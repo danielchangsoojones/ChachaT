@@ -11,8 +11,8 @@ import Koloda
 import pop
 
 class ViewController: UIViewController {
-
-    @IBOutlet weak var kolodaView: KolodaView!
+    
+    @IBOutlet weak var kolodaView: CustomKolodaView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
