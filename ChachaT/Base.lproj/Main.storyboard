@@ -17,12 +17,18 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="KolodaView" customModule="Koloda">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="KolodaView" customModule="Koloda">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="32I-zm-XDi" secondAttribute="trailing" id="514-y7-r0L"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="bottom" id="BEj-ig-fAu"/>
+                            <constraint firstItem="32I-zm-XDi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="J1a-RW-927"/>
+                            <constraint firstItem="32I-zm-XDi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JuR-HK-vJm"/>
+                        </constraints>
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
