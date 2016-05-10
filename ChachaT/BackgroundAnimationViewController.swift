@@ -17,6 +17,7 @@ private let kolodaCountOfVisibleCards = 2
 private let kolodaAlphaValueSemiTransparent:CGFloat = 0.1
 var wooshSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("woosh", ofType: "wav")!)
 var audioPlayerWoosh = AVAudioPlayer()
+private let numberOfCards : UInt = 5
 
 class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegate {
     @IBOutlet weak var actLoading: UIActivityIndicatorView!
@@ -58,8 +59,8 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 
 //MARK: KolodaViewDelegate
 extension BackgroundAnimationViewController: KolodaViewDelegate {
-    func koloda(kolodaDidRunOutOfCards koloda: KolodaView) {
-        
+    func kolodaDidRunOutOfCards(koloda: KolodaView) {
+        kolodaView.resetCurrentCardIndex()
     }
     
     func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
@@ -90,7 +91,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
     }
     
     func koloda(koloda: KolodaView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
-        
+    
     }
 }
 
@@ -98,7 +99,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
-        return 3
+        return numberOfCards
     }
   
     func didTapImage(img: UIImage) {
