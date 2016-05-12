@@ -88,7 +88,6 @@
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				926108181CDBCA32009F3E86 /* ViewController.swift */,
-				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
@@ -106,6 +105,7 @@
 				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
+				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 			);
 			name = Tinder;
 			sourceTree = "<group>";
