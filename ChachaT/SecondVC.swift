@@ -11,6 +11,7 @@ import UIKit
 class SecondVC: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var theFirstBulletText: UILabel!
     
     
     override func viewDidLoad() {
