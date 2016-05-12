@@ -17,6 +17,8 @@ protocol CustomCardViewDelegate:class {
 }
 
 class CustomCardView: OverlayView {
+    @IBOutlet weak var theCardMainImage: UIImageView!
+    
     
     weak var delegate:CustomCardViewDelegate?
     var didEndDragging = false
