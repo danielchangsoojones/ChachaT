@@ -83,21 +83,45 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				926108181CDBCA32009F3E86 /* ViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
-				926108301CE25B84009F3E86 /* CustomOverlayView.xib */,
-				9261082E1CE25B74009F3E86 /* CustomCardView.xib */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
+				9261083B1CE4EDF7009F3E86 /* sounds */,
+			);
+			path = ChachaT;
+			sourceTree = "<group>";
+		};
+		926108391CE4EDA0009F3E86 /* Tinder */ = {
+			isa = PBXGroup;
+			children = (
+				9261083A1CE4EDC4009F3E86 /* xib files */,
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
 				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
+			);
+			name = Tinder;
+			sourceTree = "<group>";
+		};
+		9261083A1CE4EDC4009F3E86 /* xib files */ = {
+			isa = PBXGroup;
+			children = (
+				9261082E1CE25B74009F3E86 /* CustomCardView.xib */,
+				926108301CE25B84009F3E86 /* CustomOverlayView.xib */,
+			);
+			name = "xib files";
+			sourceTree = "<group>";
+		};
+		9261083B1CE4EDF7009F3E86 /* sounds */ = {
+			isa = PBXGroup;
+			children = (
 				926108321CE25C22009F3E86 /* woosh.wav */,
 			);
-			path = ChachaT;
+			name = sounds;
 			sourceTree = "<group>";
 		};
 		A3265B56DF0AFCD0EA66CAA7 /* Pods */ = {

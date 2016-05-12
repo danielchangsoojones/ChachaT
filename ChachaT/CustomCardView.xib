@@ -17,17 +17,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="cards_1" translatesAutoresizingMaskIntoConstraints="NO" id="EAs-ve-9HP">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                </imageView>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="2RF-SQ-P1c">
-                    <rect key="frame" x="20" y="505" width="70" height="70"/>
-                    <constraints>
-                        <constraint firstAttribute="width" constant="70" id="8hK-Vv-Q3C"/>
-                        <constraint firstAttribute="height" constant="70" id="dUr-mB-UI3"/>
-                    </constraints>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4d-0b-hnS">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="S4d-0b-hnS">
                     <rect key="frame" x="98" y="515" width="476" height="21"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="21" id="H64-TT-TTe"/>
@@ -46,31 +36,14 @@
                     <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xX2-4I-fOm">
-                    <rect key="frame" x="20" y="505" width="70" height="70"/>
-                </button>
             </subviews>
             <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
-                <constraint firstItem="xX2-4I-fOm" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="0nQ-nM-Gis"/>
-                <constraint firstItem="S4d-0b-hnS" firstAttribute="leading" secondItem="2RF-SQ-P1c" secondAttribute="trailing" constant="8" id="78T-Cs-tJe"/>
                 <constraint firstItem="ugm-aG-L6z" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="30" id="Ce0-E4-IEX"/>
-                <constraint firstAttribute="trailing" secondItem="EAs-ve-9HP" secondAttribute="trailing" id="I7C-9n-fg6"/>
-                <constraint firstAttribute="bottom" secondItem="xX2-4I-fOm" secondAttribute="bottom" constant="25" id="MF0-RI-nKs"/>
-                <constraint firstItem="EAs-ve-9HP" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="QnN-DL-doU"/>
-                <constraint firstItem="xX2-4I-fOm" firstAttribute="height" secondItem="2RF-SQ-P1c" secondAttribute="height" id="YAt-Ig-VvH"/>
                 <constraint firstItem="ugm-aG-L6z" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="b3a-k9-uk4"/>
-                <constraint firstAttribute="bottom" secondItem="EAs-ve-9HP" secondAttribute="bottom" id="cE3-Dz-p7e"/>
                 <constraint firstAttribute="trailing" secondItem="S4d-0b-hnS" secondAttribute="trailing" constant="26" id="f0W-Yy-Xrn"/>
                 <constraint firstAttribute="bottom" secondItem="S4d-0b-hnS" secondAttribute="bottom" constant="64" id="hMJ-z9-f6P"/>
-                <constraint firstItem="xX2-4I-fOm" firstAttribute="width" secondItem="2RF-SQ-P1c" secondAttribute="width" id="i9b-vq-rwD"/>
-                <constraint firstAttribute="bottom" secondItem="2RF-SQ-P1c" secondAttribute="bottom" constant="25" id="jEY-96-KOn"/>
-                <constraint firstItem="EAs-ve-9HP" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="lfj-y5-ObY"/>
-                <constraint firstItem="2RF-SQ-P1c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="uDV-dH-IT5"/>
             </constraints>
         </view>
     </objects>
-    <resources>
-        <image name="cards_1" width="345" height="460"/>
-    </resources>
 </document>
