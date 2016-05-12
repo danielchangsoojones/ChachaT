@@ -19,6 +19,7 @@
 		926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 926108301CE25B84009F3E86 /* CustomOverlayView.xib */; };
 		926108331CE25C22009F3E86 /* woosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 926108321CE25C22009F3E86 /* woosh.wav */; };
 		926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108341CE25C5E009F3E86 /* CustomOverlayView.swift */; };
+		9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261083D1CE4F8E3009F3E86 /* globals.swift */; };
 		EF9C10DF2F6056BBCA00A7D1 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +39,7 @@
 		926108301CE25B84009F3E86 /* CustomOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
 		926108321CE25C22009F3E86 /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
 		926108341CE25C5E009F3E86 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
+		9261083D1CE4F8E3009F3E86 /* globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
 		A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
 		E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -90,6 +92,7 @@
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
+				9261083C1CE4F8D5009F3E86 /* globals */,
 				9261083B1CE4EDF7009F3E86 /* sounds */,
 			);
 			path = ChachaT;
@@ -122,6 +125,14 @@
 				926108321CE25C22009F3E86 /* woosh.wav */,
 			);
 			name = sounds;
+			sourceTree = "<group>";
+		};
+		9261083C1CE4F8D5009F3E86 /* globals */ = {
+			isa = PBXGroup;
+			children = (
+				9261083D1CE4F8E3009F3E86 /* globals.swift */,
+			);
+			name = globals;
 			sourceTree = "<group>";
 		};
 		A3265B56DF0AFCD0EA66CAA7 /* Pods */ = {
@@ -260,6 +271,7 @@
 			files = (
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				926108191CDBCA32009F3E86 /* ViewController.swift in Sources */,
