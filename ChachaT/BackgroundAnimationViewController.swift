@@ -23,6 +23,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var actLoading: UIActivityIndicatorView!
     @IBOutlet weak var kolodaView: CustomKolodaView!
     
+    @IBOutlet weak var imageView: UIImageView!
+    
+    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +67,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
     }
     
     func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
-        UIApplication.sharedApplication().openURL(NSURL(string: "http://yalantis.com/")!)
+        self.buttonTappedHandler()
     }
     
     func koloda(kolodaShouldApplyAppearAnimation koloda: KolodaView) -> Bool {
@@ -122,6 +125,31 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
         return NSBundle.mainBundle().loadNibNamed("CustomOverlayView",
                                                   owner: self, options: nil)[0] as? OverlayView
+    }
+}
+
+extension BackgroundAnimationViewController: MagicMoveable {
+    var isMagic: Bool {
+        return true
+    }
+    
+    var duration: NSTimeInterval {
+        return 0.5
+    }
+    
+    var spring: CGFloat {
+        return 0.7
+    }
+    
+    private func buttonTappedHandler() {
+        let secondVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(SecondVC)) as! SecondVC
+        
+        imageView.hidden = false
+        presentViewControllerMagically(self, to: secondVC, animated: true, duration: duration, spring: spring)
+    }
+    
+    var magicViews: [UIView] {
+        return [imageView]
     }
 }
 

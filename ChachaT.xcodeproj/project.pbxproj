@@ -19,6 +19,12 @@
 		926108331CE25C22009F3E86 /* woosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 926108321CE25C22009F3E86 /* woosh.wav */; };
 		926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108341CE25C5E009F3E86 /* CustomOverlayView.swift */; };
 		9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261083D1CE4F8E3009F3E86 /* globals.swift */; };
+		926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108401CE50661009F3E86 /* MagicMoveExt.swift */; };
+		926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108421CE5066F009F3E86 /* UIViewExt.swift */; };
+		926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108431CE5066F009F3E86 /* UIGestureRecognizerExt.swift */; };
+		926108471CE50755009F3E86 /* MagicMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108461CE50755009F3E86 /* MagicMove.swift */; };
+		926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */; };
+		9261084B1CE50816009F3E86 /* SecondVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261084A1CE50816009F3E86 /* SecondVC.swift */; };
 		EF9C10DF2F6056BBCA00A7D1 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */; };
 /* End PBXBuildFile section */
 
@@ -38,6 +44,12 @@
 		926108321CE25C22009F3E86 /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
 		926108341CE25C5E009F3E86 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
 		9261083D1CE4F8E3009F3E86 /* globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
+		926108401CE50661009F3E86 /* MagicMoveExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveExt.swift; sourceTree = "<group>"; };
+		926108421CE5066F009F3E86 /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
+		926108431CE5066F009F3E86 /* UIGestureRecognizerExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIGestureRecognizerExt.swift; sourceTree = "<group>"; };
+		926108461CE50755009F3E86 /* MagicMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMove.swift; sourceTree = "<group>"; };
+		926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionExamples.swift; sourceTree = "<group>"; };
+		9261084A1CE50816009F3E86 /* SecondVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SecondVC.swift; sourceTree = "<group>"; };
 		A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
 		E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -97,6 +109,7 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
+				9261083F1CE50447009F3E86 /* Magic Move */,
 				9261083A1CE4EDC4009F3E86 /* xib files */,
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
 				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
@@ -130,6 +143,19 @@
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 			);
 			name = globals;
+			sourceTree = "<group>";
+		};
+		9261083F1CE50447009F3E86 /* Magic Move */ = {
+			isa = PBXGroup;
+			children = (
+				926108401CE50661009F3E86 /* MagicMoveExt.swift */,
+				926108421CE5066F009F3E86 /* UIViewExt.swift */,
+				926108431CE5066F009F3E86 /* UIGestureRecognizerExt.swift */,
+				926108461CE50755009F3E86 /* MagicMove.swift */,
+				926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */,
+				9261084A1CE50816009F3E86 /* SecondVC.swift */,
+			);
+			name = "Magic Move";
 			sourceTree = "<group>";
 		};
 		A3265B56DF0AFCD0EA66CAA7 /* Pods */ = {
@@ -267,10 +293,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
+				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
+				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
+				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
+				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
+				9261084B1CE50816009F3E86 /* SecondVC.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

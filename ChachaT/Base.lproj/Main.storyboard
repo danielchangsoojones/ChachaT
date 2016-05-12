@@ -35,6 +35,11 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C">
+                                        <rect key="frame" x="33" y="120" width="315" height="325"/>
+                                    </imageView>
+                                </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
                             </view>
                         </subviews>
@@ -49,6 +54,7 @@
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="imageView" destination="16g-Ya-p0C" id="th5-L8-dcF"/>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
                     </connections>
                 </viewController>
@@ -56,5 +62,42 @@
             </objects>
             <point key="canvasLocation" x="339.5" y="387.5"/>
         </scene>
+        <!--SecondVC-->
+        <scene sceneID="Tui-ct-3pW">
+            <objects>
+                <viewController storyboardIdentifier="SecondVC" id="7Sy-Jm-ZWb" customClass="SecondVC" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fRp-pc-gE5"/>
+                        <viewControllerLayoutGuide type="bottom" id="6ML-sB-9wT"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="vyx-nI-0mL">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g">
+                                <rect key="frame" x="0.0" y="20" width="600" height="264"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="264" id="vHd-oq-IIN"/>
+                                </constraints>
+                            </imageView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="vyx-nI-0mL" secondAttribute="leading" id="4Br-aC-Fep"/>
+                            <constraint firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="9m7-cS-3qT"/>
+                            <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="fRp-pc-gE5" secondAttribute="bottom" id="goT-7q-xaO"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="imageView" destination="8hk-xb-Z8g" id="Pxs-FZ-hXM"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="896" y="354"/>
+        </scene>
     </scenes>
+    <resources>
+        <image name="Driving girl" width="157" height="203"/>
+    </resources>
 </document>
