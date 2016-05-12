@@ -4,12 +4,42 @@
 <dict>
 	<key>SchemeUserState</key>
 	<dict>
+		<key>AFDateHelper.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>EFTools.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Koloda.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ChachaT.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SCLAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>SnapKit.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -22,7 +52,37 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>19E4FCAE7EE3E81A5D32A507B3C9E202</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>22393314BD84357CB62E2F569D7F4AA5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>2692A60CA9509B2E2A543556E170DCB4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>395970F09DFE5EFCDA4AFA3D5EBE78C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4D280F1D1992CBDF641522662D187A3E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>56170867254AF3082A1840024F458BD3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6BDB4D035FCCA69D44E073675F8E7668</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -32,7 +92,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FB6524852789888161070DF36022FCEC</key>
+		<key>FDCBED7B344D29900EE17E3B8C96B7ED</key>
 		<dict>
 			<key>primary</key>
 			<true/>

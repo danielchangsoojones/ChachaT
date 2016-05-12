@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = '23E3F8D85890EFF38584BB6A'
+               BlueprintIdentifier = 'C236EA0801F7C4FC16D4F69B'
                BlueprintName = 'Pods-ChachaT'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'Pods_ChachaT.framework'>

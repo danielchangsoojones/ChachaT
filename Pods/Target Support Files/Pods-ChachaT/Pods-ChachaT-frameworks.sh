@@ -84,10 +84,22 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
+  install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/Koloda.framework"
+  install_framework "Pods-ChachaT/MBProgressHUD.framework"
+  install_framework "Pods-ChachaT/SCLAlertView.framework"
+  install_framework "Pods-ChachaT/SnapKit.framework"
+  install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
+  install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/Koloda.framework"
+  install_framework "Pods-ChachaT/MBProgressHUD.framework"
+  install_framework "Pods-ChachaT/SCLAlertView.framework"
+  install_framework "Pods-ChachaT/SnapKit.framework"
+  install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi

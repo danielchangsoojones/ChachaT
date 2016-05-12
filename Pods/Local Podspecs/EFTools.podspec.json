@@ -1,0 +1,106 @@
+{
+  "name": "EFTools",
+  "version": "1.0",
+  "summary": "iOS ElevenFifty Toolkit",
+  "homepage": "https://github.com/ElevenFifty/EFTools",
+  "authors": "ElevenFifty Consulting",
+  "source": {
+    "git": "https://barryllium@github.com/ElevenFifty/EFTools.git",
+    "tag": "1.0"
+  },
+  "platforms": {
+    "ios": "8.0"
+  },
+  "requires_arc": true,
+  "dependencies": {
+    "SnapKit": [
+
+    ],
+    "MBProgressHUD": [
+      "~> 0.9.2"
+    ],
+    "AFDateHelper": [
+
+    ],
+    "Instabug": [
+
+    ],
+    "TPKeyboardAvoiding": [
+
+    ],
+    "SCLAlertView": [
+
+    ]
+  },
+  "default_subspecs": "Everything",
+  "subspecs": [
+    {
+      "name": "Basic",
+      "source_files": "EFTools/Basic"
+    },
+    {
+      "name": "Parse",
+      "dependencies": {
+        "ParseUI": [
+
+        ],
+        "ParseFacebookUtilsV4": [
+
+        ],
+        "ParseTwitterUtils": [
+
+        ]
+      },
+      "source_files": [
+        "EFTools/Parse",
+        "EFTools/Basic"
+      ]
+    },
+    {
+      "name": "Alamofire",
+      "dependencies": {
+        "Alamofire": [
+          "~> 3.2"
+        ],
+        "SwiftyJSON": [
+
+        ],
+        "SwiftKeychainWrapper": [
+
+        ]
+      },
+      "source_files": [
+        "EFTools/AF",
+        "EFTools/Basic"
+      ]
+    },
+    {
+      "name": "Everything",
+      "dependencies": {
+        "ParseUI": [
+
+        ],
+        "ParseFacebookUtilsV4": [
+
+        ],
+        "ParseTwitterUtils": [
+
+        ],
+        "Alamofire": [
+          "~> 3.2"
+        ],
+        "SwiftyJSON": [
+
+        ],
+        "SwiftKeychainWrapper": [
+
+        ]
+      },
+      "source_files": [
+        "EFTools/Parse",
+        "EFTools/AF",
+        "EFTools/Basic"
+      ]
+    }
+  ]
+}

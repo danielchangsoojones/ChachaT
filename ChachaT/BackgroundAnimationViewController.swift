@@ -26,6 +26,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
