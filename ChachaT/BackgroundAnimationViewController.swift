@@ -19,6 +19,7 @@ var wooshSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("w
 var audioPlayerWoosh = AVAudioPlayer()
 private let numberOfCards : UInt = 5
 
+//go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
 class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegate {
     @IBOutlet weak var actLoading: UIActivityIndicatorView!
     @IBOutlet weak var kolodaView: CustomKolodaView!
@@ -144,6 +145,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     private func buttonTappedHandler() {
         let secondVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(SecondVC)) as! SecondVC
         
+        //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
         imageView.hidden = false
         presentViewControllerMagically(self, to: secondVC, animated: true, duration: duration, spring: spring)
     }

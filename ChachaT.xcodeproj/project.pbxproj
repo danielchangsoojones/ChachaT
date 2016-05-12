@@ -33,7 +33,7 @@
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		9261081D1CDBCA32009F3E86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		9261081D1CDBCA32009F3E86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ChachaT/Assets.xcassets; sourceTree = "<group>"; };
 		926108201CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		926108221CDBCA32009F3E86 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		926108281CE255ED009F3E86 /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
@@ -78,6 +78,7 @@
 			isa = PBXGroup;
 			children = (
 				926108151CDBCA32009F3E86 /* ChachaT */,
+				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				926108141CDBCA32009F3E86 /* Products */,
 				A3265B56DF0AFCD0EA66CAA7 /* Pods */,
 				5651C15A164084F13922B25B /* Frameworks */,
@@ -97,7 +98,6 @@
 			children = (
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
-				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
 				9261083C1CE4F8D5009F3E86 /* globals */,
@@ -109,13 +109,13 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
-				9261083F1CE50447009F3E86 /* Magic Move */,
 				9261083A1CE4EDC4009F3E86 /* xib files */,
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
 				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
+				9261083F1CE50447009F3E86 /* Magic Move */,
 			);
 			name = Tinder;
 			sourceTree = "<group>";
