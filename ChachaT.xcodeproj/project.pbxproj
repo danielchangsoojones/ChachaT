@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
-		926108191CDBCA32009F3E86 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108181CDBCA32009F3E86 /* ViewController.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
 		926108211CDBCA32009F3E86 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */; };
@@ -27,7 +26,6 @@
 		68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		926108181CDBCA32009F3E86 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9261081D1CDBCA32009F3E86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		926108201CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -87,7 +85,6 @@
 			children = (
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
-				926108181CDBCA32009F3E86 /* ViewController.swift */,
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
@@ -274,7 +271,6 @@
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
-				926108191CDBCA32009F3E86 /* ViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
