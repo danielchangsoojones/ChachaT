@@ -40,7 +40,8 @@ extension CardDetailViewController: MagicMoveable {
     func imageTapped() {
         let backgroundAnimationVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(BackgroundAnimationViewController)) as! BackgroundAnimationViewController
         
-        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: true, duration: duration, spring: spring)
+        //not animating right now because it was fucking things up.
+        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: false, duration: duration, spring: spring)
     }
     
     var isMagic: Bool {
