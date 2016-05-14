@@ -12,10 +12,15 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
+    @IBOutlet weak var theBottomBlurredView: UIView!
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        let gradient: CAGradientLayer = CAGradientLayer()
+        gradient.frame = theBottomBlurredView.bounds
+        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
+        theBottomBlurredView.layer.insertSublayer(gradient, atIndex: 0)
         setupTapHandler()
     }
     
