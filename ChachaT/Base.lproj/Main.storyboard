@@ -77,7 +77,7 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cKi-vK-cJw">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="734"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture">
@@ -207,8 +207,8 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="kwP-NN-ZE2">
-                                                <rect key="frame" x="20" y="426" width="560" height="282"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="kwP-NN-ZE2" userLabel="Question Stack View">
+                                                <rect key="frame" x="20" y="426" width="560" height="261"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWC-yS-1iT">
                                                         <rect key="frame" x="0.0" y="0.0" width="560" height="60"/>
@@ -225,8 +225,8 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
-                                                        <rect key="frame" x="0.0" y="74" width="560" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
+                                                        <rect key="frame" x="0.0" y="67" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
                                                             <constraint firstAttribute="height" constant="60" id="hao-IK-1IR"/>
@@ -240,8 +240,8 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
-                                                        <rect key="frame" x="0.0" y="148" width="560" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
+                                                        <rect key="frame" x="0.0" y="134" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="330" id="eXZ-98-ah3"/>
                                                             <constraint firstAttribute="height" constant="60" id="kkZ-NB-F8G"/>
@@ -255,14 +255,14 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
-                                                        <rect key="frame" x="0.0" y="222" width="560" height="60"/>
+                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
+                                                        <rect key="frame" x="0.0" y="201" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="H9a-sB-RtB"/>
                                                             <constraint firstAttribute="width" constant="330" id="juy-EQ-jEd"/>
                                                         </constraints>
-                                                        <state key="normal" title="Ask Your Own..." backgroundImage="Question Bubble">
-                                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Your Own Question..." backgroundImage="Custom Question Bubble">
+                                                            <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                                                         </state>
                                                         <variation key="default">
                                                             <mask key="constraints">
@@ -361,6 +361,7 @@
     </scenes>
     <resources>
         <image name="Bullet Point" width="8" height="8"/>
+        <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Driving girl" width="157" height="203"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Top Line" width="375" height="1"/>
