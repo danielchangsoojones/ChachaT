@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="533"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="734"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
@@ -207,35 +207,101 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWC-yS-1iT">
-                                                <rect key="frame" x="10" y="452" width="580" height="50"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="50" id="dDc-ea-ywZ"/>
-                                                </constraints>
-                                                <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
-                                                    <color key="titleColor" red="0.047058823529411764" green="0.72941176470588232" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                            </button>
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="14" translatesAutoresizingMaskIntoConstraints="NO" id="kwP-NN-ZE2">
+                                                <rect key="frame" x="20" y="426" width="560" height="282"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWC-yS-1iT">
+                                                        <rect key="frame" x="0.0" y="0.0" width="560" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="dDc-ea-ywZ"/>
+                                                            <constraint firstAttribute="width" constant="330" id="lA8-dY-3Rq"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
+                                                            <color key="titleColor" red="0.047058823529411764" green="0.72941176470588232" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="lA8-dY-3Rq"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
+                                                        <rect key="frame" x="0.0" y="74" width="560" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
+                                                            <constraint firstAttribute="height" constant="60" id="hao-IK-1IR"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
+                                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="GgM-VQ-xLE"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
+                                                        <rect key="frame" x="0.0" y="148" width="560" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="330" id="eXZ-98-ah3"/>
+                                                            <constraint firstAttribute="height" constant="60" id="kkZ-NB-F8G"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
+                                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="eXZ-98-ah3"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
+                                                        <rect key="frame" x="0.0" y="222" width="560" height="60"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="H9a-sB-RtB"/>
+                                                            <constraint firstAttribute="width" constant="330" id="juy-EQ-jEd"/>
+                                                        </constraints>
+                                                        <state key="normal" title="Ask Your Own..." backgroundImage="Question Bubble">
+                                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                        <variation key="default">
+                                                            <mask key="constraints">
+                                                                <exclude reference="juy-EQ-jEd"/>
+                                                            </mask>
+                                                        </variation>
+                                                    </button>
+                                                </subviews>
+                                            </stackView>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask Taylor: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-Q8-gEl">
+                                                <rect key="frame" x="8" y="406" width="79" height="18"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
-                                            <constraint firstAttribute="trailing" secondItem="XWC-yS-1iT" secondAttribute="trailing" constant="10" id="3m3-Lf-yao"/>
+                                            <constraint firstAttribute="trailing" secondItem="kwP-NN-ZE2" secondAttribute="trailing" constant="20" id="339-KL-fi8"/>
+                                            <constraint firstItem="kwP-NN-ZE2" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="3WQ-gC-gPI"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" constant="-61" id="4Es-KN-xkx"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="7US-qG-o0r"/>
+                                            <constraint firstItem="bjX-Q8-gEl" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="865-Xw-5Lj"/>
+                                            <constraint firstItem="bjX-Q8-gEl" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="3" id="DjI-9k-vhI"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="FD2-qx-rfU"/>
+                                            <constraint firstItem="kwP-NN-ZE2" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="MhW-Zn-GuE"/>
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
-                                            <constraint firstAttribute="bottom" secondItem="XWC-yS-1iT" secondAttribute="bottom" constant="31" id="U1A-iu-0Cf"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
+                                            <constraint firstAttribute="trailing" secondItem="kwP-NN-ZE2" secondAttribute="trailing" constant="20" id="YtU-kk-b73"/>
+                                            <constraint firstAttribute="bottom" secondItem="kwP-NN-ZE2" secondAttribute="bottom" constant="26" id="aBO-Ng-ps0"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="cEx-7Q-tPb"/>
-                                            <constraint firstItem="XWC-yS-1iT" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="49" id="f4y-vW-V4C"/>
+                                            <constraint firstItem="kwP-NN-ZE2" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="2" id="ijg-RO-R6l"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="m0d-Qv-Dsh"/>
                                             <constraint firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="pYg-FL-5Gk"/>
                                             <constraint firstAttribute="bottom" secondItem="QhN-sR-LNs" secondAttribute="bottom" constant="20" id="sh9-cf-oXI"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" id="t67-ZE-aKb"/>
                                             <constraint firstAttribute="trailing" secondItem="dCo-OJ-te4" secondAttribute="trailing" id="xLZ-qp-Z4y"/>
-                                            <constraint firstItem="XWC-yS-1iT" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="10" id="yL8-9X-bgv"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -243,6 +309,8 @@
                                                 <exclude reference="VCW-xe-Mzj"/>
                                                 <exclude reference="PyY-G5-Lvp"/>
                                                 <exclude reference="sh9-cf-oXI"/>
+                                                <exclude reference="339-KL-fi8"/>
+                                                <exclude reference="MhW-Zn-GuE"/>
                                             </mask>
                                         </variation>
                                     </view>
