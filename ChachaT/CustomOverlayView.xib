@@ -11,21 +11,28 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Follow" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-hZ-ESw">
+                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lw-xX-y0V">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                </view>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-hZ-ESw">
                     <rect key="frame" x="183" y="253" width="235" height="94"/>
                     <constraints>
                         <constraint firstAttribute="height" constant="94" id="c0s-Ex-Zd6"/>
                         <constraint firstAttribute="width" constant="235" id="x7U-zK-bas"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="51"/>
-                    <color key="textColor" red="0.91372549020000005" green="0.1176470588" blue="0.38823529410000002" alpha="1" colorSpace="calibratedRGB"/>
+                    <color key="textColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
             </subviews>
-            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstItem="G5P-hZ-ESw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2MC-J7-s0W"/>
+                <constraint firstItem="6lw-xX-y0V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4I9-3o-V4f"/>
+                <constraint firstAttribute="trailing" secondItem="6lw-xX-y0V" secondAttribute="trailing" id="5co-RM-29x"/>
                 <constraint firstItem="G5P-hZ-ESw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eWp-AU-LS6"/>
+                <constraint firstItem="6lw-xX-y0V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ovc-vc-tSA"/>
+                <constraint firstAttribute="bottom" secondItem="6lw-xX-y0V" secondAttribute="bottom" id="str-SQ-LDe"/>
             </constraints>
         </view>
     </objects>
