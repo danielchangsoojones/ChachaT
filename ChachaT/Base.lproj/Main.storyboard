@@ -285,20 +285,27 @@
                                                 <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5O-C2-7n0" userLabel="Profile Background Button">
+                                                <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="kwP-NN-ZE2" secondAttribute="trailing" constant="20" id="339-KL-fi8"/>
                                             <constraint firstItem="kwP-NN-ZE2" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="3WQ-gC-gPI"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" constant="-61" id="4Es-KN-xkx"/>
+                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="leading" secondItem="8hk-xb-Z8g" secondAttribute="leading" id="4Pe-Ft-iwW"/>
                                             <constraint firstAttribute="trailing" secondItem="bJ1-ZI-nEr" secondAttribute="trailing" id="5gU-vj-d23"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="7US-qG-o0r"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="865-Xw-5Lj"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="3" id="DjI-9k-vhI"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="FD2-qx-rfU"/>
+                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="bottom" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="M2A-2h-JId"/>
+                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="M8H-h8-D88"/>
                                             <constraint firstItem="kwP-NN-ZE2" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="MhW-Zn-GuE"/>
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
+                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
                                             <constraint firstAttribute="trailing" secondItem="kwP-NN-ZE2" secondAttribute="trailing" constant="20" id="YtU-kk-b73"/>
@@ -364,6 +371,7 @@
                         <outlet property="theBottomBlurredView" destination="bJ1-ZI-nEr" id="q29-1L-KYd"/>
                         <outlet property="theCustomQuestionButton" destination="Hdx-yn-KHS" id="dSt-aw-zM1"/>
                         <outlet property="theFirstBulletText" destination="GZp-kG-YwR" id="1K2-x8-oMM"/>
+                        <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
                         <outlet property="theQuestionButtonOne" destination="XWC-yS-1iT" id="oiH-eA-9MK"/>
                         <outlet property="theQuestionButtonTwo" destination="18q-bc-79v" id="lgk-YV-gib"/>
                     </connections>

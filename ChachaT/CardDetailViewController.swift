@@ -16,6 +16,7 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: UIButton!
     @IBOutlet weak var theQuestionButtonTwo: UIButton!
     @IBOutlet weak var theCustomQuestionButton: UIButton!
+    @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,33 +28,12 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
-    func setUI() {
-        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector(imageTapped()))
-        imageView.userInteractionEnabled = true
-        imageView.addGestureRecognizer(tapGestureRecognizer)
-    }
-    
     private func setupTapHandler() {
-//        blueButton.tapped { _ in
-//            self.nextButtonTappedHandler()
-//        }
-//        
-//        backButton.tapped { _ in
-//            self.backButtonTappedHander()
-//        }
+        theProfileImageButtonOverlay.tapped { _ in
+            self.imageTapped()
+        }
+
     }
-    
-    private func nextButtonTappedHandler() {
-//        let thirdVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(ThirdVC)) as! ThirdVC
-//        
-//        presentViewControllerMagically(self, to: thirdVC, animated: true)
-    }
-    
-//    private func backButtonTappedHander() {
-//        let firstVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(FirstVC)) as! FirstVC
-//        
-//        presentViewControllerCustomTrasition(firstVC, transition: FadeTransition(), animated: true)
-//    }
 }
 
 extension CardDetailViewController: MagicMoveable {
