@@ -13,7 +13,9 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
     @IBOutlet weak var theBottomBlurredView: UIView!
-    
+    @IBOutlet weak var theQuestionButtonOne: UIButton!
+    @IBOutlet weak var theQuestionButtonTwo: UIButton!
+    @IBOutlet weak var theCustomQuestionButton: UIButton!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -21,7 +23,14 @@ class CardDetailViewController: UIViewController {
         gradient.frame = theBottomBlurredView.bounds
         gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
         theBottomBlurredView.layer.insertSublayer(gradient, atIndex: 0)
+        
         setupTapHandler()
+    }
+    
+    func setUI() {
+        let tapGestureRecognizer = UITapGestureRecognizer(target:self, action:Selector(imageTapped()))
+        imageView.userInteractionEnabled = true
+        imageView.addGestureRecognizer(tapGestureRecognizer)
     }
     
     private func setupTapHandler() {
@@ -48,6 +57,12 @@ class CardDetailViewController: UIViewController {
 }
 
 extension CardDetailViewController: MagicMoveable {
+    func imageTapped() {
+        let backgroundAnimationVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(BackgroundAnimationViewController)) as! BackgroundAnimationViewController
+        
+        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: true, duration: duration, spring: spring)
+    }
+    
     var isMagic: Bool {
         return true
     }

@@ -143,11 +143,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
     }
     
     private func buttonTappedHandler() {
-        let secondVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
+        let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
         imageView.hidden = false
-        presentViewControllerMagically(self, to: secondVC, animated: true, duration: duration, spring: spring)
+        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
     var magicViews: [UIView] {
