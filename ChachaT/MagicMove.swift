@@ -18,6 +18,7 @@ import UIKit
     optional var spring: CGFloat { get }
 }
 
+//go to MagicMove/patrickReynolds to get more info on how magic Move works. Magic move is for animating between pages. 
 // MARK: - MagicMoveTransition Delegate
 class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
