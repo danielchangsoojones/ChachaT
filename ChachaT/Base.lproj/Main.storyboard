@@ -78,7 +78,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="1000"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="719"/>
                                         <subviews>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
@@ -129,8 +129,8 @@
                                                     <constraint firstItem="IkV-io-nnJ" firstAttribute="top" secondItem="dI7-Qj-h3R" secondAttribute="bottom" constant="8" id="xhl-kX-gPg"/>
                                                 </constraints>
                                             </view>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCo-OJ-te4" userLabel="Fact View">
-                                                <rect key="frame" x="0.0" y="325" width="600" height="264"/>
+                                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dCo-OJ-te4" userLabel="Fact View">
+                                                <rect key="frame" x="0.0" y="328" width="600" height="264"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Bullet Point" translatesAutoresizingMaskIntoConstraints="NO" id="Wim-iW-FJm" userLabel="Bullet Point 1">
                                                         <rect key="frame" x="10" y="10" width="10" height="10"/>
@@ -218,6 +218,7 @@ Bacon pork chop turducken tri-tip ham hock. Brisket flank kielbasa, picanha fran
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" constant="-61" id="4Es-KN-xkx"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="7US-qG-o0r"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="FD2-qx-rfU"/>
+                                            <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
@@ -232,6 +233,7 @@ Bacon pork chop turducken tri-tip ham hock. Brisket flank kielbasa, picanha fran
                                             <mask key="constraints">
                                                 <exclude reference="4Es-KN-xkx"/>
                                                 <exclude reference="VCW-xe-Mzj"/>
+                                                <exclude reference="sh9-cf-oXI"/>
                                             </mask>
                                         </variation>
                                     </view>
