@@ -62,10 +62,10 @@
             </objects>
             <point key="canvasLocation" x="339.5" y="387.5"/>
         </scene>
-        <!--SecondVC-->
+        <!--Card Detail View Controller-->
         <scene sceneID="Tui-ct-3pW">
             <objects>
-                <viewController storyboardIdentifier="SecondVC" id="7Sy-Jm-ZWb" customClass="SecondVC" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardDetailViewController" id="7Sy-Jm-ZWb" customClass="CardDetailViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRp-pc-gE5"/>
                         <viewControllerLayoutGuide type="bottom" id="6ML-sB-9wT"/>
@@ -207,7 +207,7 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" axis="vertical" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="kwP-NN-ZE2" userLabel="Question Stack View">
+                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="7" translatesAutoresizingMaskIntoConstraints="NO" id="kwP-NN-ZE2" userLabel="Question Stack View">
                                                 <rect key="frame" x="20" y="426" width="560" height="261"/>
                                                 <subviews>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWC-yS-1iT">
@@ -225,7 +225,7 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
                                                         <rect key="frame" x="0.0" y="67" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
@@ -240,7 +240,7 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
                                                         <rect key="frame" x="0.0" y="134" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="330" id="eXZ-98-ah3"/>
@@ -255,7 +255,7 @@
                                                             </mask>
                                                         </variation>
                                                     </button>
-                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
                                                         <rect key="frame" x="0.0" y="201" width="560" height="60"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="60" id="H9a-sB-RtB"/>

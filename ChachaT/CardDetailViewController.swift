@@ -8,7 +8,7 @@
 
 import UIKit
 
-class SecondVC: UIViewController {
+class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
@@ -42,7 +42,7 @@ class SecondVC: UIViewController {
 //    }
 }
 
-extension SecondVC: MagicMoveable {
+extension CardDetailViewController: MagicMoveable {
     var isMagic: Bool {
         return true
     }
