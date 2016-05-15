@@ -25,6 +25,7 @@
 		926108471CE50755009F3E86 /* MagicMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108461CE50755009F3E86 /* MagicMove.swift */; };
 		926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */; };
 		9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261084A1CE50816009F3E86 /* CardDetailViewController.swift */; };
+		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
 		EF9C10DF2F6056BBCA00A7D1 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */; };
 /* End PBXBuildFile section */
 
@@ -50,6 +51,7 @@
 		926108461CE50755009F3E86 /* MagicMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMove.swift; sourceTree = "<group>"; };
 		926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionExamples.swift; sourceTree = "<group>"; };
 		9261084A1CE50816009F3E86 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
+		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
 		A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
 		E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -117,6 +119,7 @@
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
+				92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */,
 			);
 			name = Tinder;
 			sourceTree = "<group>";
@@ -295,6 +298,7 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
