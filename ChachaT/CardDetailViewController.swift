@@ -20,10 +20,6 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let gradient: CAGradientLayer = CAGradientLayer()
-        gradient.frame = theBottomBlurredView.bounds
-        gradient.colors = [UIColor.whiteColor().CGColor, UIColor.blackColor().CGColor]
-        theBottomBlurredView.layer.insertSublayer(gradient, atIndex: 0)
         
         setupTapHandler()
     }
