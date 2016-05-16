@@ -112,7 +112,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     func applyShadow(view:UIView) {
         view.layer.shadowRadius = 2.5
         view.layer.shadowOffset = CGSizeMake(0, 1)
-        view.layer.shadowColor = UIColor(rgba: "#555").CGColor
+        view.layer.shadowColor = UIColor.grayColor().CGColor
         view.layer.shadowOpacity = 2.0
     }
     
@@ -136,69 +136,69 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp()
     {
-        let newUser = User()
-        newUser.fullName = fullName.text!
-        newUser.lowercaseFullName = fullName.text!.lowercaseString
-        newUser.email = theEmail.text
-        newUser.username = theEmail.text
-        newUser.password = thePassword.text
-        self.view.userInteractionEnabled = false
-        theSpinner.startAnimating()
-        
-        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
-            self.view.userInteractionEnabled = true
-            self.theSpinner.stopAnimating()
-            if success {
-                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.currentInstallation()
-                installation["user"] = PFUser.currentUser()
-                installation.saveInBackground()
-            }
-            else {
-                if error != nil {
-                    let code = error!.code
-                    if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
-                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", type: .Error)
-                    }
-                    else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
-                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", type: .Error)
-                    }
-                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", type: .Error)
-                }
-            }
-        }
+//        let newUser = User()
+//        newUser.fullName = fullName.text!
+//        newUser.lowercaseFullName = fullName.text!.lowercaseString
+//        newUser.email = theEmail.text
+//        newUser.username = theEmail.text
+//        newUser.password = thePassword.text
+//        self.view.userInteractionEnabled = false
+//        theSpinner.startAnimating()
+//        
+//        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+//            self.view.userInteractionEnabled = true
+//            self.theSpinner.stopAnimating()
+//            if success {
+//                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+//                let installation = PFInstallation.currentInstallation()
+//                installation["user"] = PFUser.currentUser()
+//                installation.saveInBackground()
+//            }
+//            else {
+//                if error != nil {
+//                    let code = error!.code
+//                    if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
+//                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", type: .Error)
+//                    }
+//                    else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
+//                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", type: .Error)
+//                    }
+//                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", type: .Error)
+//                }
+//            }
+//        }
     }
     
     func logIn() {
-        view.userInteractionEnabled=false
-        theSpinner.startAnimating()
-        User.logInWithUsernameInBackground(theEmail.text!.lowercaseString, password: thePassword.text!) { (user, error) -> Void in
-            self.theSpinner.stopAnimating()
-            self.view.userInteractionEnabled=true
-            
-            if let error = error {
-                let code = error.code
-                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
-                    let alert = Alert()
-                    alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
-                        alert.closeAlert()
-                        self.theEmail.becomeFirstResponder()
-                    })
-                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
-                }
-                else {
-                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", type: .Error)
-                }
-                return;
-            }
-            
-            if user != nil {
-                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.currentInstallation()
-                installation["user"] = PFUser.currentUser()
-                installation.saveEventually(nil)
-            }
-        }
+//        view.userInteractionEnabled=false
+//        theSpinner.startAnimating()
+//        User.logInWithUsernameInBackground(theEmail.text!.lowercaseString, password: thePassword.text!) { (user, error) -> Void in
+//            self.theSpinner.stopAnimating()
+//            self.view.userInteractionEnabled=true
+//            
+//            if let error = error {
+//                let code = error.code
+//                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
+//                    let alert = Alert()
+//                    alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+//                        alert.closeAlert()
+//                        self.theEmail.becomeFirstResponder()
+//                    })
+//                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
+//                }
+//                else {
+//                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", type: .Error)
+//                }
+//                return;
+//            }
+//            
+//            if user != nil {
+//                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+//                let installation = PFInstallation.currentInstallation()
+//                installation["user"] = PFUser.currentUser()
+//                installation.saveEventually(nil)
+//            }
+//        }
     }
     
     func allValidates() -> Bool
@@ -258,7 +258,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
 }
 
 //keyboard notification
-extension SignUpTwoViewController {
+extension SignUpLogInViewController {
     func keyboardWillShow(notification: NSNotification) {
         guard let bottomConstraint = bottomConstraint else { return }
         if let userInfo = notification.userInfo {
@@ -284,7 +284,7 @@ extension SignUpTwoViewController {
     }
 }
 
-extension SignUpTwoViewController: SegueHandlerType {
+extension SignUpLogInViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case SignUpSuccessSegue

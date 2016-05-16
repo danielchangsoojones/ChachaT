@@ -28,6 +28,7 @@
 		9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261084A1CE50816009F3E86 /* CardDetailViewController.swift */; };
 		926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926108541CEA0EA6009F3E86 /* Onboarding.storyboard */; };
 		926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */; };
+		926108591CEA11B9009F3E86 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108581CEA11B9009F3E86 /* Alert.swift */; };
 		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
@@ -66,6 +67,7 @@
 		9261084A1CE50816009F3E86 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		926108541CEA0EA6009F3E86 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpLogInViewController.swift; sourceTree = "<group>"; };
+		926108581CEA11B9009F3E86 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -198,6 +200,7 @@
 		9261083C1CE4F8D5009F3E86 /* globals */ = {
 			isa = PBXGroup;
 			children = (
+				926108581CEA11B9009F3E86 /* Alert.swift */,
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 			);
 			name = globals;
@@ -369,6 +372,7 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
+				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,

@@ -9,5 +9,5 @@
 import Foundation
 import EFTools
 
-let backgroundCardViewColor = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 0.3)
+let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
 
