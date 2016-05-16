@@ -10,6 +10,7 @@ import UIKit
 import pop
 import Koloda
 import AVFoundation
+import Parse
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
