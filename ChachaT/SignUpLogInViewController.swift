@@ -11,7 +11,7 @@ import EFTools
 import Parse
 import SnapKit
 
-class SignUpTwoViewController: UIViewController, UITextFieldDelegate {
+class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     @IBOutlet weak var fullName: UITextField!
     @IBOutlet weak var theEmail: UITextField!

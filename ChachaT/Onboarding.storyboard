@@ -289,8 +289,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChaCha-Logo-White" width="157" height="203"/>
-        <image name="Or Line" width="157" height="203"/>
-        <image name="facebook_logo" width="157" height="203"/>
+        <image name="ChaCha-Logo-White" width="67" height="25"/>
+        <image name="Or Line" width="276" height="13"/>
+        <image name="facebook_logo" width="29" height="29"/>
     </resources>
 </document>
