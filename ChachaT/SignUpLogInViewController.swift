@@ -123,69 +123,66 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp()
     {
-//        let newUser = User()
-//        newUser.fullName = fullName.text!
-//        newUser.lowercaseFullName = fullName.text!.lowercaseString
-//        newUser.email = theEmail.text
-//        newUser.username = theEmail.text
-//        newUser.password = thePassword.text
-//        self.view.userInteractionEnabled = false
-//        theSpinner.startAnimating()
-//        
-//        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
-//            self.view.userInteractionEnabled = true
-//            self.theSpinner.stopAnimating()
-//            if success {
-//                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-//                let installation = PFInstallation.currentInstallation()
-//                installation["user"] = PFUser.currentUser()
-//                installation.saveInBackground()
-//            }
-//            else {
-//                if error != nil {
-//                    let code = error!.code
-//                    if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
-//                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", type: .Error)
-//                    }
-//                    else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
-//                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", type: .Error)
-//                    }
-//                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", type: .Error)
-//                }
-//            }
-//        }
+        let newUser = User()
+        newUser.username = theEmail.text
+        newUser.password = thePassword.text
+        self.view.userInteractionEnabled = false
+        theSpinner.startAnimating()
+        
+        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+            self.view.userInteractionEnabled = true
+            self.theSpinner.stopAnimating()
+            if success {
+                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+                let installation = PFInstallation.currentInstallation()
+                installation["user"] = PFUser.currentUser()
+                installation.saveInBackground()
+            }
+            else {
+                if error != nil {
+                    let code = error!.code
+                    if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
+                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", type: .Error)
+                    }
+                    else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
+                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", type: .Error)
+                    }
+                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", type: .Error)
+                }
+            }
+        }
     }
     
     func logIn() {
-//        view.userInteractionEnabled=false
-//        theSpinner.startAnimating()
-//        User.logInWithUsernameInBackground(theEmail.text!.lowercaseString, password: thePassword.text!) { (user, error) -> Void in
-//            self.theSpinner.stopAnimating()
-//            self.view.userInteractionEnabled=true
-//            
-//            if let error = error {
-//                let code = error.code
-//                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
-//                    let alert = Alert()
-//                    alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
-//                        alert.closeAlert()
-//                        self.theEmail.becomeFirstResponder()
-//                    })
-//                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
-//                }
-//                else {
-//                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", type: .Error)
-//                }
-//                return;
-//            }
-//            
-//            if user != nil {
-//                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-//                let installation = PFInstallation.currentInstallation()
-//                installation["user"] = PFUser.currentUser()
-//                installation.saveEventually(nil)
-//            }
-//        }
+        view.userInteractionEnabled=false
+        theSpinner.startAnimating()
+        User.logInWithUsernameInBackground(theEmail.text!.lowercaseString, password: thePassword.text!) { (user, error) -> Void in
+            self.theSpinner.stopAnimating()
+            self.view.userInteractionEnabled=true
+            
+            if let error = error {
+                let code = error.code
+                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
+                    let alert = Alert()
+                    alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+                        alert.closeAlert()
+                        self.theEmail.becomeFirstResponder()
+                    })
+                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
+                }
+                else {
+                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", type: .Error)
+                }
+                return;
+            }
+            
+            if user != nil {
+                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+                let installation = PFInstallation.currentInstallation()
+                installation["user"] = PFUser.currentUser()
+                installation.saveEventually(nil)
+            }
+        }
     }
     
     func allValidates() -> Bool

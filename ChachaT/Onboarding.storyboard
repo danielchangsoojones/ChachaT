@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="11m-Bf-sI4">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -173,11 +173,11 @@
                             </imageView>
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="b1L-J8-n7A">
                                 <rect key="frame" x="127" y="238" width="20" height="20"/>
-                                <color key="backgroundColor" red="0.80392156859999997" green="0.91764705879999997" blue="0.91372549020000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="20" id="7rh-Va-9q9"/>
                                     <constraint firstAttribute="height" constant="20" id="SNg-gR-6Zd"/>
                                 </constraints>
+                                <color key="color" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                             </activityIndicatorView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="8C8-jf-1mY">
                                 <rect key="frame" x="148" y="617" width="79" height="30"/>
@@ -258,11 +258,20 @@
                         <outlet property="theSpinner" destination="b1L-J8-n7A" id="8zZ-Vy-qKq"/>
                         <outlet property="theTermsOfService" destination="B8v-0M-Wvc" id="jZL-mr-HLj"/>
                         <outlet property="theTextfieldsView" destination="J6X-gB-146" id="8QR-2w-YsT"/>
+                        <segue destination="7ft-US-IjM" kind="presentation" identifier="SignUpSuccessSegue" id="Rdr-PG-LAv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-AS-nWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-416.5" y="1070.5"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="7tp-3o-Hfg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="7ft-US-IjM" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PoG-Q9-yaU" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-73" y="1055"/>
         </scene>
     </scenes>
     <resources>
