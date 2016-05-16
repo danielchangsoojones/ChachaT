@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		1CFD0CEEC18450221F839A84 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = A4789E1652B49212A025D9B2 /* Pods_ChachaT.framework */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -25,11 +26,22 @@
 		926108471CE50755009F3E86 /* MagicMove.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108461CE50755009F3E86 /* MagicMove.swift */; };
 		926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */; };
 		9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261084A1CE50816009F3E86 /* CardDetailViewController.swift */; };
-		EF9C10DF2F6056BBCA00A7D1 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */; };
+		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
+		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
+		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
+		92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */; };
+		92B8DF2F1CE9357500AFA518 /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2E1CE9357500AFA518 /* CoreLocation.framework */; };
+		92B8DF311CE9357E00AFA518 /* QuartzCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF301CE9357E00AFA518 /* QuartzCore.framework */; };
+		92B8DF331CE9358A00AFA518 /* Security.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF321CE9358A00AFA518 /* Security.framework */; };
+		92B8DF351CE9359100AFA518 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF341CE9359100AFA518 /* StoreKit.framework */; };
+		92B8DF371CE9359B00AFA518 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */; };
+		92B8DF391CE935AA00AFA518 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF381CE935AA00AFA518 /* libz.tbd */; };
+		92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		2474D48527C725504A0343BB /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
+		511522772663A7240A9235BE /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -50,8 +62,18 @@
 		926108461CE50755009F3E86 /* MagicMove.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMove.swift; sourceTree = "<group>"; };
 		926108481CE5079E009F3E86 /* CustomTransitionExamples.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTransitionExamples.swift; sourceTree = "<group>"; };
 		9261084A1CE50816009F3E86 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
-		A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
-		E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
+		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
+		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
+		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
+		92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		92B8DF2E1CE9357500AFA518 /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
+		92B8DF301CE9357E00AFA518 /* QuartzCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = QuartzCore.framework; path = System/Library/Frameworks/QuartzCore.framework; sourceTree = SDKROOT; };
+		92B8DF321CE9358A00AFA518 /* Security.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Security.framework; path = System/Library/Frameworks/Security.framework; sourceTree = SDKROOT; };
+		92B8DF341CE9359100AFA518 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
+		92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
+		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
+		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		A4789E1652B49212A025D9B2 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -59,7 +81,17 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EF9C10DF2F6056BBCA00A7D1 /* Pods_ChachaT.framework in Frameworks */,
+				92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */,
+				92B8DF391CE935AA00AFA518 /* libz.tbd in Frameworks */,
+				92B8DF371CE9359B00AFA518 /* SystemConfiguration.framework in Frameworks */,
+				92B8DF351CE9359100AFA518 /* StoreKit.framework in Frameworks */,
+				92B8DF331CE9358A00AFA518 /* Security.framework in Frameworks */,
+				92B8DF311CE9357E00AFA518 /* QuartzCore.framework in Frameworks */,
+				92B8DF2F1CE9357500AFA518 /* CoreLocation.framework in Frameworks */,
+				92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */,
+				92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */,
+				92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */,
+				1CFD0CEEC18450221F839A84 /* Pods_ChachaT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -69,9 +101,28 @@
 		5651C15A164084F13922B25B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
-				68A4AA5C9E4687831BB82EB6 /* Pods_ChachaT.framework */,
+				92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */,
+				92B8DF381CE935AA00AFA518 /* libz.tbd */,
+				92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */,
+				92B8DF341CE9359100AFA518 /* StoreKit.framework */,
+				92B8DF321CE9358A00AFA518 /* Security.framework */,
+				92B8DF301CE9357E00AFA518 /* QuartzCore.framework */,
+				92B8DF2E1CE9357500AFA518 /* CoreLocation.framework */,
+				92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */,
+				92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */,
+				92B8DF281CE9356000AFA518 /* AudioToolbox.framework */,
+				A4789E1652B49212A025D9B2 /* Pods_ChachaT.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		6EA673826D757C5A35FCB43B /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				2474D48527C725504A0343BB /* Pods-ChachaT.debug.xcconfig */,
+				511522772663A7240A9235BE /* Pods-ChachaT.release.xcconfig */,
+			);
+			name = Pods;
 			sourceTree = "<group>";
 		};
 		9261080A1CDBCA32009F3E86 = {
@@ -80,8 +131,8 @@
 				926108151CDBCA32009F3E86 /* ChachaT */,
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				926108141CDBCA32009F3E86 /* Products */,
-				A3265B56DF0AFCD0EA66CAA7 /* Pods */,
 				5651C15A164084F13922B25B /* Frameworks */,
+				6EA673826D757C5A35FCB43B /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -116,6 +167,7 @@
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
+				92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 			);
 			name = Tinder;
@@ -158,15 +210,6 @@
 			name = "Magic Move";
 			sourceTree = "<group>";
 		};
-		A3265B56DF0AFCD0EA66CAA7 /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */,
-				E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -174,12 +217,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "ChachaT" */;
 			buildPhases = (
-				A340A70EA6F08D0DB3F9C88F /* Check Pods Manifest.lock */,
+				505E400DD4F174FE8A058259 /* 📦 Check Pods Manifest.lock */,
 				9261080F1CDBCA32009F3E86 /* Sources */,
 				926108101CDBCA32009F3E86 /* Frameworks */,
 				926108111CDBCA32009F3E86 /* Resources */,
-				2866DB2D95A25FD19098A4EA /* Embed Pods Frameworks */,
-				9CCDE9FE735C712CD0FFA886 /* Copy Pods Resources */,
+				B9D8CC266C2EE34AB02C72D3 /* 📦 Embed Pods Frameworks */,
+				88B045F250E157DB09FB3252 /* 📦 Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -240,29 +283,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		2866DB2D95A25FD19098A4EA /* Embed Pods Frameworks */ = {
+		505E400DD4F174FE8A058259 /* 📦 Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Embed Pods Frameworks";
+			name = "📦 Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-frameworks.sh\"\n";
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		9CCDE9FE735C712CD0FFA886 /* Copy Pods Resources */ = {
+		88B045F250E157DB09FB3252 /* 📦 Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Copy Pods Resources";
+			name = "📦 Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -270,19 +313,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		A340A70EA6F08D0DB3F9C88F /* Check Pods Manifest.lock */ = {
+		B9D8CC266C2EE34AB02C72D3 /* 📦 Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Check Pods Manifest.lock";
+			name = "📦 Embed Pods Frameworks";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -295,6 +338,7 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
@@ -414,7 +458,7 @@
 		};
 		926108261CDBCA32009F3E86 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = A6ED81DD5A6F8113967FB422 /* Pods-ChachaT.debug.xcconfig */;
+			baseConfigurationReference = 2474D48527C725504A0343BB /* Pods-ChachaT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ChachaT/Info.plist;
@@ -426,7 +470,7 @@
 		};
 		926108271CDBCA32009F3E86 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = E08ED5B434B74F59FBAF5B02 /* Pods-ChachaT.release.xcconfig */;
+			baseConfigurationReference = 511522772663A7240A9235BE /* Pods-ChachaT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = ChachaT/Info.plist;

@@ -231,6 +231,9 @@
                                                                 <exclude reference="lA8-dY-3Rq"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <segue destination="NyQ-U9-QoJ" kind="presentation" id="vLT-h3-GsH"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
                                                         <rect key="frame" x="0.0" y="67" width="560" height="60"/>
@@ -379,6 +382,43 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="905" y="348"/>
+        </scene>
+        <!--Question Detail View Controller-->
+        <scene sceneID="YqU-ev-aWv">
+            <objects>
+                <viewController id="NyQ-U9-QoJ" customClass="QuestionDetailViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="tiN-aj-NqQ"/>
+                        <viewControllerLayoutGuide type="bottom" id="75P-4j-5Tk"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="ykl-Dk-kFB">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dc-Ga-AH2">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="NyQ-U9-QoJ" id="OlY-5D-NvY"/>
+                                    <outlet property="delegate" destination="NyQ-U9-QoJ" id="LLr-1T-bog"/>
+                                </connections>
+                            </tableView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="9dc-Ga-AH2" secondAttribute="trailing" id="PKZ-m6-5uZ"/>
+                            <constraint firstItem="75P-4j-5Tk" firstAttribute="top" secondItem="9dc-Ga-AH2" secondAttribute="bottom" id="c8m-iN-T5g"/>
+                            <constraint firstItem="9dc-Ga-AH2" firstAttribute="top" secondItem="tiN-aj-NqQ" secondAttribute="bottom" id="hi1-3L-wSG"/>
+                            <constraint firstItem="9dc-Ga-AH2" firstAttribute="leading" secondItem="ykl-Dk-kFB" secondAttribute="leading" id="mNH-Aa-mYq"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="theTableView" destination="9dc-Ga-AH2" id="Da0-fk-5mF"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="FTI-zU-Sqh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1579" y="183"/>
         </scene>
     </scenes>
     <resources>
