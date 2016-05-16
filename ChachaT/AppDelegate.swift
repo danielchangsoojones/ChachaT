@@ -26,6 +26,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         self.window?.rootViewController = initialViewController
         self.window?.makeKeyAndVisible()
         
+        //register parse subclasses
+        User.registerSubclass()
+        
         
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {

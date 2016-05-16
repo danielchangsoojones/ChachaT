@@ -29,6 +29,7 @@
 		926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926108541CEA0EA6009F3E86 /* Onboarding.storyboard */; };
 		926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */; };
 		926108591CEA11B9009F3E86 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108581CEA11B9009F3E86 /* Alert.swift */; };
+		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
 		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
@@ -68,6 +69,7 @@
 		926108541CEA0EA6009F3E86 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpLogInViewController.swift; sourceTree = "<group>"; };
 		926108581CEA11B9009F3E86 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
+		9261085B1CEA196C009F3E86 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -153,6 +155,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				9261085A1CEA1939009F3E86 /* Models */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
@@ -225,6 +228,14 @@
 				926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */,
 			);
 			name = Onboarding;
+			sourceTree = "<group>";
+		};
+		9261085A1CEA1939009F3E86 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9261085B1CEA196C009F3E86 /* User.swift */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -373,6 +384,7 @@
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
+				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,

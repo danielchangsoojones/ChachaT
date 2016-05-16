@@ -13,7 +13,6 @@ import SnapKit
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
-    @IBOutlet weak var fullName: UITextField!
     @IBOutlet weak var theEmail: UITextField!
     @IBOutlet weak var thePassword: UITextField!
     @IBOutlet weak var theSignUpButton: UIButton!
@@ -191,16 +190,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func allValidates() -> Bool
     {
-        if fullName.text!.isEmpty && signUpState {
-            let alert = Alert()
-            alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
-                alert.closeAlert()
-                self.fullName.becomeFirstResponder()
-            })
-            alert.createAlert("Full Name is Required", subtitle: "Please enter your full name.", closeButtonTitle: "", type: .Error)
-            return false
-        }
-        else if theEmail.text!.isEmpty {
+        if theEmail.text!.isEmpty {
             let alert = Alert()
             alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
                 alert.closeAlert()
@@ -232,11 +222,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func textFieldShouldReturn(textField: UITextField) -> Bool {
-        if textField===self.fullName
-        {
-            self.theEmail.becomeFirstResponder()
-        }
-        else if textField===self.theEmail
+        if textField===self.theEmail
         {
             self.thePassword.becomeFirstResponder()
         }
