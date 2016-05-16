@@ -30,7 +30,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //register parse subclasses
         User.registerSubclass()
-        
+        TinderCard.registerSubclass()
         
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {
