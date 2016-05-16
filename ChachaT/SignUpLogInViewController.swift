@@ -50,6 +50,9 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 self.theFacebookButton.setTitle("Sign Up With Facebook", forState: .Normal)
                 self.theSignUpButton.setTitle("Sign Up", forState: .Normal)
                 self.theCreateAccountLabel.alpha = 1
+                self.theTermsOfService.setTitle("Terms Of Service", forState: .Normal)
+                self.theTermsOfService.setTitleColor(facebookBlue, forState: .Normal)
+                self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue-Medium", size: 10)
                 self.view.layoutIfNeeded()
             } else {
                 self.changeScreenButton.setTitle("Or, Sign Up", forState: .Normal)

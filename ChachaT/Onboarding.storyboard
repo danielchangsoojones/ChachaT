@@ -62,8 +62,8 @@
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="VQM-M5-iLq"/>
                                         <exclude reference="K4y-9w-Voh"/>
+                                        <exclude reference="VQM-M5-iLq"/>
                                     </mask>
                                 </variation>
                             </button>
@@ -111,9 +111,9 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
-                                        <exclude reference="urC-a9-8GN"/>
-                                        <exclude reference="XMv-NT-pAR"/>
                                         <exclude reference="SPb-Kc-tFl"/>
+                                        <exclude reference="XMv-NT-pAR"/>
+                                        <exclude reference="urC-a9-8GN"/>
                                     </mask>
                                 </variation>
                             </imageView>

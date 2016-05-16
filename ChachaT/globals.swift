@@ -10,4 +10,4 @@ import Foundation
 import EFTools
 
 let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
-
+let facebookBlue = UIColor.rgba(red: 45, green: 68, blue: 133, alpha: 1)
