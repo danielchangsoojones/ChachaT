@@ -27,13 +27,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var changeScreenButton: UIButton!
     
     //constraint outlets
-    @IBOutlet weak var bottomConstraint: NSLayoutConstraint!
-    @IBOutlet weak var theTextFieldsView: UIView!
-    @IBOutlet weak var fullNameHeight: NSLayoutConstraint!
-    @IBOutlet weak var lineViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var textFieldsViewHeight: NSLayoutConstraint!
-    @IBOutlet weak var FullNameTopConstraint: NSLayoutConstraint!
-    @IBOutlet weak var lineViewTopConstraint: NSLayoutConstraint!
+    @IBOutlet weak var changeScreenButtonBottomConstraint: NSLayoutConstraint!
+    
     
     var signUpState = true
     
@@ -52,11 +47,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         signUpState = !signUpState
         UIView.animateWithDuration(0.3, animations: { () -> Void in
             if self.signUpState {
-                self.fullNameHeight.constant = 35
-                self.lineViewHeight.constant = 1
-                self.lineViewTopConstraint.constant = 4
-                self.FullNameTopConstraint.constant = 4
-                self.textFieldsViewHeight.constant = 130
                 self.changeScreenButton.setTitle("Or, Sign In", forState: .Normal)
                 self.theFacebookButton.setTitle("Sign Up With Facebook", forState: .Normal)
                 self.theSignUpButton.setTitle("Sign Up", forState: .Normal)
@@ -64,11 +54,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 self.theTermsOfService.alpha = 1
                 self.view.layoutIfNeeded()
             } else {
-                self.fullNameHeight.constant = 0
-                self.lineViewHeight.constant = 0
-                self.lineViewTopConstraint.constant = 0
-                self.FullNameTopConstraint.constant = 0
-                self.textFieldsViewHeight.constant = 85
                 self.changeScreenButton.setTitle("Or, Sign Up", forState: .Normal)
                 self.theFacebookButton.setTitle("Sign In With Facebook", forState: .Normal)
                 self.theSignUpButton.setTitle("Sign In", forState: .Normal)
@@ -260,7 +245,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
 //keyboard notification
 extension SignUpLogInViewController {
     func keyboardWillShow(notification: NSNotification) {
-        guard let bottomConstraint = bottomConstraint else { return }
+        guard let bottomConstraint = changeScreenButtonBottomConstraint else { return }
         if let userInfo = notification.userInfo {
             if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
                 //tab bar height is default by Apple at 49
@@ -275,7 +260,7 @@ extension SignUpLogInViewController {
     }
     
     func keyboardWillHide(notification: NSNotification) {
-        guard let bottomConstraint = bottomConstraint else { return }
+        guard let bottomConstraint = changeScreenButtonBottomConstraint else { return }
         bottomConstraint.constant = 20
         self.hideOrUnhideFacebook(false)
         UIView.animateWithDuration(0.3, animations: { () -> Void in
