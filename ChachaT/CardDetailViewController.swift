@@ -24,6 +24,10 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
+    override func prefersStatusBarHidden() -> Bool {
+        return true
+    }
+    
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
             self.imageTapped()
