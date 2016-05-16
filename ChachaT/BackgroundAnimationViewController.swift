@@ -27,6 +27,11 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     @IBOutlet weak var imageView: UIImageView!
     
+    @IBAction func logOut(sender: AnyObject) {
+        User.logOut()
+        performSegueWithIdentifier("loginpage", sender: self)
+    }
+    
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -46,6 +51,10 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        if User.currentUser() == nil {
+            performSegueWithIdentifier("loginpage", sender: self)
+        }
+        
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
