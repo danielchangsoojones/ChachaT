@@ -81,6 +81,14 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
+    override func viewWillAppear(animated: Bool) {
+//        if let _ = User.currentUser() {
+//            performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+//        }
+    }
+    
+    
+    
     func dismissKeyboard() {
         view.endEditing(true)
     }
