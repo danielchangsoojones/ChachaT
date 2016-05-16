@@ -51,14 +51,15 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 self.theFacebookButton.setTitle("Sign Up With Facebook", forState: .Normal)
                 self.theSignUpButton.setTitle("Sign Up", forState: .Normal)
                 self.theCreateAccountLabel.alpha = 1
-                self.theTermsOfService.alpha = 1
                 self.view.layoutIfNeeded()
             } else {
                 self.changeScreenButton.setTitle("Or, Sign Up", forState: .Normal)
                 self.theFacebookButton.setTitle("Sign In With Facebook", forState: .Normal)
                 self.theSignUpButton.setTitle("Sign In", forState: .Normal)
                 self.theCreateAccountLabel.alpha = 0
-                self.theTermsOfService.alpha = 0
+                self.theTermsOfService.setTitle("Forgot Password?", forState: .Normal)
+                self.theTermsOfService.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue", size: 12)
                 self.view.layoutIfNeeded()
             }
         })
@@ -113,8 +114,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                     self.theFacebookButton.alpha = 1
                     self.orLine.alpha = 1
                     self.theFacebookLogo.alpha = 1
+                    self.theTermsOfService.alpha = 1
                     if self.signUpState {
-                        self.theTermsOfService.alpha = 1
                         self.theCreateAccountLabel.alpha = 1
                     }
                 }
