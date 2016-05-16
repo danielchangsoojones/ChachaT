@@ -11,14 +11,33 @@ import SCLAlertView
 
 class Alert {
     
-    let alert = SCLAlertView()
+    let alert : SCLAlertView
     var alertViewResponder : SCLAlertViewResponder
+    let appearance = SCLAlertView.SCLAppearance(
+        showCloseButton: false
+    )
     
-    init() {
+    init(closeButtonHidden: Bool) {
+        //this is for making alerts that have a hidden close button.
+        if closeButtonHidden {
+            alert = SCLAlertView(appearance: appearance)
+        } else {
+             alert = SCLAlertView()
+        }
+
         alertViewResponder = SCLAlertViewResponder(alertview: alert)
     }
     
-    init(title: String, subtitle: String, closeButtonTitle: String, type: SCLAlertViewStyle) {
+    init(title: String, subtitle: String, closeButtonTitle: String, closeButtonHidden: Bool, type: SCLAlertViewStyle) {
+        if closeButtonHidden {
+            let appearance = SCLAlertView.SCLAppearance(
+                showCloseButton: false
+            )
+            alert = SCLAlertView(appearance: appearance)
+        } else {
+            alert = SCLAlertView()
+        }
+        
         alertViewResponder = SCLAlertViewResponder(alertview: alert)
         switch type {
         case .Success :
@@ -60,11 +79,6 @@ class Alert {
     
     
     func addButton(buttonTitle: String, closeButtonHidden: Bool, buttonAction: () -> Void) {
-        if closeButtonHidden {
-//            alert.showCloseButton = false
-            //not working for some reason
-        }
-        
         alert.addButton(buttonTitle, action: buttonAction)
     }
     

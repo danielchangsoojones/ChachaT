@@ -153,12 +153,12 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 if error != nil {
                     let code = error!.code
                     if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
-                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", type: .Error)
+                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
                     }
                     else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
-                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", type: .Error)
+                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
                     }
-                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", type: .Error)
+                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
                 }
             }
         }
@@ -174,7 +174,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 let code = error.code
                 if code == PFErrorCode.ErrorObjectNotFound.rawValue {
-                    let alert = Alert()
+                    let alert = Alert(closeButtonHidden: true)
                     alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
                         alert.closeAlert()
                         self.theEmail.becomeFirstResponder()
@@ -182,7 +182,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                     alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
                 }
                 else {
-                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", type: .Error)
+                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
                 }
                 return;
             }
@@ -199,7 +199,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     func allValidates() -> Bool
     {
         if theEmail.text!.isEmpty {
-            let alert = Alert()
+            let alert = Alert(closeButtonHidden: true)
             alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
@@ -207,7 +207,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             alert.createAlert("Email is Required", subtitle: "Please enter an email address.", closeButtonTitle: "", type: .Error)
             return false
         }
-        else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {let alert = Alert()
+        else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
+            let alert = Alert(closeButtonHidden: true)
             alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
@@ -216,7 +217,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             return false
         }
         else if thePassword.text!.isEmpty {
-            let alert = Alert()
+            let alert = Alert(closeButtonHidden: true)
             alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.thePassword.becomeFirstResponder()
