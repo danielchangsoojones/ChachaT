@@ -21,6 +21,15 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.height - 150, width:  UIScreen.mainScreen().bounds.width, height: 150)
+        let transparent = UIColor(white: 1, alpha: 0).CGColor
+        let opaque = UIColor(white: 1, alpha: 1).CGColor
+        gradientLayer.colors = [transparent, opaque]
+        gradientLayer.locations = [0.0, 0.8]
+        
+        self.view.layer.addSublayer(gradientLayer)
+        
         setupTapHandler()
     }
     
