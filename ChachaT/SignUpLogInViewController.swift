@@ -113,8 +113,10 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                     self.theFacebookButton.alpha = 1
                     self.orLine.alpha = 1
                     self.theFacebookLogo.alpha = 1
-                    self.theCreateAccountLabel.alpha = 1
-                    self.theTermsOfService.alpha = 1
+                    if self.signUpState {
+                        self.theTermsOfService.alpha = 1
+                        self.theCreateAccountLabel.alpha = 1
+                    }
                 }
             })
     }
