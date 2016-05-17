@@ -229,17 +229,30 @@
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="7kN-dq-rUd" customClass="MBAutoGrowingTextView">
+                                                        <rect key="frame" x="20" y="0.0" width="580" height="60"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="height" constant="60" id="jJ1-Th-tD9"/>
+                                                        </constraints>
+                                                        <string key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</string>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                    </textView>
                                                 </subviews>
                                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstItem="MLZ-wk-Al1" firstAttribute="leading" secondItem="GZp-kG-YwR" secondAttribute="leading" id="4g6-MN-vha"/>
                                                     <constraint firstItem="GZp-kG-YwR" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="top" constant="8" id="4z5-vf-1zH"/>
+                                                    <constraint firstItem="7kN-dq-rUd" firstAttribute="leading" secondItem="pn3-ZV-lAp" secondAttribute="trailing" id="Bww-Ti-4ty"/>
                                                     <constraint firstItem="Wim-iW-FJm" firstAttribute="centerY" secondItem="GZp-kG-YwR" secondAttribute="centerY" id="DDQ-pF-RgZ"/>
                                                     <constraint firstItem="pn3-ZV-lAp" firstAttribute="top" secondItem="GZp-kG-YwR" secondAttribute="bottom" constant="10" id="J5y-7f-W5G"/>
+                                                    <constraint firstItem="7kN-dq-rUd" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="top" id="Jth-WN-HWu"/>
                                                     <constraint firstItem="GZp-kG-YwR" firstAttribute="leading" secondItem="Wim-iW-FJm" secondAttribute="trailing" constant="19" id="KfI-lq-cwM"/>
                                                     <constraint firstItem="MLZ-wk-Al1" firstAttribute="top" secondItem="GZp-kG-YwR" secondAttribute="bottom" constant="8" id="NT4-R5-szB"/>
                                                     <constraint firstItem="QhN-sR-LNs" firstAttribute="top" secondItem="MLZ-wk-Al1" secondAttribute="bottom" constant="8" id="Q7x-KQ-sD5"/>
                                                     <constraint firstAttribute="trailing" secondItem="GZp-kG-YwR" secondAttribute="trailing" id="Tnl-da-WaW"/>
+                                                    <constraint firstAttribute="bottom" secondItem="7kN-dq-rUd" secondAttribute="bottom" id="Xd0-fG-FPC"/>
                                                     <constraint firstAttribute="bottom" secondItem="QhN-sR-LNs" secondAttribute="bottom" constant="9" id="ZAz-ld-b3h"/>
                                                     <constraint firstItem="Wim-iW-FJm" firstAttribute="leading" secondItem="dCo-OJ-te4" secondAttribute="leading" constant="10" id="ZGQ-dt-te8"/>
                                                     <constraint firstAttribute="trailing" secondItem="QhN-sR-LNs" secondAttribute="trailing" id="bI9-mO-tDm"/>
@@ -247,6 +260,7 @@
                                                     <constraint firstItem="Wim-iW-FJm" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="top" constant="10" id="dWj-hA-cmV"/>
                                                     <constraint firstItem="Tck-Dg-N2s" firstAttribute="top" secondItem="QhN-sR-LNs" secondAttribute="bottom" constant="8" id="eyH-nd-9xn"/>
                                                     <constraint firstItem="QhN-sR-LNs" firstAttribute="leading" secondItem="GZp-kG-YwR" secondAttribute="leading" id="gf3-pY-Wa3"/>
+                                                    <constraint firstAttribute="trailing" secondItem="7kN-dq-rUd" secondAttribute="trailing" id="jSP-bo-4e1"/>
                                                     <constraint firstItem="pn3-ZV-lAp" firstAttribute="leading" secondItem="Wim-iW-FJm" secondAttribute="leading" id="rFx-JK-By6"/>
                                                     <constraint firstItem="Tck-Dg-N2s" firstAttribute="leading" secondItem="dCo-OJ-te4" secondAttribute="leading" id="t38-Yo-APO"/>
                                                     <constraint firstItem="xaK-0i-rYZ" firstAttribute="top" secondItem="MLZ-wk-Al1" secondAttribute="bottom" constant="10" id="td1-oL-KmY"/>
@@ -256,6 +270,7 @@
                                                 <variation key="default">
                                                     <mask key="constraints">
                                                         <exclude reference="DDQ-pF-RgZ"/>
+                                                        <exclude reference="Xd0-fG-FPC"/>
                                                     </mask>
                                                 </variation>
                                             </view>

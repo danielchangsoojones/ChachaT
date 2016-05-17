@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBAutoGrowingTextView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -67,7 +72,7 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>102D7F4445672AB793A9574D4F6DA868</key>
+		<key>0475C79D5539AB0E8DCC1995C6928FF4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -103,6 +108,11 @@
 			<true/>
 		</dict>
 		<key>6BDB4D035FCCA69D44E073675F8E7668</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9348368E0AE14076087837D8C8256FB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
