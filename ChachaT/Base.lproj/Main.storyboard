@@ -70,7 +70,7 @@
                     <connections>
                         <outlet property="imageView" destination="16g-Ya-p0C" id="th5-L8-dcF"/>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="loginpage" id="28w-wD-wPr"/>
+                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="28w-wD-wPr"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

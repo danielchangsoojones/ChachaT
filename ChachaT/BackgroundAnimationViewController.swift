@@ -11,6 +11,7 @@ import pop
 import Koloda
 import AVFoundation
 import Parse
+import EFTools
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -29,7 +30,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     @IBAction func logOut(sender: AnyObject) {
         User.logOut()
-        performSegueWithIdentifier("loginpage", sender: self)
+        performSegueWithIdentifier(.LogInPageSegue, sender: self)
     }
     
     
@@ -52,7 +53,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         if User.currentUser() == nil {
-            performSegueWithIdentifier("loginpage", sender: self)
+            performSegueWithIdentifier(.LogInPageSegue, sender: self)
         }
         
     }
@@ -162,6 +163,17 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     var magicViews: [UIView] {
         return [imageView]
+    }
+}
+
+extension BackgroundAnimationViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case LogInPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
     }
 }
 

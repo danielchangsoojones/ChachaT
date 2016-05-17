@@ -10,6 +10,8 @@ import UIKit
 
 class CardDetailViewController: CardDetailSuperViewController {
     
+    var editingProfileState = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapHandler()
