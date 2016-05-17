@@ -42,14 +42,12 @@ class CardDetailViewController: CardDetailSuperViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController")
-        vc.contentSizeInPopup = CGSizeMake(300, 400)
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController")
+        vc.contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 200)
         vc.landscapeContentSizeInPopup = CGSizeMake(400, 200)
         let popup = STPopupController(rootViewController: vc)
-        dispatch_async(dispatch_get_main_queue(), {
             popup.presentInViewController(self)
-        })
     }
     
     func setGUI(editingProfileState: Bool) {
