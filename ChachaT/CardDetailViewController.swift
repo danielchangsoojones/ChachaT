@@ -49,8 +49,7 @@ class CardDetailViewController: CardDetailSuperViewController {
         theProfileImageButtonOverlay.tapped { _ in
             self.imageTapped()
         }
-        theAgeLabel.tapped { (_) in
-            //have a date delegate pop up
+        theAgeLabel.tapped { _ in
             DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
                 (date) -> Void in
             }
@@ -58,6 +57,7 @@ class CardDetailViewController: CardDetailSuperViewController {
         
 
     }
+
 }
 
 extension CardDetailViewController: MagicMoveable {
