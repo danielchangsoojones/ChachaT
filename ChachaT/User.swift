@@ -18,6 +18,10 @@ class User: PFUser {
     @NSManaged var birthDate: NSDate?
     @NSManaged var profileImage: PFFile?
     @NSManaged var gender: String?
+    @NSManaged var title: String?
+    @NSManaged var factOne: String?
+    @NSManaged var factTwo: String?
+    @NSManaged var factThree: String?
     
 }
 

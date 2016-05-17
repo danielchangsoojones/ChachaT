@@ -33,6 +33,7 @@
 		9289F6E61CEA578300F42ACE /* CardDetailSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6E51CEA578300F42ACE /* CardDetailSuperViewController.swift */; };
 		9289F6E81CEA594200F42ACE /* CardDetailEditingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6E71CEA594200F42ACE /* CardDetailEditingViewController.swift */; };
 		9289F6EA1CEA59B100F42ACE /* TinderCard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6E91CEA59B100F42ACE /* TinderCard.swift */; };
+		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
@@ -76,6 +77,7 @@
 		9289F6E51CEA578300F42ACE /* CardDetailSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailSuperViewController.swift; sourceTree = "<group>"; };
 		9289F6E71CEA594200F42ACE /* CardDetailEditingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailEditingViewController.swift; sourceTree = "<group>"; };
 		9289F6E91CEA59B100F42ACE /* TinderCard.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TinderCard.swift; sourceTree = "<group>"; };
+		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -243,6 +245,7 @@
 			children = (
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9289F6E91CEA59B100F42ACE /* TinderCard.swift */,
+				9289F6EB1CEB542800F42ACE /* Question.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -402,6 +405,7 @@
 				9289F6E81CEA594200F42ACE /* CardDetailEditingViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				9289F6E61CEA578300F42ACE /* CardDetailSuperViewController.swift in Sources */,
+				9289F6EC1CEB542800F42ACE /* Question.swift in Sources */,
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
