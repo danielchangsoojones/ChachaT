@@ -21,6 +21,7 @@ class CardDetailViewController: CardDetailSuperViewController {
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     @IBOutlet weak var theFullNameTextField: UITextField!
     @IBOutlet weak var theFullNameLabel: UILabel!
+    @IBOutlet weak var theAgeLabel: UILabel!
     
     var editingProfileState = true
     
@@ -48,6 +49,13 @@ class CardDetailViewController: CardDetailSuperViewController {
         theProfileImageButtonOverlay.tapped { _ in
             self.imageTapped()
         }
+        theAgeLabel.tapped { (_) in
+            //have a date delegate pop up
+            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
+                (date) -> Void in
+            }
+        }
+        
 
     }
 }
