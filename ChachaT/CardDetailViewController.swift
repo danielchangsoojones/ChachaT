@@ -20,18 +20,17 @@ class CardDetailViewController: CardDetailSuperViewController {
     @IBOutlet weak var theCustomQuestionButton: UIButton!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     
-    var editingProfileState = false
+    var editingProfileState = true
+    
     var userOfTheCard: User? {
         didSet {
-            if let profileImage = userOfTheCard?.profileImage {
-//                imag.file = profileImage
-//                imageView.loadInBackground()
-            }
+            theFirstBulletText.text = "hi"
         }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.profileImage.image = UIImage(named: "camera-Colored")
         setupTapHandler()
     }
     

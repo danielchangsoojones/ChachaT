@@ -98,7 +98,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
     }
     
     func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
-        self.buttonTappedHandler()
+        self.buttonTappedHandler(index)
     }
     
     func koloda(kolodaShouldApplyAppearAnimation koloda: KolodaView) -> Bool {
@@ -172,8 +172,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
         return 0.7
     }
     
-    private func buttonTappedHandler() {
+    private func buttonTappedHandler(index: UInt) {
         let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
+        
+        cardDetailVC.userOfTheCard = userArray[Int(index)]
+        
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
         imageView.hidden = false
