@@ -8,9 +8,12 @@
 
 import UIKit
 import Parse
+import ParseUI
+
 
 class CardDetailViewController: CardDetailSuperViewController {
     
+    @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
     @IBOutlet weak var theQuestionButtonOne: UIButton!
     @IBOutlet weak var theQuestionButtonTwo: UIButton!
@@ -69,6 +72,6 @@ extension CardDetailViewController: MagicMoveable {
     }
     
     var magicViews: [UIView] {
-        return [imageView]
+        return [profileImage]
     }
 }

@@ -34,6 +34,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ParseUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ChachaT.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -62,6 +67,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>102D7F4445672AB793A9574D4F6DA868</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>19E4FCAE7EE3E81A5D32A507B3C9E202</key>
 		<dict>
 			<key>primary</key>
@@ -92,11 +102,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63DD95907DBB5189AA880B06F23608F7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>6BDB4D035FCCA69D44E073675F8E7668</key>
 		<dict>
 			<key>primary</key>
@@ -108,6 +113,11 @@
 			<true/>
 		</dict>
 		<key>C45290004E0078130C91A71711094467</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
 		<dict>
 			<key>primary</key>
 			<true/>
