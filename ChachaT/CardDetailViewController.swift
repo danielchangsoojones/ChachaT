@@ -7,14 +7,37 @@
 //
 
 import UIKit
+import Parse
 
 class CardDetailViewController: CardDetailSuperViewController {
     
+    @IBOutlet weak var theFirstBulletText: UILabel!
+    @IBOutlet weak var theQuestionButtonOne: UIButton!
+    @IBOutlet weak var theQuestionButtonTwo: UIButton!
+    @IBOutlet weak var theCustomQuestionButton: UIButton!
+    @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
+    
     var editingProfileState = false
+    var userOfTheCard: User? {
+        didSet {
+            if let profileImage = userOfTheCard?.profileImage {
+//                imag.file = profileImage
+//                imageView.loadInBackground()
+            }
+        }
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapHandler()
+    }
+    
+    func setGUI(editingProfileState: Bool) {
+        if editingProfileState{
+            
+        } else {
+            
+        }
     }
     
     private func setupTapHandler() {

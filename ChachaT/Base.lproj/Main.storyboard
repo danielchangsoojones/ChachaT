@@ -375,7 +375,6 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
-                        <outlet property="imageView" destination="8hk-xb-Z8g" id="Pxs-FZ-hXM"/>
                         <outlet property="theCustomQuestionButton" destination="Hdx-yn-KHS" id="dSt-aw-zM1"/>
                         <outlet property="theFirstBulletText" destination="GZp-kG-YwR" id="1K2-x8-oMM"/>
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
