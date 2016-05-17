@@ -22,10 +22,17 @@ class CardDetailViewController: CardDetailSuperViewController {
     @IBOutlet weak var theFullNameTextField: UITextField!
     @IBOutlet weak var theFullNameLabel: UILabel!
     @IBOutlet weak var theAgeLabel: UILabel!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var theTitleLabel: UILabel!
     
     var editingProfileState = true
     
     var userOfTheCard: User?
+    
+    @IBAction func fullNameTextFieldEditingChanged(sender: AnyObject) {
+        theFullNameTextField.invalidateIntrinsicContentSize()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -40,6 +47,7 @@ class CardDetailViewController: CardDetailSuperViewController {
             self.profileImage.contentMode = .Center
             self.theFullNameLabel.hidden = true
             theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
+            theTitleLabel.hidden = true
         } else {
             
         }
