@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import ParseUI
+import STPopup
 
 
 class CardDetailViewController: CardDetailSuperViewController {
@@ -38,6 +39,17 @@ class CardDetailViewController: CardDetailSuperViewController {
         super.viewDidLoad()
         setGUI(editingProfileState)
         setupTapHandler()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController")
+        vc.contentSizeInPopup = CGSizeMake(300, 400)
+        vc.landscapeContentSizeInPopup = CGSizeMake(400, 200)
+        let popup = STPopupController(rootViewController: vc)
+        dispatch_async(dispatch_get_main_queue(), {
+            popup.presentInViewController(self)
+        })
     }
     
     func setGUI(editingProfileState: Bool) {

@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'CA26A61A3FD628630903CF45'
-               BlueprintName = 'Koloda'
+               BlueprintIdentifier = 'EA73952665EE5FAE1A24D49C'
+               BlueprintName = 'STPopup'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Koloda.framework'>
+               BuildableName = 'STPopup.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
