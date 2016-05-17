@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        print(User.currentUser())
         //setting the initial storyboard
 //            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //            
@@ -30,7 +29,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //register parse subclasses
         User.registerSubclass()
-        
+        TinderCard.registerSubclass()
+        Question.registerSubclass()
         
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {
