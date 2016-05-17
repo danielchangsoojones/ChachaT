@@ -9,13 +9,6 @@
 import UIKit
 
 class CardDetailSuperViewController: UIViewController {
-    
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var theFirstBulletText: UILabel!
-    @IBOutlet weak var theQuestionButtonOne: UIButton!
-    @IBOutlet weak var theQuestionButtonTwo: UIButton!
-    @IBOutlet weak var theCustomQuestionButton: UIButton!
-    @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
 
     override func viewDidLoad() {
         super.viewDidLoad()

@@ -28,6 +28,8 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     @IBOutlet weak var imageView: UIImageView!
     
+    var userArray = [User]()
+    
     @IBAction func logOut(sender: AnyObject) {
         User.logOut()
         performSegueWithIdentifier(.LogInPageSegue, sender: self)
@@ -48,6 +50,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+        
+        createUserArray()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -72,6 +77,20 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 
 }
 
+//queries
+extension BackgroundAnimationViewController {
+    func createUserArray() {
+        let query = User.query()
+        query!.includeKey("follower")
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let users = objects as? [User] {
+                self.userArray = users
+                self.kolodaView.reloadData()
+            }
+        })
+    }
+}
+
 //MARK: KolodaViewDelegate
 extension BackgroundAnimationViewController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
@@ -79,7 +98,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
     }
     
     func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
-        self.buttonTappedHandler()
+        self.buttonTappedHandler(index)
     }
     
     func koloda(kolodaShouldApplyAppearAnimation koloda: KolodaView) -> Bool {
@@ -114,7 +133,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
-        return numberOfCards
+        return UInt(userArray.count)
     }
   
     func didTapImage(img: UIImage) {
@@ -153,8 +172,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
         return 0.7
     }
     
-    private func buttonTappedHandler() {
+    private func buttonTappedHandler(index: UInt) {
         let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
+        
+        cardDetailVC.userOfTheCard = userArray[Int(index)]
+        
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
         imageView.hidden = false

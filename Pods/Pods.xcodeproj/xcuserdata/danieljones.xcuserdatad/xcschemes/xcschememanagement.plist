@@ -24,6 +24,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>MBAutoGrowingTextView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>MBProgressHUD.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -34,12 +39,22 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>ParseUI.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Pods-ChachaT.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
 		</dict>
 		<key>SCLAlertView.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>STPopup.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -62,6 +77,11 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>06D06CD9EC424A6FDF0CC0C1939DF107</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>19E4FCAE7EE3E81A5D32A507B3C9E202</key>
 		<dict>
 			<key>primary</key>
@@ -82,6 +102,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>2CAE6BC554D479B0FB87E5264852C379</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>395970F09DFE5EFCDA4AFA3D5EBE78C0</key>
 		<dict>
 			<key>primary</key>
@@ -92,12 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>63DD95907DBB5189AA880B06F23608F7</key>
+		<key>6BDB4D035FCCA69D44E073675F8E7668</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6BDB4D035FCCA69D44E073675F8E7668</key>
+		<key>9348368E0AE14076087837D8C8256FB8</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -108,6 +133,11 @@
 			<true/>
 		</dict>
 		<key>C45290004E0078130C91A71711094467</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
 		<dict>
 			<key>primary</key>
 			<true/>

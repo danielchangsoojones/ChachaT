@@ -7,22 +7,82 @@
 //
 
 import UIKit
+import Parse
+import ParseUI
+import STPopup
+
 
 class CardDetailViewController: CardDetailSuperViewController {
     
-    var editingProfileState = false
+    @IBOutlet weak var profileImage: PFImageView!
+    @IBOutlet weak var theFirstBulletText: UILabel!
+    @IBOutlet weak var theQuestionButtonOne: UIButton!
+    @IBOutlet weak var theQuestionButtonTwo: UIButton!
+    @IBOutlet weak var theCustomQuestionButton: UIButton!
+    @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
+    @IBOutlet weak var theFullNameTextField: UITextField!
+    @IBOutlet weak var theFullNameLabel: UILabel!
+    @IBOutlet weak var theAgeLabel: UILabel!
+    @IBOutlet weak var titleTextField: UITextField!
+    @IBOutlet weak var theTitleLabel: UILabel!
+    
+    var editingProfileState = true
+    
+    var userOfTheCard: User?
+    
+    @IBAction func fullNameTextFieldEditingChanged(sender: AnyObject) {
+        theFullNameTextField.invalidateIntrinsicContentSize()
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setGUI(editingProfileState)
         setupTapHandler()
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController")
+        vc.contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 200)
+        vc.landscapeContentSizeInPopup = CGSizeMake(400, 200)
+        let popup = STPopupController(rootViewController: vc)
+            popup.presentInViewController(self)
+    }
+    
+    func setGUI(editingProfileState: Bool) {
+        if editingProfileState{
+            self.profileImage.backgroundColor = ChachaBombayGrey
+            self.profileImage.image = UIImage(named: "camera-Colored")
+            self.profileImage.contentMode = .Center
+            self.theFullNameLabel.hidden = true
+            theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
+            theTitleLabel.hidden = true
+        } else {
+            
+        }
     }
     
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
             self.imageTapped()
         }
+        theAgeLabel.tapped { _ in
+            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
+                (birthday) -> Void in
+                let calendar : NSCalendar = NSCalendar.currentCalendar()
+                let now = NSDate()
+                let ageComponents = calendar.components(.Year,
+                    fromDate: birthday,
+                    toDate: now,
+                    options: [])
+                self.theAgeLabel.text = ", " + "\(ageComponents.year)"
+            }
+        }
+        
 
     }
+
 }
 
 extension CardDetailViewController: MagicMoveable {
@@ -46,6 +106,6 @@ extension CardDetailViewController: MagicMoveable {
     }
     
     var magicViews: [UIView] {
-        return [imageView]
+        return [profileImage]
     }
 }
