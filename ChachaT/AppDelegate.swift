@@ -29,7 +29,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //register parse subclasses
         User.registerSubclass()
-        TinderCard.registerSubclass()
         Question.registerSubclass()
         
         // Override point for customization after application launch.

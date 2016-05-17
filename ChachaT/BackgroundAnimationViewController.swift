@@ -28,6 +28,8 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     @IBOutlet weak var imageView: UIImageView!
     
+    var userArray = [User]()
+    
     @IBAction func logOut(sender: AnyObject) {
         User.logOut()
         performSegueWithIdentifier(.LogInPageSegue, sender: self)
@@ -48,6 +50,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
+        
+        createUserArray()
+        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,6 +75,20 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         super.viewDidLayoutSubviews()
     }
 
+}
+
+//queries
+extension BackgroundAnimationViewController {
+    func createUserArray() {
+        let query = User.query()
+        query!.includeKey("follower")
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            if let users = objects as? [User] {
+                self.userArray = users
+                self.kolodaView.reloadData()
+            }
+        })
+    }
 }
 
 //MARK: KolodaViewDelegate
@@ -114,7 +133,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
-        return numberOfCards
+        return UInt(userArray.count)
     }
   
     func didTapImage(img: UIImage) {
