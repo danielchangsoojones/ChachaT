@@ -51,7 +51,14 @@ class CardDetailViewController: CardDetailSuperViewController {
         }
         theAgeLabel.tapped { _ in
             DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
-                (date) -> Void in
+                (birthday) -> Void in
+                let calendar : NSCalendar = NSCalendar.currentCalendar()
+                let now = NSDate()
+                let ageComponents = calendar.components(.Year,
+                    fromDate: birthday,
+                    toDate: now,
+                    options: [])
+                self.theAgeLabel.text = ", " + "\(ageComponents.year)"
             }
         }
         
