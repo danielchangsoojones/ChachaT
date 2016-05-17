@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0mX-qL-tRg">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="0mX-qL-tRg">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -111,34 +111,44 @@
                                                             <constraint firstAttribute="height" constant="1" id="PST-LH-ybZ"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=", Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG2-2N-iPj">
-                                                        <rect key="frame" x="98" y="8" width="44" height="23"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text=", Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG2-2N-iPj">
+                                                        <rect key="frame" x="98" y="15" width="44" height="23"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkV-io-nnJ">
-                                                        <rect key="frame" x="8" y="39" width="27" height="16"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkV-io-nnJ">
+                                                        <rect key="frame" x="8" y="46" width="27" height="16"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dI7-Qj-h3R">
-                                                        <rect key="frame" x="8" y="8" width="90" height="23"/>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="dI7-Qj-h3R">
+                                                        <rect key="frame" x="8" y="8" width="90" height="30"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
                                                         <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
+                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name" textAlignment="natural" clearsOnBeginEditing="YES" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-7g-UB7">
+                                                        <rect key="frame" x="8" y="8" width="90" height="30"/>
+                                                        <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
+                                                        <textInputTraits key="textInputTraits"/>
+                                                    </textField>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="IkV-io-nnJ" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="0Ti-yS-cT8"/>
+                                                    <constraint firstItem="Cak-7g-UB7" firstAttribute="trailing" secondItem="dI7-Qj-h3R" secondAttribute="trailing" id="9N9-l5-nI7"/>
                                                     <constraint firstItem="7pK-7V-3MT" firstAttribute="leading" secondItem="q5j-vq-aso" secondAttribute="leading" id="Dvo-k2-bta"/>
                                                     <constraint firstAttribute="bottom" secondItem="7pK-7V-3MT" secondAttribute="bottom" id="HbP-nO-Bkj"/>
                                                     <constraint firstItem="dI7-Qj-h3R" firstAttribute="leading" secondItem="q5j-vq-aso" secondAttribute="leading" constant="8" id="Rkg-9g-oTW"/>
                                                     <constraint firstAttribute="height" constant="61" id="Tnl-HE-9ze"/>
+                                                    <constraint firstItem="Cak-7g-UB7" firstAttribute="bottom" secondItem="dI7-Qj-h3R" secondAttribute="bottom" id="XbX-DP-m6j"/>
                                                     <constraint firstItem="dI7-Qj-h3R" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="top" constant="8" id="aLb-H0-HSO"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="61" id="cb5-om-MC1"/>
                                                     <constraint firstAttribute="trailing" secondItem="7pK-7V-3MT" secondAttribute="trailing" id="f8A-yr-pMa"/>
+                                                    <constraint firstItem="Cak-7g-UB7" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="hps-ZH-0CS"/>
+                                                    <constraint firstItem="Cak-7g-UB7" firstAttribute="top" secondItem="dI7-Qj-h3R" secondAttribute="top" id="iBa-bA-gaz"/>
                                                     <constraint firstItem="iG2-2N-iPj" firstAttribute="baseline" secondItem="dI7-Qj-h3R" secondAttribute="baseline" id="uoF-QA-pHB"/>
                                                     <constraint firstItem="iG2-2N-iPj" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="trailing" id="wuo-J6-MXL"/>
                                                     <constraint firstItem="IkV-io-nnJ" firstAttribute="top" secondItem="dI7-Qj-h3R" secondAttribute="bottom" constant="8" id="xhl-kX-gPg"/>
@@ -299,6 +309,10 @@
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5O-C2-7n0" userLabel="Profile Background Button">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
                                             </button>
+                                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XiY-Tr-pe6">
+                                                <rect key="frame" x="0.0" y="0.0" width="60" height="46"/>
+                                                <state key="normal" image="camera-Colored"/>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -378,6 +392,8 @@
                         <outlet property="profileImage" destination="8hk-xb-Z8g" id="QQ4-0v-Dow"/>
                         <outlet property="theCustomQuestionButton" destination="Hdx-yn-KHS" id="dSt-aw-zM1"/>
                         <outlet property="theFirstBulletText" destination="GZp-kG-YwR" id="1K2-x8-oMM"/>
+                        <outlet property="theFullNameLabel" destination="dI7-Qj-h3R" id="jDQ-RN-H4a"/>
+                        <outlet property="theFullNameTextField" destination="Cak-7g-UB7" id="RyF-75-ElM"/>
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
                         <outlet property="theQuestionButtonOne" destination="XWC-yS-1iT" id="oiH-eA-9MK"/>
                         <outlet property="theQuestionButtonTwo" destination="18q-bc-79v" id="lgk-YV-gib"/>
@@ -431,5 +447,6 @@
         <image name="Driving girl" width="157" height="203"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Top Line" width="375" height="1"/>
+        <image name="camera-Colored" width="60" height="46"/>
     </resources>
 </document>

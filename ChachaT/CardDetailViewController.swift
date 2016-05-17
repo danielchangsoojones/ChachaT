@@ -19,24 +19,26 @@ class CardDetailViewController: CardDetailSuperViewController {
     @IBOutlet weak var theQuestionButtonTwo: UIButton!
     @IBOutlet weak var theCustomQuestionButton: UIButton!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
+    @IBOutlet weak var theFullNameTextField: UITextField!
+    @IBOutlet weak var theFullNameLabel: UILabel!
     
     var editingProfileState = true
     
-    var userOfTheCard: User? {
-        didSet {
-            theFirstBulletText.text = "hi"
-        }
-    }
+    var userOfTheCard: User?
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.profileImage.image = UIImage(named: "camera-Colored")
+        setGUI(editingProfileState)
         setupTapHandler()
     }
     
     func setGUI(editingProfileState: Bool) {
         if editingProfileState{
-            
+            self.profileImage.backgroundColor = ChachaBombayGrey
+            self.profileImage.image = UIImage(named: "camera-Colored")
+            self.profileImage.contentMode = .Center
+            self.theFullNameLabel.hidden = true
+            theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
         } else {
             
         }
