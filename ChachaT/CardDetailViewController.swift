@@ -12,7 +12,7 @@ import ParseUI
 import STPopup
 
 
-class CardDetailViewController: CardDetailSuperViewController {
+class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
@@ -54,6 +54,7 @@ class CardDetailViewController: CardDetailSuperViewController {
     }
     
     func setGUI(editingProfileState: Bool) {
+        self.view.layer.addSublayer(setBottomBlur())
         if editingProfileState{
             self.profileImage.backgroundColor = ChachaBombayGrey
             self.profileImage.image = UIImage(named: "camera-Colored")
@@ -89,6 +90,10 @@ class CardDetailViewController: CardDetailSuperViewController {
         }
         
 
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
 
 }
