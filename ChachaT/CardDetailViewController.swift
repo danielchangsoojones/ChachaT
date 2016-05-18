@@ -41,13 +41,16 @@ class CardDetailViewController: CardDetailSuperViewController {
         setupTapHandler()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    func createDetailPopUp() {
+        //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController")
-        vc.contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 200)
-        vc.landscapeContentSizeInPopup = CGSizeMake(400, 200)
         let popup = STPopupController(rootViewController: vc)
-            popup.presentInViewController(self)
+        popup.containerView.layer.cornerRadius = 10.0
+        popup.navigationBar.barTintColor = ChachaTeal
+        popup.navigationBar.tintColor = UIColor.whiteColor()
+        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        popup.presentInViewController(self)
     }
     
     func setGUI(editingProfileState: Bool) {
@@ -67,6 +70,7 @@ class CardDetailViewController: CardDetailSuperViewController {
         theProfileImageButtonOverlay.tapped { _ in
             self.imageTapped()
         }
+        
         theAgeLabel.tapped { _ in
             DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
                 (birthday) -> Void in
@@ -78,6 +82,10 @@ class CardDetailViewController: CardDetailSuperViewController {
                     options: [])
                 self.theAgeLabel.text = ", " + "\(ageComponents.year)"
             }
+        }
+        
+        theFirstBulletText.tapped { (_) in
+            self.createDetailPopUp()
         }
         
 

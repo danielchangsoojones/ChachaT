@@ -9,10 +9,14 @@
 import UIKit
 
 class UserDetailPopUpViewController: UIViewController {
+    
+    var keyboardHeight : CGFloat = 216
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "About You"
+        
+        contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - keyboardHeight - 100)
         // Do any additional setup after loading the view.
     }
 
