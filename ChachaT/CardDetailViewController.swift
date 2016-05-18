@@ -11,7 +11,6 @@ import Parse
 import ParseUI
 import STPopup
 
-
 class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
@@ -25,6 +24,9 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theAgeLabel: UILabel!
     @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var theTitleLabel: UILabel!
+    @IBOutlet weak var theSecondBulletText: UILabel!
+    @IBOutlet weak var theThirdBulletText: UILabel!
+    
     
     var editingProfileState = true
     
@@ -41,10 +43,20 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
-    func createDetailPopUp() {
+    func createDetailPopUp(factNumber: Fact) {
         //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController")
+        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController") as! UserDetailPopUpViewController
+        vc.delegate = self
+        vc.factNumber = factNumber
+        switch factNumber {
+        case .FactOne:
+            vc.factDescriptionText = theFirstBulletText.text
+        case .FactTwo:
+            vc.factDescriptionText = theSecondBulletText.text
+        case .FactThree:
+            vc.factDescriptionText = theThirdBulletText.text
+        }
         let popup = STPopupController(rootViewController: vc)
         popup.containerView.layer.cornerRadius = 10.0
         popup.navigationBar.barTintColor = ChachaTeal
@@ -86,7 +98,15 @@ class CardDetailViewController: UIViewController {
         }
         
         theFirstBulletText.tapped { (_) in
-            self.createDetailPopUp()
+            self.createDetailPopUp(Fact.FactOne)
+        }
+        
+        theSecondBulletText.tapped { (_) in
+            self.createDetailPopUp(Fact.FactTwo)
+        }
+        
+        theThirdBulletText.tapped { (_) in
+            self.createDetailPopUp(Fact.FactThree)
         }
         
 
@@ -96,6 +116,20 @@ class CardDetailViewController: UIViewController {
         return true
     }
 
+}
+
+protocol PopUpViewControllerDelegate{
+    func passFactDescription(text: String, fact: Fact)
+}
+
+extension CardDetailViewController: PopUpViewControllerDelegate {
+    func passFactDescription(text: String, fact: Fact) {
+        switch fact {
+        case .FactOne: theFirstBulletText.text = text
+        case .FactTwo: theSecondBulletText.text = text
+        case .FactThree: theThirdBulletText.text = text
+        }
+    }
 }
 
 extension CardDetailViewController: MagicMoveable {

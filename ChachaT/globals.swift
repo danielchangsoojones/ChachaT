@@ -35,3 +35,10 @@ func setBottomBlur() -> CAGradientLayer {
     
     return gradientLayer
 }
+
+//enums
+enum Fact {
+    case FactOne
+    case FactTwo
+    case FactThree
+}

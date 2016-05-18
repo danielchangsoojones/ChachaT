@@ -198,7 +198,7 @@
                                                             <constraint firstAttribute="height" constant="10" id="dVG-Ux-qfb"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Kindergarten to 12th grade, i never missed any days of school. Ever." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLZ-wk-Al1">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="From Kindergarten to 12th grade, i never missed any days of school. Ever." textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MLZ-wk-Al1">
                                                         <rect key="frame" x="39" y="31" width="561" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -223,7 +223,7 @@
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shaq has my autograph" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-sR-LNs">
+                                                    <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Shaq has my autograph" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="50" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QhN-sR-LNs">
                                                         <rect key="frame" x="39" y="54" width="561" height="15"/>
                                                         <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -425,6 +425,8 @@
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
                         <outlet property="theQuestionButtonOne" destination="XWC-yS-1iT" id="oiH-eA-9MK"/>
                         <outlet property="theQuestionButtonTwo" destination="18q-bc-79v" id="lgk-YV-gib"/>
+                        <outlet property="theSecondBulletText" destination="MLZ-wk-Al1" id="CvR-zm-bkU"/>
+                        <outlet property="theThirdBulletText" destination="QhN-sR-LNs" id="GAd-Lq-IIG"/>
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
                     </connections>

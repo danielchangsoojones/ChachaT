@@ -16,6 +16,11 @@ class UserDetailPopUpViewController: UIViewController {
     @IBOutlet weak var theActivitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var theSaveButton: UIButton!
     
+    var factNumber: Fact?
+    var factDescriptionText: String?
+    
+    var delegate: PopUpViewControllerDelegate?
+    
     @IBAction func save(sender: AnyObject) {
         theSaveButton.enabled = false
         let currentUser = User.currentUser()
@@ -24,6 +29,7 @@ class UserDetailPopUpViewController: UIViewController {
         theActivitySpinner.startAnimating()
         currentUser?.saveInBackgroundWithBlock({ (success, error) in
             if success {
+                self.delegate?.passFactDescription(self.theDescriptionTextView.text, fact: self.factNumber!)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
             
@@ -38,8 +44,9 @@ class UserDetailPopUpViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "About You"
-        
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - keyboardHeight - 100)
+        theDescriptionTextView.text = factDescriptionText
+        
         // Do any additional setup after loading the view.
     }
 
