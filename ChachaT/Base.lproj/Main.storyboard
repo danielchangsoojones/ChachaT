@@ -129,16 +129,13 @@
                                                         <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-7g-UB7">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Full Name..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Cak-7g-UB7">
                                                         <rect key="frame" x="8" y="8" width="125" height="24"/>
                                                         <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                         <fontDescription key="fontDescription" type="boldSystem" pointSize="20"/>
                                                         <textInputTraits key="textInputTraits"/>
-                                                        <connections>
-                                                            <action selector="fullNameTextFieldEditingChanged:" destination="7Sy-Jm-ZWb" eventType="editingChanged" id="UK3-Y9-kLH"/>
-                                                        </connections>
                                                     </textField>
-                                                    <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Asv-C1-hSe">
+                                                    <textField hidden="YES" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" horizontalCompressionResistancePriority="755" contentHorizontalAlignment="left" contentVerticalAlignment="center" placeholder="Title..." textAlignment="natural" minimumFontSize="17" clearButtonMode="whileEditing" translatesAutoresizingMaskIntoConstraints="NO" id="Asv-C1-hSe">
                                                         <rect key="frame" x="8" y="40" width="592" height="19"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="340.5" id="GL3-h3-Wya"/>
@@ -340,16 +337,16 @@
                                                 <rect key="frame" x="0.0" y="0.0" width="60" height="46"/>
                                                 <state key="normal" image="camera-Colored"/>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
                                                 <rect key="frame" x="20" y="16" width="34" height="30"/>
                                                 <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <size key="titleShadowOffset" width="4" height="4"/>
-                                                <state key="normal" title="Edit"/>
+                                                <state key="normal" title="Back"/>
                                                 <connections>
                                                     <action selector="editOrBackOrSavePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="8FX-yJ-IqH"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" ambiguous="YES" misplaced="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
                                                 <rect key="frame" x="27" y="21" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="KUD-XN-RL2"/>
@@ -375,6 +372,8 @@
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstAttribute="bottom" secondItem="kwP-NN-ZE2" secondAttribute="bottom" constant="59" id="SdX-uM-F6T"/>
+                                            <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
+                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="16" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerY" secondItem="i23-FF-3md" secondAttribute="centerY" id="UT1-jF-9Jn"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
