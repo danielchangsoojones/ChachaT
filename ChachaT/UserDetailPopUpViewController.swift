@@ -7,11 +7,34 @@
 //
 
 import UIKit
+import Parse
 
 class UserDetailPopUpViewController: UIViewController {
     
     var keyboardHeight : CGFloat = 216
-
+    @IBOutlet weak var theDescriptionTextView: UITextView!
+    @IBOutlet weak var theActivitySpinner: UIActivityIndicatorView!
+    @IBOutlet weak var theSaveButton: UIButton!
+    
+    @IBAction func save(sender: AnyObject) {
+        theSaveButton.enabled = false
+        let currentUser = User.currentUser()
+        currentUser?.factOne = theDescriptionTextView.text
+        theActivitySpinner.hidden = false
+        theActivitySpinner.startAnimating()
+        currentUser?.saveInBackgroundWithBlock({ (success, error) in
+            if success {
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+        })
+    }
+    
+    @IBAction func clearText(sender: AnyObject) {
+        theDescriptionTextView.text = ""
+        theDescriptionTextView.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         self.title = "About You"
