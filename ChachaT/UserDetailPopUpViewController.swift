@@ -7,18 +7,56 @@
 //
 
 import UIKit
+import Parse
 
 class UserDetailPopUpViewController: UIViewController {
-
+    
+    var keyboardHeight : CGFloat = 216
+    @IBOutlet weak var theDescriptionTextView: UITextView!
+    @IBOutlet weak var theActivitySpinner: UIActivityIndicatorView!
+    @IBOutlet weak var theSaveButton: UIButton!
+    
+    var factNumber: Fact?
+    var factDescriptionText: String?
+    
+    var delegate: PopUpViewControllerDelegate?
+    
+    @IBAction func save(sender: AnyObject) {
+        theSaveButton.enabled = false
+        let currentUser = User.currentUser()
+        currentUser?.factOne = theDescriptionTextView.text
+        theActivitySpinner.hidden = false
+        theActivitySpinner.startAnimating()
+        currentUser?.saveInBackgroundWithBlock({ (success, error) in
+            if success {
+                self.delegate?.passFactDescription(self.theDescriptionTextView.text, fact: self.factNumber!)
+                self.dismissViewControllerAnimated(true, completion: nil)
+            }
+            
+        })
+    }
+    
+    @IBAction func clearText(sender: AnyObject) {
+        theDescriptionTextView.text = ""
+        theDescriptionTextView.becomeFirstResponder()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        self.title = "About You"
+        contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - keyboardHeight - 100)
+        theDescriptionTextView.text = factDescriptionText
+        
         // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func prefersStatusBarHidden() -> Bool {
+        return true
     }
     
 

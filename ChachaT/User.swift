@@ -12,7 +12,7 @@ import Parse
 class User: PFUser {
     
     //MARK- NSManaged properies
-    @NSManaged var fullName: String
+    @NSManaged var fullName: String?
     @NSManaged var lowercaseFullName: String?
     @NSManaged var lowercaseUsername: String?
     @NSManaged var birthDate: NSDate?
@@ -22,6 +22,20 @@ class User: PFUser {
     @NSManaged var factOne: String?
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
+    
+    func calculateBirthDate() -> Int? {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        if let birthDate = birthDate {
+            let ageComponents = calendar.components(.Year,
+                                                    fromDate: birthDate,
+                                                    toDate: now,
+                                                    options: [])
+            return ageComponents.year
+        }
+        return nil
+        
+    }
     
 }
 
