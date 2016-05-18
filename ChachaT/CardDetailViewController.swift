@@ -26,14 +26,55 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theSecondBulletText: UILabel!
     @IBOutlet weak var theThirdBulletText: UILabel!
+    @IBOutlet weak var editOrBackOrSaveButton: UIButton!
+    @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     
+    enum FloatingButtonState {
+        case Save
+        case Edit
+    }
     
     var editingProfileState = true
+    var fullNameTextFieldDidChange = false
+    var titleTextFieldDidChange = false
+    var floatingButtonState : FloatingButtonState = .Edit
     
     var userOfTheCard: User?
     
     @IBAction func fullNameTextFieldEditingChanged(sender: AnyObject) {
         theFullNameTextField.invalidateIntrinsicContentSize()
+    }
+    
+    @IBAction func editOrBackOrSavePressed(sender: AnyObject) {
+        
+        if editingProfileState {
+            if floatingButtonState == .Edit {
+                editOrBackOrSaveButton.setTitle("Save", forState: .Normal)
+                floatingButtonState = .Save
+            } else {
+                if fullNameTextFieldDidChange {
+                    let fullNameText = theFullNameTextField.text
+                    userOfTheCard?.fullName = fullNameText
+                    userOfTheCard?.lowercaseFullName = fullNameText?.lowercaseString
+                }
+                if titleTextFieldDidChange {
+                    userOfTheCard?.title = titleTextField.text
+                }
+                editOrBackOrSaveButton.setTitle("", forState: .Normal)
+                theSavingSpinner.hidden = false
+                theSavingSpinner.startAnimating()
+                userOfTheCard?.saveInBackgroundWithBlock({ (success, error) in
+                    if success {
+                        self.theSavingSpinner.stopAnimating()
+                        self.theSavingSpinner.hidden = true
+                        self.editOrBackOrSaveButton.setTitle("Edit", forState: .Normal)
+                    } else {
+                        let _ = Alert(title: "Problem Saving Profile", subtitle: "Please try to save again", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
+                    }
+                })
+                floatingButtonState = .Edit
+            }
+        }
     }
     
     
@@ -68,16 +109,40 @@ class CardDetailViewController: UIViewController {
     func setGUI(editingProfileState: Bool) {
         self.view.layer.addSublayer(setBottomBlur())
         if editingProfileState{
+            //checking if the full name or title field were even changed.
+            theFullNameTextField.addTarget(self, action: #selector(CardDetailViewController.fullNameTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+            titleTextField.addTarget(self, action: #selector(CardDetailViewController.titleTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+            
+            if let fullName = userOfTheCard?.fullName {
+                theFullNameTextField.text = fullName
+            }
+            if let age = userOfTheCard?.calculateBirthDate() {
+                theAgeLabel.text = ", " + "\(age)"
+            }
+            if let title = userOfTheCard?.title {
+                titleTextField.text = title
+            }
             self.profileImage.backgroundColor = ChachaBombayGrey
             self.profileImage.image = UIImage(named: "camera-Colored")
             self.profileImage.contentMode = .Center
             self.theFullNameLabel.hidden = true
             theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
             theTitleLabel.hidden = true
+            theCustomQuestionButton.setTitle("Find Friends", forState: .Normal)
         } else {
             
         }
     }
+    
+    func fullNameTextFieldDidChange(textField: UITextField) {
+        fullNameTextFieldDidChange = true
+    }
+    
+    func titleTextFieldDidChange(textField: UITextField) {
+        titleTextFieldDidChange = true
+    }
+    
+    
     
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
@@ -94,6 +159,8 @@ class CardDetailViewController: UIViewController {
                     toDate: now,
                     options: [])
                 self.theAgeLabel.text = ", " + "\(ageComponents.year)"
+                self.userOfTheCard?.birthDate = birthday
+                self.userOfTheCard?.saveInBackground()
             }
         }
         
@@ -117,6 +184,7 @@ class CardDetailViewController: UIViewController {
     }
 
 }
+
 
 protocol PopUpViewControllerDelegate{
     func passFactDescription(text: String, fact: Fact)
