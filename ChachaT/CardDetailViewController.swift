@@ -119,7 +119,6 @@ class CardDetailViewController: UIViewController {
         if floatingButtonState == .Edit {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
         }
-        
     }
     
     func setEditingGUI() {
@@ -179,18 +178,19 @@ class CardDetailViewController: UIViewController {
             }
         }
         
-        theFirstBulletText.tapped { (_) in
-            self.createDetailPopUp(Fact.FactOne)
+        if self.floatingButtonState == .Save {
+            theFirstBulletText.tapped { (_) in
+                self.createDetailPopUp(Fact.FactOne)
+            }
+            
+            theSecondBulletText.tapped { (_) in
+                self.createDetailPopUp(Fact.FactTwo)
+            }
+            
+            theThirdBulletText.tapped { (_) in
+                self.createDetailPopUp(Fact.FactThree)
+            }
         }
-        
-        theSecondBulletText.tapped { (_) in
-            self.createDetailPopUp(Fact.FactTwo)
-        }
-        
-        theThirdBulletText.tapped { (_) in
-            self.createDetailPopUp(Fact.FactThree)
-        }
-        
 
     }
     
