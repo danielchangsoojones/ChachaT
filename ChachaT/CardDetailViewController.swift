@@ -40,7 +40,7 @@ class CardDetailViewController: UIViewController {
     //need to set this to editing if I want to have profile that is editable
     var floatingButtonState : FloatingButtonState = .Edit
     
-    var userOfTheCard: User?
+    var userOfTheCard: User? = User.currentUser()
     
     @IBAction func editOrBackOrSavePressed(sender: AnyObject) {
         switch floatingButtonState {
@@ -55,6 +55,8 @@ class CardDetailViewController: UIViewController {
                 userOfTheCard?.title = titleTextField.text
             }
             editOrBackOrSaveButton.setTitle("", forState: .Normal)
+            theFullNameTextField.userInteractionEnabled = false
+            titleTextField.userInteractionEnabled = false
             theSavingSpinner.hidden = false
             theSavingSpinner.startAnimating()
             userOfTheCard?.saveInBackgroundWithBlock({ (success, error) in
@@ -69,6 +71,8 @@ class CardDetailViewController: UIViewController {
             floatingButtonState = .Edit
         case .Edit:
             //the user is on the profile page, but not currently wanting to edit anything. Only looking.
+                titleTextField.userInteractionEnabled = true
+                theFullNameTextField.userInteractionEnabled = true
                 editOrBackOrSaveButton.setTitle("Save", forState: .Normal)
                 floatingButtonState = .Save
                 setEditingGUI()
@@ -115,7 +119,12 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             theTitleLabel.text = title
         }
-        
+        if let age = userOfTheCard?.calculateBirthDate() {
+            theAgeLabel.text = ", " + "\(age)"
+        }
+        if let factOne = userOfTheCard?.factOne {
+            theFirstBulletText.text = factOne
+        }
         if floatingButtonState == .Edit {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
         }
@@ -178,19 +187,24 @@ class CardDetailViewController: UIViewController {
             }
         }
         
-        if self.floatingButtonState == .Save {
             theFirstBulletText.tapped { (_) in
-                self.createDetailPopUp(Fact.FactOne)
+                if self.floatingButtonState == .Save {
+                    self.createDetailPopUp(Fact.FactOne)
+                }
             }
             
             theSecondBulletText.tapped { (_) in
-                self.createDetailPopUp(Fact.FactTwo)
+                if self.floatingButtonState == .Save {
+                    self.createDetailPopUp(Fact.FactTwo)
+                }
             }
             
             theThirdBulletText.tapped { (_) in
-                self.createDetailPopUp(Fact.FactThree)
+                if self.floatingButtonState == .Save {
+                    self.createDetailPopUp(Fact.FactThree)
+                }
             }
-        }
+        
 
     }
     
