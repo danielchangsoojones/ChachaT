@@ -57,6 +57,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.imageView.hidden = true
         if User.currentUser() == nil {
             performSegueWithIdentifier(.LogInPageSegue, sender: self)
         }
@@ -145,6 +146,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         
         cardView.backgroundColor = UIColor.clearColor()
         cardView.delegate = self
+        cardView.userOfTheCard = userArray[Int(index)]
         
         //Rounded corners
         cardView.layer.cornerRadius = 10.0

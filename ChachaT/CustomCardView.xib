@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15E65" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -59,7 +59,10 @@
                 <constraint firstItem="qhL-rn-cDC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uJL-OT-tIq"/>
             </constraints>
             <connections>
+                <outlet property="theAgeLabel" destination="Js5-bq-7SC" id="fbP-PM-dNo"/>
                 <outlet property="theCardMainImage" destination="qhL-rn-cDC" id="WSo-Bh-7vJ"/>
+                <outlet property="theFullNameLabel" destination="hic-8h-7Bo" id="osK-HE-3Sb"/>
+                <outlet property="theTitleLabel" destination="T6l-F0-VzE" id="1Bs-Ku-RnJ"/>
             </connections>
         </view>
     </objects>
