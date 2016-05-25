@@ -38,7 +38,7 @@ class CardDetailViewController: UIViewController {
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
     //need to set this to editing if I want to have profile that is editable
-    var floatingButtonState : FloatingButtonState = .DismissViewController
+    var floatingButtonState : FloatingButtonState = .Edit
     
     var userOfTheCard: User?
     
