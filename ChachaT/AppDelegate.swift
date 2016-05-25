@@ -40,14 +40,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         Parse.initializeWithConfiguration(configuration)
         
-        let pages = pagesControllerInStoryboard()
-        
-        pages.showPageControl = false
-        
-        window = UIWindow(frame: UIScreen.mainScreen().bounds)
-        window?.rootViewController = pages
-        window?.makeKeyAndVisible()
-        
         return true
     }
     

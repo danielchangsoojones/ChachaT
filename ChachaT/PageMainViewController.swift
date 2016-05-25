@@ -1,18 +1,25 @@
 //
-//  PagesSlidingViewController.swift
+//  PageMainViewController.swift
 //  ChachaT
 //
-//  Created by Daniel Jones on 5/23/16.
+//  Created by Daniel Jones on 5/24/16.
 //  Copyright © 2016 Chong500Productions. All rights reserved.
 //
 
 import UIKit
 import Pages
 
-class PagesSlidingViewController: UIPageViewController {
-
+class PageMainViewController: PagesController {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let backgroundAnimationViewController = storyboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
+        let cardDetailViewController = storyboard.instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
+        self.add([backgroundAnimationViewController, cardDetailViewController])
+        
+        self.showPageControl = false
 
         // Do any additional setup after loading the view.
     }
