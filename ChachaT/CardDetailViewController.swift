@@ -217,10 +217,11 @@ extension CardDetailViewController: PopUpViewControllerDelegate {
 
 extension CardDetailViewController: MagicMoveable {
     func imageTapped() {
-        let backgroundAnimationVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(BackgroundAnimationViewController)) as! BackgroundAnimationViewController
-        
-        //not animating right now because it was fucking things up.
-        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: false, duration: duration, spring: spring)
+        self.dismissViewControllerAnimated(false, completion: nil)
+//        let backgroundAnimationVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(BackgroundAnimationViewController)) as! BackgroundAnimationViewController
+//        
+//        //not animating right now because it was fucking things up.
+//        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: false, duration: duration, spring: spring)
     }
     
     var isMagic: Bool {

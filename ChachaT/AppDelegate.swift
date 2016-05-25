@@ -8,6 +8,7 @@
 
 import UIKit
 import Parse
+import Pages
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
@@ -27,6 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //            self.window?.rootViewController = initialViewController
 //            self.window?.makeKeyAndVisible()
         
+        
         //register parse subclasses
         User.registerSubclass()
         Question.registerSubclass()
@@ -37,7 +39,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.server = "https://chachatinder.herokuapp.com/parse"
         }
         Parse.initializeWithConfiguration(configuration)
+        
+        let pages = pagesControllerInStoryboard()
+        
+        pages.showPageControl = false
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.rootViewController = pages
+        window?.makeKeyAndVisible()
+        
         return true
+    }
+    
+    func pagesControllerInStoryboard() -> PagesController {
+        let storyboardIds = ["BackgroundAnimationViewController","CardDetailViewController"]
+        return PagesController(storyboardIds)
     }
 
     func applicationWillResignActive(application: UIApplication) {
