@@ -609,6 +609,118 @@
             </objects>
             <point key="canvasLocation" x="1461.5" y="901.5"/>
         </scene>
+        <!--View Controller-->
+        <scene sceneID="ClZ-Go-zVe">
+            <objects>
+                <viewController storyboardIdentifier="UserDetailQuestionPopUpViewController" id="8Wh-eE-d6m" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="AfQ-Vv-JJx"/>
+                        <viewControllerLayoutGuide type="bottom" id="DXq-tO-8ln"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Eas-hc-G61">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h1c-kP-5ik">
+                                <rect key="frame" x="0.0" y="599" width="375" height="68"/>
+                                <subviews>
+                                    <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="XmP-9h-kXV">
+                                        <rect key="frame" x="78" y="14" width="220" height="40"/>
+                                        <subviews>
+                                            <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="n8R-Xp-R0A">
+                                                <rect key="frame" x="0.0" y="0.0" width="102" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="ANi-qF-nWo"/>
+                                                    <constraint firstAttribute="width" constant="102" id="eQt-rr-EZa"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <state key="normal" title="Clear" backgroundImage="Custom Question Bubble">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                            <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdG-cf-Irm">
+                                                <rect key="frame" x="118" y="0.0" width="102" height="40"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="102" id="VTg-Tg-2RJ"/>
+                                                    <constraint firstAttribute="height" constant="40" id="qX4-fJ-UKS"/>
+                                                </constraints>
+                                                <fontDescription key="fontDescription" type="system" pointSize="21"/>
+                                                <state key="normal" title="Save" backgroundImage="Custom Question Bubble">
+                                                    <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                            </button>
+                                        </subviews>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="40" id="9a7-ve-RJh"/>
+                                            <constraint firstAttribute="width" constant="220" id="Pa5-g0-CoB"/>
+                                        </constraints>
+                                    </stackView>
+                                    <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="l9v-8P-U6t">
+                                        <rect key="frame" x="202" y="24" width="20" height="20"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="20" id="bnb-35-YaL"/>
+                                            <constraint firstAttribute="height" constant="20" id="t1g-Vr-kt5"/>
+                                        </constraints>
+                                        <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                    </activityIndicatorView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="0.57194890200000004" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="l9v-8P-U6t" firstAttribute="centerY" secondItem="KdG-cf-Irm" secondAttribute="centerY" id="A7R-RC-Ta4"/>
+                                    <constraint firstItem="XmP-9h-kXV" firstAttribute="centerX" secondItem="h1c-kP-5ik" secondAttribute="centerX" id="CyT-R8-7FY"/>
+                                    <constraint firstAttribute="trailing" secondItem="XmP-9h-kXV" secondAttribute="trailing" constant="20" id="I90-o1-UIz"/>
+                                    <constraint firstItem="XmP-9h-kXV" firstAttribute="leading" secondItem="h1c-kP-5ik" secondAttribute="leading" constant="20" id="LLe-aR-Gcm"/>
+                                    <constraint firstAttribute="height" constant="68" id="MyF-uY-jGJ"/>
+                                    <constraint firstItem="XmP-9h-kXV" firstAttribute="centerY" secondItem="h1c-kP-5ik" secondAttribute="centerY" id="S78-w5-w4Y"/>
+                                    <constraint firstItem="KdG-cf-Irm" firstAttribute="leading" secondItem="l9v-8P-U6t" secondAttribute="trailing" constant="-26" id="xu5-bX-F1g"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="I90-o1-UIz"/>
+                                        <exclude reference="LLe-aR-Gcm"/>
+                                    </mask>
+                                </variation>
+                            </view>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="205"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="205" id="1Ca-K7-Q9d"/>
+                                </constraints>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9">
+                                <rect key="frame" x="0.0" y="265" width="375" height="334"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <mutableString key="text">Lorem ipsum dolor sit er elit lamet, consectetaur cillium adipisicing pecu, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Nam liber te conscient to factor tum poen legum odioque civiuda.</mutableString>
+                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                            </textView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="h1c-kP-5ik" firstAttribute="top" secondItem="hNg-E2-IW9" secondAttribute="bottom" id="3es-W6-SF0"/>
+                            <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="ils-DD-YlI" secondAttribute="bottom" constant="60" id="G5R-vX-2Pc"/>
+                            <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="WA3-Ap-NR8"/>
+                            <constraint firstItem="DXq-tO-8ln" firstAttribute="top" secondItem="h1c-kP-5ik" secondAttribute="bottom" id="Y4j-v3-4B7"/>
+                            <constraint firstItem="ils-DD-YlI" firstAttribute="top" secondItem="Eas-hc-G61" secondAttribute="top" id="eBc-85-loa"/>
+                            <constraint firstAttribute="trailing" secondItem="ils-DD-YlI" secondAttribute="trailing" id="rpl-Ee-G8J"/>
+                            <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" id="uGm-Az-wEz"/>
+                            <constraint firstAttribute="trailing" secondItem="h1c-kP-5ik" secondAttribute="trailing" id="ud7-7L-e8i"/>
+                            <constraint firstItem="ils-DD-YlI" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="yEi-nh-ISG"/>
+                            <constraint firstItem="h1c-kP-5ik" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="yXT-UC-iae"/>
+                        </constraints>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="T46-h2-Nim" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="893.5" y="1287.5"/>
+        </scene>
     </scenes>
     <resources>
         <image name="Bullet Point" width="8" height="8"/>

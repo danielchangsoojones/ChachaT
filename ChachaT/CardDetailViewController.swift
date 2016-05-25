@@ -89,6 +89,10 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
+    override func viewWillAppear(animated: Bool) {
+        createQuestionPopUp()
+    }
+    
     func createDetailPopUp(factNumber: Fact) {
         //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
@@ -103,6 +107,19 @@ class CardDetailViewController: UIViewController {
         case .FactThree:
             vc.factDescriptionText = theThirdBulletText.text
         }
+        let popup = STPopupController(rootViewController: vc)
+        popup.containerView.layer.cornerRadius = 10.0
+        popup.navigationBar.barTintColor = ChachaTeal
+        popup.navigationBar.tintColor = UIColor.whiteColor()
+        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        popup.presentInViewController(self)
+    }
+    
+    func createQuestionPopUp() {
+        //look at STPopUp github for more info.
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController")
+        vc.contentSizeInPopup = CGSizeMake(vc.view.bounds.width - 75, vc.view.bounds.height - 100)
         let popup = STPopupController(rootViewController: vc)
         popup.containerView.layer.cornerRadius = 10.0
         popup.navigationBar.barTintColor = ChachaTeal
