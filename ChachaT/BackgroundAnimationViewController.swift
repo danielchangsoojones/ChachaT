@@ -57,6 +57,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.imageView.hidden = true
         if User.currentUser() == nil {
             performSegueWithIdentifier(.LogInPageSegue, sender: self)
         }
