@@ -640,23 +640,9 @@
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fbs-Sd-CFR" customClass="TPKeyboardAvoidingScrollView">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-Ek-CAM" userLabel="BackgroundColorOverlay">
+                                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-Ek-CAM" userLabel="BackgroundColorOverlay">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                         <subviews>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9" customClass="MBAutoGrowingTextView">
-                                                <rect key="frame" x="20" y="138" width="335" height="366"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="366" id="9qO-SN-e79"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="366" id="faP-eh-vF1"/>
-                                                </constraints>
-                                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
-                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                                <connections>
-                                                    <outlet property="delegate" destination="8Wh-eE-d6m" id="phi-yZ-1Zz"/>
-                                                </connections>
-                                            </textView>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Question:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="uO6-LA-19D">
                                                 <rect key="frame" x="20" y="20" width="74" height="21"/>
                                                 <constraints>
@@ -697,6 +683,20 @@
                                                     <outlet property="delegate" destination="8Wh-eE-d6m" id="vfU-3z-I3j"/>
                                                 </connections>
                                             </textView>
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9" customClass="MBAutoGrowingTextView">
+                                                <rect key="frame" x="20" y="133" width="335" height="366"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="366" id="9qO-SN-e79"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="366" id="faP-eh-vF1"/>
+                                                </constraints>
+                                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                                <connections>
+                                                    <outlet property="delegate" destination="8Wh-eE-d6m" id="phi-yZ-1Zz"/>
+                                                </connections>
+                                            </textView>
                                         </subviews>
                                         <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.29500105574324326" colorSpace="calibratedRGB"/>
                                         <constraints>
@@ -711,6 +711,7 @@
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="LmZ-DP-7YP" secondAttribute="bottom" constant="8" id="kPk-QL-XvF"/>
                                             <constraint firstItem="ils-DD-YlI" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" constant="8" id="twQ-ww-EEO"/>
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="ils-DD-YlI" secondAttribute="leading" id="y6G-vc-465"/>
+                                            <constraint firstAttribute="bottom" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="168" id="yFo-cx-acv"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -726,6 +727,11 @@
                                     <constraint firstAttribute="bottom" secondItem="dYL-Ek-CAM" secondAttribute="bottom" id="q3Q-ZP-Lnr"/>
                                     <constraint firstItem="dYL-Ek-CAM" firstAttribute="height" secondItem="fbs-Sd-CFR" secondAttribute="height" id="s4c-BM-4po"/>
                                 </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="s4c-BM-4po"/>
+                                    </mask>
+                                </variation>
                             </scrollView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
