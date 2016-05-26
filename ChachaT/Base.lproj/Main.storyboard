@@ -700,7 +700,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-Ek-CAM" userLabel="BackgroundColorOverlay">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
                                 <subviews>
-                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9">
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9">
                                         <rect key="frame" x="20" y="225" width="335" height="366"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
@@ -718,7 +718,7 @@
                                     <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="RHA-yH-cva"/>
                                 </constraints>
                             </view>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Write a question that others would like to know about you..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" misplaced="YES" text="Write a question that others would like to know about you..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI">
                                 <rect key="frame" x="20" y="12" width="335" height="205"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>

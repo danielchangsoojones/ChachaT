@@ -11,8 +11,8 @@ import Parse
 import SnapKit
 
 enum QuestionPopUpState {
-    case editingMode
-    case viewOnlyMode
+    case EditingMode
+    case ViewOnlyMode
 }
 
 class QuestionPopUpViewController: PopUpSuperViewController {
@@ -31,7 +31,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     var theQuestionTextFieldChanged = false
     var theAnswerTextFieldChanged = false
     
-    var questionPopUpState = QuestionPopUpState.viewOnlyMode
+    var questionPopUpState = QuestionPopUpState.ViewOnlyMode
     
     var delegate: QuestionPopUpViewControllerDelegate?
     
@@ -84,20 +84,29 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         theAnswerTextField.tag = 2
         // Do any additional setup after loading the view.
         if let currentQuestion = currentQuestion {
-            setNormalGUI(currentQuestion)
+            theQuestionTextField.text = currentQuestion.question
+            theAnswerTextField.text = currentQuestion.topAnswer
+            if questionPopUpState == .ViewOnlyMode {
+                setViewOnlyGUI(currentQuestion)
+            } else if questionPopUpState == .EditingMode {
+                setEditingGUI(currentQuestion)
+            }
         } else {
-            setFirstTimeGUI()
+            setUnwrittenQuestionGUI()
         }
         
     }
     
-    func setNormalGUI(currentQuestion: Question) {
-        theQuestionTextField.text = currentQuestion.question
-        theAnswerTextField.text = currentQuestion.topAnswer
+    func setViewOnlyGUI(currentQuestion: Question) {
         theBottomBarView.hidden = true
         theBottomStackView.hidden = true
         //made this constraint inactive, so I could rebuild it in the updateViewConstraints without run-time constraint warnings. 
         theBottomBackgroundColorConstraint.active = false
+    }
+    
+    func setEditingGUI(currentQuestion: Question) {
+        theQuestionTextField.userInteractionEnabled = false
+        theAnswerTextField.userInteractionEnabled = false
     }
     
     override func updateViewConstraints() {
@@ -107,9 +116,15 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         super.updateViewConstraints()
     }
     
-    func setFirstTimeGUI() {
+    func setUnwrittenQuestionGUI() {
         theQuestionTextField.textColor = placeHolderTextColor
         theAnswerTextField.textColor = placeHolderTextColor
+        if questionPopUpState == .EditingMode {
+            theAnswerTextField.userInteractionEnabled = true
+            theQuestionTextField.userInteractionEnabled = true
+        } else if questionPopUpState == .ViewOnlyMode {
+            theQuestionTextField.text = "Oops, they don't seem to have written a question yet"
+        }
     }
 
     override func didReceiveMemoryWarning() {
