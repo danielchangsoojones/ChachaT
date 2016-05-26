@@ -282,7 +282,7 @@
                                                             </mask>
                                                         </variation>
                                                         <connections>
-                                                            <segue destination="NyQ-U9-QoJ" kind="presentation" id="vLT-h3-GsH"/>
+                                                            <action selector="questionOneButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="ep3-Cq-aYR"/>
                                                         </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v">
@@ -299,6 +299,9 @@
                                                                 <exclude reference="GgM-VQ-xLE"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="questionButtonTwoPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="qAG-77-ZDA"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS">
                                                         <rect key="frame" x="0.0" y="134" width="560" height="60"/>
@@ -314,6 +317,9 @@
                                                                 <exclude reference="eXZ-98-ah3"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="questionButtonThreePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="9uM-6O-w9l"/>
+                                                        </connections>
                                                     </button>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
                                                         <rect key="frame" x="0.0" y="201" width="560" height="60"/>
@@ -329,6 +335,9 @@
                                                                 <exclude reference="juy-EQ-jEd"/>
                                                             </mask>
                                                         </variation>
+                                                        <connections>
+                                                            <action selector="customQuestionButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="9Zm-QF-6Eh"/>
+                                                        </connections>
                                                     </button>
                                                 </subviews>
                                             </stackView>
@@ -445,12 +454,13 @@
                         <outlet property="editOrBackOrSaveButton" destination="i23-FF-3md" id="JjS-rL-JqS"/>
                         <outlet property="profileImage" destination="8hk-xb-Z8g" id="QQ4-0v-Dow"/>
                         <outlet property="theAgeLabel" destination="iG2-2N-iPj" id="TJR-gZ-ehy"/>
-                        <outlet property="theCustomQuestionButton" destination="Hdx-yn-KHS" id="dSt-aw-zM1"/>
+                        <outlet property="theCustomQuestionButton" destination="wKk-OW-7Uu" id="KMB-2m-6Nk"/>
                         <outlet property="theFirstBulletText" destination="GZp-kG-YwR" id="1K2-x8-oMM"/>
                         <outlet property="theFullNameLabel" destination="dI7-Qj-h3R" id="jDQ-RN-H4a"/>
                         <outlet property="theFullNameTextField" destination="Cak-7g-UB7" id="RyF-75-ElM"/>
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
                         <outlet property="theQuestionButtonOne" destination="XWC-yS-1iT" id="oiH-eA-9MK"/>
+                        <outlet property="theQuestionButtonThree" destination="Hdx-yn-KHS" id="ZLc-nf-WrZ"/>
                         <outlet property="theQuestionButtonTwo" destination="18q-bc-79v" id="lgk-YV-gib"/>
                         <outlet property="theSavingSpinner" destination="zLF-DG-mmb" id="DeZ-s9-0nd"/>
                         <outlet property="theSecondBulletText" destination="MLZ-wk-Al1" id="CvR-zm-bkU"/>
@@ -475,7 +485,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dc-Ga-AH2">
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" misplaced="YES" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="9dc-Ga-AH2">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <connections>

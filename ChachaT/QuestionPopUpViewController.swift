@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class QuestionPopUpViewController: PopUpSuperViewController {
 
@@ -42,7 +43,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             currentQuestion?.createdBy = currentUser
             currentQuestion?.question = theQuestionTextField.text
             currentQuestion?.topAnswer = theAnswerTextField.text
-            currentQuestion?.saveInBackground()
         }
         switch questionNumber {
         case 1: currentUser!.questionOne = currentQuestion
@@ -52,28 +52,35 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         }
         theActivitySpinner.hidden = false
         theActivitySpinner.startAnimating()
-        currentUser?.saveInBackgroundWithBlock({ (success, error) in
+        let array : [PFObject] = [currentUser!, currentQuestion!]
+        PFObject.saveAllInBackground(array) { (success, error) in
             if success {
+                self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.questionNumber)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
-            
-        })
+        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 100)
         theQuestionTextField.layer.cornerRadius = 10.0
         theAnswerTextField.layer.cornerRadius = 10.0
         theQuestionTextField.tag = 1
         theAnswerTextField.tag = 2
         // Do any additional setup after loading the view.
         if let currentQuestion = currentQuestion {
-            
+            setNormalGUI(currentQuestion)
         } else {
             setFirstTimeGUI()
         }
         
+    }
+    
+    func setNormalGUI(currentQuestion: Question) {
+        theQuestionTextField.text = currentQuestion.question
+        theAnswerTextField.text = currentQuestion.topAnswer
     }
     
     func setFirstTimeGUI() {

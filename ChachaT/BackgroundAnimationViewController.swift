@@ -82,7 +82,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 extension BackgroundAnimationViewController {
     func createUserArray() {
         let query = User.query()
-        query!.includeKey("follower")
+//        query!.includeKey("questionOne")
+//        query!.includeKey("questionTwo")
+//        query!.includeKey("questionThree")
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let users = objects as? [User] {
                 self.userArray = users

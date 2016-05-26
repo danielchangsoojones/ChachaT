@@ -17,6 +17,7 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theFirstBulletText: UILabel!
     @IBOutlet weak var theQuestionButtonOne: UIButton!
     @IBOutlet weak var theQuestionButtonTwo: UIButton!
+    @IBOutlet weak var theQuestionButtonThree: UIButton!
     @IBOutlet weak var theCustomQuestionButton: UIButton!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     @IBOutlet weak var theFullNameTextField: UITextField!
@@ -82,15 +83,27 @@ class CardDetailViewController: UIViewController {
         }
     }
     
+    @IBAction func questionOneButtonPressed(sender: AnyObject) {
+        createQuestionPopUp(1)
+    }
+    
+    @IBAction func questionButtonTwoPressed(sender: AnyObject) {
+        createQuestionPopUp(2)
+    }
+    
+    @IBAction func questionButtonThreePressed(sender: AnyObject) {
+        createQuestionPopUp(3)
+    }
+    
+    @IBAction func customQuestionButtonPressed(sender: AnyObject) {
+        createQuestionPopUp(4)
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setGUI()
         setupTapHandler()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        createQuestionPopUp()
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -115,11 +128,19 @@ class CardDetailViewController: UIViewController {
         popup.presentInViewController(self)
     }
     
-    func createQuestionPopUp() {
+    func createQuestionPopUp(questionNumber: Int) {
         //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController")
-        vc.contentSizeInPopup = CGSizeMake(vc.view.bounds.width - 75, vc.view.bounds.height - 100)
+        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
+        vc.delegate = self
+        vc.questionNumber = questionNumber
+        switch questionNumber {
+        case 1:
+            vc.currentQuestion = userOfTheCard?.questionOne
+        case 2: vc.currentQuestion = userOfTheCard?.questionTwo
+        case 3: vc.currentQuestion = userOfTheCard?.questionThree
+        default: break
+        }
         let popup = STPopupController(rootViewController: vc)
         popup.containerView.layer.cornerRadius = 10.0
         popup.navigationBar.barTintColor = ChachaTeal
@@ -144,6 +165,24 @@ class CardDetailViewController: UIViewController {
         }
         if floatingButtonState == .Edit {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
+        }
+        do {
+                    let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
+                    theQuestionButtonOne.setTitle(question?.question, forState: .Normal)
+                    } catch {
+                        print("there was an error fetching the question")
+                    }
+        do {
+            let question = try userOfTheCard?.questionTwo?.fetchIfNeeded()
+            theQuestionButtonTwo.setTitle(question?.question, forState: .Normal)
+        } catch {
+            print("there was an error fetching the question")
+        }
+        do {
+            let question = try userOfTheCard?.questionThree?.fetchIfNeeded()
+            theQuestionButtonThree.setTitle(question?.question, forState: .Normal)
+        } catch {
+            print("there was an error fetching the question")
         }
     }
     
@@ -245,6 +284,23 @@ extension CardDetailViewController: PopUpViewControllerDelegate {
         }
     }
 }
+
+protocol QuestionPopUpViewControllerDelegate{
+    func passQuestionText(text: String, questionNumber: Int)
+}
+
+extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
+    func passQuestionText(text: String, questionNumber: Int) {
+        switch questionNumber {
+        case 1: theQuestionButtonOne.setTitle(text, forState: .Normal)
+        case 2: theQuestionButtonTwo.setTitle(text, forState: .Normal)
+        case 3: theQuestionButtonThree.setTitle(text, forState: .Normal)
+        default: break
+        }
+    }
+}
+
+
 
 extension CardDetailViewController: MagicMoveable {
     func imageTapped() {
