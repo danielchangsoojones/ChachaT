@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import ParseUI
 import STPopup
+import EFTools
 
 class CardDetailViewController: UIViewController {
     
@@ -134,22 +135,24 @@ class CardDetailViewController: UIViewController {
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
         vc.delegate = self
         vc.questionNumber = questionNumber
-        if questionDetailState == .EditingMode {
-            vc.questionPopUpState = .EditingMode
-        }
         switch questionNumber {
-        case 1:
-            vc.currentQuestion = userOfTheCard?.questionOne
+        case 1: vc.currentQuestion = userOfTheCard?.questionOne
         case 2: vc.currentQuestion = userOfTheCard?.questionTwo
         case 3: vc.currentQuestion = userOfTheCard?.questionThree
         default: break
         }
-        let popup = STPopupController(rootViewController: vc)
-        popup.containerView.layer.cornerRadius = 10.0
-        popup.navigationBar.barTintColor = ChachaTeal
-        popup.navigationBar.tintColor = UIColor.whiteColor()
-        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        popup.presentInViewController(self)
+        if questionDetailState == .EditingMode {
+            vc.questionPopUpState = .EditingMode
+            self.navigationController?.pushViewController(vc, animated: true)
+        } else {
+            let popup = STPopupController(rootViewController: vc)
+            popup.containerView.layer.cornerRadius = 10.0
+            popup.navigationBar.barTintColor = ChachaTeal
+            popup.navigationBar.tintColor = UIColor.whiteColor()
+            popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+            popup.presentInViewController(self)
+        }
+        
     }
     
     func setGUI() {

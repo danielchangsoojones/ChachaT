@@ -357,7 +357,7 @@
                                                 <state key="normal" image="camera-Colored"/>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
-                                                <rect key="frame" x="20" y="16" width="34" height="30"/>
+                                                <rect key="frame" x="20" y="90" width="34" height="30"/>
                                                 <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                 <size key="titleShadowOffset" width="4" height="4"/>
                                                 <state key="normal" title="Back"/>
@@ -366,7 +366,7 @@
                                                 </connections>
                                             </button>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
-                                                <rect key="frame" x="27" y="21" width="20" height="20"/>
+                                                <rect key="frame" x="27" y="95" width="20" height="20"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="20" id="KUD-XN-RL2"/>
                                                     <constraint firstAttribute="width" constant="20" id="vF4-mu-c4r"/>
@@ -392,7 +392,7 @@
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstAttribute="bottom" secondItem="kwP-NN-ZE2" secondAttribute="bottom" constant="59" id="SdX-uM-F6T"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
-                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="16" id="Ty8-td-QWW"/>
+                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="90" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerY" secondItem="i23-FF-3md" secondAttribute="centerY" id="UT1-jF-9Jn"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
@@ -469,6 +469,7 @@
                         <outlet property="theThirdBulletText" destination="QhN-sR-LNs" id="GAd-Lq-IIG"/>
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
+                        <segue destination="8Wh-eE-d6m" kind="show" identifier="QuestionEditingPopUpSegue" id="QHg-xS-Tuv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -716,7 +717,7 @@
                                         </connections>
                                     </textView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.1379592483108108" colorSpace="calibratedRGB"/>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.29500105574324326" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="bottom" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="8" id="3UJ-Uh-kFK"/>
                                     <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="MFq-va-pwg"/>
@@ -737,6 +738,7 @@
                                 </connections>
                             </textView>
                         </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="ils-DD-YlI" secondAttribute="bottom" constant="10" id="8xX-2a-asA"/>
                             <constraint firstItem="dYL-Ek-CAM" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="EKf-q3-7pp"/>
@@ -766,7 +768,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T46-h2-Nim" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="893.5" y="1287.5"/>
+            <point key="canvasLocation" x="1986.5" y="917.5"/>
         </scene>
     </scenes>
     <resources>
