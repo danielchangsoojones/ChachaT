@@ -19,12 +19,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
 
     @IBOutlet weak var theQuestionTextField: UITextView!
     @IBOutlet weak var theAnswerTextField: UITextView!
-    @IBOutlet weak var theSaveButton: UIButton!
-    @IBOutlet weak var theBottomBarView: UIView!
-    @IBOutlet weak var theBottomStackView: UIStackView!
-    @IBOutlet weak var theClearButton: UIButton!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    @IBOutlet weak var theBottomBackgroundColorConstraint: NSLayoutConstraint!
     
     var currentQuestion: Question?
     var questionNumber: Int = 1
@@ -35,13 +30,8 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     
     var delegate: QuestionPopUpViewControllerDelegate?
     
-    @IBAction func clearCurrentTextField(sender: AnyObject) {
-        activeTextField.text = nil
-        activeTextField.becomeFirstResponder()
-    }
-    
-    @IBAction func save(sender: AnyObject) {
-        theSaveButton.enabled = false
+    func save() {
+        self.navigationItem.leftBarButtonItem?.enabled = false
         let currentUser = User.currentUser()
         //if the currentQuestion was passed to the pop up, as opposed to making a new question
         if let currentQuestion = currentQuestion {
@@ -69,11 +59,10 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         PFObject.saveAllInBackground(array) { (success, error) in
             if success {
                 self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.questionNumber)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -98,6 +87,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setEditingGUI(currentQuestion: Question) {
         theQuestionTextField.userInteractionEnabled = true
         theAnswerTextField.userInteractionEnabled = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(save))
         self.edgesForExtendedLayout = UIRectEdge.None
     }
     
