@@ -1,26 +1,23 @@
 //
-//  Post.swift
-//  Chacha
+//  Answer.swift
+//  ChachaT
 //
-//  Created by Daniel Jones on 3/2/16.
+//  Created by Daniel Jones on 5/25/16.
 //  Copyright © 2016 Chong500Productions. All rights reserved.
 //
 
 import Foundation
 import Parse
 
-class Question: PFObject, PFSubclassing {
+class Answer: PFObject, PFSubclassing {
     class func parseClassName() -> String {
-        return "Question"
+        return "Answer"
     }
     
     @NSManaged var createdBy: User?
     @NSManaged var questionImage: PFFile?
-    @NSManaged var question: String
-    @NSManaged var questionDescription: String
-    @NSManaged var topAnswer: String?
-    
-    
+    @NSManaged var answer: String
+    @NSManaged var questionParent: Question?
     
     override init() {
         super.init()

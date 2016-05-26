@@ -22,6 +22,9 @@ class User: PFUser {
     @NSManaged var factOne: String?
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
+    @NSManaged var questionOne: Question?
+    @NSManaged var questionTwo: Question?
+    @NSManaged var questionThree: Question?
     
     func calculateBirthDate() -> Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()

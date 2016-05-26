@@ -45,6 +45,9 @@
 		92B8DF391CE935AA00AFA518 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF381CE935AA00AFA518 /* libz.tbd */; };
 		92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
+		92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */; };
+		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
+		92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B0A1CF68DC400B0B1A4 /* Answer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -89,6 +92,9 @@
 		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
+		92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionPopUpViewController.swift; sourceTree = "<group>"; };
+		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
+		92E59B0A1CF68DC400B0B1A4 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		A4789E1652B49212A025D9B2 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
@@ -179,13 +185,13 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
+				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				9261083A1CE4EDC4009F3E86 /* xib files */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */,
-				929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
 			);
@@ -245,6 +251,7 @@
 			children = (
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9289F6EB1CEB542800F42ACE /* Question.swift */,
+				92E59B0A1CF68DC400B0B1A4 /* Answer.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -264,6 +271,16 @@
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
 			);
 			name = Koloda;
+			sourceTree = "<group>";
+		};
+		92E59B051CF677FD00B0B1A4 /* Pop Ups */ = {
+			isa = PBXGroup;
+			children = (
+				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
+				92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */,
+				929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */,
+			);
+			name = "Pop Ups";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -417,15 +434,18 @@
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
+				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
 				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
+				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
+				92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 			);
