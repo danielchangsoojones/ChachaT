@@ -107,6 +107,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setEditingGUI(currentQuestion: Question) {
         theQuestionTextField.userInteractionEnabled = true
         theAnswerTextField.userInteractionEnabled = true
+        self.edgesForExtendedLayout = UIRectEdge.None
     }
     
     override func updateViewConstraints() {
