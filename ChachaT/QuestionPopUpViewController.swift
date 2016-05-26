@@ -8,17 +8,30 @@
 
 import UIKit
 import Parse
+import SnapKit
+
+enum QuestionPopUpState {
+    case editingMode
+    case viewOnlyMode
+}
 
 class QuestionPopUpViewController: PopUpSuperViewController {
 
     @IBOutlet weak var theQuestionTextField: UITextView!
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theSaveButton: UIButton!
+    @IBOutlet weak var theBottomBarView: UIView!
+    @IBOutlet weak var theBottomStackView: UIStackView!
+    @IBOutlet weak var theClearButton: UIButton!
+    @IBOutlet weak var theBackgroundColorView: UIView!
+    @IBOutlet weak var theBottomBackgroundColorConstraint: NSLayoutConstraint!
     
     var currentQuestion: Question?
     var questionNumber: Int = 1
     var theQuestionTextFieldChanged = false
     var theAnswerTextFieldChanged = false
+    
+    var questionPopUpState = QuestionPopUpState.viewOnlyMode
     
     var delegate: QuestionPopUpViewControllerDelegate?
     
@@ -81,6 +94,17 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setNormalGUI(currentQuestion: Question) {
         theQuestionTextField.text = currentQuestion.question
         theAnswerTextField.text = currentQuestion.topAnswer
+        theBottomBarView.hidden = true
+        theBottomStackView.hidden = true
+        //made this constraint inactive, so I could rebuild it in the updateViewConstraints without run-time constraint warnings. 
+        theBottomBackgroundColorConstraint.active = false
+    }
+    
+    override func updateViewConstraints() {
+        theBackgroundColorView.snp_updateConstraints { (make) in
+            make.bottom.equalTo(self.view)
+        }
+        super.updateViewConstraints()
     }
     
     func setFirstTimeGUI() {

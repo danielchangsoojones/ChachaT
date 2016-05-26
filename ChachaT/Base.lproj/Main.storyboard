@@ -750,6 +750,11 @@
                     <connections>
                         <outlet property="theActivitySpinner" destination="l9v-8P-U6t" id="7NC-N3-bFo"/>
                         <outlet property="theAnswerTextField" destination="hNg-E2-IW9" id="Kp7-co-Auy"/>
+                        <outlet property="theBackgroundColorView" destination="dYL-Ek-CAM" id="ebt-fD-Rcw"/>
+                        <outlet property="theBottomBackgroundColorConstraint" destination="KDJ-nO-PdE" id="xiQ-mu-SzT"/>
+                        <outlet property="theBottomBarView" destination="h1c-kP-5ik" id="VNL-1h-aLQ"/>
+                        <outlet property="theBottomStackView" destination="XmP-9h-kXV" id="hvy-F8-UYv"/>
+                        <outlet property="theClearButton" destination="n8R-Xp-R0A" id="dV3-hB-eQa"/>
                         <outlet property="theQuestionTextField" destination="ils-DD-YlI" id="VKB-WN-vVg"/>
                         <outlet property="theSaveButton" destination="KdG-cf-Irm" id="1Mg-Ud-oeg"/>
                     </connections>
