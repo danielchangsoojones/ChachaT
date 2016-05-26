@@ -529,7 +529,7 @@
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <connections>
-                                                    <action selector="clearText:" destination="yoS-jo-wuS" eventType="touchUpInside" id="1RC-br-VH4"/>
+                                                    <action selector="clearText:" destination="yoS-jo-wuS" eventType="touchUpInside" id="xsh-9u-fiV"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="EDg-Md-mMv">
@@ -600,7 +600,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="theActivitySpinner" destination="Nta-PX-C8N" id="GVi-bs-w0p"/>
+                        <outlet property="theActivitySpinner" destination="Nta-PX-C8N" id="Bms-7f-uVf"/>
                         <outlet property="theDescriptionTextView" destination="IDA-rk-Nl0" id="nVW-oa-Ava"/>
                         <outlet property="theSaveButton" destination="EDg-Md-mMv" id="azB-wa-dGN"/>
                     </connections>
@@ -637,6 +637,9 @@
                                                 <state key="normal" title="Clear" backgroundImage="Custom Question Bubble">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="clearCurrentTextField:" destination="8Wh-eE-d6m" eventType="touchUpInside" id="bHM-V6-3Du"/>
+                                                </connections>
                                             </button>
                                             <button opaque="NO" alpha="0.60000002384185791" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KdG-cf-Irm">
                                                 <rect key="frame" x="118" y="0.0" width="102" height="40"/>
@@ -648,6 +651,9 @@
                                                 <state key="normal" title="Save" backgroundImage="Custom Question Bubble">
                                                     <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
+                                                <connections>
+                                                    <action selector="save:" destination="8Wh-eE-d6m" eventType="touchUpInside" id="Zcp-Df-VDX"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <constraints>
@@ -681,39 +687,50 @@
                                     </mask>
                                 </variation>
                             </view>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-Ek-CAM" userLabel="BackgroundColorOverlay">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="599"/>
+                                <subviews>
+                                    <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9">
+                                        <rect key="frame" x="20" y="225" width="335" height="366"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
+                                        <connections>
+                                            <outlet property="delegate" destination="8Wh-eE-d6m" id="phi-yZ-1Zz"/>
+                                        </connections>
+                                    </textView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.1379592483108108" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="8" id="3UJ-Uh-kFK"/>
+                                    <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="MFq-va-pwg"/>
+                                    <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="RHA-yH-cva"/>
+                                </constraints>
+                            </view>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" text="Write a question that others would like to know about you..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI">
                                 <rect key="frame" x="20" y="12" width="335" height="205"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="205" id="1Ca-K7-Q9d"/>
                                 </constraints>
-                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="12"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                 <connections>
                                     <outlet property="delegate" destination="8Wh-eE-d6m" id="vfU-3z-I3j"/>
                                 </connections>
                             </textView>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9">
-                                <rect key="frame" x="20" y="225" width="335" height="364"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="12"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
-                                <connections>
-                                    <outlet property="delegate" destination="8Wh-eE-d6m" id="phi-yZ-1Zz"/>
-                                </connections>
-                            </textView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="h1c-kP-5ik" firstAttribute="top" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="10" id="3es-W6-SF0"/>
-                            <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="ils-DD-YlI" secondAttribute="bottom" constant="10" id="G5R-vX-2Pc"/>
-                            <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" constant="20" id="WA3-Ap-NR8"/>
+                            <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="ils-DD-YlI" secondAttribute="bottom" constant="10" id="8xX-2a-asA"/>
+                            <constraint firstItem="dYL-Ek-CAM" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="EKf-q3-7pp"/>
+                            <constraint firstItem="h1c-kP-5ik" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="bottom" id="KDJ-nO-PdE"/>
+                            <constraint firstItem="dYL-Ek-CAM" firstAttribute="top" secondItem="Eas-hc-G61" secondAttribute="top" id="Wya-Px-Q1v"/>
                             <constraint firstItem="DXq-tO-8ln" firstAttribute="top" secondItem="h1c-kP-5ik" secondAttribute="bottom" id="Y4j-v3-4B7"/>
                             <constraint firstItem="ils-DD-YlI" firstAttribute="top" secondItem="Eas-hc-G61" secondAttribute="top" constant="10" id="eBc-85-loa"/>
                             <constraint firstAttribute="trailing" secondItem="ils-DD-YlI" secondAttribute="trailing" constant="20" id="rpl-Ee-G8J"/>
-                            <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="uGm-Az-wEz"/>
+                            <constraint firstAttribute="trailing" secondItem="dYL-Ek-CAM" secondAttribute="trailing" id="sy9-oh-7fb"/>
                             <constraint firstAttribute="trailing" secondItem="h1c-kP-5ik" secondAttribute="trailing" id="ud7-7L-e8i"/>
                             <constraint firstItem="ils-DD-YlI" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" constant="20" id="yEi-nh-ISG"/>
                             <constraint firstItem="h1c-kP-5ik" firstAttribute="leading" secondItem="Eas-hc-G61" secondAttribute="leading" id="yXT-UC-iae"/>
@@ -721,8 +738,10 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="theActivitySpinner" destination="l9v-8P-U6t" id="7NC-N3-bFo"/>
                         <outlet property="theAnswerTextField" destination="hNg-E2-IW9" id="Kp7-co-Auy"/>
                         <outlet property="theQuestionTextField" destination="ils-DD-YlI" id="VKB-WN-vVg"/>
+                        <outlet property="theSaveButton" destination="KdG-cf-Irm" id="1Mg-Ud-oeg"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T46-h2-Nim" userLabel="First Responder" sceneMemberID="firstResponder"/>

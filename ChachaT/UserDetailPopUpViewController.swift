@@ -9,11 +9,10 @@
 import UIKit
 import Parse
 
-class UserDetailPopUpViewController: UIViewController {
+class UserDetailPopUpViewController: PopUpSuperViewController {
     
     var keyboardHeight : CGFloat = 216
     @IBOutlet weak var theDescriptionTextView: UITextView!
-    @IBOutlet weak var theActivitySpinner: UIActivityIndicatorView!
     @IBOutlet weak var theSaveButton: UIButton!
     
     var factNumber: Fact?
@@ -55,9 +54,7 @@ class UserDetailPopUpViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    override func prefersStatusBarHidden() -> Bool {
-        return true
-    }
+    
     
 
     /*

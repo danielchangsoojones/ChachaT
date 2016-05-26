@@ -14,6 +14,7 @@ let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
 let facebookBlue = UIColor.rgba(red: 45, green: 68, blue: 133, alpha: 1)
 let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
+let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
 
 //helper functions
 func isIphone3by2AR() -> Bool {
@@ -48,18 +49,18 @@ enum Fact {
 func editingBeginsTextView(textView: UITextView) {
     if textView.textColor == placeHolderTextColor {
         textView.text = nil
-        textView.textColor = UIColor.blackColor()
+        textView.textColor = ChachaBombayGrey
     }
 }
 
 func editingEndedTextView(textView: UITextView, placeHolderText: String) {
     if textView.text.isEmpty {
         textView.text = placeHolderText
-        textView.textColor = UIColor.lightGrayColor()
+        textView.textColor = placeHolderTextColor
     }
 }
 
 func resetTextView(textView: UITextView, placeHolderText: String) {
     textView.text = placeHolderText
-    textView.textColor = UIColor.lightGrayColor()
+    textView.textColor = placeHolderTextColor
 }
