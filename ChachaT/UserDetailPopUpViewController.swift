@@ -56,7 +56,11 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
         self.title = "About You"
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - keyboardHeight - 100)
         theDescriptionTextView.text = factDescriptionText
-        
+        placeHolderText = "Something interesting about you..."
+        if factDescriptionText == placeHolderText {
+            //this happens when the string passed to it is the placeholder because the user has not entered a bullet description yet.
+            theDescriptionTextView.textColor = placeHolderTextColor
+        }
         // Do any additional setup after loading the view.
     }
 
@@ -66,18 +70,13 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
     }
 }
 
-extension UserDetailPopUpViewController: UITextFieldDelegate {
+extension UserDetailPopUpViewController: UITextViewDelegate {
     func textViewDidBeginEditing(textView: UITextView) {
         activeTextField = textView
         editingBeginsTextView(textView)
     }
     
     func textViewDidEndEditing(textView: UITextView) {
-        if textView.tag == 1 {
-            placeHolderText = "A question about you (e.g. what is your favorite quote?). Remember to write it like someone else is asking you..."
-        } else if textView.tag == 2 {
-            placeHolderText = "Your interesting (hopefully not too obscene) answer"
-        }
         editingEndedTextView(textView, placeHolderText: placeHolderText)
     }
 }
