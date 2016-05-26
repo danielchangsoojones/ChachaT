@@ -20,6 +20,7 @@ class PageMainViewController: PagesController {
         self.add([backgroundAnimationViewController, cardDetailViewController])
         
         self.showPageControl = false
+        self.automaticallyAdjustsScrollViewInsets = false
 
         // Do any additional setup after loading the view.
     }

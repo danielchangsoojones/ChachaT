@@ -72,7 +72,6 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
 
 extension UserDetailPopUpViewController: UITextViewDelegate {
     func textViewDidBeginEditing(textView: UITextView) {
-        activeTextField = textView
         editingBeginsTextView(textView)
     }
     
