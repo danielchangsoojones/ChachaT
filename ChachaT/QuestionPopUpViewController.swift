@@ -86,9 +86,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         if let currentQuestion = currentQuestion {
             theQuestionTextField.text = currentQuestion.question
             theAnswerTextField.text = currentQuestion.topAnswer
-            if questionPopUpState == .ViewOnlyMode {
-                setViewOnlyGUI(currentQuestion)
-            } else if questionPopUpState == .EditingMode {
+            if questionPopUpState == .EditingMode {
                 setEditingGUI(currentQuestion)
             }
         } else {
@@ -97,26 +95,10 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         
     }
     
-    func setViewOnlyGUI(currentQuestion: Question) {
-        theBottomBarView.hidden = true
-        theBottomStackView.hidden = true
-        //made this constraint inactive, so I could rebuild it in the updateViewConstraints without run-time constraint warnings. 
-        theBottomBackgroundColorConstraint.active = false
-    }
-    
     func setEditingGUI(currentQuestion: Question) {
         theQuestionTextField.userInteractionEnabled = true
         theAnswerTextField.userInteractionEnabled = true
         self.edgesForExtendedLayout = UIRectEdge.None
-    }
-    
-    override func updateViewConstraints() {
-        if questionPopUpState == .ViewOnlyMode {
-            theBackgroundColorView.snp_updateConstraints { (make) in
-                make.bottom.equalTo(self.view)
-            }
-        }
-        super.updateViewConstraints()
     }
     
     func setUnwrittenQuestionGUI() {

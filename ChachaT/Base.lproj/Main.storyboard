@@ -678,8 +678,8 @@
                                                 <nil key="highlightedColor"/>
                                                 <variation key="default">
                                                     <mask key="constraints">
-                                                        <exclude reference="uSp-gf-xrR"/>
                                                         <exclude reference="AP9-Yd-BMP"/>
+                                                        <exclude reference="uSp-gf-xrR"/>
                                                     </mask>
                                                 </variation>
                                             </label>
