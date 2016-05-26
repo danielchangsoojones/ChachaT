@@ -105,13 +105,15 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     }
     
     func setEditingGUI(currentQuestion: Question) {
-        theQuestionTextField.userInteractionEnabled = false
-        theAnswerTextField.userInteractionEnabled = false
+        theQuestionTextField.userInteractionEnabled = true
+        theAnswerTextField.userInteractionEnabled = true
     }
     
     override func updateViewConstraints() {
-        theBackgroundColorView.snp_updateConstraints { (make) in
-            make.bottom.equalTo(self.view)
+        if questionPopUpState == .ViewOnlyMode {
+            theBackgroundColorView.snp_updateConstraints { (make) in
+                make.bottom.equalTo(self.view)
+            }
         }
         super.updateViewConstraints()
     }
@@ -145,7 +147,7 @@ extension QuestionPopUpViewController: UITextViewDelegate {
         if textView.tag == 1 {
             placeHolderText = "A question about you (e.g. what is your favorite quote?). Remember to write it like someone else is asking you..."
         } else if textView.tag == 2 {
-            placeHolderText = "Your interesting (hopefully not too vulgar) answer"
+            placeHolderText = "Your interesting (hopefully not too obscene) answer"
         }
         editingEndedTextView(textView, placeHolderText: placeHolderText)
     }

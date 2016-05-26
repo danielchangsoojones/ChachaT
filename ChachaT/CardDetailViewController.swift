@@ -30,22 +30,22 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var editOrBackOrSaveButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     
-    enum FloatingButtonState {
-        case Save
-        case Edit
-        case DismissViewController
+    enum QuestionDetailState {
+        case EditingMode
+        case ProfileViewOnlyMode
+        case OtherUserProfileViewOnlyMode
     }
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
     //need to set this to editing if I want to have profile that is editable
-    var floatingButtonState : FloatingButtonState = .Edit
+    var questionDetailState : QuestionDetailState = .ProfileViewOnlyMode
     
     var userOfTheCard: User? = User.currentUser()
     
     @IBAction func editOrBackOrSavePressed(sender: AnyObject) {
-        switch floatingButtonState {
-        case .Save:
+        switch questionDetailState {
+        case .EditingMode:
             //the user is editing right now, and will hit the save button to save their work
             if fullNameTextFieldDidChange {
                 let fullNameText = theFullNameTextField.text
@@ -69,15 +69,15 @@ class CardDetailViewController: UIViewController {
                     let _ = Alert(title: "Problem Saving Profile", subtitle: "Please try to save again", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
                 }
             })
-            floatingButtonState = .Edit
-        case .Edit:
+            questionDetailState = .ProfileViewOnlyMode
+        case .ProfileViewOnlyMode:
             //the user is on the profile page, but not currently wanting to edit anything. Only looking.
                 titleTextField.userInteractionEnabled = true
                 theFullNameTextField.userInteractionEnabled = true
                 editOrBackOrSaveButton.setTitle("Save", forState: .Normal)
-                floatingButtonState = .Save
+                questionDetailState = .EditingMode
                 setEditingGUI()
-        case .DismissViewController:
+        case .OtherUserProfileViewOnlyMode:
             //the user is on the normal card view and looking at another user. This just dismisses the detail view back to the card stack
             imageTapped()
         }
@@ -134,6 +134,9 @@ class CardDetailViewController: UIViewController {
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
         vc.delegate = self
         vc.questionNumber = questionNumber
+        if questionDetailState == .EditingMode {
+            vc.questionPopUpState = .EditingMode
+        }
         switch questionNumber {
         case 1:
             vc.currentQuestion = userOfTheCard?.questionOne
@@ -163,7 +166,7 @@ class CardDetailViewController: UIViewController {
         if let factOne = userOfTheCard?.factOne {
             theFirstBulletText.text = factOne
         }
-        if floatingButtonState == .Edit {
+        if questionDetailState == .ProfileViewOnlyMode {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
         }
         do {
@@ -227,7 +230,7 @@ class CardDetailViewController: UIViewController {
         }
         
         theAgeLabel.tapped { _ in
-            if self.floatingButtonState == .Save {
+            if self.questionDetailState == .EditingMode {
                 DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
                     (birthday) -> Void in
                     let calendar : NSCalendar = NSCalendar.currentCalendar()
@@ -244,24 +247,22 @@ class CardDetailViewController: UIViewController {
         }
         
             theFirstBulletText.tapped { (_) in
-                if self.floatingButtonState == .Save {
+                if self.questionDetailState == .EditingMode {
                     self.createDetailPopUp(Fact.FactOne)
                 }
             }
             
             theSecondBulletText.tapped { (_) in
-                if self.floatingButtonState == .Save {
+                if self.questionDetailState == .EditingMode {
                     self.createDetailPopUp(Fact.FactTwo)
                 }
             }
             
             theThirdBulletText.tapped { (_) in
-                if self.floatingButtonState == .Save {
+                if self.questionDetailState == .EditingMode {
                     self.createDetailPopUp(Fact.FactThree)
                 }
             }
-        
-
     }
     
     override func prefersStatusBarHidden() -> Bool {
@@ -305,10 +306,6 @@ extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
 extension CardDetailViewController: MagicMoveable {
     func imageTapped() {
         self.dismissViewControllerAnimated(false, completion: nil)
-//        let backgroundAnimationVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(BackgroundAnimationViewController)) as! BackgroundAnimationViewController
-////
-////        //not animating right now because it was fucking things up.
-//        presentViewControllerMagically(self, to: backgroundAnimationVC, animated: false, duration: duration, spring: spring)
     }
     
     var isMagic: Bool {
