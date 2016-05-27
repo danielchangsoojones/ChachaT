@@ -38,12 +38,6 @@ func setBottomBlur() -> CAGradientLayer {
     return gradientLayer
 }
 
-//enums
-enum Fact {
-    case FactOne
-    case FactTwo
-    case FactThree
-}
 
 //Text View methods
 func editingBeginsTextView(textView: UITextView) {

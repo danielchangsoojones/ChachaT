@@ -33,7 +33,6 @@
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */; };
-		92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
 		92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */; };
@@ -80,7 +79,6 @@
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailPopUpViewController.swift; sourceTree = "<group>"; };
-		92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionDetailViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,7 +189,6 @@
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
-				92B8DF1A1CE930E200AFA518 /* QuestionDetailViewController.swift */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
 			);
@@ -435,7 +432,6 @@
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
 				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
-				92B8DF1B1CE930E200AFA518 /* QuestionDetailViewController.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,

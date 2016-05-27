@@ -8,27 +8,30 @@
 
 import UIKit
 import Parse
+import SnapKit
+
+enum QuestionPopUpState {
+    case EditingMode
+    case ViewOnlyMode
+}
 
 class QuestionPopUpViewController: PopUpSuperViewController {
 
     @IBOutlet weak var theQuestionTextField: UITextView!
     @IBOutlet weak var theAnswerTextField: UITextView!
-    @IBOutlet weak var theSaveButton: UIButton!
+    @IBOutlet weak var theBackgroundColorView: UIView!
     
     var currentQuestion: Question?
     var questionNumber: Int = 1
     var theQuestionTextFieldChanged = false
     var theAnswerTextFieldChanged = false
     
+    var questionPopUpState = QuestionPopUpState.ViewOnlyMode
+    
     var delegate: QuestionPopUpViewControllerDelegate?
     
-    @IBAction func clearCurrentTextField(sender: AnyObject) {
-        activeTextField.text = nil
-        activeTextField.becomeFirstResponder()
-    }
-    
-    @IBAction func save(sender: AnyObject) {
-        theSaveButton.enabled = false
+    func save() {
+        self.navigationItem.leftBarButtonItem?.enabled = false
         let currentUser = User.currentUser()
         //if the currentQuestion was passed to the pop up, as opposed to making a new question
         if let currentQuestion = currentQuestion {
@@ -56,11 +59,10 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         PFObject.saveAllInBackground(array) { (success, error) in
             if success {
                 self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.questionNumber)
-                self.dismissViewControllerAnimated(true, completion: nil)
+                self.navigationController?.popViewControllerAnimated(true)
             }
         }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,21 +73,33 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         theAnswerTextField.tag = 2
         // Do any additional setup after loading the view.
         if let currentQuestion = currentQuestion {
-            setNormalGUI(currentQuestion)
+            theQuestionTextField.text = currentQuestion.question
+            theAnswerTextField.text = currentQuestion.topAnswer
+            if questionPopUpState == .EditingMode {
+                setEditingGUI(currentQuestion)
+            }
         } else {
-            setFirstTimeGUI()
+            setUnwrittenQuestionGUI()
         }
         
     }
     
-    func setNormalGUI(currentQuestion: Question) {
-        theQuestionTextField.text = currentQuestion.question
-        theAnswerTextField.text = currentQuestion.topAnswer
+    func setEditingGUI(currentQuestion: Question) {
+        theQuestionTextField.userInteractionEnabled = true
+        theAnswerTextField.userInteractionEnabled = true
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(save))
+        self.edgesForExtendedLayout = UIRectEdge.None
     }
     
-    func setFirstTimeGUI() {
+    func setUnwrittenQuestionGUI() {
         theQuestionTextField.textColor = placeHolderTextColor
         theAnswerTextField.textColor = placeHolderTextColor
+        if questionPopUpState == .EditingMode {
+            theAnswerTextField.userInteractionEnabled = true
+            theQuestionTextField.userInteractionEnabled = true
+        } else if questionPopUpState == .ViewOnlyMode {
+            theQuestionTextField.text = "Oops, they don't seem to have written a question yet"
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -106,7 +120,7 @@ extension QuestionPopUpViewController: UITextViewDelegate {
         if textView.tag == 1 {
             placeHolderText = "A question about you (e.g. what is your favorite quote?). Remember to write it like someone else is asking you..."
         } else if textView.tag == 2 {
-            placeHolderText = "Your interesting (hopefully not too vulgar) answer"
+            placeHolderText = "Your interesting (hopefully not too obscene) answer"
         }
         editingEndedTextView(textView, placeHolderText: placeHolderText)
     }
