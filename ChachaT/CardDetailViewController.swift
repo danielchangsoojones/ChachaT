@@ -56,7 +56,6 @@ class CardDetailViewController: UIViewController {
             if titleTextFieldDidChange {
                 userOfTheCard?.title = titleTextField.text
             }
-            editOrBackOrSaveButton.setTitle("", forState: .Normal)
             theFullNameTextField.userInteractionEnabled = false
             titleTextField.userInteractionEnabled = false
             theSavingSpinner.hidden = false
@@ -193,6 +192,14 @@ class CardDetailViewController: UIViewController {
         if questionDetailState == .ProfileViewOnlyMode {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
         }
+        if let profileImage = userOfTheCard?.profileImage {
+            self.profileImage.file = profileImage
+            self.profileImage.loadInBackground()
+        } else {
+            profileImage.backgroundColor = ChachaBombayGrey
+            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
+            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
+        }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
             theQuestionButtonOne.setTitle(question?.question, forState: .Normal)
@@ -227,7 +234,7 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             titleTextField.text = title
         }
-        self.profileImage.backgroundColor = ChachaBombayGrey
+        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
         self.profileImage.image = UIImage(named: "camera-Colored")
         self.profileImage.contentMode = .Center
         self.theFullNameLabel.hidden = true
@@ -250,7 +257,11 @@ class CardDetailViewController: UIViewController {
     
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
-            self.imageTapped()
+            if self.questionDetailState == .OtherUserProfileViewOnlyMode {
+                self.imageTapped()
+            } else if self.questionDetailState == .EditingMode {
+                //put image picker/camera picker here
+            }
         }
         
         theAgeLabel.tapped { _ in
