@@ -16,7 +16,6 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
-    @IBOutlet weak var theQuestionButtonOne: UIButton!
     @IBOutlet weak var theQuestionButtonTwo: UIButton!
     @IBOutlet weak var theQuestionButtonThree: UIButton!
     @IBOutlet weak var theCustomQuestionButton: UIButton!
@@ -30,6 +29,8 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theThirdBulletText: UILabel!
     @IBOutlet weak var editOrBackOrSaveButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var theQuestionButtonOne: ResizableButton!
+  
     
     enum QuestionDetailState {
         case EditingMode
@@ -84,9 +85,10 @@ class CardDetailViewController: UIViewController {
         }
     }
     
-    @IBAction func questionOneButtonPressed(sender: AnyObject) {
+    @IBAction func questionButtonOnePressed(sender: AnyObject) {
         createQuestionPopUp(1)
     }
+    
     
     @IBAction func questionButtonTwoPressed(sender: AnyObject) {
         createQuestionPopUp(2)
@@ -105,6 +107,9 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
         setGUI()
         setupTapHandler()
+        theQuestionButtonOne.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        theQuestionButtonOne.titleLabel?.textAlignment = NSTextAlignment.Center
+        theQuestionButtonOne.titleLabel?.numberOfLines = 0
     }
     
     func createDetailPopUp(factNumber: Fact) {
