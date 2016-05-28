@@ -16,8 +16,6 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
-    @IBOutlet weak var theQuestionButtonTwo: UIButton!
-    @IBOutlet weak var theQuestionButtonThree: UIButton!
     @IBOutlet weak var theCustomQuestionButton: UIButton!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     @IBOutlet weak var theFullNameTextField: UITextField!
@@ -30,6 +28,8 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var editOrBackOrSaveButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
+    @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
+    @IBOutlet weak var theQuestionButtonThree: ResizableButton!
   
     
     enum QuestionDetailState {
@@ -89,7 +89,6 @@ class CardDetailViewController: UIViewController {
         createQuestionPopUp(1)
     }
     
-    
     @IBAction func questionButtonTwoPressed(sender: AnyObject) {
         createQuestionPopUp(2)
     }
@@ -97,6 +96,7 @@ class CardDetailViewController: UIViewController {
     @IBAction func questionButtonThreePressed(sender: AnyObject) {
         createQuestionPopUp(3)
     }
+
     
     @IBAction func customQuestionButtonPressed(sender: AnyObject) {
         createQuestionPopUp(4)
@@ -107,10 +107,9 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
         setGUI()
         setupTapHandler()
-        theQuestionButtonOne.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        theQuestionButtonOne.titleLabel?.textAlignment = NSTextAlignment.Center
-        theQuestionButtonOne.titleLabel?.numberOfLines = 0
     }
+    
+    
     
     func createDetailPopUp(factNumber: Fact) {
         //look at STPopUp github for more info.
@@ -160,8 +159,19 @@ class CardDetailViewController: UIViewController {
         
     }
     
+    func createQuestionBubbleGUI(questionButton: ResizableButton) {
+        questionButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+        questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
+        questionButton.titleLabel?.numberOfLines = 0
+        questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
+        
+    }
+    
     func setGUI() {
         self.view.layer.addSublayer(setBottomBlur())
+        createQuestionBubbleGUI(theQuestionButtonOne)
+        createQuestionBubbleGUI(theQuestionButtonTwo)
+        createQuestionBubbleGUI(theQuestionButtonThree)
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }

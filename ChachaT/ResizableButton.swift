@@ -14,8 +14,10 @@ class ResizableButton: UIButton {
     
     override func intrinsicContentSize() -> CGSize
     {
+        let extraHeightCushion : CGFloat = 50
+        let extraWidthCushion : CGFloat = 10
         let labelSize = titleLabel?.sizeThatFits(CGSizeMake(self.frame.size.width, CGFloat.max)) ?? CGSizeZero
-        let desiredButtonSize = CGSizeMake(labelSize.width + titleEdgeInsets.left + titleEdgeInsets.right, labelSize.height + titleEdgeInsets.top + titleEdgeInsets.bottom)
+        let desiredButtonSize = CGSizeMake(labelSize.width + titleEdgeInsets.left + titleEdgeInsets.right + extraWidthCushion, labelSize.height + titleEdgeInsets.top + titleEdgeInsets.bottom + extraHeightCushion)
         
         return desiredButtonSize
     }
