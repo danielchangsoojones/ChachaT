@@ -184,15 +184,21 @@ class CardDetailViewController: UIViewController {
         if let factOne = userOfTheCard?.factOne {
             theFirstBulletText.text = factOne
         }
+        if let factTwo = userOfTheCard?.factTwo {
+            theSecondBulletText.text = factTwo
+        }
+        if let factThree = userOfTheCard?.factThree {
+            theThirdBulletText.text = factThree
+        }
         if questionDetailState == .ProfileViewOnlyMode {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
         }
         do {
-                    let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
-                    theQuestionButtonOne.setTitle(question?.question, forState: .Normal)
-                    } catch {
-                        print("there was an error fetching the question")
-                    }
+            let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
+            theQuestionButtonOne.setTitle(question?.question, forState: .Normal)
+            } catch {
+                print("there was an error fetching the question")
+            }
         do {
             let question = try userOfTheCard?.questionTwo?.fetchIfNeeded()
             theQuestionButtonTwo.setTitle(question?.question, forState: .Normal)
