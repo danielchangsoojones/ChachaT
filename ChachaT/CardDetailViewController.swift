@@ -12,6 +12,12 @@ import ParseUI
 import STPopup
 import EFTools
 
+public enum QuestionDetailState {
+    case EditingMode
+    case ProfileViewOnlyMode
+    case OtherUserProfileViewOnlyMode
+}
+
 class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
@@ -30,18 +36,11 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
-  
-    
-    enum QuestionDetailState {
-        case EditingMode
-        case ProfileViewOnlyMode
-        case OtherUserProfileViewOnlyMode
-    }
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
     //need to set this to editing if I want to have profile that is editable
-    var questionDetailState : QuestionDetailState = .ProfileViewOnlyMode
+    var questionDetailState : QuestionDetailState = .OtherUserProfileViewOnlyMode
     
     var userOfTheCard: User? = User.currentUser()
     
@@ -172,6 +171,7 @@ class CardDetailViewController: UIViewController {
         createQuestionBubbleGUI(theQuestionButtonOne)
         createQuestionBubbleGUI(theQuestionButtonTwo)
         createQuestionBubbleGUI(theQuestionButtonThree)
+        editOrBackOrSaveButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }

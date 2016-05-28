@@ -17,8 +17,8 @@ class PageMainViewController: PagesController {
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let backgroundAnimationViewController = storyboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
         let cardDetailViewController = storyboard.instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
+        cardDetailViewController.questionDetailState = .ProfileViewOnlyMode
         self.add([backgroundAnimationViewController, cardDetailViewController])
-        
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
 
