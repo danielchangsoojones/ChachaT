@@ -22,11 +22,11 @@ class BottomPicturePopUpViewController: UIViewController {
     var bottomPicturePopUpViewControllerDelegate : BottomPicturePopUpViewControllerDelegate?
     
     @IBAction func thePhotoLibraryButtonPressed(sender: AnyObject) {
-        setImagePickerDelegate()
+        setImagePickerDelegate(UIImagePickerControllerSourceType.PhotoLibrary)
     }
 
     @IBAction func theCameraButtonPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(true, completion: nil)
+        setImagePickerDelegate(UIImagePickerControllerSourceType.Camera)
     }
     
     override func viewDidLoad() {
@@ -56,10 +56,10 @@ class BottomPicturePopUpViewController: UIViewController {
 }
 
 extension BottomPicturePopUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func setImagePickerDelegate() {
+    func setImagePickerDelegate(pickerType: UIImagePickerControllerSourceType) {
         let imgPicker = UIImagePickerController()
         imgPicker.delegate = self
-        imgPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+        imgPicker.sourceType = pickerType;
         imgPicker.allowsEditing = true
         self.presentViewController(imgPicker, animated: true, completion: nil)
     }
@@ -76,6 +76,7 @@ extension BottomPicturePopUpViewController: UIImagePickerControllerDelegate, UIN
     }
     
     func dismissCurrentViewController() {
+        //in the imagePickerController, it thought the current view controller was the image picker, so it wasn't dismissing the bottom pop up controller. This fixed that.
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 }
