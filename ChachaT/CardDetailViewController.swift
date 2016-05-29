@@ -12,6 +12,12 @@ import ParseUI
 import STPopup
 import EFTools
 
+public enum QuestionDetailState {
+    case EditingMode
+    case ProfileViewOnlyMode
+    case OtherUserProfileViewOnlyMode
+}
+
 class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
@@ -30,18 +36,11 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
-  
-    
-    enum QuestionDetailState {
-        case EditingMode
-        case ProfileViewOnlyMode
-        case OtherUserProfileViewOnlyMode
-    }
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
     //need to set this to editing if I want to have profile that is editable
-    var questionDetailState : QuestionDetailState = .ProfileViewOnlyMode
+    var questionDetailState : QuestionDetailState = .OtherUserProfileViewOnlyMode
     
     var userOfTheCard: User? = User.currentUser()
     
@@ -57,7 +56,6 @@ class CardDetailViewController: UIViewController {
             if titleTextFieldDidChange {
                 userOfTheCard?.title = titleTextField.text
             }
-            editOrBackOrSaveButton.setTitle("", forState: .Normal)
             theFullNameTextField.userInteractionEnabled = false
             titleTextField.userInteractionEnabled = false
             theSavingSpinner.hidden = false
@@ -81,7 +79,7 @@ class CardDetailViewController: UIViewController {
                 setEditingGUI()
         case .OtherUserProfileViewOnlyMode:
             //the user is on the normal card view and looking at another user. This just dismisses the detail view back to the card stack
-            imageTapped()
+            self.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
@@ -102,18 +100,15 @@ class CardDetailViewController: UIViewController {
         createQuestionPopUp(4)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setGUI()
         setupTapHandler()
     }
     
-    
-    
     func createDetailPopUp(factNumber: Fact) {
         //look at STPopUp github for more info.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController") as! UserDetailPopUpViewController
         vc.delegate = self
         vc.factNumber = factNumber
@@ -167,11 +162,25 @@ class CardDetailViewController: UIViewController {
         
     }
     
+    func createBottomPicturePopUp() {
+        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
+        vc.bottomPicturePopUpViewControllerDelegate = self
+        vc.profileImageSize = self.profileImage.frame.size
+        let popup = STPopupController(rootViewController: vc)
+        popup.navigationBar.barTintColor = ChachaTeal
+        popup.navigationBar.tintColor = UIColor.whiteColor()
+        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        popup.style = STPopupStyle.BottomSheet
+        popup.presentInViewController(self)
+    }
+    
     func setGUI() {
         self.view.layer.addSublayer(setBottomBlur())
         createQuestionBubbleGUI(theQuestionButtonOne)
         createQuestionBubbleGUI(theQuestionButtonTwo)
         createQuestionBubbleGUI(theQuestionButtonThree)
+        editOrBackOrSaveButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }
@@ -192,6 +201,14 @@ class CardDetailViewController: UIViewController {
         }
         if questionDetailState == .ProfileViewOnlyMode {
             editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
+        }
+        if let profileImage = userOfTheCard?.profileImage {
+            self.profileImage.file = profileImage
+            self.profileImage.loadInBackground()
+        } else {
+            profileImage.backgroundColor = ChachaBombayGrey
+            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
+            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
         }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
@@ -227,7 +244,7 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             titleTextField.text = title
         }
-        self.profileImage.backgroundColor = ChachaBombayGrey
+        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
         self.profileImage.image = UIImage(named: "camera-Colored")
         self.profileImage.contentMode = .Center
         self.theFullNameLabel.hidden = true
@@ -250,7 +267,12 @@ class CardDetailViewController: UIViewController {
     
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
-            self.imageTapped()
+            if self.questionDetailState == .OtherUserProfileViewOnlyMode {
+                self.dismissViewControllerAnimated(false, completion: nil)
+            } else if self.questionDetailState == .EditingMode {
+                //put image picker/camera picker here
+                self.createBottomPicturePopUp()
+            }
         }
         
         theAgeLabel.tapped { _ in
@@ -328,9 +350,6 @@ extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
 
 
 extension CardDetailViewController: MagicMoveable {
-    func imageTapped() {
-        self.dismissViewControllerAnimated(false, completion: nil)
-    }
     
     var isMagic: Bool {
         return true
@@ -346,5 +365,11 @@ extension CardDetailViewController: MagicMoveable {
     
     var magicViews: [UIView] {
         return [profileImage]
+    }
+}
+
+extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
+    func passImage(image: UIImage) {
+        profileImage.image = image
     }
 }
