@@ -100,18 +100,15 @@ class CardDetailViewController: UIViewController {
         createQuestionPopUp(4)
     }
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         setGUI()
         setupTapHandler()
     }
     
-    
-    
     func createDetailPopUp(factNumber: Fact) {
         //look at STPopUp github for more info.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController") as! UserDetailPopUpViewController
         vc.delegate = self
         vc.factNumber = factNumber
@@ -162,6 +159,10 @@ class CardDetailViewController: UIViewController {
         questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
         questionButton.titleLabel?.numberOfLines = 0
         questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
+        
+    }
+    
+    func createBottomPicturePopUp() {
         
     }
     

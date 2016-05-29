@@ -34,6 +34,7 @@
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */; };
 		929FDB7E1CFA096400ACE474 /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB7D1CFA096400ACE474 /* ResizableButton.swift */; };
+		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
 		92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */; };
@@ -81,6 +82,7 @@
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailPopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB7D1CFA096400ACE474 /* ResizableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
+		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -191,6 +193,7 @@
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
+				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
 			);
@@ -348,6 +351,7 @@
 				926108211CDBCA32009F3E86 /* LaunchScreen.storyboard in Resources */,
 				926108331CE25C22009F3E86 /* woosh.wav in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
+				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
@@ -468,6 +472,14 @@
 				926108201CDBCA32009F3E86 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+		929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				929FDB801CFA6F0400ACE474 /* Base */,
+			);
+			name = PopUp.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
