@@ -39,6 +39,7 @@ class CardDetailViewController: UIViewController {
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
+    var imageWasChanged = false
     //need to set this to editing if I want to have profile that is editable
     var questionDetailState : QuestionDetailState = .OtherUserProfileViewOnlyMode
     
@@ -52,6 +53,10 @@ class CardDetailViewController: UIViewController {
                 let fullNameText = theFullNameTextField.text
                 userOfTheCard?.fullName = fullNameText
                 userOfTheCard?.lowercaseFullName = fullNameText?.lowercaseString
+            }
+            if imageWasChanged {
+                let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(profileImage.image!, 0.6)!)
+                userOfTheCard!.profileImage = file
             }
             if titleTextFieldDidChange {
                 userOfTheCard?.title = titleTextField.text
@@ -102,7 +107,7 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setGUI()
+        setNormalGUI()
         setupTapHandler()
     }
     
@@ -175,7 +180,7 @@ class CardDetailViewController: UIViewController {
         popup.presentInViewController(self)
     }
     
-    func setGUI() {
+    func setNormalGUI() {
         self.view.layer.addSublayer(setBottomBlur())
         createQuestionBubbleGUI(theQuestionButtonOne)
         createQuestionBubbleGUI(theQuestionButtonTwo)
@@ -370,6 +375,7 @@ extension CardDetailViewController: MagicMoveable {
 
 extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
+        imageWasChanged = true
         profileImage.image = image
     }
 }
