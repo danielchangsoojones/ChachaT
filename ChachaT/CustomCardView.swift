@@ -8,6 +8,7 @@
 
 import UIKit
 import Koloda
+import ParseUI
 
 private let overlayRightImageName = "overlay_like"
 private let overlayLeftImageName = "overlay_skip"
@@ -17,10 +18,10 @@ protocol CustomCardViewDelegate:class {
 }
 
 class CustomCardView: OverlayView {
-    @IBOutlet weak var theCardMainImage: UIImageView!
     @IBOutlet weak var theFullNameLabel: UILabel!
     @IBOutlet weak var theAgeLabel: UILabel!
     @IBOutlet weak var theTitleLabel: UILabel!
+    @IBOutlet weak var theCardMainImage: PFImageView!
     
     var userOfTheCard : User? {
         didSet {
@@ -32,6 +33,12 @@ class CustomCardView: OverlayView {
             }
             if let age = userOfTheCard?.calculateBirthDate() {
                 theAgeLabel.text = ", " + "\(age)"
+            }
+            if let profileImage = userOfTheCard?.profileImage {
+                self.theCardMainImage.file = profileImage
+                self.theCardMainImage.loadInBackground()
+            } else {
+                theCardMainImage.backgroundColor = ChachaBombayGrey
             }
             
         }

@@ -11,7 +11,7 @@
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="qhL-rn-cDC">
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qhL-rn-cDC" customClass="PFImageView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="539"/>
                 </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDJ-pE-4t4">
@@ -60,13 +60,10 @@
             </constraints>
             <connections>
                 <outlet property="theAgeLabel" destination="Js5-bq-7SC" id="fbP-PM-dNo"/>
-                <outlet property="theCardMainImage" destination="qhL-rn-cDC" id="WSo-Bh-7vJ"/>
+                <outlet property="theCardMainImage" destination="qhL-rn-cDC" id="CYI-28-X7v"/>
                 <outlet property="theFullNameLabel" destination="hic-8h-7Bo" id="osK-HE-3Sb"/>
                 <outlet property="theTitleLabel" destination="T6l-F0-VzE" id="1Bs-Ku-RnJ"/>
             </connections>
         </view>
     </objects>
-    <resources>
-        <image name="Driving girl" width="157" height="203"/>
-    </resources>
 </document>

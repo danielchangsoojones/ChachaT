@@ -44,11 +44,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C">
-                                        <rect key="frame" x="33" y="120" width="315" height="325"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="264"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
+                                    <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
+                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -68,8 +76,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="imageView" destination="16g-Ya-p0C" id="th5-L8-dcF"/>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
+                        <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="28w-wD-wPr"/>
                     </connections>
                 </viewController>
@@ -352,10 +360,6 @@
                                                     <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                             </button>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" fixedFrame="YES" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
-                                                <rect key="frame" x="290" y="122" width="20" height="20"/>
-                                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                            </activityIndicatorView>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
                                                 <rect key="frame" x="20" y="50" width="34" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
@@ -366,6 +370,10 @@
                                                     <action selector="editOrBackOrSavePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="8FX-yJ-IqH"/>
                                                 </connections>
                                             </button>
+                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
+                                                <rect key="frame" x="290" y="122" width="20" height="20"/>
+                                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </activityIndicatorView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -386,6 +394,7 @@
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstItem="18q-bc-79v" firstAttribute="leading" secondItem="XWC-yS-1iT" secondAttribute="leading" id="Rge-W7-kyV"/>
+                                            <constraint firstItem="zLF-DG-mmb" firstAttribute="centerX" secondItem="v5S-4V-jao" secondAttribute="centerX" id="SVb-Sy-7Pv"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="50" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
@@ -398,6 +407,7 @@
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="cEx-7Q-tPb"/>
                                             <constraint firstAttribute="bottom" secondItem="wKk-OW-7Uu" secondAttribute="bottom" constant="59" id="k7Z-kK-QdY"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="m0d-Qv-Dsh"/>
+                                            <constraint firstItem="zLF-DG-mmb" firstAttribute="centerY" secondItem="g5O-C2-7n0" secondAttribute="centerY" id="mId-h5-nF5"/>
                                             <constraint firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="pYg-FL-5Gk"/>
                                             <constraint firstAttribute="bottom" secondItem="QhN-sR-LNs" secondAttribute="bottom" constant="20" id="sh9-cf-oXI"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" id="t67-ZE-aKb"/>
@@ -484,7 +494,6 @@
     <resources>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
-        <image name="Driving girl" width="157" height="203"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
