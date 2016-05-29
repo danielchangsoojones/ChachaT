@@ -8,15 +8,25 @@
 
 import UIKit
 
+protocol BottomPicturePopUpViewControllerDelegate {
+    func passImage(image: UIImage)
+}
+
 class BottomPicturePopUpViewController: UIViewController {
     
     @IBOutlet weak var thePhotoLibraryButton: UIButton!
     @IBOutlet weak var theCameraButton: UIButton!
     
+    var profileImageSize : CGSize?
+    
+    var bottomPicturePopUpViewControllerDelegate : BottomPicturePopUpViewControllerDelegate?
+    
     @IBAction func thePhotoLibraryButtonPressed(sender: AnyObject) {
+        setImagePickerDelegate()
     }
 
     @IBAction func theCameraButtonPressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(true, completion: nil)
     }
     
     override func viewDidLoad() {
@@ -43,4 +53,29 @@ class BottomPicturePopUpViewController: UIViewController {
     }
     */
 
+}
+
+extension BottomPicturePopUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func setImagePickerDelegate() {
+        let imgPicker = UIImagePickerController()
+        imgPicker.delegate = self
+        imgPicker.sourceType = UIImagePickerControllerSourceType.PhotoLibrary;
+        imgPicker.allowsEditing = true
+        self.presentViewController(imgPicker, animated: true, completion: nil)
+    }
+    
+    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!)
+    {
+        if image != nil {
+            //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
+//            let resizedImage = image.resizeImage(profileImageSize!)
+            bottomPicturePopUpViewControllerDelegate?.passImage(image)
+            dismissCurrentViewController()
+        }
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
+    func dismissCurrentViewController() {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
 }

@@ -79,7 +79,7 @@ class CardDetailViewController: UIViewController {
                 setEditingGUI()
         case .OtherUserProfileViewOnlyMode:
             //the user is on the normal card view and looking at another user. This just dismisses the detail view back to the card stack
-            imageTapped()
+            self.dismissViewControllerAnimated(false, completion: nil)
         }
     }
     
@@ -165,6 +165,8 @@ class CardDetailViewController: UIViewController {
     func createBottomPicturePopUp() {
         let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
+        vc.bottomPicturePopUpViewControllerDelegate = self
+        vc.profileImageSize = self.profileImage.frame.size
         let popup = STPopupController(rootViewController: vc)
         popup.navigationBar.barTintColor = ChachaTeal
         popup.navigationBar.tintColor = UIColor.whiteColor()
@@ -266,7 +268,7 @@ class CardDetailViewController: UIViewController {
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
             if self.questionDetailState == .OtherUserProfileViewOnlyMode {
-                self.imageTapped()
+                self.dismissViewControllerAnimated(false, completion: nil)
             } else if self.questionDetailState == .EditingMode {
                 //put image picker/camera picker here
                 self.createBottomPicturePopUp()
@@ -348,9 +350,6 @@ extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
 
 
 extension CardDetailViewController: MagicMoveable {
-    func imageTapped() {
-        self.dismissViewControllerAnimated(false, completion: nil)
-    }
     
     var isMagic: Bool {
         return true
@@ -366,5 +365,11 @@ extension CardDetailViewController: MagicMoveable {
     
     var magicViews: [UIView] {
         return [profileImage]
+    }
+}
+
+extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
+    func passImage(image: UIImage) {
+        profileImage.image = image
     }
 }

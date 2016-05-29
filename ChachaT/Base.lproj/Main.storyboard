@@ -105,7 +105,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="770"/>
                                         <subviews>
-                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="264" id="vHd-oq-IIN"/>
