@@ -12,6 +12,7 @@ import Koloda
 import AVFoundation
 import Parse
 import EFTools
+import ParseUI
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -23,10 +24,8 @@ private let numberOfCards : UInt = 5
 
 //go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
 class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegate {
-    @IBOutlet weak var actLoading: UIActivityIndicatorView!
     @IBOutlet weak var kolodaView: CustomKolodaView!
-    
-    @IBOutlet weak var imageView: UIImageView!
+    @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     
     var userArray = [User]()
     
@@ -50,14 +49,13 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        
         createUserArray()
         
     }
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
-        self.imageView.hidden = true
+        self.theMagicMovePlaceholderImage.hidden = true
         if User.currentUser() == nil {
             performSegueWithIdentifier(.LogInPageSegue, sender: self)
         }
@@ -147,6 +145,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         cardView.delegate = self
         cardView.userOfTheCard = userArray[Int(index)]
         
+        
         //Rounded corners
         cardView.layer.cornerRadius = 10.0
         cardView.layer.masksToBounds = true
@@ -177,15 +176,21 @@ extension BackgroundAnimationViewController: MagicMoveable {
         let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
         
         cardDetailVC.userOfTheCard = userArray[Int(index)]
+        if let image = userArray[Int(index)].profileImage{
+            self.theMagicMovePlaceholderImage.file = image
+            self.theMagicMovePlaceholderImage.loadInBackground()
+        } else {
+            theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
+        }
         
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
-        imageView.hidden = false
+        theMagicMovePlaceholderImage.hidden = false
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
     var magicViews: [UIView] {
-        return [imageView]
+        return [theMagicMovePlaceholderImage]
     }
 }
 

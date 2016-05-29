@@ -44,11 +44,19 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" image="Driving girl" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C">
-                                        <rect key="frame" x="33" y="120" width="315" height="325"/>
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
+                                        <rect key="frame" x="0.0" y="100" width="375" height="264"/>
+                                        <constraints>
+                                            <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
+                                    <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
+                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
+                                </constraints>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
@@ -68,8 +76,8 @@
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
-                        <outlet property="imageView" destination="16g-Ya-p0C" id="th5-L8-dcF"/>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
+                        <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="28w-wD-wPr"/>
                     </connections>
                 </viewController>
@@ -486,7 +494,6 @@
     <resources>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
-        <image name="Driving girl" width="157" height="203"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
