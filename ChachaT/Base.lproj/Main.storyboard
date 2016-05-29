@@ -90,6 +90,9 @@
             <objects>
                 <pageViewController storyboardIdentifier="PageMainViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="s5O-Gk-Yh3" customClass="PageMainViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bCJ-lW-7uC"/>
+                    <connections>
+                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="qc7-o9-Apy"/>
+                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zf-Dg-75B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -281,7 +284,7 @@
                                                     <constraint firstAttribute="width" constant="330" id="lA8-dY-3Rq"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="s8Z-3a-BZd"/>
                                                 </constraints>
-                                                <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
+                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
                                                     <color key="titleColor" red="0.047058823529411764" green="0.72941176470588232" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <variation key="default">
@@ -294,31 +297,13 @@
                                                     <action selector="questionButtonOnePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="2S3-mP-ocr"/>
                                                 </connections>
                                             </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="501" width="560" height="68"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="hao-IK-1IR"/>
-                                                </constraints>
-                                                <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
-                                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="GgM-VQ-xLE"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="questionButtonTwoPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="MkN-hO-exi"/>
-                                                </connections>
-                                            </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
                                                 <rect key="frame" x="20" y="576" width="560" height="68"/>
                                                 <constraints>
                                                     <constraint firstAttribute="width" constant="330" id="eXZ-98-ah3"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="kkZ-NB-F8G"/>
                                                 </constraints>
-                                                <state key="normal" title="Is Shaq Really That Tall?" backgroundImage="Question Bubble">
+                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
                                                     <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                                 </state>
                                                 <variation key="default">
@@ -361,7 +346,7 @@
                                                 </state>
                                             </button>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
-                                                <rect key="frame" x="20" y="50" width="34" height="30"/>
+                                                <rect key="frame" x="20" y="100" width="34" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <size key="titleShadowOffset" width="4" height="4"/>
@@ -374,6 +359,24 @@
                                                 <rect key="frame" x="290" y="122" width="20" height="20"/>
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
+                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
+                                                <rect key="frame" x="20" y="500" width="560" height="68"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
+                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="hao-IK-1IR"/>
+                                                </constraints>
+                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
+                                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                                </state>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="GgM-VQ-xLE"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <action selector="questionButtonTwoPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="MkN-hO-exi"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
@@ -396,7 +399,7 @@
                                             <constraint firstItem="18q-bc-79v" firstAttribute="leading" secondItem="XWC-yS-1iT" secondAttribute="leading" id="Rge-W7-kyV"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerX" secondItem="v5S-4V-jao" secondAttribute="centerX" id="SVb-Sy-7Pv"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
-                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="50" id="Ty8-td-QWW"/>
+                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="100" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
                                             <constraint firstItem="Hdx-yn-KHS" firstAttribute="leading" secondItem="18q-bc-79v" secondAttribute="leading" id="UgH-UO-xeA"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
@@ -476,6 +479,7 @@
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
                         <segue destination="137-mi-AE4" kind="show" identifier="QuestionEditingPopUpSegue" id="QHg-xS-Tuv"/>
+                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="LKh-Ql-dNR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -497,4 +501,7 @@
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="LKh-Ql-dNR"/>
+    </inferredMetricsTieBreakers>
 </document>

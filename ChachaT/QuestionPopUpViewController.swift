@@ -71,20 +71,21 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         theAnswerTextField.layer.cornerRadius = 10.0
         theQuestionTextField.tag = 1
         theAnswerTextField.tag = 2
+        if questionPopUpState == .EditingMode {
+            setEditingGUI()
+        }
         // Do any additional setup after loading the view.
         if let currentQuestion = currentQuestion {
             theQuestionTextField.text = currentQuestion.question
             theAnswerTextField.text = currentQuestion.topAnswer
-            if questionPopUpState == .EditingMode {
-                setEditingGUI(currentQuestion)
-            }
+            
         } else {
             setUnwrittenQuestionGUI()
         }
         
     }
     
-    func setEditingGUI(currentQuestion: Question) {
+    func setEditingGUI() {
         theQuestionTextField.userInteractionEnabled = true
         theAnswerTextField.userInteractionEnabled = true
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(save))

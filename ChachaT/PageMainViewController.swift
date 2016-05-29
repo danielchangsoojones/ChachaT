@@ -8,6 +8,7 @@
 
 import UIKit
 import Pages
+import EFTools
 
 class PageMainViewController: PagesController {
     
@@ -21,8 +22,14 @@ class PageMainViewController: PagesController {
         self.add([backgroundAnimationViewController, cardDetailViewController])
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
+        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
 
         // Do any additional setup after loading the view.
+    }
+    
+    func logOut() {
+        User.logOut()
+        performSegueWithIdentifier(.LogInPageSegue, sender: self)
     }
 
     override func didReceiveMemoryWarning() {
@@ -41,4 +48,15 @@ class PageMainViewController: PagesController {
     }
     */
 
+}
+
+extension PageMainViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case LogInPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
+    }
 }

@@ -217,19 +217,25 @@ class CardDetailViewController: UIViewController {
         }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
-            theQuestionButtonOne.setTitle(question?.question, forState: .Normal)
+            if let question = question {
+                theQuestionButtonOne.setTitle(question.question, forState: .Normal)
+            }
             } catch {
                 print("there was an error fetching the question")
             }
         do {
             let question = try userOfTheCard?.questionTwo?.fetchIfNeeded()
-            theQuestionButtonTwo.setTitle(question?.question, forState: .Normal)
+            if let question = question {
+                theQuestionButtonTwo.setTitle(question.question, forState: .Normal)
+            }
         } catch {
             print("there was an error fetching the question")
         }
         do {
             let question = try userOfTheCard?.questionThree?.fetchIfNeeded()
-            theQuestionButtonThree.setTitle(question?.question, forState: .Normal)
+            if let question = question {
+                theQuestionButtonThree.setTitle(question.question, forState: .Normal)
+            }
         } catch {
             print("there was an error fetching the question")
         }
@@ -352,8 +358,6 @@ extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
     }
 }
 
-
-
 extension CardDetailViewController: MagicMoveable {
     
     var isMagic: Bool {
@@ -377,5 +381,16 @@ extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
         imageWasChanged = true
         profileImage.image = image
+    }
+}
+
+extension CardDetailViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case LogInPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        
     }
 }
