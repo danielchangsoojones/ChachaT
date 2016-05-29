@@ -163,7 +163,14 @@ class CardDetailViewController: UIViewController {
     }
     
     func createBottomPicturePopUp() {
-        
+        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
+        let popup = STPopupController(rootViewController: vc)
+        popup.navigationBar.barTintColor = ChachaTeal
+        popup.navigationBar.tintColor = UIColor.whiteColor()
+        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        popup.style = STPopupStyle.BottomSheet
+        popup.presentInViewController(self)
     }
     
     func setGUI() {
@@ -262,6 +269,7 @@ class CardDetailViewController: UIViewController {
                 self.imageTapped()
             } else if self.questionDetailState == .EditingMode {
                 //put image picker/camera picker here
+                self.createBottomPicturePopUp()
             }
         }
         

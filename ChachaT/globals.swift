@@ -16,6 +16,11 @@ let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
 let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
 
+//storyboard identifiers
+public enum StoryboardIdentifiers : String {
+   case BottomPicturePopUpViewController
+}
+
 //helper functions
 func isIphone3by2AR() -> Bool {
     let screenSize: CGRect = UIScreen.mainScreen().bounds
