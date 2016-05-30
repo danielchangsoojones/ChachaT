@@ -107,6 +107,7 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         setNormalGUI()
         setupTapHandler()
     }

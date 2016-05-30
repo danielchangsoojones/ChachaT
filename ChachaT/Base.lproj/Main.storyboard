@@ -50,12 +50,21 @@
                                             <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
                                         </constraints>
                                     </imageView>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-jA-iWv">
+                                        <rect key="frame" x="203" y="576" width="46" height="30"/>
+                                        <state key="normal" title="Button"/>
+                                        <connections>
+                                            <action selector="segueToProfilePage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IMm-On-so3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstAttribute="bottom" secondItem="b0O-jA-iWv" secondAttribute="bottom" constant="61" id="4QH-vW-PVt"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
                                     <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
+                                    <constraint firstAttribute="trailing" secondItem="b0O-jA-iWv" secondAttribute="trailing" constant="126" id="Woj-Oe-sgM"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -502,6 +511,6 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LKh-Ql-dNR"/>
+        <segue reference="28w-wD-wPr"/>
     </inferredMetricsTieBreakers>
 </document>

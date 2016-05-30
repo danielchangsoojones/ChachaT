@@ -29,6 +29,12 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     var userArray = [User]()
     
+    var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
+    
+    @IBAction func segueToProfilePage(sender: AnyObject) {
+        pageMainViewControllerDelegate!.moveToPageIndex(1)
+    }
+    
     @IBAction func logOut(sender: AnyObject) {
         User.logOut()
         performSegueWithIdentifier(.LogInPageSegue, sender: self)
