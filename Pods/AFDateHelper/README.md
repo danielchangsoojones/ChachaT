@@ -51,6 +51,7 @@ date.isToday() -> Bool
 date.isTomorrow()-> Bool
 date.isYesterday() -> Bool
 date.isSameWeekAsDate(date) -> Bool
+date.isSameMonthAsDate(date) -> Bool
 date.isThisWeek() -> Bool
 date.isNextWeek() -> Bool
 date.isLastWeek() -> Bool
@@ -62,6 +63,10 @@ date.isLastYear() -> Bool
 
 ### Adjusting Dates
 ```Swift
+date.dateByAddingMonths(2) -> NSDate
+date.dateBySubtractingMonths(4) -> NSDate
+date.dateByAddingWeeks(2) -> NSDate
+date.dateBySubtractingWeeks(4) -> NSDate
 date.dateByAddingDays(2) -> NSDate
 date.dateBySubtractingDays(4) -> NSDate
 date.dateByAddingHours(2) -> NSDate

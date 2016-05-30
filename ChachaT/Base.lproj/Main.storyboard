@@ -50,21 +50,38 @@
                                             <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
                                         </constraints>
                                     </imageView>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-jA-iWv">
-                                        <rect key="frame" x="203" y="576" width="46" height="30"/>
-                                        <state key="normal" title="Button"/>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-jA-iWv">
+                                        <rect key="frame" x="276" y="590" width="59" height="56"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="59" id="cBA-xr-68n"/>
+                                            <constraint firstAttribute="height" constant="56" id="zij-pG-Ukh"/>
+                                        </constraints>
+                                        <state key="normal" image="Profile Main Page Button"/>
                                         <connections>
                                             <action selector="segueToProfilePage:" destination="BYZ-38-t0r" eventType="touchUpInside" id="IMm-On-so3"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-4C-MkM">
+                                        <rect key="frame" x="147" y="578" width="81" height="79"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="81" id="09h-A4-aYK"/>
+                                            <constraint firstAttribute="height" constant="79" id="zEg-7j-bgk"/>
+                                        </constraints>
+                                        <state key="normal" image="Skip Main Page Button"/>
+                                        <connections>
+                                            <action selector="skipCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQ7-gb-Ksq"/>
                                         </connections>
                                     </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
                                 <constraints>
-                                    <constraint firstAttribute="bottom" secondItem="b0O-jA-iWv" secondAttribute="bottom" constant="61" id="4QH-vW-PVt"/>
+                                    <constraint firstAttribute="trailing" secondItem="b0O-jA-iWv" secondAttribute="trailing" constant="40" id="7xx-2l-aNj"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
+                                    <constraint firstItem="ELM-4C-MkM" firstAttribute="centerX" secondItem="32I-zm-XDi" secondAttribute="centerX" id="Jbe-cW-j8f"/>
+                                    <constraint firstAttribute="bottom" secondItem="ELM-4C-MkM" secondAttribute="bottom" constant="10" id="JkH-8h-UEw"/>
                                     <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
-                                    <constraint firstAttribute="trailing" secondItem="b0O-jA-iWv" secondAttribute="trailing" constant="126" id="Woj-Oe-sgM"/>
+                                    <constraint firstItem="b0O-jA-iWv" firstAttribute="centerY" secondItem="ELM-4C-MkM" secondAttribute="centerY" id="Vgq-CK-u1P"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -77,11 +94,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="9F2-jI-qmF">
-                            <connections>
-                                <action selector="logOut:" destination="BYZ-38-t0r" id="viY-4z-3pb"/>
-                            </connections>
-                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="9F2-jI-qmF"/>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -507,7 +520,9 @@
     <resources>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
+        <image name="Profile Main Page Button" width="60" height="59"/>
         <image name="Question Bubble" width="340" height="68"/>
+        <image name="Skip Main Page Button" width="81" height="79"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>

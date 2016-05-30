@@ -18,17 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
-        //setting the initial storyboard
-//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            
-//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//            
-//            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
-        
-        
         //register parse subclasses
         User.registerSubclass()
         Question.registerSubclass()
@@ -39,6 +28,19 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.server = "https://chachatinder.herokuapp.com/parse"
         }
         Parse.initializeWithConfiguration(configuration)
+        
+        //setting the initial storyboard
+        if User.currentUser() == nil {
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+            
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
+            
+        }
         
         return true
     }

@@ -35,11 +35,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         pageMainViewControllerDelegate!.moveToPageIndex(1)
     }
     
-    @IBAction func logOut(sender: AnyObject) {
-        User.logOut()
-        performSegueWithIdentifier(.LogInPageSegue, sender: self)
+    @IBAction func skipCard(sender: AnyObject) {
+        kolodaView.swipe(.Right)
     }
-    
     
     //MARK: Lifecycle
     override func viewDidLoad() {
