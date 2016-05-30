@@ -18,6 +18,17 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
         
+        //register parse subclasses
+        User.registerSubclass()
+        Question.registerSubclass()
+        
+        // Override point for customization after application launch.
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "djflkajsdlfjienrj3457698"
+            $0.server = "https://chachatinder.herokuapp.com/parse"
+        }
+        Parse.initializeWithConfiguration(configuration)
+        
         //setting the initial storyboard
         if User.currentUser() == nil {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
@@ -30,17 +41,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             self.window?.makeKeyAndVisible()
             
         }
-        
-        //register parse subclasses
-        User.registerSubclass()
-        Question.registerSubclass()
-        
-        // Override point for customization after application launch.
-        let configuration = ParseClientConfiguration {
-            $0.applicationId = "djflkajsdlfjienrj3457698"
-            $0.server = "https://chachatinder.herokuapp.com/parse"
-        }
-        Parse.initializeWithConfiguration(configuration)
         
         return true
     }
