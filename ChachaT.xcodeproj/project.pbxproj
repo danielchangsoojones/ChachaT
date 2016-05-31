@@ -581,6 +581,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = dcj.Chong500Productions.ChachaT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "64393233-ac72-4ad3-aa22-d966ff08b07f";
 			};
 			name = Release;
 		};
