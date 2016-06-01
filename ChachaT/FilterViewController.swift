@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import Foundation
 
 class FilterViewController: UIViewController {
     
@@ -19,17 +20,29 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theRaceStackView: UIStackView!
     @IBOutlet weak var theContentView: UIView!
     @IBOutlet weak var theRaceHolderView: UIView!
+    @IBOutlet weak var theDistanceSlider: UISlider!
+    @IBOutlet weak var theDistanceMilesLabel: UILabel!
+    @IBOutlet weak var theDistanceGraySliderView: UIView!
+    
+    let cornerSize : CGFloat = 10
+    
+    @IBAction func distanceSliderValueChanged(sender: AnyObject) {
+        let distanceValue = round(theDistanceSlider.value)
+        theDistanceMilesLabel.text = "\(Int(distanceValue)) mi."
+        
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-
+        
     }
     
     override func viewDidLayoutSubviews() {
         createBackgroundView(theRaceStackView, holderView: theRaceHolderView)
         maskButton(theRaceAsianButton, leftButton: true)
         maskButton(theRaceAllButton, leftButton: false)
+        theDistanceGraySliderView.layer.cornerRadius = cornerSize
     }
     
     func createBackgroundView(stackView: UIStackView, holderView: UIView) {
@@ -43,7 +56,6 @@ class FilterViewController: UIViewController {
     
     //left button means we want the corners to be on the top and bottom left. If false, then we want right side corners.
     func maskButton(button: UIButton, leftButton: Bool) {
-        let cornerSize : CGFloat = 10
         let maskLayer = CAShapeLayer()
         if leftButton {
              maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
