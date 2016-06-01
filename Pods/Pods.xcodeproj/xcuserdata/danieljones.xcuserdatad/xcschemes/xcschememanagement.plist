@@ -9,6 +9,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>BlurryModalSegue.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Bolts.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,6 +35,11 @@
 			<false/>
 		</dict>
 		<key>MBProgressHUD.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>MZAppearance.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -74,6 +84,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>UIImage+BlurredFrame.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -83,6 +98,11 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>19E4FCAE7EE3E81A5D32A507B3C9E202</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>1B4085559C9C1FD1B3C13EE05CF54F67</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -107,11 +127,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>428D650F4D4E6A5BC36757A850FA85F0</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>56170867254AF3082A1840024F458BD3</key>
 		<dict>
 			<key>primary</key>
@@ -122,7 +137,27 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7BB1A9890320F7B37393B73035621E9D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>9348368E0AE14076087837D8C8256FB8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>9D6F66BBE6336D06C25E5B420D804A4F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>A096731F617D77771C48A6DD6E6AA614</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B26A5B29C7DE5D9837AF3DDE8FEDC2BC</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -143,11 +178,6 @@
 			<true/>
 		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EE6495C27A210425032ED08262A48959</key>
 		<dict>
 			<key>primary</key>
 			<true/>
