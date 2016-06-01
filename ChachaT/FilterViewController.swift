@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class FilterViewController: UIViewController {
     
@@ -15,7 +16,8 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theRaceLatinoButton: UIButton!
     @IBOutlet weak var theRaceWhiteButton: UIButton!
     @IBOutlet weak var theRaceAllButton: UIButton!
-    
+    @IBOutlet weak var theRaceStackView: UIStackView!
+    @IBOutlet weak var theContentView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,10 +26,18 @@ class FilterViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-       
-        theRaceAllButton.layer.borderColor = PeriwinkleGray.CGColor
+        createBackgroundView(theRaceStackView)
         maskButton(theRaceAsianButton, leftButton: true)
         maskButton(theRaceAllButton, leftButton: false)
+    }
+    
+    func createBackgroundView(stackView: UIStackView) {
+        let backgroundColorView = UIView()
+        backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
+        self.theContentView.insertSubview(backgroundColorView, belowSubview: stackView)
+        backgroundColorView.snp_makeConstraints { (make) -> Void in
+            make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
+        }
     }
     
     //left button means we want the corners to be on the top and bottom left. If false, then we want right side corners.
