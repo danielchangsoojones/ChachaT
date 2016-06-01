@@ -15,6 +15,7 @@ let facebookBlue = UIColor.rgba(red: 45, green: 68, blue: 133, alpha: 1)
 let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
 let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
+let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178, alpha: 0.25)
 
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {

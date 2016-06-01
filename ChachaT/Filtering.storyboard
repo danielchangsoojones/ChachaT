@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="BaY-7o-22m">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Filter View Controller-->
+        <scene sceneID="mDN-x0-sAl">
+            <objects>
+                <viewController id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="9Nj-sU-CBv"/>
+                        <viewControllerLayoutGuide type="bottom" id="ltp-4t-4UI"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="h0X-hd-wq6">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="14g-4q-Nzs">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="g5Y-6u-2zd">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="542"/>
+                                        <subviews>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Filters" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lLm-mr-Qho">
+                                                <rect key="frame" x="155" y="0.0" width="64.5" height="29"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="24"/>
+                                                <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Race:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="2lc-Eu-bhG">
+                                                <rect key="frame" x="20" y="29" width="37" height="17"/>
+                                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                <nil key="highlightedColor"/>
+                                            </label>
+                                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="hWU-04-v3b">
+                                                <rect key="frame" x="20" y="60" width="335" height="40"/>
+                                                <subviews>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9v-iH-Eoh">
+                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="40"/>
+                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Asian">
+                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
+                                                        <rect key="frame" x="68" y="0.0" width="66" height="40"/>
+                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Black">
+                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
+                                                        <rect key="frame" x="135" y="0.0" width="65" height="40"/>
+                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="Latino">
+                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
+                                                        <rect key="frame" x="202" y="0.0" width="66" height="40"/>
+                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="White">
+                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
+                                                        <rect key="frame" x="270" y="0.0" width="66" height="40"/>
+                                                        <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
+                                                        <state key="normal" title="All">
+                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        </state>
+                                                    </button>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="40" id="Wan-Y9-cHX"/>
+                                                </constraints>
+                                            </stackView>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="hWU-04-v3b" secondAttribute="trailing" constant="20" id="0M1-8w-hta"/>
+                                            <constraint firstItem="lLm-mr-Qho" firstAttribute="centerX" secondItem="g5Y-6u-2zd" secondAttribute="centerX" id="82b-jV-N7t"/>
+                                            <constraint firstItem="lLm-mr-Qho" firstAttribute="top" secondItem="g5Y-6u-2zd" secondAttribute="top" id="Mg4-qs-s1D"/>
+                                            <constraint firstItem="2lc-Eu-bhG" firstAttribute="top" secondItem="lLm-mr-Qho" secondAttribute="bottom" id="SFe-OD-ipH"/>
+                                            <constraint firstItem="hWU-04-v3b" firstAttribute="top" secondItem="2lc-Eu-bhG" secondAttribute="bottom" constant="14" id="SGD-bO-29E"/>
+                                            <constraint firstItem="2lc-Eu-bhG" firstAttribute="leading" secondItem="g5Y-6u-2zd" secondAttribute="leading" constant="20" id="kkw-qm-CU2"/>
+                                            <constraint firstItem="hWU-04-v3b" firstAttribute="leading" secondItem="g5Y-6u-2zd" secondAttribute="leading" constant="20" id="odY-eK-Ykr"/>
+                                        </constraints>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="0.25" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="g5Y-6u-2zd" firstAttribute="leading" secondItem="14g-4q-Nzs" secondAttribute="leading" id="6h8-mS-D5o"/>
+                                    <constraint firstAttribute="bottom" secondItem="g5Y-6u-2zd" secondAttribute="bottom" id="QCX-L0-aLT"/>
+                                    <constraint firstItem="g5Y-6u-2zd" firstAttribute="top" secondItem="14g-4q-Nzs" secondAttribute="top" id="b6U-7X-Ktu"/>
+                                    <constraint firstAttribute="trailing" secondItem="g5Y-6u-2zd" secondAttribute="trailing" id="qj3-Se-vKY"/>
+                                </constraints>
+                            </scrollView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="g5Y-6u-2zd" firstAttribute="height" secondItem="h0X-hd-wq6" secondAttribute="height" id="2iI-7g-A4l"/>
+                            <constraint firstItem="ltp-4t-4UI" firstAttribute="top" secondItem="14g-4q-Nzs" secondAttribute="bottom" id="2ih-Ql-GiY"/>
+                            <constraint firstItem="14g-4q-Nzs" firstAttribute="width" secondItem="h0X-hd-wq6" secondAttribute="width" id="L6E-Ro-OtP"/>
+                            <constraint firstItem="g5Y-6u-2zd" firstAttribute="width" secondItem="h0X-hd-wq6" secondAttribute="width" id="SaG-TE-HSz"/>
+                            <constraint firstItem="14g-4q-Nzs" firstAttribute="leading" secondItem="h0X-hd-wq6" secondAttribute="leading" id="rxL-3P-zHl"/>
+                            <constraint firstAttribute="trailing" secondItem="14g-4q-Nzs" secondAttribute="trailing" id="uk7-B0-7BA"/>
+                            <constraint firstItem="14g-4q-Nzs" firstAttribute="top" secondItem="9Nj-sU-CBv" secondAttribute="bottom" id="vfn-Jm-NYw"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="2iI-7g-A4l"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
+                    <connections>
+                        <outlet property="theRaceAllButton" destination="rtt-1Q-Gbr" id="l9T-3N-jsC"/>
+                        <outlet property="theRaceAsianButton" destination="B9v-iH-Eoh" id="pVg-vr-9HX"/>
+                        <outlet property="theRaceBlackButton" destination="KnV-zn-ucp" id="38g-ZY-4Xa"/>
+                        <outlet property="theRaceLatinoButton" destination="nC9-6c-8Yq" id="FFu-Jt-zeS"/>
+                        <outlet property="theRaceWhiteButton" destination="Vwi-jJ-qZm" id="YNx-W2-x7v"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="oCd-99-eZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="321.5" y="388.5"/>
+        </scene>
+    </scenes>
+</document>

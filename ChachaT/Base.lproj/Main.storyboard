@@ -72,16 +72,27 @@
                                             <action selector="skipCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQ7-gb-Ksq"/>
                                         </connections>
                                     </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdX-3j-BI4">
+                                        <rect key="frame" x="40" y="590" width="59" height="56"/>
+                                        <state key="normal" title="Filter"/>
+                                        <connections>
+                                            <segue destination="daK-C5-wmi" kind="custom" identifier="FilterPageBlurrySegue" customClass="BlurryModalSegue" id="pbG-G9-gXM"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.29729729729729731" colorSpace="calibratedRGB"/>
                                 <constraints>
+                                    <constraint firstItem="NdX-3j-BI4" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" constant="40" id="2Yh-5N-qNO"/>
                                     <constraint firstAttribute="trailing" secondItem="b0O-jA-iWv" secondAttribute="trailing" constant="40" id="7xx-2l-aNj"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
                                     <constraint firstItem="ELM-4C-MkM" firstAttribute="centerX" secondItem="32I-zm-XDi" secondAttribute="centerX" id="Jbe-cW-j8f"/>
                                     <constraint firstAttribute="bottom" secondItem="ELM-4C-MkM" secondAttribute="bottom" constant="10" id="JkH-8h-UEw"/>
+                                    <constraint firstItem="NdX-3j-BI4" firstAttribute="height" secondItem="b0O-jA-iWv" secondAttribute="height" id="QTO-Ul-M0n"/>
                                     <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
                                     <constraint firstItem="b0O-jA-iWv" firstAttribute="centerY" secondItem="ELM-4C-MkM" secondAttribute="centerY" id="Vgq-CK-u1P"/>
+                                    <constraint firstItem="NdX-3j-BI4" firstAttribute="centerY" secondItem="ELM-4C-MkM" secondAttribute="centerY" id="p4x-0a-H7h"/>
+                                    <constraint firstItem="NdX-3j-BI4" firstAttribute="width" secondItem="b0O-jA-iWv" secondAttribute="width" id="yuu-KA-rs3"/>
                                 </constraints>
                             </view>
                         </subviews>
@@ -106,6 +117,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="339.5" y="387.5"/>
+        </scene>
+        <!--Filtering-->
+        <scene sceneID="hOT-6i-yVN">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filtering" id="daK-C5-wmi" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0aa-uD-aZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="452.5" y="907"/>
         </scene>
         <!--Page Main View Controller-->
         <scene sceneID="F7M-Lw-zEq">

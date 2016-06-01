@@ -392,6 +392,6 @@ extension CardDetailViewController: SegueHandlerType {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+       
     }
 }
