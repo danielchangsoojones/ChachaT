@@ -18,6 +18,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theRaceAllButton: UIButton!
     @IBOutlet weak var theRaceStackView: UIStackView!
     @IBOutlet weak var theContentView: UIView!
+    @IBOutlet weak var theRaceHolderView: UIView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -26,15 +27,15 @@ class FilterViewController: UIViewController {
     }
     
     override func viewDidLayoutSubviews() {
-        createBackgroundView(theRaceStackView)
+        createBackgroundView(theRaceStackView, holderView: theRaceHolderView)
         maskButton(theRaceAsianButton, leftButton: true)
         maskButton(theRaceAllButton, leftButton: false)
     }
     
-    func createBackgroundView(stackView: UIStackView) {
+    func createBackgroundView(stackView: UIStackView, holderView: UIView) {
         let backgroundColorView = UIView()
         backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
-        self.theContentView.insertSubview(backgroundColorView, belowSubview: stackView)
+        holderView.insertSubview(backgroundColorView, belowSubview: stackView)
         backgroundColorView.snp_makeConstraints { (make) -> Void in
             make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
         }
@@ -46,8 +47,6 @@ class FilterViewController: UIViewController {
         let maskLayer = CAShapeLayer()
         if leftButton {
              maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-            
-            
         } else {
             //button is on the right side
             maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopRight.union(.BottomRight), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
