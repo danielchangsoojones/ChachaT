@@ -9,6 +9,7 @@
 import UIKit
 import SnapKit
 import Foundation
+import TTRangeSlider
 
 class FilterViewController: UIViewController {
     
@@ -23,19 +24,26 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theDistanceSlider: UISlider!
     @IBOutlet weak var theDistanceMilesLabel: UILabel!
     @IBOutlet weak var theDistanceGraySliderView: UIView!
+    @IBOutlet weak var theAgeRangeSlider: TTRangeSlider!
+    @IBOutlet weak var theAgeRangeLabel: UILabel!
     
     let cornerSize : CGFloat = 10
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
         let distanceValue = round(theDistanceSlider.value)
         theDistanceMilesLabel.text = "\(Int(distanceValue)) mi."
-        
     }
-    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        setAgeSliderGUI()
+    }
+    
+    func setAgeSliderGUI() {
+        theAgeRangeSlider.tintColor = PeriwinkleGray
+        theAgeRangeSlider.tintColorBetweenHandles = ChachaTeal
+        theAgeRangeSlider.handleDiameter = 27
+        theAgeRangeSlider.selectedHandleDiameterMultiplier = 1.2
     }
     
     override func viewDidLayoutSubviews() {
@@ -76,4 +84,17 @@ class FilterViewController: UIViewController {
         return true
     }
 
+}
+
+
+extension FilterViewController: TTRangeSliderDelegate {
+    func rangeSlider(sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
+        let ageMaxValue = round(theAgeRangeSlider.selectedMaximum)
+        let ageMinValue = round(theAgeRangeSlider.selectedMinimum)
+        if ageMaxValue >= 65 {
+            theAgeRangeLabel.text = "\(Int(ageMinValue)) - \(Int(ageMaxValue))+"
+        } else {
+            theAgeRangeLabel.text = "\(Int(ageMinValue)) - \(Int(ageMaxValue))"
+        }
+    }
 }

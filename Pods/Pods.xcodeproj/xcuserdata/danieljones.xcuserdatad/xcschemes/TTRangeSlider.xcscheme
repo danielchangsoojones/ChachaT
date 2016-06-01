@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'D0B520483FAA319280FE16EF'
-               BlueprintName = 'EFTools'
+               BlueprintIdentifier = 'B36021C2D1093860B2AAF230'
+               BlueprintName = 'TTRangeSlider'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'EFTools.framework'>
+               BuildableName = 'TTRangeSlider.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

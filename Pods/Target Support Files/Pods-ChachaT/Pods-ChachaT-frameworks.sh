@@ -99,6 +99,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ChachaT/STPopup.framework"
   install_framework "Pods-ChachaT/SnapKit.framework"
   install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
+  install_framework "Pods-ChachaT/TTRangeSlider.framework"
   install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi
@@ -118,6 +119,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ChachaT/STPopup.framework"
   install_framework "Pods-ChachaT/SnapKit.framework"
   install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
+  install_framework "Pods-ChachaT/TTRangeSlider.framework"
   install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi

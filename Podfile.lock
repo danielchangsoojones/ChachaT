@@ -28,6 +28,7 @@ PODS:
   - SnapKit (0.21.0)
   - STPopup (1.7.0)
   - TPKeyboardAvoiding (1.3)
+  - TTRangeSlider (1.0.4)
   - UIImage+BlurredFrame (0.0.4)
 
 DEPENDENCIES:
@@ -39,6 +40,7 @@ DEPENDENCIES:
   - Parse
   - ParseUI
   - STPopup
+  - TTRangeSlider
 
 EXTERNAL SOURCES:
   EFTools:
@@ -68,6 +70,7 @@ SPEC CHECKSUMS:
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   STPopup: 36b45120f51ab3cdf7a10c1b9032b7fc8eef75ac
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
+  TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
   UIImage+BlurredFrame: ad2f7195c6947ea3117c7d202f75a51958d5061a
 
 COCOAPODS: 0.39.0

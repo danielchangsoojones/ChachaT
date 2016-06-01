@@ -5,7 +5,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Filter View Controller-->
+        <!--Delegate-->
         <scene sceneID="mDN-x0-sAl">
             <objects>
                 <viewController id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
@@ -144,18 +144,80 @@
                                                     </mask>
                                                 </variation>
                                             </view>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KQz-m9-FPD">
+                                                <rect key="frame" x="20" y="182" width="335" height="60"/>
+                                                <subviews>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Age Range:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xRV-ft-Zt8">
+                                                        <rect key="frame" x="0.0" y="0.0" width="74" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="18-65+" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="09R-hC-gc6">
+                                                        <rect key="frame" x="287" y="0.0" width="48" height="17"/>
+                                                        <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                                        <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <nil key="highlightedColor"/>
+                                                    </label>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kVJ-9y-fJl" customClass="TTRangeSlider">
+                                                        <rect key="frame" x="0.0" y="20" width="335" height="40"/>
+                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <userDefinedRuntimeAttributes>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="maxValue">
+                                                                <real key="value" value="65"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="minValue">
+                                                                <real key="value" value="18"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedMinimum">
+                                                                <real key="value" value="18"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="selectedMaximum">
+                                                                <real key="value" value="65"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                            <userDefinedRuntimeAttribute type="boolean" keyPath="hideLabels" value="YES"/>
+                                                            <userDefinedRuntimeAttribute type="number" keyPath="minDistance">
+                                                                <real key="value" value="0.0"/>
+                                                            </userDefinedRuntimeAttribute>
+                                                        </userDefinedRuntimeAttributes>
+                                                        <connections>
+                                                            <outlet property="delegate" destination="BaY-7o-22m" id="Ygk-4a-wUN"/>
+                                                        </connections>
+                                                    </view>
+                                                </subviews>
+                                                <constraints>
+                                                    <constraint firstItem="kVJ-9y-fJl" firstAttribute="leading" secondItem="xRV-ft-Zt8" secondAttribute="leading" id="3ZU-JV-0gA"/>
+                                                    <constraint firstAttribute="height" constant="60" id="GHw-ri-JLM"/>
+                                                    <constraint firstItem="09R-hC-gc6" firstAttribute="baseline" secondItem="xRV-ft-Zt8" secondAttribute="baseline" id="HfR-sl-OyU"/>
+                                                    <constraint firstItem="xRV-ft-Zt8" firstAttribute="leading" secondItem="KQz-m9-FPD" secondAttribute="leading" id="LPC-x2-efQ"/>
+                                                    <constraint firstItem="xRV-ft-Zt8" firstAttribute="top" secondItem="KQz-m9-FPD" secondAttribute="top" id="MUl-IY-Bdx"/>
+                                                    <constraint firstAttribute="trailing" secondItem="kVJ-9y-fJl" secondAttribute="trailing" id="cbj-bx-fbf"/>
+                                                    <constraint firstAttribute="trailing" secondItem="09R-hC-gc6" secondAttribute="trailing" id="j6Y-0U-6zM"/>
+                                                    <constraint firstAttribute="bottom" secondItem="kVJ-9y-fJl" secondAttribute="bottom" id="lUN-FR-zLT"/>
+                                                    <constraint firstItem="kVJ-9y-fJl" firstAttribute="top" secondItem="xRV-ft-Zt8" secondAttribute="bottom" constant="8" id="pCm-UQ-A9o"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="pCm-UQ-A9o"/>
+                                                    </mask>
+                                                </variation>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="lLm-mr-Qho" firstAttribute="centerX" secondItem="g5Y-6u-2zd" secondAttribute="centerX" id="82b-jV-N7t"/>
                                             <constraint firstItem="MBq-Uk-nkq" firstAttribute="leading" secondItem="LbL-Fc-hnD" secondAttribute="leading" id="9Dg-1V-Y9X"/>
                                             <constraint firstItem="VLS-lV-Rxu" firstAttribute="height" secondItem="hWU-04-v3b" secondAttribute="height" id="CcC-Ex-3IO"/>
+                                            <constraint firstItem="kVJ-9y-fJl" firstAttribute="height" secondItem="VLS-lV-Rxu" secondAttribute="height" id="MKd-zW-U7I"/>
                                             <constraint firstItem="lLm-mr-Qho" firstAttribute="top" secondItem="g5Y-6u-2zd" secondAttribute="top" constant="5" id="Mg4-qs-s1D"/>
-                                            <constraint firstAttribute="bottom" secondItem="MBq-Uk-nkq" secondAttribute="bottom" constant="374" id="RHe-ZV-aV3"/>
+                                            <constraint firstItem="KQz-m9-FPD" firstAttribute="trailing" secondItem="MBq-Uk-nkq" secondAttribute="trailing" id="Qyd-m5-xyo"/>
+                                            <constraint firstAttribute="bottom" secondItem="KQz-m9-FPD" secondAttribute="bottom" constant="300" id="Xp9-P9-qE4"/>
                                             <constraint firstAttribute="trailing" secondItem="LbL-Fc-hnD" secondAttribute="trailing" constant="20" id="e1M-JA-XMo"/>
                                             <constraint firstItem="LbL-Fc-hnD" firstAttribute="top" secondItem="lLm-mr-Qho" secondAttribute="bottom" id="e62-hl-0Tg"/>
                                             <constraint firstItem="MBq-Uk-nkq" firstAttribute="top" secondItem="LbL-Fc-hnD" secondAttribute="bottom" constant="14" id="eHm-6X-8HE"/>
+                                            <constraint firstItem="KQz-m9-FPD" firstAttribute="top" secondItem="MBq-Uk-nkq" secondAttribute="bottom" constant="14" id="iJ3-2R-HRm"/>
                                             <constraint firstItem="MBq-Uk-nkq" firstAttribute="trailing" secondItem="LbL-Fc-hnD" secondAttribute="trailing" id="jO4-2S-FFj"/>
+                                            <constraint firstItem="KQz-m9-FPD" firstAttribute="leading" secondItem="MBq-Uk-nkq" secondAttribute="leading" id="nxl-Rv-NVr"/>
                                             <constraint firstItem="LbL-Fc-hnD" firstAttribute="leading" secondItem="g5Y-6u-2zd" secondAttribute="leading" constant="20" id="wDo-9E-VOE"/>
                                         </constraints>
                                     </view>
@@ -187,6 +249,8 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="theAgeRangeLabel" destination="09R-hC-gc6" id="JQU-4r-NcY"/>
+                        <outlet property="theAgeRangeSlider" destination="kVJ-9y-fJl" id="6e6-AR-kSE"/>
                         <outlet property="theContentView" destination="g5Y-6u-2zd" id="geU-vl-4Ef"/>
                         <outlet property="theDistanceGraySliderView" destination="VLS-lV-Rxu" id="H8s-Aw-4IB"/>
                         <outlet property="theDistanceMilesLabel" destination="aWV-gw-6ue" id="fMd-Xl-kdR"/>
