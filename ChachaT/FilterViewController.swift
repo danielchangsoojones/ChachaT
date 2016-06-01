@@ -26,6 +26,12 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theDistanceGraySliderView: UIView!
     @IBOutlet weak var theAgeRangeSlider: TTRangeSlider!
     @IBOutlet weak var theAgeRangeLabel: UILabel!
+    @IBOutlet weak var theHairColorBrunetteButton: UIButton!
+    @IBOutlet weak var theHairColorRedheadButton: UIButton!
+    @IBOutlet weak var theHairColorBlondeButton: UIButton!
+    @IBOutlet weak var theHairColorAllButton: UIButton!
+    @IBOutlet weak var theHairColorStackView: UIStackView!
+    @IBOutlet weak var theHairColorHolderView: UIView!
     
     let cornerSize : CGFloat = 10
     
@@ -48,11 +54,16 @@ class FilterViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         createBackgroundView(theRaceStackView, holderView: theRaceHolderView)
+        createBackgroundView(theHairColorStackView, holderView: theHairColorHolderView)
+        maskButton(theHairColorBrunetteButton, leftButton: true)
+        maskButton(theHairColorAllButton, leftButton: false)
         maskButton(theRaceAsianButton, leftButton: true)
         maskButton(theRaceAllButton, leftButton: false)
         theDistanceGraySliderView.layer.cornerRadius = cornerSize
+        theAgeRangeSlider.layer.cornerRadius = cornerSize
     }
     
+    //for creating the lines between the buttons. I create spacing with the stack view and then place a view with background color behind it to fill in the spaces.
     func createBackgroundView(stackView: UIStackView, holderView: UIView) {
         let backgroundColorView = UIView()
         backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
