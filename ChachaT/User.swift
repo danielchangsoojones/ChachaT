@@ -25,6 +25,11 @@ class User: PFUser {
     @NSManaged var questionOne: Question?
     @NSManaged var questionTwo: Question?
     @NSManaged var questionThree: Question?
+    @NSManaged var race: String?
+    @NSManaged var hairColor: String?
+    @NSManaged var politicalAffiliation: String?
+    @NSManaged var sexuality: String?
+    
     
     func calculateBirthDate() -> Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()

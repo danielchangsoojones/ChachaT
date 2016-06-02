@@ -32,17 +32,57 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theHairColorAllButton: UIButton!
     @IBOutlet weak var theHairColorStackView: UIStackView!
     @IBOutlet weak var theHairColorHolderView: UIView!
+    @IBOutlet weak var theSexualityStraightButton: UIButton!
+    @IBOutlet weak var theSexualityGayButton: UIButton!
+    @IBOutlet weak var theSexualityBisexualButton: UIButton!
+    @IBOutlet weak var theSexualityAllButton: UIButton!
+    @IBOutlet weak var thePoliticDemocratButton: UIButton!
+    @IBOutlet weak var thePoliticRepublicanButton: UIButton!
+    @IBOutlet weak var thePoliticAllButton: UIButton!
+    @IBOutlet weak var theGenderMaleButton: UIButton!
+    @IBOutlet weak var theGenderFemaleButton: UIButton!
+    @IBOutlet weak var theGenderAllButton: UIButton!
+    
     
     let cornerSize : CGFloat = 10
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
         let distanceValue = round(theDistanceSlider.value)
-        theDistanceMilesLabel.text = "\(Int(distanceValue)) mi."
+        if distanceValue >= 101 {
+            theDistanceMilesLabel.text = "100+ mi."
+        } else {
+            theDistanceMilesLabel.text = "\(Int(distanceValue)) mi."
+        }
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        setGUI()
+    }
+    
+    func setGUI() {
         setAgeSliderGUI()
+        theSexualityAllButton.layer.cornerRadius = cornerSize
+        theSexualityBisexualButton.layer.cornerRadius = cornerSize
+        theSexualityGayButton.layer.cornerRadius = cornerSize
+        theSexualityStraightButton.layer.cornerRadius = cornerSize
+        theHairColorBrunetteButton.layer.cornerRadius = cornerSize
+        theHairColorRedheadButton.layer.cornerRadius = cornerSize
+        theHairColorBlondeButton.layer.cornerRadius = cornerSize
+        theHairColorAllButton.layer.cornerRadius = cornerSize
+        theDistanceGraySliderView.layer.cornerRadius = cornerSize
+        theAgeRangeSlider.layer.cornerRadius = cornerSize
+        theRaceAsianButton.layer.cornerRadius = cornerSize
+        theRaceBlackButton.layer.cornerRadius = cornerSize
+        theRaceLatinoButton.layer.cornerRadius = cornerSize
+        theRaceWhiteButton.layer.cornerRadius = cornerSize
+        theRaceAllButton.layer.cornerRadius = cornerSize
+        thePoliticAllButton.layer.cornerRadius = cornerSize
+        thePoliticDemocratButton.layer.cornerRadius = cornerSize
+        thePoliticRepublicanButton.layer.cornerRadius = cornerSize
+        theGenderMaleButton.layer.cornerRadius = cornerSize
+        theGenderFemaleButton.layer.cornerRadius = cornerSize
+        theGenderAllButton.layer.cornerRadius = cornerSize
     }
     
     func setAgeSliderGUI() {
@@ -52,39 +92,28 @@ class FilterViewController: UIViewController {
         theAgeRangeSlider.selectedHandleDiameterMultiplier = 1.2
     }
     
-    override func viewDidLayoutSubviews() {
-        createBackgroundView(theRaceStackView, holderView: theRaceHolderView)
-        createBackgroundView(theHairColorStackView, holderView: theHairColorHolderView)
-        maskButton(theHairColorBrunetteButton, leftButton: true)
-        maskButton(theHairColorAllButton, leftButton: false)
-        maskButton(theRaceAsianButton, leftButton: true)
-        maskButton(theRaceAllButton, leftButton: false)
-        theDistanceGraySliderView.layer.cornerRadius = cornerSize
-        theAgeRangeSlider.layer.cornerRadius = cornerSize
-    }
-    
     //for creating the lines between the buttons. I create spacing with the stack view and then place a view with background color behind it to fill in the spaces.
-    func createBackgroundView(stackView: UIStackView, holderView: UIView) {
-        let backgroundColorView = UIView()
-        backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
-        holderView.insertSubview(backgroundColorView, belowSubview: stackView)
-        backgroundColorView.snp_makeConstraints { (make) -> Void in
-            make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
-        }
-    }
+//    func createBackgroundView(stackView: UIStackView, holderView: UIView) {
+//        let backgroundColorView = UIView()
+//        backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
+//        holderView.insertSubview(backgroundColorView, belowSubview: stackView)
+//        backgroundColorView.snp_makeConstraints { (make) -> Void in
+//            make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
+//        }
+//    }
     
     //left button means we want the corners to be on the top and bottom left. If false, then we want right side corners.
-    func maskButton(button: UIButton, leftButton: Bool) {
-        let maskLayer = CAShapeLayer()
-        if leftButton {
-             maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-        } else {
-            //button is on the right side
-            maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopRight.union(.BottomRight), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-        }
-        
-        button.layer.mask = maskLayer
-    }
+//    func maskButton(button: UIButton, leftButton: Bool) {
+//        let maskLayer = CAShapeLayer()
+//        if leftButton {
+//             maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
+//        } else {
+//            //button is on the right side
+//            maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopRight.union(.BottomRight), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
+//        }
+//        
+//        button.layer.mask = maskLayer
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
