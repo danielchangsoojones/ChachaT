@@ -44,12 +44,6 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderAllButton: UIButton!
     
     let cornerSize : CGFloat = 10
-    //for the whereKey queries to find the correct column name in parse
-    let maximumDistanceCategoryName = "location"
-    let ageRangeCategoryName = "birthDate"
-    let hairColorCategoryName = "hairColor"
-    let politicalAffiliationCategoryName = "politicalAffiliation"
-    let sexualityCategoryName = "sexuality"
     
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
@@ -60,14 +54,39 @@ class FilterViewController: UIViewController {
         case RaceWhiteFilter = "white"
         case RaceLatinoFilter = "latino"
         case RaceAsianFilter = "asian"
-        case RaceAllFilter = "all"
+        case RaceAllFilter
+        case HairColorBrunetteFilter = "brunette"
+        case HairColorBlondeFilter = "blonde"
+        case HairColorRedheadFilter = "redhead"
+        case HairColorAllFilter
+        case PoliticalAffiliationDemocratFilter = "democrat"
+        case PoliticalAffiliationRepublicanFilter = "republican"
+        case PoliticalAffiliationAllFilter
+        case GenderMaleFilter = "male"
+        case GenderFemaleFilter = "female"
+        case GenderAllFilter
+        case SexualityStraightFilter = "straight"
+        case SexualityGayFilter = "gay"
+        case SexualityBisexualFilter = "bisexual"
+        case SexualityAllFilter
+        
         //this array lets me iterate over certain sections of the enum
         static let raceMinusAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
-        static let theAllButtonValues = [RaceAllFilter]
+        static let hairColorMinusAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
+        static let genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
+        static let sexualityMinusAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
+        static let theAllButtonValues = [RaceAllFilter, HairColorAllFilter, GenderAllFilter, SexualityAllFilter]
     }
     
+    //for the whereKey queries to find the correct column name in parse
     enum FilterCategories : String {
         case RaceCategoryName = "race"
+        case HairColorCategoryName = "hairColor"
+        case PoliticalAffiliationCategoryName = "politicalAffiliation"
+        case SexualityCategoryName = "sexuality"
+        case GenderCategoryName = "gender"
+        case locationCategoryName = "location"
+        case ageCategoryName = "birthDate"
     }
     
     //the button pressed actions
@@ -109,23 +128,32 @@ class FilterViewController: UIViewController {
                 //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
                 switch filterDictionaryCurrentFilterCategory {
                 case .RaceCategoryName?:
-                    if filterName == .RaceAllFilter {
-                        let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
-                        for button in buttonMinusAllButtonArray {
-                            changeButtonBackground(button, currentState: true)
-                        }
-                        //reseting all the filter states to false, because we want all races in the query. Which, is the default query.
-                        for filterName in FilterNames.raceMinusAllValues {
-                            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
-                        }
-                    } else {
-                        //it is not the all button, so change the all button state and button color.
-                        changeButtonBackground(theRaceAllButton, currentState: true)
-                        filterDictionary[.RaceAllFilter] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
-                    }
+                    let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.raceMinusAllValues, theAllButton: theRaceAllButton, theAllFilter: .RaceAllFilter)
+                case .HairColorCategoryName?:
+                    let buttonMinusAllButtonArray : [UIButton] = [theHairColorBrunetteButton, theHairColorRedheadButton, theHairColorBlondeButton, theHairColorAllButton]
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.hairColorMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
                 default: break
                 }
             }
+        }
+    }
+    
+    //this method is to change the button highlights if all was pushed, or if all is pushed and someone presses another button
+    func changeButtonHighlightsAndDictionaryValues(categoryName: FilterCategories, filterName: FilterNames, buttonArray: [UIButton], categoryArray: [FilterNames], theAllButton: UIButton, theAllFilter: FilterNames) {
+        if FilterNames.theAllButtonValues.contains(filterName) {
+            //this means the button pressed was an all button
+            for button in buttonArray {
+                changeButtonBackground(button, currentState: true)
+            }
+            //reseting all the filter states to false, because we want all races in the query. Which, is the default query.
+            for filterName in categoryArray {
+                filterDictionary[filterName] = (filterState: false, filterCategory: categoryName)
+            }
+        } else {
+            //it is not the all button, so change the all button state and button color.
+            changeButtonBackground(theAllButton, currentState: true)
+            filterDictionary[theAllFilter] = (filterState: false, filterCategory: categoryName)
         }
     }
     
