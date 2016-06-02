@@ -43,62 +43,6 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     
-    @IBAction func asianRaceButtonPressed(sender: UIButton) {
-        let filterName = FilterNames.RaceAsianFilter
-        filterButtonPressed(sender, filterName: filterName)
-    }
-    
-    func filterButtonPressed(button: UIButton, filterName: FilterNames) {
-        if let filterDictionaryCurrentState = filterDictionary[filterName]?.filterState {
-            let filterDictionaryCurrentFilterCategory = filterDictionary[filterName]?.filterCategory
-            filterDictionary.updateValue((filterState: !filterDictionaryCurrentState, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: filterName)
-            if filterDictionaryCurrentState {
-                //button needs to be unhighlighted/returned to normal state
-                button.backgroundColor = ChachaBombayGrey
-                button.setTitleColor(ChachaTeal, forState: .Normal)
-            } else {
-                //button should become highlighted
-                button.backgroundColor = ChachaTeal
-                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            }
-        }
-    }
-
-    
-    
-    
-    @IBAction func save(sender: AnyObject) {
-        createFilteredUserArray()
-    }
-    
-    enum FilterNames : String {
-        case RaceBlackFilter = "black"
-        case RaceWhiteFilter = "white"
-        case RaceLatinoFilter = "latino"
-        case RaceAsianFilter = "asian"
-        case RaceAllFilter = "all"
-        //this array lets me iterate over certain sections of the enum
-        static let raceValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, RaceAllFilter]
-    }
-    
-    enum FilterCategories : String {
-        case RaceCategoryName = "race"
-    }
-    
-    func createFilterDictionary() {
-        for filterName in FilterNames.raceValues {
-            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
-        }
-    }
-    
-    
-    //Bool states for the buttons to see if they have been highlighted to be added to the query
-    var asianRaceButtonState = false
-    var blackRaceButtonState = false
-    var latinoRaceButtonState = false
-    var RaceButtonState = false
-    
-    
     let cornerSize : CGFloat = 10
     //for the whereKey queries to find the correct column name in parse
     let maximumDistanceCategoryName = "location"
@@ -110,6 +54,73 @@ class FilterViewController: UIViewController {
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
     var delegate: FilterViewControllerDelegate?
+    
+    enum FilterNames : String {
+        case RaceBlackFilter = "black"
+        case RaceWhiteFilter = "white"
+        case RaceLatinoFilter = "latino"
+        case RaceAsianFilter = "asian"
+        case RaceAllFilter = "all"
+        //this array lets me iterate over certain sections of the enum
+        static let raceMinusAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
+        static let theAllButtonValues = [RaceAllFilter]
+    }
+    
+    enum FilterCategories : String {
+        case RaceCategoryName = "race"
+    }
+    
+    @IBAction func asianRaceButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.RaceAsianFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    func filterButtonPressed(button: UIButton, filterName: FilterNames) {
+        if let filterDictionaryCurrentState = filterDictionary[filterName]?.filterState {
+            let filterDictionaryCurrentFilterCategory = filterDictionary[filterName]?.filterCategory
+            filterDictionary.updateValue((filterState: !filterDictionaryCurrentState, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: filterName)
+            changeButtonBackground(button, currentState: filterDictionaryCurrentState)
+            if !filterDictionaryCurrentState {
+                //button should become highlighted and the all button should be unhighlighted
+                //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
+                switch filterDictionaryCurrentFilterCategory {
+                case .RaceCategoryName?:
+                    if filterName == .RaceAllFilter {
+                        let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
+                        for button in buttonMinusAllButtonArray {
+                            changeButtonBackground(button, currentState: true)
+                        }
+                        //reseting all the filter states to false, because we want all races in the query. Which, is the default query.
+                        for filterName in FilterNames.raceMinusAllValues {
+                            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
+                        }
+                    } else {
+                        //it is not the all button, so change the all button state and button color.
+                        changeButtonBackground(theRaceAllButton, currentState: true)
+                        filterDictionary[.RaceAllFilter] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
+                    }
+                default: break
+                }
+            }
+        }
+    }
+    
+    func changeButtonBackground(button: UIButton, currentState: Bool) {
+        if currentState {
+            //button needs to be unhighlighted/returned to normal state
+            button.backgroundColor = ChachaBombayGrey
+            button.setTitleColor(ChachaTeal, forState: .Normal)
+        } else {
+            //button should become highlighted
+            button.backgroundColor = ChachaTeal
+            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        }
+    }
+
+    
+    @IBAction func save(sender: AnyObject) {
+        createFilteredUserArray()
+    }
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
         let distanceValue = round(theDistanceSlider.value)
@@ -124,6 +135,15 @@ class FilterViewController: UIViewController {
         super.viewDidLoad()
         createFilterDictionary()
         setGUI()
+    }
+    
+    func createFilterDictionary() {
+        for filterName in FilterNames.raceMinusAllValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
+        }
+        for filterName in FilterNames.theAllButtonValues {
+            filterDictionary[filterName] = (filterState: true, filterCategory: FilterCategories.RaceCategoryName)
+        }
     }
     
     func setGUI() {
