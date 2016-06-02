@@ -210,12 +210,24 @@ extension BackgroundAnimationViewController: SegueHandlerType {
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
         case .FilterPageBlurrySegue:
+            let destinationVC = segue.destinationViewController as! FilterViewController
+            destinationVC.delegate = self
             let blurrySegue = segue as! BlurryModalSegue
             blurrySegue.backingImageTintColor = BlurryFilteringPageBackground
             blurrySegue.backingImageSaturationDeltaFactor = 0.2
         // Do some things
         default: break
         }
+    }
+}
+
+protocol FilterViewControllerDelegate {
+    func passFilteredUserArray(filteredUserArray: [User])
+}
+extension BackgroundAnimationViewController: FilterViewControllerDelegate {
+    func passFilteredUserArray(filteredUserArray: [User]) {
+        userArray = filteredUserArray
+        self.kolodaView.reloadData()
     }
 }
 

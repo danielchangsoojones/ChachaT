@@ -43,8 +43,40 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     
+    @IBAction func save(sender: AnyObject) {
+        createFilteredUserArray()
+    }
+    
+    
     
     let cornerSize : CGFloat = 10
+    //for the whereKey queries to find the correct column name in parse
+    let raceCategoryName = "race"
+    let maximumDistanceCategoryName = "location"
+    let ageRangeCategoryName = "birthDate"
+    let hairColorCategoryName = "hairColor"
+    let politicalAffiliationCategoryName = "politicalAffiliation"
+    let sexualityCategoryName = "sexuality"
+    
+    var query = User.query()
+    
+    var delegate: FilterViewControllerDelegate?
+    
+    
+    @IBAction func asianRaceButtonPressed(sender: AnyObject) {
+    }
+    
+    @IBAction func blackRaceButtonPressed(sender: AnyObject) {
+    }
+    
+    @IBAction func latinoRaceButtonPressed(sender: AnyObject) {
+    }
+    
+    @IBAction func whiteRaceButtonPressed(sender: AnyObject) {
+    }
+
+    @IBAction func allRaceButtonPressed(sender: AnyObject) {
+    }
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
         let distanceValue = round(theDistanceSlider.value)
@@ -126,6 +158,20 @@ class FilterViewController: UIViewController {
 
 }
 
+//create new user query for the card stack.
+extension FilterViewController {
+    func createFilteredUserArray() {
+            query?.whereKey("objectId", notEqualTo: (User.currentUser()?.objectId)!)
+            query?.whereKey("title", equalTo: "hihi")
+            query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if let users = objects as? [User] {
+                    self.delegate?.passFilteredUserArray(users)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+                }
+            })
+    }
+}
+
 
 extension FilterViewController: TTRangeSliderDelegate {
     func rangeSlider(sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
@@ -138,3 +184,4 @@ extension FilterViewController: TTRangeSliderDelegate {
         }
     }
 }
+
