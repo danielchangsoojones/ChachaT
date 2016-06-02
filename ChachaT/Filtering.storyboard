@@ -51,7 +51,7 @@
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="MDb-rm-f7q"/>
+                                                                            <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="mxD-h9-7kG"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">

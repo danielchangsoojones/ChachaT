@@ -43,28 +43,59 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     
-    @IBAction func save(sender: AnyObject) {
-        createFilteredUserArray()
+    @IBAction func asianRaceButtonPressed(sender: AnyObject) {
+        let filterDictionaryCurrentState = filterDictionary[FilterNames.RaceAsianFilter]?.filterState
+        let filterDictionaryCurrentFilterCategory = filterDictionary[FilterNames.RaceAsianFilter]?.filterCategory
+        //switch the current state from true to false
+        filterDictionary.updateValue((filterState: !filterDictionaryCurrentState!, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: FilterNames.RaceAsianFilter)
+        print(filterDictionary)
     }
     
     
     
+    @IBAction func save(sender: AnyObject) {
+        createFilteredUserArray()
+    }
+    
+    enum FilterNames : String {
+        case RaceBlackFilter = "black"
+        case RaceWhiteFilter = "white"
+        case RaceLatinoFilter = "latino"
+        case RaceAsianFilter = "asian"
+        case RaceAllFilter = "all"
+        //this array lets me iterate over certain sections of the enum
+        static let raceValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, RaceAllFilter]
+    }
+    
+    enum FilterCategories : String {
+        case RaceCategoryName = "race"
+    }
+    
+    func createFilterDictionary() {
+        for filterName in FilterNames.raceValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
+        }
+    }
+    
+    
+    //Bool states for the buttons to see if they have been highlighted to be added to the query
+    var asianRaceButtonState = false
+    var blackRaceButtonState = false
+    var latinoRaceButtonState = false
+    var RaceButtonState = false
+    
+    
     let cornerSize : CGFloat = 10
     //for the whereKey queries to find the correct column name in parse
-    let raceCategoryName = "race"
     let maximumDistanceCategoryName = "location"
     let ageRangeCategoryName = "birthDate"
     let hairColorCategoryName = "hairColor"
     let politicalAffiliationCategoryName = "politicalAffiliation"
     let sexualityCategoryName = "sexuality"
     
-    var query = User.query()
+    var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
     var delegate: FilterViewControllerDelegate?
-    
-    
-    @IBAction func asianRaceButtonPressed(sender: AnyObject) {
-    }
     
     @IBAction func blackRaceButtonPressed(sender: AnyObject) {
     }
@@ -89,6 +120,7 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        createFilterDictionary()
         setGUI()
     }
     
@@ -161,8 +193,13 @@ class FilterViewController: UIViewController {
 //create new user query for the card stack.
 extension FilterViewController {
     func createFilteredUserArray() {
+            let query = User.query()
+            for (filterName, filterDictionaryTuple) in filterDictionary {
+                if filterDictionaryTuple.filterState {
+                   query?.whereKey(filterDictionaryTuple.filterCategory.rawValue, equalTo: filterName.rawValue)
+                }
+            }
             query?.whereKey("objectId", notEqualTo: (User.currentUser()?.objectId)!)
-            query?.whereKey("title", equalTo: "hihi")
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.delegate?.passFilteredUserArray(users)

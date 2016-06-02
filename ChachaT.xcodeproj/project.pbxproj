@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		922BE8D71D00798900A2FEEE /* Race.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922BE8D61D00798900A2FEEE /* Race.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -57,6 +58,7 @@
 
 /* Begin PBXFileReference section */
 		162090DFB081217222A2CCC6 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
+		922BE8D61D00798900A2FEEE /* Race.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Race.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -255,6 +257,7 @@
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9289F6EB1CEB542800F42ACE /* Question.swift */,
 				92E59B0A1CF68DC400B0B1A4 /* Answer.swift */,
+				922BE8D61D00798900A2FEEE /* Race.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -472,6 +475,7 @@
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				9273B79D1CFF4F110001A608 /* FilterViewController.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
+				922BE8D71D00798900A2FEEE /* Race.swift in Sources */,
 				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
 				92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
