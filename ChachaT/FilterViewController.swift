@@ -43,13 +43,25 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     
-    @IBAction func asianRaceButtonPressed(sender: AnyObject) {
+    @IBAction func asianRaceButtonPressed(sender: UIButton) {
         let filterDictionaryCurrentState = filterDictionary[FilterNames.RaceAsianFilter]?.filterState
         let filterDictionaryCurrentFilterCategory = filterDictionary[FilterNames.RaceAsianFilter]?.filterCategory
         //switch the current state from true to false
         filterDictionary.updateValue((filterState: !filterDictionaryCurrentState!, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: FilterNames.RaceAsianFilter)
-        print(filterDictionary)
+        changeButtonBackgroundColor(sender, highlightedState: filterDictionaryCurrentState!)
     }
+    
+    func changeButtonBackgroundColor(button: UIButton, highlightedState: Bool) {
+        if highlightedState {
+            button.backgroundColor = ChachaBombayGrey
+            button.setTitleColor(ChachaTeal, forState: .Normal)
+        } else {
+            //button should become highlighted
+            button.backgroundColor = ChachaTeal
+            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+        }
+    }
+
     
     
     

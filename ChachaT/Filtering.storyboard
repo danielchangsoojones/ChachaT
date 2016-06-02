@@ -51,7 +51,7 @@
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
                                                                         <connections>
-                                                                            <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="mxD-h9-7kG"/>
+                                                                            <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="OsE-38-Ih4"/>
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
@@ -90,9 +90,6 @@
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
-                                                                        <connections>
-                                                                            <action selector="allRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="2V4-Kg-t0m"/>
-                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
