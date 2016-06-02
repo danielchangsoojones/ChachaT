@@ -44,21 +44,23 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderAllButton: UIButton!
     
     @IBAction func asianRaceButtonPressed(sender: UIButton) {
-        let filterDictionaryCurrentState = filterDictionary[FilterNames.RaceAsianFilter]?.filterState
-        let filterDictionaryCurrentFilterCategory = filterDictionary[FilterNames.RaceAsianFilter]?.filterCategory
-        //switch the current state from true to false
-        filterDictionary.updateValue((filterState: !filterDictionaryCurrentState!, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: FilterNames.RaceAsianFilter)
-        changeButtonBackgroundColor(sender, highlightedState: filterDictionaryCurrentState!)
+        let filterName = FilterNames.RaceAsianFilter
+        filterButtonPressed(sender, filterName: filterName)
     }
     
-    func changeButtonBackgroundColor(button: UIButton, highlightedState: Bool) {
-        if highlightedState {
-            button.backgroundColor = ChachaBombayGrey
-            button.setTitleColor(ChachaTeal, forState: .Normal)
-        } else {
-            //button should become highlighted
-            button.backgroundColor = ChachaTeal
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+    func filterButtonPressed(button: UIButton, filterName: FilterNames) {
+        if let filterDictionaryCurrentState = filterDictionary[filterName]?.filterState {
+            let filterDictionaryCurrentFilterCategory = filterDictionary[filterName]?.filterCategory
+            filterDictionary.updateValue((filterState: !filterDictionaryCurrentState, filterCategory:filterDictionaryCurrentFilterCategory!), forKey: filterName)
+            if filterDictionaryCurrentState {
+                //button needs to be unhighlighted/returned to normal state
+                button.backgroundColor = ChachaBombayGrey
+                button.setTitleColor(ChachaTeal, forState: .Normal)
+            } else {
+                //button should become highlighted
+                button.backgroundColor = ChachaTeal
+                button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            }
         }
     }
 
@@ -108,18 +110,6 @@ class FilterViewController: UIViewController {
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
     var delegate: FilterViewControllerDelegate?
-    
-    @IBAction func blackRaceButtonPressed(sender: AnyObject) {
-    }
-    
-    @IBAction func latinoRaceButtonPressed(sender: AnyObject) {
-    }
-    
-    @IBAction func whiteRaceButtonPressed(sender: AnyObject) {
-    }
-
-    @IBAction func allRaceButtonPressed(sender: AnyObject) {
-    }
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
         let distanceValue = round(theDistanceSlider.value)

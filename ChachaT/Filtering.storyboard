@@ -60,9 +60,6 @@
                                                                         <state key="normal" title="Black">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
-                                                                        <connections>
-                                                                            <action selector="blackRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="kTu-9M-B3n"/>
-                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
                                                                         <rect key="frame" x="135" y="0.0" width="65" height="40"/>
@@ -70,9 +67,6 @@
                                                                         <state key="normal" title="Latino">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
-                                                                        <connections>
-                                                                            <action selector="latinoRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="Pym-iI-KN2"/>
-                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
                                                                         <rect key="frame" x="202" y="0.0" width="65.5" height="40"/>
@@ -80,9 +74,6 @@
                                                                         <state key="normal" title="White">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
-                                                                        <connections>
-                                                                            <action selector="whiteRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="MSe-tz-H0h"/>
-                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
                                                                         <rect key="frame" x="269" y="0.0" width="65.5" height="40"/>
