@@ -70,10 +70,34 @@ class FilterViewController: UIViewController {
         case RaceCategoryName = "race"
     }
     
+    //the button pressed actions
     @IBAction func asianRaceButtonPressed(sender: UIButton) {
         let filterName = FilterNames.RaceAsianFilter
         filterButtonPressed(sender, filterName: filterName)
     }
+    
+    @IBAction func blackRaceButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.RaceBlackFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func latinoRaceButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.RaceLatinoFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func whiteRaceButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.RaceWhiteFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func allRaceButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.RaceAllFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+
+    
+    
     
     func filterButtonPressed(button: UIButton, filterName: FilterNames) {
         if let filterDictionaryCurrentState = filterDictionary[filterName]?.filterState {
