@@ -75,7 +75,8 @@ class FilterViewController: UIViewController {
         static let hairColorMinusAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
         static let genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
         static let sexualityMinusAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
-        static let theAllButtonValues = [RaceAllFilter, HairColorAllFilter, GenderAllFilter, SexualityAllFilter]
+        static let politicalAffiliationMinusAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
+        static let theAllButtonValues = [RaceAllFilter, HairColorAllFilter, GenderAllFilter, SexualityAllFilter, PoliticalAffiliationAllFilter]
     }
     
     //for the whereKey queries to find the correct column name in parse
@@ -131,8 +132,17 @@ class FilterViewController: UIViewController {
                     let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
                     changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.raceMinusAllValues, theAllButton: theRaceAllButton, theAllFilter: .RaceAllFilter)
                 case .HairColorCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theHairColorBrunetteButton, theHairColorRedheadButton, theHairColorBlondeButton, theHairColorAllButton]
+                    let buttonMinusAllButtonArray : [UIButton] = [theHairColorBrunetteButton, theHairColorRedheadButton, theHairColorBlondeButton]
                     changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.hairColorMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
+                case .PoliticalAffiliationCategoryName?:
+                    let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
+                case .GenderCategoryName?:
+                    let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.genderMinusAllValues, theAllButton: theGenderAllButton, theAllFilter: .GenderAllFilter)
+                case .SexualityCategoryName?:
+                    let buttonMinusAllButtonArray : [UIButton] = [theSexualityGayButton, theSexualityBisexualButton, theSexualityStraightButton]
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.sexualityMinusAllValues, theAllButton: theSexualityAllButton, theAllFilter: .SexualityAllFilter)
                 default: break
                 }
             }
