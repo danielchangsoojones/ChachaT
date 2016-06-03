@@ -29,6 +29,7 @@ class User: PFUser {
     @NSManaged var hairColor: String?
     @NSManaged var politicalAffiliation: String?
     @NSManaged var sexuality: String?
+    @NSManaged var location: PFGeoPoint?
     
     
     func calculateBirthDate() -> Int? {

@@ -10,6 +10,7 @@ import UIKit
 import SnapKit
 import Foundation
 import TTRangeSlider
+import Parse
 
 class FilterViewController: UIViewController {
     
@@ -44,10 +45,13 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderAllButton: UIButton!
     
     let cornerSize : CGFloat = 10
+    var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
+    let currentUser = User.currentUser()
     
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
     var delegate: FilterViewControllerDelegate?
+    
     
     enum FilterNames : String {
         case RaceBlackFilter = "black"
@@ -264,6 +268,7 @@ class FilterViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         createFilterDictionary()
+        getUserLocation()
         setGUI()
     }
     
@@ -358,6 +363,20 @@ class FilterViewController: UIViewController {
 
 //create new user query for the card stack.
 extension FilterViewController {
+    
+    //running this query in view did load. It loads while they are choosing filters. So, we get their new location. If not loaded by the time they hit save, we just use the users last location.
+    func getUserLocation() {
+        PFGeoPoint.geoPointForCurrentLocationInBackground {
+            (geoPoint: PFGeoPoint?, error: NSError?) -> Void in
+            if error == nil {
+                // do something with the new geoPoint
+                self.currentUser?.location = geoPoint
+                self.currentUser?.saveInBackground()
+                self.currentUserLocation = geoPoint
+            }
+        }
+    }
+    
     func createFilteredUserArray() {
             let query = User.query()
             //the where clause checks if the all button is checked, in which case, there should be now whereKey on the query for that particular category.
@@ -367,7 +386,10 @@ extension FilterViewController {
                    query?.whereKey(filterDictionaryTuple.filterCategory.rawValue, equalTo: filterName.rawValue)
                 }
             }
-            query?.whereKey("objectId", notEqualTo: (User.currentUser()?.objectId)!)
+            if let currentUserLocation = currentUserLocation {
+                query?.whereKey("location", nearGeoPoint: currentUserLocation)
+            }
+            query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.delegate?.passFilteredUserArray(users)
