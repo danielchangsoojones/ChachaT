@@ -11,6 +11,7 @@ import SnapKit
 import Foundation
 import TTRangeSlider
 import Parse
+import CoreLocation
 
 class FilterViewController: UIViewController {
     
@@ -267,6 +268,8 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+//        let locationManager = CLLocationManager()
+//        locationManager.requestWhenInUseAuthorization()
         createFilterDictionary()
         getUserLocation()
         setGUI()
@@ -373,6 +376,8 @@ extension FilterViewController {
                 self.currentUser?.location = geoPoint
                 self.currentUser?.saveInBackground()
                 self.currentUserLocation = geoPoint
+            } else {
+                print(error)
             }
         }
     }
@@ -387,7 +392,7 @@ extension FilterViewController {
                 }
             }
             if let currentUserLocation = currentUserLocation {
-                query?.whereKey("location", nearGeoPoint: currentUserLocation)
+                query?.whereKey("location", nearGeoPoint: currentUserLocation, withinMiles: Double(theDistanceSlider.value))
             }
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
