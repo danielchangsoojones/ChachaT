@@ -116,7 +116,75 @@ class FilterViewController: UIViewController {
         filterButtonPressed(sender, filterName: filterName)
     }
 
+    @IBAction func brunetteHairColorButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.HairColorBrunetteFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
     
+    @IBAction func redheadHairColorButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.HairColorRedheadFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func blondeHairColorButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.HairColorBlondeFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func allHairColorButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.HairColorAllFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func democratPoliticsButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.PoliticalAffiliationDemocratFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func republicanPoliticsButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.PoliticalAffiliationRepublicanFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func allPoliticsButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.PoliticalAffiliationAllFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func maleGenderButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.GenderMaleFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func femaleGenderButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.GenderFemaleFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func allGenderButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.GenderAllFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func straightSexualityButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.SexualityStraightFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func gaySexualityButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.SexualityGayFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func bisexualButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.SexualityBisexualFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
+    
+    @IBAction func allSexualityButtonPressed(sender: UIButton) {
+        let filterName = FilterNames.SexualityAllFilter
+        filterButtonPressed(sender, filterName: filterName)
+    }
     
     
     func filterButtonPressed(button: UIButton, filterName: FilterNames) {
@@ -136,9 +204,9 @@ class FilterViewController: UIViewController {
                     changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.hairColorMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
                 case .PoliticalAffiliationCategoryName?:
                     let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllButton: thePoliticAllButton, theAllFilter: .PoliticalAffiliationAllFilter)
                 case .GenderCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
+                    let buttonMinusAllButtonArray : [UIButton] = [theGenderMaleButton, theGenderFemaleButton]
                     changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.genderMinusAllValues, theAllButton: theGenderAllButton, theAllFilter: .GenderAllFilter)
                 case .SexualityCategoryName?:
                     let buttonMinusAllButtonArray : [UIButton] = [theSexualityGayButton, theSexualityBisexualButton, theSexualityStraightButton]
@@ -161,7 +229,7 @@ class FilterViewController: UIViewController {
                 filterDictionary[filterName] = (filterState: false, filterCategory: categoryName)
             }
         } else {
-            //it is not the all button, so change the all button state and button color.
+            //it is not the all button, so change the all-button state and button color.
             changeButtonBackground(theAllButton, currentState: true)
             filterDictionary[theAllFilter] = (filterState: false, filterCategory: categoryName)
         }
@@ -203,9 +271,23 @@ class FilterViewController: UIViewController {
         for filterName in FilterNames.raceMinusAllValues {
             filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
         }
-        for filterName in FilterNames.theAllButtonValues {
-            filterDictionary[filterName] = (filterState: true, filterCategory: FilterCategories.RaceCategoryName)
+        for filterName in FilterNames.hairColorMinusAllValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.HairColorCategoryName)
         }
+        for filterName in FilterNames.politicalAffiliationMinusAllValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.PoliticalAffiliationCategoryName)
+        }
+        for filterName in FilterNames.genderMinusAllValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.GenderCategoryName)
+        }
+        for filterName in FilterNames.sexualityMinusAllValues {
+            filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.SexualityCategoryName)
+        }
+        filterDictionary[FilterNames.RaceAllFilter] = (filterState: true, filterCategory: FilterCategories.RaceCategoryName)
+        filterDictionary[FilterNames.HairColorAllFilter] = (filterState: true, filterCategory: FilterCategories.HairColorCategoryName)
+        filterDictionary[FilterNames.PoliticalAffiliationAllFilter] = (filterState: true, filterCategory: FilterCategories.PoliticalAffiliationCategoryName)
+        filterDictionary[FilterNames.GenderAllFilter] = (filterState: true, filterCategory: FilterCategories.GenderCategoryName)
+        filterDictionary[FilterNames.SexualityAllFilter] = (filterState: true, filterCategory: FilterCategories.SexualityCategoryName)
     }
     
     func setGUI() {

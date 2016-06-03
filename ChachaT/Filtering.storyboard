@@ -238,6 +238,9 @@
                                                                         <state key="normal" title="Brunette">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="brunetteHairColorButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="Bd6-gc-6NS"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-oC-oKJ">
                                                                         <rect key="frame" x="84" y="0.0" width="82" height="40"/>
@@ -245,6 +248,9 @@
                                                                         <state key="normal" title="Redhead">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="redheadHairColorButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="0NY-XO-iAc"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYa-6T-iBc">
                                                                         <rect key="frame" x="168" y="0.0" width="82.5" height="40"/>
@@ -252,6 +258,9 @@
                                                                         <state key="normal" title="Blonde">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="blondeHairColorButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="tPg-rM-WFI"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="I0w-s0-CFd">
                                                                         <rect key="frame" x="253" y="0.0" width="82" height="40"/>
@@ -259,6 +268,9 @@
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="allHairColorButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="jzd-yH-ddS"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -287,6 +299,9 @@
                                                                         <state key="normal" title="Democrat">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="democratPoliticsButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="n99-cg-Mc1"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLu-b7-wtK">
                                                                         <rect key="frame" x="112" y="0.0" width="110" height="40"/>
@@ -294,6 +309,9 @@
                                                                         <state key="normal" title="Republican">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="republicanPoliticsButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="5GM-Ma-buN"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-rD-z1e">
                                                                         <rect key="frame" x="224" y="0.0" width="110.5" height="40"/>
@@ -301,6 +319,9 @@
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="allPoliticsButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="WPl-uj-yOz"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -335,6 +356,9 @@
                                                                         <state key="normal" title="Male">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="maleGenderButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="DmM-ms-ofQ"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NwT-ya-8az">
                                                                         <rect key="frame" x="112" y="0.0" width="110" height="40"/>
@@ -342,6 +366,9 @@
                                                                         <state key="normal" title="Female">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="femaleGenderButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="rtS-b0-xVE"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2v6-el-gD2">
                                                                         <rect key="frame" x="224" y="0.0" width="110.5" height="40"/>
@@ -349,6 +376,9 @@
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="allGenderButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="QR2-DR-WZ7"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
@@ -379,10 +409,13 @@
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Flw-Zv-jmP">
                                                                         <rect key="frame" x="0.0" y="0.0" width="81.5" height="40"/>
-                                                                        <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Straight">
-                                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="straightSexualityButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="TGZ-dQ-bhn"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-yF-rHe">
                                                                         <rect key="frame" x="84" y="0.0" width="81.5" height="40"/>
@@ -390,6 +423,9 @@
                                                                         <state key="normal" title="Gay">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="gaySexualityButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="yWW-p9-y6A"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fw3-gL-qaH">
                                                                         <rect key="frame" x="169" y="0.0" width="81.5" height="40"/>
@@ -397,13 +433,19 @@
                                                                         <state key="normal" title="Bisexual">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="bisexualButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="RUq-zz-0Z9"/>
+                                                                        </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-Pb-TfH">
                                                                         <rect key="frame" x="253" y="0.0" width="81.5" height="40"/>
-                                                                        <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
+                                                                        <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
-                                                                            <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                                            <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                                                         </state>
+                                                                        <connections>
+                                                                            <action selector="allSexualityButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="gv4-h3-CE1"/>
+                                                                        </connections>
                                                                     </button>
                                                                 </subviews>
                                                                 <constraints>
