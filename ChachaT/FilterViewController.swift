@@ -362,6 +362,7 @@ extension FilterViewController {
             let query = User.query()
             //the where clause checks if the all button is checked, in which case, there should be now whereKey on the query for that particular category.
             for (filterName, filterDictionaryTuple) in filterDictionary where !FilterNames.theAllButtonValues.contains(filterName) {
+                //checks if the button is clicked
                 if filterDictionaryTuple.filterState {
                    query?.whereKey(filterDictionaryTuple.filterCategory.rawValue, equalTo: filterName.rawValue)
                 }
