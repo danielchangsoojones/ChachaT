@@ -64,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>Ripple.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SCLAlertView.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -112,11 +117,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E3CE8224B404E4DC0EF500E04D17973</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>22393314BD84357CB62E2F569D7F4AA5</key>
 		<dict>
 			<key>primary</key>
@@ -132,7 +132,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>31F36F4AFA7257D28DF516CC44805235</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>395970F09DFE5EFCDA4AFA3D5EBE78C0</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>44D2DD7BB4053466AB048034B49B0BA6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -147,22 +157,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>75A84FD6C20EF1B4E8C06CA840BCF3D9</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>7BB1A9890320F7B37393B73035621E9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8C7DB7BB06AD6024DA63FA6F80DC2B93</key>
+		<key>8A21FBE1B28598FAFB10EF43488D4D83</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>9348368E0AE14076087837D8C8256FB8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>94315D83DF295726F042D30B0C86CE59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -187,7 +197,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CC0064203B3A46C8E608F9CD126DA18F</key>
+		<key>D54B847AEE15A4E6C6A75DF306CAB77E</key>
 		<dict>
 			<key>primary</key>
 			<true/>

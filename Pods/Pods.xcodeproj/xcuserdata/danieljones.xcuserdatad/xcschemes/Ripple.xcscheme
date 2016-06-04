@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FD35CDB3C984B72B763B06B1'
-               BlueprintName = 'UIImage+BlurredFrame'
+               BlueprintIdentifier = '22BFBB46B91B2518EB170D1A'
+               BlueprintName = 'Ripple'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'UIImage_BlurredFrame.framework'>
+               BuildableName = 'Ripple.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>

@@ -14,6 +14,7 @@ import Parse
 import EFTools
 import ParseUI
 import BlurryModalSegue
+import Ripple
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -27,10 +28,14 @@ private let numberOfCards : UInt = 5
 class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegate {
     @IBOutlet weak var kolodaView: CustomKolodaView!
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
+    @IBOutlet weak var theChachaLoadingImage: UIImageView!
+    @IBOutlet weak var theBackgroundColorView: UIView!
     
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
+    
+    var rippleState = 1
     
     @IBAction func segueToProfilePage(sender: AnyObject) {
         pageMainViewControllerDelegate!.moveToPageIndex(1)
@@ -64,7 +69,6 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         if User.currentUser() == nil {
             performSegueWithIdentifier(.LogInPageSegue, sender: self)
         }
-        
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
@@ -77,6 +81,12 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
+        rippleState += 1
+        //need to only do on rippleState 3 because the frame is not set for the center of the chachaLoadingImage
+        //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
+        if rippleState == 3 {
+            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+        }
     }
 
 }
