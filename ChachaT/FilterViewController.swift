@@ -12,6 +12,7 @@ import Foundation
 import TTRangeSlider
 import Parse
 import CoreLocation
+import Timepiece
 
 class FilterViewController: UIViewController {
     
@@ -395,6 +396,9 @@ extension FilterViewController {
             if let currentUserLocation = currentUserLocation where theDistanceSlider.value <= 100 {
                 query?.whereKey("location", nearGeoPoint: currentUserLocation, withinMiles: Double(theDistanceSlider.value))
             }
+            let minMaxDateRange = createMinMaxDateRange(theAgeRangeSlider.selectedMaximum, minAge: theAgeRangeSlider.selectedMinimum)
+            query?.whereKey("birthDate", greaterThanOrEqualTo: minMaxDateRange.minDate)
+            query?.whereKey("birthDate", lessThanOrEqualTo: minMaxDateRange.maxDate)
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
@@ -402,6 +406,15 @@ extension FilterViewController {
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })
+    }
+    
+    func createMinMaxDateRange(maxAge: Float, minAge: Float) -> (minDate: NSDate, maxDate: NSDate) {
+        let now = NSDate()
+        //minDate means the oldest person/earliest year.
+        let minDate = now.change(year: now.year - Int(maxAge))
+        //maxDate means the youngest person/latest year.
+        let maxDate = now.change(year: now.year - Int(minAge))
+        return (minDate: minDate, maxDate: maxDate)
     }
 }
 
