@@ -67,6 +67,11 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
+    @IBAction func termsOfServiceButtonPressed(sender: AnyObject) {
+       UIApplication.sharedApplication().openURL(NSURL(string: "http://about.chacha.com/terms-of-use/")!)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 

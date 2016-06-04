@@ -50,7 +50,7 @@
                                 </constraints>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B8v-0M-Wvc">
-                                <rect key="frame" x="148.5" y="354" width="77" height="24"/>
+                                <rect key="frame" x="149" y="354" width="77" height="24"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="25" id="K4y-9w-Voh"/>
                                     <constraint firstAttribute="width" constant="78" id="VQM-M5-iLq"/>
@@ -66,6 +66,9 @@
                                         <exclude reference="VQM-M5-iLq"/>
                                     </mask>
                                 </variation>
+                                <connections>
+                                    <action selector="termsOfServiceButtonPressed:" destination="11m-Bf-sI4" eventType="touchUpInside" id="MxO-Eb-iFn"/>
+                                </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="By creating an account, you accept our " textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="rWv-S8-RVR">
                                 <rect key="frame" x="95" y="349" width="185" height="12"/>
