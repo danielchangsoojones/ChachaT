@@ -391,7 +391,8 @@ extension FilterViewController {
                    query?.whereKey(filterDictionaryTuple.filterCategory.rawValue, equalTo: filterName.rawValue)
                 }
             }
-            if let currentUserLocation = currentUserLocation {
+            //don't need the query if the user wants 100+ miles. That just means all users. 
+            if let currentUserLocation = currentUserLocation where theDistanceSlider.value <= 100 {
                 query?.whereKey("location", nearGeoPoint: currentUserLocation, withinMiles: Double(theDistanceSlider.value))
             }
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
