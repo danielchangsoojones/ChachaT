@@ -397,8 +397,11 @@ extension FilterViewController {
                 query?.whereKey("location", nearGeoPoint: currentUserLocation, withinMiles: Double(theDistanceSlider.value))
             }
             let minMaxDateRange = createMinMaxDateRange(theAgeRangeSlider.selectedMaximum, minAge: theAgeRangeSlider.selectedMinimum)
+            //if the max age chosen was 65+, then there is no need to set an upper age limit.
+            if theAgeRangeSlider.selectedMaximum < 65 {
+                query?.whereKey("birthDate", lessThanOrEqualTo: minMaxDateRange.maxDate)
+            }
             query?.whereKey("birthDate", greaterThanOrEqualTo: minMaxDateRange.minDate)
-            query?.whereKey("birthDate", lessThanOrEqualTo: minMaxDateRange.maxDate)
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
