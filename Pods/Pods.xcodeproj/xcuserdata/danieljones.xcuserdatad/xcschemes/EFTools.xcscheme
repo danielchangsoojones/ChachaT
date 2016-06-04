@@ -14,7 +14,7 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'FDCBED7B344D29900EE17E3B8C96B7ED'
+               BlueprintIdentifier = 'D0B520483FAA319280FE16EF'
                BlueprintName = 'EFTools'
                ReferencedContainer = 'container:Pods.xcodeproj'
                BuildableName = 'EFTools.framework'>

@@ -16,7 +16,7 @@ install_framework()
     local source="$1"
   fi
 
-  local destination="${TARGET_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
+  local destination="${CONFIGURATION_BUILD_DIR}/${FRAMEWORKS_FOLDER_PATH}"
 
   if [ -L "${source}" ]; then
       echo "Symlinked..."
@@ -59,8 +59,8 @@ code_sign_if_enabled() {
   if [ -n "${EXPANDED_CODE_SIGN_IDENTITY}" -a "${CODE_SIGNING_REQUIRED}" != "NO" -a "${CODE_SIGNING_ALLOWED}" != "NO" ]; then
     # Use the current code_sign_identitiy
     echo "Code Signing $1 with Identity ${EXPANDED_CODE_SIGN_IDENTITY_NAME}"
-    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements \"$1\""
-    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} ${OTHER_CODE_SIGN_FLAGS} --preserve-metadata=identifier,entitlements "$1"
+    echo "/usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements \"$1\""
+    /usr/bin/codesign --force --sign ${EXPANDED_CODE_SIGN_IDENTITY} --preserve-metadata=identifier,entitlements "$1"
   fi
 }
 
@@ -84,34 +84,42 @@ strip_invalid_archs() {
 
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AFDateHelper/AFDateHelper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/EFTools/EFTools.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Koloda/Koloda.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MBAutoGrowingTextView/MBAutoGrowingTextView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Pages/Pages.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Parse/Parse.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ParseUI/ParseUI.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/STPopup/STPopup.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
+  install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/BlurryModalSegue.framework"
+  install_framework "Pods-ChachaT/Bolts.framework"
+  install_framework "Pods-ChachaT/EFTools.framework"
+  install_framework "Pods-ChachaT/Koloda.framework"
+  install_framework "Pods-ChachaT/MBAutoGrowingTextView.framework"
+  install_framework "Pods-ChachaT/MBProgressHUD.framework"
+  install_framework "Pods-ChachaT/MZAppearance.framework"
+  install_framework "Pods-ChachaT/Pages.framework"
+  install_framework "Pods-ChachaT/Parse.framework"
+  install_framework "Pods-ChachaT/ParseUI.framework"
+  install_framework "Pods-ChachaT/SCLAlertView.framework"
+  install_framework "Pods-ChachaT/STPopup.framework"
+  install_framework "Pods-ChachaT/SnapKit.framework"
+  install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
+  install_framework "Pods-ChachaT/TTRangeSlider.framework"
+  install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
+  install_framework "Pods-ChachaT/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
-  install_framework "$BUILT_PRODUCTS_DIR/AFDateHelper/AFDateHelper.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/EFTools/EFTools.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Koloda/Koloda.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MBAutoGrowingTextView/MBAutoGrowingTextView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Pages/Pages.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/Parse/Parse.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/ParseUI/ParseUI.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/STPopup/STPopup.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/SnapKit/SnapKit.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/TPKeyboardAvoiding/TPKeyboardAvoiding.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/pop/pop.framework"
+  install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/BlurryModalSegue.framework"
+  install_framework "Pods-ChachaT/Bolts.framework"
+  install_framework "Pods-ChachaT/EFTools.framework"
+  install_framework "Pods-ChachaT/Koloda.framework"
+  install_framework "Pods-ChachaT/MBAutoGrowingTextView.framework"
+  install_framework "Pods-ChachaT/MBProgressHUD.framework"
+  install_framework "Pods-ChachaT/MZAppearance.framework"
+  install_framework "Pods-ChachaT/Pages.framework"
+  install_framework "Pods-ChachaT/Parse.framework"
+  install_framework "Pods-ChachaT/ParseUI.framework"
+  install_framework "Pods-ChachaT/SCLAlertView.framework"
+  install_framework "Pods-ChachaT/STPopup.framework"
+  install_framework "Pods-ChachaT/SnapKit.framework"
+  install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
+  install_framework "Pods-ChachaT/TTRangeSlider.framework"
+  install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
+  install_framework "Pods-ChachaT/pop.framework"
 fi

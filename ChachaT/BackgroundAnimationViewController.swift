@@ -13,6 +13,7 @@ import AVFoundation
 import Parse
 import EFTools
 import ParseUI
+import BlurryModalSegue
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -203,10 +204,30 @@ extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
+        case FilterPageBlurrySegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        
+        switch segueIdentifierForSegue(segue) {
+        case .FilterPageBlurrySegue:
+            let destinationVC = segue.destinationViewController as! FilterViewController
+            destinationVC.delegate = self
+            let blurrySegue = segue as! BlurryModalSegue
+            blurrySegue.backingImageTintColor = BlurryFilteringPageBackground
+            blurrySegue.backingImageSaturationDeltaFactor = 0.2
+        // Do some things
+        default: break
+        }
+    }
+}
+
+protocol FilterViewControllerDelegate {
+    func passFilteredUserArray(filteredUserArray: [User])
+}
+extension BackgroundAnimationViewController: FilterViewControllerDelegate {
+    func passFilteredUserArray(filteredUserArray: [User]) {
+        userArray = filteredUserArray
+        self.kolodaView.reloadData()
     }
 }
 
