@@ -105,6 +105,11 @@ class CardDetailViewController: UIViewController {
         createQuestionPopUp(4)
     }
     
+    @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
+        let _ = Alert(title: "Abuse Reported", subtitle: "We have reported this user to the moderators, and they will review the profile.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Info)
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         

@@ -211,6 +211,17 @@
                                                             </mask>
                                                         </variation>
                                                     </textField>
+                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUz-Kg-VhW" userLabel="Report Abuse Button">
+                                                        <rect key="frame" x="540" y="9" width="59" height="22"/>
+                                                        <constraints>
+                                                            <constraint firstAttribute="width" constant="59" id="Egr-P0-897"/>
+                                                            <constraint firstAttribute="height" constant="22" id="qhi-2h-Tmd"/>
+                                                        </constraints>
+                                                        <state key="normal" image="Report User Button"/>
+                                                        <connections>
+                                                            <action selector="reportAbuseButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="62y-bp-xdo"/>
+                                                        </connections>
+                                                    </button>
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="IkV-io-nnJ" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="0Ti-yS-cT8"/>
@@ -228,7 +239,9 @@
                                                     <constraint firstAttribute="trailing" secondItem="7pK-7V-3MT" secondAttribute="trailing" id="f8A-yr-pMa"/>
                                                     <constraint firstItem="Cak-7g-UB7" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="hps-ZH-0CS"/>
                                                     <constraint firstItem="Cak-7g-UB7" firstAttribute="top" secondItem="dI7-Qj-h3R" secondAttribute="top" id="iBa-bA-gaz"/>
+                                                    <constraint firstAttribute="trailing" secondItem="fUz-Kg-VhW" secondAttribute="trailing" constant="1" id="lnU-F2-Jj4"/>
                                                     <constraint firstItem="Asv-C1-hSe" firstAttribute="leading" secondItem="IkV-io-nnJ" secondAttribute="leading" id="t4M-0M-0DQ"/>
+                                                    <constraint firstItem="fUz-Kg-VhW" firstAttribute="centerY" secondItem="iG2-2N-iPj" secondAttribute="centerY" id="tEd-Z4-kIU"/>
                                                     <constraint firstItem="iG2-2N-iPj" firstAttribute="baseline" secondItem="dI7-Qj-h3R" secondAttribute="baseline" id="uoF-QA-pHB"/>
                                                     <constraint firstAttribute="trailing" secondItem="Asv-C1-hSe" secondAttribute="trailing" id="wpH-3i-6B7"/>
                                                     <constraint firstItem="iG2-2N-iPj" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="trailing" id="wuo-J6-MXL"/>
@@ -541,6 +554,7 @@
         <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Profile Main Page Button" width="60" height="59"/>
         <image name="Question Bubble" width="340" height="68"/>
+        <image name="Report User Button" width="5" height="20"/>
         <image name="Skip Main Page Button" width="81" height="79"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
