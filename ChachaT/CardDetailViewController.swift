@@ -106,7 +106,11 @@ class CardDetailViewController: UIViewController {
     }
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
-        let _ = Alert(title: "Abuse Reported", subtitle: "We have reported this user to the moderators, and they will review the profile.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Info)
+        let alert = Alert(closeButtonHidden: false)
+        alert.addButton("Block User", closeButtonHidden: false) { 
+            alert.closeAlert()
+        }
+       alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .Error)
     }
     
     
