@@ -45,6 +45,7 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderMaleButton: UIButton!
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
+    @IBOutlet weak var theSaveButton: UIButton!
     
     let cornerSize : CGFloat = 10
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
@@ -322,6 +323,7 @@ class FilterViewController: UIViewController {
         theGenderMaleButton.layer.cornerRadius = cornerSize
         theGenderFemaleButton.layer.cornerRadius = cornerSize
         theGenderAllButton.layer.cornerRadius = cornerSize
+        theSaveButton.layer.cornerRadius = 0.5 * theSaveButton.bounds.size.width
     }
     
     func setAgeSliderGUI() {
