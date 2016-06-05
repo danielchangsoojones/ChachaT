@@ -14,6 +14,11 @@ import Parse
 import CoreLocation
 import Timepiece
 
+public enum FilterUserMode {
+    case InputMode
+    case FilteringMode
+}
+
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var theRaceAsianButton: UIButton!
@@ -53,6 +58,7 @@ class FilterViewController: UIViewController {
     
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
+    var filterUserMode : FilterUserMode = .FilteringMode
     var delegate: FilterViewControllerDelegate?
     
     
