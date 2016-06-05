@@ -8,7 +8,7 @@
         <!--Delegate-->
         <scene sceneID="mDN-x0-sAl">
             <objects>
-                <viewController id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Nj-sU-CBv"/>
                         <viewControllerLayoutGuide type="bottom" id="ltp-4t-4UI"/>
@@ -557,6 +557,7 @@
                         <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="QpJ-Zn-87l"/>
                         <outlet property="theMainStackView" destination="75A-6e-wii" id="5Ft-O1-QyY"/>
                         <outlet property="theMaximumDistanceHolderView" destination="MBq-Uk-nkq" id="6gt-mQ-Ynp"/>
+                        <outlet property="thePageTitle" destination="lLm-mr-Qho" id="3Pd-6z-V6P"/>
                         <outlet property="thePoliticAllButton" destination="qOY-rD-z1e" id="XEK-Oh-ZKJ"/>
                         <outlet property="thePoliticDemocratButton" destination="cdO-bn-uA9" id="rL8-rz-9FW"/>
                         <outlet property="thePoliticRepublicanButton" destination="XLu-b7-wtK" id="NoK-NL-TyK"/>

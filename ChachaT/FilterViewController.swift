@@ -15,7 +15,7 @@ import CoreLocation
 import Timepiece
 
 public enum FilterUserMode {
-    case InputMode
+    case UserEditingMode
     case FilteringMode
 }
 
@@ -57,6 +57,8 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var thePoliticStackView: UIStackView!
     @IBOutlet weak var theGenderStackView: UIStackView!
     @IBOutlet weak var theSexualityStackView: UIStackView!
+    @IBOutlet weak var thePageTitle: UILabel!
+    
     
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
     let currentUser = User.currentUser()
@@ -220,13 +222,13 @@ class FilterViewController: UIViewController {
                 //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
                 switch filterDictionaryCurrentFilterCategory {
                 case .RaceCategoryName?:
-                    if filterUserMode == .InputMode {
+                    if filterUserMode == .UserEditingMode {
                         chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.raceAllValues, pushedButton: button, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton])
                     } else if filterUserMode == .FilteringMode {
                         changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.raceMinusAllValues, theAllFilter: .RaceAllFilter)
                     }
                 case .HairColorCategoryName?:
-                    if filterUserMode == .InputMode {
+                    if filterUserMode == .UserEditingMode {
                         chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.hairColorAllValues, pushedButton: button, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton])
                     } else if filterUserMode == .FilteringMode {
                         changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
@@ -343,7 +345,7 @@ class FilterViewController: UIViewController {
     func setGUI() {
         setAgeSliderGUI()
         setRoundedCorners()
-        if filterUserMode == .InputMode {
+        if filterUserMode == .UserEditingMode {
             setInputModeGUI()
         }
     }
@@ -365,10 +367,11 @@ class FilterViewController: UIViewController {
     func setInputModeGUI() {
         removeFromMainStackView(theMaximumDistanceHolderView)
         removeFromMainStackView(theAgeRangeHolderView)
-        setPreferNotToSayButtonText([theRaceAllButton, theHairColorAllButton, thePoliticAllButton, theGenderAllButton, theSexualityAllButton])
+        setSkipButtonText([theRaceAllButton, theHairColorAllButton, thePoliticAllButton, theGenderAllButton, theSexualityAllButton])
+        thePageTitle.text = "Who Are You?"
     }
     
-    func setPreferNotToSayButtonText(buttonArray: [UIButton]) {
+    func setSkipButtonText(buttonArray: [UIButton]) {
         for button in buttonArray {
             button.setTitle("Skip", forState: .Normal)
         }
