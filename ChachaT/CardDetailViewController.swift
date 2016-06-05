@@ -272,7 +272,7 @@ class CardDetailViewController: UIViewController {
         self.titleTextField.hidden = false
         theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
         theTitleLabel.hidden = true
-        theCustomQuestionButton.setTitle("Find Friends", forState: .Normal)
+        theCustomQuestionButton.setTitle("Set Filters", forState: .Normal)
     }
     
     func fullNameTextFieldDidChange(textField: UITextField) {
