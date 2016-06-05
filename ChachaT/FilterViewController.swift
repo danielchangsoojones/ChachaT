@@ -51,6 +51,10 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     @IBOutlet weak var theSaveButton: UIButton!
+    @IBOutlet weak var theMaximumDistanceHolderView: UIView!
+    @IBOutlet weak var theMainStackView: UIStackView!
+    @IBOutlet weak var theAgeRangeHolderView: UIView!
+    
     
     let cornerSize : CGFloat = 10
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
@@ -330,6 +334,28 @@ class FilterViewController: UIViewController {
         theGenderFemaleButton.layer.cornerRadius = cornerSize
         theGenderAllButton.layer.cornerRadius = cornerSize
         theSaveButton.layer.cornerRadius = 0.5 * theSaveButton.bounds.size.width
+        //remove this part later
+        setInputModeGUI()
+        if filterUserMode == .InputMode {
+            setInputModeGUI()
+        }
+    }
+    
+    func setInputModeGUI() {
+        removeFromMainStackView(theMaximumDistanceHolderView)
+        removeFromMainStackView(theAgeRangeHolderView)
+        setPreferNotToSayButtonText([theRaceAllButton, theHairColorAllButton, thePoliticAllButton, theGenderAllButton, theSexualityAllButton])
+    }
+    
+    func setPreferNotToSayButtonText(buttonArray: [UIButton]) {
+        for button in buttonArray {
+            button.setTitle("Skip", forState: .Normal)
+        }
+    }
+    
+    func removeFromMainStackView(view: UIView) {
+        theMainStackView.removeArrangedSubview(view)
+        view.removeFromSuperview()
     }
     
     func setAgeSliderGUI() {

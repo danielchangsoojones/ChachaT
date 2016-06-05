@@ -54,7 +54,7 @@
                                                                             <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="OsE-38-Ih4"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
                                                                         <rect key="frame" x="67" y="0.0" width="66" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Black">
@@ -64,7 +64,7 @@
                                                                             <action selector="blackRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="1s0-5H-Yn1"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
                                                                         <rect key="frame" x="135" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Latino">
@@ -74,7 +74,7 @@
                                                                             <action selector="latinoRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="k1N-6U-Dde"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
                                                                         <rect key="frame" x="202" y="0.0" width="66" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="White">
@@ -84,7 +84,7 @@
                                                                             <action selector="whiteRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="n7j-bZ-3rd"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
+                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
                                                                         <rect key="frame" x="270" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
@@ -538,6 +538,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="theAgeRangeHolderView" destination="KQz-m9-FPD" id="lbN-XD-XWr"/>
                         <outlet property="theAgeRangeLabel" destination="09R-hC-gc6" id="JQU-4r-NcY"/>
                         <outlet property="theAgeRangeSlider" destination="kVJ-9y-fJl" id="6e6-AR-kSE"/>
                         <outlet property="theContentView" destination="g5Y-6u-2zd" id="geU-vl-4Ef"/>
@@ -553,6 +554,8 @@
                         <outlet property="theHairColorHolderView" destination="kUx-rB-mGu" id="IVK-CR-Zjv"/>
                         <outlet property="theHairColorRedheadButton" destination="2f2-oC-oKJ" id="3Al-x9-Zb3"/>
                         <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="CbT-HD-VGv"/>
+                        <outlet property="theMainStackView" destination="75A-6e-wii" id="5Ft-O1-QyY"/>
+                        <outlet property="theMaximumDistanceHolderView" destination="MBq-Uk-nkq" id="6gt-mQ-Ynp"/>
                         <outlet property="thePoliticAllButton" destination="qOY-rD-z1e" id="XEK-Oh-ZKJ"/>
                         <outlet property="thePoliticDemocratButton" destination="cdO-bn-uA9" id="rL8-rz-9FW"/>
                         <outlet property="thePoliticRepublicanButton" destination="XLu-b7-wtK" id="NoK-NL-TyK"/>
