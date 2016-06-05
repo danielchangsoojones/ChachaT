@@ -442,7 +442,7 @@ extension FilterViewController {
             if FilterNames.raceAllValues.contains(filterName) {
                 if filterName == .RaceAllFilter {
                     //the user does not want to be queried upon for this particular field.
-                    currentUser.race = nil
+                    currentUser.removeObjectForKey("race")
                 } else {
                     //set the appropriate value to the user
                     currentUser.race = filterName.rawValue
@@ -450,7 +450,7 @@ extension FilterViewController {
             } else if FilterNames.hairColorAllValues.contains(filterName) {
                 if filterName == .HairColorAllFilter {
                     //the user does not want to be queried upon for this particular field.
-                    currentUser.hairColor = nil
+                    currentUser.removeObjectForKey("hairColor")
                 } else {
                     //set the appropriate value to the user
                     currentUser.hairColor = filterName.rawValue
@@ -458,7 +458,7 @@ extension FilterViewController {
             } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
                 if filterName == .PoliticalAffiliationAllFilter {
                     //the user does not want to be queried upon for this particular field.
-                    currentUser.politicalAffiliation = nil
+                    currentUser.removeObjectForKey("politicalAffiliation")
                 } else {
                     //set the appropriate value to the user
                     currentUser.politicalAffiliation = filterName.rawValue
@@ -466,7 +466,7 @@ extension FilterViewController {
             } else if FilterNames.genderAllValues.contains(filterName) {
                 if filterName == .GenderAllFilter {
                     //the user does not want to be queried upon for this particular field.
-                    currentUser.gender = nil
+                    currentUser.removeObjectForKey("gender")
                 } else {
                     //set the appropriate value to the user
                     currentUser.gender = filterName.rawValue
@@ -474,7 +474,7 @@ extension FilterViewController {
             } else if FilterNames.sexualityAllValues.contains(filterName) {
                 if filterName == .SexualityAllFilter {
                     //the user does not want to be queried upon for this particular field.
-                    currentUser.sexuality = nil
+                    currentUser.removeObjectForKey("sexuality")
                 } else {
                     //set the appropriate value to the user
                     currentUser.sexuality = filterName.rawValue
