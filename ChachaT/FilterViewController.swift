@@ -312,7 +312,11 @@ class FilterViewController: UIViewController {
 
     
     @IBAction func save(sender: AnyObject) {
-        createFilteredUserArray()
+        if filterUserMode == .UserEditingMode {
+            saveUserCharacteristics()
+        } else if filterUserMode == .FilteringMode {
+            createFilteredUserArray()
+        }
     }
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
@@ -426,6 +430,63 @@ extension FilterViewController {
                 self.currentUserLocation = geoPoint
             } else {
                 print(error)
+            }
+        }
+    }
+    
+    func saveUserCharacteristics() {
+        let currentUser = User.currentUser()!
+        for (filterName, filterDictionaryTuple) in filterDictionary {
+            //checks if the button is clicked
+            if filterDictionaryTuple.filterState {
+            if FilterNames.raceAllValues.contains(filterName) {
+                if filterName == .RaceAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.race = nil
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.race = filterName.rawValue
+                }
+            } else if FilterNames.hairColorAllValues.contains(filterName) {
+                if filterName == .HairColorAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.hairColor = nil
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.hairColor = filterName.rawValue
+                }
+            } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
+                if filterName == .PoliticalAffiliationAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.politicalAffiliation = nil
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.politicalAffiliation = filterName.rawValue
+                }
+            } else if FilterNames.genderAllValues.contains(filterName) {
+                if filterName == .GenderAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.gender = nil
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.gender = filterName.rawValue
+                }
+            } else if FilterNames.sexualityAllValues.contains(filterName) {
+                if filterName == .SexualityAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.sexuality = nil
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.sexuality = filterName.rawValue
+                }
+                }
+            }
+        }
+        currentUser.saveInBackgroundWithBlock { (success, error) in
+            if success {
+                self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                let _ = Alert(title: "Saving Error", subtitle: "there was an error saving you characteristics. Please try again.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
             }
         }
     }
