@@ -34,11 +34,11 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theDistanceGraySliderView: UIView!
     @IBOutlet weak var theAgeRangeSlider: TTRangeSlider!
     @IBOutlet weak var theAgeRangeLabel: UILabel!
+    @IBOutlet weak var theHairColorStackView: UIStackView!
     @IBOutlet weak var theHairColorBrunetteButton: UIButton!
     @IBOutlet weak var theHairColorRedheadButton: UIButton!
     @IBOutlet weak var theHairColorBlondeButton: UIButton!
     @IBOutlet weak var theHairColorAllButton: UIButton!
-    @IBOutlet weak var theHairColorStackView: UIStackView!
     @IBOutlet weak var theHairColorHolderView: UIView!
     @IBOutlet weak var theSexualityStraightButton: UIButton!
     @IBOutlet weak var theSexualityGayButton: UIButton!
@@ -54,6 +54,9 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theMaximumDistanceHolderView: UIView!
     @IBOutlet weak var theMainStackView: UIStackView!
     @IBOutlet weak var theAgeRangeHolderView: UIView!
+    @IBOutlet weak var thePoliticStackView: UIStackView!
+    @IBOutlet weak var theGenderStackView: UIStackView!
+    @IBOutlet weak var theSexualityStackView: UIStackView!
     
     
     let cornerSize : CGFloat = 10
@@ -214,20 +217,15 @@ class FilterViewController: UIViewController {
                 //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
                 switch filterDictionaryCurrentFilterCategory {
                 case .RaceCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.raceMinusAllValues, theAllButton: theRaceAllButton, theAllFilter: .RaceAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.raceMinusAllValues, theAllFilter: .RaceAllFilter)
                 case .HairColorCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theHairColorBrunetteButton, theHairColorRedheadButton, theHairColorBlondeButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.hairColorMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
                 case .PoliticalAffiliationCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllButton: thePoliticAllButton, theAllFilter: .PoliticalAffiliationAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllFilter: .PoliticalAffiliationAllFilter)
                 case .GenderCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theGenderMaleButton, theGenderFemaleButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.genderMinusAllValues, theAllButton: theGenderAllButton, theAllFilter: .GenderAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.genderMinusAllValues, theAllFilter: .GenderAllFilter)
                 case .SexualityCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theSexualityGayButton, theSexualityBisexualButton, theSexualityStraightButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.sexualityMinusAllValues, theAllButton: theSexualityAllButton, theAllFilter: .SexualityAllFilter)
+                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.sexualityMinusAllValues, theAllFilter: .SexualityAllFilter)
                 default: break
                 }
             }
@@ -235,11 +233,11 @@ class FilterViewController: UIViewController {
     }
     
     //this method is to change the button highlights if all was pushed, or if all is pushed and someone presses another button
-    func changeButtonHighlightsAndDictionaryValues(categoryName: FilterCategories, filterName: FilterNames, buttonArray: [UIButton], categoryArray: [FilterNames], theAllButton: UIButton, theAllFilter: FilterNames) {
+    func changeButtonHighlightsAndDictionaryValues(categoryName: FilterCategories, filterName: FilterNames, buttonArray: [UIButton], categoryArray: [FilterNames], theAllFilter: FilterNames) {
         if FilterNames.theAllButtonValues.contains(filterName) {
             //this means the button pressed was an all button
-            for button in buttonArray {
-                changeButtonBackground(button, currentState: true)
+            for index in 0...buttonArray.count - 2 {
+                changeButtonBackground(buttonArray[index], currentState: true)
             }
             //reseting all the filter states to false, because we want all races in the query. Which, is the default query.
             for filterName in categoryArray {
@@ -247,9 +245,13 @@ class FilterViewController: UIViewController {
             }
         } else {
             //it is not the all button, so change the all-button state and button color.
-            changeButtonBackground(theAllButton, currentState: true)
+            changeButtonBackground(buttonArray[buttonArray.count - 1], currentState: true)
             filterDictionary[theAllFilter] = (filterState: false, filterCategory: categoryName)
         }
+    }
+    
+    func chooseOneButton (filterName: FilterNames, pushedButton: UIButton, buttonArray: [UIButton]) {
+        
     }
     
     func changeButtonBackground(button: UIButton, currentState: Bool) {

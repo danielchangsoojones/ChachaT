@@ -54,7 +54,7 @@
                                                                             <action selector="asianRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="OsE-38-Ih4"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
                                                                         <rect key="frame" x="67" y="0.0" width="66" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Black">
@@ -64,7 +64,7 @@
                                                                             <action selector="blackRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="1s0-5H-Yn1"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="nC9-6c-8Yq">
                                                                         <rect key="frame" x="135" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Latino">
@@ -74,7 +74,7 @@
                                                                             <action selector="latinoRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="k1N-6U-Dde"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Vwi-jJ-qZm">
                                                                         <rect key="frame" x="202" y="0.0" width="66" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="White">
@@ -84,7 +84,7 @@
                                                                             <action selector="whiteRaceButtonPressed:" destination="BaY-7o-22m" eventType="touchUpInside" id="n7j-bZ-3rd"/>
                                                                         </connections>
                                                                     </button>
-                                                                    <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
+                                                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
                                                                         <rect key="frame" x="270" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
@@ -548,17 +548,19 @@
                         <outlet property="theGenderAllButton" destination="2v6-el-gD2" id="5AB-5a-cxL"/>
                         <outlet property="theGenderFemaleButton" destination="NwT-ya-8az" id="n08-IM-vM5"/>
                         <outlet property="theGenderMaleButton" destination="mEn-1c-riz" id="NGt-gA-rxw"/>
+                        <outlet property="theGenderStackView" destination="2N8-ZS-9Kt" id="HUu-gp-0M8"/>
                         <outlet property="theHairColorAllButton" destination="I0w-s0-CFd" id="Nam-KF-F0r"/>
                         <outlet property="theHairColorBlondeButton" destination="FYa-6T-iBc" id="zay-pB-fhx"/>
                         <outlet property="theHairColorBrunetteButton" destination="DfI-YA-Ac1" id="rcH-h1-ELA"/>
                         <outlet property="theHairColorHolderView" destination="kUx-rB-mGu" id="IVK-CR-Zjv"/>
                         <outlet property="theHairColorRedheadButton" destination="2f2-oC-oKJ" id="3Al-x9-Zb3"/>
-                        <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="CbT-HD-VGv"/>
+                        <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="QpJ-Zn-87l"/>
                         <outlet property="theMainStackView" destination="75A-6e-wii" id="5Ft-O1-QyY"/>
                         <outlet property="theMaximumDistanceHolderView" destination="MBq-Uk-nkq" id="6gt-mQ-Ynp"/>
                         <outlet property="thePoliticAllButton" destination="qOY-rD-z1e" id="XEK-Oh-ZKJ"/>
                         <outlet property="thePoliticDemocratButton" destination="cdO-bn-uA9" id="rL8-rz-9FW"/>
                         <outlet property="thePoliticRepublicanButton" destination="XLu-b7-wtK" id="NoK-NL-TyK"/>
+                        <outlet property="thePoliticStackView" destination="RAM-In-1m5" id="8ze-aB-pho"/>
                         <outlet property="theRaceAllButton" destination="rtt-1Q-Gbr" id="l9T-3N-jsC"/>
                         <outlet property="theRaceAsianButton" destination="B9v-iH-Eoh" id="pVg-vr-9HX"/>
                         <outlet property="theRaceBlackButton" destination="KnV-zn-ucp" id="38g-ZY-4Xa"/>
@@ -570,6 +572,7 @@
                         <outlet property="theSexualityAllButton" destination="JUc-Pb-TfH" id="2lb-Bh-dwB"/>
                         <outlet property="theSexualityBisexualButton" destination="fw3-gL-qaH" id="HoZ-GB-50a"/>
                         <outlet property="theSexualityGayButton" destination="cw8-yF-rHe" id="02u-s8-g6o"/>
+                        <outlet property="theSexualityStackView" destination="ROG-IY-3bB" id="R5i-fS-3Mj"/>
                         <outlet property="theSexualityStraightButton" destination="Flw-Zv-jmP" id="fok-1r-vzl"/>
                     </connections>
                 </viewController>
