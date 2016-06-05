@@ -58,8 +58,6 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderStackView: UIStackView!
     @IBOutlet weak var theSexualityStackView: UIStackView!
     
-    
-    let cornerSize : CGFloat = 10
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
     let currentUser = User.currentUser()
     
@@ -91,9 +89,14 @@ class FilterViewController: UIViewController {
         case SexualityAllFilter
         
         //this array lets me iterate over certain sections of the enum
+        static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, RaceAllFilter]
+        static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, HairColorAllFilter]
+        static var genderAllValues = [GenderMaleFilter, GenderFemaleFilter, GenderAllFilter]
+        static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, SexualityAllFilter]
+        static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter, PoliticalAffiliationAllFilter]
         static let raceMinusAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
         static let hairColorMinusAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
-        static let genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
+        static var genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
         static let sexualityMinusAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
         static let politicalAffiliationMinusAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
         static let theAllButtonValues = [RaceAllFilter, HairColorAllFilter, GenderAllFilter, SexualityAllFilter, PoliticalAffiliationAllFilter]
@@ -217,9 +220,17 @@ class FilterViewController: UIViewController {
                 //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
                 switch filterDictionaryCurrentFilterCategory {
                 case .RaceCategoryName?:
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.raceMinusAllValues, theAllFilter: .RaceAllFilter)
+                    if filterUserMode == .InputMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.raceAllValues, pushedButton: button, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.raceMinusAllValues, theAllFilter: .RaceAllFilter)
+                    }
                 case .HairColorCategoryName?:
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
+                    if filterUserMode == .InputMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.hairColorAllValues, pushedButton: button, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
+                    }
                 case .PoliticalAffiliationCategoryName?:
                     changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllFilter: .PoliticalAffiliationAllFilter)
                 case .GenderCategoryName?:
@@ -250,8 +261,27 @@ class FilterViewController: UIViewController {
         }
     }
     
-    func chooseOneButton (filterName: FilterNames, pushedButton: UIButton, buttonArray: [UIButton]) {
+    //you can only push one button when inputing your characteristics
+    func chooseOneButton (filterCategory: FilterCategories, filterName: FilterNames, filterNamesArray: [FilterNames], pushedButton: UIButton, buttonArray: [UIButton]) {
+        for button in buttonArray {
+            if button == pushedButton {
+                //set the pushed button to highlighted
+                changeButtonBackground(pushedButton, currentState: false)
+            } else {
+                //set the non-pushed buttons all to unhighlighted
+                changeButtonBackground(button, currentState: true)
+            }
+        }
         
+        //set the correct values in the dictionary
+        for filter in filterNamesArray {
+            if filter == filterName {
+                filterDictionary[filter] = (filterState: true, filterCategory: filterCategory)
+            } else {
+                //every other filter name becomes false
+                filterDictionary[filter] = (filterState: false, filterCategory: filterCategory)
+            }
+        }
     }
     
     func changeButtonBackground(button: UIButton, currentState: Bool) {
@@ -282,8 +312,6 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let locationManager = CLLocationManager()
-//        locationManager.requestWhenInUseAuthorization()
         createFilterDictionary()
         getUserLocation()
         setGUI()
@@ -314,33 +342,24 @@ class FilterViewController: UIViewController {
     
     func setGUI() {
         setAgeSliderGUI()
-        theSexualityAllButton.layer.cornerRadius = cornerSize
-        theSexualityBisexualButton.layer.cornerRadius = cornerSize
-        theSexualityGayButton.layer.cornerRadius = cornerSize
-        theSexualityStraightButton.layer.cornerRadius = cornerSize
-        theHairColorBrunetteButton.layer.cornerRadius = cornerSize
-        theHairColorRedheadButton.layer.cornerRadius = cornerSize
-        theHairColorBlondeButton.layer.cornerRadius = cornerSize
-        theHairColorAllButton.layer.cornerRadius = cornerSize
-        theDistanceGraySliderView.layer.cornerRadius = cornerSize
-        theAgeRangeSlider.layer.cornerRadius = cornerSize
-        theRaceAsianButton.layer.cornerRadius = cornerSize
-        theRaceBlackButton.layer.cornerRadius = cornerSize
-        theRaceLatinoButton.layer.cornerRadius = cornerSize
-        theRaceWhiteButton.layer.cornerRadius = cornerSize
-        theRaceAllButton.layer.cornerRadius = cornerSize
-        thePoliticAllButton.layer.cornerRadius = cornerSize
-        thePoliticDemocratButton.layer.cornerRadius = cornerSize
-        thePoliticRepublicanButton.layer.cornerRadius = cornerSize
-        theGenderMaleButton.layer.cornerRadius = cornerSize
-        theGenderFemaleButton.layer.cornerRadius = cornerSize
-        theGenderAllButton.layer.cornerRadius = cornerSize
-        theSaveButton.layer.cornerRadius = 0.5 * theSaveButton.bounds.size.width
-        //remove this part later
-        setInputModeGUI()
+        setRoundedCorners()
         if filterUserMode == .InputMode {
             setInputModeGUI()
         }
+    }
+    
+    func setRoundedCorners() {
+        let cornerSize : CGFloat = 10
+        let stackViewArray = [theRaceStackView, theHairColorStackView, theGenderStackView, thePoliticStackView, theSexualityStackView]
+        for stackView in stackViewArray {
+            for button in stackView.arrangedSubviews {
+                button.layer.cornerRadius = cornerSize
+            }
+        }
+        //set the other corners
+        theAgeRangeSlider.layer.cornerRadius = cornerSize
+        theDistanceGraySliderView.layer.cornerRadius = cornerSize
+        theSaveButton.layer.cornerRadius = 0.5 * theSaveButton.bounds.size.width
     }
     
     func setInputModeGUI() {
@@ -366,29 +385,6 @@ class FilterViewController: UIViewController {
         theAgeRangeSlider.handleDiameter = 27
         theAgeRangeSlider.selectedHandleDiameterMultiplier = 1.2
     }
-    
-    //for creating the lines between the buttons. I create spacing with the stack view and then place a view with background color behind it to fill in the spaces.
-//    func createBackgroundView(stackView: UIStackView, holderView: UIView) {
-//        let backgroundColorView = UIView()
-//        backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
-//        holderView.insertSubview(backgroundColorView, belowSubview: stackView)
-//        backgroundColorView.snp_makeConstraints { (make) -> Void in
-//            make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
-//        }
-//    }
-    
-    //left button means we want the corners to be on the top and bottom left. If false, then we want right side corners.
-//    func maskButton(button: UIButton, leftButton: Bool) {
-//        let maskLayer = CAShapeLayer()
-//        if leftButton {
-//             maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-//        } else {
-//            //button is on the right side
-//            maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopRight.union(.BottomRight), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-//        }
-//        
-//        button.layer.mask = maskLayer
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
