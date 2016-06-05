@@ -54,6 +54,7 @@ class CardDetailViewController: UIViewController {
                 userOfTheCard?.fullName = fullNameText
                 userOfTheCard?.lowercaseFullName = fullNameText?.lowercaseString
             }
+            theProfileImageButtonOverlay.setImage(nil, forState: .Normal)
             if imageWasChanged {
                 let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(profileImage.image!, 0.6)!)
                 userOfTheCard!.profileImage = file
@@ -265,9 +266,8 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             titleTextField.text = title
         }
-        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
-        self.profileImage.image = UIImage(named: "camera-Colored")
-        self.profileImage.contentMode = .Center
+        theProfileImageButtonOverlay.setImage(UIImage(named: "camera-Colored"), forState: .Normal)
+//        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
         self.theFullNameLabel.hidden = true
         self.theFullNameTextField.hidden = false
         self.titleTextField.hidden = false
