@@ -103,7 +103,6 @@ class CardDetailViewController: UIViewController {
 
     
     @IBAction func customQuestionButtonPressed(sender: AnyObject) {
-        createQuestionPopUp(PopUpQuestionNumber.CustomQuestion)
     }
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
@@ -273,7 +272,7 @@ class CardDetailViewController: UIViewController {
         self.titleTextField.hidden = false
         theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
         theTitleLabel.hidden = true
-        theCustomQuestionButton.setTitle("Find Friends", forState: .Normal)
+        theCustomQuestionButton.setTitle("Set Filters", forState: .Normal)
     }
     
     func fullNameTextFieldDidChange(textField: UITextField) {
@@ -398,9 +397,15 @@ extension CardDetailViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
+        case FilterInputPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-       
+        switch segueIdentifierForSegue(segue) {
+        case .FilterInputPageSegue:
+            let destinationVC = segue.destinationViewController as! FilterViewController
+            destinationVC.filterUserMode = FilterUserMode.UserEditingMode
+        default: break
+        }
     }
 }

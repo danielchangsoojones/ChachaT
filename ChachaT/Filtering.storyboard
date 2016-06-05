@@ -8,7 +8,7 @@
         <!--Delegate-->
         <scene sceneID="mDN-x0-sAl">
             <objects>
-                <viewController id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="BaY-7o-22m" customClass="FilterViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="9Nj-sU-CBv"/>
                         <viewControllerLayoutGuide type="bottom" id="ltp-4t-4UI"/>
@@ -538,6 +538,7 @@
                     </view>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
+                        <outlet property="theAgeRangeHolderView" destination="KQz-m9-FPD" id="lbN-XD-XWr"/>
                         <outlet property="theAgeRangeLabel" destination="09R-hC-gc6" id="JQU-4r-NcY"/>
                         <outlet property="theAgeRangeSlider" destination="kVJ-9y-fJl" id="6e6-AR-kSE"/>
                         <outlet property="theContentView" destination="g5Y-6u-2zd" id="geU-vl-4Ef"/>
@@ -547,15 +548,20 @@
                         <outlet property="theGenderAllButton" destination="2v6-el-gD2" id="5AB-5a-cxL"/>
                         <outlet property="theGenderFemaleButton" destination="NwT-ya-8az" id="n08-IM-vM5"/>
                         <outlet property="theGenderMaleButton" destination="mEn-1c-riz" id="NGt-gA-rxw"/>
+                        <outlet property="theGenderStackView" destination="2N8-ZS-9Kt" id="HUu-gp-0M8"/>
                         <outlet property="theHairColorAllButton" destination="I0w-s0-CFd" id="Nam-KF-F0r"/>
                         <outlet property="theHairColorBlondeButton" destination="FYa-6T-iBc" id="zay-pB-fhx"/>
                         <outlet property="theHairColorBrunetteButton" destination="DfI-YA-Ac1" id="rcH-h1-ELA"/>
                         <outlet property="theHairColorHolderView" destination="kUx-rB-mGu" id="IVK-CR-Zjv"/>
                         <outlet property="theHairColorRedheadButton" destination="2f2-oC-oKJ" id="3Al-x9-Zb3"/>
-                        <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="CbT-HD-VGv"/>
+                        <outlet property="theHairColorStackView" destination="jKj-B9-jLW" id="QpJ-Zn-87l"/>
+                        <outlet property="theMainStackView" destination="75A-6e-wii" id="5Ft-O1-QyY"/>
+                        <outlet property="theMaximumDistanceHolderView" destination="MBq-Uk-nkq" id="6gt-mQ-Ynp"/>
+                        <outlet property="thePageTitle" destination="lLm-mr-Qho" id="3Pd-6z-V6P"/>
                         <outlet property="thePoliticAllButton" destination="qOY-rD-z1e" id="XEK-Oh-ZKJ"/>
                         <outlet property="thePoliticDemocratButton" destination="cdO-bn-uA9" id="rL8-rz-9FW"/>
                         <outlet property="thePoliticRepublicanButton" destination="XLu-b7-wtK" id="NoK-NL-TyK"/>
+                        <outlet property="thePoliticStackView" destination="RAM-In-1m5" id="8ze-aB-pho"/>
                         <outlet property="theRaceAllButton" destination="rtt-1Q-Gbr" id="l9T-3N-jsC"/>
                         <outlet property="theRaceAsianButton" destination="B9v-iH-Eoh" id="pVg-vr-9HX"/>
                         <outlet property="theRaceBlackButton" destination="KnV-zn-ucp" id="38g-ZY-4Xa"/>
@@ -567,6 +573,7 @@
                         <outlet property="theSexualityAllButton" destination="JUc-Pb-TfH" id="2lb-Bh-dwB"/>
                         <outlet property="theSexualityBisexualButton" destination="fw3-gL-qaH" id="HoZ-GB-50a"/>
                         <outlet property="theSexualityGayButton" destination="cw8-yF-rHe" id="02u-s8-g6o"/>
+                        <outlet property="theSexualityStackView" destination="ROG-IY-3bB" id="R5i-fS-3Mj"/>
                         <outlet property="theSexualityStraightButton" destination="Flw-Zv-jmP" id="fok-1r-vzl"/>
                     </connections>
                 </viewController>

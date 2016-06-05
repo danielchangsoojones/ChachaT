@@ -57,7 +57,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
                                         <rect key="frame" x="0.0" y="100" width="375" height="264"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
@@ -180,7 +180,7 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="770"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="264"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="264" id="vHd-oq-IIN"/>
@@ -408,6 +408,7 @@
                                                 </variation>
                                                 <connections>
                                                     <action selector="customQuestionButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="9Zm-QF-6Eh"/>
+                                                    <segue destination="daK-C5-wmi" kind="show" identifier="FilterInputPageSegue" id="J40-Mu-xxa"/>
                                                 </connections>
                                             </button>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask Taylor: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-Q8-gEl">
@@ -586,5 +587,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="LKh-Ql-dNR"/>
+        <segue reference="J40-Mu-xxa"/>
     </inferredMetricsTieBreakers>
 </document>

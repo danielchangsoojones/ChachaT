@@ -14,6 +14,11 @@ import Parse
 import CoreLocation
 import Timepiece
 
+public enum FilterUserMode {
+    case UserEditingMode
+    case FilteringMode
+}
+
 class FilterViewController: UIViewController {
     
     @IBOutlet weak var theRaceAsianButton: UIButton!
@@ -29,11 +34,11 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theDistanceGraySliderView: UIView!
     @IBOutlet weak var theAgeRangeSlider: TTRangeSlider!
     @IBOutlet weak var theAgeRangeLabel: UILabel!
+    @IBOutlet weak var theHairColorStackView: UIStackView!
     @IBOutlet weak var theHairColorBrunetteButton: UIButton!
     @IBOutlet weak var theHairColorRedheadButton: UIButton!
     @IBOutlet weak var theHairColorBlondeButton: UIButton!
     @IBOutlet weak var theHairColorAllButton: UIButton!
-    @IBOutlet weak var theHairColorStackView: UIStackView!
     @IBOutlet weak var theHairColorHolderView: UIView!
     @IBOutlet weak var theSexualityStraightButton: UIButton!
     @IBOutlet weak var theSexualityGayButton: UIButton!
@@ -46,13 +51,21 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theGenderFemaleButton: UIButton!
     @IBOutlet weak var theGenderAllButton: UIButton!
     @IBOutlet weak var theSaveButton: UIButton!
+    @IBOutlet weak var theMaximumDistanceHolderView: UIView!
+    @IBOutlet weak var theMainStackView: UIStackView!
+    @IBOutlet weak var theAgeRangeHolderView: UIView!
+    @IBOutlet weak var thePoliticStackView: UIStackView!
+    @IBOutlet weak var theGenderStackView: UIStackView!
+    @IBOutlet weak var theSexualityStackView: UIStackView!
+    @IBOutlet weak var thePageTitle: UILabel!
     
-    let cornerSize : CGFloat = 10
+    
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
     let currentUser = User.currentUser()
     
     var filterDictionary = [FilterNames : (filterState: Bool, filterCategory: FilterCategories)]()
     
+    var filterUserMode : FilterUserMode = .FilteringMode
     var delegate: FilterViewControllerDelegate?
     
     
@@ -78,9 +91,14 @@ class FilterViewController: UIViewController {
         case SexualityAllFilter
         
         //this array lets me iterate over certain sections of the enum
+        static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, RaceAllFilter]
+        static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, HairColorAllFilter]
+        static var genderAllValues = [GenderMaleFilter, GenderFemaleFilter, GenderAllFilter]
+        static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, SexualityAllFilter]
+        static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter, PoliticalAffiliationAllFilter]
         static let raceMinusAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
         static let hairColorMinusAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
-        static let genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
+        static var genderMinusAllValues = [GenderMaleFilter, GenderFemaleFilter]
         static let sexualityMinusAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
         static let politicalAffiliationMinusAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
         static let theAllButtonValues = [RaceAllFilter, HairColorAllFilter, GenderAllFilter, SexualityAllFilter, PoliticalAffiliationAllFilter]
@@ -204,20 +222,35 @@ class FilterViewController: UIViewController {
                 //or if it is the all button, then all the other buttons should be dehighligheted/their state changed
                 switch filterDictionaryCurrentFilterCategory {
                 case .RaceCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theRaceAsianButton, theRaceBlackButton, theRaceWhiteButton, theRaceLatinoButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.raceMinusAllValues, theAllButton: theRaceAllButton, theAllFilter: .RaceAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.raceAllValues, pushedButton: button, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theRaceStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.raceMinusAllValues, theAllFilter: .RaceAllFilter)
+                    }
                 case .HairColorCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theHairColorBrunetteButton, theHairColorRedheadButton, theHairColorBlondeButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.hairColorMinusAllValues, theAllButton: theHairColorAllButton, theAllFilter: .HairColorAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.hairColorAllValues, pushedButton: button, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
+                    }
                 case .PoliticalAffiliationCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [thePoliticDemocratButton, thePoliticRepublicanButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllButton: thePoliticAllButton, theAllFilter: .PoliticalAffiliationAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.politicalAffiliationAllValues, pushedButton: button, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllFilter: .PoliticalAffiliationAllFilter)
+                    }
                 case .GenderCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theGenderMaleButton, theGenderFemaleButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.genderMinusAllValues, theAllButton: theGenderAllButton, theAllFilter: .GenderAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.genderAllValues, pushedButton: button, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                         changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.genderMinusAllValues, theAllFilter: .GenderAllFilter)
+                    }
                 case .SexualityCategoryName?:
-                    let buttonMinusAllButtonArray : [UIButton] = [theSexualityGayButton, theSexualityBisexualButton, theSexualityStraightButton]
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: buttonMinusAllButtonArray, categoryArray: FilterNames.sexualityMinusAllValues, theAllButton: theSexualityAllButton, theAllFilter: .SexualityAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.sexualityAllValues, pushedButton: button, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.sexualityMinusAllValues, theAllFilter: .SexualityAllFilter)
+                    }
                 default: break
                 }
             }
@@ -225,11 +258,11 @@ class FilterViewController: UIViewController {
     }
     
     //this method is to change the button highlights if all was pushed, or if all is pushed and someone presses another button
-    func changeButtonHighlightsAndDictionaryValues(categoryName: FilterCategories, filterName: FilterNames, buttonArray: [UIButton], categoryArray: [FilterNames], theAllButton: UIButton, theAllFilter: FilterNames) {
+    func changeButtonHighlightsAndDictionaryValues(categoryName: FilterCategories, filterName: FilterNames, buttonArray: [UIButton], categoryArray: [FilterNames], theAllFilter: FilterNames) {
         if FilterNames.theAllButtonValues.contains(filterName) {
             //this means the button pressed was an all button
-            for button in buttonArray {
-                changeButtonBackground(button, currentState: true)
+            for index in 0...buttonArray.count - 2 {
+                changeButtonBackground(buttonArray[index], currentState: true)
             }
             //reseting all the filter states to false, because we want all races in the query. Which, is the default query.
             for filterName in categoryArray {
@@ -237,8 +270,31 @@ class FilterViewController: UIViewController {
             }
         } else {
             //it is not the all button, so change the all-button state and button color.
-            changeButtonBackground(theAllButton, currentState: true)
+            changeButtonBackground(buttonArray[buttonArray.count - 1], currentState: true)
             filterDictionary[theAllFilter] = (filterState: false, filterCategory: categoryName)
+        }
+    }
+    
+    //you can only push one button when inputing your characteristics
+    func chooseOneButton (filterCategory: FilterCategories, filterName: FilterNames, filterNamesArray: [FilterNames], pushedButton: UIButton, buttonArray: [UIButton]) {
+        for button in buttonArray {
+            if button == pushedButton {
+                //set the pushed button to highlighted
+                changeButtonBackground(pushedButton, currentState: false)
+            } else {
+                //set the non-pushed buttons all to unhighlighted
+                changeButtonBackground(button, currentState: true)
+            }
+        }
+        
+        //set the correct values in the dictionary
+        for filter in filterNamesArray {
+            if filter == filterName {
+                filterDictionary[filter] = (filterState: true, filterCategory: filterCategory)
+            } else {
+                //every other filter name becomes false
+                filterDictionary[filter] = (filterState: false, filterCategory: filterCategory)
+            }
         }
     }
     
@@ -256,7 +312,11 @@ class FilterViewController: UIViewController {
 
     
     @IBAction func save(sender: AnyObject) {
-        createFilteredUserArray()
+        if filterUserMode == .UserEditingMode {
+            saveUserCharacteristics()
+        } else if filterUserMode == .FilteringMode {
+            createFilteredUserArray()
+        }
     }
     
     @IBAction func distanceSliderValueChanged(sender: AnyObject) {
@@ -270,8 +330,6 @@ class FilterViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        let locationManager = CLLocationManager()
-//        locationManager.requestWhenInUseAuthorization()
         createFilterDictionary()
         getUserLocation()
         setGUI()
@@ -302,28 +360,42 @@ class FilterViewController: UIViewController {
     
     func setGUI() {
         setAgeSliderGUI()
-        theSexualityAllButton.layer.cornerRadius = cornerSize
-        theSexualityBisexualButton.layer.cornerRadius = cornerSize
-        theSexualityGayButton.layer.cornerRadius = cornerSize
-        theSexualityStraightButton.layer.cornerRadius = cornerSize
-        theHairColorBrunetteButton.layer.cornerRadius = cornerSize
-        theHairColorRedheadButton.layer.cornerRadius = cornerSize
-        theHairColorBlondeButton.layer.cornerRadius = cornerSize
-        theHairColorAllButton.layer.cornerRadius = cornerSize
-        theDistanceGraySliderView.layer.cornerRadius = cornerSize
+        setRoundedCorners()
+        if filterUserMode == .UserEditingMode {
+            setInputModeGUI()
+        }
+    }
+    
+    func setRoundedCorners() {
+        let cornerSize : CGFloat = 10
+        let stackViewArray = [theRaceStackView, theHairColorStackView, theGenderStackView, thePoliticStackView, theSexualityStackView]
+        for stackView in stackViewArray {
+            for button in stackView.arrangedSubviews {
+                button.layer.cornerRadius = cornerSize
+            }
+        }
+        //set the other corners
         theAgeRangeSlider.layer.cornerRadius = cornerSize
-        theRaceAsianButton.layer.cornerRadius = cornerSize
-        theRaceBlackButton.layer.cornerRadius = cornerSize
-        theRaceLatinoButton.layer.cornerRadius = cornerSize
-        theRaceWhiteButton.layer.cornerRadius = cornerSize
-        theRaceAllButton.layer.cornerRadius = cornerSize
-        thePoliticAllButton.layer.cornerRadius = cornerSize
-        thePoliticDemocratButton.layer.cornerRadius = cornerSize
-        thePoliticRepublicanButton.layer.cornerRadius = cornerSize
-        theGenderMaleButton.layer.cornerRadius = cornerSize
-        theGenderFemaleButton.layer.cornerRadius = cornerSize
-        theGenderAllButton.layer.cornerRadius = cornerSize
+        theDistanceGraySliderView.layer.cornerRadius = cornerSize
         theSaveButton.layer.cornerRadius = 0.5 * theSaveButton.bounds.size.width
+    }
+    
+    func setInputModeGUI() {
+        removeFromMainStackView(theMaximumDistanceHolderView)
+        removeFromMainStackView(theAgeRangeHolderView)
+        setSkipButtonText([theRaceAllButton, theHairColorAllButton, thePoliticAllButton, theGenderAllButton, theSexualityAllButton])
+        thePageTitle.text = "Who Are You?"
+    }
+    
+    func setSkipButtonText(buttonArray: [UIButton]) {
+        for button in buttonArray {
+            button.setTitle("Skip", forState: .Normal)
+        }
+    }
+    
+    func removeFromMainStackView(view: UIView) {
+        theMainStackView.removeArrangedSubview(view)
+        view.removeFromSuperview()
     }
     
     func setAgeSliderGUI() {
@@ -332,29 +404,6 @@ class FilterViewController: UIViewController {
         theAgeRangeSlider.handleDiameter = 27
         theAgeRangeSlider.selectedHandleDiameterMultiplier = 1.2
     }
-    
-    //for creating the lines between the buttons. I create spacing with the stack view and then place a view with background color behind it to fill in the spaces.
-//    func createBackgroundView(stackView: UIStackView, holderView: UIView) {
-//        let backgroundColorView = UIView()
-//        backgroundColorView.backgroundColor = FilteringPageStackViewLinesColor
-//        holderView.insertSubview(backgroundColorView, belowSubview: stackView)
-//        backgroundColorView.snp_makeConstraints { (make) -> Void in
-//            make.edges.equalTo(stackView).inset(UIEdgeInsetsMake(0, 20, 0, 20))
-//        }
-//    }
-    
-    //left button means we want the corners to be on the top and bottom left. If false, then we want right side corners.
-//    func maskButton(button: UIButton, leftButton: Bool) {
-//        let maskLayer = CAShapeLayer()
-//        if leftButton {
-//             maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopLeft.union(.BottomLeft), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-//        } else {
-//            //button is on the right side
-//            maskLayer.path = UIBezierPath(roundedRect: button.bounds, byRoundingCorners: UIRectCorner.TopRight.union(.BottomRight), cornerRadii: CGSizeMake(cornerSize, cornerSize)).CGPath
-//        }
-//        
-//        button.layer.mask = maskLayer
-//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -381,6 +430,63 @@ extension FilterViewController {
                 self.currentUserLocation = geoPoint
             } else {
                 print(error)
+            }
+        }
+    }
+    
+    func saveUserCharacteristics() {
+        let currentUser = User.currentUser()!
+        for (filterName, filterDictionaryTuple) in filterDictionary {
+            //checks if the button is clicked
+            if filterDictionaryTuple.filterState {
+            if FilterNames.raceAllValues.contains(filterName) {
+                if filterName == .RaceAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.removeObjectForKey("race")
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.race = filterName.rawValue
+                }
+            } else if FilterNames.hairColorAllValues.contains(filterName) {
+                if filterName == .HairColorAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.removeObjectForKey("hairColor")
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.hairColor = filterName.rawValue
+                }
+            } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
+                if filterName == .PoliticalAffiliationAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.removeObjectForKey("politicalAffiliation")
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.politicalAffiliation = filterName.rawValue
+                }
+            } else if FilterNames.genderAllValues.contains(filterName) {
+                if filterName == .GenderAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.removeObjectForKey("gender")
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.gender = filterName.rawValue
+                }
+            } else if FilterNames.sexualityAllValues.contains(filterName) {
+                if filterName == .SexualityAllFilter {
+                    //the user does not want to be queried upon for this particular field.
+                    currentUser.removeObjectForKey("sexuality")
+                } else {
+                    //set the appropriate value to the user
+                    currentUser.sexuality = filterName.rawValue
+                }
+                }
+            }
+        }
+        currentUser.saveInBackgroundWithBlock { (success, error) in
+            if success {
+                self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                let _ = Alert(title: "Saving Error", subtitle: "there was an error saving you characteristics. Please try again.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
             }
         }
     }
