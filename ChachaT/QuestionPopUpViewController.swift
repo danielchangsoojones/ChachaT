@@ -15,6 +15,13 @@ enum QuestionPopUpState {
     case ViewOnlyMode
 }
 
+enum PopUpQuestionNumber {
+    case QuestionOne
+    case QuestionTwo
+    case QuestionThree
+    case CustomQuestion
+}
+
 class QuestionPopUpViewController: PopUpSuperViewController {
 
     @IBOutlet weak var theQuestionTextField: UITextView!
@@ -22,7 +29,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theBackgroundColorView: UIView!
     
     var currentQuestion: Question?
-    var questionNumber: Int = 1
+    var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
     var theQuestionTextFieldChanged = false
     var theAnswerTextFieldChanged = false
     
@@ -47,18 +54,18 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             currentQuestion?.question = theQuestionTextField.text
             currentQuestion?.topAnswer = theAnswerTextField.text
         }
-        switch questionNumber {
-        case 1: currentUser!.questionOne = currentQuestion
-        case 2: currentUser!.questionTwo = currentQuestion
-        case 3: currentUser!.questionThree = currentQuestion
-        default: break
+        switch popUpQuestionNumber {
+        case .QuestionOne: currentUser!.questionOne = currentQuestion
+        case .QuestionTwo: currentUser!.questionTwo = currentQuestion
+        case .QuestionThree: currentUser!.questionThree = currentQuestion
+        case .CustomQuestion: break
         }
         theActivitySpinner.hidden = false
         theActivitySpinner.startAnimating()
         let array : [PFObject] = [currentUser!, currentQuestion!]
         PFObject.saveAllInBackground(array) { (success, error) in
             if success {
-                self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.questionNumber)
+                self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.popUpQuestionNumber)
                 self.navigationController?.popViewControllerAnimated(true)
             }
         }

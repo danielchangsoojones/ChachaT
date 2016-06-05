@@ -12,7 +12,7 @@ import Koloda
 let defaultBottomOffset:CGFloat = 0
 let defaultTopOffset:CGFloat = 67
 let defaultHorizontalOffset:CGFloat = 10
-let defaultHeightRatio:CGFloat = 1.25
+let defaultHeightRatio:CGFloat = 1.35
 let defaultHeightRatio3by2:CGFloat = 1.06
 let backgroundCardHorizontalMarginMultiplier:CGFloat = 0.25
 let backgroundCardScalePercent:CGFloat = 1.5

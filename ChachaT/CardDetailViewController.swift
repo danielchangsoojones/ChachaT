@@ -54,6 +54,7 @@ class CardDetailViewController: UIViewController {
                 userOfTheCard?.fullName = fullNameText
                 userOfTheCard?.lowercaseFullName = fullNameText?.lowercaseString
             }
+            theProfileImageButtonOverlay.setImage(nil, forState: .Normal)
             if imageWasChanged {
                 let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(profileImage.image!, 0.6)!)
                 userOfTheCard!.profileImage = file
@@ -89,20 +90,20 @@ class CardDetailViewController: UIViewController {
     }
     
     @IBAction func questionButtonOnePressed(sender: AnyObject) {
-        createQuestionPopUp(1)
+        createQuestionPopUp(PopUpQuestionNumber.QuestionOne)
     }
     
     @IBAction func questionButtonTwoPressed(sender: AnyObject) {
-        createQuestionPopUp(2)
+        createQuestionPopUp(PopUpQuestionNumber.QuestionTwo)
     }
     
     @IBAction func questionButtonThreePressed(sender: AnyObject) {
-        createQuestionPopUp(3)
+        createQuestionPopUp(PopUpQuestionNumber.QuestionThree)
     }
 
     
     @IBAction func customQuestionButtonPressed(sender: AnyObject) {
-        createQuestionPopUp(4)
+        createQuestionPopUp(PopUpQuestionNumber.CustomQuestion)
     }
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
@@ -143,17 +144,17 @@ class CardDetailViewController: UIViewController {
         popup.presentInViewController(self)
     }
     
-    func createQuestionPopUp(questionNumber: Int) {
+    func createQuestionPopUp(questionNumber: PopUpQuestionNumber) {
         //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
         vc.delegate = self
-        vc.questionNumber = questionNumber
+        vc.popUpQuestionNumber = questionNumber
         switch questionNumber {
-        case 1: vc.currentQuestion = userOfTheCard?.questionOne
-        case 2: vc.currentQuestion = userOfTheCard?.questionTwo
-        case 3: vc.currentQuestion = userOfTheCard?.questionThree
-        default: break
+        case .QuestionOne: vc.currentQuestion = userOfTheCard?.questionOne
+        case .QuestionTwo: vc.currentQuestion = userOfTheCard?.questionTwo
+        case .QuestionThree: vc.currentQuestion = userOfTheCard?.questionThree
+        case .CustomQuestion: break
         }
         if questionDetailState == .EditingMode {
             vc.questionPopUpState = .EditingMode
@@ -265,9 +266,8 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             titleTextField.text = title
         }
-        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
-        self.profileImage.image = UIImage(named: "camera-Colored")
-        self.profileImage.contentMode = .Center
+        theProfileImageButtonOverlay.setImage(UIImage(named: "camera-Colored"), forState: .Normal)
+//        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
         self.theFullNameLabel.hidden = true
         self.theFullNameTextField.hidden = false
         self.titleTextField.hidden = false
@@ -354,16 +354,16 @@ extension CardDetailViewController: PopUpViewControllerDelegate {
 }
 
 protocol QuestionPopUpViewControllerDelegate{
-    func passQuestionText(text: String, questionNumber: Int)
+    func passQuestionText(text: String, questionNumber: PopUpQuestionNumber)
 }
 
 extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
-    func passQuestionText(text: String, questionNumber: Int) {
+    func passQuestionText(text: String, questionNumber: PopUpQuestionNumber) {
         switch questionNumber {
-        case 1: theQuestionButtonOne.setTitle(text, forState: .Normal)
-        case 2: theQuestionButtonTwo.setTitle(text, forState: .Normal)
-        case 3: theQuestionButtonThree.setTitle(text, forState: .Normal)
-        default: break
+        case .QuestionOne: theQuestionButtonOne.setTitle(text, forState: .Normal)
+        case .QuestionTwo: theQuestionButtonTwo.setTitle(text, forState: .Normal)
+        case .QuestionThree: theQuestionButtonThree.setTitle(text, forState: .Normal)
+        case .CustomQuestion: break
         }
     }
 }
