@@ -234,11 +234,23 @@ class FilterViewController: UIViewController {
                         changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theHairColorStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.hairColorMinusAllValues, theAllFilter: .HairColorAllFilter)
                     }
                 case .PoliticalAffiliationCategoryName?:
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllFilter: .PoliticalAffiliationAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.politicalAffiliationAllValues, pushedButton: button, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: thePoliticStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.politicalAffiliationMinusAllValues, theAllFilter: .PoliticalAffiliationAllFilter)
+                    }
                 case .GenderCategoryName?:
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.genderMinusAllValues, theAllFilter: .GenderAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.genderAllValues, pushedButton: button, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                         changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theGenderStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.genderMinusAllValues, theAllFilter: .GenderAllFilter)
+                    }
                 case .SexualityCategoryName?:
-                    changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.sexualityMinusAllValues, theAllFilter: .SexualityAllFilter)
+                    if filterUserMode == .UserEditingMode {
+                        chooseOneButton(filterDictionaryCurrentFilterCategory!, filterName: filterName, filterNamesArray: FilterNames.sexualityAllValues, pushedButton: button, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton])
+                    } else if filterUserMode == .FilteringMode {
+                        changeButtonHighlightsAndDictionaryValues(filterDictionaryCurrentFilterCategory!, filterName: filterName, buttonArray: theSexualityStackView.arrangedSubviews as! [UIButton], categoryArray: FilterNames.sexualityMinusAllValues, theAllFilter: .SexualityAllFilter)
+                    }
                 default: break
                 }
             }
