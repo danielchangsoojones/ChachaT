@@ -21,6 +21,7 @@ let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
+   case QuestionOnboardingCell
 }
 
 //helper functions
