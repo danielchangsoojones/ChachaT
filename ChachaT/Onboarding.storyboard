@@ -310,6 +310,9 @@
                                                     <state key="normal" title="Button" backgroundImage="Question Bubble">
                                                         <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                     </state>
+                                                    <connections>
+                                                        <action selector="questionButtonPressed:" destination="H0X-2T-UDU" eventType="touchUpInside" id="PEw-7O-aiN"/>
+                                                    </connections>
                                                 </button>
                                             </subviews>
                                             <constraints>
@@ -333,6 +336,9 @@
                                                 <exclude reference="gQq-MT-dTW"/>
                                             </mask>
                                         </variation>
+                                        <connections>
+                                            <outlet property="theQuestionButton" destination="aCX-Vi-YIm" id="OVw-F6-UXL"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                                 <connections>

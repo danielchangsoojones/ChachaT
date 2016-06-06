@@ -9,10 +9,19 @@
 import UIKit
 
 class QuestionOnboardingTableViewCell: UITableViewCell {
+    
+    @IBOutlet weak var theQuestionButton: ResizableButton!
+    
+    
+    @IBAction func questionButtonPressed(sender: AnyObject) {
+        
+    }
+    
 
     override func awakeFromNib() {
         super.awakeFromNib()
         // Initialization code
+        createQuestionBubbleGUI(theQuestionButton)
     }
 
     override func setSelected(selected: Bool, animated: Bool) {

@@ -169,14 +169,6 @@ class CardDetailViewController: UIViewController {
         
     }
     
-    func createQuestionBubbleGUI(questionButton: ResizableButton) {
-        questionButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-        questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
-        questionButton.titleLabel?.numberOfLines = 0
-        questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
-        
-    }
-    
     func createBottomPicturePopUp() {
         let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController

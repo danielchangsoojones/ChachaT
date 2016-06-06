@@ -11,7 +11,7 @@ import UIKit
 class QuestionOnboardingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    let sampleQuestionsArray : [String] = ["what was the scariest moment of your life?"]
+    let sampleQuestionsArray : [String] = ["what was the scariest moment of your life and how did you cope with it?"]
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,6 +35,9 @@ extension QuestionOnboardingViewController : UITableViewDelegate, UITableViewDat
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let cell = self.tableView.dequeueReusableCellWithIdentifier(StoryboardIdentifiers.QuestionOnboardingCell.rawValue)! as! QuestionOnboardingTableViewCell
+        let index = indexPath.item
+        let questionString = sampleQuestionsArray[index]
+        cell.theQuestionButton.setTitle(questionString, forState: .Normal)
         return cell
     }
 

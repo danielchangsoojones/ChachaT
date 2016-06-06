@@ -46,6 +46,14 @@ func setBottomBlur() -> CAGradientLayer {
     return gradientLayer
 }
 
+func createQuestionBubbleGUI(questionButton: ResizableButton) {
+    questionButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
+    questionButton.titleLabel?.numberOfLines = 0
+    questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
+    
+}
+
 
 //Text View methods
 func editingBeginsTextView(textView: UITextView) {

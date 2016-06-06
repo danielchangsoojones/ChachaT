@@ -246,7 +246,7 @@
 		926108531CEA0E95009F3E86 /* Onboarding */ = {
 			isa = PBXGroup;
 			children = (
-				928A65B91D0606FA0021C75C /* QuestionOnboardin */,
+				928A65B91D0606FA0021C75C /* QuestionOnboarding */,
 				926108541CEA0EA6009F3E86 /* Onboarding.storyboard */,
 				926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */,
 			);
@@ -272,13 +272,13 @@
 			name = Filtering;
 			sourceTree = "<group>";
 		};
-		928A65B91D0606FA0021C75C /* QuestionOnboardin */ = {
+		928A65B91D0606FA0021C75C /* QuestionOnboarding */ = {
 			isa = PBXGroup;
 			children = (
 				928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */,
 				928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */,
 			);
-			name = QuestionOnboardin;
+			name = QuestionOnboarding;
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
