@@ -21,6 +21,7 @@ let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
+   case QuestionOnboardingCell
 }
 
 //helper functions
@@ -43,6 +44,14 @@ func setBottomBlur() -> CAGradientLayer {
     gradientLayer.locations = [0.0, 0.8]
     
     return gradientLayer
+}
+
+func createQuestionBubbleGUI(questionButton: ResizableButton) {
+    questionButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
+    questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
+    questionButton.titleLabel?.numberOfLines = 0
+    questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
+    
 }
 
 
