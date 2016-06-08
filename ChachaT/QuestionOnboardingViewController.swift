@@ -41,6 +41,7 @@ extension QuestionOnboardingViewController : UITableViewDelegate, UITableViewDat
         let questionString = sampleQuestionsArray[index]
         cell.index = index
         cell.delegate = self
+        cell.backgroundColor = UIColor.clearColor()
         cell.popUpQuestionNumber = self.questionNumber
         cell.theQuestionButton.setTitle(questionString, forState: .Normal)
         return cell
