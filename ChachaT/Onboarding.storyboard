@@ -279,7 +279,7 @@
             </objects>
             <point key="canvasLocation" x="-73" y="1055"/>
         </scene>
-        <!--Question Onboarding View Controller-->
+        <!--Answer Three Questions-->
         <scene sceneID="Dma-0s-XHI">
             <objects>
                 <viewController id="WOQ-Ef-PR1" customClass="QuestionOnboardingViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
@@ -355,7 +355,7 @@
                             <constraint firstItem="sSI-Af-c6N" firstAttribute="top" secondItem="atd-Uw-KhB" secondAttribute="bottom" id="zxk-5v-kVg"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="3Qm-hf-fns"/>
+                    <navigationItem key="navigationItem" title="Answer Three Questions" id="3Qm-hf-fns"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="atd-Uw-KhB" id="Sep-S9-6gb"/>
@@ -373,6 +373,10 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iVr-2j-WD6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
                     </navigationBar>
                     <nil name="viewControllers"/>
                     <connections>
