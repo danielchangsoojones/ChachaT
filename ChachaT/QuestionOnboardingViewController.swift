@@ -11,7 +11,7 @@ import UIKit
 class QuestionOnboardingViewController: UIViewController {
     
     @IBOutlet weak var tableView: UITableView!
-    let sampleQuestionsArray : [String] = ["what was the scariest moment of your life and how did you cope with it?"]
+    let sampleQuestionsArray : [String] = ["What would the person who named Walkie Talkies have named other items?", "What is something someone said that forever changed your way of thinking?", "What G-Rated Joke Always Cracks You Up?", "What is your favorite fun fact?", "Who is the scariest person you have ever met?","What will be the \"turns out cigarettes are bad for us.\" of our generation?", "What was a loophole that you found and exploited the hell out of?", "What was your \"I don't get paid enough for this shit\" moment?"]
     var index : Int?
     var questionNumber: PopUpQuestionNumber = .QuestionOne
 
