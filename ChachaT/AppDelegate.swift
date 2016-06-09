@@ -44,15 +44,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.currentUser()!.anonymous = true
             User.currentUser()?.saveInBackground()
             
-            PFAnonymousUtils.logInWithBlock {
-                (user: PFUser?, error: NSError?) -> Void in
-                if error != nil || user == nil {
-                    print("Anonymous login failed.")
-                } else {
-                    print("Anonymous user logged in.")
-                }
-            }
-            
         }
         
         return true
