@@ -31,14 +31,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //setting the initial storyboard
         if User.currentUser() == nil {
-            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+//            
+//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+//            
+//            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
+//            
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
             
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
-            
-            self.window?.rootViewController = initialViewController
-            self.window?.makeKeyAndVisible()
+            User.enableAutomaticUser()
+            User.currentUser()!.anonymous = true
+            User.currentUser()?.saveInBackground()
             
         }
         
@@ -65,6 +69,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+        
     }
 
 
