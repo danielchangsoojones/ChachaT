@@ -149,7 +149,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             self.view.userInteractionEnabled = true
             self.theSpinner.stopAnimating()
             if success {
-                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
+                self.performSegueWithIdentifier(.SignUpToQuestionOnboardingSegue, sender: self)
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = PFUser.currentUser()
                 installation.saveInBackground()
@@ -276,6 +276,7 @@ extension SignUpLogInViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case SignUpSuccessSegue
+        case SignUpToQuestionOnboardingSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

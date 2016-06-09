@@ -12,9 +12,13 @@ class QuestionOnboardingTableViewCell: UITableViewCell {
     
     @IBOutlet weak var theQuestionButton: ResizableButton!
     
+    var index: Int?
+    var delegate : QuestionOnboardingTableViewCellDelegate?
+    
     
     @IBAction func questionButtonPressed(sender: AnyObject) {
-        
+        delegate?.passIndexForButtonPushed(index!)
+        delegate?.createQuestionPopUp()
     }
     
 

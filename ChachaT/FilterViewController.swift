@@ -13,6 +13,7 @@ import TTRangeSlider
 import Parse
 import CoreLocation
 import Timepiece
+import EFTools
 
 public enum FilterUserMode {
     case UserEditingMode
@@ -67,6 +68,7 @@ class FilterViewController: UIViewController {
     
     var filterUserMode : FilterUserMode = .FilteringMode
     var delegate: FilterViewControllerDelegate?
+    var fromOnboarding = false
     
     
     enum FilterNames : String {
@@ -484,7 +486,11 @@ extension FilterViewController {
         }
         currentUser.saveInBackgroundWithBlock { (success, error) in
             if success {
-                self.navigationController?.popViewControllerAnimated(true)
+                if self.fromOnboarding {
+                    self.performSegueWithIdentifier(.FilterToMainPageSegue, sender: self)
+                } else {
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
             } else {
                 let _ = Alert(title: "Saving Error", subtitle: "there was an error saving you characteristics. Please try again.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
             }
@@ -541,4 +547,12 @@ extension FilterViewController: TTRangeSliderDelegate {
         }
     }
 }
+
+extension FilterViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case FilterToMainPageSegue
+    }
+}
+
 

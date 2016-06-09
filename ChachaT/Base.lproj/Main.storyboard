@@ -44,7 +44,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
                                         <rect key="frame" x="148" y="285" width="78" height="78"/>
                                     </imageView>
                                 </subviews>

@@ -41,9 +41,6 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="WOQ-Ef-PR1" kind="presentation" id="bt8-lq-P2t"/>
-                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RhP-q7-qTo">
                                 <rect key="frame" x="68" y="305" width="35" height="35"/>
@@ -265,6 +262,7 @@
                         <outlet property="theTermsOfService" destination="B8v-0M-Wvc" id="jZL-mr-HLj"/>
                         <outlet property="theTextfieldsView" destination="J6X-gB-146" id="8QR-2w-YsT"/>
                         <segue destination="7ft-US-IjM" kind="presentation" identifier="SignUpSuccessSegue" id="Rdr-PG-LAv"/>
+                        <segue destination="Myq-Dr-4TB" kind="presentation" identifier="SignUpToQuestionOnboardingSegue" id="pui-5C-Zt1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-AS-nWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -279,7 +277,7 @@
             </objects>
             <point key="canvasLocation" x="-73" y="1055"/>
         </scene>
-        <!--Question Onboarding View Controller-->
+        <!--Answer Three Questions-->
         <scene sceneID="Dma-0s-XHI">
             <objects>
                 <viewController id="WOQ-Ef-PR1" customClass="QuestionOnboardingViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
@@ -291,76 +289,120 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="atd-Uw-KhB">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuestionOnboardingCell" rowHeight="88" id="H0X-2T-UDU" customClass="QuestionOnboardingTableViewCell" customModule="ChachaT" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="28" width="375" height="88"/>
-                                        <autoresizingMask key="autoresizingMask"/>
-                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H0X-2T-UDU" id="geP-us-dxi">
-                                            <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
-                                            <autoresizingMask key="autoresizingMask"/>
-                                            <subviews>
-                                                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCX-Vi-YIm" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
-                                                    <rect key="frame" x="10" y="10" width="355" height="68"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="oTT-ry-ZgB">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                <subviews>
+                                    <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="none" rowHeight="88" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="atd-Uw-KhB">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                        <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                        <prototypes>
+                                            <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="QuestionOnboardingCell" rowHeight="88" id="H0X-2T-UDU" customClass="QuestionOnboardingTableViewCell" customModule="ChachaT" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="92" width="375" height="88"/>
+                                                <autoresizingMask key="autoresizingMask"/>
+                                                <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="H0X-2T-UDU" id="geP-us-dxi">
+                                                    <rect key="frame" x="0.0" y="0.0" width="375" height="88"/>
+                                                    <autoresizingMask key="autoresizingMask"/>
+                                                    <subviews>
+                                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aCX-Vi-YIm" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
+                                                            <rect key="frame" x="10" y="10" width="355" height="68"/>
+                                                            <constraints>
+                                                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="VdX-Q1-AD7"/>
+                                                            </constraints>
+                                                            <state key="normal" title="What is your dream job?" backgroundImage="Question Bubble">
+                                                                <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                            </state>
+                                                            <connections>
+                                                                <action selector="questionButtonPressed:" destination="H0X-2T-UDU" eventType="touchUpInside" id="PEw-7O-aiN"/>
+                                                            </connections>
+                                                        </button>
+                                                    </subviews>
                                                     <constraints>
-                                                        <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="VdX-Q1-AD7"/>
+                                                        <constraint firstAttribute="trailing" secondItem="aCX-Vi-YIm" secondAttribute="trailing" constant="10" id="3gZ-5x-LSb"/>
+                                                        <constraint firstItem="aCX-Vi-YIm" firstAttribute="leading" secondItem="geP-us-dxi" secondAttribute="leading" constant="10" id="HXb-SF-in5"/>
+                                                        <constraint firstItem="aCX-Vi-YIm" firstAttribute="centerX" secondItem="geP-us-dxi" secondAttribute="centerX" id="MKS-sn-xLO"/>
+                                                        <constraint firstItem="aCX-Vi-YIm" firstAttribute="centerY" secondItem="geP-us-dxi" secondAttribute="centerY" id="Nu8-6D-8jF"/>
+                                                        <constraint firstAttribute="bottom" secondItem="aCX-Vi-YIm" secondAttribute="bottom" constant="9.5" id="dhh-j5-olX"/>
                                                     </constraints>
-                                                    <state key="normal" title="What is your dream job?" backgroundImage="Question Bubble">
-                                                        <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </state>
-                                                    <connections>
-                                                        <action selector="questionButtonPressed:" destination="H0X-2T-UDU" eventType="touchUpInside" id="PEw-7O-aiN"/>
-                                                    </connections>
-                                                </button>
-                                            </subviews>
-                                            <constraints>
-                                                <constraint firstAttribute="trailing" secondItem="aCX-Vi-YIm" secondAttribute="trailing" constant="10" id="3gZ-5x-LSb"/>
-                                                <constraint firstItem="aCX-Vi-YIm" firstAttribute="leading" secondItem="geP-us-dxi" secondAttribute="leading" constant="10" id="HXb-SF-in5"/>
-                                                <constraint firstItem="aCX-Vi-YIm" firstAttribute="centerX" secondItem="geP-us-dxi" secondAttribute="centerX" id="MKS-sn-xLO"/>
-                                                <constraint firstItem="aCX-Vi-YIm" firstAttribute="centerY" secondItem="geP-us-dxi" secondAttribute="centerY" id="Nu8-6D-8jF"/>
-                                                <constraint firstAttribute="bottom" secondItem="aCX-Vi-YIm" secondAttribute="bottom" constant="9.5" id="dhh-j5-olX"/>
-                                            </constraints>
-                                            <variation key="default">
-                                                <mask key="constraints">
-                                                    <exclude reference="MKS-sn-xLO"/>
-                                                </mask>
-                                            </variation>
-                                        </tableViewCellContentView>
-                                        <constraints>
-                                            <constraint firstAttribute="bottom" secondItem="aCX-Vi-YIm" secondAttribute="bottom" constant="10" id="gQq-MT-dTW"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="gQq-MT-dTW"/>
-                                            </mask>
-                                        </variation>
+                                                    <variation key="default">
+                                                        <mask key="constraints">
+                                                            <exclude reference="MKS-sn-xLO"/>
+                                                        </mask>
+                                                    </variation>
+                                                </tableViewCellContentView>
+                                                <constraints>
+                                                    <constraint firstAttribute="bottom" secondItem="aCX-Vi-YIm" secondAttribute="bottom" constant="10" id="gQq-MT-dTW"/>
+                                                </constraints>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="gQq-MT-dTW"/>
+                                                    </mask>
+                                                </variation>
+                                                <connections>
+                                                    <outlet property="theQuestionButton" destination="aCX-Vi-YIm" id="OVw-F6-UXL"/>
+                                                </connections>
+                                            </tableViewCell>
+                                        </prototypes>
                                         <connections>
-                                            <outlet property="theQuestionButton" destination="aCX-Vi-YIm" id="OVw-F6-UXL"/>
+                                            <outlet property="dataSource" destination="WOQ-Ef-PR1" id="X3W-hd-1S3"/>
+                                            <outlet property="delegate" destination="WOQ-Ef-PR1" id="hlN-8f-PIo"/>
                                         </connections>
-                                    </tableViewCell>
-                                </prototypes>
-                                <connections>
-                                    <outlet property="dataSource" destination="WOQ-Ef-PR1" id="X3W-hd-1S3"/>
-                                    <outlet property="delegate" destination="WOQ-Ef-PR1" id="hlN-8f-PIo"/>
-                                </connections>
-                            </tableView>
+                                    </tableView>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="atd-Uw-KhB" firstAttribute="top" secondItem="oTT-ry-ZgB" secondAttribute="top" id="0Lm-1X-OSG"/>
+                                    <constraint firstAttribute="bottom" secondItem="atd-Uw-KhB" secondAttribute="bottom" id="Coc-Qk-A0t"/>
+                                    <constraint firstAttribute="trailing" secondItem="atd-Uw-KhB" secondAttribute="trailing" id="Hfz-fP-6Zc"/>
+                                    <constraint firstItem="atd-Uw-KhB" firstAttribute="leading" secondItem="oTT-ry-ZgB" secondAttribute="leading" id="c3H-pY-lEu"/>
+                                </constraints>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailing" secondItem="atd-Uw-KhB" secondAttribute="trailing" id="2eX-Po-vRp"/>
-                            <constraint firstItem="atd-Uw-KhB" firstAttribute="top" secondItem="vpO-HF-dKT" secondAttribute="bottom" id="Iuy-s2-sWI"/>
-                            <constraint firstItem="atd-Uw-KhB" firstAttribute="leading" secondItem="4uo-Ls-LMX" secondAttribute="leading" id="nPc-dl-O49"/>
-                            <constraint firstItem="sSI-Af-c6N" firstAttribute="top" secondItem="atd-Uw-KhB" secondAttribute="bottom" id="zxk-5v-kVg"/>
+                            <constraint firstAttribute="bottom" secondItem="oTT-ry-ZgB" secondAttribute="bottom" id="AEy-nx-YKW"/>
+                            <constraint firstItem="oTT-ry-ZgB" firstAttribute="leading" secondItem="4uo-Ls-LMX" secondAttribute="leading" id="BEk-xY-E9c"/>
+                            <constraint firstItem="oTT-ry-ZgB" firstAttribute="top" secondItem="4uo-Ls-LMX" secondAttribute="top" id="C8F-nx-Nt8"/>
+                            <constraint firstAttribute="trailing" secondItem="oTT-ry-ZgB" secondAttribute="trailing" id="DkK-iE-Cp7"/>
                         </constraints>
                     </view>
+                    <navigationItem key="navigationItem" title="Answer Three Questions" id="3Qm-hf-fns"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="atd-Uw-KhB" id="Sep-S9-6gb"/>
+                        <segue destination="HZD-sk-dvs" kind="show" identifier="FilteringPageSegue" id="cIm-fX-1as"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oae-e5-Vde" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="256.5" y="835.5"/>
+        </scene>
+        <!--Filtering-->
+        <scene sceneID="vwa-74-dJU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filtering" id="HZD-sk-dvs" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9v-Yy-DoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="632.5" y="797"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="LZH-bd-wmI">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Myq-Dr-4TB" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="iVr-2j-WD6">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                        <color key="barTintColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                        <textAttributes key="titleTextAttributes">
+                            <color key="textColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </textAttributes>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="WOQ-Ef-PR1" kind="relationship" relationship="rootViewController" id="KAj-TN-f8F"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="eF6-vy-uT7" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="113.5" y="1559.5"/>
         </scene>

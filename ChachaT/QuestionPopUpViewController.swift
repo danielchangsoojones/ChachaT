@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SnapKit
+import EFTools
 
 enum QuestionPopUpState {
     case EditingMode
@@ -32,6 +33,8 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
     var theQuestionTextFieldChanged = false
     var theAnswerTextFieldChanged = false
+    
+    var fromOnboarding = false
     
     var questionPopUpState = QuestionPopUpState.ViewOnlyMode
     
@@ -65,8 +68,14 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         let array : [PFObject] = [currentUser!, currentQuestion!]
         PFObject.saveAllInBackground(array) { (success, error) in
             if success {
-                self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.popUpQuestionNumber)
-                self.navigationController?.popViewControllerAnimated(true)
+                //for when we are in onboarding mode and answer the 3rd question.
+                if self.fromOnboarding && self.popUpQuestionNumber == .QuestionThree {
+                    self.performSegueWithIdentifier(.FilteringPageSegue, sender: self)
+                } else {
+                    //all the other times, I can just pop the view controller. 
+                    self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.popUpQuestionNumber)
+                    self.navigationController?.popViewControllerAnimated(true)
+                }
             }
         }
     }
@@ -141,3 +150,21 @@ extension QuestionPopUpViewController: UITextViewDelegate {
         }
     }
 }
+
+extension QuestionPopUpViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case FilteringPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .FilteringPageSegue:
+            let destinationVC = segue.destinationViewController as! FilterViewController
+            destinationVC.filterUserMode = FilterUserMode.UserEditingMode
+            destinationVC.fromOnboarding = true
+        default: break
+        }
+    }
+}
+
