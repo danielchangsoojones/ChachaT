@@ -48,6 +48,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+       
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
@@ -95,7 +96,10 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 extension BackgroundAnimationViewController {
     func createUserArray() {
         let query = User.query()
-        query?.whereKey("objectId", notEqualTo: (User.currentUser()?.objectId)!)
+        if let objectId = User.currentUser()?.objectId {
+            query?.whereKey("objectId", notEqualTo: objectId)
+        }
+        query?.whereKey("anonymous", equalTo: false)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
             if let users = objects as? [User] {
                 self.userArray = users
