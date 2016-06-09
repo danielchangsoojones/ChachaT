@@ -15,6 +15,7 @@ import EFTools
 import ParseUI
 import BlurryModalSegue
 import Ripple
+import SnapKit
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -30,6 +31,17 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
+    let handOverlayBackgroundColorView: UIView = {
+        $0.backgroundColor = HandBackgroundColorOverlay
+        $0.alpha = 0.75
+        return $0
+    }(UIImageView())
+    
+    let handImage: UIImageView = {
+        $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
+        $0.contentMode = .ScaleAspectFit
+        return $0
+    }(UIImageView())
     
     var userArray = [User]()
     
@@ -212,6 +224,28 @@ extension BackgroundAnimationViewController: MagicMoveable {
     var magicViews: [UIView] {
         return [theMagicMovePlaceholderImage]
     }
+}
+
+extension BackgroundAnimationViewController {
+    func createHandOverlay() {
+        self.view.addSubview(handOverlayBackgroundColorView)
+        handOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        handOverlayBackgroundColorView.addSubview(handImage)
+        handImage.snp_makeConstraints { (make) in
+            make.center.equalTo(handOverlayBackgroundColorView).offset(CGPointMake(20, 20))
+        }
+        
+        ripple(handImage.frame.origin, view: handOverlayBackgroundColorView)
+        
+    }
+    
+    func removeHandOverlay() {
+        handOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
 }
 
 extension BackgroundAnimationViewController: SegueHandlerType {

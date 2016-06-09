@@ -31,6 +31,7 @@ class User: PFUser {
     @NSManaged var sexuality: String?
     @NSManaged var location: PFGeoPoint?
     @NSManaged var anonymous: Bool
+    @NSManaged var anonymousFlow: Int
     
     func calculateBirthDate() -> Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
