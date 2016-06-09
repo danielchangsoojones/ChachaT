@@ -575,11 +575,20 @@
                         <outlet property="theSexualityGayButton" destination="cw8-yF-rHe" id="02u-s8-g6o"/>
                         <outlet property="theSexualityStackView" destination="ROG-IY-3bB" id="R5i-fS-3Mj"/>
                         <outlet property="theSexualityStraightButton" destination="Flw-Zv-jmP" id="fok-1r-vzl"/>
+                        <segue destination="y2E-PW-aMD" kind="presentation" identifier="FilterToMainPageSegue" id="Pjn-TL-Gvc"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCd-99-eZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="316.5" y="408.5"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="W5v-9O-r0f">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="y2E-PW-aMD" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5ET-cK-gSZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="636.5" y="147"/>
         </scene>
     </scenes>
 </document>
