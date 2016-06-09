@@ -329,11 +329,20 @@
                         <outlet property="theAnswerTextField" destination="hNg-E2-IW9" id="Kp7-co-Auy"/>
                         <outlet property="theBackgroundColorView" destination="dYL-Ek-CAM" id="ebt-fD-Rcw"/>
                         <outlet property="theQuestionTextField" destination="ils-DD-YlI" id="VKB-WN-vVg"/>
+                        <segue destination="0dF-ag-cVb" kind="presentation" identifier="FilteringPageSegue" id="PYE-uw-2RF"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T46-h2-Nim" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1963.5" y="889.5"/>
+        </scene>
+        <!--Filtering-->
+        <scene sceneID="HZM-1t-Opl">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filtering" id="0dF-ag-cVb" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="HFY-Yk-aqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2270.5" y="702"/>
         </scene>
     </scenes>
     <resources>

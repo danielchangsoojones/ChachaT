@@ -22,10 +22,6 @@ class QuestionOnboardingViewController: UIViewController {
         tableView.estimatedRowHeight = 88.0
         // Do any additional setup after loading the view.
     }
-    
-    override func viewDidAppear(animated: Bool) {
-        print(questionNumber)
-    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -63,6 +59,7 @@ extension QuestionOnboardingViewController: QuestionOnboardingTableViewCellDeleg
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController
         vc.popUpQuestionNumber = self.questionNumber
+        vc.fromOnboarding = true
         let question = Question()
         question.question = sampleQuestionsArray[index!]
         vc.currentQuestion = question
@@ -84,7 +81,7 @@ extension QuestionOnboardingViewController: QuestionPopUpViewControllerDelegate 
         case .QuestionTwo:
             self.questionNumber = .QuestionThree
         case .QuestionThree:
-            print("hihi")
+            break
         case .CustomQuestion: break
         }
     }
