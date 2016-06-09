@@ -41,9 +41,6 @@
                                         <integer key="value" value="10"/>
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
-                                <connections>
-                                    <segue destination="Myq-Dr-4TB" kind="presentation" id="bt8-lq-P2t"/>
-                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="facebook_logo" translatesAutoresizingMaskIntoConstraints="NO" id="RhP-q7-qTo">
                                 <rect key="frame" x="68" y="305" width="35" height="35"/>
@@ -265,6 +262,7 @@
                         <outlet property="theTermsOfService" destination="B8v-0M-Wvc" id="jZL-mr-HLj"/>
                         <outlet property="theTextfieldsView" destination="J6X-gB-146" id="8QR-2w-YsT"/>
                         <segue destination="7ft-US-IjM" kind="presentation" identifier="SignUpSuccessSegue" id="Rdr-PG-LAv"/>
+                        <segue destination="Myq-Dr-4TB" kind="presentation" identifier="SignUpToQuestionOnboardingSegue" id="pui-5C-Zt1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-AS-nWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -371,11 +369,20 @@
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="tableView" destination="atd-Uw-KhB" id="Sep-S9-6gb"/>
+                        <segue destination="HZD-sk-dvs" kind="show" identifier="FilteringPageSegue" id="cIm-fX-1as"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oae-e5-Vde" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="700.5" y="1559.5"/>
+            <point key="canvasLocation" x="256.5" y="835.5"/>
+        </scene>
+        <!--Filtering-->
+        <scene sceneID="vwa-74-dJU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Filtering" id="HZD-sk-dvs" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="S9v-Yy-DoT" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="632.5" y="797"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="LZH-bd-wmI">

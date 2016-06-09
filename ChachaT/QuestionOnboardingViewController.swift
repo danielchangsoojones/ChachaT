@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import EFTools
 
 class QuestionOnboardingViewController: UIViewController {
     
@@ -20,6 +21,10 @@ class QuestionOnboardingViewController: UIViewController {
         tableView.rowHeight = UITableViewAutomaticDimension
         tableView.estimatedRowHeight = 88.0
         // Do any additional setup after loading the view.
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        print(questionNumber)
     }
 
     override func didReceiveMemoryWarning() {
@@ -42,42 +47,62 @@ extension QuestionOnboardingViewController : UITableViewDelegate, UITableViewDat
         cell.index = index
         cell.delegate = self
         cell.backgroundColor = UIColor.clearColor()
-        cell.popUpQuestionNumber = self.questionNumber
         cell.theQuestionButton.setTitle(questionString, forState: .Normal)
         return cell
     }
 }
 
 protocol QuestionOnboardingTableViewCellDelegate {
-    func createQuestionPopUp(questionNumber: PopUpQuestionNumber)
-    func passIndexForButtonPushed(index: Int, questionNumber: PopUpQuestionNumber)
+    func createQuestionPopUp()
+    func passIndexForButtonPushed(index: Int)
 }
 
 extension QuestionOnboardingViewController: QuestionOnboardingTableViewCellDelegate {
-    func createQuestionPopUp(questionNumber: PopUpQuestionNumber) {
+    func createQuestionPopUp() {
         //look at STPopUp github for more info.
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController
-        vc.popUpQuestionNumber = questionNumber
+        vc.popUpQuestionNumber = self.questionNumber
         let question = Question()
         question.question = sampleQuestionsArray[index!]
-        switch questionNumber {
-        case .QuestionOne: vc.currentQuestion = question
-        case .QuestionTwo: vc.currentQuestion = question
-        case .QuestionThree: vc.currentQuestion = question
-        case .CustomQuestion: break
-        }
+        vc.currentQuestion = question
+        vc.delegate = self
         vc.questionPopUpState = .EditingMode
         self.navigationController?.pushViewController(vc, animated: true)
     }
     
-    func passIndexForButtonPushed(index: Int, questionNumber: PopUpQuestionNumber) {
+    func passIndexForButtonPushed(index: Int) {
         self.index = index
+    }
+}
+
+extension QuestionOnboardingViewController: QuestionPopUpViewControllerDelegate {
+    func passQuestionText(text: String, questionNumber: PopUpQuestionNumber) {
         switch questionNumber {
-        case .QuestionOne: self.questionNumber = .QuestionTwo
-        case .QuestionTwo: self.questionNumber = .QuestionThree
-        case .QuestionThree: break
+        case .QuestionOne:
+            self.questionNumber = .QuestionTwo
+        case .QuestionTwo:
+            self.questionNumber = .QuestionThree
+        case .QuestionThree:
+            print("hihi")
         case .CustomQuestion: break
+        }
+    }
+}
+
+extension QuestionOnboardingViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case FilteringPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .FilteringPageSegue:
+            let destinationVC = segue.destinationViewController as! FilterViewController
+            destinationVC.filterUserMode = FilterUserMode.UserEditingMode
+            destinationVC.fromOnboarding = true
+        default: break
         }
     }
 }

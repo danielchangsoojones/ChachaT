@@ -67,6 +67,7 @@ class FilterViewController: UIViewController {
     
     var filterUserMode : FilterUserMode = .FilteringMode
     var delegate: FilterViewControllerDelegate?
+    var fromOnboarding = false
     
     
     enum FilterNames : String {
