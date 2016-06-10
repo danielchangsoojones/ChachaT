@@ -17,12 +17,16 @@ let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 
 let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
 let FilteringPageStackViewLinesColor = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 0.75)
 let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178, alpha: 0.25)
-let HandBackgroundColorOverlay = UIColor.rgba(red: 178, green: 178, blue: 178, alpha: 0.5)
+let HandBackgroundColorOverlay = UIColor.rgba(red: 0, green: 0, blue: 0, alpha: 0.65)
 
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
    case QuestionOnboardingCell
+}
+
+public enum AnonymousFlow {
+    case MainPageFirstVisitHandOverlay
 }
 
 //helper functions

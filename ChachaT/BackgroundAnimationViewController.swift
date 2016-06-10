@@ -31,13 +31,13 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    let handOverlayBackgroundColorView: UIView = {
+    let theHandOverlayBackgroundColorView: UIView = {
         $0.backgroundColor = HandBackgroundColorOverlay
-        $0.alpha = 0.75
+        $0.userInteractionEnabled = false
         return $0
-    }(UIImageView())
+    }(UIView())
     
-    let handImage: UIImageView = {
+    let theHandImage: UIImageView = {
         $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
         $0.contentMode = .ScaleAspectFit
         return $0
@@ -46,6 +46,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
+    var anonymousFlow: AnonymousFlow?
     
     var rippleState = 1
     
@@ -60,7 +61,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        createAnonymousFlow()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
@@ -84,6 +85,14 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         }
     }
     
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            if anonymousFlow == nil {
+                anonymousFlow = .MainPageFirstVisitHandOverlay
+            }
+        }
+    }
+    
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
         let qualityOfServiceClass = QOS_CLASS_BACKGROUND
         let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
@@ -99,6 +108,10 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+        } else if rippleState == 5 {
+            if anonymousFlow == .MainPageFirstVisitHandOverlay {
+                ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
+            }
         }
     }
 
@@ -116,6 +129,9 @@ extension BackgroundAnimationViewController {
             if let users = objects as? [User] {
                 self.userArray = users
                 self.kolodaView.reloadData()
+                if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && self.anonymousFlow == .MainPageFirstVisitHandOverlay {
+                    self.createHandOverlay()
+                }
             }
         })
     }
@@ -228,22 +244,19 @@ extension BackgroundAnimationViewController: MagicMoveable {
 
 extension BackgroundAnimationViewController {
     func createHandOverlay() {
-        self.view.addSubview(handOverlayBackgroundColorView)
-        handOverlayBackgroundColorView.snp_makeConstraints { (make) in
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
         
-        handOverlayBackgroundColorView.addSubview(handImage)
-        handImage.snp_makeConstraints { (make) in
-            make.center.equalTo(handOverlayBackgroundColorView).offset(CGPointMake(20, 20))
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
         }
-        
-        ripple(handImage.frame.origin, view: handOverlayBackgroundColorView)
-        
     }
     
     func removeHandOverlay() {
-        handOverlayBackgroundColorView.removeFromSuperview()
+        theHandOverlayBackgroundColorView.removeFromSuperview()
     }
     
 }
