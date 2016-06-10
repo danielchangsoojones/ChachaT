@@ -34,19 +34,21 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     let theHandOverlayBackgroundColorView: UIView = {
         $0.backgroundColor = HandBackgroundColorOverlay
         $0.userInteractionEnabled = false
+        $0.alpha = 0
         return $0
     }(UIView())
     
     let theHandImage: UIImageView = {
         $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
         $0.contentMode = .ScaleAspectFit
+        $0.alpha = 0
         return $0
     }(UIImageView())
     
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
-    var anonymousFlow: AnonymousFlow?
+    var anonymousFlow: AnonymousFlow = .MainPageFirstVisitHandOverlay
     
     var rippleState = 1
     
@@ -61,6 +63,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && self.anonymousFlow == .MainPageFirstVisitHandOverlay {
+            
+        }
         createAnonymousFlow()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
@@ -85,10 +90,17 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         }
     }
     
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(2, animations: {
+            self.theHandImage.alpha = 1.0
+            self.theHandOverlayBackgroundColorView.alpha = 1.0
+        })
+    }
+    
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-            if anonymousFlow == nil {
-                anonymousFlow = .MainPageFirstVisitHandOverlay
+            switch anonymousFlow {
+            case .MainPageFirstVisitHandOverlay: createHandOverlay()
             }
         }
     }
@@ -108,7 +120,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
-        } else if rippleState == 5 {
+        } else if rippleState == 8 {
             if anonymousFlow == .MainPageFirstVisitHandOverlay {
                 ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
             }
@@ -129,9 +141,6 @@ extension BackgroundAnimationViewController {
             if let users = objects as? [User] {
                 self.userArray = users
                 self.kolodaView.reloadData()
-                if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && self.anonymousFlow == .MainPageFirstVisitHandOverlay {
-                    self.createHandOverlay()
-                }
             }
         })
     }
