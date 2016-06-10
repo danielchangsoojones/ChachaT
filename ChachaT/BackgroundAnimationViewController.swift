@@ -16,6 +16,7 @@ import ParseUI
 import BlurryModalSegue
 import Ripple
 import SnapKit
+import Timepiece
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -31,15 +32,17 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    let handOverlayBackgroundColorView: UIView = {
+    let theHandOverlayBackgroundColorView: UIView = {
         $0.backgroundColor = HandBackgroundColorOverlay
-        $0.alpha = 0.75
+        $0.userInteractionEnabled = false
+        $0.alpha = 0
         return $0
-    }(UIImageView())
+    }(UIView())
     
-    let handImage: UIImageView = {
+    let theHandImage: UIImageView = {
         $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
         $0.contentMode = .ScaleAspectFit
+        $0.alpha = 0
         return $0
     }(UIImageView())
     
@@ -60,7 +63,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-       
+        createAnonymousFlow()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
@@ -84,11 +87,10 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         }
     }
     
-    func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
-            theAudioPlayer.play()
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(2, animations: {
+            self.theHandImage.alpha = 1.0
+            self.theHandOverlayBackgroundColorView.alpha = 1.0
         })
     }
     
@@ -99,7 +101,19 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+        } else if rippleState == 6 {
+            if anonymousFlow == .MainPageFirstVisitHandOverlay {
+                ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
+            }
         }
+    }
+    
+    func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
+        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
+        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
+        dispatch_async(backgroundQueue, {
+            theAudioPlayer.play()
+        })
     }
 
 }
@@ -107,17 +121,24 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 //queries
 extension BackgroundAnimationViewController {
     func createUserArray() {
-        let query = User.query()
-        if let objectId = User.currentUser()?.objectId {
-            query?.whereKey("objectId", notEqualTo: objectId)
-        }
-        query?.whereKey("anonymous", equalTo: false)
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
-            if let users = objects as? [User] {
-                self.userArray = users
-                self.kolodaView.reloadData()
+        //creating the anonymous flow for a new user, so the learn how to use the app.
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            userArray = [createFirstPlaceholderUser()]
+            self.kolodaView.reloadData()
+        } else {
+            //normal creating of the stack.
+            let query = User.query()
+            if let objectId = User.currentUser()?.objectId {
+                query?.whereKey("objectId", notEqualTo: objectId)
             }
-        })
+            query?.whereKey("anonymous", equalTo: false)
+            query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+                if let users = objects as? [User] {
+                    self.userArray = users
+                    self.kolodaView.reloadData()
+                }
+            })
+        }
     }
 }
 
@@ -177,6 +198,11 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         cardView.delegate = self
         cardView.userOfTheCard = userArray[Int(index)]
         
+        //special case for PFAnonymous User going through anonymous flow
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            cardView.theCardMainImage.image = UIImage(named: "DrivingGirl")
+        }
+        
         
         //Rounded corners
         cardView.layer.cornerRadius = 10.0
@@ -212,7 +238,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {
-            theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
+            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+                theMagicMovePlaceholderImage.image = UIImage(named: "DrivingGirl")
+            } else {
+                theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
+            }
         }
         
         
@@ -226,24 +256,49 @@ extension BackgroundAnimationViewController: MagicMoveable {
     }
 }
 
+//creating the overlay/anonymous flow
 extension BackgroundAnimationViewController {
     func createHandOverlay() {
-        self.view.addSubview(handOverlayBackgroundColorView)
-        handOverlayBackgroundColorView.snp_makeConstraints { (make) in
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
         
-        handOverlayBackgroundColorView.addSubview(handImage)
-        handImage.snp_makeConstraints { (make) in
-            make.center.equalTo(handOverlayBackgroundColorView).offset(CGPointMake(20, 20))
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
         }
-        
-        ripple(handImage.frame.origin, view: handOverlayBackgroundColorView)
-        
     }
     
     func removeHandOverlay() {
-        handOverlayBackgroundColorView.removeFromSuperview()
+        theHandOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            switch anonymousFlow {
+            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            }
+        }
+    }
+    
+    func createFirstPlaceholderUser() -> User {
+        let placeholderUser = User()
+        placeholderUser.title = "Graphic Designer"
+        placeholderUser.birthDate = NSDate.date(year: 1995, month: 6, day: 2)
+        placeholderUser.fullName = "Taylor Johnson"
+        placeholderUser.factOne = "I have never missed a day of school. Ever."
+        placeholderUser.factTwo = "Shaq has my autograph."
+        placeholderUser.factThree = "I'm an identical twin."
+        placeholderUser.questionOne = createQuestion("What's a clear sign that someone was raised well?", answerString: "When someone is obviously in the wrong, and they know it, they apologise and work towards not making a mistake like that again. Most people will deny it until the other person gives up, or get all defensive about how it was not a big deal.")
+        return placeholderUser
+    }
+    
+    func createQuestion(questionString: String, answerString: String) -> Question {
+        let question = Question()
+        question.question = questionString
+        question.topAnswer = answerString
+        return question
     }
     
 }

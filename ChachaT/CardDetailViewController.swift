@@ -116,7 +116,6 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         setNormalGUI()
         setupTapHandler()
     }
@@ -213,6 +212,9 @@ class CardDetailViewController: UIViewController {
             self.profileImage.file = profileImage
             self.profileImage.loadInBackground()
         } else {
+            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+                profileImage.image = UIImage(named: "DrivingGirl")
+            }
             profileImage.backgroundColor = ChachaBombayGrey
             theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
             theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center

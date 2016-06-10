@@ -99,7 +99,6 @@ extension QuestionOnboardingViewController: SegueHandlerType {
             let destinationVC = segue.destinationViewController as! FilterViewController
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
-        default: break
         }
     }
 }
