@@ -25,6 +25,7 @@ public enum StoryboardIdentifiers : String {
    case QuestionOnboardingCell
 }
 
+var anonymousFlow : AnonymousFlow = .MainPageFirstVisitHandOverlay
 public enum AnonymousFlow {
     case MainPageFirstVisitHandOverlay
 }

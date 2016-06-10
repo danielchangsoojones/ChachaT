@@ -48,7 +48,6 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
-    var anonymousFlow: AnonymousFlow = .MainPageFirstVisitHandOverlay
     
     var rippleState = 1
     
@@ -63,9 +62,6 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && self.anonymousFlow == .MainPageFirstVisitHandOverlay {
-            
-        }
         createAnonymousFlow()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
@@ -97,6 +93,20 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         })
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        rippleState += 1
+        //need to only do on rippleState 3 because the frame is not set for the center of the chachaLoadingImage
+        //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
+        if rippleState == 3 {
+            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+        } else if rippleState == 8 {
+            if anonymousFlow == .MainPageFirstVisitHandOverlay {
+                ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
+            }
+        }
+    }
+    
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
             switch anonymousFlow {
@@ -111,20 +121,6 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         dispatch_async(backgroundQueue, {
             theAudioPlayer.play()
         })
-    }
-    
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        rippleState += 1
-        //need to only do on rippleState 3 because the frame is not set for the center of the chachaLoadingImage
-        //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
-        if rippleState == 3 {
-            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
-        } else if rippleState == 8 {
-            if anonymousFlow == .MainPageFirstVisitHandOverlay {
-                ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
-            }
-        }
     }
 
 }
@@ -251,6 +247,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     }
 }
 
+//creating the overlay
 extension BackgroundAnimationViewController {
     func createHandOverlay() {
         self.view.addSubview(theHandOverlayBackgroundColorView)
