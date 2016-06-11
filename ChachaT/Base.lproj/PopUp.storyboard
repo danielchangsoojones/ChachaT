@@ -256,9 +256,8 @@
                                                     </mask>
                                                 </variation>
                                             </label>
-                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Write a question that others would like to know about you..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI" customClass="MBAutoGrowingTextView">
+                                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Write a question that others would like to know about you..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI" customClass="MBAutoGrowingTextView">
                                                 <rect key="frame" x="20" y="39" width="335" height="50"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="50" id="1Ca-K7-Q9d"/>
                                                     <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="50" id="s3r-DV-rCB"/>
