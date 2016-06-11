@@ -219,6 +219,9 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8kU-eE-Q5T">
                                                 <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
                                                 <subviews>
+                                                    <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Question Background" translatesAutoresizingMaskIntoConstraints="NO" id="i27-F4-49n">
+                                                        <rect key="frame" x="0.0" y="0.0" width="375" height="90"/>
+                                                    </imageView>
                                                     <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Write a question that others would like to know about you..." textAlignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ils-DD-YlI" customClass="MBAutoGrowingTextView">
                                                         <rect key="frame" x="20" y="20" width="335" height="50"/>
                                                         <constraints>
@@ -235,10 +238,14 @@
                                                 </subviews>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
+                                                    <constraint firstAttribute="trailing" secondItem="i27-F4-49n" secondAttribute="trailing" id="6kg-tK-HHt"/>
                                                     <constraint firstItem="ils-DD-YlI" firstAttribute="leading" secondItem="8kU-eE-Q5T" secondAttribute="leading" constant="20" id="B7C-eK-xzQ"/>
                                                     <constraint firstAttribute="trailing" secondItem="ils-DD-YlI" secondAttribute="trailing" constant="20" id="D2c-NE-pWl"/>
+                                                    <constraint firstItem="i27-F4-49n" firstAttribute="top" secondItem="8kU-eE-Q5T" secondAttribute="top" id="fop-hy-2bf"/>
                                                     <constraint firstItem="ils-DD-YlI" firstAttribute="top" secondItem="8kU-eE-Q5T" secondAttribute="top" constant="20" id="hNT-ef-cVe"/>
                                                     <constraint firstAttribute="bottom" secondItem="ils-DD-YlI" secondAttribute="bottom" constant="20" id="hhz-UJ-c5m"/>
+                                                    <constraint firstItem="i27-F4-49n" firstAttribute="leading" secondItem="8kU-eE-Q5T" secondAttribute="leading" id="lb2-Lk-SCx"/>
+                                                    <constraint firstAttribute="bottom" secondItem="i27-F4-49n" secondAttribute="bottom" id="yVa-dn-WhP"/>
                                                 </constraints>
                                             </view>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9" customClass="MBAutoGrowingTextView">
@@ -326,6 +333,7 @@
     </scenes>
     <resources>
         <image name="Custom Question Bubble" width="340" height="68"/>
+        <image name="Question Background" width="375" height="120"/>
         <image name="Question Bubble" width="340" height="68"/>
     </resources>
 </document>

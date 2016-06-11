@@ -83,10 +83,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 100)
-        theQuestionTextField.layer.cornerRadius = 10.0
-        theAnswerTextField.layer.cornerRadius = 10.0
-        theQuestionTextField.tag = 1
-        theAnswerTextField.tag = 2
+        setNormalGUI()
         if questionPopUpState == .EditingMode {
             setEditingGUI()
         }
@@ -99,6 +96,19 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             setUnwrittenQuestionGUI()
         }
         
+    }
+    
+    func setNormalGUI() {
+        theQuestionTextField.layer.cornerRadius = 10.0
+        theAnswerTextField.layer.cornerRadius = 10.0
+        //tagging the fields, so we know which textfield was used. Will be used in the text view delegate methods.
+        theQuestionTextField.tag = 1
+        theAnswerTextField.tag = 2
+        //create shadow for the question Text fields
+        theQuestionTextField.layer.shadowColor = UIColor.whiteColor().CGColor
+        theQuestionTextField.layer.shadowRadius = 3.0;
+        theQuestionTextField.layer.shadowOpacity = 1;
+        theQuestionTextField.layer.shadowOffset = CGSizeZero;
     }
     
     func setEditingGUI() {
