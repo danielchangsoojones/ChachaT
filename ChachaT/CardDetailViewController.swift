@@ -212,12 +212,13 @@ class CardDetailViewController: UIViewController {
             self.profileImage.file = profileImage
             self.profileImage.loadInBackground()
         } else {
-            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
                 profileImage.image = UIImage(named: "DrivingGirl")
+            } else {
+                profileImage.backgroundColor = ChachaBombayGrey
+                theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
+                theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
             }
-            profileImage.backgroundColor = ChachaBombayGrey
-            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
-            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
         }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()

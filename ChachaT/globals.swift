@@ -8,6 +8,7 @@
 
 import Foundation
 import EFTools
+import Parse
 
 //colors
 let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
@@ -25,7 +26,7 @@ public enum StoryboardIdentifiers : String {
    case QuestionOnboardingCell
 }
 
-var anonymousFlow : AnonymousFlow = .MainPageFirstVisitHandOverlay
+var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitHandOverlay
 public enum AnonymousFlow {
     case MainPageFirstVisitHandOverlay
 }
@@ -57,7 +58,22 @@ func createQuestionBubbleGUI(questionButton: ResizableButton) {
     questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
     questionButton.titleLabel?.numberOfLines = 0
     questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
-    
+}
+
+//returns true if the user is anonymous and if they are at the anonymous flow that was passed as a parameter
+func anonymousFlowStage(anonymousFlow: AnonymousFlow) -> Bool {
+    //checking that they are anonymous user, if not, then they don't do the anonymous flow at all.
+    if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+        switch anonymousFlow {
+        case .MainPageFirstVisitHandOverlay:
+            if anonymousFlowGlobal == anonymousFlow {
+                return true
+            } else {
+                return false
+            }
+        }
+    }
+        return false
 }
 
 

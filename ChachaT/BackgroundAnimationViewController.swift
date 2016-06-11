@@ -102,7 +102,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
         } else if rippleState == 6 {
-            if anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
                 ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
             }
         }
@@ -122,7 +122,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 extension BackgroundAnimationViewController {
     func createUserArray() {
         //creating the anonymous flow for a new user, so the learn how to use the app.
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+        if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
             userArray = [createFirstPlaceholderUser()]
             self.kolodaView.reloadData()
         } else {
@@ -199,7 +199,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         cardView.userOfTheCard = userArray[Int(index)]
         
         //special case for PFAnonymous User going through anonymous flow
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+        if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
             cardView.theCardMainImage.image = UIImage(named: "DrivingGirl")
         }
         
@@ -238,7 +238,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {
-            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
                 theMagicMovePlaceholderImage.image = UIImage(named: "DrivingGirl")
             } else {
                 theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
@@ -276,7 +276,7 @@ extension BackgroundAnimationViewController {
     
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-            switch anonymousFlow {
+            switch anonymousFlowGlobal {
             case .MainPageFirstVisitHandOverlay: createHandOverlay()
             }
         }
@@ -290,7 +290,7 @@ extension BackgroundAnimationViewController {
         placeholderUser.factOne = "I have never missed a day of school. Ever."
         placeholderUser.factTwo = "Shaq has my autograph."
         placeholderUser.factThree = "I'm an identical twin."
-        placeholderUser.questionOne = createQuestion("What's a clear sign that someone was raised well?", answerString: "When someone is obviously in the wrong, and they know it, they apologise and work towards not making a mistake like that again. Most people will deny it until the other person gives up, or get all defensive about how it was not a big deal.")
+        placeholderUser.questionOne = createQuestion("What's a clear sign that someone was raised well?", answerString: "When someone is obviously in the wrong, and they know it, they apologize and work towards not making a mistake like that again. Most people will deny it until the other person gives up, or get all defensive about how it was not a big deal.")
         return placeholderUser
     }
     
