@@ -33,9 +33,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     var theHandOverlayBackgroundColorView: UIView = UIView()
-    var theHandImage: UIImageView = UIImageView()
 
-    
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
@@ -252,7 +250,7 @@ extension BackgroundAnimationViewController {
             make.edges.equalTo(self.view)
         }
         
-        theHandImage = createHandImageOverlay()
+        let theHandImage = createHandImageOverlay()
         theHandOverlayBackgroundColorView.addSubview(theHandImage)
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))

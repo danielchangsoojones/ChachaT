@@ -37,7 +37,6 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
     var theHandOverlayBackgroundColorView: UIView = UIView()
-    var theHandImage: UIImageView = UIImageView()
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -348,10 +347,16 @@ extension CardDetailViewController {
             make.edges.equalTo(self.view)
         }
         
-        theHandImage = createHandImageOverlay()
+        let theHandImage = createHandImageOverlay()
         theHandOverlayBackgroundColorView.addSubview(theHandImage)
         theHandImage.snp_makeConstraints { (make) in
-            make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
+            make.center.equalTo(theQuestionButtonOne).offset(CGPointMake(20, 60))
+        }
+        
+        let overlayLabel = createLabelForOverlay("Ask Taylor a question!")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.center.equalTo(profileImage)
         }
     }
     

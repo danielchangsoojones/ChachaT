@@ -80,6 +80,16 @@ func createHandImageOverlay() -> UIImageView {
     return theHandImage
 }
 
+func createLabelForOverlay(labelString: String) -> UILabel {
+    let overlayLabel: UILabel = {
+        $0.text = labelString
+        $0.alpha = 0
+        $0.textColor = UIColor.whiteColor()
+        return $0
+    }(UILabel())
+    return overlayLabel
+}
+
 func animateOverlay(backgroundOverlayView: UIView, subviews: [UIView]) {
     UIView.animateWithDuration(2, animations: {
         for subview in subviews {
