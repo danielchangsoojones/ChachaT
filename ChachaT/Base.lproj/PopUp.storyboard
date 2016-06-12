@@ -350,6 +350,7 @@
                         <outlet property="theLikeButton" destination="XNY-3Z-ecp" id="uin-dm-p40"/>
                         <outlet property="theQuestionTextField" destination="ils-DD-YlI" id="VKB-WN-vVg"/>
                         <segue destination="0dF-ag-cVb" kind="presentation" identifier="FilteringPageSegue" id="PYE-uw-2RF"/>
+                        <segue destination="DE2-Q3-Y1X" kind="presentation" identifier="QuestionPageToMainTinderPageSegue" id="vuO-rQ-cx0"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="T46-h2-Nim" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -363,6 +364,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="HFY-Yk-aqS" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2270.5" y="702"/>
+        </scene>
+        <!--Main-->
+        <scene sceneID="7aQ-qY-XBi">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" id="DE2-Q3-Y1X" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="bHh-JK-f3A" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2243" y="970"/>
         </scene>
     </scenes>
     <resources>

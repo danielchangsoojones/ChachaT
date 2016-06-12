@@ -90,9 +90,9 @@ func createLabelForOverlay(labelString: String) -> UILabel {
     return overlayLabel
 }
 
-func animateOverlay(backgroundOverlayView: UIView, subviews: [UIView]) {
+func animateOverlay(backgroundOverlayView: UIView) {
     UIView.animateWithDuration(2, animations: {
-        for subview in subviews {
+        for subview in backgroundOverlayView.subviews {
             subview.alpha = 1
         }
         backgroundOverlayView.alpha = 1

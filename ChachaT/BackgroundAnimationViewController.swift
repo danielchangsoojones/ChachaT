@@ -76,7 +76,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView, subviews: theHandOverlayBackgroundColorView.subviews)
+        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     override func viewDidLayoutSubviews() {

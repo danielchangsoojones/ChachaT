@@ -30,6 +30,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theLikeButton: DOFavoriteButton!
+    var theHandOverlayBackgroundColorView: UIView = UIView()
     
     var currentQuestion: Question?
     var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
@@ -85,6 +86,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupTapHandler()
+        createAnonymousFlow()
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 100)
         setNormalGUI()
         if questionPopUpState == .EditingMode {
@@ -98,6 +100,10 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             setUnwrittenQuestionGUI()
         }
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     func setNormalGUI() {
@@ -116,6 +122,14 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     private func setupTapHandler() {
         theLikeButton.tapped { (_) in
             self.likeTapped(self.theLikeButton)
+            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+                let alert = Alert(closeButtonHidden: true)
+                alert.addButton("Gotcha") {
+                    //Todo: should lead to the messaging page with the matched person
+                    self.performSegueWithIdentifier(.QuestionPageToMainTinderPageSegue, sender: self)
+                }
+                alert.createAlert("It's A Match!", subtitle: "A match is when you and Taylor like each other's answers. Then, the two of you could message. I just haven't built a messaging page yet.", closeButtonTitle: "Okay", type: .Success)
+            }
         }
     }
     
@@ -154,6 +168,42 @@ class QuestionPopUpViewController: PopUpSuperViewController {
 
 }
 
+//creating hand overlay
+extension QuestionPopUpViewController {
+    func createHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        let theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theLikeButton).offset(CGPointMake(30, 60))
+        }
+        
+        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.centerY.equalTo(theLikeButton)
+            make.left.equalTo(theLikeButton).offset(50)
+        }
+    }
+    
+    func removeHandOverlay() {
+        theHandOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            switch anonymousFlowGlobal {
+            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            }
+        }
+    }
+}
+
 extension QuestionPopUpViewController: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
@@ -183,6 +233,7 @@ extension QuestionPopUpViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case FilteringPageSegue
+        case QuestionPageToMainTinderPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -191,6 +242,7 @@ extension QuestionPopUpViewController: SegueHandlerType {
             let destinationVC = segue.destinationViewController as! FilterViewController
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
+        default: break
         }
     }
 }

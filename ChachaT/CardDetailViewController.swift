@@ -108,7 +108,7 @@ class CardDetailViewController: UIViewController {
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
         let alert = Alert(closeButtonHidden: false)
-        alert.addButton("Block User", closeButtonHidden: false) { 
+        alert.addButton("Block User") { 
             alert.closeAlert()
         }
        alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .Error)
@@ -123,7 +123,7 @@ class CardDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView, subviews: theHandOverlayBackgroundColorView.subviews)
+        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     func createDetailPopUp(factNumber: Fact) {
