@@ -93,7 +93,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         if let currentQuestion = currentQuestion {
             theQuestionTextField.text = currentQuestion.question
             theAnswerTextField.text = currentQuestion.topAnswer
-            
         } else {
             setUnwrittenQuestionGUI()
         }

@@ -272,15 +272,15 @@
                                                 </constraints>
                                             </imageView>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XNY-3Z-ecp" customClass="DOFavoriteButton" customModule="DOFavoriteButton">
-                                                <rect key="frame" x="172" y="330" width="30" height="30"/>
+                                                <rect key="frame" x="20" y="313" width="30" height="30"/>
                                                 <color key="tintColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                                 <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="Bullet Point"/>
+                                                    <userDefinedRuntimeAttribute type="image" keyPath="image" value="heart"/>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="imageColorOn">
-                                                        <color key="value" red="0.93725496529999996" green="0.074509806930000005" blue="0.2078431547" alpha="1" colorSpace="deviceRGB"/>
+                                                        <color key="value" red="0.93725490196078431" green="0.074509803921568626" blue="0.20784313725490194" alpha="1" colorSpace="deviceRGB"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="color" keyPath="imageColorOff">
-                                                        <color key="value" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                        <color key="value" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                     </userDefinedRuntimeAttribute>
                                                     <userDefinedRuntimeAttribute type="number" keyPath="duration">
                                                         <real key="value" value="1"/>
@@ -299,14 +299,14 @@
                                             <constraint firstAttribute="trailing" secondItem="8kU-eE-Q5T" secondAttribute="trailing" id="GuL-Z6-Hly"/>
                                             <constraint firstAttribute="bottom" secondItem="2cO-nh-NWm" secondAttribute="bottom" constant="-10" id="KgC-BE-Tkz"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="hNg-E2-IW9" secondAttribute="centerY" id="MYJ-Xp-iQV"/>
-                                            <constraint firstItem="XNY-3Z-ecp" firstAttribute="centerX" secondItem="2cO-nh-NWm" secondAttribute="centerX" id="NDO-9e-Oiv"/>
                                             <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="SVZ-vc-UQM"/>
                                             <constraint firstItem="17F-Pm-3ST" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="UPZ-KM-cXU"/>
+                                            <constraint firstItem="XNY-3Z-ecp" firstAttribute="leading" secondItem="hNg-E2-IW9" secondAttribute="leading" id="XZ7-1Z-WEZ"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" id="b3U-Pu-2GH"/>
                                             <constraint firstAttribute="trailing" secondItem="17F-Pm-3ST" secondAttribute="trailing" constant="20" id="c0K-2b-JYe"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="hNg-E2-IW9" secondAttribute="centerX" id="idi-kT-Qe1"/>
                                             <constraint firstItem="2cO-nh-NWm" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" constant="89" id="iiF-tH-sZJ"/>
-                                            <constraint firstItem="XNY-3Z-ecp" firstAttribute="centerY" secondItem="2cO-nh-NWm" secondAttribute="centerY" id="ky0-Ia-03l"/>
+                                            <constraint firstItem="XNY-3Z-ecp" firstAttribute="top" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="8" id="oX2-Yf-GGy"/>
                                             <constraint firstItem="2cO-nh-NWm" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="vAk-TW-Hzc"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="z7J-xC-1Fj"/>
                                         </constraints>
@@ -367,10 +367,10 @@
     </scenes>
     <resources>
         <image name="Answer Area Background" width="375" height="562"/>
-        <image name="Bullet Point" width="8" height="8"/>
         <image name="ChaCha-Logo-White" width="1008" height="390"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Question Background" width="375" height="120"/>
         <image name="Question Bubble" width="340" height="68"/>
+        <image name="heart" width="189" height="173"/>
     </resources>
 </document>
