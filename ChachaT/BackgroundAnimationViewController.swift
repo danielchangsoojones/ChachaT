@@ -32,19 +32,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    let theHandOverlayBackgroundColorView: UIView = {
-        $0.backgroundColor = HandBackgroundColorOverlay
-        $0.userInteractionEnabled = false
-        $0.alpha = 0
-        return $0
-    }(UIView())
-    
-    let theHandImage: UIImageView = {
-        $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
-        $0.contentMode = .ScaleAspectFit
-        $0.alpha = 0
-        return $0
-    }(UIImageView())
+    var theHandOverlayBackgroundColorView: UIView = UIView()
+    var theHandImage: UIImageView = UIImageView()
+
     
     var userArray = [User]()
     
@@ -88,10 +78,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(2, animations: {
-            self.theHandImage.alpha = 1.0
-            self.theHandOverlayBackgroundColorView.alpha = 1.0
-        })
+        animateOverlay(theHandOverlayBackgroundColorView, subviews: theHandOverlayBackgroundColorView.subviews)
     }
     
     override func viewDidLayoutSubviews() {
@@ -259,11 +246,13 @@ extension BackgroundAnimationViewController: MagicMoveable {
 //creating the overlay/anonymous flow
 extension BackgroundAnimationViewController {
     func createHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
         self.view.addSubview(theHandOverlayBackgroundColorView)
         theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
         
+        theHandImage = createHandImageOverlay()
         theHandOverlayBackgroundColorView.addSubview(theHandImage)
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))

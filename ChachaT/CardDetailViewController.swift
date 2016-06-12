@@ -36,6 +36,8 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
+    var theHandOverlayBackgroundColorView: UIView = UIView()
+    var theHandImage: UIImageView = UIImageView()
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -117,7 +119,12 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNormalGUI()
+        createAnonymousFlow()
         setupTapHandler()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        animateOverlay(theHandOverlayBackgroundColorView, subviews: theHandOverlayBackgroundColorView.subviews)
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -330,6 +337,35 @@ class CardDetailViewController: UIViewController {
         return true
     }
 
+}
+
+//creating hand overlay
+extension CardDetailViewController {
+    func createHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
+        }
+    }
+    
+    func removeHandOverlay() {
+        theHandOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            switch anonymousFlowGlobal {
+            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            }
+        }
+    }
 }
 
 
