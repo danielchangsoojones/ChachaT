@@ -84,6 +84,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTapHandler()
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 100)
         setNormalGUI()
         if questionPopUpState == .EditingMode {
@@ -100,7 +101,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     }
     
     func setNormalGUI() {
-        theLikeButton.addTarget(self, action: #selector(QuestionPopUpViewController.tapped(_:)), forControlEvents: .TouchUpInside)
         theQuestionTextField.layer.cornerRadius = 10.0
         theAnswerTextField.layer.cornerRadius = 10.0
         //tagging the fields, so we know which textfield was used. Will be used in the text view delegate methods.
@@ -113,7 +113,13 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         theQuestionTextField.layer.shadowOffset = CGSizeZero;
     }
     
-    func tapped(sender: DOFavoriteButton) {
+    private func setupTapHandler() {
+        theLikeButton.tapped { (_) in
+            self.likeTapped(self.theLikeButton)
+        }
+    }
+    
+    func likeTapped(sender: DOFavoriteButton) {
         if sender.selected {
             // deselect
             sender.deselect()
