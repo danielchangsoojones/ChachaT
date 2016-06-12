@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import SnapKit
 import EFTools
+import DOFavoriteButton
 
 enum QuestionPopUpState {
     case EditingMode
@@ -28,6 +29,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theQuestionTextField: UITextView!
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theBackgroundColorView: UIView!
+    @IBOutlet weak var theLikeButton: DOFavoriteButton!
     
     var currentQuestion: Question?
     var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
@@ -99,6 +101,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     }
     
     func setNormalGUI() {
+        theLikeButton.addTarget(self, action: #selector(QuestionPopUpViewController.tapped(_:)), forControlEvents: .TouchUpInside)
         theQuestionTextField.layer.cornerRadius = 10.0
         theAnswerTextField.layer.cornerRadius = 10.0
         //tagging the fields, so we know which textfield was used. Will be used in the text view delegate methods.
@@ -109,6 +112,16 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         theQuestionTextField.layer.shadowRadius = 3.0;
         theQuestionTextField.layer.shadowOpacity = 1;
         theQuestionTextField.layer.shadowOffset = CGSizeZero;
+    }
+    
+    func tapped(sender: DOFavoriteButton) {
+        if sender.selected {
+            // deselect
+            sender.deselect()
+        } else {
+            // select with animation
+            sender.select()
+        }
     }
     
     func setEditingGUI() {

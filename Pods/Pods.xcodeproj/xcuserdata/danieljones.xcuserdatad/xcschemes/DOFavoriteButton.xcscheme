@@ -14,10 +14,10 @@
             buildForArchiving = "YES">
             <BuildableReference
                BuildableIdentifier = 'primary'
-               BlueprintIdentifier = 'F6974019791FA706E323D251'
-               BlueprintName = 'Koloda'
+               BlueprintIdentifier = 'BC283140839C74F1A732F6BF'
+               BlueprintName = 'DOFavoriteButton'
                ReferencedContainer = 'container:Pods.xcodeproj'
-               BuildableName = 'Koloda.framework'>
+               BuildableName = 'DOFavoriteButton.framework'>
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
