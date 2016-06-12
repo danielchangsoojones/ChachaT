@@ -206,7 +206,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dYL-Ek-CAM" userLabel="BackgroundColorOverlay">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="315"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="591"/>
                                         <subviews>
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="teS-4f-g9g">
                                                 <rect key="frame" x="173" y="190" width="30" height="30"/>
@@ -249,7 +249,7 @@
                                                 </constraints>
                                             </view>
                                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Answer Area Background" translatesAutoresizingMaskIntoConstraints="NO" id="2cO-nh-NWm">
-                                                <rect key="frame" x="0.0" y="89" width="375" height="236"/>
+                                                <rect key="frame" x="0.0" y="89" width="375" height="512"/>
                                             </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9" customClass="MBAutoGrowingTextView">
                                                 <rect key="frame" x="20" y="105" width="335" height="200"/>
@@ -265,20 +265,29 @@
                                                     <outlet property="delegate" destination="8Wh-eE-d6m" id="phi-yZ-1Zz"/>
                                                 </connections>
                                             </textView>
+                                            <imageView userInteractionEnabled="NO" alpha="0.29999999999999999" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChaCha-Logo-White" translatesAutoresizingMaskIntoConstraints="NO" id="17F-Pm-3ST">
+                                                <rect key="frame" x="20" y="335" width="335" height="109"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="109" id="BbU-Re-kKI"/>
+                                                </constraints>
+                                            </imageView>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="dYL-Ek-CAM" secondAttribute="centerX" id="1Om-L3-4fP"/>
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="8kU-eE-Q5T" secondAttribute="bottom" constant="15" id="5FG-Uz-TN3"/>
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="7mn-Rr-AfH"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="dYL-Ek-CAM" secondAttribute="centerY" id="8Xi-9D-KuW"/>
+                                            <constraint firstAttribute="bottom" secondItem="17F-Pm-3ST" secondAttribute="bottom" constant="147" id="Euo-vq-VmN"/>
+                                            <constraint firstItem="17F-Pm-3ST" firstAttribute="top" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="30" id="FkE-ME-ecr"/>
                                             <constraint firstAttribute="trailing" secondItem="2cO-nh-NWm" secondAttribute="trailing" id="G8w-As-Scg"/>
                                             <constraint firstAttribute="trailing" secondItem="8kU-eE-Q5T" secondAttribute="trailing" id="GuL-Z6-Hly"/>
                                             <constraint firstAttribute="bottom" secondItem="2cO-nh-NWm" secondAttribute="bottom" constant="-10" id="KgC-BE-Tkz"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="hNg-E2-IW9" secondAttribute="centerY" id="MYJ-Xp-iQV"/>
                                             <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="SVZ-vc-UQM"/>
+                                            <constraint firstItem="17F-Pm-3ST" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="UPZ-KM-cXU"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" id="b3U-Pu-2GH"/>
+                                            <constraint firstAttribute="trailing" secondItem="17F-Pm-3ST" secondAttribute="trailing" constant="20" id="c0K-2b-JYe"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="hNg-E2-IW9" secondAttribute="centerX" id="idi-kT-Qe1"/>
-                                            <constraint firstAttribute="bottom" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="10" id="ihm-Zf-4Uw"/>
                                             <constraint firstItem="2cO-nh-NWm" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" constant="89" id="iiF-tH-sZJ"/>
                                             <constraint firstItem="2cO-nh-NWm" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="vAk-TW-Hzc"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="z7J-xC-1Fj"/>
@@ -339,6 +348,7 @@
     </scenes>
     <resources>
         <image name="Answer Area Background" width="375" height="562"/>
+        <image name="ChaCha-Logo-White" width="1008" height="390"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Question Background" width="375" height="120"/>
         <image name="Question Bubble" width="340" height="68"/>

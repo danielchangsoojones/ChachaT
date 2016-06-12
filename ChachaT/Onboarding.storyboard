@@ -408,7 +408,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChaCha-Logo-White" width="67" height="25"/>
+        <image name="ChaCha-Logo-White" width="1008" height="390"/>
         <image name="Or Line" width="276" height="13"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="facebook_logo" width="29" height="29"/>
