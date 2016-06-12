@@ -218,7 +218,7 @@ class CardDetailViewController: UIViewController {
             self.profileImage.file = profileImage
             self.profileImage.loadInBackground()
         } else {
-            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 profileImage.image = UIImage(named: "DrivingGirl")
             } else {
                 profileImage.backgroundColor = ChachaBombayGrey
@@ -367,7 +367,8 @@ extension CardDetailViewController {
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
             switch anonymousFlowGlobal {
-            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
+            case .MainPageSecondVisitFilteringStage: break
             }
         }
     }

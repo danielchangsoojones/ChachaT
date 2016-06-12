@@ -26,9 +26,10 @@ public enum StoryboardIdentifiers : String {
    case QuestionOnboardingCell
 }
 
-var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitHandOverlay
+var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitMatchingPhase
 public enum AnonymousFlow {
-    case MainPageFirstVisitHandOverlay
+    case MainPageFirstVisitMatchingPhase
+    case MainPageSecondVisitFilteringStage
 }
 
 //helper functions
@@ -103,14 +104,8 @@ func animateOverlay(backgroundOverlayView: UIView) {
 func anonymousFlowStage(anonymousFlow: AnonymousFlow) -> Bool {
     //checking that they are anonymous user, if not, then they don't do the anonymous flow at all.
     if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-        switch anonymousFlow {
-        case .MainPageFirstVisitHandOverlay:
-            if anonymousFlowGlobal == anonymousFlow {
-                return true
-            } else {
-                return false
-            }
-        }
+        //checking to see if the anonymousFlow is at the phase passed by the parameter.
+        return anonymousFlowGlobal == anonymousFlow
     }
         return false
 }

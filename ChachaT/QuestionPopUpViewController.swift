@@ -122,7 +122,7 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     private func setupTapHandler() {
         theLikeButton.tapped { (_) in
             self.likeTapped(self.theLikeButton)
-            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 let alert = Alert(closeButtonHidden: true)
                 alert.addButton("Gotcha") {
                     //Todo: should lead to the messaging page with the matched person
@@ -198,7 +198,8 @@ extension QuestionPopUpViewController {
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
             switch anonymousFlowGlobal {
-            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
+            case .MainPageSecondVisitFilteringStage: break
             }
         }
     }
@@ -242,7 +243,8 @@ extension QuestionPopUpViewController: SegueHandlerType {
             let destinationVC = segue.destinationViewController as! FilterViewController
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
-        default: break
+        case .QuestionPageToMainTinderPageSegue:
+            anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
         }
     }
 }

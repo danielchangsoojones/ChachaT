@@ -87,7 +87,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
         } else if rippleState == 6 {
-            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
             }
         }
@@ -107,7 +107,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 extension BackgroundAnimationViewController {
     func createUserArray() {
         //creating the anonymous flow for a new user, so the learn how to use the app.
-        if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+        if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
             userArray = [createFirstPlaceholderUser()]
             self.kolodaView.reloadData()
         } else {
@@ -184,7 +184,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         cardView.userOfTheCard = userArray[Int(index)]
         
         //special case for PFAnonymous User going through anonymous flow
-        if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+        if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
             cardView.theCardMainImage.image = UIImage(named: "DrivingGirl")
         }
         
@@ -223,7 +223,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {
-            if anonymousFlowStage(.MainPageFirstVisitHandOverlay) {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 theMagicMovePlaceholderImage.image = UIImage(named: "DrivingGirl")
             } else {
                 theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
@@ -264,7 +264,8 @@ extension BackgroundAnimationViewController {
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
             switch anonymousFlowGlobal {
-            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
+            case .MainPageSecondVisitFilteringStage: break
             }
         }
     }
