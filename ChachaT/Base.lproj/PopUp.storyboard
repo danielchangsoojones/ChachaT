@@ -248,6 +248,9 @@
                                                     <constraint firstAttribute="bottom" secondItem="i27-F4-49n" secondAttribute="bottom" id="yVa-dn-WhP"/>
                                                 </constraints>
                                             </view>
+                                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Answer Area Background" translatesAutoresizingMaskIntoConstraints="NO" id="2cO-nh-NWm">
+                                                <rect key="frame" x="0.0" y="89" width="375" height="236"/>
+                                            </imageView>
                                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" userInteractionEnabled="NO" contentMode="scaleToFill" text="Your interesting answer..." textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="hNg-E2-IW9" customClass="MBAutoGrowingTextView">
                                                 <rect key="frame" x="20" y="105" width="335" height="200"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -268,12 +271,16 @@
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="top" secondItem="8kU-eE-Q5T" secondAttribute="bottom" constant="15" id="5FG-Uz-TN3"/>
                                             <constraint firstItem="hNg-E2-IW9" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="7mn-Rr-AfH"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="dYL-Ek-CAM" secondAttribute="centerY" id="8Xi-9D-KuW"/>
+                                            <constraint firstAttribute="trailing" secondItem="2cO-nh-NWm" secondAttribute="trailing" id="G8w-As-Scg"/>
                                             <constraint firstAttribute="trailing" secondItem="8kU-eE-Q5T" secondAttribute="trailing" id="GuL-Z6-Hly"/>
+                                            <constraint firstAttribute="bottom" secondItem="2cO-nh-NWm" secondAttribute="bottom" constant="-10" id="KgC-BE-Tkz"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="hNg-E2-IW9" secondAttribute="centerY" id="MYJ-Xp-iQV"/>
                                             <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="SVZ-vc-UQM"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" id="b3U-Pu-2GH"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="hNg-E2-IW9" secondAttribute="centerX" id="idi-kT-Qe1"/>
                                             <constraint firstAttribute="bottom" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="10" id="ihm-Zf-4Uw"/>
+                                            <constraint firstItem="2cO-nh-NWm" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" constant="89" id="iiF-tH-sZJ"/>
+                                            <constraint firstItem="2cO-nh-NWm" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="vAk-TW-Hzc"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="z7J-xC-1Fj"/>
                                         </constraints>
                                         <variation key="default">
@@ -284,7 +291,6 @@
                                         </variation>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.29500105570000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="dYL-Ek-CAM" firstAttribute="top" secondItem="fbs-Sd-CFR" secondAttribute="top" id="42x-bv-VF2"/>
                                     <constraint firstAttribute="trailing" secondItem="dYL-Ek-CAM" secondAttribute="trailing" id="Rfh-Mz-SSu"/>
@@ -332,6 +338,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="Answer Area Background" width="375" height="562"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Question Background" width="375" height="120"/>
         <image name="Question Bubble" width="340" height="68"/>
