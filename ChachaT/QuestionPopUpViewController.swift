@@ -200,6 +200,7 @@ extension QuestionPopUpViewController {
             switch anonymousFlowGlobal {
             case .MainPageFirstVisitMatchingPhase: createHandOverlay()
             case .MainPageSecondVisitFilteringStage: break
+            case .MainPageThirdVisitSignUpPhase: break
             }
         }
     }
@@ -244,7 +245,9 @@ extension QuestionPopUpViewController: SegueHandlerType {
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
         case .QuestionPageToMainTinderPageSegue:
-            anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
+                anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
+            }
         }
     }
 }

@@ -387,7 +387,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LZH-bd-wmI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Myq-Dr-4TB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingQuestionAnsweringNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Myq-Dr-4TB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iVr-2j-WD6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>

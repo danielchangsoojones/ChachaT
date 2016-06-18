@@ -576,6 +576,7 @@
                         <outlet property="theSexualityStackView" destination="ROG-IY-3bB" id="R5i-fS-3Mj"/>
                         <outlet property="theSexualityStraightButton" destination="Flw-Zv-jmP" id="fok-1r-vzl"/>
                         <segue destination="y2E-PW-aMD" kind="presentation" identifier="FilterToMainPageSegue" id="Pjn-TL-Gvc"/>
+                        <segue destination="HCV-ha-3ig" kind="presentation" identifier="FilterPageToSignUpPageSegue" id="8W9-yW-a0V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="oCd-99-eZv" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -589,6 +590,14 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5ET-cK-gSZ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="636.5" y="147"/>
+        </scene>
+        <!--Onboarding-->
+        <scene sceneID="KN7-UX-Sok">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" id="HCV-ha-3ig" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="PrN-zn-0oS" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="681.5" y="445"/>
         </scene>
     </scenes>
 </document>

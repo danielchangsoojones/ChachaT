@@ -5,13 +5,21 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--OnboardingQuestionAnsweringNavigationController-->
+        <scene sceneID="940-KE-UzY">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Onboarding" referencedIdentifier="OnboardingQuestionAnsweringNavigationController" id="iIV-nv-kuo" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NMc-Fr-UI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="85.5" y="-134"/>
+        </scene>
         <!--Onboarding-->
         <scene sceneID="4f1-Gx-aDr">
             <objects>
                 <viewControllerPlaceholder storyboardName="Onboarding" id="fEb-nV-m3f" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNf-HX-Mif" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="345.5" y="-98"/>
+            <point key="canvasLocation" x="469.5" y="-282"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="S6e-Wr-Zzt">
@@ -44,7 +52,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
                                         <rect key="frame" x="148" y="285" width="78" height="78"/>
                                     </imageView>
                                 </subviews>
@@ -133,8 +141,10 @@
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
                         <outlet property="theBackgroundColorView" destination="dsh-Hh-R5l" id="HgS-Re-cUg"/>
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
+                        <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="28w-wD-wPr"/>
+                        <segue destination="iIV-nv-kuo" kind="presentation" identifier="MainTinderPageToQuestionOnboardingSegue" id="3lX-ep-9E2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -586,7 +596,7 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="J40-Mu-xxa"/>
-        <segue reference="LKh-Ql-dNR"/>
+        <segue reference="pbG-G9-gXM"/>
+        <segue reference="28w-wD-wPr"/>
     </inferredMetricsTieBreakers>
 </document>

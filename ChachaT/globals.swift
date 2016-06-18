@@ -30,6 +30,7 @@ var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitMatchingPhase
 public enum AnonymousFlow {
     case MainPageFirstVisitMatchingPhase
     case MainPageSecondVisitFilteringStage
+    case MainPageThirdVisitSignUpPhase
 }
 
 //helper functions

@@ -369,6 +369,7 @@ extension CardDetailViewController {
             switch anonymousFlowGlobal {
             case .MainPageFirstVisitMatchingPhase: createHandOverlay()
             case .MainPageSecondVisitFilteringStage: break
+            case .MainPageThirdVisitSignUpPhase: break
             }
         }
     }
