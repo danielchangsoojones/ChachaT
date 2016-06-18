@@ -28,6 +28,7 @@
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="z8X-fj-PnC">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
+                        <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                     </navigationBar>
                     <connections>
                         <segue destination="s5O-Gk-Yh3" kind="relationship" relationship="rootViewController" id="OdG-WI-yv5"/>
@@ -596,7 +597,7 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="qc7-o9-Apy"/>
         <segue reference="pbG-G9-gXM"/>
-        <segue reference="28w-wD-wPr"/>
     </inferredMetricsTieBreakers>
 </document>
