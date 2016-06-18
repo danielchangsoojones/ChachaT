@@ -318,9 +318,9 @@
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" id="b3U-Pu-2GH"/>
                                             <constraint firstAttribute="trailing" secondItem="17F-Pm-3ST" secondAttribute="trailing" constant="20" id="c0K-2b-JYe"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="hNg-E2-IW9" secondAttribute="centerX" id="idi-kT-Qe1"/>
-                                            <constraint firstItem="2cO-nh-NWm" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" constant="89" id="iiF-tH-sZJ"/>
                                             <constraint firstItem="XNY-3Z-ecp" firstAttribute="top" secondItem="hNg-E2-IW9" secondAttribute="bottom" constant="8" id="oX2-Yf-GGy"/>
                                             <constraint firstItem="2cO-nh-NWm" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="vAk-TW-Hzc"/>
+                                            <constraint firstItem="2cO-nh-NWm" firstAttribute="top" secondItem="8kU-eE-Q5T" secondAttribute="bottom" constant="-1" id="yRU-bU-m61"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" id="z7J-xC-1Fj"/>
                                         </constraints>
                                         <variation key="default">
