@@ -86,14 +86,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-//        if let _ = User.currentUser() {
-//            performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-//        }
-    }
-    
-    
-    
     func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -139,18 +131,18 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp()
     {
-        let newUser = User()
-        newUser.username = theEmail.text
-        newUser.password = thePassword.text
-        newUser.anonymous = false
+        let currentUser = User.currentUser()
+        currentUser!.username = theEmail.text
+        currentUser!.password = thePassword.text
+        currentUser!.anonymous = false
         self.view.userInteractionEnabled = false
         theSpinner.startAnimating()
         
-        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+        currentUser!.signUpInBackgroundWithBlock { (success, error) -> Void in
             self.view.userInteractionEnabled = true
             self.theSpinner.stopAnimating()
             if success {
-                self.performSegueWithIdentifier(.SignUpToQuestionOnboardingSegue, sender: self)
+                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = PFUser.currentUser()
                 installation.saveInBackground()
