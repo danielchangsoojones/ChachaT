@@ -150,7 +150,7 @@ class CardDetailViewController: UIViewController {
     
     func createQuestionPopUp(questionNumber: PopUpQuestionNumber) {
         //look at STPopUp github for more info.
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let storyboard = UIStoryboard(name: "Question", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
         vc.delegate = self
         vc.popUpQuestionNumber = questionNumber

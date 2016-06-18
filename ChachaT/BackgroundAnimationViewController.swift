@@ -375,6 +375,11 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             blurrySegue.backingImageTintColor = BlurryFilteringPageBackground
             blurrySegue.backingImageSaturationDeltaFactor = 0.2
         // Do some things
+        case .MainTinderPageToQuestionOnboardingSegue:
+            let navigationVC = segue.destinationViewController as! UINavigationController
+            let destinationVC = navigationVC.viewControllers[0] as! QuestionPopUpViewController
+            destinationVC.fromOnboarding = true
+            destinationVC.questionPopUpState = .EditingMode
         default: break
         }
     }

@@ -40,6 +40,7 @@
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
+		92B87DA71D15F20800D3535C /* Question.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92B87DA51D15F20800D3535C /* Question.storyboard */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
 		92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */; };
@@ -94,6 +95,7 @@
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		92B87DA61D15F20800D3535C /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Question.storyboard; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -174,6 +176,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				92B87DA41D15F1E300D3535C /* Question */,
 				9273B7991CFF491D0001A608 /* Filtering */,
 				9261085A1CEA1939009F3E86 /* Models */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
@@ -291,11 +294,19 @@
 			name = Koloda;
 			sourceTree = "<group>";
 		};
+		92B87DA41D15F1E300D3535C /* Question */ = {
+			isa = PBXGroup;
+			children = (
+				92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */,
+				92B87DA51D15F20800D3535C /* Question.storyboard */,
+			);
+			name = Question;
+			sourceTree = "<group>";
+		};
 		92E59B051CF677FD00B0B1A4 /* Pop Ups */ = {
 			isa = PBXGroup;
 			children = (
 				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
-				92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */,
 				929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */,
 				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
 				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
@@ -381,6 +392,7 @@
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
+				92B87DA71D15F20800D3535C /* Question.storyboard in Resources */,
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
@@ -513,6 +525,14 @@
 				929FDB801CFA6F0400ACE474 /* Base */,
 			);
 			name = PopUp.storyboard;
+			sourceTree = "<group>";
+		};
+		92B87DA51D15F20800D3535C /* Question.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				92B87DA61D15F20800D3535C /* Base */,
+			);
+			name = Question.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
