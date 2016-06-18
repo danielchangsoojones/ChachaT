@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qen-f5-BQ5">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -287,6 +287,17 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </button>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="98e-Bf-CQk">
+                                                <rect key="frame" x="122" y="494" width="130" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" constant="130" id="1JS-3m-Z3o"/>
+                                                    <constraint firstAttribute="height" constant="30" id="yMC-6M-IvT"/>
+                                                </constraints>
+                                                <state key="normal" title="Back To Main Page"/>
+                                                <connections>
+                                                    <segue destination="DE2-Q3-Y1X" kind="presentation" identifier="MainPageButtonToMainPageSegue" id="aMX-dq-992"/>
+                                                </connections>
+                                            </button>
                                         </subviews>
                                         <constraints>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerX" secondItem="dYL-Ek-CAM" secondAttribute="centerX" id="1Om-L3-4fP"/>
@@ -298,9 +309,11 @@
                                             <constraint firstAttribute="trailing" secondItem="2cO-nh-NWm" secondAttribute="trailing" id="G8w-As-Scg"/>
                                             <constraint firstAttribute="trailing" secondItem="8kU-eE-Q5T" secondAttribute="trailing" id="GuL-Z6-Hly"/>
                                             <constraint firstAttribute="bottom" secondItem="2cO-nh-NWm" secondAttribute="bottom" constant="-10" id="KgC-BE-Tkz"/>
+                                            <constraint firstItem="98e-Bf-CQk" firstAttribute="centerX" secondItem="dYL-Ek-CAM" secondAttribute="centerX" id="MWB-bw-EbW"/>
                                             <constraint firstItem="teS-4f-g9g" firstAttribute="centerY" secondItem="hNg-E2-IW9" secondAttribute="centerY" id="MYJ-Xp-iQV"/>
                                             <constraint firstAttribute="trailing" secondItem="hNg-E2-IW9" secondAttribute="trailing" constant="20" id="SVZ-vc-UQM"/>
                                             <constraint firstItem="17F-Pm-3ST" firstAttribute="leading" secondItem="dYL-Ek-CAM" secondAttribute="leading" constant="20" id="UPZ-KM-cXU"/>
+                                            <constraint firstItem="98e-Bf-CQk" firstAttribute="top" secondItem="17F-Pm-3ST" secondAttribute="bottom" constant="50" id="VRa-Mh-rEX"/>
                                             <constraint firstItem="XNY-3Z-ecp" firstAttribute="leading" secondItem="hNg-E2-IW9" secondAttribute="leading" id="XZ7-1Z-WEZ"/>
                                             <constraint firstItem="8kU-eE-Q5T" firstAttribute="top" secondItem="dYL-Ek-CAM" secondAttribute="top" id="b3U-Pu-2GH"/>
                                             <constraint firstAttribute="trailing" secondItem="17F-Pm-3ST" secondAttribute="trailing" constant="20" id="c0K-2b-JYe"/>
@@ -382,4 +395,7 @@
         <image name="Question Bubble" width="340" height="68"/>
         <image name="heart" width="189" height="173"/>
     </resources>
+    <inferredMetricsTieBreakers>
+        <segue reference="aMX-dq-992"/>
+    </inferredMetricsTieBreakers>
 </document>

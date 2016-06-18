@@ -164,12 +164,7 @@ class CardDetailViewController: UIViewController {
             vc.questionPopUpState = .EditingMode
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let popup = STPopupController(rootViewController: vc)
-            popup.containerView.layer.cornerRadius = 10.0
-            popup.navigationBar.barTintColor = ChachaTeal
-            popup.navigationBar.tintColor = UIColor.whiteColor()
-            popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            popup.presentInViewController(self)
+            self.presentViewController(vc, animated: true, completion: nil)
         }
         
     }
@@ -436,6 +431,7 @@ extension CardDetailViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
         case FilterInputPageSegue
+        case CardDetailPageToQuestionPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

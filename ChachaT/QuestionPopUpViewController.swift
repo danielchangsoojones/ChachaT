@@ -236,6 +236,7 @@ extension QuestionPopUpViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case FilteringPageSegue
         case QuestionPageToMainTinderPageSegue
+        case MainPageButtonToMainPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -248,6 +249,7 @@ extension QuestionPopUpViewController: SegueHandlerType {
             if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
             }
+        default: break
         }
     }
 }
