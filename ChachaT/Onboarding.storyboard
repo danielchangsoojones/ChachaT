@@ -262,7 +262,6 @@
                         <outlet property="theTermsOfService" destination="B8v-0M-Wvc" id="jZL-mr-HLj"/>
                         <outlet property="theTextfieldsView" destination="J6X-gB-146" id="8QR-2w-YsT"/>
                         <segue destination="7ft-US-IjM" kind="presentation" identifier="SignUpSuccessSegue" id="Rdr-PG-LAv"/>
-                        <segue destination="Myq-Dr-4TB" kind="presentation" identifier="SignUpToQuestionOnboardingSegue" id="pui-5C-Zt1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="wE3-AS-nWY" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -387,7 +386,7 @@
         <!--Navigation Controller-->
         <scene sceneID="LZH-bd-wmI">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="Myq-Dr-4TB" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="OnboardingQuestionAnsweringNavigationController" automaticallyAdjustsScrollViewInsets="NO" id="Myq-Dr-4TB" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="iVr-2j-WD6">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -408,7 +407,7 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ChaCha-Logo-White" width="67" height="25"/>
+        <image name="ChaCha-Logo-White" width="1008" height="390"/>
         <image name="Or Line" width="276" height="13"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="facebook_logo" width="29" height="29"/>

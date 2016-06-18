@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import SnapKit
 import EFTools
+import DOFavoriteButton
 
 enum QuestionPopUpState {
     case EditingMode
@@ -28,6 +29,8 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theQuestionTextField: UITextView!
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theBackgroundColorView: UIView!
+    @IBOutlet weak var theLikeButton: DOFavoriteButton!
+    var theHandOverlayBackgroundColorView: UIView = UIView()
     
     var currentQuestion: Question?
     var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
@@ -82,11 +85,10 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setupTapHandler()
+        createAnonymousFlow()
         contentSizeInPopup = CGSizeMake(self.view.bounds.width - 75, self.view.bounds.height - 100)
-        theQuestionTextField.layer.cornerRadius = 10.0
-        theAnswerTextField.layer.cornerRadius = 10.0
-        theQuestionTextField.tag = 1
-        theAnswerTextField.tag = 2
+        setNormalGUI()
         if questionPopUpState == .EditingMode {
             setEditingGUI()
         }
@@ -94,11 +96,51 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         if let currentQuestion = currentQuestion {
             theQuestionTextField.text = currentQuestion.question
             theAnswerTextField.text = currentQuestion.topAnswer
-            
         } else {
             setUnwrittenQuestionGUI()
         }
         
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        animateOverlay(theHandOverlayBackgroundColorView)
+    }
+    
+    func setNormalGUI() {
+        theQuestionTextField.layer.cornerRadius = 10.0
+        theAnswerTextField.layer.cornerRadius = 10.0
+        //tagging the fields, so we know which textfield was used. Will be used in the text view delegate methods.
+        theQuestionTextField.tag = 1
+        theAnswerTextField.tag = 2
+        //create shadow for the question Text fields
+        theQuestionTextField.layer.shadowColor = UIColor.whiteColor().CGColor
+        theQuestionTextField.layer.shadowRadius = 3.0;
+        theQuestionTextField.layer.shadowOpacity = 1;
+        theQuestionTextField.layer.shadowOffset = CGSizeZero;
+    }
+    
+    private func setupTapHandler() {
+        theLikeButton.tapped { (_) in
+            self.likeTapped(self.theLikeButton)
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
+                let alert = Alert(closeButtonHidden: true)
+                alert.addButton("Gotcha") {
+                    //Todo: should lead to the messaging page with the matched person
+                    self.performSegueWithIdentifier(.QuestionPageToMainTinderPageSegue, sender: self)
+                }
+                alert.createAlert("It's A Match!", subtitle: "A match is when you and Taylor like each other's answers. Then, the two of you could message. I just haven't built a messaging page yet.", closeButtonTitle: "Okay", type: .Success)
+            }
+        }
+    }
+    
+    func likeTapped(sender: DOFavoriteButton) {
+        if sender.selected {
+            // deselect
+            sender.deselect()
+        } else {
+            // select with animation
+            sender.select()
+        }
     }
     
     func setEditingGUI() {
@@ -124,6 +166,44 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+//creating hand overlay
+extension QuestionPopUpViewController {
+    func createHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        let theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theLikeButton).offset(CGPointMake(30, 60))
+        }
+        
+        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.centerY.equalTo(theLikeButton)
+            make.left.equalTo(theLikeButton).offset(50)
+        }
+    }
+    
+    func removeHandOverlay() {
+        theHandOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            switch anonymousFlowGlobal {
+            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
+            case .MainPageSecondVisitFilteringStage: break
+            case .MainPageThirdVisitSignUpPhase: break
+            }
+        }
+    }
 }
 
 extension QuestionPopUpViewController: UITextViewDelegate {
@@ -155,6 +235,8 @@ extension QuestionPopUpViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case FilteringPageSegue
+        case QuestionPageToMainTinderPageSegue
+        case MainPageButtonToMainPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -163,6 +245,11 @@ extension QuestionPopUpViewController: SegueHandlerType {
             let destinationVC = segue.destinationViewController as! FilterViewController
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
+        case .QuestionPageToMainTinderPageSegue:
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
+                anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
+            }
+        default: break
         }
     }
 }

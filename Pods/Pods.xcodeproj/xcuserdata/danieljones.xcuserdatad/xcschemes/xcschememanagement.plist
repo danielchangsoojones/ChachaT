@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>DOFavoriteButton.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>EFTools.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -132,17 +137,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>31F36F4AFA7257D28DF516CC44805235</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>395970F09DFE5EFCDA4AFA3D5EBE78C0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>44D2DD7BB4053466AB048034B49B0BA6</key>
+		<key>3A4353537504B41B246EA7FF80724DC2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3E2F9653B55075B03D833F0F99F94AB2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -157,17 +162,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>75A84FD6C20EF1B4E8C06CA840BCF3D9</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>7BB1A9890320F7B37393B73035621E9D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A21FBE1B28598FAFB10EF43488D4D83</key>
+		<key>805D4E75C1BB0ABF8B1DF1FECAAB4B65</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,12 +192,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>B5C4ED1D6A507A0986B56DC227AF5D9D</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>C45290004E0078130C91A71711094467</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D54B847AEE15A4E6C6A75DF306CAB77E</key>
+		<key>D39630E1758F3BF4BE29A5A3B04ABECA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -208,6 +213,11 @@
 			<true/>
 		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EF82CCE9687833D1852EA20779D7B9B3</key>
 		<dict>
 			<key>primary</key>
 			<true/>

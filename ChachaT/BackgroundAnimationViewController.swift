@@ -32,20 +32,9 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    let theHandOverlayBackgroundColorView: UIView = {
-        $0.backgroundColor = HandBackgroundColorOverlay
-        $0.userInteractionEnabled = false
-        $0.alpha = 0
-        return $0
-    }(UIView())
-    
-    let theHandImage: UIImageView = {
-        $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
-        $0.contentMode = .ScaleAspectFit
-        $0.alpha = 0
-        return $0
-    }(UIImageView())
-    
+    var theHandOverlayBackgroundColorView: UIView = UIView()
+    @IBOutlet weak var theFilteringButton: UIButton!
+
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
@@ -82,16 +71,10 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
         self.theMagicMovePlaceholderImage.hidden = true
-        if User.currentUser() == nil {
-            performSegueWithIdentifier(.LogInPageSegue, sender: self)
-        }
     }
     
     override func viewDidAppear(animated: Bool) {
-        UIView.animateWithDuration(2, animations: {
-            self.theHandImage.alpha = 1.0
-            self.theHandOverlayBackgroundColorView.alpha = 1.0
-        })
+        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     override func viewDidLayoutSubviews() {
@@ -102,7 +85,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         if rippleState == 3 {
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
         } else if rippleState == 6 {
-            if anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
             }
         }
@@ -122,7 +105,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 extension BackgroundAnimationViewController {
     func createUserArray() {
         //creating the anonymous flow for a new user, so the learn how to use the app.
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+        if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
             userArray = [createFirstPlaceholderUser()]
             self.kolodaView.reloadData()
         } else {
@@ -149,7 +132,13 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
     }
     
     func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
-        self.buttonTappedHandler(index)
+        //this means the user tapped the sign up card
+        if anonymousFlowStage(.MainPageThirdVisitSignUpPhase) && (Int(index) == 3 || (Int(index) == userArray.count && userArray.count < 4)) {
+            performSegueWithIdentifier(.MainTinderPageToQuestionOnboardingSegue, sender: self)
+        } else {
+            //go through the normal user process
+            self.buttonTappedHandler(index)
+        }
     }
     
     func koloda(kolodaShouldApplyAppearAnimation koloda: KolodaView) -> Bool {
@@ -184,7 +173,12 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
-        return UInt(userArray.count)
+        if anonymousFlowStage(.MainPageThirdVisitSignUpPhase) {
+            //the user can see 3 cards, and then they need to sign up. 
+            return UInt(userArray.count + 1)
+        } else {
+            return UInt(userArray.count)
+        }
     }
   
     func didTapImage(img: UIImage) {
@@ -194,15 +188,20 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         guard let cardView = NSBundle.mainBundle().loadNibNamed("CustomCardView", owner: self, options: nil)[0] as? CustomCardView else { return UIView() }
         
-        cardView.backgroundColor = UIColor.clearColor()
-        cardView.delegate = self
-        cardView.userOfTheCard = userArray[Int(index)]
-        
-        //special case for PFAnonymous User going through anonymous flow
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
-            cardView.theCardMainImage.image = UIImage(named: "DrivingGirl")
+        //to make a sign up card for anonymous users on the 4th card.
+        if anonymousFlowStage(.MainPageThirdVisitSignUpPhase) && (Int(index) == 3 || (Int(index) == userArray.count && userArray.count < 4)) {
+            cardView.theCardMainImage.image = UIImage(named: "ChachaSignUpCardImage")
+        } else {
+            //do the normal indexing of users to cards
+            cardView.backgroundColor = UIColor.clearColor()
+            cardView.delegate = self
+            cardView.userOfTheCard = userArray[Int(index)]
         }
         
+        //special case for PFAnonymous User going through anonymous flow
+        if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
+            cardView.theCardMainImage.image = UIImage(named: "DrivingGirl")
+        }
         
         //Rounded corners
         cardView.layer.cornerRadius = 10.0
@@ -232,19 +231,18 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     private func buttonTappedHandler(index: UInt) {
         let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
-        
+
         cardDetailVC.userOfTheCard = userArray[Int(index)]
         if let image = userArray[Int(index)].profileImage{
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {
-            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 theMagicMovePlaceholderImage.image = UIImage(named: "DrivingGirl")
             } else {
                 theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
             }
         }
-        
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
         theMagicMovePlaceholderImage.hidden = false
@@ -258,15 +256,37 @@ extension BackgroundAnimationViewController: MagicMoveable {
 
 //creating the overlay/anonymous flow
 extension BackgroundAnimationViewController {
-    func createHandOverlay() {
+    func createFirstTapCardHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
         self.view.addSubview(theHandOverlayBackgroundColorView)
         theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
         
+        let theHandImage = createHandImageOverlay()
         theHandOverlayBackgroundColorView.addSubview(theHandImage)
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
+        }
+    }
+    
+    func createSecondTapFilteringHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.center.equalTo(theHandOverlayBackgroundColorView)
+        }
+        
+        let theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theFilteringButton).offset(CGPointMake(40, 50))
         }
     }
     
@@ -276,8 +296,10 @@ extension BackgroundAnimationViewController {
     
     func createAnonymousFlow() {
         if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-            switch anonymousFlow {
-            case .MainPageFirstVisitHandOverlay: createHandOverlay()
+            switch anonymousFlowGlobal {
+            case .MainPageFirstVisitMatchingPhase: createFirstTapCardHandOverlay()
+            case .MainPageSecondVisitFilteringStage: createSecondTapFilteringHandOverlay()
+            case .MainPageThirdVisitSignUpPhase: break
             }
         }
     }
@@ -290,7 +312,7 @@ extension BackgroundAnimationViewController {
         placeholderUser.factOne = "I have never missed a day of school. Ever."
         placeholderUser.factTwo = "Shaq has my autograph."
         placeholderUser.factThree = "I'm an identical twin."
-        placeholderUser.questionOne = createQuestion("What's a clear sign that someone was raised well?", answerString: "When someone is obviously in the wrong, and they know it, they apologise and work towards not making a mistake like that again. Most people will deny it until the other person gives up, or get all defensive about how it was not a big deal.")
+        placeholderUser.questionOne = createQuestion("What's a clear sign that someone was raised well?", answerString: "When someone is obviously in the wrong, and they know it, they apologize and work towards not making a mistake like that again. Most people will deny it until the other person gives up, or get all defensive about how it was not a big deal.")
         return placeholderUser
     }
     
@@ -301,6 +323,39 @@ extension BackgroundAnimationViewController {
         return question
     }
     
+    func createSignUpImage() {
+        let theSignUpImage : UIImageView = {
+            $0.backgroundColor = ChachaTeal
+            return $0
+        } (UIImageView())
+        
+        let theWhiteChachaLogo = UIImageView(image: UIImage(named: "ChaCha-Logo-White"))
+        theSignUpImage.addSubview(theWhiteChachaLogo)
+        theWhiteChachaLogo.snp_makeConstraints { (make) in
+            make.centerX.equalTo(theSignUpImage)
+            make.leading.equalTo(theSignUpImage)
+            make.trailing.equalTo(theSignUpImage)
+            make.centerY.equalTo(theSignUpImage)
+        }
+        
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.center.equalTo(theHandOverlayBackgroundColorView)
+        }
+        
+        let theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theFilteringButton).offset(CGPointMake(40, 50))
+        }
+    }
 }
 
 extension BackgroundAnimationViewController: SegueHandlerType {
@@ -308,6 +363,7 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
         case FilterPageBlurrySegue
+        case MainTinderPageToQuestionOnboardingSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

@@ -78,7 +78,7 @@ class Alert {
     
     
     
-    func addButton(buttonTitle: String, closeButtonHidden: Bool, buttonAction: () -> Void) {
+    func addButton(buttonTitle: String, buttonAction: () -> Void) {
         alert.addButton(buttonTitle, action: buttonAction)
     }
     

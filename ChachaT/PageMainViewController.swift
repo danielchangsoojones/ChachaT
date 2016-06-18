@@ -24,8 +24,20 @@ class PageMainViewController: PagesController {
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
-
+        setChachaNavigationLogo()
+        
         // Do any additional setup after loading the view.
+    }
+    
+    func setChachaNavigationLogo() {
+        let logo = UIImage(named: "ChaCha-Logo-White")
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+        imageView.image = logo
+        imageView.contentMode = .ScaleAspectFit
+        let titleView = UIView(frame: CGRectMake(0,0, 150,40))
+        imageView.frame = titleView.bounds
+        titleView.addSubview(imageView)
+        self.navigationItem.titleView = titleView
     }
     
     func logOut() {

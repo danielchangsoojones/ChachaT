@@ -60,7 +60,6 @@ class FilterViewController: UIViewController {
     @IBOutlet weak var theSexualityStackView: UIStackView!
     @IBOutlet weak var thePageTitle: UILabel!
     
-    
     var currentUserLocation : PFGeoPoint? = User.currentUser()?.location
     let currentUser = User.currentUser()
     
@@ -337,6 +336,9 @@ class FilterViewController: UIViewController {
         setGUI()
     }
     
+    override func viewDidAppear(animated: Bool) {
+    }
+    
     func createFilterDictionary() {
         for filterName in FilterNames.raceMinusAllValues {
             filterDictionary[filterName] = (filterState: false, filterCategory: FilterCategories.RaceCategoryName)
@@ -487,7 +489,7 @@ extension FilterViewController {
         currentUser.saveInBackgroundWithBlock { (success, error) in
             if success {
                 if self.fromOnboarding {
-                    self.performSegueWithIdentifier(.FilterToMainPageSegue, sender: self)
+                    self.performSegueWithIdentifier(.FilterPageToSignUpPageSegue, sender: self)
                 } else {
                     self.navigationController?.popViewControllerAnimated(true)
                 }
@@ -519,6 +521,10 @@ extension FilterViewController {
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
+                    //if we are in the anonymous flow, then we need to change the anonymousFlowPhase
+                    if anonymousFlowStage(.MainPageSecondVisitFilteringStage) {
+                        anonymousFlowGlobal = .MainPageThirdVisitSignUpPhase
+                    }
                     self.delegate?.passFilteredUserArray(users)
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
@@ -552,7 +558,16 @@ extension FilterViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case FilterToMainPageSegue
+        case FilterPageToSignUpPageSegue
     }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .FilterToMainPageSegue: break
+        default: break
+        }
+    }
+    
 }
 
 

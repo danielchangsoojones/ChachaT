@@ -36,6 +36,7 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
+    var theHandOverlayBackgroundColorView: UIView = UIView()
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -107,7 +108,7 @@ class CardDetailViewController: UIViewController {
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
         let alert = Alert(closeButtonHidden: false)
-        alert.addButton("Block User", closeButtonHidden: false) { 
+        alert.addButton("Block User") { 
             alert.closeAlert()
         }
        alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .Error)
@@ -117,7 +118,12 @@ class CardDetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNormalGUI()
+        createAnonymousFlow()
         setupTapHandler()
+    }
+    
+    override func viewWillAppear(animated: Bool) {
+        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -158,12 +164,7 @@ class CardDetailViewController: UIViewController {
             vc.questionPopUpState = .EditingMode
             self.navigationController?.pushViewController(vc, animated: true)
         } else {
-            let popup = STPopupController(rootViewController: vc)
-            popup.containerView.layer.cornerRadius = 10.0
-            popup.navigationBar.barTintColor = ChachaTeal
-            popup.navigationBar.tintColor = UIColor.whiteColor()
-            popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-            popup.presentInViewController(self)
+            self.presentViewController(vc, animated: true, completion: nil)
         }
         
     }
@@ -212,12 +213,13 @@ class CardDetailViewController: UIViewController {
             self.profileImage.file = profileImage
             self.profileImage.loadInBackground()
         } else {
-            if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) && anonymousFlow == .MainPageFirstVisitHandOverlay {
+            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
                 profileImage.image = UIImage(named: "DrivingGirl")
+            } else {
+                profileImage.backgroundColor = ChachaBombayGrey
+                theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
+                theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
             }
-            profileImage.backgroundColor = ChachaBombayGrey
-            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
-            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
         }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
@@ -331,6 +333,43 @@ class CardDetailViewController: UIViewController {
 
 }
 
+//creating hand overlay
+extension CardDetailViewController {
+    func createHandOverlay() {
+        theHandOverlayBackgroundColorView = createBackgroundOverlay()
+        self.view.addSubview(theHandOverlayBackgroundColorView)
+        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
+        
+        let theHandImage = createHandImageOverlay()
+        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        theHandImage.snp_makeConstraints { (make) in
+            make.center.equalTo(theQuestionButtonOne).offset(CGPointMake(20, 60))
+        }
+        
+        let overlayLabel = createLabelForOverlay("Ask Taylor a question!")
+        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
+        overlayLabel.snp_makeConstraints { (make) in
+            make.center.equalTo(profileImage)
+        }
+    }
+    
+    func removeHandOverlay() {
+        theHandOverlayBackgroundColorView.removeFromSuperview()
+    }
+    
+    func createAnonymousFlow() {
+        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
+            switch anonymousFlowGlobal {
+            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
+            case .MainPageSecondVisitFilteringStage: break
+            case .MainPageThirdVisitSignUpPhase: break
+            }
+        }
+    }
+}
+
 
 protocol PopUpViewControllerDelegate{
     func passFactDescription(text: String, fact: Fact)
@@ -392,6 +431,7 @@ extension CardDetailViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
         case FilterInputPageSegue
+        case CardDetailPageToQuestionPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {

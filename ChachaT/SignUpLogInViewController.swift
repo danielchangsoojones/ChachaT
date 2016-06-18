@@ -86,14 +86,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    override func viewWillAppear(animated: Bool) {
-//        if let _ = User.currentUser() {
-//            performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-//        }
-    }
-    
-    
-    
     func dismissKeyboard() {
         view.endEditing(true)
     }
@@ -139,18 +131,18 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp()
     {
-        let newUser = User()
-        newUser.username = theEmail.text
-        newUser.password = thePassword.text
-        newUser.anonymous = false
+        let currentUser = User.currentUser()
+        currentUser!.username = theEmail.text
+        currentUser!.password = thePassword.text
+        currentUser!.anonymous = false
         self.view.userInteractionEnabled = false
         theSpinner.startAnimating()
         
-        newUser.signUpInBackgroundWithBlock { (success, error) -> Void in
+        currentUser!.signUpInBackgroundWithBlock { (success, error) -> Void in
             self.view.userInteractionEnabled = true
             self.theSpinner.stopAnimating()
             if success {
-                self.performSegueWithIdentifier(.SignUpToQuestionOnboardingSegue, sender: self)
+                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 let installation = PFInstallation.currentInstallation()
                 installation["user"] = PFUser.currentUser()
                 installation.saveInBackground()
@@ -181,7 +173,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 let code = error.code
                 if code == PFErrorCode.ErrorObjectNotFound.rawValue {
                     let alert = Alert(closeButtonHidden: true)
-                    alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+                    alert.addButton("Okay", buttonAction: { () -> Void in
                         alert.closeAlert()
                         self.theEmail.becomeFirstResponder()
                     })
@@ -206,7 +198,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     {
         if theEmail.text!.isEmpty {
             let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+            alert.addButton("Okay", buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
             })
@@ -215,7 +207,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         }
         else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
             let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+            alert.addButton("Okay", buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
             })
@@ -224,7 +216,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         }
         else if thePassword.text!.isEmpty {
             let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", closeButtonHidden: true, buttonAction: { () -> Void in
+            alert.addButton("Okay", buttonAction: { () -> Void in
                 alert.closeAlert()
                 self.thePassword.becomeFirstResponder()
             })
