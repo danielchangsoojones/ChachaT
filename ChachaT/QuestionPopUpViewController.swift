@@ -182,8 +182,9 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setRandomSampleQuestion() {
         if fromOnboarding {
             let randomIndex = Int(arc4random_uniform(UInt32(sampleQuestionsArray.count)))
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+            UIView.animateWithDuration(1.0, animations: { () -> Void in
                 self.theQuestionTextField.text = self.sampleQuestionsArray[randomIndex]
+                self.theAnswerTextField.text = ""
                 self.view.layoutIfNeeded()
             })
         }
