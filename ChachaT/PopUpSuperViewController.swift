@@ -8,7 +8,7 @@
 
 import UIKit
 
-class PopUpSuperViewController: UIViewController {
+class PopUpSuperViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var theActivitySpinner: UIActivityIndicatorView!
     

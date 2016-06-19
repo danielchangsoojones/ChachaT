@@ -30,7 +30,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theLikeButton: DOFavoriteButton!
-    var theHandOverlayBackgroundColorView: UIView = UIView()
     @IBOutlet weak var theMainPageButton: UIButton!
     
     let sampleQuestionsArray : [String] = ["What would the person who named Walkie Talkies have named other items?", "What is something someone said that forever changed your way of thinking?", "What G-Rated Joke Always Cracks You Up?", "What is your favorite fun fact?", "Who is the scariest person you have ever met?","What will be the \"turns out cigarettes are bad for us.\" of our generation?", "What was a loophole that you found and exploited the hell out of?", "What was your \"I don't get paid enough for this shit\" moment?"]
@@ -116,10 +115,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         
     }
     
-    override func viewDidAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView)
-    }
-    
     func setNormalGUI() {
         theQuestionTextField.layer.cornerRadius = 10.0
         theAnswerTextField.layer.cornerRadius = 10.0
@@ -182,11 +177,8 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setRandomSampleQuestion() {
         if fromOnboarding {
             let randomIndex = Int(arc4random_uniform(UInt32(sampleQuestionsArray.count)))
-            UIView.animateWithDuration(1.0, animations: { () -> Void in
-                self.theQuestionTextField.text = self.sampleQuestionsArray[randomIndex]
-                self.theAnswerTextField.text = ""
-                self.view.layoutIfNeeded()
-            })
+            self.theQuestionTextField.text = self.sampleQuestionsArray[randomIndex]
+            self.theAnswerTextField.text = ""
         }
     }
 
@@ -200,28 +192,16 @@ class QuestionPopUpViewController: PopUpSuperViewController {
 //creating hand overlay
 extension QuestionPopUpViewController {
     func createHandOverlay() {
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
         let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
+        createSemiTranslucentBlackOverlay([theHandImage, overlayLabel])
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theLikeButton).offset(CGPointMake(30, 60))
         }
-        
-        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
-        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
         overlayLabel.snp_makeConstraints { (make) in
             make.centerY.equalTo(theLikeButton)
             make.left.equalTo(theLikeButton).offset(50)
         }
-    }
-    
-    func removeHandOverlay() {
-        theHandOverlayBackgroundColorView.removeFromSuperview()
     }
     
     func createAnonymousFlow() {

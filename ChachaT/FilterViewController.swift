@@ -526,6 +526,7 @@ extension FilterViewController {
                         anonymousFlowGlobal = .MainPageThirdVisitSignUpPhase
                     }
                     self.delegate?.passFilteredUserArray(users)
+                    self.delegate?.updateAnonymousFlow()
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })

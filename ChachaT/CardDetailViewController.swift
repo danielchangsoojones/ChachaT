@@ -18,7 +18,7 @@ public enum QuestionDetailState {
     case OtherUserProfileViewOnlyMode
 }
 
-class CardDetailViewController: UIViewController {
+class CardDetailViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
@@ -36,7 +36,6 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theQuestionButtonOne: ResizableButton!
     @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
     @IBOutlet weak var theQuestionButtonThree: ResizableButton!
-    var theHandOverlayBackgroundColorView: UIView = UIView()
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -120,10 +119,6 @@ class CardDetailViewController: UIViewController {
         setNormalGUI()
         createAnonymousFlow()
         setupTapHandler()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -336,27 +331,15 @@ class CardDetailViewController: UIViewController {
 //creating hand overlay
 extension CardDetailViewController {
     func createHandOverlay() {
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
         let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
+        createSemiTranslucentBlackOverlay([theHandImage, overlayLabel])
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theQuestionButtonOne).offset(CGPointMake(20, 60))
         }
-        
-        let overlayLabel = createLabelForOverlay("Ask Taylor a question!")
-        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
         overlayLabel.snp_makeConstraints { (make) in
             make.center.equalTo(profileImage)
         }
-    }
-    
-    func removeHandOverlay() {
-        theHandOverlayBackgroundColorView.removeFromSuperview()
     }
     
     func createAnonymousFlow() {
