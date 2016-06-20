@@ -30,7 +30,9 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     @IBOutlet weak var theAnswerTextField: UITextView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theLikeButton: DOFavoriteButton!
-    var theHandOverlayBackgroundColorView: UIView = UIView()
+    @IBOutlet weak var theMainPageButton: UIButton!
+    
+    let sampleQuestionsArray : [String] = ["What would the person who named Walkie Talkies have named other items?", "What is something someone said that forever changed your way of thinking?", "What G-Rated Joke Always Cracks You Up?", "What is your favorite fun fact?", "Who is the scariest person you have ever met?","What will be the \"turns out cigarettes are bad for us.\" of our generation?", "What was a loophole that you found and exploited the hell out of?", "What was your \"I don't get paid enough for this shit\" moment?"]
     
     var currentQuestion: Question?
     var popUpQuestionNumber: PopUpQuestionNumber = .QuestionOne
@@ -61,9 +63,15 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             currentQuestion?.topAnswer = theAnswerTextField.text
         }
         switch popUpQuestionNumber {
-        case .QuestionOne: currentUser!.questionOne = currentQuestion
-        case .QuestionTwo: currentUser!.questionTwo = currentQuestion
-        case .QuestionThree: currentUser!.questionThree = currentQuestion
+        case .QuestionOne:
+            currentUser!.questionOne = currentQuestion
+            popUpQuestionNumber = .QuestionTwo
+        case .QuestionTwo:
+            currentUser!.questionTwo = currentQuestion
+            popUpQuestionNumber = .QuestionThree
+        case .QuestionThree:
+            currentUser!.questionThree = currentQuestion
+            popUpQuestionNumber = .CustomQuestion
         case .CustomQuestion: break
         }
         theActivitySpinner.hidden = false
@@ -72,8 +80,13 @@ class QuestionPopUpViewController: PopUpSuperViewController {
         PFObject.saveAllInBackground(array) { (success, error) in
             if success {
                 //for when we are in onboarding mode and answer the 3rd question.
-                if self.fromOnboarding && self.popUpQuestionNumber == .QuestionThree {
-                    self.performSegueWithIdentifier(.FilteringPageSegue, sender: self)
+                if self.fromOnboarding {
+                    if self.popUpQuestionNumber == .CustomQuestion {
+                        //the new user has answered 3 questions, so can go to the filter page.
+                        self.performSegueWithIdentifier(.FilteringPageSegue, sender: self)
+                    } else {
+                        self.setRandomSampleQuestion()
+                    }
                 } else {
                     //all the other times, I can just pop the view controller. 
                     self.delegate?.passQuestionText(self.theQuestionTextField.text, questionNumber: self.popUpQuestionNumber)
@@ -100,10 +113,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
             setUnwrittenQuestionGUI()
         }
         
-    }
-    
-    override func viewDidAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView)
     }
     
     func setNormalGUI() {
@@ -146,18 +155,30 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     func setEditingGUI() {
         theQuestionTextField.userInteractionEnabled = true
         theAnswerTextField.userInteractionEnabled = true
+        if self.navigationController == nil {
+            
+        }
         self.navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: .Save, target: self, action: #selector(save))
         self.edgesForExtendedLayout = UIRectEdge.None
+        theLikeButton.hidden = true
+        theMainPageButton.hidden = true
+        setRandomSampleQuestion()
     }
     
     func setUnwrittenQuestionGUI() {
-        theQuestionTextField.textColor = placeHolderTextColor
-        theAnswerTextField.textColor = placeHolderTextColor
         if questionPopUpState == .EditingMode {
             theAnswerTextField.userInteractionEnabled = true
             theQuestionTextField.userInteractionEnabled = true
         } else if questionPopUpState == .ViewOnlyMode {
             theQuestionTextField.text = "Oops, they don't seem to have written a question yet"
+        }
+    }
+    
+    func setRandomSampleQuestion() {
+        if fromOnboarding {
+            let randomIndex = Int(arc4random_uniform(UInt32(sampleQuestionsArray.count)))
+            self.theQuestionTextField.text = self.sampleQuestionsArray[randomIndex]
+            self.theAnswerTextField.text = ""
         }
     }
 
@@ -171,28 +192,16 @@ class QuestionPopUpViewController: PopUpSuperViewController {
 //creating hand overlay
 extension QuestionPopUpViewController {
     func createHandOverlay() {
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
         let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
+        createSemiTranslucentBlackOverlay([theHandImage, overlayLabel])
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theLikeButton).offset(CGPointMake(30, 60))
         }
-        
-        let overlayLabel = createLabelForOverlay("Like Taylor's Question")
-        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
         overlayLabel.snp_makeConstraints { (make) in
             make.centerY.equalTo(theLikeButton)
             make.left.equalTo(theLikeButton).offset(50)
         }
-    }
-    
-    func removeHandOverlay() {
-        theHandOverlayBackgroundColorView.removeFromSuperview()
     }
     
     func createAnonymousFlow() {

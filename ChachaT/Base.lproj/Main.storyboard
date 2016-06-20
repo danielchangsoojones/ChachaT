@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--OnboardingQuestionAnsweringNavigationController-->
+        <!--Question-->
         <scene sceneID="940-KE-UzY">
             <objects>
-                <viewControllerPlaceholder storyboardName="Onboarding" referencedIdentifier="OnboardingQuestionAnsweringNavigationController" id="iIV-nv-kuo" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Question" id="iIV-nv-kuo" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NMc-Fr-UI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="85.5" y="-134"/>
@@ -576,13 +576,13 @@
             </objects>
             <point key="canvasLocation" x="905" y="348"/>
         </scene>
-        <!--UserDetailQuestionPopUpViewController-->
+        <!--Question-->
         <scene sceneID="Aiw-qk-KTi">
             <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UserDetailQuestionPopUpViewController" storyboardName="PopUp" referencedIdentifier="UserDetailQuestionPopUpViewController" id="137-mi-AE4" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardIdentifier="UserDetailQuestionPopUpViewController" storyboardName="Question" id="137-mi-AE4" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4G-9S-7Pq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1986.5" y="917.5"/>
+            <point key="canvasLocation" x="1399" y="959"/>
         </scene>
     </scenes>
     <resources>

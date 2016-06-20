@@ -13,10 +13,6 @@ import ParseUI
 private let overlayRightImageName = "overlay_like"
 private let overlayLeftImageName = "overlay_skip"
 
-protocol CustomCardViewDelegate:class {
-    func didTapImage(img:UIImage)
-}
-
 class CustomCardView: OverlayView {
     @IBOutlet weak var theFullNameLabel: UILabel!
     @IBOutlet weak var theAgeLabel: UILabel!
@@ -44,7 +40,6 @@ class CustomCardView: OverlayView {
         }
     }
     
-    weak var delegate:CustomCardViewDelegate?
     var didEndDragging = false
     
     override func awakeFromNib() {

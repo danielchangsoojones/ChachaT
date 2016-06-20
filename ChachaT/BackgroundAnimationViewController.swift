@@ -27,19 +27,16 @@ var audioPlayerWoosh = AVAudioPlayer()
 private let numberOfCards : UInt = 5
 
 //go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
-class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegate {
+class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    var theHandOverlayBackgroundColorView: UIView = UIView()
     @IBOutlet weak var theFilteringButton: UIButton!
 
     var userArray = [User]()
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
-    
-    var rippleState = 1
     
     @IBAction func segueToProfilePage(sender: AnyObject) {
         pageMainViewControllerDelegate!.moveToPageIndex(1)
@@ -73,10 +70,6 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
         self.theMagicMovePlaceholderImage.hidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
-        animateOverlay(theHandOverlayBackgroundColorView)
-    }
-    
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rippleState += 1
@@ -86,7 +79,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
             ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
         } else if rippleState == 6 {
             if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
-                ripple(theHandOverlayBackgroundColorView.center, view: self.theHandOverlayBackgroundColorView)
+                ripple(theOverlayView.center, view: self.theOverlayView)
             }
         }
     }
@@ -104,7 +97,7 @@ class BackgroundAnimationViewController: UIViewController, CustomCardViewDelegat
 //queries
 extension BackgroundAnimationViewController {
     func createUserArray() {
-        //creating the anonymous flow for a new user, so the learn how to use the app.
+        //creating the anonymous flow for a new user, so the users learns how to use the app.
         if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
             userArray = [createFirstPlaceholderUser()]
             self.kolodaView.reloadData()
@@ -180,10 +173,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
             return UInt(userArray.count)
         }
     }
-  
-    func didTapImage(img: UIImage) {
-        
-    }
 
     func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         guard let cardView = NSBundle.mainBundle().loadNibNamed("CustomCardView", owner: self, options: nil)[0] as? CustomCardView else { return UIView() }
@@ -194,7 +183,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         } else {
             //do the normal indexing of users to cards
             cardView.backgroundColor = UIColor.clearColor()
-            cardView.delegate = self
             cardView.userOfTheCard = userArray[Int(index)]
         }
         
@@ -257,41 +245,25 @@ extension BackgroundAnimationViewController: MagicMoveable {
 //creating the overlay/anonymous flow
 extension BackgroundAnimationViewController {
     func createFirstTapCardHandOverlay() {
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
         let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        createSemiTranslucentBlackOverlay([theHandImage])
+        
         theHandImage.snp_makeConstraints { (make) in
-            make.center.equalTo(theHandOverlayBackgroundColorView).offset(CGPointMake(20, 30))
+            make.center.equalTo(theOverlayView).offset(CGPointMake(20, 30))
         }
     }
     
     func createSecondTapFilteringHandOverlay() {
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
-        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
-        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
-        overlayLabel.snp_makeConstraints { (make) in
-            make.center.equalTo(theHandOverlayBackgroundColorView)
-        }
-        
         let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
+        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
+        createSemiTranslucentBlackOverlay([theHandImage, overlayLabel])
+        
         theHandImage.snp_makeConstraints { (make) in
             make.center.equalTo(theFilteringButton).offset(CGPointMake(40, 50))
         }
-    }
-    
-    func removeHandOverlay() {
-        theHandOverlayBackgroundColorView.removeFromSuperview()
+        overlayLabel.snp_makeConstraints { (make) in
+            make.center.equalTo(theOverlayView)
+        }
     }
     
     func createAnonymousFlow() {
@@ -299,7 +271,7 @@ extension BackgroundAnimationViewController {
             switch anonymousFlowGlobal {
             case .MainPageFirstVisitMatchingPhase: createFirstTapCardHandOverlay()
             case .MainPageSecondVisitFilteringStage: createSecondTapFilteringHandOverlay()
-            case .MainPageThirdVisitSignUpPhase: break
+            case .MainPageThirdVisitSignUpPhase: removeOverlay()
             }
         }
     }
@@ -322,40 +294,6 @@ extension BackgroundAnimationViewController {
         question.topAnswer = answerString
         return question
     }
-    
-    func createSignUpImage() {
-        let theSignUpImage : UIImageView = {
-            $0.backgroundColor = ChachaTeal
-            return $0
-        } (UIImageView())
-        
-        let theWhiteChachaLogo = UIImageView(image: UIImage(named: "ChaCha-Logo-White"))
-        theSignUpImage.addSubview(theWhiteChachaLogo)
-        theWhiteChachaLogo.snp_makeConstraints { (make) in
-            make.centerX.equalTo(theSignUpImage)
-            make.leading.equalTo(theSignUpImage)
-            make.trailing.equalTo(theSignUpImage)
-            make.centerY.equalTo(theSignUpImage)
-        }
-        
-        theHandOverlayBackgroundColorView = createBackgroundOverlay()
-        self.view.addSubview(theHandOverlayBackgroundColorView)
-        theHandOverlayBackgroundColorView.snp_makeConstraints { (make) in
-            make.edges.equalTo(self.view)
-        }
-        
-        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
-        theHandOverlayBackgroundColorView.addSubview(overlayLabel)
-        overlayLabel.snp_makeConstraints { (make) in
-            make.center.equalTo(theHandOverlayBackgroundColorView)
-        }
-        
-        let theHandImage = createHandImageOverlay()
-        theHandOverlayBackgroundColorView.addSubview(theHandImage)
-        theHandImage.snp_makeConstraints { (make) in
-            make.center.equalTo(theFilteringButton).offset(CGPointMake(40, 50))
-        }
-    }
 }
 
 extension BackgroundAnimationViewController: SegueHandlerType {
@@ -375,6 +313,11 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             blurrySegue.backingImageTintColor = BlurryFilteringPageBackground
             blurrySegue.backingImageSaturationDeltaFactor = 0.2
         // Do some things
+        case .MainTinderPageToQuestionOnboardingSegue:
+            let navigationVC = segue.destinationViewController as! UINavigationController
+            let destinationVC = navigationVC.viewControllers[0] as! QuestionPopUpViewController
+            destinationVC.fromOnboarding = true
+            destinationVC.questionPopUpState = .EditingMode
         default: break
         }
     }
@@ -382,11 +325,16 @@ extension BackgroundAnimationViewController: SegueHandlerType {
 
 protocol FilterViewControllerDelegate {
     func passFilteredUserArray(filteredUserArray: [User])
+    func updateAnonymousFlow()
 }
 extension BackgroundAnimationViewController: FilterViewControllerDelegate {
     func passFilteredUserArray(filteredUserArray: [User]) {
         userArray = filteredUserArray
         self.kolodaView.reloadData()
+    }
+    
+    func updateAnonymousFlow() {
+        createAnonymousFlow()
     }
 }
 
