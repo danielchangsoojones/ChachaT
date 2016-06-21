@@ -5,6 +5,45 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
+        <!--Filter Tag View Controller-->
+        <scene sceneID="UTw-sp-Kxf">
+            <objects>
+                <viewController storyboardIdentifier="FilterTagViewController" id="vSA-UM-BZe" customClass="FilterTagViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="OXw-Kc-WVv"/>
+                        <viewControllerLayoutGuide type="bottom" id="We9-01-ZOh"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Zpo-OK-WTQ">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQh-0P-704" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="179" y="292" width="242" height="16"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="UQh-0P-704" firstAttribute="centerX" secondItem="Zpo-OK-WTQ" secondAttribute="centerX" id="88B-1s-YQz"/>
+                            <constraint firstItem="UQh-0P-704" firstAttribute="centerY" secondItem="Zpo-OK-WTQ" secondAttribute="centerY" id="rFA-Qa-6Eo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="tagView" destination="UQh-0P-704" id="Q36-2Y-gu3"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ggu-Iv-tXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-259" y="442"/>
+        </scene>
         <!--Delegate-->
         <scene sceneID="mDN-x0-sAl">
             <objects>

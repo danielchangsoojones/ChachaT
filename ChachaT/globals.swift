@@ -24,6 +24,7 @@ let HandBackgroundColorOverlay = UIColor.rgba(red: 0, green: 0, blue: 0, alpha: 
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
    case QuestionOnboardingCell
+   case FilterTagViewController
 }
 
 var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitMatchingPhase

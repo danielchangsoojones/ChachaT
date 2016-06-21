@@ -46,6 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         }
         
+        self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+        let storyboard = UIStoryboard(name: "Filtering", bundle: nil)
+        
+        let initialViewController = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.FilterTagViewController.rawValue) as! FilterTagViewController
+        
+        self.window?.rootViewController = initialViewController
+        self.window?.makeKeyAndVisible()
+        
         return true
     }
 

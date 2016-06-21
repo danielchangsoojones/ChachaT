@@ -29,6 +29,7 @@ PODS:
   - SCLAlertView (0.5.8)
   - SnapKit (0.21.0)
   - STPopup (1.7.0)
+  - TagListView (1.0.0)
   - Timepiece (0.4.2)
   - TPKeyboardAvoiding (1.3)
   - TTRangeSlider (1.0.4)
@@ -45,6 +46,7 @@ DEPENDENCIES:
   - ParseUI
   - Ripple
   - STPopup
+  - TagListView (~> 1.0)
   - Timepiece
   - TTRangeSlider
 
@@ -77,6 +79,7 @@ SPEC CHECKSUMS:
   SCLAlertView: 653e84d1f9fd95333bc54671fbadb7d0c47fce49
   SnapKit: 2756fe24b706367af224c9c508d2f9166d03354c
   STPopup: 36b45120f51ab3cdf7a10c1b9032b7fc8eef75ac
+  TagListView: 6bf4bded034c4c90b1e90d8cd3d8e1d852dba0a8
   Timepiece: cf53bb908bf542acc0e3d5f69cabfed869df4ebd
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
