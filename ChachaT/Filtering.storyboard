@@ -17,7 +17,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQh-0P-704" customClass="TagListView" customModule="TagListView">
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UQh-0P-704" customClass="TagListView" customModule="TagListView">
                                 <rect key="frame" x="179" y="288" width="242" height="24"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <userDefinedRuntimeAttributes>
@@ -36,15 +36,37 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvJ-cx-GbG" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="179" y="41" width="242" height="24"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="CvJ-cx-GbG" firstAttribute="centerX" secondItem="Zpo-OK-WTQ" secondAttribute="centerX" id="2cl-xL-t0d"/>
                             <constraint firstItem="UQh-0P-704" firstAttribute="centerX" secondItem="Zpo-OK-WTQ" secondAttribute="centerX" id="88B-1s-YQz"/>
+                            <constraint firstItem="CvJ-cx-GbG" firstAttribute="top" secondItem="OXw-Kc-WVv" secondAttribute="bottom" constant="21" id="XOK-2Y-ddL"/>
                             <constraint firstItem="UQh-0P-704" firstAttribute="centerY" secondItem="Zpo-OK-WTQ" secondAttribute="centerY" id="rFA-Qa-6Eo"/>
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="tagView" destination="UQh-0P-704" id="Q36-2Y-gu3"/>
+                        <outlet property="tagChoicesView" destination="UQh-0P-704" id="lRc-Yr-eoj"/>
+                        <outlet property="tagChosenView" destination="CvJ-cx-GbG" id="ArR-Py-clH"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggu-Iv-tXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -91,7 +113,7 @@
                                                                 <rect key="frame" x="0.0" y="20" width="335" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="B9v-iH-Eoh">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="66" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Asian">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -101,7 +123,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="KnV-zn-ucp">
-                                                                        <rect key="frame" x="68" y="0.0" width="66" height="40"/>
+                                                                        <rect key="frame" x="67" y="0.0" width="66" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Black">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -131,7 +153,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rtt-1Q-Gbr">
-                                                                        <rect key="frame" x="270" y="0.0" width="66" height="40"/>
+                                                                        <rect key="frame" x="270" y="0.0" width="65" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -279,7 +301,7 @@
                                                                 <rect key="frame" x="0.0" y="20" width="335" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="DfI-YA-Ac1">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="83" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="82" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Brunette">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -289,7 +311,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2f2-oC-oKJ">
-                                                                        <rect key="frame" x="85" y="0.0" width="82" height="40"/>
+                                                                        <rect key="frame" x="84" y="0.0" width="83" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Redhead">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -299,7 +321,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="FYa-6T-iBc">
-                                                                        <rect key="frame" x="169" y="0.0" width="83" height="40"/>
+                                                                        <rect key="frame" x="169" y="0.0" width="82" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Blonde">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -340,7 +362,7 @@
                                                                 <rect key="frame" x="0.0" y="20" width="335" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cdO-bn-uA9">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="111" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Democrat">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -350,7 +372,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XLu-b7-wtK">
-                                                                        <rect key="frame" x="113" y="0.0" width="110" height="40"/>
+                                                                        <rect key="frame" x="112" y="0.0" width="111" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Republican">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -360,7 +382,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qOY-rD-z1e">
-                                                                        <rect key="frame" x="225" y="0.0" width="111" height="40"/>
+                                                                        <rect key="frame" x="225" y="0.0" width="110" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -397,7 +419,7 @@
                                                                 <rect key="frame" x="0.0" y="20" width="335" height="40"/>
                                                                 <subviews>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mEn-1c-riz">
-                                                                        <rect key="frame" x="0.0" y="0.0" width="111" height="40"/>
+                                                                        <rect key="frame" x="0.0" y="0.0" width="110" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Male">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -407,7 +429,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NwT-ya-8az">
-                                                                        <rect key="frame" x="113" y="0.0" width="110" height="40"/>
+                                                                        <rect key="frame" x="112" y="0.0" width="111" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Female">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -417,7 +439,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2v6-el-gD2">
-                                                                        <rect key="frame" x="225" y="0.0" width="111" height="40"/>
+                                                                        <rect key="frame" x="225" y="0.0" width="110" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
@@ -464,7 +486,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cw8-yF-rHe">
-                                                                        <rect key="frame" x="85" y="0.0" width="82" height="40"/>
+                                                                        <rect key="frame" x="85" y="0.0" width="81" height="40"/>
                                                                         <color key="backgroundColor" red="0.83137254900000002" green="0.83529411760000005" blue="0.84313725490000002" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="Gay">
                                                                             <color key="titleColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
@@ -484,7 +506,7 @@
                                                                         </connections>
                                                                     </button>
                                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JUc-Pb-TfH">
-                                                                        <rect key="frame" x="254" y="0.0" width="82" height="40"/>
+                                                                        <rect key="frame" x="254" y="0.0" width="81" height="40"/>
                                                                         <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                                         <state key="normal" title="All">
                                                                             <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
