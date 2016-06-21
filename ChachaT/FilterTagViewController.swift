@@ -80,14 +80,17 @@ extension FilterTagViewController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //the tag from the choices tag view was pressed
         if sender.tag == 1 {
-            self.view.layoutIfNeeded()
-            self.tagChosenViewWidthConstraint.constant += tagView.intrinsicContentSize().width + 50
-            self.view.layoutIfNeeded()
+            extendTagListViewWidth(tagView)
             self.tagChoicesView.removeTag(title)
             self.tagChosenView.addTag(title)
-            print(tagView.intrinsicContentSize().width)
-            
         }
+    }
+    
+    func extendTagListViewWidth(tagView: TagView) {
+        let tagWidth = tagView.intrinsicContentSize().width
+        let tagPadding = self.tagChosenView.marginX * 3
+        self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
+        self.view.layoutIfNeeded()
     }
     
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
