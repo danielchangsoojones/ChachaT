@@ -80,20 +80,29 @@ extension FilterTagViewController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //the tag from the choices tag view was pressed
         if sender.tag == 1 {
-            extendTagListViewWidth(tagView)
+            changeTagListViewWidth(tagView, extend: true)
             self.tagChoicesView.removeTag(title)
             self.tagChosenView.addTag(title)
         }
     }
     
-    func extendTagListViewWidth(tagView: TagView) {
+    func changeTagListViewWidth(tagView: TagView, extend: Bool) {
         let tagWidth = tagView.intrinsicContentSize().width
+        //TODO: Can't figure out how the marginX is being applied, so the math is a guestimate right now.
         let tagPadding = self.tagChosenView.marginX * 3
-        self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
+        let extraPadding : CGFloat = 5
+        if extend {
+            //we are adding a tag, and need to make more room
+            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding + extraPadding
+        } else {
+            //deleting a tag, so shrink view
+            self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
+        }
         self.view.layoutIfNeeded()
     }
     
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+        changeTagListViewWidth(tagView, extend: false)
         sender.removeTagView(tagView)
     }
 }
