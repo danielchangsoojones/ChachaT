@@ -13,6 +13,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
     @IBOutlet weak var tagChosenView: TagListView!
+    @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
     
     
     var normalTags = [String]()
@@ -79,8 +80,13 @@ extension FilterTagViewController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //the tag from the choices tag view was pressed
         if sender.tag == 1 {
+            self.view.layoutIfNeeded()
+            self.tagChosenViewWidthConstraint.constant += tagView.intrinsicContentSize().width + 50
+            self.view.layoutIfNeeded()
             self.tagChoicesView.removeTag(title)
             self.tagChosenView.addTag(title)
+            print(tagView.intrinsicContentSize().width)
+            
         }
     }
     

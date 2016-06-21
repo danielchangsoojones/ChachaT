@@ -40,13 +40,13 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="79"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Kr0-pV-KoN">
-                                        <rect key="frame" x="0.0" y="0.0" width="608" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="50" height="79"/>
                                         <subviews>
                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="CvJ-cx-GbG" customClass="TagListView" customModule="TagListView">
-                                                <rect key="frame" x="8" y="28" width="552" height="24"/>
+                                                <rect key="frame" x="8" y="28" width="50" height="24"/>
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="552" id="PHE-bI-Ymq"/>
+                                                    <constraint firstAttribute="width" constant="50" id="PHE-bI-Ymq"/>
                                                     <constraint firstAttribute="height" constant="24" id="vNr-zb-9LK"/>
                                                 </constraints>
                                                 <userDefinedRuntimeAttributes>
@@ -70,10 +70,10 @@
                                         <constraints>
                                             <constraint firstAttribute="height" constant="79" id="6cC-hT-5YK"/>
                                             <constraint firstItem="CvJ-cx-GbG" firstAttribute="leading" secondItem="Kr0-pV-KoN" secondAttribute="leading" constant="8" id="Im6-cC-1lV"/>
-                                            <constraint firstAttribute="width" constant="608" id="O53-om-scK"/>
                                             <constraint firstItem="CvJ-cx-GbG" firstAttribute="centerY" secondItem="Kr0-pV-KoN" secondAttribute="centerY" id="OkF-Ob-6il"/>
                                             <constraint firstAttribute="width" secondItem="CvJ-cx-GbG" secondAttribute="width" id="SgT-u2-mZU"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="Ybd-hJ-KWK"/>
+                                            <constraint firstAttribute="width" secondItem="CvJ-cx-GbG" secondAttribute="width" id="nBh-Tk-Vj6"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
@@ -110,6 +110,7 @@
                     <connections>
                         <outlet property="tagChoicesView" destination="UQh-0P-704" id="lRc-Yr-eoj"/>
                         <outlet property="tagChosenView" destination="CvJ-cx-GbG" id="ArR-Py-clH"/>
+                        <outlet property="tagChosenViewWidthConstraint" destination="PHE-bI-Ymq" id="dpR-Hr-Skj"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggu-Iv-tXK" userLabel="First Responder" sceneMemberID="firstResponder"/>
