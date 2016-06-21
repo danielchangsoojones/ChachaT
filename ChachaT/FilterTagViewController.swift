@@ -11,7 +11,7 @@ import TagListView
 
 class FilterTagViewController: OverlayAnonymousFlowViewController {
     
-    @IBOutlet weak var tagView: TagListView!
+    @IBOutlet weak var tagChoicesView: TagListView!
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
     
@@ -39,14 +39,15 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         super.viewDidLoad()
         setSpecialtyTagsInTagDictionary()
         setTagsFromDictionary()
-        tagView.delegate = self
+        tagChoicesView.delegate = self
+        tagChoicesView.alignment = .Center
         
         // Do any additional setup after loading the view.
     }
     
     func setTagsFromDictionary() {
         for (tagName, tagAttribute) in tagDictionary {
-            tagView.addTag(tagName)
+            tagChoicesView.addTag(tagName)
         }
     }
     
@@ -72,7 +73,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 
 extension FilterTagViewController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        print("Tag pressed: \(title), \(sender)")
+        self.tagChoicesView.addTag("what's up")
         tagView.selected = !tagView.selected
     }
     
