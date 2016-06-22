@@ -10,31 +10,33 @@ import UIKit
 import TagListView
 import SnapKit
 
+public enum SpecialtyTags : String {
+    case Gender
+    case Race
+    case Sexuality
+    case AgeRange = "Age Range"
+    case PoliticalAffiliation = "Political Affiliation"
+    case HairColor = "Hair Color"
+    case Location
+    static let specialtyButtonValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor]
+    static let specialtySingleSliderValues = [Location]
+    static let specialtyRangeSliderValues = [AgeRange]
+}
+
 class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
     @IBOutlet weak var tagChosenView: TagListView!
     @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var theCategoryLabel: UILabel!
+    @IBOutlet weak var theDoneSpecialtyButton: UIButton!
+    var theStackViewTagsButtons : StackViewTagButtons?
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
     
     //search Variables
     var searchActive : Bool = false
-    
-    enum SpecialtyTags : String {
-        case Gender
-        case Race
-        case Sexuality
-        case AgeRange = "Age Range"
-        case PoliticalAffiliation = "Political Affiliation"
-        case HairColor = "Hair Color"
-        case Location
-        static let specialtyButtonValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor]
-        static let specialtySingleSliderValues = [Location]
-        static let specialtyRangeSliderValues = [AgeRange]
-    }
     
     enum TagAttributes {
         case Generic
@@ -43,8 +45,18 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         case SpecialtyRangeSlider
     }
     
+    @IBAction func doneSpecialtyButtonPressed(sender: UIButton) {
+        sender.hidden = true
+        theCategoryLabel.hidden = true
+        theStackViewTagsButtons?.hidden = true
+        tagChoicesView.hidden = false
+        theStackViewTagsButtons!.removeAllSubviews()
+    }
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        theStackViewTagsButtons = createStackViewTagButtons()
         setSpecialtyTagsInTagDictionary()
         setTagsFromDictionary()
         tagChoicesView.delegate = self
@@ -84,14 +96,6 @@ extension FilterTagViewController: TagListViewDelegate {
         //the tag from the choices tag view was pressed
         if sender.tag == 1 {
             let tagAttribute = tagDictionary[title]!
-            let stackView = StackViewTagButtons(frame: CGRectMake(0, 0, 100, 100))
-            self.view.addSubview(stackView)
-            stackView.delegate = self
-            stackView.addButtonToStackView(.HairColor)
-            stackView.snp_makeConstraints { (make) in
-                make.center.equalTo(self.view)
-            }
-            
             switch tagAttribute {
             case .Generic:
                 changeTagListViewWidth(tagView, extend: true)
@@ -99,7 +103,11 @@ extension FilterTagViewController: TagListViewDelegate {
                 self.tagChosenView.addTag(title)
             case .SpecialtyButtons:
                 tagChoicesView.hidden = true
+                theCategoryLabel.hidden = false
                 theCategoryLabel.text = title
+                theDoneSpecialtyButton.hidden = false
+                theStackViewTagsButtons!.addButtonToStackView(title)
+                theStackViewTagsButtons?.hidden = false
             case .SpecialtySingleSlider:
                 break
             case .SpecialtyRangeSlider:
@@ -187,6 +195,17 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
     
     func removeChosenTag(tagTitle: String) {
         tagChosenView.removeTag(tagTitle)
+    }
+    
+    func createStackViewTagButtons() -> StackViewTagButtons {
+        let stackView = StackViewTagButtons(frame: CGRectMake(0, 0, 100, 100))
+        stackView.delegate = self
+        self.view.addSubview(stackView)
+        stackView.snp_makeConstraints { (make) in
+            make.center.equalTo(self.view)
+        }
+        stackView.hidden = true
+        return stackView
     }
 }
 

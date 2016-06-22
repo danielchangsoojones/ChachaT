@@ -107,12 +107,19 @@
                                     <outlet property="delegate" destination="vSA-UM-BZe" id="KFT-Ew-9ha"/>
                                 </connections>
                             </searchBar>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcE-XT-U2s">
+                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CcE-XT-U2s">
                                 <rect key="frame" x="263" y="194" width="75" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="xV9-Lj-ajz">
+                                <rect key="frame" x="282" y="353" width="37" height="30"/>
+                                <state key="normal" title="Done"/>
+                                <connections>
+                                    <action selector="doneSpecialtyButtonPressed:" destination="vSA-UM-BZe" eventType="touchUpInside" id="99I-Bz-rAs"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -121,10 +128,12 @@
                             <constraint firstItem="0gb-Rr-6KO" firstAttribute="top" secondItem="Zpo-OK-WTQ" secondAttribute="top" id="RbJ-D7-jOS"/>
                             <constraint firstItem="CcE-XT-U2s" firstAttribute="centerX" secondItem="Zpo-OK-WTQ" secondAttribute="centerX" id="Wuy-Xw-sP7"/>
                             <constraint firstItem="O5n-IP-wgv" firstAttribute="leading" secondItem="Zpo-OK-WTQ" secondAttribute="leading" id="d66-Nf-OMr"/>
+                            <constraint firstItem="xV9-Lj-ajz" firstAttribute="centerX" secondItem="Zpo-OK-WTQ" secondAttribute="centerX" id="iES-kI-isI"/>
                             <constraint firstAttribute="trailing" secondItem="0gb-Rr-6KO" secondAttribute="trailing" id="kKu-cd-c1g"/>
                             <constraint firstItem="0gb-Rr-6KO" firstAttribute="top" secondItem="O5n-IP-wgv" secondAttribute="bottom" id="qVH-VM-oFp"/>
                             <constraint firstItem="UQh-0P-704" firstAttribute="centerY" secondItem="Zpo-OK-WTQ" secondAttribute="centerY" id="rFA-Qa-6Eo"/>
                             <constraint firstItem="CcE-XT-U2s" firstAttribute="top" secondItem="0gb-Rr-6KO" secondAttribute="bottom" constant="51" id="rxH-l4-qfY"/>
+                            <constraint firstItem="xV9-Lj-ajz" firstAttribute="top" secondItem="UQh-0P-704" secondAttribute="bottom" constant="41" id="sui-dd-Q5r"/>
                             <constraint firstAttribute="trailing" secondItem="O5n-IP-wgv" secondAttribute="trailing" id="wn7-3e-rh7"/>
                             <constraint firstItem="0gb-Rr-6KO" firstAttribute="leading" secondItem="Zpo-OK-WTQ" secondAttribute="leading" id="zfb-Bp-HUC"/>
                         </constraints>
@@ -139,6 +148,7 @@
                         <outlet property="tagChosenView" destination="CvJ-cx-GbG" id="ArR-Py-clH"/>
                         <outlet property="tagChosenViewWidthConstraint" destination="PHE-bI-Ymq" id="dpR-Hr-Skj"/>
                         <outlet property="theCategoryLabel" destination="CcE-XT-U2s" id="mXP-hq-Xdl"/>
+                        <outlet property="theDoneSpecialtyButton" destination="xV9-Lj-ajz" id="w4V-oV-V5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="ggu-Iv-tXK" userLabel="First Responder" sceneMemberID="firstResponder"/>

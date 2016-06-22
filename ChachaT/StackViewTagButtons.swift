@@ -15,14 +15,6 @@ protocol StackViewTagButtonsDelegate {
 
 class StackViewTagButtons: UIStackView {
     
-    enum FilterCategories : String {
-        case Race = "race"
-        case HairColor = "hairColor"
-        case PoliticalAffiliation = "politicalAffiliation"
-        case Sexuality = "sexuality"
-        case Gender = "gender"
-    }
-    
     enum FilterNames : String {
         case RaceBlackFilter = "black"
         case RaceWhiteFilter = "white"
@@ -47,7 +39,6 @@ class StackViewTagButtons: UIStackView {
         static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
     }
     
-    var filterCategory: FilterCategories = .Race
     var delegate: StackViewTagButtonsDelegate?
     
     override init(frame: CGRect) {
@@ -66,18 +57,20 @@ class StackViewTagButtons: UIStackView {
         self.spacing = 2
     }
     
-    func addButtonToStackView(filterCategory: FilterCategories) {
+    func addButtonToStackView(filterCategory: String) {
         switch filterCategory {
-        case .Race:
+        case SpecialtyTags.Race.rawValue:
             iterateThroughFilterNames(FilterNames.raceAllValues)
-        case .Gender:
+        case SpecialtyTags.Gender.rawValue:
             iterateThroughFilterNames(FilterNames.genderAllValues)
-        case .HairColor:
+        case SpecialtyTags.HairColor.rawValue:
             iterateThroughFilterNames(FilterNames.hairColorAllValues)
-        case .Sexuality:
+        case SpecialtyTags.Sexuality.rawValue:
             iterateThroughFilterNames(FilterNames.sexualityAllValues)
-        case .PoliticalAffiliation:
+        case SpecialtyTags.PoliticalAffiliation.rawValue:
             iterateThroughFilterNames(FilterNames.politicalAffiliationAllValues)
+        default:
+            break
         }
     }
     
@@ -116,4 +109,9 @@ class StackViewTagButtons: UIStackView {
         }
     }
 
+    func removeAllSubviews() {
+        for subview in self.subviews {
+            subview.removeFromSuperview()
+        }
+    }
 }
