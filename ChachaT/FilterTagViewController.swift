@@ -30,6 +30,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var theCategoryLabel: UILabel!
     @IBOutlet weak var theDoneSpecialtyButton: UIButton!
+    @IBOutlet weak var theSpecialtyTagEnviromentHolderView: UIView!
     var theStackViewTagsButtons : StackViewTagButtons?
     
     var normalTags = [String]()
@@ -46,10 +47,8 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     }
     
     @IBAction func doneSpecialtyButtonPressed(sender: UIButton) {
-        sender.hidden = true
-        theCategoryLabel.hidden = true
+        createSpecialtyTagEnviroment(true, categoryTitleText: nil)
         theStackViewTagsButtons?.hidden = true
-        tagChoicesView.hidden = false
         theStackViewTagsButtons!.removeAllSubviews()
     }
     
@@ -102,10 +101,7 @@ extension FilterTagViewController: TagListViewDelegate {
                 self.tagChoicesView.removeTag(title)
                 self.tagChosenView.addTag(title)
             case .SpecialtyButtons:
-                tagChoicesView.hidden = true
-                theCategoryLabel.hidden = false
-                theCategoryLabel.text = title
-                theDoneSpecialtyButton.hidden = false
+                createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 theStackViewTagsButtons!.addButtonToStackView(title)
                 theStackViewTagsButtons?.hidden = false
             case .SpecialtySingleSlider:
@@ -115,6 +111,15 @@ extension FilterTagViewController: TagListViewDelegate {
             }
            
         }
+    }
+    
+    func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool, categoryTitleText: String?) {
+        tagChoicesView.hidden = !specialtyEnviromentHidden
+        theCategoryLabel.hidden = specialtyEnviromentHidden
+        if let categoryTitleText = categoryTitleText {
+            theCategoryLabel.text = categoryTitleText
+        }
+        theDoneSpecialtyButton.hidden = specialtyEnviromentHidden
     }
     
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
