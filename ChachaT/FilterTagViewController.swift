@@ -19,6 +19,9 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
     
+    //search Variables
+    var searchActive : Bool = false
+    
     enum SpecialtyTags : String {
         case Gender
         case Race
@@ -106,3 +109,51 @@ extension FilterTagViewController: TagListViewDelegate {
         sender.removeTagView(tagView)
     }
 }
+
+extension FilterTagViewController: UISearchBarDelegate {
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let data = setDataArray()
+        var filtered:[String] = []
+        tagChoicesView.removeAllTags()
+        filtered = data.filter({ (text) -> Bool in
+            let tmp: NSString = text
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        if(filtered.count == 0){
+            searchActive = false
+        } else {
+            searchActive = true
+            for tag in filtered {
+                tagChoicesView.addTag(tag)
+            }
+        }
+    }
+    
+    func setDataArray() -> [String] {
+        var dataArray = [String]()
+        for (tagName, _) in tagDictionary {
+            dataArray.append(tagName)
+        }
+        return dataArray
+    }
+
+}
+
+
