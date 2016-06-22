@@ -8,13 +8,14 @@
 
 import UIKit
 import TagListView
+import SnapKit
 
 class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
     @IBOutlet weak var tagChosenView: TagListView!
     @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
-    
+    @IBOutlet weak var theCategoryLabel: UILabel!
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
@@ -49,7 +50,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         tagChoicesView.delegate = self
         tagChoicesView.alignment = .Center
         tagChosenView.delegate = self
-        
         // Do any additional setup after loading the view.
     }
     
@@ -83,9 +83,29 @@ extension FilterTagViewController: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //the tag from the choices tag view was pressed
         if sender.tag == 1 {
-            changeTagListViewWidth(tagView, extend: true)
-            self.tagChoicesView.removeTag(title)
-            self.tagChosenView.addTag(title)
+            let tagAttribute = tagDictionary[title]!
+            let stackView = StackViewTagButtons(frame: CGRectMake(0, 0, 100, 100))
+            self.view.addSubview(stackView)
+            stackView.delegate = self
+            stackView.addButtonToStackView(.HairColor)
+            stackView.snp_makeConstraints { (make) in
+                make.center.equalTo(self.view)
+            }
+            
+            switch tagAttribute {
+            case .Generic:
+                changeTagListViewWidth(tagView, extend: true)
+                self.tagChoicesView.removeTag(title)
+                self.tagChosenView.addTag(title)
+            case .SpecialtyButtons:
+                tagChoicesView.hidden = true
+                theCategoryLabel.text = title
+            case .SpecialtySingleSlider:
+                break
+            case .SpecialtyRangeSlider:
+                break
+            }
+           
         }
     }
     
@@ -113,6 +133,7 @@ extension FilterTagViewController: TagListViewDelegate {
 extension FilterTagViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
+        searchBar.showsCancelButton = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -121,10 +142,12 @@ extension FilterTagViewController: UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false
+        searchBar.showsCancelButton = false
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false
+        searchBar.showsCancelButton = false
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -155,5 +178,19 @@ extension FilterTagViewController: UISearchBarDelegate {
     }
 
 }
+
+extension FilterTagViewController: StackViewTagButtonsDelegate {
+    func createChosenTag(tagTitle: String) {
+        let tagView = tagChosenView.addTag(tagTitle)
+        changeTagListViewWidth(tagView, extend: true)
+    }
+    
+    func removeChosenTag(tagTitle: String) {
+        tagChosenView.removeTag(tagTitle)
+    }
+}
+
+
+
 
 
