@@ -25,6 +25,7 @@ public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
    case QuestionOnboardingCell
    case FilterTagViewController
+   case DistanceSingleRangeSlider
 }
 
 var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitMatchingPhase

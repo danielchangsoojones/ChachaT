@@ -32,6 +32,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theDoneSpecialtyButton: UIButton!
     @IBOutlet weak var theSpecialtyTagEnviromentHolderView: UIView!
     var theStackViewTagsButtons : StackViewTagButtons?
+    var theDistanceSliderView : DistanceSliderView?
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
@@ -48,14 +49,16 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBAction func doneSpecialtyButtonPressed(sender: UIButton) {
         createSpecialtyTagEnviroment(true, categoryTitleText: nil)
-        theStackViewTagsButtons?.hidden = true
-        theStackViewTagsButtons!.removeAllSubviews()
+        if let theStackViewTagsButtons = theStackViewTagsButtons {
+            theStackViewTagsButtons.removeFromSuperview()
+        }
+        if let theDistanceSlider = theDistanceSliderView {
+            theDistanceSlider.removeFromSuperview()
+        }
     }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        theStackViewTagsButtons = createStackViewTagButtons()
         setSpecialtyTagsInTagDictionary()
         setTagsFromDictionary()
         tagChoicesView.delegate = self
@@ -102,10 +105,11 @@ extension FilterTagViewController: TagListViewDelegate {
                 self.tagChosenView.addTag(title)
             case .SpecialtyButtons:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                theStackViewTagsButtons = createStackViewTagButtons()
                 theStackViewTagsButtons!.addButtonToStackView(title)
-                theStackViewTagsButtons?.hidden = false
             case .SpecialtySingleSlider:
-                break
+                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createDistanceSingleRangeSlider()
             case .SpecialtyRangeSlider:
                 break
             }
@@ -113,13 +117,28 @@ extension FilterTagViewController: TagListViewDelegate {
         }
     }
     
+    func createDistanceSingleRangeSlider() {
+        //the frame gets overrided by the snp_constraints
+        theDistanceSliderView = DistanceSliderView(frame: CGRectMake(0, 0, 200, 200))
+        //had to set the initial value for the slider here because not loading when I put in the slider view class
+        theDistanceSliderView!.distanceSlider.setValue(50.0, animated: false)
+        self.theSpecialtyTagEnviromentHolderView.addSubview(theDistanceSliderView!)
+        theDistanceSliderView!.snp_makeConstraints { (make) in
+            make.leading.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
+            make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
+            make.top.equalTo(theCategoryLabel).offset(100)
+            make.height.equalTo(30)
+        }
+    }
+    
     func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool, categoryTitleText: String?) {
         tagChoicesView.hidden = !specialtyEnviromentHidden
-        theCategoryLabel.hidden = specialtyEnviromentHidden
+        for subview in theSpecialtyTagEnviromentHolderView.subviews {
+            subview.hidden = specialtyEnviromentHidden
+        }
         if let categoryTitleText = categoryTitleText {
             theCategoryLabel.text = categoryTitleText
         }
-        theDoneSpecialtyButton.hidden = specialtyEnviromentHidden
     }
     
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
@@ -205,11 +224,11 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
     func createStackViewTagButtons() -> StackViewTagButtons {
         let stackView = StackViewTagButtons(frame: CGRectMake(0, 0, 100, 100))
         stackView.delegate = self
-        self.view.addSubview(stackView)
+        self.theSpecialtyTagEnviromentHolderView.addSubview(stackView)
         stackView.snp_makeConstraints { (make) in
-            make.center.equalTo(self.view)
+            make.centerY.equalTo(self.view)
+            make.centerX.equalTo(self.theSpecialtyTagEnviromentHolderView)
         }
-        stackView.hidden = true
         return stackView
     }
 }

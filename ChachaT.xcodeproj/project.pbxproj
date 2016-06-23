@@ -33,6 +33,8 @@
 		9273B79D1CFF4F110001A608 /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9273B79C1CFF4F110001A608 /* FilterViewController.swift */; };
 		928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* FilterTagViewController.swift */; };
 		9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */; };
+		9288193D1D1C2CEB000A8E04 /* DistanceSlider.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9288193C1D1C2CEB000A8E04 /* DistanceSlider.xib */; };
+		9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */; };
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */; };
 		928A65BB1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */; };
@@ -91,6 +93,8 @@
 		9273B79C1CFF4F110001A608 /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* FilterTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagViewController.swift; sourceTree = "<group>"; };
 		9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewTagButtons.swift; sourceTree = "<group>"; };
+		9288193C1D1C2CEB000A8E04 /* DistanceSlider.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DistanceSlider.xib; sourceTree = "<group>"; };
+		9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSliderView.swift; sourceTree = "<group>"; };
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingViewController.swift; sourceTree = "<group>"; };
 		928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingTableViewCell.swift; sourceTree = "<group>"; };
@@ -288,6 +292,8 @@
 			isa = PBXGroup;
 			children = (
 				9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */,
+				9288193C1D1C2CEB000A8E04 /* DistanceSlider.xib */,
+				9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */,
 			);
 			name = "Xib Files";
 			sourceTree = "<group>";
@@ -413,6 +419,7 @@
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
+				9288193D1D1C2CEB000A8E04 /* DistanceSlider.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -514,6 +521,7 @@
 				9273B79D1CFF4F110001A608 /* FilterViewController.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
+				9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */,
 				92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
