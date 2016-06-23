@@ -123,13 +123,13 @@ extension FilterTagViewController: TagListViewDelegate {
     }
     
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        let tagWidth = tagView.intrinsicContentSize().width
+        //added the + 1 because the tag view was getting rounded down, so when I would delete tags, the next tag wouldn't have enough roomto stay on the same line
+        let tagWidth = tagView.intrinsicContentSize().width + 1
         //TODO: Can't figure out how the marginX is being applied, so the math is a guestimate right now.
-        let tagPadding = self.tagChosenView.marginX * 3
-        let extraPadding : CGFloat = 5
+        let tagPadding : CGFloat = self.tagChosenView.marginX
         if extend {
             //we are adding a tag, and need to make more room
-            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding + extraPadding
+            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
         } else {
             //deleting a tag, so shrink view
             self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
