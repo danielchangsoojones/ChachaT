@@ -10,11 +10,12 @@ import UIKit
 import SnapKit
 
 class DistanceSliderView: UIView {
-    let distanceLabel = UILabel()
-    let distanceSlider = UISlider()
+    let theDistanceLabel = UILabel()
+    let theDistanceSlider = UISlider()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        createDistanceLabel()
         createDistanceSlider()
     }
     
@@ -23,35 +24,34 @@ class DistanceSliderView: UIView {
     }
     
     func createDistanceSlider() {
-        distanceSlider.minimumTrackTintColor = ChachaTeal
-        distanceSlider.maximumTrackTintColor = UIColor.whiteColor()
-        distanceSlider.maximumValue = 101
-        distanceSlider.minimumValue = 1
-        distanceSlider.thumbTintColor = UIColor.whiteColor()
-        distanceSlider.continuous = true // false makes it call only once you let go
-        distanceSlider.addTarget(self, action: #selector(DistanceSliderView.valueChanged(_:)), forControlEvents: .ValueChanged)
-        self.addSubview(distanceSlider)
-        distanceSlider.snp_makeConstraints { (make) in
-            make.edges.equalTo(self)
+        theDistanceSlider.minimumTrackTintColor = ChachaTeal
+        theDistanceSlider.maximumTrackTintColor = UIColor.whiteColor()
+        theDistanceSlider.maximumValue = 101
+        theDistanceSlider.minimumValue = 1
+        theDistanceSlider.thumbTintColor = UIColor.whiteColor()
+        theDistanceSlider.continuous = true // false makes it call only once you let go
+        theDistanceSlider.addTarget(self, action: #selector(DistanceSliderView.valueChanged(_:)), forControlEvents: .ValueChanged)
+        self.addSubview(theDistanceSlider)
+        theDistanceSlider.snp_makeConstraints { (make) in
+            make.trailing.leading.bottom.equalTo(self)
+            make.top.equalTo(theDistanceLabel.snp_bottom).offset(10)
         }
     }
     
     func valueChanged(sender: UISlider) {
         let distanceValue = round(sender.value)
-//        if distanceValue >= 101 {
-//            theDistanceMilesLabel.text = "100+ mi."
-//        } else {
-//            theDistanceMilesLabel.text = "\(Int(distanceValue)) mi."
-//        }
+        if distanceValue >= 101 {
+            theDistanceLabel.text = "100+ mi."
+        } else {
+            theDistanceLabel.text = "\(Int(distanceValue)) mi."
+        }
     }
     
     func createDistanceLabel() {
-        self.addSubview(distanceLabel)
-        distanceLabel.snp_makeConstraints { (make) in
+        self.addSubview(theDistanceLabel)
+        theDistanceLabel.snp_makeConstraints { (make) in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
-            make.width.equalTo(20)
-            make.height.equalTo(20)
         }
     }
 

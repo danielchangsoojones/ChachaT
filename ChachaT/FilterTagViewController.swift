@@ -123,13 +123,13 @@ extension FilterTagViewController: TagListViewDelegate {
         //the frame gets overrided by the snp_constraints
         theDistanceSliderView = DistanceSliderView(frame: CGRectMake(0, 0, 200, 200))
         //had to set the initial value for the slider here because not loading when I put in the slider view class
-        theDistanceSliderView!.distanceSlider.setValue(50.0, animated: false)
+        theDistanceSliderView!.theDistanceSlider.setValue(50.0, animated: false)
         self.theSpecialtyTagEnviromentHolderView.addSubview(theDistanceSliderView!)
         theDistanceSliderView!.snp_makeConstraints { (make) in
             make.leading.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
             make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(-8)
             make.top.equalTo(theCategoryLabel).offset(100)
-            make.height.equalTo(30)
+            make.height.equalTo(50)
         }
     }
     
