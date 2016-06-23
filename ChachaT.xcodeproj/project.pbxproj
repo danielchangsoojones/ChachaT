@@ -34,6 +34,7 @@
 		928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* FilterTagViewController.swift */; };
 		9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */; };
 		9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */; };
+		928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */; };
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */; };
 		928A65BB1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */; };
@@ -93,6 +94,7 @@
 		928819351D18E78B000A8E04 /* FilterTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagViewController.swift; sourceTree = "<group>"; };
 		9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewTagButtons.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSliderView.swift; sourceTree = "<group>"; };
+		928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeDoubleRangeSliderView.swift; sourceTree = "<group>"; };
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingViewController.swift; sourceTree = "<group>"; };
 		928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingTableViewCell.swift; sourceTree = "<group>"; };
@@ -291,6 +293,7 @@
 			children = (
 				9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */,
 				9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */,
+				928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */,
 			);
 			name = "Xib Files";
 			sourceTree = "<group>";
@@ -501,6 +504,7 @@
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
+				928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */,
 				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,

@@ -33,6 +33,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theSpecialtyTagEnviromentHolderView: UIView!
     var theStackViewTagsButtons : StackViewTagButtons?
     var theDistanceSliderView : DistanceSliderView?
+    var theAgeRangeSliderView : AgeDoubleRangeSliderView?
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
@@ -109,15 +110,16 @@ extension FilterTagViewController: TagListViewDelegate {
                 theStackViewTagsButtons!.addButtonToStackView(title)
             case .SpecialtySingleSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createDistanceSingleRangeSlider()
+                createDistanceSliderView()
             case .SpecialtyRangeSlider:
-                break
+                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createAgeRangeSliderView()
             }
            
         }
     }
     
-    func createDistanceSingleRangeSlider() {
+    func createDistanceSliderView() {
         //the frame gets overrided by the snp_constraints
         theDistanceSliderView = DistanceSliderView(frame: CGRectMake(0, 0, 200, 200))
         //had to set the initial value for the slider here because not loading when I put in the slider view class
@@ -125,10 +127,21 @@ extension FilterTagViewController: TagListViewDelegate {
         self.theSpecialtyTagEnviromentHolderView.addSubview(theDistanceSliderView!)
         theDistanceSliderView!.snp_makeConstraints { (make) in
             make.leading.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
-            make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
+            make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(-8)
             make.top.equalTo(theCategoryLabel).offset(100)
             make.height.equalTo(30)
         }
+    }
+    
+    func createAgeRangeSliderView() {
+        theAgeRangeSliderView = AgeDoubleRangeSliderView(frame: CGRectMake(0, 0, 200, 200))
+        theSpecialtyTagEnviromentHolderView.addSubview(theAgeRangeSliderView!)
+        theAgeRangeSliderView?.snp_makeConstraints(closure: { (make) in
+            make.leading.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
+            make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(-8)
+            make.top.equalTo(theCategoryLabel).offset(100)
+            make.height.equalTo(30)
+        })
     }
     
     func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool, categoryTitleText: String?) {
