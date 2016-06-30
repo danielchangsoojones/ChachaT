@@ -11,6 +11,7 @@ import UIKit
 protocol StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String)
     func removeChosenTag(tagTitle: String)
+    func doesChosenTagViewContain(tagTitle: String) -> Bool
 }
 
 class StackViewTagButtons: UIStackView {
@@ -76,18 +77,18 @@ class StackViewTagButtons: UIStackView {
     
     func iterateThroughFilterNames(filterNamesArray: [FilterNames]) {
         for filterName in filterNamesArray {
-            let button = createButton()
-            button.setTitle(filterName.rawValue, forState: .Normal)
+            let button = createButton(filterName)
             self.addArrangedSubview(button)
         }
     }
     
-    func createButton() -> UIButton {
+    func createButton(filterName: FilterNames) -> UIButton {
         let button: UIButton = {
-            $0.backgroundColor = ChachaBombayGrey
+            let tagHasNotBeenChosen = !(delegate?.doesChosenTagViewContain(filterName.rawValue))!
+            changeButtonHighlight(tagHasNotBeenChosen, button: $0, changeChosenTags: false)
             $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
             $0.layer.cornerRadius = 10
-            $0.setTitleColor(ChachaTeal, forState: .Normal)
+            $0.setTitle(filterName.rawValue, forState: .Normal)
             return $0
         }(UIButton())
         
@@ -96,16 +97,32 @@ class StackViewTagButtons: UIStackView {
     
     func buttonTapped(sender: UIButton!) {
         let buttonHighlighted : Bool = (sender.backgroundColor == ChachaTeal)
+        changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true)
+    }
+    
+    func changeButtonHighlight(buttonHighlighted: Bool, button: UIButton, changeChosenTags: Bool) {
         if buttonHighlighted {
-            //we are unhighlighting it and remove the tag from the Tag Chosen View
-            sender.backgroundColor = ChachaBombayGrey
-            sender.setTitleColor(ChachaTeal, forState: .Normal)
-            delegate!.removeChosenTag((sender.titleLabel?.text)!)
+            //we are unhighlighting the button
+            button.backgroundColor = ChachaBombayGrey
+            button.setTitleColor(ChachaTeal, forState: .Normal)
+            if changeChosenTags {
+                if let titleLabel = button.titleLabel {
+                    if let tagTitle = titleLabel.text {
+                        delegate!.removeChosenTag(titleLabel.text!)
+                    }
+                }
+            }
         } else {
-            //we highlight it
-            sender.backgroundColor = ChachaTeal
-            sender.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            delegate?.createChosenTag((sender.titleLabel?.text)!)
+            //highlight the button
+            button.backgroundColor = ChachaTeal
+            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+            if changeChosenTags {
+                if let titleLabel = button.titleLabel {
+                    if let tagTitle = titleLabel.text {
+                        delegate?.createChosenTag(tagTitle)
+                    }
+                }
+            }
         }
     }
 

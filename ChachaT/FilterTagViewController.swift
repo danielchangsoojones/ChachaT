@@ -53,8 +53,11 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         if let theStackViewTagsButtons = theStackViewTagsButtons {
             theStackViewTagsButtons.removeFromSuperview()
         }
-        if let theDistanceSlider = theDistanceSliderView {
-            theDistanceSlider.removeFromSuperview()
+        if let theDistanceSliderView = theDistanceSliderView {
+            theDistanceSliderView.removeFromSuperview()
+        }
+        if let theAgeRangeSliderView = theAgeRangeSliderView {
+            theAgeRangeSliderView.removeFromSuperview()
         }
     }
     
@@ -103,7 +106,9 @@ extension FilterTagViewController: TagListViewDelegate {
             case .Generic:
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
-                self.tagChosenView.addTag(title)
+                if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+                    self.tagChosenView.addTag(title)
+                }
             case .SpecialtyButtons:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 theStackViewTagsButtons = createStackViewTagButtons()
@@ -119,6 +124,16 @@ extension FilterTagViewController: TagListViewDelegate {
         }
     }
     
+func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bool {
+        let tagViews = tagListView.tagViews
+        for tagView in tagViews {
+            if tagView.titleLabel?.text == title {
+                return true
+            }
+        }
+        return false
+}
+
     func createDistanceSliderView() {
         //the frame gets overrided by the snp_constraints
         theDistanceSliderView = DistanceSliderView(frame: CGRectMake(0, 0, 200, 200))
@@ -243,6 +258,10 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             make.centerX.equalTo(self.theSpecialtyTagEnviromentHolderView)
         }
         return stackView
+    }
+    
+    func doesChosenTagViewContain(tagTitle: String) -> Bool {
+        return tagExistsInChosenTagListView(tagChosenView, title: tagTitle)
     }
 }
 

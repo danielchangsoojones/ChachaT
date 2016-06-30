@@ -46,6 +46,6 @@ class AgeDoubleRangeSliderView: UIView {
 extension AgeDoubleRangeSliderView: TTRangeSliderDelegate {
     func rangeSlider(sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
 //        let ageMaxValue = round(theAgeRangeSlider.selectedMaximum)
-//        let ageMinValue = round(theAgeRangeSlider.selectedMinimum)
+//        let ageMinValude = round(theAgeRangeSlider.selectedMinimum)
     }
 }
