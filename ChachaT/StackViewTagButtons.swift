@@ -34,7 +34,7 @@ class StackViewTagButtons: UIStackView {
         self.spacing = 2
     }
     
-    func addButtonToStackView(filterCategory: String) {
+    func addButtonToStackView(filterCategory: String, addNoneButton: Bool) {
         switch filterCategory {
         case SpecialtyTags.Race.rawValue:
             iterateThroughFilterNames(FilterNames.raceAllValues)
@@ -48,6 +48,17 @@ class StackViewTagButtons: UIStackView {
             iterateThroughFilterNames(FilterNames.politicalAffiliationAllValues)
         default:
             break
+        }
+        if addNoneButton {
+            //if we are on editing tags for profile page, then the stack view should have a none button
+            let button: UIButton = {
+                changeButtonHighlight(true, button: $0, changeChosenTags: false)
+                $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
+                $0.layer.cornerRadius = 10
+                $0.setTitle("None", forState: .Normal)
+                return $0
+            }(UIButton())
+            self.addArrangedSubview(button)
         }
     }
     

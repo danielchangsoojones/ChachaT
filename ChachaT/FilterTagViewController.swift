@@ -24,20 +24,20 @@ public enum SpecialtyTags : String {
 }
 
 public enum FilterNames : String {
-    case RaceBlackFilter = "black"
-    case RaceWhiteFilter = "white"
-    case RaceLatinoFilter = "latino"
-    case RaceAsianFilter = "asian"
-    case HairColorBrunetteFilter = "brunette"
-    case HairColorBlondeFilter = "blonde"
-    case HairColorRedheadFilter = "redhead"
-    case PoliticalAffiliationDemocratFilter = "democrat"
-    case PoliticalAffiliationRepublicanFilter = "republican"
-    case GenderMaleFilter = "male"
-    case GenderFemaleFilter = "female"
-    case SexualityStraightFilter = "straight"
-    case SexualityGayFilter = "gay"
-    case SexualityBisexualFilter = "bisexual"
+    case RaceBlackFilter = "Black"
+    case RaceWhiteFilter = "White"
+    case RaceLatinoFilter = "Latino"
+    case RaceAsianFilter = "Asian"
+    case HairColorBrunetteFilter = "Brunette"
+    case HairColorBlondeFilter = "Blonde"
+    case HairColorRedheadFilter = "Redhead"
+    case PoliticalAffiliationDemocratFilter = "Democrat"
+    case PoliticalAffiliationRepublicanFilter = "Republican"
+    case GenderMaleFilter = "Male"
+    case GenderFemaleFilter = "Female"
+    case SexualityStraightFilter = "Straight"
+    case SexualityGayFilter = "Gay"
+    case SexualityBisexualFilter = "Bisexual"
     
     //this array lets me iterate over certain sections of the enum
     static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
@@ -90,18 +90,19 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         super.viewDidLoad()
         setTagsInTagDictionary()
         setTagsFromDictionary()
-        tagChoicesView.delegate = self
+        
         tagChoicesView.alignment = .Center
-        tagChosenView.delegate = self
         // Do any additional setup after loading the view.
     }
     
+    //move to actual filtering page
     func setTagsFromDictionary() {
         for (tagName, tagAttribute) in tagDictionary {
             tagChoicesView.addTag(tagName)
         }
     }
     
+    //move to actual filtering page
     func setTagsInTagDictionary() {
         for defaultGenericTag in FilterNames.allValues {
             //setting generic tags that are pre-set like (Male, Black, ect.)
@@ -126,32 +127,32 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 
 }
 
-extension FilterTagViewController: TagListViewDelegate {
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        //the tag from the choices tag view was pressed
-        if sender.tag == 1 {
-            let tagAttribute = tagDictionary[title]!
-            switch tagAttribute {
-            case .Generic:
-                changeTagListViewWidth(tagView, extend: true)
-                self.tagChoicesView.removeTag(title)
-                if !tagExistsInChosenTagListView(tagChosenView, title: title) {
-                    self.tagChosenView.addTag(title)
-                }
-            case .SpecialtyButtons:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                theStackViewTagsButtons = createStackViewTagButtons()
-                theStackViewTagsButtons!.addButtonToStackView(title)
-            case .SpecialtySingleSlider:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createDistanceSliderView()
-            case .SpecialtyRangeSlider:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createAgeRangeSliderView()
-            }
-           
-        }
-    }
+extension FilterTagViewController {
+//    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+//        //the tag from the choices tag view was pressed
+//        if sender.tag == 1 {
+//            let tagAttribute = tagDictionary[title]!
+//            switch tagAttribute {
+//            case .Generic:
+//                changeTagListViewWidth(tagView, extend: true)
+//                self.tagChoicesView.removeTag(title)
+//                if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+//                    self.tagChosenView.addTag(title)
+//                }
+//            case .SpecialtyButtons:
+//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+//                theStackViewTagsButtons = createStackViewTagButtons()
+//                theStackViewTagsButtons!.addButtonToStackView(title)
+//            case .SpecialtySingleSlider:
+//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+//                createDistanceSliderView()
+//            case .SpecialtyRangeSlider:
+//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+//                createAgeRangeSliderView()
+//            }
+//           
+//        }
+//    }
     
 func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bool {
         let tagViews = tagListView.tagViews
@@ -198,25 +199,25 @@ func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bo
         }
     }
     
-    func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        //added the + 1 because the tag view was getting rounded down, so when I would delete tags, the next tag wouldn't have enough roomto stay on the same line
-        let tagWidth = tagView.intrinsicContentSize().width + 1
-        //TODO: Can't figure out how the marginX is being applied, so the math is a guestimate right now.
-        let tagPadding : CGFloat = self.tagChosenView.marginX
-        if extend {
-            //we are adding a tag, and need to make more room
-            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
-        } else {
-            //deleting a tag, so shrink view
-            self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
-        }
-        self.view.layoutIfNeeded()
-    }
+//    func changeTagListViewWidth(tagView: TagView, extend: Bool) {
+//        //added the + 1 because the tag view was getting rounded down, so when I would delete tags, the next tag wouldn't have enough roomto stay on the same line
+//        let tagWidth = tagView.intrinsicContentSize().width + 1
+//        //TODO: Can't figure out how the marginX is being applied, so the math is a guestimate right now.
+//        let tagPadding : CGFloat = self.tagChosenView.marginX
+//        if extend {
+//            //we are adding a tag, and need to make more room
+//            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
+//        } else {
+//            //deleting a tag, so shrink view
+//            self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
+//        }
+//        self.view.layoutIfNeeded()
+//    }
     
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-        changeTagListViewWidth(tagView, extend: false)
-        sender.removeTagView(tagView)
-    }
+//    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+//        changeTagListViewWidth(tagView, extend: false)
+//        sender.removeTagView(tagView)
+//    }
 }
 
 extension FilterTagViewController: UISearchBarDelegate {
@@ -271,7 +272,7 @@ extension FilterTagViewController: UISearchBarDelegate {
 extension FilterTagViewController: StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String) {
         let tagView = tagChosenView.addTag(tagTitle)
-        changeTagListViewWidth(tagView, extend: true)
+//        changeTagListViewWidth(tagView, extend: true)
     }
     
     func removeChosenTag(tagTitle: String) {

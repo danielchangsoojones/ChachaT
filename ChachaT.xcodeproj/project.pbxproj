@@ -35,6 +35,8 @@
 		9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */; };
 		9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */; };
+		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
+		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */; };
 		928A65BB1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */; };
@@ -95,6 +97,8 @@
 		9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewTagButtons.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSliderView.swift; sourceTree = "<group>"; };
 		928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeDoubleRangeSliderView.swift; sourceTree = "<group>"; };
+		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
+		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; };
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingViewController.swift; sourceTree = "<group>"; };
 		928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingTableViewCell.swift; sourceTree = "<group>"; };
@@ -186,6 +190,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				928819441D286C70000A8E04 /* Profile */,
 				92B87DA41D15F1E300D3535C /* Question */,
 				9273B7991CFF491D0001A608 /* Filtering */,
 				9261085A1CEA1939009F3E86 /* Models */,
@@ -296,6 +301,15 @@
 				928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */,
 			);
 			name = "Xib Files";
+			sourceTree = "<group>";
+		};
+		928819441D286C70000A8E04 /* Profile */ = {
+			isa = PBXGroup;
+			children = (
+				928819451D286CA8000A8E04 /* Profile.storyboard */,
+				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
+			);
+			name = Profile;
 			sourceTree = "<group>";
 		};
 		928A65B91D0606FA0021C75C /* QuestionOnboarding */ = {
@@ -410,6 +424,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				926108211CDBCA32009F3E86 /* LaunchScreen.storyboard in Resources */,
+				928819461D286CA8000A8E04 /* Profile.storyboard in Resources */,
 				926108331CE25C22009F3E86 /* woosh.wav in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
@@ -505,6 +520,7 @@
 				928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */,
+				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,

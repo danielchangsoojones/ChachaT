@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Filter Tag View Controller-->
+        <!--Adding Tags To Profile View Controller-->
         <scene sceneID="UTw-sp-Kxf">
             <objects>
-                <viewController storyboardIdentifier="FilterTagViewController" id="vSA-UM-BZe" customClass="FilterTagViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterTagViewController" id="vSA-UM-BZe" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="OXw-Kc-WVv"/>
                         <viewControllerLayoutGuide type="bottom" id="We9-01-ZOh"/>
