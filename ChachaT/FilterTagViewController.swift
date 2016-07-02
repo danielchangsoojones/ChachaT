@@ -23,6 +23,31 @@ public enum SpecialtyTags : String {
     static let specialtyRangeSliderValues = [AgeRange]
 }
 
+public enum FilterNames : String {
+    case RaceBlackFilter = "black"
+    case RaceWhiteFilter = "white"
+    case RaceLatinoFilter = "latino"
+    case RaceAsianFilter = "asian"
+    case HairColorBrunetteFilter = "brunette"
+    case HairColorBlondeFilter = "blonde"
+    case HairColorRedheadFilter = "redhead"
+    case PoliticalAffiliationDemocratFilter = "democrat"
+    case PoliticalAffiliationRepublicanFilter = "republican"
+    case GenderMaleFilter = "male"
+    case GenderFemaleFilter = "female"
+    case SexualityStraightFilter = "straight"
+    case SexualityGayFilter = "gay"
+    case SexualityBisexualFilter = "bisexual"
+    
+    //this array lets me iterate over certain sections of the enum
+    static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
+    static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
+    static let genderAllValues = [GenderMaleFilter, GenderFemaleFilter]
+    static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
+    static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
+    static let allValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, GenderMaleFilter, GenderFemaleFilter, SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
+}
+
 class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
@@ -63,7 +88,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSpecialtyTagsInTagDictionary()
+        setTagsInTagDictionary()
         setTagsFromDictionary()
         tagChoicesView.delegate = self
         tagChoicesView.alignment = .Center
@@ -77,8 +102,12 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         }
     }
     
-    //sets speciality tags like Gender, Sexuality, ect. because they create a special animation
-    func setSpecialtyTagsInTagDictionary() {
+    func setTagsInTagDictionary() {
+        for defaultGenericTag in FilterNames.allValues {
+            //setting generic tags that are pre-set like (Male, Black, ect.)
+            tagDictionary[defaultGenericTag.rawValue] = TagAttributes.Generic
+        }
+        //sets speciality tags like Gender, Sexuality, ect. because they create a special animation
         for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
             tagDictionary[specialtyButtonTag.rawValue] = TagAttributes.SpecialtyButtons
         }

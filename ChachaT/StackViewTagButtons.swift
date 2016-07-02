@@ -16,30 +16,6 @@ protocol StackViewTagButtonsDelegate {
 
 class StackViewTagButtons: UIStackView {
     
-    enum FilterNames : String {
-        case RaceBlackFilter = "black"
-        case RaceWhiteFilter = "white"
-        case RaceLatinoFilter = "latino"
-        case RaceAsianFilter = "asian"
-        case HairColorBrunetteFilter = "brunette"
-        case HairColorBlondeFilter = "blonde"
-        case HairColorRedheadFilter = "redhead"
-        case PoliticalAffiliationDemocratFilter = "democrat"
-        case PoliticalAffiliationRepublicanFilter = "republican"
-        case GenderMaleFilter = "male"
-        case GenderFemaleFilter = "female"
-        case SexualityStraightFilter = "straight"
-        case SexualityGayFilter = "gay"
-        case SexualityBisexualFilter = "bisexual"
-        
-        //this array lets me iterate over certain sections of the enum
-        static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
-        static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
-        static var genderAllValues = [GenderMaleFilter, GenderFemaleFilter]
-        static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
-        static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
-    }
-    
     var delegate: StackViewTagButtonsDelegate?
     
     override init(frame: CGRect) {
