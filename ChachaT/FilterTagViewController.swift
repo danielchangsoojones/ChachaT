@@ -220,55 +220,6 @@ func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bo
 //    }
 }
 
-extension FilterTagViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let data = setDataArray()
-        var filtered:[String] = []
-        tagChoicesView.removeAllTags()
-        filtered = data.filter({ (text) -> Bool in
-            let tmp: NSString = text
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if(filtered.count == 0){
-            searchActive = false
-        } else {
-            searchActive = true
-            for tag in filtered {
-                tagChoicesView.addTag(tag)
-            }
-        }
-    }
-    
-    func setDataArray() -> [String] {
-        var dataArray = [String]()
-        for (tagName, _) in tagDictionary {
-            dataArray.append(tagName)
-        }
-        return dataArray
-    }
-
-}
-
 extension FilterTagViewController: StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String) {
         let tagView = tagChosenView.addTag(tagTitle)
