@@ -5,10 +5,10 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--View Controller-->
+        <!--Profile Index View Controller-->
         <scene sceneID="8Ge-7n-FwY">
             <objects>
-                <viewController id="FWd-U8-Jgx" sceneMemberID="viewController">
+                <viewController id="FWd-U8-Jgx" customClass="ProfileIndexViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iab-pd-kb6"/>
                         <viewControllerLayoutGuide type="bottom" id="9PT-2X-tXc"/>
@@ -20,6 +20,9 @@
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKB-hL-shh">
                                 <rect key="frame" x="228" y="285" width="145" height="30"/>
                                 <state key="normal" title="Add Tags To Yourself"/>
+                                <connections>
+                                    <action selector="addingTagsToProfileButtonPressed:" destination="FWd-U8-Jgx" eventType="touchUpInside" id="WB0-eW-y6G"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,10 +31,176 @@
                             <constraint firstItem="UKB-hL-shh" firstAttribute="centerX" secondItem="iEg-Es-KxU" secondAttribute="centerX" id="iPG-8y-mnx"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <segue destination="mYP-fS-yh2" kind="show" identifier="AddingTagsToProfileSegue" id="pML-or-Fkj"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9b-39-CQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="560" y="530"/>
+        </scene>
+        <!--Adding Tags To Profile View Controller-->
+        <scene sceneID="uBc-WO-8Po">
+            <objects>
+                <viewController storyboardIdentifier="FilterTagViewController" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="in9-u2-WDu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fr5-lD-rRN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qcq-BR-zCX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egt-Ig-axq">
+                                <rect key="frame" x="0.0" y="143" width="600" height="457"/>
+                                <subviews>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSZ-o2-TeW">
+                                        <rect key="frame" x="282" y="214" width="37" height="30"/>
+                                        <state key="normal" title="Done"/>
+                                        <connections>
+                                            <action selector="doneSpecialtyButtonPressed:" destination="mYP-fS-yh2" eventType="touchUpInside" id="qFt-8Z-kxK"/>
+                                        </connections>
+                                    </button>
+                                    <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Category:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="n6T-Fz-CxS">
+                                        <rect key="frame" x="263" y="20" width="75" height="21"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstItem="fSZ-o2-TeW" firstAttribute="centerY" secondItem="egt-Ig-axq" secondAttribute="centerY" id="3WE-vv-pA3"/>
+                                    <constraint firstItem="n6T-Fz-CxS" firstAttribute="top" secondItem="egt-Ig-axq" secondAttribute="top" constant="20" id="T8O-s8-2aI"/>
+                                    <constraint firstItem="n6T-Fz-CxS" firstAttribute="centerX" secondItem="egt-Ig-axq" secondAttribute="centerX" id="UiS-f9-WsN"/>
+                                    <constraint firstItem="fSZ-o2-TeW" firstAttribute="centerX" secondItem="egt-Ig-axq" secondAttribute="centerX" id="Ygz-aP-hyd"/>
+                                </constraints>
+                            </view>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="179" y="288" width="242" height="24"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
+                            </view>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
+                                <rect key="frame" x="0.0" y="64" width="600" height="79"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-4Y-beP">
+                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="79"/>
+                                        <subviews>
+                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-AG-Xp8" customClass="TagListView" customModule="TagListView">
+                                                <rect key="frame" x="8" y="28" width="0.0" height="24"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="width" id="5AO-FB-Xpb"/>
+                                                    <constraint firstAttribute="height" constant="24" id="83c-M0-ifX"/>
+                                                </constraints>
+                                                <userDefinedRuntimeAttributes>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                                        <real key="value" value="9"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="YES"/>
+                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                                        <real key="value" value="6"/>
+                                                    </userDefinedRuntimeAttribute>
+                                                </userDefinedRuntimeAttributes>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="2iB-AG-Xp8" firstAttribute="leading" secondItem="KUC-4Y-beP" secondAttribute="leading" constant="8" id="1bh-0d-Ovl"/>
+                                            <constraint firstAttribute="height" constant="79" id="Emi-8t-vR8"/>
+                                            <constraint firstItem="2iB-AG-Xp8" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="FAj-rw-YGS"/>
+                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="MvN-Wr-BUO"/>
+                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OmA-RI-P4C"/>
+                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="vyk-wC-DuZ"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="OmA-RI-P4C"/>
+                                                <exclude reference="MvN-Wr-BUO"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="79" id="0Ik-rf-686"/>
+                                    <constraint firstAttribute="trailing" secondItem="KUC-4Y-beP" secondAttribute="trailing" id="EPd-45-nTb"/>
+                                    <constraint firstItem="KUC-4Y-beP" firstAttribute="leading" secondItem="lRp-GR-lFB" secondAttribute="leading" id="KjU-gG-owz"/>
+                                    <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="PO7-hQ-6gn"/>
+                                    <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="fxy-7m-HQM"/>
+                                    <constraint firstItem="KUC-4Y-beP" firstAttribute="top" secondItem="lRp-GR-lFB" secondAttribute="top" id="nXa-B2-gyZ"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="PO7-hQ-6gn"/>
+                                    </mask>
+                                </variation>
+                            </scrollView>
+                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
+                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mYP-fS-yh2" id="nK3-lC-h0h"/>
+                                </connections>
+                            </searchBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="centerX" secondItem="qcq-BR-zCX" secondAttribute="centerX" id="0jf-fg-qhJ"/>
+                            <constraint firstItem="hfh-eM-SNs" firstAttribute="top" secondItem="in9-u2-WDu" secondAttribute="bottom" id="E8f-SK-i7h"/>
+                            <constraint firstItem="egt-Ig-axq" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="HCS-0Y-HSL"/>
+                            <constraint firstItem="lRp-GR-lFB" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="HVk-tz-WYd"/>
+                            <constraint firstItem="egt-Ig-axq" firstAttribute="top" secondItem="lRp-GR-lFB" secondAttribute="bottom" id="K0v-5o-hSp"/>
+                            <constraint firstItem="Fr5-lD-rRN" firstAttribute="top" secondItem="egt-Ig-axq" secondAttribute="bottom" id="b9j-in-7rh"/>
+                            <constraint firstAttribute="trailing" secondItem="lRp-GR-lFB" secondAttribute="trailing" id="eO9-nB-R99"/>
+                            <constraint firstItem="lRp-GR-lFB" firstAttribute="top" secondItem="qcq-BR-zCX" secondAttribute="top" id="gnd-UR-NXa"/>
+                            <constraint firstItem="hfh-eM-SNs" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="k5W-WH-1AA"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="centerY" secondItem="qcq-BR-zCX" secondAttribute="centerY" id="k8t-X8-cCt"/>
+                            <constraint firstAttribute="trailing" secondItem="hfh-eM-SNs" secondAttribute="trailing" id="n3h-Ec-nK4"/>
+                            <constraint firstItem="lRp-GR-lFB" firstAttribute="top" secondItem="hfh-eM-SNs" secondAttribute="bottom" id="r0R-cz-WVy"/>
+                            <constraint firstAttribute="trailing" secondItem="egt-Ig-axq" secondAttribute="trailing" id="rrR-J3-sOt"/>
+                        </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="gnd-UR-NXa"/>
+                            </mask>
+                        </variation>
+                    </view>
+                    <connections>
+                        <outlet property="tagChoicesView" destination="f8Q-9k-XpF" id="Odn-oM-mHy"/>
+                        <outlet property="tagChosenView" destination="2iB-AG-Xp8" id="bDk-dk-vHq"/>
+                        <outlet property="tagChosenViewWidthConstraint" destination="5AO-FB-Xpb" id="MQT-ER-5rL"/>
+                        <outlet property="theCategoryLabel" destination="n6T-Fz-CxS" id="fyJ-E2-7vb"/>
+                        <outlet property="theDoneSpecialtyButton" destination="fSZ-o2-TeW" id="oDs-Ec-Q8M"/>
+                        <outlet property="theSpecialtyTagEnviromentHolderView" destination="egt-Ig-axq" id="AFn-el-v0l"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZx-kU-P0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1331" y="513"/>
         </scene>
     </scenes>
 </document>

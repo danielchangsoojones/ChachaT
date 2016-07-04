@@ -37,6 +37,7 @@
 		928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
+		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */; };
 		928A65BB1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */; };
@@ -99,6 +100,7 @@
 		928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeDoubleRangeSliderView.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; };
+		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingViewController.swift; sourceTree = "<group>"; };
 		928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingTableViewCell.swift; sourceTree = "<group>"; };
@@ -308,6 +310,7 @@
 			children = (
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
+				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -516,6 +519,7 @@
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
