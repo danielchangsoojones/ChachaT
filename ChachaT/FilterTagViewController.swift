@@ -234,7 +234,13 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
     }
     
     func removeChosenTag(tagTitle: String) {
-        tagChosenView.removeTag(tagTitle)
+        //finding the particular tagView, so we know what to pass to the changeTagListWidth
+        //removeTag does not return a tagView like addTag does
+        for tagView in tagChosenView.tagViews where tagView.currentTitle == tagTitle {
+            tagChosenView.removeTag(tagTitle)
+            changeTagListViewWidth(tagView, extend: false)
+        }
+        
         print("tagViewIntrinsicSize3: \(tagChosenView.intrinsicContentSize().width)")
         print("chosenTagViewWidthConstraint3: \(tagChosenViewWidthConstraint.constant)")
         print("tagViewHolderWidth3: \(theChosenTagHolderView.frame.width)")
