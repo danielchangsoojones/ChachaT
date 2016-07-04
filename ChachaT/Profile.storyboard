@@ -99,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="79"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-4Y-beP">
-                                        <rect key="frame" x="0.0" y="0.0" width="8" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="68" height="79"/>
                                         <subviews>
                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-AG-Xp8" customClass="TagListView" customModule="TagListView">
                                                 <rect key="frame" x="8" y="28" width="0.0" height="24"/>
@@ -124,20 +124,38 @@
                                                     </userDefinedRuntimeAttribute>
                                                 </userDefinedRuntimeAttributes>
                                             </view>
+                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqA-ji-qaT">
+                                                <rect key="frame" x="34" y="25" width="30" height="30"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="30" id="9FK-yG-8HR"/>
+                                                    <constraint firstAttribute="width" constant="46" id="Ewt-5H-yay"/>
+                                                </constraints>
+                                                <state key="normal" title="Add"/>
+                                                <variation key="default">
+                                                    <mask key="constraints">
+                                                        <exclude reference="9FK-yG-8HR"/>
+                                                        <exclude reference="Ewt-5H-yay"/>
+                                                    </mask>
+                                                </variation>
+                                            </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="leading" secondItem="KUC-4Y-beP" secondAttribute="leading" constant="8" id="1bh-0d-Ovl"/>
                                             <constraint firstAttribute="height" constant="79" id="Emi-8t-vR8"/>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="FAj-rw-YGS"/>
+                                            <constraint firstAttribute="trailing" secondItem="QqA-ji-qaT" secondAttribute="trailing" constant="4" id="J1b-nh-oJq"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="MvN-Wr-BUO"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OmA-RI-P4C"/>
-                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" constant="8" id="vyk-wC-DuZ"/>
+                                            <constraint firstItem="QqA-ji-qaT" firstAttribute="leading" secondItem="2iB-AG-Xp8" secondAttribute="trailing" constant="26" id="Vet-9C-Ytb"/>
+                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" constant="80" id="vyk-wC-DuZ"/>
+                                            <constraint firstItem="QqA-ji-qaT" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="zcj-3Z-BbE"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="OmA-RI-P4C"/>
                                                 <exclude reference="MvN-Wr-BUO"/>
+                                                <exclude reference="vyk-wC-DuZ"/>
                                             </mask>
                                         </variation>
                                     </view>
