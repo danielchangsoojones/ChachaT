@@ -99,7 +99,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="79"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-4Y-beP">
-                                        <rect key="frame" x="0.0" y="0.0" width="0.0" height="79"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="8" height="79"/>
                                         <subviews>
                                             <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="2iB-AG-Xp8" customClass="TagListView" customModule="TagListView">
                                                 <rect key="frame" x="8" y="28" width="0.0" height="24"/>
@@ -132,7 +132,7 @@
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="FAj-rw-YGS"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="MvN-Wr-BUO"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OmA-RI-P4C"/>
-                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="vyk-wC-DuZ"/>
+                                            <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" constant="8" id="vyk-wC-DuZ"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">

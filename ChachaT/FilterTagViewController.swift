@@ -201,10 +201,9 @@ extension FilterTagViewController {
     }
     
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        //added the + 1 because the tag view was getting rounded down, so when I would delete tags, the next tag wouldn't have enough roomto stay on the same line
         let tagWidth = tagView.intrinsicContentSize().width
-        //TODO: Can't figure out how the marginX is being applied, so the math is a guestimate right now.
         let tagPadding : CGFloat = self.tagChosenView.marginX
+        //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
         if extend {
             //we are adding a tag, and need to make more room
             self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
@@ -212,13 +211,7 @@ extension FilterTagViewController {
             //deleting a tag, so shrink view
             self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
         }
-        print("tagViewIntrinsicSize: \(tagView.intrinsicContentSize().width)")
-        print("chosenTagViewWidthConstraint: \(tagChosenViewWidthConstraint.constant)")
-        print("tagViewHolderWidth: \(theChosenTagHolderView.frame.width)")
         self.view.layoutIfNeeded()
-        print("tagViewIntrinsicSize2: \(tagView.intrinsicContentSize().width)")
-        print("chosenTagViewWidthConstraint2: \(tagChosenViewWidthConstraint.constant)")
-        print("tagViewHolderWidth2: \(theChosenTagHolderView.frame.width)")
     }
     
 //    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
@@ -240,10 +233,6 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             tagChosenView.removeTag(tagTitle)
             changeTagListViewWidth(tagView, extend: false)
         }
-        
-        print("tagViewIntrinsicSize3: \(tagChosenView.intrinsicContentSize().width)")
-        print("chosenTagViewWidthConstraint3: \(tagChosenViewWidthConstraint.constant)")
-        print("tagViewHolderWidth3: \(theChosenTagHolderView.frame.width)")
     }
     
     func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) {
