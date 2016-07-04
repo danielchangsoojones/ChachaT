@@ -52,7 +52,11 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 createAgeRangeSliderView()
             }
+        } else if sender.tag == 2 {
+            //the remove button in theChosenTagView was pressed
+            changeTagListViewWidth(tagView, extend: false)
         }
+        
     }
     
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {

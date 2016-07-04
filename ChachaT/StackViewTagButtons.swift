@@ -103,7 +103,7 @@ class StackViewTagButtons: UIStackView {
             if changeChosenTags {
                 if let titleLabel = button.titleLabel {
                     if let tagTitle = titleLabel.text {
-                        delegate!.removeChosenTag(titleLabel.text!)
+                        delegate!.removeChosenTag(tagTitle)
                     }
                 }
             }

@@ -194,6 +194,7 @@
                         <outlet property="tagChosenView" destination="2iB-AG-Xp8" id="bDk-dk-vHq"/>
                         <outlet property="tagChosenViewWidthConstraint" destination="5AO-FB-Xpb" id="MQT-ER-5rL"/>
                         <outlet property="theCategoryLabel" destination="n6T-Fz-CxS" id="fyJ-E2-7vb"/>
+                        <outlet property="theChosenTagHolderView" destination="KUC-4Y-beP" id="gL6-U7-idc"/>
                         <outlet property="theDoneSpecialtyButton" destination="fSZ-o2-TeW" id="oDs-Ec-Q8M"/>
                         <outlet property="theSpecialtyTagEnviromentHolderView" destination="egt-Ig-axq" id="AFn-el-v0l"/>
                     </connections>
