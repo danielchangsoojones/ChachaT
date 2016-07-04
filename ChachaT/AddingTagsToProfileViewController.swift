@@ -43,15 +43,25 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                theStackViewTagsButtons = createStackViewTagButtons()
                 //need a none button, so it gives users the option to not have it.
-                theStackViewTagsButtons!.addButtonToStackView(title, addNoneButton: true)
+                theStackViewTagsButtons = createStackViewTagButtons(title, addNoneButton: true)
             case .SpecialtySingleSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 createDistanceSliderView()
             case .SpecialtyRangeSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 createAgeRangeSliderView()
+            }
+        }
+    }
+    
+    func genericTagIsSpecial(tagTitle: String) {
+        for filterName in FilterNames.raceAllValues {
+            if filterName.rawValue == tagTitle {
+                //we have a specialty generic tag
+                if FilterNames.genderAllValues.contains(filterName) {
+                    
+                }
             }
         }
     }

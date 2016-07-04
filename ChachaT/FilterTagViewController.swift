@@ -230,8 +230,8 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
         tagChosenView.removeTag(tagTitle)
     }
     
-    func createStackViewTagButtons() -> StackViewTagButtons {
-        let stackView = StackViewTagButtons(frame: CGRectMake(0, 0, 100, 100))
+    func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) -> StackViewTagButtons {
+        let stackView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: self)
         stackView.delegate = self
         self.theSpecialtyTagEnviromentHolderView.addSubview(stackView)
         stackView.snp_makeConstraints { (make) in

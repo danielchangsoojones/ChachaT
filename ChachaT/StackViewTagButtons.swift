@@ -23,6 +23,13 @@ class StackViewTagButtons: UIStackView {
         setStackViewProperties()
     }
     
+    init(filterCategory: String, addNoneButton: Bool, delegate: StackViewTagButtonsDelegate) {
+        super.init(frame: CGRectMake(0, 0, 200, 200))
+        setStackViewProperties()
+        self.delegate = delegate
+        self.addButtonsToStackView(filterCategory, addNoneButton: addNoneButton)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -34,7 +41,7 @@ class StackViewTagButtons: UIStackView {
         self.spacing = 2
     }
     
-    func addButtonToStackView(filterCategory: String, addNoneButton: Bool) {
+    func addButtonsToStackView(filterCategory: String, addNoneButton: Bool) {
         switch filterCategory {
         case SpecialtyTags.Race.rawValue:
             iterateThroughFilterNames(FilterNames.raceAllValues)
