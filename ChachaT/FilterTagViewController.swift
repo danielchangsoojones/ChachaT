@@ -230,7 +230,7 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
         tagChosenView.removeTag(tagTitle)
     }
     
-    func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) -> StackViewTagButtons {
+    func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) {
         let stackView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: self)
         stackView.delegate = self
         self.theSpecialtyTagEnviromentHolderView.addSubview(stackView)
@@ -238,7 +238,7 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             make.centerY.equalTo(self.view)
             make.centerX.equalTo(self.theSpecialtyTagEnviromentHolderView)
         }
-        return stackView
+        theStackViewTagsButtons = stackView
     }
     
     func doesChosenTagViewContain(tagTitle: String) -> Bool {

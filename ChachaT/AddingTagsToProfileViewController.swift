@@ -39,12 +39,12 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
             let tagAttribute = tagDictionary[title]!
             switch tagAttribute {
             case .Generic:
-                break
+                genericTagIsSpecial(title)
                 //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 //need a none button, so it gives users the option to not have it.
-                theStackViewTagsButtons = createStackViewTagButtons(title, addNoneButton: true)
+                createStackViewTagButtons(title, addNoneButton: true)
             case .SpecialtySingleSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 createDistanceSliderView()
@@ -55,12 +55,25 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         }
     }
     
+    func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {
+        createSpecialtyTagEnviroment(false, categoryTitleText: categoryTitleText)
+        createStackViewTagButtons(categoryTitleText, addNoneButton: true)
+    }
+    
     func genericTagIsSpecial(tagTitle: String) {
-        for filterName in FilterNames.raceAllValues {
+        for filterName in FilterNames.allValues {
             if filterName.rawValue == tagTitle {
                 //we have a specialty generic tag
                 if FilterNames.genderAllValues.contains(filterName) {
-                    
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Gender.rawValue)
+                } else if FilterNames.hairColorAllValues.contains(filterName) {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.HairColor.rawValue)
+                } else if FilterNames.sexualityAllValues.contains(filterName) {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Sexuality.rawValue)
+                } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.PoliticalAffiliation.rawValue)
+                } else if FilterNames.raceAllValues.contains(filterName) {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Race.rawValue)
                 }
             }
         }

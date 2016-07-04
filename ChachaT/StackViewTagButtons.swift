@@ -17,6 +17,7 @@ protocol StackViewTagButtonsDelegate {
 class StackViewTagButtons: UIStackView {
     
     var delegate: StackViewTagButtonsDelegate?
+    let noneButtonText = "None"
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -62,7 +63,7 @@ class StackViewTagButtons: UIStackView {
                 changeButtonHighlight(true, button: $0, changeChosenTags: false)
                 $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
                 $0.layer.cornerRadius = 10
-                $0.setTitle("None", forState: .Normal)
+                $0.setTitle(noneButtonText, forState: .Normal)
                 return $0
             }(UIButton())
             self.addArrangedSubview(button)
@@ -112,7 +113,7 @@ class StackViewTagButtons: UIStackView {
             button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
             if changeChosenTags {
                 if let titleLabel = button.titleLabel {
-                    if let tagTitle = titleLabel.text {
+                    if let tagTitle = titleLabel.text where tagTitle != noneButtonText {
                         delegate?.createChosenTag(tagTitle)
                     }
                 }
