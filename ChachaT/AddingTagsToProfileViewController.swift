@@ -19,6 +19,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var addToProfileTagArray : [Tag] = []
     var createdTag : TagView?
     var alreadySavedTags = false
+    var tagsFromParse: [Tag] = []
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -63,8 +64,11 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 query?.findObjectsInBackgroundWithBlock({ (objects, error) in
                     if error == nil {
                         if let tags = objects as? [Tag] {
+                            //saving tags to this array, so I can delete any tags the user ends up deleting
+                            self.tagsFromParse = tags
                             for tag in tags {
                                 self.tagDictionary[tag.title] = .Generic
+                                
                             }
                             self.loadData()
                         }
@@ -79,7 +83,18 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         //the user should be able to remove his/her tags because now they are editing them
         tagChoicesView.enableRemoveButton = true
     }
+
+    override func didReceiveMemoryWarning() {
+        super.didReceiveMemoryWarning()
+        // Dispose of any resources that can be recreated.
+    }
+
+}
+
+//overrided super class methods
+extension AddingTagsToProfileViewController {
     
+    //overriding this because we want to have a special case for creating a new tag within user editing mode
     override func doneSpecialtyButtonPressed(sender: UIButton) {
         super.doneSpecialtyButtonPressed(sender)
         if sender.titleLabel?.text == createTagButtonText {
@@ -101,12 +116,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         let existsInChoicesTagDictionary = tagDictionary[tagTitle] != nil
         return (tagExistsInChosenTagListView(tagChosenView, title: tagTitle) || existsInChoicesTagDictionary)
     }
-
-    override func didReceiveMemoryWarning() {
-        super.didReceiveMemoryWarning()
-        // Dispose of any resources that can be recreated.
+    
+    override func removeChoicesTag(tagTitle: String) {
+        super.removeChoicesTag(tagTitle)
+        for tag in tagsFromParse where tag.title == tagTitle {
+            //TODO: Not sure if I should change this to delete with block since, I should probably
+            //check if the tag was really deleted before the user leaves the page
+            tag.deleteInBackground()
+        }
     }
-
+    
 }
 
 extension AddingTagsToProfileViewController: TagListViewDelegate {
@@ -116,6 +135,9 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         if sender.tag == 2 {
             //the remove button in theChosenTagView was pressed
             changeTagListViewWidth(tagView, extend: false)
+        } else if sender.tag == 1{
+            //we hit the remove button in theChoicesTagView
+            removeChoicesTag(title)
         }
     }
     

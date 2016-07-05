@@ -98,7 +98,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     }
     
     func loadData() {
-        print(tagDictionary)
         setTagsFromDictionary()
     }
     
@@ -245,6 +244,10 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             tagChosenView.removeTag(tagTitle)
             changeTagListViewWidth(tagView, extend: false)
         }
+    }
+
+    func removeChoicesTag(tagTitle: String) {
+        tagChoicesView.removeTag(tagTitle)
     }
     
     func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) {

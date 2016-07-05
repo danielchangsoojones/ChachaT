@@ -12,6 +12,7 @@ protocol StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String)
     func removeChosenTag(tagTitle: String)
     func doesChosenTagViewContain(tagTitle: String) -> Bool
+    func removeChoicesTag(tagTitle: String)
 }
 
 class StackViewTagButtons: UIStackView {
@@ -60,10 +61,10 @@ class StackViewTagButtons: UIStackView {
         if addNoneButton {
             //if we are on editing tags for profile page, then the stack view should have a none button
             let button: UIButton = {
-                changeButtonHighlight(true, button: $0, changeChosenTags: false)
+                $0.setTitle(noneButtonText, forState: .Normal)
+                changeButtonHighlight(true, button: $0, changeChosenTags: false, changeChoicesTag: false)
                 $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
                 $0.layer.cornerRadius = 10
-                $0.setTitle(noneButtonText, forState: .Normal)
                 return $0
             }(UIButton())
             self.addArrangedSubview(button)
@@ -79,11 +80,11 @@ class StackViewTagButtons: UIStackView {
     
     func createButton(filterName: FilterNames) -> UIButton {
         let button: UIButton = {
+            $0.setTitle(filterName.rawValue, forState: .Normal)
             let tagHasNotBeenChosen = !(delegate?.doesChosenTagViewContain(filterName.rawValue))!
-            changeButtonHighlight(tagHasNotBeenChosen, button: $0, changeChosenTags: false)
+            changeButtonHighlight(tagHasNotBeenChosen, button: $0, changeChosenTags: false, changeChoicesTag: false)
             $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
             $0.layer.cornerRadius = 10
-            $0.setTitle(filterName.rawValue, forState: .Normal)
             return $0
         }(UIButton())
         
@@ -92,29 +93,30 @@ class StackViewTagButtons: UIStackView {
     
     func buttonTapped(sender: UIButton!) {
         let buttonHighlighted : Bool = (sender.backgroundColor == ChachaTeal)
-        changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true)
+        changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true, changeChoicesTag: true)
     }
     
-    func changeButtonHighlight(buttonHighlighted: Bool, button: UIButton, changeChosenTags: Bool) {
-        if buttonHighlighted {
-            //we are unhighlighting the button
-            button.backgroundColor = ChachaBombayGrey
-            button.setTitleColor(ChachaTeal, forState: .Normal)
-            if changeChosenTags {
-                if let titleLabel = button.titleLabel {
-                    if let tagTitle = titleLabel.text {
+    func changeButtonHighlight(buttonHighlighted: Bool, button: UIButton, changeChosenTags: Bool, changeChoicesTag: Bool) {
+        if let titleLabel = button.titleLabel {
+            if let tagTitle = titleLabel.text {
+                if buttonHighlighted {
+                    //we are unhighlighting the button
+                    button.backgroundColor = ChachaBombayGrey
+                    button.setTitleColor(ChachaTeal, forState: .Normal)
+                    if changeChosenTags {
                         delegate!.removeChosenTag(tagTitle)
+                    } else if changeChoicesTag {
+                        //doing something with the choices tag
+                        delegate?.removeChoicesTag(tagTitle)
                     }
-                }
-            }
-        } else {
-            //highlight the button
-            button.backgroundColor = ChachaTeal
-            button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-            if changeChosenTags {
-                if let titleLabel = button.titleLabel {
-                    if let tagTitle = titleLabel.text where tagTitle != noneButtonText {
-                        delegate?.createChosenTag(tagTitle)
+                } else {
+                    //highlight the button
+                    button.backgroundColor = ChachaTeal
+                    button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                    if changeChosenTags {
+                        if tagTitle != noneButtonText {
+                            delegate?.createChosenTag(tagTitle)
+                        }
                     }
                 }
             }
