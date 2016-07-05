@@ -14,31 +14,40 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var theAddToProfileButton: UIButton!
+    @IBOutlet weak var theDoneButton: UIBarButtonItem!
     
-    @IBAction func addToProfilePressed(sender: UIButton) {
+    var addToProfileTagArray : [Tag] = []
+    
+    @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
         theActivityIndicator.hidden = false
-        theAddToProfileButton.userInteractionEnabled = false
-        var tagArray : [Tag] = []
-        for tagView in tagChosenView.tagViews {
-            let tag = Tag()
-            if let title = tagView.currentTitle {
-                tag.title = title
-            }
-            tag.createdBy = User.currentUser()
-            tagArray.append(tag)
-        }
-        PFObject.saveAllInBackground(tagArray) { (success, error) in
+        theDoneButton.enabled = false
+        PFObject.saveAllInBackground(addToProfileTagArray) { (success, error) in
             if success {
                 self.theActivityIndicator.stopAnimating()
-                self.theAddToProfileButton.userInteractionEnabled = true
+                self.navigationController?.popViewControllerAnimated(true)
             } else {
+                self.theDoneButton.enabled = true
                 print(error)
             }
         }
     }
     
-
+    
+    @IBAction func addToProfilePressed(sender: UIButton) {
+        for tagView in tagChosenView.tagViews {
+            let tag = Tag()
+            if let title = tagView.currentTitle {
+                tag.title = title
+                tagChoicesView.addTag(title)
+            }
+            tag.createdBy = User.currentUser()
+            addToProfileTagArray.append(tag)
+        }
+        tagChosenView.removeAllTags()
+        tagChosenViewWidthConstraint.constant = 0
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         changeTheChoicesTagView()

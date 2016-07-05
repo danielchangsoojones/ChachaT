@@ -40,10 +40,10 @@
             </objects>
             <point key="canvasLocation" x="1372" y="530"/>
         </scene>
-        <!--Adding Tags To Profile View Controller-->
+        <!--Add Tags To Your Profile-->
         <scene sceneID="uBc-WO-8Po">
             <objects>
-                <viewController storyboardIdentifier="FilterTagViewController" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="FilterTagViewController" title="Add Tags To Your Profile" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="in9-u2-WDu"/>
                         <viewControllerLayoutGuide type="bottom" id="Fr5-lD-rRN"/>
@@ -52,11 +52,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="egt-Ig-axq">
-                                <rect key="frame" x="0.0" y="143" width="600" height="457"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="egt-Ig-axq">
+                                <rect key="frame" x="0.0" y="187" width="600" height="413"/>
                                 <subviews>
-                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSZ-o2-TeW">
-                                        <rect key="frame" x="282" y="214" width="37" height="30"/>
+                                    <button hidden="YES" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fSZ-o2-TeW">
+                                        <rect key="frame" x="282" y="192" width="37" height="30"/>
                                         <state key="normal" title="Done"/>
                                         <connections>
                                             <action selector="doneSpecialtyButtonPressed:" destination="mYP-fS-yh2" eventType="touchUpInside" id="qFt-8Z-kxK"/>
@@ -96,8 +96,8 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
-                                <rect key="frame" x="0.0" y="64" width="600" height="79"/>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
+                                <rect key="frame" x="0.0" y="108" width="600" height="79"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="KUC-4Y-beP">
                                         <rect key="frame" x="0.0" y="0.0" width="134" height="79"/>
@@ -178,8 +178,8 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <searchBar contentMode="redraw" misplaced="YES" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
-                                <rect key="frame" x="0.0" y="20" width="600" height="44"/>
+                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
                                 </constraints>
@@ -216,6 +216,13 @@
                             </mask>
                         </variation>
                     </view>
+                    <navigationItem key="navigationItem" title="Add Tags" id="lDu-8K-Y1l">
+                        <barButtonItem key="rightBarButtonItem" title="Done" id="Ttp-mV-XcO">
+                            <connections>
+                                <action selector="theDoneButtonPressed:" destination="mYP-fS-yh2" id="N2g-Fl-clP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="tagChoicesView" destination="f8Q-9k-XpF" id="Odn-oM-mHy"/>
                         <outlet property="tagChosenView" destination="2iB-AG-Xp8" id="bDk-dk-vHq"/>
@@ -224,7 +231,9 @@
                         <outlet property="theAddToProfileButton" destination="QqA-ji-qaT" id="sEk-YM-Gwa"/>
                         <outlet property="theCategoryLabel" destination="n6T-Fz-CxS" id="fyJ-E2-7vb"/>
                         <outlet property="theChosenTagHolderView" destination="KUC-4Y-beP" id="gL6-U7-idc"/>
+                        <outlet property="theDoneButton" destination="Ttp-mV-XcO" id="EXm-Cf-SmR"/>
                         <outlet property="theDoneSpecialtyButton" destination="fSZ-o2-TeW" id="oDs-Ec-Q8M"/>
+                        <outlet property="theScrollView" destination="lRp-GR-lFB" id="Qqz-kT-cpp"/>
                         <outlet property="theSpecialtyTagEnviromentHolderView" destination="egt-Ig-axq" id="AFn-el-v0l"/>
                     </connections>
                 </viewController>

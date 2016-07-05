@@ -57,6 +57,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theDoneSpecialtyButton: UIButton!
     @IBOutlet weak var theSpecialtyTagEnviromentHolderView: UIView!
     @IBOutlet weak var theChosenTagHolderView: UIView!
+    @IBOutlet weak var theScrollView: UIScrollView!
     var theStackViewTagsButtons : StackViewTagButtons?
     var theDistanceSliderView : DistanceSliderView?
     var theAgeRangeSliderView : AgeDoubleRangeSliderView?
@@ -201,6 +202,7 @@ extension FilterTagViewController {
     }
     
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
+        let originalTagChosenViewMaxX = tagChosenView.frame.maxX
         let tagWidth = tagView.intrinsicContentSize().width
         let tagPadding : CGFloat = self.tagChosenView.marginX
         //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
@@ -212,6 +214,11 @@ extension FilterTagViewController {
             self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
         }
         self.view.layoutIfNeeded()
+        if self.view.frame.width <= theChosenTagHolderView.frame.width {
+            //TODO: did -100 because it looks better, and I could not figure out exact math. I want it to look like 8tracks, where after it grows bigger than the screen
+            //it stays in the same spot
+            theScrollView.setContentOffset(CGPointMake(originalTagChosenViewMaxX - 100, 0), animated: true)
+        }
     }
     
 //    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
