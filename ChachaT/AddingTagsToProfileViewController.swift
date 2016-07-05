@@ -8,8 +8,36 @@
 
 import UIKit
 import TagListView
+import Parse
 
 class AddingTagsToProfileViewController: FilterTagViewController {
+    
+    @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
+    @IBOutlet weak var theAddToProfileButton: UIButton!
+    
+    @IBAction func addToProfilePressed(sender: UIButton) {
+        theActivityIndicator.startAnimating()
+        theActivityIndicator.hidden = false
+        theAddToProfileButton.userInteractionEnabled = false
+        var tagArray : [Tag] = []
+        for tagView in tagChosenView.tagViews {
+            let tag = Tag()
+            if let title = tagView.currentTitle {
+                tag.title = title
+            }
+            tag.createdBy = User.currentUser()
+            tagArray.append(tag)
+        }
+        PFObject.saveAllInBackground(tagArray) { (success, error) in
+            if success {
+                self.theActivityIndicator.stopAnimating()
+                self.theAddToProfileButton.userInteractionEnabled = true
+            } else {
+                print(error)
+            }
+        }
+    }
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()

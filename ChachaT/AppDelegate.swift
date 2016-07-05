@@ -21,6 +21,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //register parse subclasses
         User.registerSubclass()
         Question.registerSubclass()
+        Tag.registerSubclass()
         
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {
