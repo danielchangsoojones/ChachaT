@@ -17,6 +17,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
     
     var addToProfileTagArray : [Tag] = []
+    var createdTag : TagView?
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -36,13 +37,11 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBAction func addToProfilePressed(sender: UIButton) {
         for tagView in tagChosenView.tagViews {
-            let tag = Tag()
             if let title = tagView.currentTitle {
-                tag.title = title
+                let tag = Tag(title: title)
+                addToProfileTagArray.append(tag)
                 tagChoicesView.addTag(title)
             }
-            tag.createdBy = User.currentUser()
-            addToProfileTagArray.append(tag)
         }
         tagChosenView.removeAllTags()
         tagChosenViewWidthConstraint.constant = 0
@@ -60,6 +59,20 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         //the user should be able to remove his/her tags because now they are editing them
         tagChoicesView.enableRemoveButton = true
     }
+    
+    override func doneSpecialtyButtonPressed(sender: UIButton) {
+        super.doneSpecialtyButtonPressed(sender)
+        if sender.titleLabel?.text == createTagButtonText {
+            //we re-create the tagView with the original tags and then the created tag is already kept in
+            setTagsFromDictionary()
+            if let createdTag = createdTag {
+                if let title = createdTag.currentTitle {
+                    let tag = Tag(title: title)
+                    addToProfileTagArray.append(tag)
+                }
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -71,29 +84,11 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 extension AddingTagsToProfileViewController: TagListViewDelegate {
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
         sender.removeTagView(tagView)
-        if sender.tag == 1 {
-            //the remove button from theChoicesTagView was pressed
-            let tagAttribute = tagDictionary[title]!
-            switch tagAttribute {
-            case .Generic:
-                genericTagIsSpecial(title)
-                //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
-            case .SpecialtyButtons:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                //need a none button, so it gives users the option to not have it.
-                createStackViewTagButtons(title, addNoneButton: true)
-            case .SpecialtySingleSlider:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createDistanceSliderView()
-            case .SpecialtyRangeSlider:
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createAgeRangeSliderView()
-            }
-        } else if sender.tag == 2 {
+        tagAttributeActions(title, sender: sender, tagPressed: false)
+        if sender.tag == 2 {
             //the remove button in theChosenTagView was pressed
             changeTagListViewWidth(tagView, extend: false)
         }
-        
     }
     
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {
@@ -101,7 +96,8 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         createStackViewTagButtons(categoryTitleText, addNoneButton: true)
     }
     
-    func genericTagIsSpecial(tagTitle: String) {
+    //creates the special buttons as well as checks if the generic tag is a special one
+    func genericTagIsSpecial(tagTitle: String) -> Bool {
         for filterName in FilterNames.allValues {
             if filterName.rawValue == tagTitle {
                 //we have a specialty generic tag
@@ -116,12 +112,39 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 } else if FilterNames.raceAllValues.contains(filterName) {
                     createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Race.rawValue)
                 }
+                //FilterNames contains the tag, so it is a special tag and we return true
+                return true
+            }
+        }
+        return false
+    }
+    
+    func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool) {
+        if sender.tag == 1 {
+            //we have chosen/removed something from the ChosenTagView
+            let tagAttribute = tagDictionary[title]!
+            switch tagAttribute {
+            case .Generic:
+                if !genericTagIsSpecial(title) && tagPressed {
+                    //we are dealing with a normal generic tag that was pressed
+                    print("hi")
+                }
+            //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
+            case .SpecialtyButtons:
+                createStackViewTagButtonsAndSpecialtyEnviroment(title)
+            case .SpecialtySingleSlider:
+                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createDistanceSliderView()
+            case .SpecialtyRangeSlider:
+                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createAgeRangeSliderView()
             }
         }
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        //do nothing because we only act on tag Remove buttons being pressed
+        //we only want to have an action for tag pressed if the user taps something in choices tag view
+        tagAttributeActions(title, sender: sender, tagPressed: true)
     }
 }
 
@@ -161,6 +184,14 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             for tag in filtered {
                 tagChoicesView.addTag(tag)
             }
+        }
+        if filtered.isEmpty {
+            createSpecialtyTagEnviroment(false, categoryTitleText: "Create A New Tag?")
+            createdTag = tagChoicesView.addTag(searchText)
+            tagChoicesView.hidden = false
+            theDoneSpecialtyButton.setTitle(createTagButtonText, forState: .Normal)
+        } else {
+            createSpecialtyTagEnviroment(true, categoryTitleText: nil)
         }
     }
     

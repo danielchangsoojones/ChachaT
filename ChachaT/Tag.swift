@@ -21,4 +21,10 @@ class Tag: PFObject, PFSubclassing {
         super.init()
     }
     
+    init(title: String) {
+        super.init()
+        self.title = title
+        self.createdBy = User.currentUser()
+    }
+    
 }

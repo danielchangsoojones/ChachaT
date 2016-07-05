@@ -64,6 +64,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
+    let createTagButtonText = "Create"
     
     //search Variables
     var searchActive : Bool = false
