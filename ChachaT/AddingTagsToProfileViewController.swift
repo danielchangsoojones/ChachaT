@@ -18,6 +18,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     var addToProfileTagArray : [Tag] = []
     var createdTag : TagView?
+    var alreadySavedTags = false
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -58,8 +59,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     override func setTagsInTagDictionary() {
         let query = Tag.query()
         if let currentUser = User.currentUser() {
-            if let objectId = currentUser.objectId {
-                query?.whereKey("createdBy", equalTo: objectId)
+                query?.whereKey("createdBy", equalTo: currentUser)
                 query?.findObjectsInBackgroundWithBlock({ (objects, error) in
                     if error == nil {
                         if let tags = objects as? [Tag] {
@@ -72,9 +72,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                         print(error)
                     }
                 })
-            }
         }
-        
     }
     
     func changeTheChoicesTagView() {
@@ -94,6 +92,14 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 }
             }
         }
+    }
+    
+    //overriding this method because I want to not only see if tag exists with chosen tags
+    //we also want to see if tag is in the already saved Parse tags because then the button
+    //should be highlighted.
+    override func doesChosenTagViewContain(tagTitle: String) -> Bool {
+        let existsInChoicesTagDictionary = tagDictionary[tagTitle] != nil
+        return (tagExistsInChosenTagListView(tagChosenView, title: tagTitle) || existsInChoicesTagDictionary)
     }
 
     override func didReceiveMemoryWarning() {
