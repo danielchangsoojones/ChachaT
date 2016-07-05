@@ -55,6 +55,28 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func setTagsInTagDictionary() {
+        let query = Tag.query()
+        if let currentUser = User.currentUser() {
+            if let objectId = currentUser.objectId {
+                query?.whereKey("createdBy", equalTo: objectId)
+                query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+                    if error == nil {
+                        if let tags = objects as? [Tag] {
+                            for tag in tags {
+                                self.tagDictionary[tag.title] = .Generic
+                            }
+                            self.loadData()
+                        }
+                    } else {
+                        print(error)
+                    }
+                })
+            }
+        }
+        
+    }
+    
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
         tagChoicesView.enableRemoveButton = true

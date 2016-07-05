@@ -92,10 +92,14 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTagsInTagDictionary()
-        setTagsFromDictionary()
-        
+        loadData()
         tagChoicesView.alignment = .Center
         // Do any additional setup after loading the view.
+    }
+    
+    func loadData() {
+        print(tagDictionary)
+        setTagsFromDictionary()
     }
     
     //move to actual filtering page
