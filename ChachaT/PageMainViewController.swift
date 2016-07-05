@@ -15,16 +15,16 @@ class PageMainViewController: PagesController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let backgroundAnimationViewController = storyboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let backgroundAnimationViewController = mainStoryboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
         backgroundAnimationViewController.pageMainViewControllerDelegate = self
-        let cardDetailViewController = storyboard.instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
-        cardDetailViewController.questionDetailState = .ProfileViewOnlyMode
-        self.add([backgroundAnimationViewController, cardDetailViewController])
+        let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileIndexViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+        self.add([backgroundAnimationViewController, profileIndexViewController])
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
-        setChachaNavigationLogo()
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
+//        setChachaNavigationLogo()
         
         // Do any additional setup after loading the view.
     }

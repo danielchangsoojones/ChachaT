@@ -194,6 +194,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				9288194D1D2BECC8000A8E04 /* Navigation/PageView Controllers */,
 				928819441D286C70000A8E04 /* Profile */,
 				92B87DA41D15F1E300D3535C /* Question */,
 				9273B7991CFF491D0001A608 /* Filtering */,
@@ -219,8 +220,6 @@
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
-				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
-				92B87DA81D173C7600D3535C /* OverlayAnonymousFlowViewController.swift */,
 			);
 			name = Tinder;
 			sourceTree = "<group>";
@@ -316,6 +315,15 @@
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
 			);
 			name = Profile;
+			sourceTree = "<group>";
+		};
+		9288194D1D2BECC8000A8E04 /* Navigation/PageView Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
+				92B87DA81D173C7600D3535C /* OverlayAnonymousFlowViewController.swift */,
+			);
+			name = "Navigation/PageView Controllers";
 			sourceTree = "<group>";
 		};
 		928A65B91D0606FA0021C75C /* QuestionOnboarding */ = {
