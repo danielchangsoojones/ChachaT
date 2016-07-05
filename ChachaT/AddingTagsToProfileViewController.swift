@@ -9,6 +9,7 @@
 import UIKit
 import TagListView
 import Parse
+import SCLAlertView
 
 class AddingTagsToProfileViewController: FilterTagViewController {
     
@@ -172,12 +173,14 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
     func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool) {
         if sender.tag == 1 {
             //we have chosen/removed something from the ChosenTagView
-            let tagAttribute = tagDictionary[title]!
+            if let tagAttribute = tagDictionary[title] {
             switch tagAttribute {
             case .Generic:
                 if !genericTagIsSpecial(title) && tagPressed {
                     //we are dealing with a normal generic tag that was pressed
                     print("hi")
+                    createAlertTextFieldPopUp(title)
+                    
                 }
             //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
@@ -188,8 +191,16 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
             case .SpecialtyRangeSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
                 createAgeRangeSliderView()
+                }
             }
         }
+    }
+    
+    func createAlertTextFieldPopUp(text: String) {
+        let alert = SCLAlertView()
+        let textField = alert.addTextField()
+        textField.text = text
+        alert.showEdit("Edit The Tag", subTitle: "")
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
