@@ -179,18 +179,15 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         })
         if(filtered.count == 0){
             searchActive = false
-        } else {
-            searchActive = true
-            for tag in filtered {
-                tagChoicesView.addTag(tag)
-            }
-        }
-        if filtered.isEmpty {
             createSpecialtyTagEnviroment(false, categoryTitleText: "Create A New Tag?")
             createdTag = tagChoicesView.addTag(searchText)
             tagChoicesView.hidden = false
             theDoneSpecialtyButton.setTitle(createTagButtonText, forState: .Normal)
         } else {
+            searchActive = true
+            for tag in filtered {
+                tagChoicesView.addTag(tag)
+            }
             createSpecialtyTagEnviroment(true, categoryTitleText: nil)
         }
     }

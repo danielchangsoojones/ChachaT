@@ -68,25 +68,6 @@
                                         <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
-                                    <view tag="1" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
-                                        <rect key="frame" x="179" y="101" width="242" height="24"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <userDefinedRuntimeAttributes>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                <real key="value" value="9"/>
-                                            </userDefinedRuntimeAttribute>
-                                            <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
-                                            <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                <real key="value" value="6"/>
-                                            </userDefinedRuntimeAttribute>
-                                        </userDefinedRuntimeAttributes>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="fSZ-o2-TeW" firstAttribute="centerY" secondItem="egt-Ig-axq" secondAttribute="centerY" id="3WE-vv-pA3"/>
@@ -94,6 +75,25 @@
                                     <constraint firstItem="n6T-Fz-CxS" firstAttribute="centerX" secondItem="egt-Ig-axq" secondAttribute="centerX" id="UiS-f9-WsN"/>
                                     <constraint firstItem="fSZ-o2-TeW" firstAttribute="centerX" secondItem="egt-Ig-axq" secondAttribute="centerX" id="Ygz-aP-hyd"/>
                                 </constraints>
+                            </view>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="0.0" y="187" width="600" height="413"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
+                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
+                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
+                                        <real key="value" value="9"/>
+                                    </userDefinedRuntimeAttribute>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
+                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
+                                        <real key="value" value="6"/>
+                                    </userDefinedRuntimeAttribute>
+                                </userDefinedRuntimeAttributes>
                             </view>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
                                 <rect key="frame" x="0.0" y="108" width="600" height="79"/>
@@ -195,9 +195,12 @@
                         <constraints>
                             <constraint firstItem="34F-hU-9oS" firstAttribute="centerY" secondItem="qcq-BR-zCX" secondAttribute="centerY" id="2mX-BX-vpe"/>
                             <constraint firstItem="hfh-eM-SNs" firstAttribute="top" secondItem="in9-u2-WDu" secondAttribute="bottom" id="E8f-SK-i7h"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="top" secondItem="egt-Ig-axq" secondAttribute="top" id="FSG-Nf-qDH"/>
                             <constraint firstItem="egt-Ig-axq" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="HCS-0Y-HSL"/>
                             <constraint firstItem="lRp-GR-lFB" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="HVk-tz-WYd"/>
                             <constraint firstItem="egt-Ig-axq" firstAttribute="top" secondItem="lRp-GR-lFB" secondAttribute="bottom" id="K0v-5o-hSp"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="leading" secondItem="egt-Ig-axq" secondAttribute="leading" id="TsA-nA-9EP"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="bottom" secondItem="egt-Ig-axq" secondAttribute="bottom" id="aA7-FX-yUl"/>
                             <constraint firstItem="Fr5-lD-rRN" firstAttribute="top" secondItem="egt-Ig-axq" secondAttribute="bottom" id="b9j-in-7rh"/>
                             <constraint firstAttribute="trailing" secondItem="lRp-GR-lFB" secondAttribute="trailing" id="eO9-nB-R99"/>
                             <constraint firstItem="lRp-GR-lFB" firstAttribute="top" secondItem="qcq-BR-zCX" secondAttribute="top" id="gnd-UR-NXa"/>
@@ -206,6 +209,7 @@
                             <constraint firstItem="34F-hU-9oS" firstAttribute="centerX" secondItem="qcq-BR-zCX" secondAttribute="centerX" id="osL-TT-jvf"/>
                             <constraint firstItem="lRp-GR-lFB" firstAttribute="top" secondItem="hfh-eM-SNs" secondAttribute="bottom" id="r0R-cz-WVy"/>
                             <constraint firstAttribute="trailing" secondItem="egt-Ig-axq" secondAttribute="trailing" id="rrR-J3-sOt"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="trailing" secondItem="egt-Ig-axq" secondAttribute="trailing" id="tOW-ze-pSj"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">
