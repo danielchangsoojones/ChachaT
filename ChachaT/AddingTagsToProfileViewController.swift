@@ -203,8 +203,6 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
         searchBar.showsCancelButton = true
-        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
-        theSpecialtyTagEnviromentHolderView?.delegate = self
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -236,6 +234,10 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             resetTagChoicesViewList()
         } else if(filtered.count == 0){
             //there is text, but it has no matches in the database
+            if !(theSpecialtyTagEnviromentHolderView?.theSpecialtyView is TagListView) {
+                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
+                theSpecialtyTagEnviromentHolderView?.delegate = self
+            }
             searchActive = false
             createSpecialtyTagEnviroment(false)
             theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
