@@ -55,12 +55,12 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
     @IBOutlet weak var theCategoryLabel: UILabel!
     @IBOutlet weak var theDoneSpecialtyButton: UIButton!
-    @IBOutlet weak var theSpecialtyTagEnviromentHolderView: UIView!
+    var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     @IBOutlet weak var theChosenTagHolderView: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
-    var theStackViewTagsButtons : StackViewTagButtons?
-    var theDistanceSliderView : DistanceSliderView?
-    var theAgeRangeSliderView : AgeDoubleRangeSliderView?
+//    var theStackViewTagsButtons : StackViewTagButtons?
+//    var theDistanceSliderView : DistanceSliderView?
+//    var theAgeRangeSliderView : AgeDoubleRangeSliderView?
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
@@ -77,23 +77,16 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     }
     
     @IBAction func doneSpecialtyButtonPressed(sender: UIButton) {
+        if let theSpecialtyTagEnviromentHolderView = theSpecialtyTagEnviromentHolderView {
+            theSpecialtyTagEnviromentHolderView.theSpecialtyView?.removeFromSuperview()
+        }
         createSpecialtyTagEnviroment(true, categoryTitleText: nil)
-        if let theStackViewTagsButtons = theStackViewTagsButtons {
-            theStackViewTagsButtons.removeFromSuperview()
-        }
-        if let theDistanceSliderView = theDistanceSliderView {
-            theDistanceSliderView.removeFromSuperview()
-        }
-        if let theAgeRangeSliderView = theAgeRangeSliderView {
-            theAgeRangeSliderView.removeFromSuperview()
-        }
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setTagsInTagDictionary()
         loadData()
-        self.view.addSubview(SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: SpecialtyTagEnviroments.DistanceSlider))
         tagChoicesView.alignment = .Center
         // Do any additional setup after loading the view.
     }
@@ -173,8 +166,14 @@ extension FilterTagViewController {
     
     func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool, categoryTitleText: String?) {
         tagChoicesView.hidden = !specialtyEnviromentHidden
-        for subview in theSpecialtyTagEnviromentHolderView.subviews {
-            subview.hidden = specialtyEnviromentHidden
+        if let theSpecialtyTagEnviromentHolderView = theSpecialtyTagEnviromentHolderView {
+            if !self.view.subviews.contains(theSpecialtyTagEnviromentHolderView) {
+                //checking if the holder view has been added to the view, because we need to add it, if it has not. 
+                self.view.addSubview(theSpecialtyTagEnviromentHolderView)
+            }
+            for subview in theSpecialtyTagEnviromentHolderView.subviews {
+                subview.hidden = specialtyEnviromentHidden
+            }
         }
         if let categoryTitleText = categoryTitleText {
             theCategoryLabel.text = categoryTitleText
@@ -224,17 +223,6 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
 
     func removeChoicesTag(tagTitle: String) {
         tagChoicesView.removeTag(tagTitle)
-    }
-    
-    func createStackViewTagButtons(filterCategory: String, addNoneButton: Bool) {
-        let stackView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: self)
-        stackView.delegate = self
-        self.theSpecialtyTagEnviromentHolderView.addSubview(stackView)
-        stackView.snp_makeConstraints { (make) in
-            make.centerY.equalTo(self.view)
-            make.centerX.equalTo(self.theSpecialtyTagEnviromentHolderView)
-        }
-        theStackViewTagsButtons = stackView
     }
     
     func doesChosenTagViewContain(tagTitle: String) -> Bool {

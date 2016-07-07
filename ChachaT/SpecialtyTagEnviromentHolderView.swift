@@ -47,10 +47,17 @@ class SpecialtyTagEnviromentHolderView: UIView {
         case .AgeRangeSlider:
             theSpecialtyView = AgeDoubleRangeSliderView()
         case .StackViewButtons:
+            //had to pass this one via createStackViewButtons function because I need to somehow pass a delegate and other parameters
             break
         case .CreateNewTag:
             break
         }
+        createStackView()
+    }
+    
+    init(filterCategory: String, addNoneButton: Bool, stackViewButtonDelegate: StackViewTagButtonsDelegate) {
+        super.init(frame: CGRectMake(0, 0, 200, 200))
+        self.theSpecialtyView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: stackViewButtonDelegate)
         createStackView()
     }
     
@@ -71,7 +78,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
         if let theSpecialtyView = theSpecialtyView {
             theStackView.addArrangedSubview(theSpecialtyView)
             theSpecialtyView.snp_makeConstraints(closure: { (make) in
-                make.width.equalTo(40)
+                make.leading.trailing.equalTo(theStackView)
                 make.height.equalTo(30)
             })
         }
@@ -85,4 +92,5 @@ class SpecialtyTagEnviromentHolderView: UIView {
         theDistanceSliderView.theDistanceSlider.setValue(50.0, animated: false)
         theSpecialtyView = theDistanceSliderView
     }
+    
 }

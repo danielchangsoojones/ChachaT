@@ -143,8 +143,8 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
     }
     
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {
+        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self)
         createSpecialtyTagEnviroment(false, categoryTitleText: categoryTitleText)
-        createStackViewTagButtons(categoryTitleText, addNoneButton: true)
     }
     
     //creates the special buttons as well as checks if the generic tag is a special one
@@ -180,17 +180,16 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                     //we are dealing with a normal generic tag that was pressed
                     print("hi")
                     createAlertTextFieldPopUp(title)
-                    
                 }
             //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
                 createStackViewTagButtonsAndSpecialtyEnviroment(title)
             case .SpecialtySingleSlider:
+                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-//                createDistanceSliderView()
             case .SpecialtyRangeSlider:
+                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-//                createAgeRangeSliderView()
                 }
             }
         }
