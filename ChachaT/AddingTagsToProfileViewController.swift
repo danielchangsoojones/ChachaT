@@ -114,6 +114,7 @@ extension AddingTagsToProfileViewController {
     
     override func addToProfileTagArray(title: String) {
         addToProfileTagArray.append(Tag(title: title))
+        tagDictionary[title] = .Generic
         resetTagChoicesViewList()
     }
 }
