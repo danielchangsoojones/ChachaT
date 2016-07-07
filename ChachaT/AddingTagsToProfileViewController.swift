@@ -243,7 +243,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             createSpecialtyTagEnviroment(false)
             createdTag = tagChoicesView.addTag(searchText)
             tagChoicesView.hidden = false
-            theDoneSpecialtyButton.setTitle(createTagButtonText, forState: .Normal)
+            theSpecialtyTagEnviromentHolderView?.theDoneButton.setTitle(createTagButtonText, forState: .Normal)
         } else {
             searchActive = true
             for tag in filtered {

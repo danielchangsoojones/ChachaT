@@ -53,14 +53,9 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var tagChoicesView: TagListView!
     @IBOutlet weak var tagChosenView: TagListView!
     @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
-    @IBOutlet weak var theCategoryLabel: UILabel!
-    @IBOutlet weak var theDoneSpecialtyButton: UIButton!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     @IBOutlet weak var theChosenTagHolderView: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
-//    var theStackViewTagsButtons : StackViewTagButtons?
-//    var theDistanceSliderView : DistanceSliderView?
-//    var theAgeRangeSliderView : AgeDoubleRangeSliderView?
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()

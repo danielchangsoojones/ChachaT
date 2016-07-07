@@ -40,6 +40,7 @@
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
 		9288194C1D2BDCFC000A8E04 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288194B1D2BDCFC000A8E04 /* Tag.swift */; };
 		928819571D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */; };
+		9288195B1D2EA278000A8E04 /* TagListViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288195A1D2EA278000A8E04 /* TagListViewExtension.swift */; };
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */; };
 		928A65BB1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */; };
@@ -105,6 +106,7 @@
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		9288194B1D2BDCFC000A8E04 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyTagEnviromentHolderView.swift; sourceTree = "<group>"; };
+		9288195A1D2EA278000A8E04 /* TagListViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListViewExtension.swift; sourceTree = "<group>"; };
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		928A65B71D06035E0021C75C /* QuestionOnboardingViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingViewController.swift; sourceTree = "<group>"; };
 		928A65BA1D06072E0021C75C /* QuestionOnboardingTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionOnboardingTableViewCell.swift; sourceTree = "<group>"; };
@@ -291,7 +293,7 @@
 		9273B7991CFF491D0001A608 /* Filtering */ = {
 			isa = PBXGroup;
 			children = (
-				928819391D1AE484000A8E04 /* Xib Files */,
+				928819391D1AE484000A8E04 /* Subview Files */,
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				9273B79C1CFF4F110001A608 /* FilterViewController.swift */,
 				928819351D18E78B000A8E04 /* FilterTagViewController.swift */,
@@ -299,15 +301,16 @@
 			name = Filtering;
 			sourceTree = "<group>";
 		};
-		928819391D1AE484000A8E04 /* Xib Files */ = {
+		928819391D1AE484000A8E04 /* Subview Files */ = {
 			isa = PBXGroup;
 			children = (
 				9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */,
 				9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */,
 				928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */,
 				928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */,
+				9288195A1D2EA278000A8E04 /* TagListViewExtension.swift */,
 			);
-			name = "Xib Files";
+			name = "Subview Files";
 			sourceTree = "<group>";
 		};
 		928819441D286C70000A8E04 /* Profile */ = {
@@ -561,6 +564,7 @@
 				92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
+				9288195B1D2EA278000A8E04 /* TagListViewExtension.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
