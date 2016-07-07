@@ -170,6 +170,13 @@ extension FilterTagViewController {
             if !self.view.subviews.contains(theSpecialtyTagEnviromentHolderView) {
                 //checking if the holder view has been added to the view, because we need to add it, if it has not. 
                 self.view.addSubview(theSpecialtyTagEnviromentHolderView)
+                theSpecialtyTagEnviromentHolderView.snp_makeConstraints(closure: { (make) in
+                    let leadingTrailingOffset : CGFloat = 20
+                    make.leading.equalTo(self.view).offset(leadingTrailingOffset)
+                    make.trailing.equalTo(self.view).offset(-leadingTrailingOffset)
+                    make.top.equalTo(theChosenTagHolderView.snp_bottom)
+                    make.bottom.equalTo(self.view)
+                })
             }
             for subview in theSpecialtyTagEnviromentHolderView.subviews {
                 subview.hidden = specialtyEnviromentHidden
