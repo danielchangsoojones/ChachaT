@@ -122,7 +122,7 @@ extension AddingTagsToProfileViewController {
 extension AddingTagsToProfileViewController: TagListViewDelegate {
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
         sender.removeTagView(tagView)
-        tagAttributeActions(title, sender: sender, tagPressed: false)
+        tagAttributeActions(title, sender: sender, tagPressed: false, tagView: tagView)
         if sender.tag == 2 {
             //the remove button in theChosenTagView was pressed
             changeTagListViewWidth(tagView, extend: false)
@@ -160,7 +160,7 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         return false
     }
     
-    func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool) {
+    func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool, tagView: TagView) {
         if sender.tag == 1 {
             //we have chosen/removed something from the ChosenTagView
             if let tagAttribute = tagDictionary[title] {
@@ -168,8 +168,7 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
             case .Generic:
                 if !genericTagIsSpecial(title) && tagPressed {
                     //we are dealing with a normal generic tag that was pressed
-                    print("hi")
-                    createAlertTextFieldPopUp(title)
+                    createAlertTextFieldPopUp(title, tagView: tagView)
                 }
             //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
@@ -186,16 +185,19 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         }
     }
     
-    func createAlertTextFieldPopUp(text: String) {
+    func createAlertTextFieldPopUp(text: String, tagView: TagView) {
         let alert = SCLAlertView()
         let textField = alert.addTextField()
         textField.text = text
-        alert.showEdit("Edit The Tag", subTitle: "")
+        alert.addButton("Done") { 
+            tagView.setTitle(textField.text, forState: .Normal)
+        }
+        alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
-        tagAttributeActions(title, sender: sender, tagPressed: true)
+        tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
     }
 }
 
