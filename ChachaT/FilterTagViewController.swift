@@ -93,7 +93,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         super.viewDidLoad()
         setTagsInTagDictionary()
         loadData()
-        self.view.addSubview(SpecialtyTagEnviromentHolderView(specialtyView: DistanceSliderView()))
+        self.view.addSubview(SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: SpecialtyTagEnviroments.DistanceSlider))
         tagChoicesView.alignment = .Center
         // Do any additional setup after loading the view.
     }

@@ -14,8 +14,8 @@ class AgeDoubleRangeSliderView: UIView {
     let theAgeRangeLabel = UILabel()
     let theAgeRangeSlider = TTRangeSlider()
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
+    init() {
+        super.init(frame: CGRectMake(0, 0, 200, 200))
         createAgeRangeSlider()
     }
     

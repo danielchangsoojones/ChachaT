@@ -187,10 +187,10 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 createStackViewTagButtonsAndSpecialtyEnviroment(title)
             case .SpecialtySingleSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createDistanceSliderView()
+//                createDistanceSliderView()
             case .SpecialtyRangeSlider:
                 createSpecialtyTagEnviroment(false, categoryTitleText: title)
-                createAgeRangeSliderView()
+//                createAgeRangeSliderView()
                 }
             }
         }

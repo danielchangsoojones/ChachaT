@@ -9,20 +9,29 @@
 import UIKit
 import SnapKit
 
+public enum SpecialtyTagEnviroments {
+    case DistanceSlider
+    case AgeRangeSlider
+    case StackViewButtons
+    case CreateNewTag
+}
+
 class SpecialtyTagEnviromentHolderView: UIView {
     
     var theSpecialtyView: UIView?
     let theDoneButton: UIButton = {
+        $0.setTitleColor(UIColor.blueColor(), forState: .Normal)
         $0.setTitle("Done", forState: .Normal)
         return $0
     }(UIButton())
     let theTitleLabel: UILabel = {
+        $0.textColor = UIColor.blackColor()
         return $0
     }(UILabel())
     let theStackView: UIStackView = {
         $0.alignment = .Center
         $0.axis = .Vertical
-        $0.distribution = .EqualCentering
+        $0.distribution = .EqualSpacing
         return $0
     }(UIStackView())
     
@@ -30,10 +39,18 @@ class SpecialtyTagEnviromentHolderView: UIView {
         print("done button tapped")
     }
     
-    init(specialtyView: UIView) {
+    init(specialtyTagEnviroment: SpecialtyTagEnviroments) {
         super.init(frame: CGRectMake(0, 0, 200, 200))
-        self.theSpecialtyView = specialtyView
-        self.backgroundColor = UIColor.redColor()
+        switch specialtyTagEnviroment {
+        case .DistanceSlider:
+            createDistanceSliderView()
+        case .AgeRangeSlider:
+            theSpecialtyView = AgeDoubleRangeSliderView()
+        case .StackViewButtons:
+            break
+        case .CreateNewTag:
+            break
+        }
         createStackView()
     }
     
@@ -53,27 +70,19 @@ class SpecialtyTagEnviromentHolderView: UIView {
         theStackView.addArrangedSubview(theTitleLabel)
         if let theSpecialtyView = theSpecialtyView {
             theStackView.addArrangedSubview(theSpecialtyView)
+            theSpecialtyView.snp_makeConstraints(closure: { (make) in
+                make.width.equalTo(40)
+                make.height.equalTo(30)
+            })
         }
         theStackView.addArrangedSubview(theDoneButton)
         theDoneButton.addTarget(self, action: #selector(doneButtonTapped), forControlEvents: .TouchUpInside)
     }
     
     func createDistanceSliderView() {
-        //the frame gets overrided by the snp_constraints
         let theDistanceSliderView = DistanceSliderView()
         //had to set the initial value for the slider here because not loading when I put in the slider view class
         theDistanceSliderView.theDistanceSlider.setValue(50.0, animated: false)
+        theSpecialtyView = theDistanceSliderView
     }
-    
-    func createAgeRangeSliderView() {
-        theAgeRangeSliderView = AgeDoubleRangeSliderView(frame: CGRectMake(0, 0, 200, 200))
-        theSpecialtyTagEnviromentHolderView.addSubview(theAgeRangeSliderView!)
-        theAgeRangeSliderView?.snp_makeConstraints(closure: { (make) in
-            make.leading.equalTo(theSpecialtyTagEnviromentHolderView).offset(8)
-            make.trailing.equalTo(theSpecialtyTagEnviromentHolderView).offset(-8)
-            make.top.equalTo(theCategoryLabel).offset(100)
-            make.height.equalTo(30)
-        })
-    }
-
 }
