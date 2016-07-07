@@ -80,7 +80,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         if let theSpecialtyTagEnviromentHolderView = theSpecialtyTagEnviromentHolderView {
             theSpecialtyTagEnviromentHolderView.theSpecialtyView?.removeFromSuperview()
         }
-        createSpecialtyTagEnviroment(true, categoryTitleText: nil)
+        createSpecialtyTagEnviroment(true)
     }
     
     override func viewDidLoad() {
@@ -164,7 +164,7 @@ extension FilterTagViewController {
         return false
     }
     
-    func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool, categoryTitleText: String?) {
+    func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool) {
         tagChoicesView.hidden = !specialtyEnviromentHidden
         if let theSpecialtyTagEnviromentHolderView = theSpecialtyTagEnviromentHolderView {
             if !self.view.subviews.contains(theSpecialtyTagEnviromentHolderView) {
@@ -174,9 +174,6 @@ extension FilterTagViewController {
             for subview in theSpecialtyTagEnviromentHolderView.subviews {
                 subview.hidden = specialtyEnviromentHidden
             }
-        }
-        if let categoryTitleText = categoryTitleText {
-            theCategoryLabel.text = categoryTitleText
         }
     }
     
@@ -227,6 +224,12 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
     
     func doesChosenTagViewContain(tagTitle: String) -> Bool {
         return tagExistsInChosenTagListView(tagChosenView, title: tagTitle)
+    }
+}
+
+extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
+    func unhideChoicesTagListView() {
+        createSpecialtyTagEnviroment(true)
     }
 }
 

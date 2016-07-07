@@ -144,7 +144,7 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
     
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {
         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self)
-        createSpecialtyTagEnviroment(false, categoryTitleText: categoryTitleText)
+        createSpecialtyTagEnviroment(false)
     }
     
     //creates the special buttons as well as checks if the generic tag is a special one
@@ -186,12 +186,13 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 createStackViewTagButtonsAndSpecialtyEnviroment(title)
             case .SpecialtySingleSlider:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createSpecialtyTagEnviroment(false)
             case .SpecialtyRangeSlider:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
-                createSpecialtyTagEnviroment(false, categoryTitleText: title)
+                createSpecialtyTagEnviroment(false)
                 }
             }
+            theSpecialtyTagEnviromentHolderView?.delegate = self
         }
     }
     
@@ -239,7 +240,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         })
         if(filtered.count == 0){
             searchActive = false
-            createSpecialtyTagEnviroment(false, categoryTitleText: "Create A New Tag?")
+            createSpecialtyTagEnviroment(false)
             createdTag = tagChoicesView.addTag(searchText)
             tagChoicesView.hidden = false
             theDoneSpecialtyButton.setTitle(createTagButtonText, forState: .Normal)
@@ -248,7 +249,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             for tag in filtered {
                 tagChoicesView.addTag(tag)
             }
-            createSpecialtyTagEnviroment(true, categoryTitleText: nil)
+            createSpecialtyTagEnviroment(true)
         }
     }
     

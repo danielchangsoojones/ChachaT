@@ -13,6 +13,7 @@ class DistanceSliderView: UIView {
     let theDistanceLabel = UILabel()
     let theDistanceSlider = UISlider()
     
+    
     init() {
         super.init(frame: CGRectMake(0, 0, 200, 200))
         createDistanceLabel()

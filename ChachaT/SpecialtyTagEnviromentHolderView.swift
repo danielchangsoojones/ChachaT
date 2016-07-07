@@ -16,6 +16,10 @@ public enum SpecialtyTagEnviroments {
     case CreateNewTag
 }
 
+protocol SpecialtyTagEnviromentHolderViewDelegate {
+    func unhideChoicesTagListView()
+}
+
 class SpecialtyTagEnviromentHolderView: UIView {
     
     var theSpecialtyView: UIView?
@@ -35,8 +39,13 @@ class SpecialtyTagEnviromentHolderView: UIView {
         return $0
     }(UIStackView())
     
+    var delegate: SpecialtyTagEnviromentHolderViewDelegate?
+    
     func doneButtonTapped(sender: UIButton!) {
-        print("done button tapped")
+        if let theSpecialtyView = theSpecialtyView {
+            theSpecialtyView.removeFromSuperview()
+        }
+        delegate?.unhideChoicesTagListView()
     }
     
     init(specialtyTagEnviroment: SpecialtyTagEnviroments) {
@@ -44,10 +53,12 @@ class SpecialtyTagEnviromentHolderView: UIView {
         switch specialtyTagEnviroment {
         case .DistanceSlider:
             createDistanceSliderView()
+            self.theTitleLabel.text = "Distance Radius"
         case .AgeRangeSlider:
             theSpecialtyView = AgeDoubleRangeSliderView()
+            self.theTitleLabel.text = "Age Range"
         case .StackViewButtons:
-            //had to pass this one via createStackViewButtons function because I need to somehow pass a delegate and other parameters
+            //had to pass this one in another initializer, since I want there to be some parameters passed through
             break
         case .CreateNewTag:
             break
@@ -58,6 +69,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
     init(filterCategory: String, addNoneButton: Bool, stackViewButtonDelegate: StackViewTagButtonsDelegate) {
         super.init(frame: CGRectMake(0, 0, 200, 200))
         self.theSpecialtyView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: stackViewButtonDelegate)
+        self.theTitleLabel.text = filterCategory
         createStackView()
     }
     
