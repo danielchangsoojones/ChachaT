@@ -55,21 +55,6 @@
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
                                 <rect key="frame" x="0.0" y="187" width="600" height="413"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <userDefinedRuntimeAttributes>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                        <real key="value" value="9"/>
-                                    </userDefinedRuntimeAttribute>
-                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="NO"/>
-                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                        <real key="value" value="6"/>
-                                    </userDefinedRuntimeAttribute>
-                                </userDefinedRuntimeAttributes>
                             </view>
                             <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
                                 <rect key="frame" x="0.0" y="64" width="600" height="44"/>
@@ -97,21 +82,6 @@
                                                     <constraint firstAttribute="width" id="5AO-FB-Xpb"/>
                                                     <constraint firstAttribute="height" constant="24" id="83c-M0-ifX"/>
                                                 </constraints>
-                                                <userDefinedRuntimeAttributes>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="tagBackgroundColor">
-                                                        <color key="value" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.66000000000000003" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="color" keyPath="textColor">
-                                                        <color key="value" red="0.96470588239999999" green="0.97254901959999995" blue="0.98431372549999996" alpha="1" colorSpace="calibratedRGB"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="cornerRadius">
-                                                        <real key="value" value="9"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                    <userDefinedRuntimeAttribute type="boolean" keyPath="enableRemoveButton" value="YES"/>
-                                                    <userDefinedRuntimeAttribute type="number" keyPath="paddingY">
-                                                        <real key="value" value="6"/>
-                                                    </userDefinedRuntimeAttribute>
-                                                </userDefinedRuntimeAttributes>
                                             </view>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="QqA-ji-qaT">
                                                 <rect key="frame" x="34" y="25" width="96" height="30"/>
@@ -140,6 +110,7 @@
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OmA-RI-P4C"/>
                                             <constraint firstItem="QqA-ji-qaT" firstAttribute="leading" secondItem="2iB-AG-Xp8" secondAttribute="trailing" constant="26" id="Vet-9C-Ytb"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" constant="80" id="vyk-wC-DuZ"/>
+                                            <constraint firstAttribute="height" constant="79" id="xur-8t-6cH"/>
                                             <constraint firstItem="QqA-ji-qaT" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="zcj-3Z-BbE"/>
                                         </constraints>
                                         <variation key="default">
@@ -152,7 +123,7 @@
                                     </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstAttribute="height" constant="79" id="0Ik-rf-686"/>
+                                    <constraint firstAttribute="height" constant="79" id="Cdh-71-GBJ"/>
                                     <constraint firstAttribute="trailing" secondItem="KUC-4Y-beP" secondAttribute="trailing" id="EPd-45-nTb"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="leading" secondItem="lRp-GR-lFB" secondAttribute="leading" id="KjU-gG-owz"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="height" secondItem="lRp-GR-lFB" secondAttribute="height" id="PJo-VP-gaJ"/>
@@ -162,6 +133,7 @@
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">
+                                        <exclude reference="PJo-VP-gaJ"/>
                                         <exclude reference="PO7-hQ-6gn"/>
                                     </mask>
                                 </variation>

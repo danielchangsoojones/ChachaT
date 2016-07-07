@@ -20,4 +20,9 @@ extension TagListView {
         self.textColor = PeriwinkleGray
         self.alignment = .Center
     }
+    
+    func addChosenTagListViewAttributes() {
+        addChoicesTagListViewAttributes()
+        self.enableRemoveButton = true
+    }
 }

@@ -81,9 +81,15 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setTagsInTagDictionary()
+        addTagListViewAttributes()
         loadData()
-        tagChoicesView.addChoicesTagListViewAttributes()
         // Do any additional setup after loading the view.
+    }
+    
+    func addTagListViewAttributes() {
+        //did this in code, rather than total storyboard because it has a lot of redundancy
+        tagChoicesView.addChoicesTagListViewAttributes()
+        tagChosenView.addChosenTagListViewAttributes()
     }
     
     func loadData() {
