@@ -59,7 +59,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     var normalTags = [String]()
     var tagDictionary = [String : TagAttributes]()
-    let createTagButtonText = "Create"
+
     
     //search Variables
     var searchActive : Bool = false
@@ -69,13 +69,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         case SpecialtyButtons
         case SpecialtySingleSlider
         case SpecialtyRangeSlider
-    }
-    
-    @IBAction func doneSpecialtyButtonPressed(sender: UIButton) {
-        if let theSpecialtyTagEnviromentHolderView = theSpecialtyTagEnviromentHolderView {
-            theSpecialtyTagEnviromentHolderView.theSpecialtyView?.removeFromSuperview()
-        }
-        createSpecialtyTagEnviroment(true)
     }
     
     override func viewDidLoad() {
@@ -237,6 +230,9 @@ extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
     func unhideChoicesTagListView() {
         createSpecialtyTagEnviroment(true)
     }
+    
+    //need to override in subclass method
+    func addToProfileTagArray(title: String) {}
 }
 
 

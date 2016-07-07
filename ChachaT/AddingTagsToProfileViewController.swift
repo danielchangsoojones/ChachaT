@@ -95,21 +95,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 //overrided super class methods
 extension AddingTagsToProfileViewController {
     
-    //overriding this because we want to have a special case for creating a new tag within user editing mode
-    override func doneSpecialtyButtonPressed(sender: UIButton) {
-        super.doneSpecialtyButtonPressed(sender)
-        if sender.titleLabel?.text == createTagButtonText {
-            //we re-create the tagView with the original tags and then the created tag is already kept in
-            setTagsFromDictionary()
-            if let createdTag = createdTag {
-                if let title = createdTag.currentTitle {
-                    let tag = Tag(title: title)
-                    addToProfileTagArray.append(tag)
-                }
-            }
-        }
-    }
-    
     //overriding this method because I want to not only see if tag exists with chosen tags
     //we also want to see if tag is in the already saved Parse tags because then the button
     //should be highlighted.
@@ -127,6 +112,10 @@ extension AddingTagsToProfileViewController {
         }
     }
     
+    override func addToProfileTagArray(title: String) {
+        addToProfileTagArray.append(Tag(title: title))
+        resetTagChoicesViewList()
+    }
 }
 
 extension AddingTagsToProfileViewController: TagListViewDelegate {
@@ -213,6 +202,8 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
         searchBar.showsCancelButton = true
+        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
+        theSpecialtyTagEnviromentHolderView?.delegate = self
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -222,6 +213,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false
         searchBar.showsCancelButton = false
+        resetTagChoicesViewList()
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
@@ -238,13 +230,17 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if(filtered.count == 0){
+        if searchText == "" {
+            //no text, so we want to stay on the tagChoicesView
+            resetTagChoicesViewList()
+        } else if(filtered.count == 0){
+            //there is text, but it has no matches in the database
             searchActive = false
             createSpecialtyTagEnviroment(false)
-            createdTag = tagChoicesView.addTag(searchText)
-            tagChoicesView.hidden = false
-            theSpecialtyTagEnviromentHolderView?.theDoneButton.setTitle(createTagButtonText, forState: .Normal)
+            theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
+            theSpecialtyTagEnviromentHolderView?.setButtonText("Create")
         } else {
+            //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true
             for tag in filtered {
                 tagChoicesView.addTag(tag)
@@ -259,5 +255,13 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             dataArray.append(tagName)
         }
         return dataArray
+    }
+    
+    func resetTagChoicesViewList() {
+        for (tagTitle, _) in tagDictionary {
+            tagChoicesView.addTag(tagTitle)
+        }
+        createSpecialtyTagEnviroment(true)
+        theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }

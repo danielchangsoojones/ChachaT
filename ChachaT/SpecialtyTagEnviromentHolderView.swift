@@ -8,6 +8,7 @@
 
 import UIKit
 import SnapKit
+import TagListView
 
 public enum SpecialtyTagEnviroments {
     case DistanceSlider
@@ -18,6 +19,7 @@ public enum SpecialtyTagEnviroments {
 
 protocol SpecialtyTagEnviromentHolderViewDelegate {
     func unhideChoicesTagListView()
+    func addToProfileTagArray(title: String)
 }
 
 class SpecialtyTagEnviromentHolderView: UIView {
@@ -38,12 +40,23 @@ class SpecialtyTagEnviromentHolderView: UIView {
         $0.distribution = .EqualSpacing
         return $0
     }(UIStackView())
+    let tagListView: TagListView = {
+        $0.addChosenTagListViewAttributes()
+        return $0
+    }(TagListView())
     
+    var createTagButtonText: String?
+    var createdTag: TagView?
     var delegate: SpecialtyTagEnviromentHolderViewDelegate?
     
     func doneButtonTapped(sender: UIButton!) {
-        if let theSpecialtyView = theSpecialtyView {
-            theSpecialtyView.removeFromSuperview()
+        if sender.titleLabel?.text == createTagButtonText {
+            //we re-create the tagView with the original tags and then the created tag is already kept in
+            if let createdTag = createdTag {
+                if let title = createdTag.currentTitle {
+                    delegate?.addToProfileTagArray(title)
+                }
+            }
         }
         self.removeFromSuperview()
         delegate?.unhideChoicesTagListView()
@@ -62,7 +75,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
             //had to pass this one in another initializer, since I want there to be some parameters passed through
             break
         case .CreateNewTag:
-            break
+            theSpecialtyView = tagListView
         }
         createStackView()
     }
@@ -99,11 +112,21 @@ class SpecialtyTagEnviromentHolderView: UIView {
         theDoneButton.addTarget(self, action: #selector(doneButtonTapped), forControlEvents: .TouchUpInside)
     }
     
+    func updateTagListView(searchText: String) {
+        tagListView.removeAllTags()
+        createdTag = tagListView.addTag(searchText)
+    }
+    
     func createDistanceSliderView() {
         let theDistanceSliderView = DistanceSliderView()
         //had to set the initial value for the slider here because not loading when I put in the slider view class
         theDistanceSliderView.theDistanceSlider.setValue(50.0, animated: false)
         theSpecialtyView = theDistanceSliderView
+    }
+    
+    func setButtonText(text: String) {
+        theDoneButton.setTitle(createTagButtonText, forState: .Normal)
+        createTagButtonText = text
     }
     
 }
