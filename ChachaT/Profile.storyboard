@@ -71,6 +71,19 @@
                                     </userDefinedRuntimeAttribute>
                                 </userDefinedRuntimeAttributes>
                             </view>
+                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mYP-fS-yh2" id="nK3-lC-h0h"/>
+                                </connections>
+                            </searchBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="34F-hU-9oS">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
                                 <rect key="frame" x="0.0" y="108" width="600" height="79"/>
                                 <subviews>
@@ -121,7 +134,6 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="leading" secondItem="KUC-4Y-beP" secondAttribute="leading" constant="8" id="1bh-0d-Ovl"/>
-                                            <constraint firstAttribute="height" constant="79" id="Emi-8t-vR8"/>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="FAj-rw-YGS"/>
                                             <constraint firstAttribute="trailing" secondItem="QqA-ji-qaT" secondAttribute="trailing" constant="4" id="J1b-nh-oJq"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="MvN-Wr-BUO"/>
@@ -143,6 +155,7 @@
                                     <constraint firstAttribute="height" constant="79" id="0Ik-rf-686"/>
                                     <constraint firstAttribute="trailing" secondItem="KUC-4Y-beP" secondAttribute="trailing" id="EPd-45-nTb"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="leading" secondItem="lRp-GR-lFB" secondAttribute="leading" id="KjU-gG-owz"/>
+                                    <constraint firstItem="KUC-4Y-beP" firstAttribute="height" secondItem="lRp-GR-lFB" secondAttribute="height" id="PJo-VP-gaJ"/>
                                     <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="PO7-hQ-6gn"/>
                                     <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="fxy-7m-HQM"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="top" secondItem="lRp-GR-lFB" secondAttribute="top" id="nXa-B2-gyZ"/>
@@ -153,19 +166,6 @@
                                     </mask>
                                 </variation>
                             </scrollView>
-                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="mYP-fS-yh2" id="nK3-lC-h0h"/>
-                                </connections>
-                            </searchBar>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="34F-hU-9oS">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
-                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>

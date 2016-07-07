@@ -9,8 +9,15 @@
 import Foundation
 import TagListView
 
+//TODO: I think a subclass makes more sense to do set the attributes of the tag and have it useable in the storyboard, but
+//I could not figure out how to subclass the taglistView because it has IBInspectable
+//attributes in the storyboar
 extension TagListView {
-    func createChoicesTagListView() {
-        self.tagBackgroundColor = UIColor.redColor()
+    func addChoicesTagListViewAttributes() {
+        self.tagBackgroundColor = ChachaTeal.colorWithAlphaComponent(0.66)
+        self.cornerRadius = 9
+        self.paddingY = 6
+        self.textColor = PeriwinkleGray
+        self.alignment = .Center
     }
 }

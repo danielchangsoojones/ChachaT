@@ -82,7 +82,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         super.viewDidLoad()
         setTagsInTagDictionary()
         loadData()
-        tagChoicesView.alignment = .Center
+        tagChoicesView.addChoicesTagListViewAttributes()
         // Do any additional setup after loading the view.
     }
     
