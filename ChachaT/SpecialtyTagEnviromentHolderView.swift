@@ -45,6 +45,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
         if let theSpecialtyView = theSpecialtyView {
             theSpecialtyView.removeFromSuperview()
         }
+        self.removeFromSuperview()
         delegate?.unhideChoicesTagListView()
     }
     
