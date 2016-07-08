@@ -58,6 +58,13 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         // Do any additional setup after loading the view.
     }
     
+    override func viewDidAppear(animated: Bool) {
+        //the alertview, the first time I clicked a tag, was not loading quickly. But, subsequent alerts were loading
+        //quickly, so I added this to already load a SCLAlertView, so then when a tag is hit, it loads quickly
+        //this actually seems to make it work. But, maybe it is just an illusion to me...
+        let _ = SCLAlertView()
+    }
+    
     override func setTagsInTagDictionary() {
         let query = Tag.query()
         if let currentUser = User.currentUser() {
