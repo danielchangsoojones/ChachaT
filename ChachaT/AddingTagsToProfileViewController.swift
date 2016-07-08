@@ -189,8 +189,13 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         let alert = SCLAlertView()
         let textField = alert.addTextField()
         textField.text = text
-        alert.addButton("Done") { 
-            tagView.setTitle(textField.text, forState: .Normal)
+        alert.addButton("Done") {
+            if let textFieldText = textField.text {
+                tagView.setTitle(textFieldText, forState: .Normal)
+                self.tagDictionary[textFieldText] = .Generic
+                self.tagDictionary.removeValueForKey(text)
+            }
+            self.tagChoicesView.layoutSubviews()
         }
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
