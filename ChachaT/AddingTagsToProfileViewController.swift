@@ -185,15 +185,21 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         }
     }
     
-    func createAlertTextFieldPopUp(text: String, tagView: TagView) {
+    func createAlertTextFieldPopUp(originalTagText: String, tagView: TagView) {
         let alert = SCLAlertView()
         let textField = alert.addTextField()
-        textField.text = text
+        textField.text = originalTagText
         alert.addButton("Done") {
-            if let textFieldText = textField.text {
-                tagView.setTitle(textFieldText, forState: .Normal)
-                self.tagDictionary[textFieldText] = .Generic
-                self.tagDictionary.removeValueForKey(text)
+            if let editedTagText = textField.text {
+                tagView.setTitle(editedTagText, forState: .Normal)
+                self.tagDictionary[editedTagText] = .Generic
+                self.tagDictionary.removeValueForKey(originalTagText)
+                //deleting the tag from addToProfileTagArray, so it doesn't save the original text to backend
+                self.addToProfileTagArray = self.addToProfileTagArray.filter({ (tag) -> Bool in
+                     return tag.title != originalTagText
+                })
+                self.addToProfileTagArray.append(Tag(title: editedTagText))
+                print(self.addToProfileTagArray)
             }
             self.tagChoicesView.layoutSubviews()
         }
