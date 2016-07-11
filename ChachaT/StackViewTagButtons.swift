@@ -19,17 +19,20 @@ class StackViewTagButtons: UIStackView {
     
     var delegate: StackViewTagButtonsDelegate?
     let noneButtonText = "None"
+    var pushOneButton = false
+    var buttonArray: [UIButton] = []
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         setStackViewProperties()
     }
     
-    init(filterCategory: String, addNoneButton: Bool, delegate: StackViewTagButtonsDelegate) {
+    init(filterCategory: String, addNoneButton: Bool, delegate: StackViewTagButtonsDelegate, pushOneButton: Bool) {
         super.init(frame: CGRectMake(0, 0, 200, 200))
         setStackViewProperties()
         self.delegate = delegate
         self.addButtonsToStackView(filterCategory, addNoneButton: addNoneButton)
+        self.pushOneButton = pushOneButton
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -67,6 +70,7 @@ class StackViewTagButtons: UIStackView {
                 $0.layer.cornerRadius = 10
                 return $0
             }(UIButton())
+            buttonArray.append(button)
             self.addArrangedSubview(button)
         }
     }
@@ -74,6 +78,7 @@ class StackViewTagButtons: UIStackView {
     func iterateThroughFilterNames(filterNamesArray: [FilterNames]) {
         for filterName in filterNamesArray {
             let button = createButton(filterName)
+            buttonArray.append(button)
             self.addArrangedSubview(button)
         }
     }
@@ -93,7 +98,11 @@ class StackViewTagButtons: UIStackView {
     
     func buttonTapped(sender: UIButton!) {
         let buttonHighlighted : Bool = (sender.backgroundColor == ChachaTeal)
-        changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true, changeChoicesTag: true)
+        if pushOneButton && !buttonHighlighted {
+            chooseOneButton(sender, buttonArray: buttonArray)
+        } else {
+            changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true, changeChoicesTag: true)
+        }
     }
     
     func changeButtonHighlight(buttonHighlighted: Bool, button: UIButton, changeChosenTags: Bool, changeChoicesTag: Bool) {
@@ -119,6 +128,19 @@ class StackViewTagButtons: UIStackView {
                         }
                     }
                 }
+            }
+        }
+    }
+    
+    //you can only push one button when inputing your characteristics
+    func chooseOneButton (pushedButton: UIButton, buttonArray: [UIButton]) {
+        for button in buttonArray {
+            if button == pushedButton {
+                //set the pushed button to highlighted
+                changeButtonHighlight(false, button: pushedButton, changeChosenTags: true, changeChoicesTag: true)
+            } else {
+                //set the non-pushed buttons all to unhighlighted
+                changeButtonHighlight(true, button: button, changeChosenTags: true, changeChoicesTag: true)
             }
         }
     }

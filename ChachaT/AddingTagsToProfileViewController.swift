@@ -139,8 +139,8 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         }
     }
     
-    func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String) {
-        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self)
+    func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool) {
+        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
         createSpecialtyTagEnviroment(false)
     }
     
@@ -150,15 +150,15 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
             if filterName.rawValue == tagTitle {
                 //we have a specialty generic tag
                 if FilterNames.genderAllValues.contains(filterName) {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Gender.rawValue)
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Gender.rawValue, pushOneButton: true)
                 } else if FilterNames.hairColorAllValues.contains(filterName) {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.HairColor.rawValue)
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.HairColor.rawValue, pushOneButton: true)
                 } else if FilterNames.sexualityAllValues.contains(filterName) {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Sexuality.rawValue)
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Sexuality.rawValue, pushOneButton: true)
                 } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.PoliticalAffiliation.rawValue)
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.PoliticalAffiliation.rawValue, pushOneButton: true)
                 } else if FilterNames.raceAllValues.contains(filterName) {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Race.rawValue)
+                    createStackViewTagButtonsAndSpecialtyEnviroment(SpecialtyTags.Race.rawValue, pushOneButton: true)
                 }
                 //FilterNames contains the tag, so it is a special tag and we return true
                 return true
@@ -179,7 +179,7 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
                 }
             //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
             case .SpecialtyButtons:
-                createStackViewTagButtonsAndSpecialtyEnviroment(title)
+                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
             case .SpecialtySingleSlider:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false)

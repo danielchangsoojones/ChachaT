@@ -80,9 +80,9 @@ class SpecialtyTagEnviromentHolderView: UIView {
         createStackView()
     }
     
-    init(filterCategory: String, addNoneButton: Bool, stackViewButtonDelegate: StackViewTagButtonsDelegate) {
+    init(filterCategory: String, addNoneButton: Bool, stackViewButtonDelegate: StackViewTagButtonsDelegate, pushOneButton: Bool) {
         super.init(frame: CGRectMake(0, 0, 200, 200))
-        self.theSpecialtyView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: stackViewButtonDelegate)
+        self.theSpecialtyView = StackViewTagButtons(filterCategory: filterCategory, addNoneButton: addNoneButton, delegate: stackViewButtonDelegate, pushOneButton: pushOneButton)
         self.theTitleLabel.text = filterCategory
         createStackView()
     }
