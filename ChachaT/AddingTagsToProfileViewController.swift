@@ -243,7 +243,6 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        print(allParseTags)
         var filtered:[Tag] = []
         tagChoicesView.removeAllTags()
         filtered = allParseTags.filter({ (tag) -> Bool in
@@ -275,19 +274,20 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     }
     
     //TODO; right now, my search is pulling down the entire tag table and then doing search, 
-    //very ineffecient, and in future, I will have to do server side cloud code.
+    //very ineffecient, and in future, I will have to do server side cloud code. 
+    //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
     func setDataArray() {
+        var alreadyContainsTagArray: [String] = []
         let query = PFQuery(className: "Tag")
         query.selectKeys(["title"])
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
                 for tag in tags {
-//                    for dataTags in dataArray where dataTags.title != tag.title {
-//                        //the dataArray does not already have a tag title like this yet,
-//                        //so, we need to add it to the array
-                    self.allParseTags.append(tag)
-                    print(self.allParseTags)
-//                    }
+                    if !alreadyContainsTagArray.contains(tag.title) {
+                        //our string array does not already contain the tag title, so we can add it to our searchable array
+                        alreadyContainsTagArray.append(tag.title)
+                        self.allParseTags.append(tag)
+                    }
                 }
             }
         }
