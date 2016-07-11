@@ -91,7 +91,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     //move to actual filtering page
     func setTagsFromDictionary() {
-        for (tagName, tagAttribute) in tagDictionary {
+        for (tagName, _) in tagDictionary {
             tagChoicesView.addTag(tagName)
         }
     }

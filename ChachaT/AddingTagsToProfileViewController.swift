@@ -20,7 +20,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var addToProfileTagArray : [Tag] = []
     var createdTag : TagView?
     var alreadySavedTags = false
-    var tagsFromParse: [Tag] = []
+    var currentUserTags: [Tag] = []
+    var allParseTags: [Tag] = []
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -55,6 +56,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         changeTheChoicesTagView()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
+        setDataArray()
         // Do any additional setup after loading the view.
     }
     
@@ -73,7 +75,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                     if error == nil {
                         if let tags = objects as? [Tag] {
                             //saving tags to this array, so I can delete any tags the user ends up deleting
-                            self.tagsFromParse = tags
+                            self.currentUserTags = tags
                             for tag in tags {
                                 self.tagDictionary[tag.title] = .Generic
                                 
@@ -112,7 +114,7 @@ extension AddingTagsToProfileViewController {
     
     override func removeChoicesTag(tagTitle: String) {
         super.removeChoicesTag(tagTitle)
-        for tag in tagsFromParse where tag.title == tagTitle {
+        for tag in currentUserTags where tag.title == tagTitle {
             //TODO: Not sure if I should change this to delete with block since, I should probably
             //check if the tag was really deleted before the user leaves the page
             tag.deleteInBackground()
@@ -241,11 +243,11 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        let data = setDataArray()
-        var filtered:[String] = []
+        print(allParseTags)
+        var filtered:[Tag] = []
         tagChoicesView.removeAllTags()
-        filtered = data.filter({ (text) -> Bool in
-            let tmp: NSString = text
+        filtered = allParseTags.filter({ (tag) -> Bool in
+            let tmp: NSString = tag.title
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
@@ -266,18 +268,29 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true
             for tag in filtered {
-                tagChoicesView.addTag(tag)
+                tagChoicesView.addTag(tag.title)
             }
             createSpecialtyTagEnviroment(true)
         }
     }
     
-    func setDataArray() -> [String] {
-        var dataArray = [String]()
-        for (tagName, _) in tagDictionary {
-            dataArray.append(tagName)
+    //TODO; right now, my search is pulling down the entire tag table and then doing search, 
+    //very ineffecient, and in future, I will have to do server side cloud code.
+    func setDataArray() {
+        let query = PFQuery(className: "Tag")
+        query.selectKeys(["title"])
+        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let tags = objects as? [Tag] {
+                for tag in tags {
+//                    for dataTags in dataArray where dataTags.title != tag.title {
+//                        //the dataArray does not already have a tag title like this yet,
+//                        //so, we need to add it to the array
+                    self.allParseTags.append(tag)
+                    print(self.allParseTags)
+//                    }
+                }
+            }
         }
-        return dataArray
     }
     
     func resetTagChoicesViewList() {
