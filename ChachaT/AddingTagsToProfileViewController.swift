@@ -234,6 +234,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false
         searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
         resetTagChoicesViewList()
     }
     
@@ -294,6 +295,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     }
     
     func resetTagChoicesViewList() {
+        tagChoicesView.removeAllTags()
         for (tagTitle, _) in tagDictionary {
             tagChoicesView.addTag(tagTitle)
         }
