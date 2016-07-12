@@ -83,14 +83,49 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     }
     
     func loadData() {
-        setTagsFromDictionary()
+        setChoicesViewTags()
     }
     
     //move to actual filtering page
-    func setTagsFromDictionary() {
+    func setChoicesViewTags() {
         for tag in currentUserTags {
-            tagChoicesView.addTag(tag.title)
+            var prefixString = ""
+            let semiColonString = ": "
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue: break
+            case TagAttributes.SpecialtyButtons.rawValue:
+                if let categoryName = findFilterNameCategory(tag.title) {
+                    prefixString = categoryName.rawValue + semiColonString
+                }
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
+                prefixString = SpecialtyTags.AgeRange.rawValue + semiColonString
+            case TagAttributes.SpecialtySingleSlider.rawValue:
+                prefixString = SpecialtyTags.Location.rawValue + semiColonString
+            default: break
+            }
+            tagChoicesView.addTag(prefixString + tag.title)
         }
+    }
+    
+    //Purpose: to find which specialty group we are dealing with
+    //For Example: It figures out whether the given string should be with Hair Color, Race, ect.
+    func findFilterNameCategory(tagTitle: String) -> SpecialtyTags? {
+        for filterName in FilterNames.allValues where filterName.rawValue == tagTitle {
+                //we have a specialty generic tag
+                if FilterNames.genderAllValues.contains(filterName) {
+                    return .Gender
+                } else if FilterNames.hairColorAllValues.contains(filterName) {
+                    return .HairColor
+                } else if FilterNames.sexualityAllValues.contains(filterName) {
+                    return .Sexuality
+                } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
+                    return .PoliticalAffiliation
+                } else if FilterNames.raceAllValues.contains(filterName) {
+                    return .Race
+                }
+        }
+        //return nil because it was in none of the above cases, shouldn't reach this point
+        return nil
     }
     
     //move to actual filtering page
