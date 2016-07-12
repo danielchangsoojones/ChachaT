@@ -127,32 +127,35 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 
 }
 
-extension FilterTagViewController {
-//    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-//        //the tag from the choices tag view was pressed
-//        if sender.tag == 1 {
-//            let tagAttribute = tagDictionary[title]!
-//            switch tagAttribute {
-//            case .Generic:
-//                changeTagListViewWidth(tagView, extend: true)
-//                self.tagChoicesView.removeTag(title)
-//                if !tagExistsInChosenTagListView(tagChosenView, title: title) {
-//                    self.tagChosenView.addTag(title)
-//                }
-//            case .SpecialtyButtons:
-//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-//                theStackViewTagsButtons = createStackViewTagButtons()
-//                theStackViewTagsButtons!.addButtonToStackView(title)
-//            case .SpecialtySingleSlider:
-//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-//                createDistanceSliderView()
-//            case .SpecialtyRangeSlider:
-//                createSpecialtyTagEnviroment(false, categoryTitleText: title)
-//                createAgeRangeSliderView()
-//            }
-//           
-//        }
-//    }
+extension FilterTagViewController: TagListViewDelegate {
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+        //the tag from the choices tag view was pressed
+        if sender.tag == 1 {
+            if let tagAttribute = tagDictionary[title] {
+                switch tagAttribute {
+                case .Generic:
+                    changeTagListViewWidth(tagView, extend: true)
+                    self.tagChoicesView.removeTag(title)
+                    if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+                        self.tagChosenView.addTag(title)
+                    }
+                case .SpecialtyButtons:
+                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+                case .SpecialtySingleSlider:
+                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
+                    createSpecialtyTagEnviroment(false)
+                case .SpecialtyRangeSlider:
+                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
+                    createSpecialtyTagEnviroment(false)
+                }
+            }
+        }
+    }
+    
+    func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool) {
+        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
+        createSpecialtyTagEnviroment(false)
+    }
     
     func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bool {
         let tagViews = tagListView.tagViews
@@ -202,10 +205,10 @@ extension FilterTagViewController {
         }
     }
     
-//    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-//        changeTagListViewWidth(tagView, extend: false)
-//        sender.removeTagView(tagView)
-//    }
+    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+        changeTagListViewWidth(tagView, extend: false)
+        sender.removeTagView(tagView)
+    }
 }
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {

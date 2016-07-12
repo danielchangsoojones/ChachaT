@@ -35,5 +35,10 @@ extension ProfileIndexViewController: SegueHandlerType {
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .AddingTagsToProfileSegue:
+            let destinationVC = segue.destinationViewController as! AddingTagsToProfileViewController
+            destinationVC.tagFilteringMode = .EditingMode
+        }
     }
 }

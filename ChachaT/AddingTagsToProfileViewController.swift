@@ -11,6 +11,11 @@ import TagListView
 import Parse
 import SCLAlertView
 
+public enum TagFilteringMode {
+    case FilteringMode
+    case EditingMode
+}
+
 class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -21,6 +26,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var createdTag : TagView?
     var alreadySavedTags = false
     var currentUserTags: [Tag] = []
+    var tagFilteringMode: TagFilteringMode = .FilteringMode
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -65,27 +71,27 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         let _ = SCLAlertView()
     }
     
-    override func setTagsInTagDictionary() {
-        let query = Tag.query()
-        if let currentUser = User.currentUser() {
-                query?.whereKey("createdBy", equalTo: currentUser)
-                query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-                    if error == nil {
-                        if let tags = objects as? [Tag] {
-                            //saving tags to this array, so I can delete any tags the user ends up deleting
-                            self.currentUserTags = tags
-                            for tag in tags {
-                                self.tagDictionary[tag.title] = .Generic
-                                
-                            }
-                            self.loadData()
-                        }
-                    } else {
-                        print(error)
-                    }
-                })
-        }
-    }
+//    override func setTagsInTagDictionary() {
+//        let query = Tag.query()
+//        if let currentUser = User.currentUser() {
+//                query?.whereKey("createdBy", equalTo: currentUser)
+//                query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+//                    if error == nil {
+//                        if let tags = objects as? [Tag] {
+//                            //saving tags to this array, so I can delete any tags the user ends up deleting
+//                            self.currentUserTags = tags
+//                            for tag in tags {
+//                                self.tagDictionary[tag.title] = .Generic
+//                                
+//                            }
+//                            self.loadData()
+//                        }
+//                    } else {
+//                        print(error)
+//                    }
+//                })
+//        }
+//    }
     
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
@@ -126,8 +132,8 @@ extension AddingTagsToProfileViewController {
     }
 }
 
-extension AddingTagsToProfileViewController: TagListViewDelegate {
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+extension AddingTagsToProfileViewController {
+    override func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
         sender.removeTagView(tagView)
         tagAttributeActions(title, sender: sender, tagPressed: false, tagView: tagView)
         if sender.tag == 2 {
@@ -137,11 +143,6 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
             //we hit the remove button in theChoicesTagView
             removeChoicesTag(title)
         }
-    }
-    
-    func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool) {
-        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
-        createSpecialtyTagEnviroment(false)
     }
     
     //creates the special buttons as well as checks if the generic tag is a special one
@@ -213,9 +214,13 @@ extension AddingTagsToProfileViewController: TagListViewDelegate {
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
     
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    override func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
-        tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
+        if tagFilteringMode == .FilteringMode {
+            super.tagPressed(title, tagView: tagView, sender: sender)
+        } else if tagFilteringMode == .EditingMode {
+            tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
+        }
     }
 }
 

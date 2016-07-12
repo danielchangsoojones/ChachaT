@@ -118,7 +118,7 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq">
-                        <barButtonItem key="leftBarButtonItem" title="Item" id="plM-0D-iM0">
+                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="plM-0D-iM0">
                             <connections>
                                 <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="YWU-JH-Jpm"/>
                             </connections>
@@ -156,9 +156,6 @@
             <objects>
                 <pageViewController storyboardIdentifier="PageMainViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="s5O-Gk-Yh3" customClass="PageMainViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <navigationItem key="navigationItem" id="bCJ-lW-7uC"/>
-                    <connections>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="qc7-o9-Apy"/>
-                    </connections>
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zf-Dg-75B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
