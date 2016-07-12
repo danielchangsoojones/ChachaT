@@ -33,10 +33,10 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
                                         <rect key="frame" x="148" y="285" width="78" height="78"/>
                                     </imageView>
                                 </subviews>
@@ -118,7 +118,16 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq">
-                        <barButtonItem key="rightBarButtonItem" title="Log Out" id="9F2-jI-qmF"/>
+                        <barButtonItem key="leftBarButtonItem" title="Item" id="plM-0D-iM0">
+                            <connections>
+                                <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="YWU-JH-Jpm"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9F2-jI-qmF">
+                            <connections>
+                                <action selector="searchButtonPressed:" destination="BYZ-38-t0r" id="Mpz-wB-dyU"/>
+                            </connections>
+                        </barButtonItem>
                     </navigationItem>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
@@ -127,13 +136,12 @@
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
                         <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="28w-wD-wPr"/>
                         <segue destination="iIV-nv-kuo" kind="presentation" identifier="MainTinderPageToQuestionOnboardingSegue" id="3lX-ep-9E2"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="339.5" y="387.5"/>
+            <point key="canvasLocation" x="1151.5" y="387.5"/>
         </scene>
         <!--Filtering-->
         <scene sceneID="hOT-6i-yVN">
@@ -154,7 +162,7 @@
                 </pageViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3zf-Dg-75B" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-166" y="1044"/>
+            <point key="canvasLocation" x="-448" y="387"/>
         </scene>
         <!--Card Detail View Controller-->
         <scene sceneID="Tui-ct-3pW">
@@ -557,7 +565,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="905" y="348"/>
+            <point key="canvasLocation" x="1717" y="348"/>
         </scene>
         <!--Question-->
         <scene sceneID="Aiw-qk-KTi">
@@ -566,6 +574,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="s4G-9S-7Pq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1399" y="959"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="NJs-ik-5Gj">
+            <objects>
+                <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="rootViewController" id="4f7-Yw-kdD"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Edb-vs-eZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="339" y="387"/>
         </scene>
     </scenes>
     <resources>
@@ -580,7 +606,7 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="qc7-o9-Apy"/>
-        <segue reference="J40-Mu-xxa"/>
+        <segue reference="YWU-JH-Jpm"/>
+        <segue reference="pbG-G9-gXM"/>
     </inferredMetricsTieBreakers>
 </document>

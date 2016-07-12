@@ -16,11 +16,12 @@ class PageMainViewController: PagesController {
         super.viewDidLoad()
         
         let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
-        let backgroundAnimationViewController = mainStoryboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
-        backgroundAnimationViewController.pageMainViewControllerDelegate = self
+        let backgroundAnimationNavigationController = mainStoryboard.instantiateViewControllerWithIdentifier("BackgroundAnimationNavigationViewController") as! UINavigationController
+        let backgroundAnimationRootViewController = backgroundAnimationNavigationController.viewControllers[0] as! BackgroundAnimationViewController
+        backgroundAnimationRootViewController.pageMainViewControllerDelegate = self
         let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
-        let profileIndexViewController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
-        self.add([backgroundAnimationViewController, profileIndexViewController])
+        let profileIndexNavigationController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+        self.add([backgroundAnimationNavigationController, profileIndexNavigationController])
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
 //        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
@@ -50,17 +51,6 @@ class PageMainViewController: PagesController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 protocol PageMainViewControllerDelegate {

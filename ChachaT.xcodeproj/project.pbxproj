@@ -218,7 +218,7 @@
 			isa = PBXGroup;
 			children = (
 				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
-				9261083A1CE4EDC4009F3E86 /* xib files */,
+				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
@@ -228,13 +228,13 @@
 			name = Tinder;
 			sourceTree = "<group>";
 		};
-		9261083A1CE4EDC4009F3E86 /* xib files */ = {
+		9261083A1CE4EDC4009F3E86 /* subviews/xibs */ = {
 			isa = PBXGroup;
 			children = (
 				9261082E1CE25B74009F3E86 /* CustomCardView.xib */,
 				926108301CE25B84009F3E86 /* CustomOverlayView.xib */,
 			);
-			name = "xib files";
+			name = subviews/xibs;
 			sourceTree = "<group>";
 		};
 		9261083B1CE4EDF7009F3E86 /* sounds */ = {

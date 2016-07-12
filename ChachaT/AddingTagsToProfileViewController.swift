@@ -21,7 +21,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var createdTag : TagView?
     var alreadySavedTags = false
     var currentUserTags: [Tag] = []
-    var allParseTags: [Tag] = []
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -56,7 +55,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         changeTheChoicesTagView()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
-        setDataArray()
         // Do any additional setup after loading the view.
     }
     
@@ -274,26 +272,6 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         }
     }
     
-    //TODO; right now, my search is pulling down the entire tag table and then doing search, 
-    //very ineffecient, and in future, I will have to do server side cloud code. 
-    //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
-    func setDataArray() {
-        var alreadyContainsTagArray: [String] = []
-        let query = PFQuery(className: "Tag")
-        query.selectKeys(["title"])
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let tags = objects as? [Tag] {
-                for tag in tags {
-                    if !alreadyContainsTagArray.contains(tag.title) {
-                        //our string array does not already contain the tag title, so we can add it to our searchable array
-                        alreadyContainsTagArray.append(tag.title)
-                        self.allParseTags.append(tag)
-                    }
-                }
-            }
-        }
-    }
-    
     func resetTagChoicesViewList() {
         tagChoicesView.removeAllTags()
         for (tagTitle, _) in tagDictionary {
@@ -301,5 +279,23 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         }
         createSpecialtyTagEnviroment(true)
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
+    }
+}
+
+extension AddingTagsToProfileViewController: MagicMoveable {
+    var isMagic: Bool {
+        return true
+    }
+    
+    var duration: NSTimeInterval {
+        return 0.5
+    }
+    
+    var spring: CGFloat {
+        return 0.7
+    }
+    
+    var magicViews: [UIView] {
+        return [tagChoicesView]
     }
 }

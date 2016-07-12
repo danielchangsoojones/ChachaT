@@ -52,23 +52,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
-                                <rect key="frame" x="0.0" y="187" width="600" height="413"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                            </view>
-                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
-                                <constraints>
-                                    <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
-                                </constraints>
-                                <textInputTraits key="textInputTraits"/>
-                                <connections>
-                                    <outlet property="delegate" destination="mYP-fS-yh2" id="nK3-lC-h0h"/>
-                                </connections>
-                            </searchBar>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="34F-hU-9oS">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
-                            </activityIndicatorView>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lRp-GR-lFB">
                                 <rect key="frame" x="0.0" y="108" width="600" height="79"/>
                                 <subviews>
@@ -138,6 +121,23 @@
                                     </mask>
                                 </variation>
                             </scrollView>
+                            <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="hfh-eM-SNs">
+                                <rect key="frame" x="0.0" y="64" width="600" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="chx-xf-2gq"/>
+                                </constraints>
+                                <textInputTraits key="textInputTraits"/>
+                                <connections>
+                                    <outlet property="delegate" destination="mYP-fS-yh2" id="nK3-lC-h0h"/>
+                                </connections>
+                            </searchBar>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="34F-hU-9oS">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="TagListView" customModule="TagListView">
+                                <rect key="frame" x="0.0" y="187" width="600" height="413"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
