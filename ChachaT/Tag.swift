@@ -9,6 +9,13 @@
 import Foundation
 import Parse
 
+public enum TagAttributes : String {
+    case Generic
+    case SpecialtyButtons
+    case SpecialtySingleSlider
+    case SpecialtyRangeSlider
+}
+
 class Tag: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "Tag"
@@ -16,15 +23,17 @@ class Tag: PFObject, PFSubclassing {
     
     @NSManaged var createdBy: User?
     @NSManaged var title: String
+    @NSManaged var attribute: String
     
     override init() {
         super.init()
     }
     
-    init(title: String) {
+    init(title: String, attribute: TagAttributes) {
         super.init()
         self.title = title
         self.createdBy = User.currentUser()
+        self.attribute = attribute.rawValue
     }
     
 }

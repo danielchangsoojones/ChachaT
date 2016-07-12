@@ -11,22 +11,16 @@ import TagListView
 import Parse
 import SCLAlertView
 
-public enum TagFilteringMode {
-    case FilteringMode
-    case EditingMode
-}
-
 class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var theAddToProfileButton: UIButton!
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
+    @IBOutlet weak var theYourTagsLabel: UILabel!
     
     var addToProfileTagArray : [Tag] = []
     var createdTag : TagView?
     var alreadySavedTags = false
-    var currentUserTags: [Tag] = []
-    var tagFilteringMode: TagFilteringMode = .FilteringMode
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -47,7 +41,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBAction func addToProfilePressed(sender: UIButton) {
         for tagView in tagChosenView.tagViews {
             if let title = tagView.currentTitle {
-                let tag = Tag(title: title)
+                let tag = Tag(title: title, attribute: .Generic)
                 addToProfileTagArray.append(tag)
                 tagChoicesView.addTag(title)
             }
@@ -56,8 +50,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         tagChosenViewWidthConstraint.constant = 0
     }
     
+    override func addToProfileTagArray(title: String) {
+        let newTag = Tag(title: title, attribute: .Generic)
+        addToProfileTagArray.append(newTag)
+        self.currentUserTags.append(newTag)
+        resetTagChoicesViewList()
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        setTagsInTagDictionary()
         changeTheChoicesTagView()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
@@ -71,27 +73,24 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         let _ = SCLAlertView()
     }
     
-//    override func setTagsInTagDictionary() {
-//        let query = Tag.query()
-//        if let currentUser = User.currentUser() {
-//                query?.whereKey("createdBy", equalTo: currentUser)
-//                query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-//                    if error == nil {
-//                        if let tags = objects as? [Tag] {
-//                            //saving tags to this array, so I can delete any tags the user ends up deleting
-//                            self.currentUserTags = tags
-//                            for tag in tags {
-//                                self.tagDictionary[tag.title] = .Generic
-//                                
-//                            }
-//                            self.loadData()
-//                        }
-//                    } else {
-//                        print(error)
-//                    }
-//                })
-//        }
-//    }
+    func setTagsInTagDictionary() {
+        let query = Tag.query()
+        if let currentUser = User.currentUser() {
+                query?.whereKey("createdBy", equalTo: currentUser)
+                query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+                    if error == nil {
+                        if let tags = objects as? [Tag] {
+                            for tag in tags {
+                                self.currentUserTags.append(tag)
+                            }
+                            self.loadData()
+                        }
+                    } else {
+                        print(error)
+                    }
+                })
+        }
+    }
     
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
@@ -112,8 +111,11 @@ extension AddingTagsToProfileViewController {
     //we also want to see if tag is in the already saved Parse tags because then the button
     //should be highlighted.
     override func doesChosenTagViewContain(tagTitle: String) -> Bool {
-        let existsInChoicesTagDictionary = tagDictionary[tagTitle] != nil
-        return (tagExistsInChosenTagListView(tagChosenView, title: tagTitle) || existsInChoicesTagDictionary)
+        var existsInChoicesTagView = false
+        for tag in currentUserTags where tag.title == tagTitle {
+            existsInChoicesTagView = true
+        }
+        return (tagExistsInChosenTagListView(tagChosenView, title: tagTitle) || existsInChoicesTagView)
     }
     
     override func removeChoicesTag(tagTitle: String) {
@@ -124,16 +126,10 @@ extension AddingTagsToProfileViewController {
             tag.deleteInBackground()
         }
     }
-    
-    override func addToProfileTagArray(title: String) {
-        addToProfileTagArray.append(Tag(title: title))
-        tagDictionary[title] = .Generic
-        resetTagChoicesViewList()
-    }
 }
 
 extension AddingTagsToProfileViewController {
-    override func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
         sender.removeTagView(tagView)
         tagAttributeActions(title, sender: sender, tagPressed: false, tagView: tagView)
         if sender.tag == 2 {
@@ -165,29 +161,32 @@ extension AddingTagsToProfileViewController {
                 return true
             }
         }
+        //not a special generic tag, so just treat like a normal tag
         return false
     }
     
     func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool, tagView: TagView) {
         if sender.tag == 1 {
             //we have chosen/removed something from the ChosenTagView
-            if let tagAttribute = tagDictionary[title] {
-            switch tagAttribute {
-            case .Generic:
-                if !genericTagIsSpecial(title) && tagPressed {
-                    //we are dealing with a normal generic tag that was pressed
-                    createAlertTextFieldPopUp(title, tagView: tagView)
-                }
-            //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
-            case .SpecialtyButtons:
-                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
-            case .SpecialtySingleSlider:
-                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
-                createSpecialtyTagEnviroment(false)
-            case .SpecialtyRangeSlider:
-                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
-                createSpecialtyTagEnviroment(false)
-                }
+            for tag in currentUserTags where tag.title == title {
+                    switch tag.attribute {
+                    case TagAttributes.Generic.rawValue:
+                        if !genericTagIsSpecial(title) && tagPressed {
+                            //we are dealing with a normal generic tag that was pressed
+                            createAlertTextFieldPopUp(title, tagView: tagView)
+                        }
+                    //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
+                    case TagAttributes.SpecialtyButtons.rawValue:
+                        createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+                    case TagAttributes.SpecialtySingleSlider.rawValue:
+                        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
+                        createSpecialtyTagEnviroment(false)
+                    case TagAttributes.SpecialtyRangeSlider.rawValue:
+                        theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
+                        createSpecialtyTagEnviroment(false)
+                    default:
+                        break
+                    }
             }
             theSpecialtyTagEnviromentHolderView?.delegate = self
         }
@@ -200,27 +199,29 @@ extension AddingTagsToProfileViewController {
         alert.addButton("Done") {
             if let editedTagText = textField.text {
                 tagView.setTitle(editedTagText, forState: .Normal)
-                self.tagDictionary[editedTagText] = .Generic
-                self.tagDictionary.removeValueForKey(originalTagText)
+                let newTag = Tag(title: editedTagText, attribute: .Generic)
+                self.currentUserTags.append(newTag)
+                for tag in self.currentUserTags where tag.title == originalTagText {
+                    //delete element in array
+                    self.currentUserTags.removeAtIndex(self.currentUserTags.indexOf(tag)!)
+                    //remove the previous tag from the actual backend
+                    //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
+                    tag.deleteInBackground()
+                }
                 //deleting the tag from addToProfileTagArray, so it doesn't save the original text to backend
                 self.addToProfileTagArray = self.addToProfileTagArray.filter({ (tag) -> Bool in
                      return tag.title != originalTagText
                 })
-                self.addToProfileTagArray.append(Tag(title: editedTagText))
-                print(self.addToProfileTagArray)
+                self.addToProfileTagArray.append(newTag)
             }
             self.tagChoicesView.layoutSubviews()
         }
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
     
-    override func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
-        if tagFilteringMode == .FilteringMode {
-            super.tagPressed(title, tagView: tagView, sender: sender)
-        } else if tagFilteringMode == .EditingMode {
-            tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
-        }
+        tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
     }
 }
 
@@ -228,6 +229,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
         searchBar.showsCancelButton = true
+        theYourTagsLabel.hidden = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -279,10 +281,11 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     
     func resetTagChoicesViewList() {
         tagChoicesView.removeAllTags()
-        for (tagTitle, _) in tagDictionary {
-            tagChoicesView.addTag(tagTitle)
+        for tag in currentUserTags {
+            tagChoicesView.addTag(tag.title)
         }
         createSpecialtyTagEnviroment(true)
+        theYourTagsLabel.hidden = false
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }

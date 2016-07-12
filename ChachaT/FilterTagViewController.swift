@@ -58,9 +58,8 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theChosenTagHolderView: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
     
-    var normalTags = [String]()
-    var tagDictionary = [String : TagAttributes]()
     var allParseTags: [Tag] = []
+    var currentUserTags: [Tag] = []
     
     @IBAction func searchButtonPressed(sender: AnyObject) {
         
@@ -68,21 +67,13 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     //search Variables
     var searchActive : Bool = false
-    
-    enum TagAttributes {
-        case Generic
-        case SpecialtyButtons
-        case SpecialtySingleSlider
-        case SpecialtyRangeSlider
-    }
-    
+
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTagsInTagDictionary()
+//        setTagsInTagDictionary()
         addTagListViewAttributes()
         loadData()
         setDataArray()
-        // Do any additional setup after loading the view.
     }
     
     func addTagListViewAttributes() {
@@ -97,28 +88,29 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     //move to actual filtering page
     func setTagsFromDictionary() {
-        for (tagName, _) in tagDictionary {
-            tagChoicesView.addTag(tagName)
+        for tag in currentUserTags {
+            tagChoicesView.addTag(tag.title)
         }
     }
     
     //move to actual filtering page
-    func setTagsInTagDictionary() {
-        for defaultGenericTag in FilterNames.allValues {
-            //setting generic tags that are pre-set like (Male, Black, ect.)
-            tagDictionary[defaultGenericTag.rawValue] = TagAttributes.Generic
-        }
-        //sets speciality tags like Gender, Sexuality, ect. because they create a special animation
-        for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
-            tagDictionary[specialtyButtonTag.rawValue] = TagAttributes.SpecialtyButtons
-        }
-        for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
-            tagDictionary[specialtySingleSliderTag.rawValue] = TagAttributes.SpecialtySingleSlider
-        }
-        for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
-            tagDictionary[specialtyRangeSliderTag.rawValue] = TagAttributes.SpecialtyRangeSlider
-        }
-    }
+    //this adds specialty tags to the dictionary
+//    func setTagsInTagDictionary() {
+//        for defaultGenericTag in FilterNames.allValues {
+//            //setting generic tags that are pre-set like (Male, Black, ect.)
+//            currentUserTagDictionary[Tag(title: defaultGenericTag.rawValue)] = TagAttributes.Generic
+//        }
+//        //sets speciality tags like Gender, Sexuality, ect. because they create a special animation
+//        for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
+//            currentUserTagDictionary[Tag(title: specialtyButtonTag.rawValue)] = TagAttributes.SpecialtyButtons
+//        }
+//        for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
+//            currentUserTagDictionary[Tag(title: specialtySingleSliderTag.rawValue)] = TagAttributes.SpecialtySingleSlider
+//        }
+//        for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
+//            currentUserTagDictionary[Tag(title: specialtyRangeSliderTag.rawValue)] = TagAttributes.SpecialtyRangeSlider
+//        }
+//    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -128,29 +120,29 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 }
 
 extension FilterTagViewController: TagListViewDelegate {
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        //the tag from the choices tag view was pressed
-        if sender.tag == 1 {
-            if let tagAttribute = tagDictionary[title] {
-                switch tagAttribute {
-                case .Generic:
-                    changeTagListViewWidth(tagView, extend: true)
-                    self.tagChoicesView.removeTag(title)
-                    if !tagExistsInChosenTagListView(tagChosenView, title: title) {
-                        self.tagChosenView.addTag(title)
-                    }
-                case .SpecialtyButtons:
-                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
-                case .SpecialtySingleSlider:
-                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
-                    createSpecialtyTagEnviroment(false)
-                case .SpecialtyRangeSlider:
-                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
-                    createSpecialtyTagEnviroment(false)
-                }
-            }
-        }
-    }
+//    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+//        //the tag from the choices tag view was pressed
+//        if sender.tag == 1 {
+//            if let tagAttribute = currentUserTagDictionary[title] {
+//                switch tagAttribute {
+//                case .Generic:
+//                    changeTagListViewWidth(tagView, extend: true)
+//                    self.tagChoicesView.removeTag(title)
+//                    if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+//                        self.tagChosenView.addTag(title)
+//                    }
+//                case .SpecialtyButtons:
+//                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+//                case .SpecialtySingleSlider:
+//                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
+//                    createSpecialtyTagEnviroment(false)
+//                case .SpecialtyRangeSlider:
+//                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
+//                    createSpecialtyTagEnviroment(false)
+//                }
+//            }
+//        }
+//    }
     
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool) {
         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
@@ -205,10 +197,10 @@ extension FilterTagViewController: TagListViewDelegate {
         }
     }
     
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-        changeTagListViewWidth(tagView, extend: false)
-        sender.removeTagView(tagView)
-    }
+//    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+//        changeTagListViewWidth(tagView, extend: false)
+//        sender.removeTagView(tagView)
+//    }
 }
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {
