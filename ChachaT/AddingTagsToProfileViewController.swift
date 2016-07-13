@@ -96,9 +96,10 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 //  Purpose: this adds specialty tags to the array, as long as the user does not already have them.
     //For Example: If user already has Race: Black, then no need to create specialty tag
     func setSpecialtyTagsInArray(tagArray: [Tag]) {
-
+        //this array is to hold any specialtyTags that the user has already set, hence, we do not need to set a defualt blank one
         var alreadyCreatedSpecialtyTagArray : [SpecialtyTags] = []
         for tag in tagArray where tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
+            //checking for tags with a specialty and adding to array
             if let filterNameCategory = findFilterNameCategory(tag.title) {
                 alreadyCreatedSpecialtyTagArray.append(filterNameCategory)
             }
@@ -110,13 +111,13 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                  self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons))
             }
         }
-//            for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
-//                currentUserTagDictionary[Tag(title: specialtySingleSliderTag.rawValue)] = TagAttributes.SpecialtySingleSlider
-//            }
-//            for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
-//                currentUserTagDictionary[Tag(title: specialtyRangeSliderTag.rawValue)] = TagAttributes.SpecialtyRangeSlider
-//            }
+        for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
+            self.currentUserTags.append(Tag(title: specialtySingleSliderTag.rawValue, attribute: .SpecialtySingleSlider))
         }
+        for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
+            self.currentUserTags.append(Tag(title: specialtyRangeSliderTag.rawValue, attribute: .SpecialtyRangeSlider))
+        }
+    }
     
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
