@@ -111,11 +111,9 @@
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="leading" secondItem="KUC-4Y-beP" secondAttribute="leading" constant="8" id="1bh-0d-Ovl"/>
-                                            <constraint firstItem="QqA-ji-qaT" firstAttribute="top" secondItem="KUC-4Y-beP" secondAttribute="top" constant="25" id="7Oz-9h-U3b"/>
                                             <constraint firstItem="2iB-AG-Xp8" firstAttribute="centerY" secondItem="KUC-4Y-beP" secondAttribute="centerY" id="FAj-rw-YGS"/>
                                             <constraint firstAttribute="trailing" secondItem="QqA-ji-qaT" secondAttribute="trailing" constant="4" id="J1b-nh-oJq"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" id="MvN-Wr-BUO"/>
-                                            <constraint firstAttribute="bottom" secondItem="QqA-ji-qaT" secondAttribute="bottom" constant="24" id="NDT-PK-MgA"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OmA-RI-P4C"/>
                                             <constraint firstItem="QqA-ji-qaT" firstAttribute="leading" secondItem="2iB-AG-Xp8" secondAttribute="trailing" constant="26" id="Vet-9C-Ytb"/>
                                             <constraint firstAttribute="width" secondItem="2iB-AG-Xp8" secondAttribute="width" constant="80" id="vyk-wC-DuZ"/>
@@ -135,10 +133,11 @@
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="leading" secondItem="lRp-GR-lFB" secondAttribute="leading" id="KjU-gG-owz"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="height" secondItem="lRp-GR-lFB" secondAttribute="height" id="PJo-VP-gaJ"/>
                                     <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="PO7-hQ-6gn"/>
+                                    <constraint firstItem="KUC-4Y-beP" firstAttribute="height" secondItem="lRp-GR-lFB" secondAttribute="height" id="bTV-sn-Ruj"/>
                                     <constraint firstAttribute="bottom" secondItem="KUC-4Y-beP" secondAttribute="bottom" id="fxy-7m-HQM"/>
                                     <constraint firstItem="KUC-4Y-beP" firstAttribute="top" secondItem="lRp-GR-lFB" secondAttribute="top" id="nXa-B2-gyZ"/>
+                                    <constraint firstAttribute="height" constant="79" id="nnK-Nx-Kye"/>
                                     <constraint firstAttribute="height" secondItem="KUC-4Y-beP" secondAttribute="height" id="p61-A5-M9Y"/>
-                                    <constraint firstAttribute="height" constant="79" id="rBT-Ln-axn"/>
                                 </constraints>
                                 <variation key="default">
                                     <mask key="constraints">

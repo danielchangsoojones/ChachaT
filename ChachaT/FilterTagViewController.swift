@@ -70,7 +70,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-//        setTagsInTagDictionary()
         addTagListViewAttributes()
         loadData()
         setDataArray()
