@@ -41,7 +41,9 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBAction func addToProfilePressed(sender: UIButton) {
         for tagView in tagChosenView.tagViews {
             if let title = tagView.currentTitle {
-                let tag = Tag(title: title, attribute: .Generic)
+                //checking to see if the attribute is special
+                let attribute : TagAttributes = findFilterNameCategory(title) != nil ? .SpecialtyButtons : .Generic
+                let tag = Tag(title: title, attribute: attribute)
                 addToProfileTagArray.append(tag)
                 tagChoicesView.addTag(title)
             }
