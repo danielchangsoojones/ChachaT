@@ -59,7 +59,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTagsInTagDictionary()
+        setTagsInCurrentUserArray()
         changeTheChoicesTagView()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
@@ -73,7 +73,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         let _ = SCLAlertView()
     }
     
-    func setTagsInTagDictionary() {
+    func setTagsInCurrentUserArray() {
         let query = Tag.query()
         if let currentUser = User.currentUser() {
                 query?.whereKey("createdBy", equalTo: currentUser)
@@ -83,6 +83,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                             for tag in tags {
                                 self.currentUserTags.append(tag)
                             }
+                            self.setSpecialtyTagsInArray(self.currentUserTags)
                             self.loadData()
                         }
                     } else {
@@ -91,6 +92,31 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 })
         }
     }
+    
+//  Purpose: this adds specialty tags to the array, as long as the user does not already have them.
+    //For Example: If user already has Race: Black, then no need to create specialty tag
+    func setSpecialtyTagsInArray(tagArray: [Tag]) {
+
+        var alreadyCreatedSpecialtyTagArray : [SpecialtyTags] = []
+        for tag in tagArray where tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
+            if let filterNameCategory = findFilterNameCategory(tag.title) {
+                alreadyCreatedSpecialtyTagArray.append(filterNameCategory)
+            }
+        }
+        for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
+            if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
+                //the users default tags do not already contain a specialty tag, so we want to create a generic one
+                //For Example: "Hair Color: None"
+                 self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons))
+            }
+        }
+//            for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
+//                currentUserTagDictionary[Tag(title: specialtySingleSliderTag.rawValue)] = TagAttributes.SpecialtySingleSlider
+//            }
+//            for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
+//                currentUserTagDictionary[Tag(title: specialtyRangeSliderTag.rawValue)] = TagAttributes.SpecialtyRangeSlider
+//            }
+        }
     
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
