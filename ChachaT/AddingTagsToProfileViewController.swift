@@ -276,7 +276,6 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
         searchBar.showsCancelButton = true
-        theYourTagsLabel.hidden = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -305,15 +304,15 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         })
         if searchText == "" {
             //no text, so we want to stay on the tagChoicesView
-            resetTagChoicesViewList()
             searchActive = false
+            resetTagChoicesViewList()
         } else if(filtered.count == 0){
             //there is text, but it has no matches in the database
+            searchActive = true
             if !(theSpecialtyTagEnviromentHolderView?.theSpecialtyView is TagListView) {
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
                 theSpecialtyTagEnviromentHolderView?.delegate = self
             }
-            searchActive = false
             createSpecialtyTagEnviroment(false)
             theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
             theSpecialtyTagEnviromentHolderView?.setButtonText("Create")
@@ -325,6 +324,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             }
             createSpecialtyTagEnviroment(true)
         }
+        theYourTagsLabel.hidden = searchActive
     }
     
     func resetTagChoicesViewList() {
@@ -333,7 +333,6 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             tagChoicesView.addTag(tag.title)
         }
         createSpecialtyTagEnviroment(true)
-        theYourTagsLabel.hidden = false
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }
