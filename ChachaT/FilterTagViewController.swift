@@ -12,44 +12,6 @@ import SnapKit
 import Parse
 import Foundation
 
-public enum SpecialtyTags : String {
-    case Gender
-    case Race
-    case Sexuality
-    case AgeRange = "Age Range"
-    case PoliticalAffiliation = "Political Affiliation"
-    case HairColor = "Hair Color"
-    case Location
-    static let specialtyButtonValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor]
-    static let specialtySingleSliderValues = [Location]
-    static let specialtyRangeSliderValues = [AgeRange]
-}
-
-public enum FilterNames : String {
-    case RaceBlackFilter = "Black"
-    case RaceWhiteFilter = "White"
-    case RaceLatinoFilter = "Latino"
-    case RaceAsianFilter = "Asian"
-    case HairColorBrunetteFilter = "Brunette"
-    case HairColorBlondeFilter = "Blonde"
-    case HairColorRedheadFilter = "Redhead"
-    case PoliticalAffiliationDemocratFilter = "Democrat"
-    case PoliticalAffiliationRepublicanFilter = "Republican"
-    case GenderMaleFilter = "Male"
-    case GenderFemaleFilter = "Female"
-    case SexualityStraightFilter = "Straight"
-    case SexualityGayFilter = "Gay"
-    case SexualityBisexualFilter = "Bisexual"
-    
-    //this array lets me iterate over certain sections of the enum
-    static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter]
-    static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter]
-    static let genderAllValues = [GenderMaleFilter, GenderFemaleFilter]
-    static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter]
-    static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
-    static let allValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, GenderMaleFilter, GenderFemaleFilter, SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter]
-}
-
 class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
@@ -90,24 +52,36 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
             switch tag.attribute {
             case TagAttributes.Generic.rawValue: break
             case TagAttributes.SpecialtyButtons.rawValue:
-                if let categoryName = findFilterNameCategory(tag.title) {
-                    prefixString = categoryName.rawValue + semiColonString
+                if let specialtyTitle = helper(tag.title) {
+                    prefixString = specialtyTitle
                 }
+//                if let categoryName = findFilterNameCategory(tag.title) {
+//                    prefixString = categoryName.rawValue + semiColonString
+//                }
             case TagAttributes.SpecialtyRangeSlider.rawValue:
                 prefixString = SpecialtyTags.AgeRange.rawValue + semiColonString
             case TagAttributes.SpecialtySingleSlider.rawValue:
                 prefixString = SpecialtyTags.Location.rawValue + semiColonString
             default: break
             }
-            tagChoicesView.addTag(prefixString + tag.title)
+//            tagChoicesView.addTag(prefixString + tag.title)
+            tagChoicesView.addTag(prefixString)
         }
     }
     
     //removes the Specialty prefix we had created earlier, for exampl, it will remove "Hair Color: "
     func removeSpecialtyPrefixString(tagTitle: String) -> String {
-        //we are looking for colon and then advancing by two, so we pass the space. We only want to get something like "Redhead", not ": Redhead"
-        if let indexOfColonCharacter = tagTitle.characters.indexOf(":")?.advancedBy(2) {
-            let tagTitleSubstring = tagTitle.substringFromIndex(indexOfColonCharacter)
+        if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
+            if tagTitle.containsString(": ?") {
+                //we have a specialty tag that does not have an attribute assigned to it, but we still want to have a stackview pop up when clicked, so the user can actually set it.
+                return tagTitle.substringToIndex(indexOfColonCharacter)
+            }
+        }
+        
+        
+        if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
+            //we are looking for colon and then advancing by two, so we pass the space. We only want to get something like "Redhead", not ": Redhead"
+            let tagTitleSubstring = tagTitle.substringFromIndex(indexOfColonCharacter.advancedBy(2))
             if tagHasSpecialtyAttribute(tagTitleSubstring) {
                 //we have a specialty tag, so we want to return a string with only the actual attribute.
                 return tagTitleSubstring
@@ -130,7 +104,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     func tagHasSpecialtyAttribute(tagTitle: String) -> Bool {
         print(tagTitle)
-        for tag in currentUserTags where tag.title == tagTitle {
+        for tag in currentUserTags where tag.title == tagTitle && tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
             //the tag is a special tag as well as the particular tag that we are looking for, which means the tag has a specialty attribute
             return true
         }
@@ -156,6 +130,14 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         }
         //return nil because it was in none of the above cases, shouldn't reach this point
         return nil
+    }
+    
+    //Purpose: If I have a string, I can't just use .conatins on array because it is looking for Specialty Tag enum to contain, not a type string
+    func specialtyTagEnumContains(string: String) -> Bool {
+        for specialtyTag in SpecialtyTags.specialtyButtonValues where specialtyTag.rawValue == string {
+            return true
+        }
+        return false
     }
     
     //move to actual filtering page

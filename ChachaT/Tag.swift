@@ -9,13 +9,6 @@
 import Foundation
 import Parse
 
-public enum TagAttributes : String {
-    case Generic
-    case SpecialtyButtons
-    case SpecialtySingleSlider
-    case SpecialtyRangeSlider
-}
-
 class Tag: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "Tag"

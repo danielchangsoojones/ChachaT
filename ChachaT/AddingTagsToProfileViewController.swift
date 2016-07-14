@@ -211,6 +211,10 @@ extension AddingTagsToProfileViewController {
                         //then, I pass the category to the stack view, so it can create that respective stack view. 
                         if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
                             createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagCategory, pushOneButton: true)
+                        } else if specialtyTagEnumContains(title) {
+                            //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
+                            //we just want to create stack view with the title given, Hence:
+                            createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
                         }
                     case TagAttributes.SpecialtySingleSlider.rawValue:
                         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
