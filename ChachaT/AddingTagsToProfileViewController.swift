@@ -110,7 +110,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
                 //the users default tags do not already contain a specialty tag, so we want to create a generic one
                 //For Example: "Hair Color: None"
-                 self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons))
+                let tagTitle = specialtyButtonTag.rawValue + ": ?"
+                self.currentUserTags.append(Tag(title: tagTitle, attribute: .SpecialtyButtons))
             }
         }
         for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
@@ -206,7 +207,11 @@ extension AddingTagsToProfileViewController {
                         }
                     //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
                     case TagAttributes.SpecialtyButtons.rawValue:
-                        createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+                        //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
+                        //then, I pass the category to the stack view, so it can create that respective stack view. 
+                        if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
+                            createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagCategory, pushOneButton: true)
+                        }
                     case TagAttributes.SpecialtySingleSlider.rawValue:
                         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                         createSpecialtyTagEnviroment(false)
@@ -266,7 +271,8 @@ extension AddingTagsToProfileViewController {
                 }
             } else {
                 //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect.
-                 tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
+                let tagTitleWithRemovedSpecialtyPrefix = removeSpecialtyPrefixString(title)
+                tagAttributeActions(tagTitleWithRemovedSpecialtyPrefix, sender: sender, tagPressed: true, tagView: tagView)
             }
         }
     }

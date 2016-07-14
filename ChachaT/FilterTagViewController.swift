@@ -10,6 +10,7 @@ import UIKit
 import TagListView
 import SnapKit
 import Parse
+import Foundation
 
 public enum SpecialtyTags : String {
     case Gender
@@ -61,10 +62,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     var allParseTags: [Tag] = []
     var currentUserTags: [Tag] = []
     
-    @IBAction func searchButtonPressed(sender: AnyObject) {
-        
-    }
-    
     //search Variables
     var searchActive : Bool = false
 
@@ -104,6 +101,40 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
             }
             tagChoicesView.addTag(prefixString + tag.title)
         }
+    }
+    
+    //removes the Specialty prefix we had created earlier, for exampl, it will remove "Hair Color: "
+    func removeSpecialtyPrefixString(tagTitle: String) -> String {
+        //we are looking for colon and then advancing by two, so we pass the space. We only want to get something like "Redhead", not ": Redhead"
+        if let indexOfColonCharacter = tagTitle.characters.indexOf(":")?.advancedBy(2) {
+            let tagTitleSubstring = tagTitle.substringFromIndex(indexOfColonCharacter)
+            if tagHasSpecialtyAttribute(tagTitleSubstring) {
+                //we have a specialty tag, so we want to return a string with only the actual attribute.
+                return tagTitleSubstring
+            }
+        }
+        return tagTitle
+        
+//        if tagHasSpecialtyAttribute(tagTitle) {
+//            if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
+//               return tagTitle.substringFromIndex(indexOfColonCharacter)
+//            }
+//        }
+//        return tagTitle
+//        for specialtyTag in SpecialtyTags.specialtyButtonValues {
+//            if tagTitle.rangeOfString(specialtyTag.rawValue + ": ") != nil{
+//                //if the tagTitle has this range of string, ex: Hair Color: , and we also know that the tag was a specialty tag,
+//            }
+//        }
+    }
+    
+    func tagHasSpecialtyAttribute(tagTitle: String) -> Bool {
+        print(tagTitle)
+        for tag in currentUserTags where tag.title == tagTitle {
+            //the tag is a special tag as well as the particular tag that we are looking for, which means the tag has a specialty attribute
+            return true
+        }
+        return false
     }
     
     //Purpose: to find which specialty group we are dealing with
