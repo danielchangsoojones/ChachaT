@@ -248,9 +248,27 @@ extension AddingTagsToProfileViewController {
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
     
+    override func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool) {
+        super.createSpecialtyTagEnviroment(specialtyEnviromentHidden)
+        theYourTagsLabel.hidden = !specialtyEnviromentHidden
+    }
+    
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
-        tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
+        //the tag from the choices tag view was pressed
+        if sender.tag == 1 {
+            if searchActive {
+                //we are in the process of searching, so we are dealing with the choices tag view still, but we want searching functionality
+                changeTagListViewWidth(tagView, extend: true)
+                self.tagChoicesView.removeTag(title)
+                if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+                    self.tagChosenView.addTag(title)
+                }
+            } else {
+                //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect.
+                 tagAttributeActions(title, sender: sender, tagPressed: true, tagView: tagView)
+            }
+        }
     }
 }
 
@@ -288,6 +306,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         if searchText == "" {
             //no text, so we want to stay on the tagChoicesView
             resetTagChoicesViewList()
+            searchActive = false
         } else if(filtered.count == 0){
             //there is text, but it has no matches in the database
             if !(theSpecialtyTagEnviromentHolderView?.theSpecialtyView is TagListView) {
