@@ -23,6 +23,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     var allParseTags: [Tag] = []
     var currentUserTags: [Tag] = []
+    var chosenTagArray : [Tag] = []
     
     //search Variables
     var searchActive : Bool = false

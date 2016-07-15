@@ -18,7 +18,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
     @IBOutlet weak var theYourTagsLabel: UILabel!
     
-    var addToProfileTagArray : [Tag] = []
     var createdTag : TagView?
     var alreadySavedTags = false
     
@@ -26,7 +25,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         theActivityIndicator.startAnimating()
         theActivityIndicator.hidden = false
         theDoneButton.enabled = false
-        PFObject.saveAllInBackground(addToProfileTagArray) { (success, error) in
+        PFObject.saveAllInBackground(chosenTagArray) { (success, error) in
             if success {
                 self.theActivityIndicator.stopAnimating()
                 self.navigationController?.popViewControllerAnimated(true)
@@ -44,7 +43,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 //checking to see if the attribute is special
                 let attribute : TagAttributes = findFilterNameCategory(title) != nil ? .SpecialtyButtons : .Generic
                 let tag = Tag(title: title, attribute: attribute)
-                addToProfileTagArray.append(tag)
+                chosenTagArray.append(tag)
                 tagChoicesView.addTag(title)
             }
         }
@@ -54,7 +53,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     override func addToProfileTagArray(title: String) {
         let newTag = Tag(title: title, attribute: .Generic)
-        addToProfileTagArray.append(newTag)
+        chosenTagArray.append(newTag)
         self.currentUserTags.append(newTag)
         resetTagChoicesViewList()
     }
@@ -247,10 +246,10 @@ extension AddingTagsToProfileViewController {
                     tag.deleteInBackground()
                 }
                 //deleting the tag from addToProfileTagArray, so it doesn't save the original text to backend
-                self.addToProfileTagArray = self.addToProfileTagArray.filter({ (tag) -> Bool in
+                self.chosenTagArray = self.chosenTagArray.filter({ (tag) -> Bool in
                      return tag.title != originalTagText
                 })
-                self.addToProfileTagArray.append(newTag)
+                self.chosenTagArray.append(newTag)
             }
             self.tagChoicesView.layoutSubviews()
         }
@@ -265,12 +264,14 @@ extension AddingTagsToProfileViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
         //the tag from the choices tag view was pressed
+        //in storyboard, we made the tag for choices tag view = 1
         if sender.tag == 1 {
             if searchActive {
                 //we are in the process of searching, so we are dealing with the choices tag view still, but we want searching functionality
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 if !tagExistsInChosenTagListView(tagChosenView, title: title) {
+                    //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class
                     self.tagChosenView.addTag(title)
                 }
             } else {
