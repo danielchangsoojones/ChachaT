@@ -211,7 +211,7 @@ extension AddingTagsToProfileViewController {
                         //then, I pass the category to the stack view, so it can create that respective stack view. 
                         if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
                             createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagCategory, pushOneButton: true)
-                        } else if specialtyTagEnumContains(title) {
+                        } else if let _ = SpecialtyTags(rawValue: title) {
                             //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
                             //we just want to create stack view with the title given, Hence:
                             createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
@@ -282,6 +282,7 @@ extension AddingTagsToProfileViewController {
     }
 }
 
+//Do not need to refactor code below
 extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
@@ -312,7 +313,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        if searchText == "" {
+        if searchText.isEmpty {
             //no text, so we want to stay on the tagChoicesView
             searchActive = false
             resetTagChoicesViewList()

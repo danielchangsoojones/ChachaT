@@ -63,6 +63,7 @@
 		92B8DF391CE935AA00AFA518 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF381CE935AA00AFA518 /* libz.tbd */; };
 		92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
+		92CEC1141D392FBB005BD321 /* MainFiltering.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1131D392FBB005BD321 /* MainFiltering.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
 		92E59B071CF6782700B0B1A4 /* QuestionPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
@@ -130,6 +131,7 @@
 		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagEnums.swift; sourceTree = "<group>"; };
+		92CEC1131D392FBB005BD321 /* MainFiltering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFiltering.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionPopUpViewController.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
@@ -226,6 +228,7 @@
 				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
+				92CEC1131D392FBB005BD321 /* MainFiltering.swift */,
 			);
 			name = Tinder;
 			sourceTree = "<group>";
@@ -545,6 +548,7 @@
 				928A65B81D06035E0021C75C /* QuestionOnboardingViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */,
+				92CEC1141D392FBB005BD321 /* MainFiltering.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,

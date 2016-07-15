@@ -31,7 +31,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         super.viewDidLoad()
         addTagListViewAttributes()
         loadData()
-        setDataArray()
+        setSearchDataArray()
     }
     
     func addTagListViewAttributes() {
@@ -47,118 +47,27 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     //move to actual filtering page
     func setChoicesViewTags() {
         for tag in currentUserTags {
-            var prefixString = ""
-            let semiColonString = ": "
+            var tagTitle = ""
             switch tag.attribute {
-            case TagAttributes.Generic.rawValue: break
+            case TagAttributes.Generic.rawValue:
+                tagTitle = tag.title
             case TagAttributes.SpecialtyButtons.rawValue:
-                if let specialtyTitle = helper(tag.title) {
-                    prefixString = specialtyTitle
+                if let specialtyTitle = stringToSpecialtyTagTitle(tag.title) {
+                    tagTitle = specialtyTitle
                 }
-//                if let categoryName = findFilterNameCategory(tag.title) {
-//                    prefixString = categoryName.rawValue + semiColonString
-//                }
             case TagAttributes.SpecialtyRangeSlider.rawValue:
-                prefixString = SpecialtyTags.AgeRange.rawValue + semiColonString
+                break
             case TagAttributes.SpecialtySingleSlider.rawValue:
-                prefixString = SpecialtyTags.Location.rawValue + semiColonString
+                break
             default: break
             }
-//            tagChoicesView.addTag(prefixString + tag.title)
-            tagChoicesView.addTag(prefixString)
-        }
-    }
-    
-    //removes the Specialty prefix we had created earlier, for exampl, it will remove "Hair Color: "
-    func removeSpecialtyPrefixString(tagTitle: String) -> String {
-        if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
-            if tagTitle.containsString(": ?") {
-                //we have a specialty tag that does not have an attribute assigned to it, but we still want to have a stackview pop up when clicked, so the user can actually set it.
-                return tagTitle.substringToIndex(indexOfColonCharacter)
+            if !tagTitle.isEmpty {
+                //don't make a tag if it will just be an empty tag
+                 tagChoicesView.addTag(tagTitle)
             }
         }
-        
-        
-        if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
-            //we are looking for colon and then advancing by two, so we pass the space. We only want to get something like "Redhead", not ": Redhead"
-            let tagTitleSubstring = tagTitle.substringFromIndex(indexOfColonCharacter.advancedBy(2))
-            if tagHasSpecialtyAttribute(tagTitleSubstring) {
-                //we have a specialty tag, so we want to return a string with only the actual attribute.
-                return tagTitleSubstring
-            }
-        }
-        return tagTitle
-        
-//        if tagHasSpecialtyAttribute(tagTitle) {
-//            if let indexOfColonCharacter = tagTitle.characters.indexOf(":") {
-//               return tagTitle.substringFromIndex(indexOfColonCharacter)
-//            }
-//        }
-//        return tagTitle
-//        for specialtyTag in SpecialtyTags.specialtyButtonValues {
-//            if tagTitle.rangeOfString(specialtyTag.rawValue + ": ") != nil{
-//                //if the tagTitle has this range of string, ex: Hair Color: , and we also know that the tag was a specialty tag,
-//            }
-//        }
     }
     
-    func tagHasSpecialtyAttribute(tagTitle: String) -> Bool {
-        print(tagTitle)
-        for tag in currentUserTags where tag.title == tagTitle && tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
-            //the tag is a special tag as well as the particular tag that we are looking for, which means the tag has a specialty attribute
-            return true
-        }
-        return false
-    }
-    
-    //Purpose: to find which specialty group we are dealing with
-    //For Example: It figures out whether the given string should be with Hair Color, Race, ect.
-    func findFilterNameCategory(tagTitle: String) -> SpecialtyTags? {
-        for filterName in FilterNames.allValues where filterName.rawValue == tagTitle {
-                //we have a specialty generic tag
-                if FilterNames.genderAllValues.contains(filterName) {
-                    return .Gender
-                } else if FilterNames.hairColorAllValues.contains(filterName) {
-                    return .HairColor
-                } else if FilterNames.sexualityAllValues.contains(filterName) {
-                    return .Sexuality
-                } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
-                    return .PoliticalAffiliation
-                } else if FilterNames.raceAllValues.contains(filterName) {
-                    return .Race
-                }
-        }
-        //return nil because it was in none of the above cases, shouldn't reach this point
-        return nil
-    }
-    
-    //Purpose: If I have a string, I can't just use .conatins on array because it is looking for Specialty Tag enum to contain, not a type string
-    func specialtyTagEnumContains(string: String) -> Bool {
-        for specialtyTag in SpecialtyTags.specialtyButtonValues where specialtyTag.rawValue == string {
-            return true
-        }
-        return false
-    }
-    
-    //move to actual filtering page
-    //this adds specialty tags to the dictionary
-//    func setTagsInTagDictionary() {
-//        for defaultGenericTag in FilterNames.allValues {
-//            //setting generic tags that are pre-set like (Male, Black, ect.)
-//            currentUserTagDictionary[Tag(title: defaultGenericTag.rawValue)] = TagAttributes.Generic
-//        }
-//        //sets speciality tags like Gender, Sexuality, ect. because they create a special animation
-//        for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
-//            currentUserTagDictionary[Tag(title: specialtyButtonTag.rawValue)] = TagAttributes.SpecialtyButtons
-//        }
-//        for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
-//            currentUserTagDictionary[Tag(title: specialtySingleSliderTag.rawValue)] = TagAttributes.SpecialtySingleSlider
-//        }
-//        for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
-//            currentUserTagDictionary[Tag(title: specialtyRangeSliderTag.rawValue)] = TagAttributes.SpecialtyRangeSlider
-//        }
-//    }
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -167,38 +76,13 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
 }
 
 extension FilterTagViewController: TagListViewDelegate {
-//    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-//        //the tag from the choices tag view was pressed
-//        if sender.tag == 1 {
-//            if let tagAttribute = currentUserTagDictionary[title] {
-//                switch tagAttribute {
-//                case .Generic:
-//                    changeTagListViewWidth(tagView, extend: true)
-//                    self.tagChoicesView.removeTag(title)
-//                    if !tagExistsInChosenTagListView(tagChosenView, title: title) {
-//                        self.tagChosenView.addTag(title)
-//                    }
-//                case .SpecialtyButtons:
-//                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
-//                case .SpecialtySingleSlider:
-//                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
-//                    createSpecialtyTagEnviroment(false)
-//                case .SpecialtyRangeSlider:
-//                    theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
-//                    createSpecialtyTagEnviroment(false)
-//                }
-//            }
-//        }
-//    }
-    
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool) {
         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: true, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
         createSpecialtyTagEnviroment(false)
     }
     
     func tagExistsInChosenTagListView(tagListView: TagListView, title: String) -> Bool {
-        let tagViews = tagListView.tagViews
-        for tagView in tagViews {
+        for tagView in tagListView.tagViews {
             if tagView.titleLabel?.text == title {
                 return true
             }
@@ -243,11 +127,7 @@ extension FilterTagViewController: TagListViewDelegate {
             theScrollView.setContentOffset(CGPointMake(originalTagChosenViewMaxX - 100, 0), animated: true)
         }
     }
-    
-//    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-//        changeTagListViewWidth(tagView, extend: false)
-//        sender.removeTagView(tagView)
-//    }
+
 }
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {
@@ -288,7 +168,7 @@ extension FilterTagViewController {
     //TODO; right now, my search is pulling down the entire tag table and then doing search,
     //very ineffecient, and in future, I will have to do server side cloud code.
     //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
-    func setDataArray() {
+    func setSearchDataArray() {
         var alreadyContainsTagArray: [String] = []
         let query = PFQuery(className: "Tag")
         query.selectKeys(["title"])
