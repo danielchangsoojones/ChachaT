@@ -194,6 +194,17 @@ extension AddingTagsToProfileViewController {
         return false
     }
     
+    func tagPressedAttributeActions(title: String, tagView: TagView) {
+        for tag in currentUserTags where tag.title == title {
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue:
+                createEditingTextFieldPopUp(title, tagView: tagView)
+            case TagAttributes.SpecialtyButtons.rawValue:
+                
+            }
+        }
+    }
+    
     func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool, tagView: TagView) {
         if sender.tag == 1 {
             //we have chosen/removed something from the ChosenTagView
@@ -202,7 +213,7 @@ extension AddingTagsToProfileViewController {
                     case TagAttributes.Generic.rawValue:
                         if !genericTagIsSpecial(title) && tagPressed {
                             //we are dealing with a normal generic tag that was pressed
-                            createAlertTextFieldPopUp(title, tagView: tagView)
+                            createEditingTextFieldPopUp(title, tagView: tagView)
                         }
                     //TODO: Remove from Parse Backend when the tag is removed or have it all removed once we hit done
                     case TagAttributes.SpecialtyButtons.rawValue:
@@ -229,7 +240,8 @@ extension AddingTagsToProfileViewController {
         }
     }
     
-    func createAlertTextFieldPopUp(originalTagText: String, tagView: TagView) {
+    //Purpose: I want an editing SCLAlertView, with a textfield, to appear when the user taps a generic tag
+    func createEditingTextFieldPopUp(originalTagText: String, tagView: TagView) {
         let alert = SCLAlertView()
         let textField = alert.addTextField()
         textField.text = originalTagText
@@ -271,16 +283,17 @@ extension AddingTagsToProfileViewController {
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 if !tagExistsInChosenTagListView(tagChosenView, title: title) {
-                    //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class
+                    //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
                     self.tagChosenView.addTag(title)
                 }
             } else {
-                //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect.
+                //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
                 let tagTitleWithRemovedSpecialtyPrefix = removeSpecialtyPrefixString(title)
                 tagAttributeActions(tagTitleWithRemovedSpecialtyPrefix, sender: sender, tagPressed: true, tagView: tagView)
             }
         }
     }
+    
 }
 
 //Do not need to refactor code below
