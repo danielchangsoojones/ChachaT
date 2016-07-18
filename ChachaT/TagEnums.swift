@@ -60,8 +60,8 @@ public enum TagAttributes : String {
 //For example: "Black" would produce a SpecialtyTag of Race, and would return "Race: Black"
 func stringToSpecialtyTagTitle(tagTitle: String) -> String? {
     if let specialtyTag = findFilterNameCategory(tagTitle) {
-        //returns something like this: "Hair Color: Brunette"
-        return "\(specialtyTag.rawValue): \(tagTitle)"
+            //returns something like this: "Hair Color: Brunette"
+            return "\(specialtyTag.rawValue): \(tagTitle)"
     }
     //if it is not a specialty tag, then it just returns nil
     return nil

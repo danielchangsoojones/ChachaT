@@ -31,7 +31,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         addTagListViewAttributes()
-        loadData()
         setSearchDataArray()
     }
     
@@ -39,34 +38,6 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
         //did this in code, rather than total storyboard because it has a lot of redundancy
         tagChoicesView.addChoicesTagListViewAttributes()
         tagChosenView.addChosenTagListViewAttributes()
-    }
-    
-    func loadData() {
-        setChoicesViewTags()
-    }
-    
-    //move to actual filtering page
-    func setChoicesViewTags() {
-        for tag in currentUserTags {
-            var tagTitle = ""
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                tagTitle = tag.title
-            case TagAttributes.SpecialtyButtons.rawValue:
-                if let specialtyTitle = stringToSpecialtyTagTitle(tag.title) {
-                    tagTitle = specialtyTitle
-                }
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                break
-            case TagAttributes.SpecialtySingleSlider.rawValue:
-                break
-            default: break
-            }
-            if !tagTitle.isEmpty {
-                //don't make a tag if it will just be an empty tag
-                 tagChoicesView.addTag(tagTitle)
-            }
-        }
     }
     
     override func didReceiveMemoryWarning() {
@@ -109,6 +80,8 @@ extension FilterTagViewController: TagListViewDelegate {
         }
     }
     
+    
+    //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
         let originalTagChosenViewMaxX = tagChosenView.frame.maxX
         let tagWidth = tagView.intrinsicContentSize().width
