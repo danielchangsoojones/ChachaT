@@ -194,17 +194,6 @@ extension AddingTagsToProfileViewController {
         return false
     }
     
-    func tagPressedAttributeActions(title: String, tagView: TagView) {
-        for tag in currentUserTags where tag.title == title {
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                createEditingTextFieldPopUp(title, tagView: tagView)
-            case TagAttributes.SpecialtyButtons.rawValue:
-                
-            }
-        }
-    }
-    
     func tagAttributeActions(title: String, sender: TagListView, tagPressed: Bool, tagView: TagView) {
         if sender.tag == 1 {
             //we have chosen/removed something from the ChosenTagView
@@ -239,7 +228,7 @@ extension AddingTagsToProfileViewController {
             theSpecialtyTagEnviromentHolderView?.delegate = self
         }
     }
-    
+    //Do not need to refactor code below
     //Purpose: I want an editing SCLAlertView, with a textfield, to appear when the user taps a generic tag
     func createEditingTextFieldPopUp(originalTagText: String, tagView: TagView) {
         let alert = SCLAlertView()
@@ -294,9 +283,39 @@ extension AddingTagsToProfileViewController {
         }
     }
     
+    //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
+    //For Example: If the distance tag is pressed, then the tag displays a single button slider
+    func tagPressedAttributeActions(title: String, tagView: TagView) {
+        for tag in currentUserTags where tag.title == title {
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue:
+                createEditingTextFieldPopUp(title, tagView: tagView)
+            case TagAttributes.SpecialtyButtons.rawValue:
+                //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
+                //then, I pass the category to the stack view, so it can create that respective stack view.
+                if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagCategory, pushOneButton: true)
+                } else if let _ = SpecialtyTags(rawValue: title) {
+                    //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
+                    //we just want to create stack view with the title given, Hence:
+                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+                }
+            case TagAttributes.SpecialtySingleSlider.rawValue:
+                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
+                createSpecialtyTagEnviroment(false)
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
+                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
+                createSpecialtyTagEnviroment(false)
+            default:
+                //should never reach here
+                break
+            }
+        }
+        theSpecialtyTagEnviromentHolderView?.delegate = self
+    }
+    
 }
 
-//Do not need to refactor code below
 extension AddingTagsToProfileViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
