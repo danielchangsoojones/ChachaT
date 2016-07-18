@@ -147,36 +147,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         }
     }
     
-    //Purpose: to make an array of the already created specialty tags, that the user actually has in their profile, so then we can figure out which ones to make like "Hair Color: ?"
-    func createAlreadyCreatedSpecialtyTagArray() -> [SpecialtyTags] {
-        var alreadyCreatedSpecialtyTagArray : [SpecialtyTags] = []
-        //filling up the alreadyCreatedSpecialtyTagArray
-        for tag in self.currentUserTags where tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
-            //checking for tags with a specialty and adding to array
-            if let filterNameCategory = findFilterNameCategory(tag.title) {
-                alreadyCreatedSpecialtyTagArray.append(filterNameCategory)
-            }
-        }
-        return alreadyCreatedSpecialtyTagArray
-    }
-    
-    func addUnknownSpecialtyTagsToCurrentUserArray(alreadyCreatedSpecialtyTagArray: [SpecialtyTags]) {
-        for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
-            if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
-                //the users default tags do not already contain a specialty tag, so we want to create a generic one
-                //For Example: "Hair Color: ?"
-                self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons))
-            }
-        }
-    }
-    
-    func alreadyCreatedSpecialtyTagContainsTag(tagTitle: String, alreadyCreatedSpecialtyTagArray: [SpecialtyTags]) -> Bool {
-        if let specialtyTag = SpecialtyTags(rawValue: tagTitle) {
-            return alreadyCreatedSpecialtyTagArray.contains(specialtyTag)
-        }
-        return false
-    }
-    
     func changeTheChoicesTagView() {
         //the user should be able to remove his/her tags because now they are editing them
         tagChoicesView.enableRemoveButton = true
@@ -372,9 +342,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
     
     func resetTagChoicesViewList() {
         tagChoicesView.removeAllTags()
-        for tag in currentUserTags {
-            tagChoicesView.addTag(tag.title)
-        }
+        loadChoicesViewTags()
         createSpecialtyTagEnviroment(true)
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
