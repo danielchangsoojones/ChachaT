@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import TagListView
 
 //TODO: I think a subclass makes more sense to do set the attributes of the tag and have it useable in the storyboard, but
 //I could not figure out how to subclass the taglistView because it has IBInspectable

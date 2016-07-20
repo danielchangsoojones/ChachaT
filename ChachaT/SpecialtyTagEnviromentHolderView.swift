@@ -8,7 +8,6 @@
 
 import UIKit
 import SnapKit
-import TagListView
 
 public enum SpecialtyTagEnviroments {
     case DistanceSlider

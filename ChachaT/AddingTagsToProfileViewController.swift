@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import TagListView
 import Parse
 import SCLAlertView
 
@@ -117,6 +116,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             if !tagTitle.isEmpty {
                 //don't make a tag if it will just be an empty tag
                 tagChoicesView.addTag(tagTitle)
+                tagChoicesView.addSpecialtyTag(tagTitle)
             }
         }
     }
