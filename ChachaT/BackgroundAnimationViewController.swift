@@ -46,8 +46,8 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
         kolodaView.swipe(.Right)
     }
     @IBAction func searchButtonPressed(sender: UIBarButtonItem) {
-        let addingTagsToProfileViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewControllerWithIdentifier(String(FilterTagViewController)) as! AddingTagsToProfileViewController
-        presentViewControllerCustomTrasition(addingTagsToProfileViewController, transition: FadeTransition(), animated: true)
+        let filterQueryViewController = UIStoryboard(name: "Filtering", bundle: nil).instantiateViewControllerWithIdentifier(String(FilterQueryViewController)) as! FilterQueryViewController
+        presentViewControllerCustomTrasition(filterQueryViewController, transition: FadeTransition(), animated: true)
     }
     
     //MARK: Lifecycle

@@ -397,21 +397,3 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }
-
-extension AddingTagsToProfileViewController: MagicMoveable {
-    var isMagic: Bool {
-        return true
-    }
-    
-    var duration: NSTimeInterval {
-        return 0.5
-    }
-    
-    var spring: CGFloat {
-        return 0.7
-    }
-    
-    var magicViews: [UIView] {
-        return [tagChoicesView]
-    }
-}
