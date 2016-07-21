@@ -369,7 +369,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             }
             createSpecialtyTagEnviroment(false)
             theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
-            theSpecialtyTagEnviromentHolderView?.setButtonText("Create")
+            theSpecialtyTagEnviromentHolderView?.setButtonText("Create New Tag?")
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true

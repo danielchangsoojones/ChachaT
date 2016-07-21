@@ -75,6 +75,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
             break
         case .CreateNewTag:
             theSpecialtyView = tagListView
+            theTitleLabel.text = "That tag doesn't exist yet"
         }
         createStackView()
     }
@@ -124,8 +125,8 @@ class SpecialtyTagEnviromentHolderView: UIView {
     }
     
     func setButtonText(text: String) {
-        theDoneButton.setTitle(createTagButtonText, forState: .Normal)
         createTagButtonText = text
+        theDoneButton.setTitle(createTagButtonText, forState: .Normal)
     }
     
 }
