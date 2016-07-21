@@ -50,6 +50,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         tagChosenViewWidthConstraint.constant = 0
     }
     
+    //TODO: change this code to actually deal with specialty Tags? Maybe, maybe it doesn't have to do that.
     override func addToProfileTagArray(title: String) {
         let newTag = Tag(title: title, attribute: .Generic)
         chosenTagArray.append(newTag)
@@ -93,7 +94,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         }
     }
     
-    //move to actual filtering page
     func loadChoicesViewTags() {
         for tag in currentUserTags {
             var tagTitle = ""
