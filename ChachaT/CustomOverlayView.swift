@@ -17,5 +17,28 @@ class CustomOverlayView: OverlayView {
     override func layoutSubviews() {
         super.layoutSubviews()
     }
+    
+    @IBOutlet lazy var overlayImageView: UIImageView! = {
+        [unowned self] in
+        
+        var imageView = UIImageView(frame: self.bounds)
+        self.addSubview(imageView)
+        
+        return imageView
+        }()
+    
+    override var overlayState: SwipeResultDirection?  {
+        didSet {
+            switch overlayState {
+            case .Left? :
+                overlayImageView.image = UIImage(named: overlayLeftImageName)
+            case .Right? :
+                overlayImageView.image = UIImage(named: overlayRightImageName)
+            default:
+                overlayImageView.image = nil
+            }
+            
+        }
+    }
 
 }

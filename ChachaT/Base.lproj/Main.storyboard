@@ -67,9 +67,9 @@
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdX-3j-BI4" userLabel="Filter Button">
                                         <rect key="frame" x="0.0" y="12" width="59" height="56"/>
-                                        <state key="normal" image="Filtering Main Page Button"/>
+                                        <state key="normal" title="yes"/>
                                         <connections>
-                                            <segue destination="daK-C5-wmi" kind="custom" identifier="FilterPageBlurrySegue" customClass="BlurryModalSegue" id="pbG-G9-gXM"/>
+                                            <action selector="approveCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XEq-6b-55l"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-4C-MkM" userLabel="Skip Button">
@@ -595,7 +595,6 @@
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Chacha Circle Button" width="78" height="78"/>
         <image name="Custom Question Bubble" width="340" height="68"/>
-        <image name="Filtering Main Page Button" width="59" height="59"/>
         <image name="Profile Main Page Button" width="60" height="59"/>
         <image name="Question Bubble" width="340" height="68"/>
         <image name="Report User Button" width="5" height="20"/>
@@ -604,6 +603,5 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YWU-JH-Jpm"/>
-        <segue reference="pbG-G9-gXM"/>
     </inferredMetricsTieBreakers>
 </document>

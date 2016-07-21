@@ -43,8 +43,12 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
     }
     
     @IBAction func skipCard(sender: AnyObject) {
+        kolodaView.swipe(.Left)
+    }
+    @IBAction func approveCard(sender: UIButton) {
         kolodaView.swipe(.Right)
     }
+    
     @IBAction func searchButtonPressed(sender: UIBarButtonItem) {
         let filterQueryViewController = UIStoryboard(name: "Filtering", bundle: nil).instantiateViewControllerWithIdentifier(String(FilterQueryViewController)) as! FilterQueryViewController
         presentViewControllerCustomTrasition(filterQueryViewController, transition: FadeTransition(), animated: true)
@@ -303,20 +307,12 @@ extension BackgroundAnimationViewController {
 extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case FilterPageBlurrySegue
         case MainTinderPageToQuestionOnboardingSegue
         case OnboardingPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        case .FilterPageBlurrySegue:
-            let destinationVC = segue.destinationViewController as! FilterViewController
-            destinationVC.delegate = self
-            let blurrySegue = segue as! BlurryModalSegue
-            blurrySegue.backingImageTintColor = BlurryFilteringPageBackground
-            blurrySegue.backingImageSaturationDeltaFactor = 0.2
-        // Do some things
         case .MainTinderPageToQuestionOnboardingSegue:
             let navigationVC = segue.destinationViewController as! UINavigationController
             let destinationVC = navigationVC.viewControllers[0] as! QuestionPopUpViewController
