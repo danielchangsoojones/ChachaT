@@ -147,7 +147,7 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
                 //because if I just used the tagTitle, then if multiple special tags have ?, then they all change instead of just one.
                 if specialtyTagView.specialtyTagTitle == filterNameCategory.rawValue {
                     specialtyTagView.setTitle(newTagTitle, forState: .Normal)
-                    let newTag = Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons)
+                    let newTag = Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons, specialtyCategoryTitle: SpecialtyTags(rawValue: specialtyTagView.specialtyTagTitle))
                     self.currentUserTags.append(newTag)
                     chosenTagArray.append(newTag)
                     tagChoicesView.layoutSubviews()
@@ -191,7 +191,7 @@ extension FilterTagViewController {
     
     func addSpecialtyTagsToSearchDataArray() {
         for filterName in FilterNames.allValues {
-            allParseTags.append(Tag(title: filterName.rawValue, attribute: TagAttributes.SpecialtyButtons))
+            allParseTags.append(Tag(title: filterName.rawValue, attribute: TagAttributes.SpecialtyButtons, specialtyCategoryTitle: findFilterNameCategory(filterName.rawValue)))
         }
     }
 }

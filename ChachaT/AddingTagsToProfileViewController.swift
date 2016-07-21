@@ -40,9 +40,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBAction func addToProfilePressed(sender: UIButton) {
         for tagView in tagChosenView.tagViews {
             if let title = tagView.currentTitle {
-                //checking to see if the attribute is special
-                let attribute : TagAttributes = findFilterNameCategory(title) != nil ? .SpecialtyButtons : .Generic
-                let tag = Tag(title: title, attribute: attribute)
+                let tag = createNewTag(title)
                 chosenTagArray.append(tag)
                 self.currentUserTags.append(tag)
                 addTagOrSpecialtyTag(title, addToChosenView: false)
@@ -54,10 +52,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     //TODO: change this code to actually deal with specialty Tags? Maybe, maybe it doesn't have to do that.
     override func addToProfileTagArray(title: String) {
-        let newTag = Tag(title: title, attribute: .Generic)
+        let newTag = createNewTag(title)
         chosenTagArray.append(newTag)
         self.currentUserTags.append(newTag)
         resetTagChoicesViewList()
+    }
+    
+    func createNewTag(title: String) -> Tag {
+        let attribute : TagAttributes = findFilterNameCategory(title) != nil ? .SpecialtyButtons : .Generic
+        let specialtyTagCategory = findFilterNameCategory(title)
+        return Tag(title: title, attribute: attribute, specialtyCategoryTitle: specialtyTagCategory)
     }
     
     override func viewDidLoad() {
@@ -102,7 +106,9 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             case TagAttributes.Generic.rawValue:
                 tagChoicesView.addTag(tag.title)
             case TagAttributes.SpecialtyButtons.rawValue:
-                if let specialtyTitle = findFilterNameCategory(tag.title)?.rawValue {
+                if tag.title == "None" {
+                    tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: tag.specialtyCategoryTitle!)
+                } else if let specialtyTitle = findFilterNameCategory(tag.title)?.rawValue {
                     //we were passed a value like "Black", which is part of the race category, so we make "Black" the title tag, and "Race" the specialty tag
                     tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyTitle)
                 } else {
@@ -128,24 +134,27 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         //this array is to hold any specialtyTags that the user has already set, hence, we do not need to set a defualt blank one
         var alreadyCreatedSpecialtyTagArray : [SpecialtyTags] = []
         for tag in currentUserTags where tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
-            //checking for tags with a specialty and adding to array
-            if let filterNameCategory = findFilterNameCategory(tag.title) {
-                alreadyCreatedSpecialtyTagArray.append(filterNameCategory)
+            if let specialtyCategoryName = tag.specialtyCategoryTitle {
+                if let specialtyTag = SpecialtyTags(rawValue: specialtyCategoryName) {
+                    //checking for tags with a specialty and adding to array
+                    alreadyCreatedSpecialtyTagArray.append(specialtyTag)
+                }
             }
         }
+        print(alreadyCreatedSpecialtyTagArray)
         for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
             if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
                 //the users default tags do not already contain a specialty tag, so we want to create a generic one
                 //For Example: "Hair Color: ?"
-                self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons))
+                self.currentUserTags.append(Tag(title: specialtyButtonTag.rawValue, attribute: .SpecialtyButtons, specialtyCategoryTitle: specialtyButtonTag))
             }
         }
         for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
-            self.currentUserTags.append(Tag(title: specialtySingleSliderTag.rawValue, attribute: .SpecialtySingleSlider))
+            self.currentUserTags.append(Tag(title: specialtySingleSliderTag.rawValue, attribute: .SpecialtySingleSlider, specialtyCategoryTitle: specialtySingleSliderTag))
         }
-        for _ in SpecialtyTags.specialtyRangeSliderValues {
+        for specialtyRangeSlider in SpecialtyTags.specialtyRangeSliderValues {
             let age : Int = User.currentUser()!.calculateBirthDate()!
-            self.currentUserTags.append(Tag(title: String(age), attribute: .SpecialtyRangeSlider))
+            self.currentUserTags.append(Tag(title: String(age), attribute: .SpecialtyRangeSlider, specialtyCategoryTitle: specialtyRangeSlider))
         }
     }
     
@@ -304,7 +313,7 @@ extension AddingTagsToProfileViewController {
         alert.addButton("Done") {
             if let editedTagText = textField.text {
                 tagView.setTitle(editedTagText, forState: .Normal)
-                let newTag = Tag(title: editedTagText, attribute: .Generic)
+                let newTag = Tag(title: editedTagText, attribute: .Generic, specialtyCategoryTitle: nil)
                 self.currentUserTags.append(newTag)
                 for tag in self.currentUserTags where tag.title == originalTagText {
                     //delete element in array

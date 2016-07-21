@@ -23,6 +23,7 @@ class StackViewTagButtons: UIStackView {
     var pushOneButton = false
     var buttonArray: [UIButton] = []
     var originalTagTitle : String = "?"
+    var filterCategory : String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,6 +32,7 @@ class StackViewTagButtons: UIStackView {
     
     init(filterCategory: String, addNoneButton: Bool, delegate: StackViewTagButtonsDelegate, pushOneButton: Bool) {
         super.init(frame: CGRectMake(0, 0, 200, 200))
+        self.filterCategory = filterCategory
         setStackViewProperties()
         self.delegate = delegate
         self.addButtonsToStackView(filterCategory, addNoneButton: addNoneButton)
@@ -63,18 +65,18 @@ class StackViewTagButtons: UIStackView {
         default:
             break
         }
-        if addNoneButton {
-            //if we are on editing tags for profile page, then the stack view should have a none button
-            let button: UIButton = {
-                $0.setTitle(noneButtonText, forState: .Normal)
-                changeButtonHighlight(true, button: $0, changeChosenTags: false, changeChoicesTag: false)
-                $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
-                $0.layer.cornerRadius = 10
-                return $0
-            }(UIButton())
-            buttonArray.append(button)
-            self.addArrangedSubview(button)
-        }
+//        if addNoneButton {
+//            //if we are on editing tags for profile page, then the stack view should have a none button
+//            let button: UIButton = {
+//                $0.setTitle(noneButtonText, forState: .Normal)
+//                changeButtonHighlight(true, button: $0, changeChosenTags: false, changeChoicesTag: false)
+//                $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
+//                $0.layer.cornerRadius = 10
+//                return $0
+//            }(UIButton())
+//            buttonArray.append(button)
+//            self.addArrangedSubview(button)
+//        }
     }
     
     func iterateThroughFilterNames(filterNamesArray: [FilterNames]) {
@@ -118,21 +120,10 @@ class StackViewTagButtons: UIStackView {
                     //we are unhighlighting the button
                     button.backgroundColor = ChachaBombayGrey
                     button.setTitleColor(ChachaTeal, forState: .Normal)
-//                    if changeChosenTags {
-//                        delegate!.removeChosenTag(tagTitle)
-//                    } else if changeChoicesTag {
-//                        //doing something with the choices tag
-//                        delegate?.removeChoicesTag(tagTitle)
-//                    }
                 } else {
                     //highlight the button
                     button.backgroundColor = ChachaTeal
                     button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
-                    if changeChosenTags {
-                        if tagTitle != noneButtonText {
-//                            delegate?.createChosenTag(tagTitle)
-                        }
-                    }
                 }
             }
         }
@@ -144,9 +135,11 @@ class StackViewTagButtons: UIStackView {
             if button == pushedButton {
                 //set the pushed button to highlighted
                 changeButtonHighlight(false, button: pushedButton, changeChosenTags: true, changeChoicesTag: true)
-                if let filterNameCategory = findFilterNameCategory(button.titleLabel!.text!) {
-                    delegate?.editSpecialtyTagView((button.titleLabel?.text)!, originalTagTitle: originalTagTitle, filterNameCategory: filterNameCategory)
+//                if let filterNameCategory = findFilterNameCategory(button.titleLabel!.text!) {
+                if let filterCategory = SpecialtyTags(rawValue: filterCategory) {
+                    delegate?.editSpecialtyTagView((button.titleLabel?.text)!, originalTagTitle: originalTagTitle, filterNameCategory: filterCategory)
                 }
+//                }
             } else {
                 //set the non-pushed buttons all to unhighlighted
                 changeButtonHighlight(true, button: button, changeChosenTags: true, changeChoicesTag: true)
