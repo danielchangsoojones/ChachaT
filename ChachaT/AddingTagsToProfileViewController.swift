@@ -95,29 +95,28 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     }
     
     func loadChoicesViewTags() {
+        let questionMarkString = "?"
         for tag in currentUserTags {
-            var tagTitle = ""
             switch tag.attribute {
             case TagAttributes.Generic.rawValue:
-                tagTitle = tag.title
+                tagChoicesView.addTag(tag.title)
             case TagAttributes.SpecialtyButtons.rawValue:
                 if let specialtyTitle = findFilterNameCategory(tag.title)?.rawValue {
                     //we were passed a value like "Black", which is part of the race category, so we make "Black" the title tag, and "Race" the specialty tag
                     tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyTitle)
                 } else {
                     //it is unknown specialty tag only if the alreadyCreatedSpecialtyTagArray does not contain it. Hence, we have to create a tag like "Hair Color: ?"
-                    tagChoicesView.addSpecialtyTag("?", specialtyTagTitle: tag.title)
+                    tagChoicesView.addSpecialtyTag(questionMarkString, specialtyTagTitle: tag.title)
                 }
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                break
             case TagAttributes.SpecialtySingleSlider.rawValue:
-                break
+                let currentUser = User.currentUser()
+                if let age = currentUser?.calculateBirthDate() {
+                    //we know the users current bday, so we make something like "Age: 19"
+                    tagChoicesView.addSpecialtyTag(String(age), specialtyTagTitle: "Age")
+                } else {
+                    tagChoicesView.addSpecialtyTag(questionMarkString, specialtyTagTitle: "Age")
+                }
             default: break
-            }
-            if !tagTitle.isEmpty {
-                //don't make a tag if it will just be an empty tag
-                tagChoicesView.addTag(tagTitle)
-                
             }
         }
     }
@@ -143,8 +142,9 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
             self.currentUserTags.append(Tag(title: specialtySingleSliderTag.rawValue, attribute: .SpecialtySingleSlider))
         }
-        for specialtyRangeSliderTag in SpecialtyTags.specialtyRangeSliderValues {
-            self.currentUserTags.append(Tag(title: specialtyRangeSliderTag.rawValue, attribute: .SpecialtyRangeSlider))
+        for _ in SpecialtyTags.specialtyRangeSliderValues {
+            let age : Int = User.currentUser()!.calculateBirthDate()!
+            self.currentUserTags.append(Tag(title: String(age), attribute: .SpecialtyRangeSlider))
         }
     }
     
@@ -227,6 +227,7 @@ extension AddingTagsToProfileViewController {
     //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
     //For Example: If the distance tag is pressed, then the tag displays a single button slider
     func tagPressedAttributeActions(title: String, tagView: TagView) {
+        //using or statement because if the user was passed a number, then it is the age number, and we still want to proceed with going to the tag attribute
         for tag in currentUserTags where tag.title == title {
             switch tag.attribute {
             case TagAttributes.Generic.rawValue:
@@ -245,14 +246,34 @@ extension AddingTagsToProfileViewController {
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false)
             case TagAttributes.SpecialtyRangeSlider.rawValue:
-                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .AgeRangeSlider)
-                createSpecialtyTagEnviroment(false)
+                createBirthdayDatePickerPop()
             default:
                 //should never reach here
                 break
             }
         }
         theSpecialtyTagEnviromentHolderView?.delegate = self
+    }
+    
+    func createBirthdayDatePickerPop() {
+        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
+            (birthday) -> Void in
+            let calendar : NSCalendar = NSCalendar.currentCalendar()
+            let now = NSDate()
+            let ageComponents = calendar.components(.Year,
+                    fromDate: birthday,
+                    toDate: now,
+                    options: [])
+            for tagView in self.tagChoicesView.tagViews where tagView is SpecialtyTagView {
+                let specialtyTagView = tagView as! SpecialtyTagView
+                if specialtyTagView.specialtyTagTitle == "Age" {
+                    tagView.setTitle("\(ageComponents.year)", forState: .Normal)
+                }
+            }
+            User.currentUser()!.birthDate = birthday
+            //TODO: I probably should be doing something to make sure this actually saves, in case they exit the app very fast before it saves.
+            User.currentUser()!.saveInBackground()
+            }
     }
     
     //Purpose: I want an editing SCLAlertView, with a textfield, to appear when the user taps a generic tag
