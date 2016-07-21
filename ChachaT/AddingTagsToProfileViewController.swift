@@ -44,7 +44,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 let attribute : TagAttributes = findFilterNameCategory(title) != nil ? .SpecialtyButtons : .Generic
                 let tag = Tag(title: title, attribute: attribute)
                 chosenTagArray.append(tag)
-                tagChoicesView.addTag(title)
+                self.currentUserTags.append(tag)
+                addTagOrSpecialtyTag(title, addToChosenView: false)
             }
         }
         tagChosenView.removeAllTags()

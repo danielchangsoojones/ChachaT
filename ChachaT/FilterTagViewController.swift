@@ -22,6 +22,7 @@ class FilterTagViewController: OverlayAnonymousFlowViewController {
     
     var allParseTags: [Tag] = []
     var currentUserTags: [Tag] = []
+    //Purpose: this array is for when you add a tag to your profile. It holds all the tags you added to profile, and then when you hit done. It will save them all to Parse.
     var chosenTagArray : [Tag] = []
     
     //search Variables
