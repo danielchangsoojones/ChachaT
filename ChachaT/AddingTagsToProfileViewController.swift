@@ -227,18 +227,6 @@ extension AddingTagsToProfileViewController {
     
     //Purpose: the title might be a category name, "?", or just a generic name, so I need to create the correct title
     func setCorrectTitle(title: String, tagView: TagView) -> String {
-        //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
-        //then, I pass the category to the stack view, so it can create that respective stack view.
-//        if FilterNames.allValues.contains(FilterNames(rawValue: title)) {
-//            return
-//        }
-//        if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
-//            return specialtyTagCategory
-//        } else if let _ = SpecialtyTags(rawValue: title) {
-//            //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
-//            //we just want to create stack view with the title given, Hence:
-//            return title
-//        }
     if title == questionMarkString {
             //the tag that was pressed was something like this "Hair Color: ?"
             if let specialtyTagView = tagView as? SpecialtyTagView {
