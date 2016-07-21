@@ -110,6 +110,9 @@ class StackViewTagButtons: UIStackView {
             chooseOneButton(sender, buttonArray: buttonArray)
         } else {
             changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true, changeChoicesTag: true)
+            if let buttonTitle = sender.titleLabel?.text {
+                 delegate?.createChosenTag(buttonTitle)
+            }
         }
     }
     

@@ -141,7 +141,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 }
             }
         }
-        print(alreadyCreatedSpecialtyTagArray)
         for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
             if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
                 //the users default tags do not already contain a specialty tag, so we want to create a generic one
@@ -206,8 +205,6 @@ extension AddingTagsToProfileViewController {
             //For Example: "Hair Color: ?"
         }
     }
-    
-    //Do not need to refactor code below
     
     override func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool) {
         super.createSpecialtyTagEnviroment(specialtyEnviromentHidden)
