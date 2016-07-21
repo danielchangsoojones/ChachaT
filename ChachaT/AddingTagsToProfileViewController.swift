@@ -19,6 +19,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     var createdTag : TagView?
     var alreadySavedTags = false
+    let questionMarkString = "?"
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
         theActivityIndicator.startAnimating()
@@ -95,7 +96,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     }
     
     func loadChoicesViewTags() {
-        let questionMarkString = "?"
         for tag in currentUserTags {
             switch tag.attribute {
             case TagAttributes.Generic.rawValue:
@@ -219,9 +219,28 @@ extension AddingTagsToProfileViewController {
                 }
             } else {
                 //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
-                tagPressedAttributeActions(title, tagView: tagView)
+                tagPressedAttributeActions(setCorrectTitle(title, tagView: tagView), tagView: tagView)
             }
         }
+    }
+    
+    //Purpose: the title might be a category name, "?", or just a generic name, so I need to create the correct title
+    func setCorrectTitle(title: String, tagView: TagView) -> String {
+        //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
+        //then, I pass the category to the stack view, so it can create that respective stack view.
+        if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
+            return specialtyTagCategory
+        } else if let _ = SpecialtyTags(rawValue: title) {
+            //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
+            //we just want to create stack view with the title given, Hence:
+            return title
+        } else if title == questionMarkString {
+            //the tag that was pressed was something like this "Hair Color: ?"
+            if let specialtyTagView = tagView as? SpecialtyTagView {
+                return specialtyTagView.specialtyTagTitle
+            }
+        }
+        return ""
     }
     
     //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
@@ -233,15 +252,7 @@ extension AddingTagsToProfileViewController {
             case TagAttributes.Generic.rawValue:
                 createEditingTextFieldPopUp(title, tagView: tagView)
             case TagAttributes.SpecialtyButtons.rawValue:
-                //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
-                //then, I pass the category to the stack view, so it can create that respective stack view.
-                if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
-                    createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagCategory, pushOneButton: true)
-                } else if let _ = SpecialtyTags(rawValue: title) {
-                    //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
-                    //we just want to create stack view with the title given, Hence:
-                    createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
-                }
+                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
             case TagAttributes.SpecialtySingleSlider.rawValue:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false)
