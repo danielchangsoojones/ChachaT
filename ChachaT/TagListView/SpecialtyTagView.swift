@@ -29,7 +29,7 @@ class SpecialtyTagView: TagView {
     }
     
     private func addSpecialtySubviews(tagTitle: String, specialtyTagTitle: String) {
-        let yellowView: UIView = {
+        let specialtyAreaView: UIView = {
             $0.backgroundColor = .blueColor()
             return $0
         }(UIView())
@@ -41,15 +41,18 @@ class SpecialtyTagView: TagView {
             return $0
         }(UILabel())
         
-        self.addSubview(yellowView)
+        self.addSubview(specialtyAreaView)
         self.addSubview(theSpecialtyLabel)
         
-        yellowView.snp_makeConstraints { (make) in
+        //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
+        specialtyAreaView.userInteractionEnabled = false
+        
+        specialtyAreaView.snp_makeConstraints { (make) in
             make.bottom.top.leading.equalTo(self)
             make.width.equalTo(calculateSpecialtyTagAreaWidth())
         }
         theSpecialtyLabel.snp_makeConstraints { (make) in
-            make.center.equalTo(yellowView)
+            make.center.equalTo(specialtyAreaView)
         }
     }
     
