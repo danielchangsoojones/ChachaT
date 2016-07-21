@@ -138,8 +138,10 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             tag.deleteInBackground()
         }
         if let specialtyTagCategory = findFilterNameCategory(newTagTitle)?.rawValue {
-            self.currentUserTags.append(Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons))
+            let newTag = Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons)
+            self.currentUserTags.append(newTag)
             tagChoicesView.addSpecialtyTag(newTagTitle, specialtyTagTitle: specialtyTagCategory)
+            chosenTagArray.append(newTag)
         }
     }
 }
