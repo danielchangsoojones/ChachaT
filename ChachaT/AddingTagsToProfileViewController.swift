@@ -141,7 +141,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
                 }
             }
         }
-        print(alreadyCreatedSpecialtyTagArray)
         for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
             if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
                 //the users default tags do not already contain a specialty tag, so we want to create a generic one
@@ -206,8 +205,6 @@ extension AddingTagsToProfileViewController {
             //For Example: "Hair Color: ?"
         }
     }
-    
-    //Do not need to refactor code below
     
     override func createSpecialtyTagEnviroment(specialtyEnviromentHidden: Bool) {
         super.createSpecialtyTagEnviroment(specialtyEnviromentHidden)
@@ -395,23 +392,5 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
         loadChoicesViewTags()
         createSpecialtyTagEnviroment(true)
         theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
-    }
-}
-
-extension AddingTagsToProfileViewController: MagicMoveable {
-    var isMagic: Bool {
-        return true
-    }
-    
-    var duration: NSTimeInterval {
-        return 0.5
-    }
-    
-    var spring: CGFloat {
-        return 0.7
-    }
-    
-    var magicViews: [UIView] {
-        return [tagChoicesView]
     }
 }
