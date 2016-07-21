@@ -130,22 +130,29 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
         return tagExistsInChosenTagListView(tagChosenView, title: tagTitle)
     }
     
-    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String) {
-        //TODO: I should be editing the tag view, not completely create a new one, because that makes all the tags rearrange. But, when I tried to edit a tag view, it would not layout subviews correctly. And, I didn't want to spend all this time
-        //I'll probably have to override layout subviews for the SpecialtyTagView
-        tagChoicesView.removeTag(originalTagTitle)
-        for tag in self.currentUserTags where tag.title == originalTagTitle{
+    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, filterNameCategory: SpecialtyTags) {
+        for tag in self.currentUserTags where tag.title == originalTagTitle {
             //delete element in array
-            self.currentUserTags.removeAtIndex(self.currentUserTags.indexOf(tag)!)
+            if let tagIndex = self.currentUserTags.indexOf(tag) {
+                 self.currentUserTags.removeAtIndex(tagIndex)
+            }
             //remove the previous tag from the actual backend
             //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
             tag.deleteInBackground()
         }
-        if let specialtyTagCategory = findFilterNameCategory(newTagTitle)?.rawValue {
-            let newTag = Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons)
-            self.currentUserTags.append(newTag)
-            tagChoicesView.addSpecialtyTag(newTagTitle, specialtyTagTitle: specialtyTagCategory)
-            chosenTagArray.append(newTag)
+        
+        for tagView in tagChoicesView.tagViews where tagView.titleLabel?.text == originalTagTitle {
+            if let specialtyTagView = tagView as? SpecialtyTagView {
+                //I am trying to pinpoint the specialtyTagView that has both the correct title and correct filter category title
+                //because if I just used the tagTitle, then if multiple special tags have ?, then they all change instead of just one.
+                if specialtyTagView.specialtyTagTitle == filterNameCategory.rawValue {
+                    specialtyTagView.setTitle(newTagTitle, forState: .Normal)
+                    let newTag = Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons)
+                    self.currentUserTags.append(newTag)
+                    chosenTagArray.append(newTag)
+                    tagChoicesView.layoutSubviews()
+                }
+            }
         }
     }
 }

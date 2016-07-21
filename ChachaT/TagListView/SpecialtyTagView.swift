@@ -84,4 +84,13 @@ class SpecialtyTagView: TagView {
         return totalSize
     }
     
+    //need to override becuase when I set the button title, it was not setting the tagTitle variable in this class
+    //hence, when we would say layoutSubviews was not changing to the new size because it still thought it was the old tagTitle
+    override func setTitle(title: String?, forState state: UIControlState) {
+        super.setTitle(title, forState: .Normal)
+        if let title = title {
+            tagTitle = title
+        }
+    }
+    
 }
