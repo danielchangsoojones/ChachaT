@@ -662,6 +662,9 @@
                                                         <exclude reference="hUV-8T-TUR"/>
                                                     </mask>
                                                 </variation>
+                                                <connections>
+                                                    <action selector="searchButtonPressed:" destination="I1A-ko-WaS" eventType="touchUpInside" id="QMH-g2-Ptu"/>
+                                                </connections>
                                             </button>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

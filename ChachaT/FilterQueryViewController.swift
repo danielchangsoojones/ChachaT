@@ -10,6 +10,10 @@ import UIKit
 
 class FilterQueryViewController: FilterTagViewController {
 
+    @IBAction func searchButtonPressed(sender: UIButton) {
+        self.dismissViewControllerAnimated(true, completion: nil)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDefaultTags()
@@ -34,11 +38,25 @@ extension FilterQueryViewController {
             tagView.backgroundColor = UIColor.blueColor()
             currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtyButtons, specialtyCategoryTitle: specialtyTag))
         }
+        //adding in generic tags
+        let query = Tag.query()
+        query?.whereKey("attribute", equalTo: TagAttributes.Generic.rawValue)
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+            for tag in objects as! [Tag] {
+                self.currentUserTags.append(tag)
+                self.tagChoicesView.addTag(tag.title)
+            }
+        })
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         for tag in currentUserTags where tag.specialtyCategoryTitle == title {
             createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false)
+        }
+        for tag in currentUserTags where tag.attribute == TagAttributes.Generic.rawValue && tag.title == title {
+            let tagView = tagChosenView.addTag(tag.title)
+            tagChoicesView.removeTag(tag.title)
+            changeTagListViewWidth(tagView, extend: true)
         }
     }
 }
