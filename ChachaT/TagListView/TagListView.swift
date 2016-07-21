@@ -323,8 +323,8 @@ public class TagListView: UIView {
     }
     
     //created for example
-    public func addSpecialtyTag(title: String) -> TagView {
-        let tagView = SpecialtyTagView(tagTitle: "hi", specialtyTagTitle: "Race")
+    public func addSpecialtyTag(tagTitle: String, specialtyTagTitle: String) -> TagView {
+        let tagView = SpecialtyTagView(tagTitle: tagTitle, specialtyTagTitle: specialtyTagTitle)
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
         tagView.tagBackgroundColor = tagBackgroundColor
@@ -400,3 +400,23 @@ public class TagListView: UIView {
         }
     }
 }
+
+//TODO: I think a subclass makes more sense to do set the attributes of the tag and have it useable in the storyboard, but
+//I could not figure out how to subclass the taglistView because it has IBInspectable
+//attributes in the storyboar
+extension TagListView {
+    func addChoicesTagListViewAttributes() {
+        self.tagBackgroundColor = ChachaTeal.colorWithAlphaComponent(0.66)
+        self.cornerRadius = 9
+        self.paddingY = 6
+        self.textColor = PeriwinkleGray
+        self.alignment = .Center
+    }
+    
+    func addChosenTagListViewAttributes() {
+        addChoicesTagListViewAttributes()
+        self.enableRemoveButton = true
+    }
+}
+
+

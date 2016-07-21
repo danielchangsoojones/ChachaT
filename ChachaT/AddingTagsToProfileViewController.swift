@@ -101,11 +101,12 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             case TagAttributes.Generic.rawValue:
                 tagTitle = tag.title
             case TagAttributes.SpecialtyButtons.rawValue:
-                //it is unknown specialty tag only if the alreadyCreatedSpecialtyTagArray does not contain it. Hence, we have to create a tag like "Hair Color: ?"
-                if let specialtyTitle = stringToSpecialtyTagTitle(tag.title) {
-                    tagTitle = specialtyTitle
+                if let specialtyTitle = findFilterNameCategory(tag.title)?.rawValue {
+                    //we were passed a value like "Black", which is part of the race category, so we make "Black" the title tag, and "Race" the specialty tag
+                    tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyTitle)
                 } else {
-                    tagTitle = tag.title + ": ?"
+                    //it is unknown specialty tag only if the alreadyCreatedSpecialtyTagArray does not contain it. Hence, we have to create a tag like "Hair Color: ?"
+                    tagChoicesView.addSpecialtyTag("?", specialtyTagTitle: tag.title)
                 }
             case TagAttributes.SpecialtyRangeSlider.rawValue:
                 break
@@ -116,7 +117,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             if !tagTitle.isEmpty {
                 //don't make a tag if it will just be an empty tag
                 tagChoicesView.addTag(tagTitle)
-                tagChoicesView.addSpecialtyTag(tagTitle)
+                
             }
         }
     }
@@ -218,8 +219,7 @@ extension AddingTagsToProfileViewController {
                 }
             } else {
                 //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
-                let tagTitleWithRemovedSpecialtyPrefix = removeSpecialtyPrefixString(title)
-                tagPressedAttributeActions(tagTitleWithRemovedSpecialtyPrefix, tagView: tagView)
+                tagPressedAttributeActions(title, tagView: tagView)
             }
         }
     }

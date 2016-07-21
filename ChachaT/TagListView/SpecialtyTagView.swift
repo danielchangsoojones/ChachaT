@@ -65,15 +65,9 @@ class SpecialtyTagView: TagView {
     }
     
     internal func setupView(tagTitle: String, specialtyTagTitle: String) {
-        frame.size = intrinsicContentSize()
-        addSubview(removeButton)
+        super.setupView()
         addSpecialtySubviews(tagTitle, specialtyTagTitle: specialtyTagTitle)
         setTitleEdgeInset()
-        
-        removeButton.tagView = self
-        
-        let longPress = UILongPressGestureRecognizer(target: self, action: #selector(self.longPress))
-        self.addGestureRecognizer(longPress)
     }
     
     override func intrinsicContentSize() -> CGSize {
