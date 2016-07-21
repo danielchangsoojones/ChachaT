@@ -215,7 +215,7 @@ extension AddingTagsToProfileViewController {
                 self.tagChoicesView.removeTag(title)
                 if !tagExistsInChosenTagListView(tagChosenView, title: title) {
                     //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
-                    self.tagChosenView.addTag(title)
+                    addTagOrSpecialtyTag(title, addToChosenView: true)
                 }
             } else {
                 //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
@@ -264,6 +264,20 @@ extension AddingTagsToProfileViewController {
             }
         }
         theSpecialtyTagEnviromentHolderView?.delegate = self
+    }
+    
+    func addTagOrSpecialtyTag(tagTitle: String, addToChosenView: Bool) {
+        if let specialtyTagCategory = findFilterNameCategory(tagTitle) {
+            //we have a specialty tag, so we want it to look special
+            if addToChosenView {
+                tagChosenView.addSpecialtyTag(tagTitle, specialtyTagTitle: specialtyTagCategory.rawValue)
+            } else {
+                tagChoicesView.addSpecialtyTag(tagTitle, specialtyTagTitle: specialtyTagCategory.rawValue)
+            }
+        } else {
+            //we are just dealing with a generic tag
+            tagChoicesView.addTag(tagTitle)
+        }
     }
     
     func createBirthdayDatePickerPop() {
@@ -365,7 +379,7 @@ extension AddingTagsToProfileViewController: UISearchBarDelegate {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true
             for tag in filtered {
-                tagChoicesView.addTag(tag.title)
+                addTagOrSpecialtyTag(tag.title, addToChosenView: false)
             }
             createSpecialtyTagEnviroment(true)
         }
