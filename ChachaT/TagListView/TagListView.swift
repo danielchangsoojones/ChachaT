@@ -324,7 +324,7 @@ public class TagListView: UIView {
     
     //created for example
     public func addSpecialtyTag(title: String) -> TagView {
-        let tagView = SpecialtyTagView(title: "hi")
+        let tagView = SpecialtyTagView(tagTitle: "hi", specialtyTagTitle: "Race")
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
         tagView.tagBackgroundColor = tagBackgroundColor

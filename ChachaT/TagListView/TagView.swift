@@ -162,6 +162,11 @@ public class TagView: UIButton {
         setupView()
     }
     
+    //need to have this init, so I can override in the SpecialtyTagView in subclass
+    override init(frame: CGRect) {
+        super.init(frame: CGRectZero)
+    }
+    
     public func setupView() {
         frame.size = intrinsicContentSize()
         addSubview(removeButton)

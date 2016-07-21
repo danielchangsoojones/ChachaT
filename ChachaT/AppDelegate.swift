@@ -46,6 +46,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             User.currentUser()?.saveInBackground()
             
         }
+        
+                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        
+                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        
+                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("FilterTagViewController") as! AddingTagsToProfileViewController
+        
+                    self.window?.rootViewController = initialViewController
+                    self.window?.makeKeyAndVisible()
         return true
     }
 
