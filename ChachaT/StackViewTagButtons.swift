@@ -13,6 +13,7 @@ protocol StackViewTagButtonsDelegate {
     func removeChosenTag(tagTitle: String)
     func doesChosenTagViewContain(tagTitle: String) -> Bool
     func removeChoicesTag(tagTitle: String)
+    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String)
 }
 
 class StackViewTagButtons: UIStackView {
@@ -21,6 +22,7 @@ class StackViewTagButtons: UIStackView {
     let noneButtonText = "None"
     var pushOneButton = false
     var buttonArray: [UIButton] = []
+    var originalTagTitle : String = ""
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -87,6 +89,10 @@ class StackViewTagButtons: UIStackView {
         let button: UIButton = {
             $0.setTitle(filterName.rawValue, forState: .Normal)
             let tagHasNotBeenChosen = !(delegate?.doesChosenTagViewContain(filterName.rawValue))!
+            if !tagHasNotBeenChosen {
+                //this button title was the original text for the tag that we were passed. So, we want to save, so we know what to pass later to the delegate
+                originalTagTitle = filterName.rawValue
+            }
             changeButtonHighlight(tagHasNotBeenChosen, button: $0, changeChosenTags: false, changeChoicesTag: false)
             $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
             $0.layer.cornerRadius = 10
@@ -112,19 +118,19 @@ class StackViewTagButtons: UIStackView {
                     //we are unhighlighting the button
                     button.backgroundColor = ChachaBombayGrey
                     button.setTitleColor(ChachaTeal, forState: .Normal)
-                    if changeChosenTags {
-                        delegate!.removeChosenTag(tagTitle)
-                    } else if changeChoicesTag {
-                        //doing something with the choices tag
-                        delegate?.removeChoicesTag(tagTitle)
-                    }
+//                    if changeChosenTags {
+//                        delegate!.removeChosenTag(tagTitle)
+//                    } else if changeChoicesTag {
+//                        //doing something with the choices tag
+//                        delegate?.removeChoicesTag(tagTitle)
+//                    }
                 } else {
                     //highlight the button
                     button.backgroundColor = ChachaTeal
                     button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                     if changeChosenTags {
                         if tagTitle != noneButtonText {
-                            delegate?.createChosenTag(tagTitle)
+//                            delegate?.createChosenTag(tagTitle)
                         }
                     }
                 }
@@ -138,6 +144,7 @@ class StackViewTagButtons: UIStackView {
             if button == pushedButton {
                 //set the pushed button to highlighted
                 changeButtonHighlight(false, button: pushedButton, changeChosenTags: true, changeChoicesTag: true)
+                delegate?.editSpecialtyTagView((button.titleLabel?.text)!, originalTagTitle: originalTagTitle)
             } else {
                 //set the non-pushed buttons all to unhighlighted
                 changeButtonHighlight(true, button: button, changeChosenTags: true, changeChoicesTag: true)

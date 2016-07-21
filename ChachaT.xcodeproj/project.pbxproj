@@ -139,7 +139,7 @@
 		92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagEnums.swift; sourceTree = "<group>"; };
+		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92CEC1131D392FBB005BD321 /* MainFiltering.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainFiltering.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B061CF6782700B0B1A4 /* QuestionPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = QuestionPopUpViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +198,7 @@
 				920BF81E1D3FF5E300104842 /* TagListView.swift */,
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
+				92CEC1111D37F8DE005BD321 /* TagEnums.swift */,
 			);
 			path = TagListView;
 			sourceTree = "<group>";
@@ -325,7 +326,6 @@
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				9273B79C1CFF4F110001A608 /* FilterViewController.swift */,
 				928819351D18E78B000A8E04 /* FilterTagViewController.swift */,
-				92CEC1111D37F8DE005BD321 /* TagEnums.swift */,
 			);
 			name = Filtering;
 			sourceTree = "<group>";

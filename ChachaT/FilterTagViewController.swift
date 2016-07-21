@@ -125,6 +125,23 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
     func doesChosenTagViewContain(tagTitle: String) -> Bool {
         return tagExistsInChosenTagListView(tagChosenView, title: tagTitle)
     }
+    
+    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String) {
+        //TODO: I should be editing the tag view, not completely create a new one, because that makes all the tags rearrange. But, when I tried to edit a tag view, it would not layout subviews correctly. And, I didn't want to spend all this time
+        //I'll probably have to override layout subviews for the SpecialtyTagView
+        tagChoicesView.removeTag(originalTagTitle)
+        for tag in self.currentUserTags where tag.title == originalTagTitle{
+            //delete element in array
+            self.currentUserTags.removeAtIndex(self.currentUserTags.indexOf(tag)!)
+            //remove the previous tag from the actual backend
+            //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
+            tag.deleteInBackground()
+        }
+        if let specialtyTagCategory = findFilterNameCategory(newTagTitle)?.rawValue {
+            self.currentUserTags.append(Tag(title: newTagTitle, attribute: TagAttributes.SpecialtyButtons))
+            tagChoicesView.addSpecialtyTag(newTagTitle, specialtyTagTitle: specialtyTagCategory)
+        }
+    }
 }
 
 extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
