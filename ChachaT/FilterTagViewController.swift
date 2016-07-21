@@ -68,6 +68,7 @@ extension FilterTagViewController: TagListViewDelegate {
             if !self.view.subviews.contains(theSpecialtyTagEnviromentHolderView) && !specialtyEnviromentHidden {
                 //checking if the holder view has been added to the view, because we need to add it, if it has not. 
                 //we also want to make sure that the specialtyTagEnviromentView is supposed to be shown
+                theSpecialtyTagEnviromentHolderView.hidden = specialtyEnviromentHidden
                 self.view.addSubview(theSpecialtyTagEnviromentHolderView)
                 theSpecialtyTagEnviromentHolderView.snp_makeConstraints(closure: { (make) in
                     let leadingTrailingOffset : CGFloat = 20
@@ -76,6 +77,8 @@ extension FilterTagViewController: TagListViewDelegate {
                     make.top.equalTo(theChosenTagHolderView.snp_bottom)
                     make.bottom.equalTo(self.view)
                 })
+            } else if specialtyEnviromentHidden {
+                theSpecialtyTagEnviromentHolderView.hidden = specialtyEnviromentHidden
             }
         }
     }
