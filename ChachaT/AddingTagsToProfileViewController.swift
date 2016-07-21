@@ -229,19 +229,23 @@ extension AddingTagsToProfileViewController {
     func setCorrectTitle(title: String, tagView: TagView) -> String {
         //taking the tag title and searching what specialty category it belongs to Gender, Race, ect.
         //then, I pass the category to the stack view, so it can create that respective stack view.
-        if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
-            return specialtyTagCategory
-        } else if let _ = SpecialtyTags(rawValue: title) {
-            //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
-            //we just want to create stack view with the title given, Hence:
-            return title
-        } else if title == questionMarkString {
+//        if FilterNames.allValues.contains(FilterNames(rawValue: title)) {
+//            return
+//        }
+//        if let specialtyTagCategory = findFilterNameCategory(title)?.rawValue {
+//            return specialtyTagCategory
+//        } else if let _ = SpecialtyTags(rawValue: title) {
+//            //if the method is passed just "Hair Color", which would happen if the user has not inputed their hair color, then we don't want to find filterCategory Name
+//            //we just want to create stack view with the title given, Hence:
+//            return title
+//        }
+    if title == questionMarkString {
             //the tag that was pressed was something like this "Hair Color: ?"
             if let specialtyTagView = tagView as? SpecialtyTagView {
                 return specialtyTagView.specialtyTagTitle
             }
         }
-        return ""
+        return title
     }
     
     //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
@@ -253,7 +257,9 @@ extension AddingTagsToProfileViewController {
             case TagAttributes.Generic.rawValue:
                 createEditingTextFieldPopUp(title, tagView: tagView)
             case TagAttributes.SpecialtyButtons.rawValue:
-                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: true)
+                //checking if we just got passed something like Black or Blonde, because then we need to convert it to a specialty tag category
+                //but if not, then we just need to pass the title because it is already a specialty tag category
+                createStackViewTagButtonsAndSpecialtyEnviroment(findFilterNameCategory(title)?.rawValue ?? title, pushOneButton: true)
             case TagAttributes.SpecialtySingleSlider.rawValue:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false)
