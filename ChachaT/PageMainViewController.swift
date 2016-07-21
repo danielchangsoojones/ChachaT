@@ -15,16 +15,17 @@ class PageMainViewController: PagesController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        let backgroundAnimationViewController = storyboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
-        backgroundAnimationViewController.pageMainViewControllerDelegate = self
-        let cardDetailViewController = storyboard.instantiateViewControllerWithIdentifier("CardDetailViewController") as! CardDetailViewController
-        cardDetailViewController.questionDetailState = .ProfileViewOnlyMode
-        self.add([backgroundAnimationViewController, cardDetailViewController])
+        let mainStoryboard = UIStoryboard(name: "Main", bundle: nil)
+        let backgroundAnimationNavigationController = mainStoryboard.instantiateViewControllerWithIdentifier("BackgroundAnimationNavigationViewController") as! UINavigationController
+        let backgroundAnimationRootViewController = backgroundAnimationNavigationController.viewControllers[0] as! BackgroundAnimationViewController
+        backgroundAnimationRootViewController.pageMainViewControllerDelegate = self
+        let profileStoryboard = UIStoryboard(name: "Profile", bundle: nil)
+        let profileIndexNavigationController = profileStoryboard.instantiateViewControllerWithIdentifier("ProfileNavigationController") as! UINavigationController
+        self.add([backgroundAnimationNavigationController, profileIndexNavigationController])
         self.showPageControl = false
         self.automaticallyAdjustsScrollViewInsets = false
-        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
-        setChachaNavigationLogo()
+//        self.navigationItem.rightBarButtonItem = UIBarButtonItem(title: "Log Out", style: .Plain, target: self, action: #selector(PageMainViewController.logOut))
+//        setChachaNavigationLogo()
         
         // Do any additional setup after loading the view.
     }
@@ -50,17 +51,6 @@ class PageMainViewController: PagesController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
-
 }
 
 protocol PageMainViewControllerDelegate {

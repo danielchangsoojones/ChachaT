@@ -45,6 +45,10 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
     @IBAction func skipCard(sender: AnyObject) {
         kolodaView.swipe(.Right)
     }
+    @IBAction func searchButtonPressed(sender: UIBarButtonItem) {
+        let addingTagsToProfileViewController = UIStoryboard(name: "Profile", bundle: nil).instantiateViewControllerWithIdentifier(String(FilterTagViewController)) as! AddingTagsToProfileViewController
+        presentViewControllerCustomTrasition(addingTagsToProfileViewController, transition: FadeTransition(), animated: true)
+    }
     
     //MARK: Lifecycle
     override func viewDidLoad() {
@@ -62,7 +66,6 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
         createUserArray()
-        
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -70,6 +73,7 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
         self.theMagicMovePlaceholderImage.hidden = true
     }
     
+    //TODO: figure out an actual way to get ripples to occur programmaticaly. Not just a hack way.
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
         rippleState += 1
@@ -299,9 +303,9 @@ extension BackgroundAnimationViewController {
 extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case LogInPageSegue
         case FilterPageBlurrySegue
         case MainTinderPageToQuestionOnboardingSegue
+        case OnboardingPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
