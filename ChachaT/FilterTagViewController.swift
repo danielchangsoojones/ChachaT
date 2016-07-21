@@ -161,6 +161,7 @@ extension FilterTagViewController {
     //very ineffecient, and in future, I will have to do server side cloud code.
     //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
     func setSearchDataArray() {
+        addSpecialtyTagsToSearchDataArray()
         var alreadyContainsTagArray: [String] = []
         let query = PFQuery(className: "Tag")
         query.selectKeys(["title"])
@@ -174,6 +175,12 @@ extension FilterTagViewController {
                     }
                 }
             }
+        }
+    }
+    
+    func addSpecialtyTagsToSearchDataArray() {
+        for filterName in FilterNames.allValues {
+            allParseTags.append(Tag(title: filterName.rawValue, attribute: TagAttributes.SpecialtyButtons))
         }
     }
 }
