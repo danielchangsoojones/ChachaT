@@ -17,21 +17,12 @@ class User: PFUser {
     @NSManaged var lowercaseUsername: String?
     @NSManaged var birthDate: NSDate?
     @NSManaged var profileImage: PFFile?
-    @NSManaged var gender: String?
     @NSManaged var title: String?
     @NSManaged var factOne: String?
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
-    @NSManaged var questionOne: Question?
-    @NSManaged var questionTwo: Question?
-    @NSManaged var questionThree: Question?
-    @NSManaged var race: String?
-    @NSManaged var hairColor: String?
-    @NSManaged var politicalAffiliation: String?
-    @NSManaged var sexuality: String?
     @NSManaged var location: PFGeoPoint?
-    @NSManaged var anonymous: Bool
-    @NSManaged var anonymousFlow: Int
+
     
     func calculateBirthDate() -> Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()

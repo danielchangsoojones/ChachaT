@@ -440,52 +440,6 @@ extension FilterViewController {
     
     func saveUserCharacteristics() {
         let currentUser = User.currentUser()!
-        for (filterName, filterDictionaryTuple) in filterDictionary {
-            //checks if the button is clicked
-            if filterDictionaryTuple.filterState {
-            if FilterNames.raceAllValues.contains(filterName) {
-                if filterName == .RaceAllFilter {
-                    //the user does not want to be queried upon for this particular field.
-                    currentUser.removeObjectForKey("race")
-                } else {
-                    //set the appropriate value to the user
-                    currentUser.race = filterName.rawValue
-                }
-            } else if FilterNames.hairColorAllValues.contains(filterName) {
-                if filterName == .HairColorAllFilter {
-                    //the user does not want to be queried upon for this particular field.
-                    currentUser.removeObjectForKey("hairColor")
-                } else {
-                    //set the appropriate value to the user
-                    currentUser.hairColor = filterName.rawValue
-                }
-            } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
-                if filterName == .PoliticalAffiliationAllFilter {
-                    //the user does not want to be queried upon for this particular field.
-                    currentUser.removeObjectForKey("politicalAffiliation")
-                } else {
-                    //set the appropriate value to the user
-                    currentUser.politicalAffiliation = filterName.rawValue
-                }
-            } else if FilterNames.genderAllValues.contains(filterName) {
-                if filterName == .GenderAllFilter {
-                    //the user does not want to be queried upon for this particular field.
-                    currentUser.removeObjectForKey("gender")
-                } else {
-                    //set the appropriate value to the user
-                    currentUser.gender = filterName.rawValue
-                }
-            } else if FilterNames.sexualityAllValues.contains(filterName) {
-                if filterName == .SexualityAllFilter {
-                    //the user does not want to be queried upon for this particular field.
-                    currentUser.removeObjectForKey("sexuality")
-                } else {
-                    //set the appropriate value to the user
-                    currentUser.sexuality = filterName.rawValue
-                }
-                }
-            }
-        }
         currentUser.saveInBackgroundWithBlock { (success, error) in
             if success {
                 if self.fromOnboarding {

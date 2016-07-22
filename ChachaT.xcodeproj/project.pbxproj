@@ -13,6 +13,7 @@
 		920BF8231D3FF5E300104842 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81F1D3FF5E300104842 /* TagView.swift */; };
 		920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */; };
 		920BF8271D415FC000104842 /* FilterQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8261D415FC000104842 /* FilterQueryViewController.swift */; };
+		920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8281D41DF9400104842 /* EditProfileViewController.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -80,6 +81,7 @@
 		920BF81F1D3FF5E300104842 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyTagView.swift; sourceTree = "<group>"; };
 		920BF8261D415FC000104842 /* FilterQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterQueryViewController.swift; sourceTree = "<group>"; };
+		920BF8281D41DF9400104842 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -338,6 +340,7 @@
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
+				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				920BF8271D415FC000104842 /* FilterQueryViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
+				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */,
 				92CEC1141D392FBB005BD321 /* MainFiltering.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,

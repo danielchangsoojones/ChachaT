@@ -134,7 +134,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         let currentUser = User.currentUser()
         currentUser!.username = theEmail.text
         currentUser!.password = thePassword.text
-        currentUser!.anonymous = false
         self.view.userInteractionEnabled = false
         theSpinner.startAnimating()
         
