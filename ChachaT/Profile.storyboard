@@ -129,8 +129,8 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="zQF-9u-tjF"/>
-                                                <exclude reference="fsi-3J-gCO"/>
                                                 <exclude reference="b23-l0-b6g"/>
+                                                <exclude reference="fsi-3J-gCO"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -196,8 +196,8 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="Zn6-zs-PFM"/>
-                                                <exclude reference="axs-2b-qf0"/>
                                                 <exclude reference="I5J-Rn-bNU"/>
+                                                <exclude reference="axs-2b-qf0"/>
                                             </mask>
                                         </variation>
                                     </view>
