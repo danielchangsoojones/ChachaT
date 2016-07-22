@@ -329,15 +329,11 @@ extension CardDetailViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case LogInPageSegue
-        case FilterInputPageSegue
         case CardDetailPageToQuestionPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        case .FilterInputPageSegue:
-            let destinationVC = segue.destinationViewController as! FilterViewController
-            destinationVC.filterUserMode = FilterUserMode.UserEditingMode
         default: break
         }
     }

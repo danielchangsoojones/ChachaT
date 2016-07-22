@@ -13,7 +13,6 @@ import AVFoundation
 import Parse
 import EFTools
 import ParseUI
-import BlurryModalSegue
 import Ripple
 import SnapKit
 import Timepiece
@@ -35,7 +34,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theFilteringButton: UIButton!
 
     var userArray = [User]()
-    //I need to do some hacky stuff to get the loading rings around chacha logo
+    //I needed to do some hacky stuff to get the loading rings around chacha logo
     var rippleState = 0
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
@@ -111,7 +110,6 @@ extension BackgroundAnimationViewController {
             if let objectId = User.currentUser()?.objectId {
                 query?.whereKey("objectId", notEqualTo: objectId)
             }
-            query?.whereKey("anonymous", equalTo: false)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.userArray = users

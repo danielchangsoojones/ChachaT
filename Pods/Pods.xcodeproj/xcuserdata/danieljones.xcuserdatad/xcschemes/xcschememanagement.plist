@@ -9,17 +9,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>BlurryModalSegue.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>Bolts.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>DOFavoriteButton.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -34,17 +24,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>MBAutoGrowingTextView.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>MBProgressHUD.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>MZAppearance.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -104,11 +84,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>UIImage+BlurredFrame.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>pop.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -142,17 +117,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A4353537504B41B246EA7FF80724DC2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3E2F9653B55075B03D833F0F99F94AB2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>56170867254AF3082A1840024F458BD3</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>639CBFFAFF13D90104F3E81AE3BA19BF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,27 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>7BB1A9890320F7B37393B73035621E9D</key>
+		<key>9DC2E3F90FC3889C288BBC78EA9E2F3D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>805D4E75C1BB0ABF8B1DF1FECAAB4B65</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9348368E0AE14076087837D8C8256FB8</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9D6F66BBE6336D06C25E5B420D804A4F</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A096731F617D77771C48A6DD6E6AA614</key>
+		<key>AD60D438A07EEC27A8EB3E8355E13E55</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -192,17 +147,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B5C4ED1D6A507A0986B56DC227AF5D9D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C45290004E0078130C91A71711094467</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D39630E1758F3BF4BE29A5A3B04ABECA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -217,12 +162,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>EF82CCE9687833D1852EA20779D7B9B3</key>
+		<key>F38D96D0299A24CBA9FAD8055057269A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>FDCBED7B344D29900EE17E3B8C96B7ED</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FE8BFFC6A67133361D26157A2D32FF53</key>
 		<dict>
 			<key>primary</key>
 			<true/>

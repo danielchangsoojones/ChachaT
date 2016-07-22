@@ -85,14 +85,10 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ChachaT/AFDateHelper.framework"
-  install_framework "Pods-ChachaT/BlurryModalSegue.framework"
   install_framework "Pods-ChachaT/Bolts.framework"
-  install_framework "Pods-ChachaT/DOFavoriteButton.framework"
   install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/Koloda.framework"
-  install_framework "Pods-ChachaT/MBAutoGrowingTextView.framework"
   install_framework "Pods-ChachaT/MBProgressHUD.framework"
-  install_framework "Pods-ChachaT/MZAppearance.framework"
   install_framework "Pods-ChachaT/Pages.framework"
   install_framework "Pods-ChachaT/Parse.framework"
   install_framework "Pods-ChachaT/ParseUI.framework"
@@ -103,19 +99,14 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
   install_framework "Pods-ChachaT/TTRangeSlider.framework"
   install_framework "Pods-ChachaT/Timepiece.framework"
-  install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ChachaT/AFDateHelper.framework"
-  install_framework "Pods-ChachaT/BlurryModalSegue.framework"
   install_framework "Pods-ChachaT/Bolts.framework"
-  install_framework "Pods-ChachaT/DOFavoriteButton.framework"
   install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/Koloda.framework"
-  install_framework "Pods-ChachaT/MBAutoGrowingTextView.framework"
   install_framework "Pods-ChachaT/MBProgressHUD.framework"
-  install_framework "Pods-ChachaT/MZAppearance.framework"
   install_framework "Pods-ChachaT/Pages.framework"
   install_framework "Pods-ChachaT/Parse.framework"
   install_framework "Pods-ChachaT/ParseUI.framework"
@@ -126,6 +117,5 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ChachaT/TPKeyboardAvoiding.framework"
   install_framework "Pods-ChachaT/TTRangeSlider.framework"
   install_framework "Pods-ChachaT/Timepiece.framework"
-  install_framework "Pods-ChachaT/UIImage_BlurredFrame.framework"
   install_framework "Pods-ChachaT/pop.framework"
 fi
