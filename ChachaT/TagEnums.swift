@@ -8,6 +8,7 @@
 
 //enums for tags
 //TODO: I think enum expressions could be helpful in making this simpler, but I am not sure how to do that at the moment
+//TODO: change name to SpecialtyTagCategoryTitles
 public enum SpecialtyTags : String {
     case Gender
     case Race
@@ -21,6 +22,7 @@ public enum SpecialtyTags : String {
     static let specialtyRangeSliderValues = [AgeRange]
 }
 
+//TODO: change name to SpecialtyTagTitles
 public enum FilterNames : String {
     
     case RaceBlackFilter = "Black"
@@ -56,6 +58,22 @@ public enum TagAttributes : String {
 }
 
 //helper functions for enums
+
+//Example: I pass Race and it returns .SpecialtyButtons
+//Example: I pass Banana and it passes back .Generic because that is just a random tag
+func convertTagAttributeFromCategoryTitle(categoryTitle: String) -> TagAttributes {
+    if let specialtyCategoryTitle = SpecialtyTags(rawValue: categoryTitle) {
+        if SpecialtyTags.specialtyButtonValues.contains(specialtyCategoryTitle) {
+            return TagAttributes.SpecialtyButtons
+        } else if SpecialtyTags.specialtySingleSliderValues.contains(specialtyCategoryTitle) {
+            return .SpecialtySingleSlider
+        } else if SpecialtyTags.specialtyRangeSliderValues.contains(specialtyCategoryTitle) {
+            return .SpecialtyRangeSlider
+        }
+    }
+    //the tag was not supposed to be a special tag
+    return .Generic
+}
 
 //Purpose: to find which specialty group we are dealing with
 //For Example: It figures out whether the given string should be with Hair Color, Race, ect.

@@ -34,6 +34,7 @@ class FilterTagViewController: UIViewController {
         setSearchDataArray()
     }
     
+    //TODO: probably could just sublcass tagListView instead of setting the attributes here
     func addTagListViewAttributes() {
         //did this in code, rather than total storyboard because it has a lot of redundancy
         tagChoicesView.addChoicesTagListViewAttributes()
@@ -176,7 +177,6 @@ extension FilterTagViewController {
         addSpecialtyTagsToSearchDataArray()
         var alreadyContainsTagArray: [String] = []
         let query = PFQuery(className: "Tag")
-        query.selectKeys(["title"])
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
                 for tag in tags {
