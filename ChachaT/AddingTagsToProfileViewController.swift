@@ -253,7 +253,7 @@ extension AddingTagsToProfileViewController {
             case TagAttributes.SpecialtyButtons.rawValue:
                 //checking if we just got passed something like Black or Blonde, because then we need to convert it to a specialty tag category
                 //but if not, then we just need to pass the title because it is already a specialty tag category
-                createStackViewTagButtonsAndSpecialtyEnviroment(findFilterNameCategory(title)?.rawValue ?? title, pushOneButton: true)
+                createStackViewTagButtonsAndSpecialtyEnviroment(findFilterNameCategory(title)?.rawValue ?? title, pushOneButton: true, addNoneButton: true)
             case TagAttributes.SpecialtySingleSlider.rawValue:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(false)

@@ -58,7 +58,6 @@ class SpecialtyTagEnviromentHolderView: UIView {
             }
         }
         self.removeFromSuperview()
-        print(delegate)
         delegate?.unhideChoicesTagListView()
     }
     

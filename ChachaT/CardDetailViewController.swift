@@ -208,13 +208,9 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
             self.profileImage.file = profileImage
             self.profileImage.loadInBackground()
         } else {
-            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
-                profileImage.image = UIImage(named: "DrivingGirl")
-            } else {
-                profileImage.backgroundColor = ChachaBombayGrey
-                theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
-                theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
-            }
+            profileImage.backgroundColor = ChachaBombayGrey
+            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
+            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
         }
         do {
             let question = try userOfTheCard?.questionOne?.fetchIfNeeded()

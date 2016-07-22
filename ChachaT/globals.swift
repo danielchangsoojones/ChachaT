@@ -103,17 +103,6 @@ func animateOverlay(backgroundOverlayView: UIView) {
     })
 }
 
-//returns true if the user is anonymous and if they are at the anonymous flow that was passed as a parameter
-func anonymousFlowStage(anonymousFlow: AnonymousFlow) -> Bool {
-    //checking that they are anonymous user, if not, then they don't do the anonymous flow at all.
-    if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-        //checking to see if the anonymousFlow is at the phase passed by the parameter.
-        return anonymousFlowGlobal == anonymousFlow
-    }
-        return false
-}
-
-
 //Text View methods
 func editingBeginsTextView(textView: UITextView) {
     if textView.textColor == placeHolderTextColor {

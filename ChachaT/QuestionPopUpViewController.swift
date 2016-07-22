@@ -131,14 +131,6 @@ class QuestionPopUpViewController: PopUpSuperViewController {
     private func setupTapHandler() {
         theLikeButton.tapped { (_) in
             self.likeTapped(self.theLikeButton)
-            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
-                let alert = Alert(closeButtonHidden: true)
-                alert.addButton("Gotcha") {
-                    //Todo: should lead to the messaging page with the matched person
-                    self.performSegueWithIdentifier(.QuestionPageToMainTinderPageSegue, sender: self)
-                }
-                alert.createAlert("It's A Match!", subtitle: "A match is when you and Taylor like each other's answers. Then, the two of you could message. I just haven't built a messaging page yet.", closeButtonTitle: "Okay", type: .Success)
-            }
         }
     }
     
@@ -254,10 +246,6 @@ extension QuestionPopUpViewController: SegueHandlerType {
             let destinationVC = segue.destinationViewController as! FilterViewController
             destinationVC.filterUserMode = FilterUserMode.UserEditingMode
             destinationVC.fromOnboarding = true
-        case .QuestionPageToMainTinderPageSegue:
-            if anonymousFlowStage(.MainPageFirstVisitMatchingPhase) {
-                anonymousFlowGlobal = .MainPageSecondVisitFilteringStage
-            }
         default: break
         }
     }

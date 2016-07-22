@@ -53,37 +53,28 @@ class StackViewTagButtons: UIStackView {
     func addButtonsToStackView(filterCategory: String, addNoneButton: Bool) {
         switch filterCategory {
         case SpecialtyTags.Race.rawValue:
-            iterateThroughFilterNames(FilterNames.raceAllValues)
+            iterateThroughFilterNames(FilterNames.raceAllValues, addNoneButton: addNoneButton)
         case SpecialtyTags.Gender.rawValue:
-            iterateThroughFilterNames(FilterNames.genderAllValues)
+            iterateThroughFilterNames(FilterNames.genderAllValues, addNoneButton: addNoneButton)
         case SpecialtyTags.HairColor.rawValue:
-            iterateThroughFilterNames(FilterNames.hairColorAllValues)
+            iterateThroughFilterNames(FilterNames.hairColorAllValues, addNoneButton: addNoneButton)
         case SpecialtyTags.Sexuality.rawValue:
-            iterateThroughFilterNames(FilterNames.sexualityAllValues)
+            iterateThroughFilterNames(FilterNames.sexualityAllValues, addNoneButton: addNoneButton)
         case SpecialtyTags.PoliticalAffiliation.rawValue:
-            iterateThroughFilterNames(FilterNames.politicalAffiliationAllValues)
+            iterateThroughFilterNames(FilterNames.politicalAffiliationAllValues, addNoneButton: addNoneButton)
         default:
             break
         }
-//        if addNoneButton {
-//            //if we are on editing tags for profile page, then the stack view should have a none button
-//            let button: UIButton = {
-//                $0.setTitle(noneButtonText, forState: .Normal)
-//                changeButtonHighlight(true, button: $0, changeChosenTags: false, changeChoicesTag: false)
-//                $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
-//                $0.layer.cornerRadius = 10
-//                return $0
-//            }(UIButton())
-//            buttonArray.append(button)
-//            self.addArrangedSubview(button)
-//        }
     }
     
-    func iterateThroughFilterNames(filterNamesArray: [FilterNames]) {
+    func iterateThroughFilterNames(filterNamesArray: [FilterNames], addNoneButton: Bool) {
         for filterName in filterNamesArray {
-            let button = createButton(filterName)
-            buttonArray.append(button)
-            self.addArrangedSubview(button)
+            if filterName != FilterNames.NoneFilter || addNoneButton {
+                //this lets all buttons be made except for none buttton. If addnonebutton is true, then it will allow a none button to be made
+                let button = createButton(filterName)
+                buttonArray.append(button)
+                self.addArrangedSubview(button)
+            }
         }
     }
     
@@ -117,9 +108,7 @@ class StackViewTagButtons: UIStackView {
     }
     
     func changeButtonHighlight(buttonHighlighted: Bool, button: UIButton, changeChosenTags: Bool, changeChoicesTag: Bool) {
-        if let titleLabel = button.titleLabel {
-            if let tagTitle = titleLabel.text {
-                if buttonHighlighted {
+        if buttonHighlighted {
                     //we are unhighlighting the button
                     button.backgroundColor = ChachaBombayGrey
                     button.setTitleColor(ChachaTeal, forState: .Normal)
@@ -128,8 +117,6 @@ class StackViewTagButtons: UIStackView {
                     button.backgroundColor = ChachaTeal
                     button.setTitleColor(UIColor.whiteColor(), forState: .Normal)
                 }
-            }
-        }
     }
     
     //you can only push one button when inputing your characteristics
