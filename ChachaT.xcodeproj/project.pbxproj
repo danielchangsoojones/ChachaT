@@ -46,7 +46,6 @@
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
 		9288194C1D2BDCFC000A8E04 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288194B1D2BDCFC000A8E04 /* Tag.swift */; };
 		928819571D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */; };
-		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
@@ -65,7 +64,6 @@
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
-		92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B0A1CF68DC400B0B1A4 /* Answer.swift */; };
 		F655E776EC943B06E5A8E4F3 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9430010B2BFBE69283C52C6B /* Pods_ChachaT.framework */; };
 /* End PBXBuildFile section */
 
@@ -113,7 +111,6 @@
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		9288194B1D2BDCFC000A8E04 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyTagEnviromentHolderView.swift; sourceTree = "<group>"; };
-		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailPopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
@@ -132,7 +129,6 @@
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
-		92E59B0A1CF68DC400B0B1A4 /* Answer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 		9430010B2BFBE69283C52C6B /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		B01750B5B900A56471484C28 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -222,7 +218,7 @@
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
 				9261085A1CEA1939009F3E86 /* Models */,
-				9261083C1CE4F8D5009F3E86 /* globals */,
+				9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */,
 				9261083B1CE4EDF7009F3E86 /* sounds */,
 			);
 			path = ChachaT;
@@ -259,7 +255,7 @@
 			name = sounds;
 			sourceTree = "<group>";
 		};
-		9261083C1CE4F8D5009F3E86 /* globals */ = {
+		9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */ = {
 			isa = PBXGroup;
 			children = (
 				926108581CEA11B9009F3E86 /* Alert.swift */,
@@ -267,7 +263,7 @@
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 				929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */,
 			);
-			name = globals;
+			name = "Globals/Helper Files";
 			sourceTree = "<group>";
 		};
 		9261083F1CE50447009F3E86 /* Magic Move */ = {
@@ -295,8 +291,6 @@
 			isa = PBXGroup;
 			children = (
 				9261085B1CEA196C009F3E86 /* User.swift */,
-				9289F6EB1CEB542800F42ACE /* Question.swift */,
-				92E59B0A1CF68DC400B0B1A4 /* Answer.swift */,
 				9288194B1D2BDCFC000A8E04 /* Tag.swift */,
 			);
 			name = Models;
@@ -524,7 +518,6 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
-				9289F6EC1CEB542800F42ACE /* Question.swift in Sources */,
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
@@ -537,7 +530,6 @@
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
-				92E59B0B1CF68DC400B0B1A4 /* Answer.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */,
