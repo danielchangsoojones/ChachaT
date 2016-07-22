@@ -137,6 +137,7 @@
                         <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="iIV-nv-kuo" kind="presentation" identifier="MainTinderPageToQuestionOnboardingSegue" id="3lX-ep-9E2"/>
+                        <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="u00-Q4-cEz"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -603,5 +604,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="YWU-JH-Jpm"/>
+        <segue reference="u00-Q4-cEz"/>
     </inferredMetricsTieBreakers>
 </document>

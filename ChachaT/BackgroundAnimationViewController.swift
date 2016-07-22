@@ -50,8 +50,7 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
     }
     
     @IBAction func searchButtonPressed(sender: UIBarButtonItem) {
-        let filterQueryViewController = UIStoryboard(name: "Filtering", bundle: nil).instantiateViewControllerWithIdentifier(String(FilterQueryViewController)) as! FilterQueryViewController
-        presentViewControllerCustomTrasition(filterQueryViewController, transition: FadeTransition(), animated: true)
+        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
     }
     
     //MARK: Lifecycle
@@ -309,6 +308,7 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case MainTinderPageToQuestionOnboardingSegue
         case OnboardingPageSegue
+        case BackgroundAnimationControllerToTagFilteringPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -318,6 +318,9 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             let destinationVC = navigationVC.viewControllers[0] as! QuestionPopUpViewController
             destinationVC.fromOnboarding = true
             destinationVC.questionPopUpState = .EditingMode
+        case .BackgroundAnimationControllerToTagFilteringPageSegue:
+            let destinationVC = segue.destinationViewController as! FilterQueryViewController
+            destinationVC.mainPageDelegate = self
         default: break
         }
     }
