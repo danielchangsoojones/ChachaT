@@ -5,14 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <scenes>
-        <!--Question-->
-        <scene sceneID="940-KE-UzY">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Question" id="iIV-nv-kuo" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="NMc-Fr-UI4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="85.5" y="-134"/>
-        </scene>
         <!--Onboarding-->
         <scene sceneID="4f1-Gx-aDr">
             <objects>
@@ -136,7 +128,6 @@
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
                         <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
-                        <segue destination="iIV-nv-kuo" kind="presentation" identifier="MainTinderPageToQuestionOnboardingSegue" id="3lX-ep-9E2"/>
                         <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="2hX-Ts-O6M"/>
                     </connections>
                 </viewController>
@@ -476,21 +467,12 @@
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
                         <outlet property="theUserOfCardTagListView" destination="dCe-w4-3mH" id="cLf-Xf-cmv"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
-                        <segue destination="137-mi-AE4" kind="show" identifier="QuestionEditingPopUpSegue" id="QHg-xS-Tuv"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="LKh-Ql-dNR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1717" y="348"/>
-        </scene>
-        <!--Question-->
-        <scene sceneID="Aiw-qk-KTi">
-            <objects>
-                <viewControllerPlaceholder storyboardIdentifier="UserDetailQuestionPopUpViewController" storyboardName="Question" id="137-mi-AE4" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s4G-9S-7Pq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1399" y="959"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NJs-ik-5Gj">
@@ -520,6 +502,6 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="LKh-Ql-dNR"/>
+        <segue reference="YWU-JH-Jpm"/>
     </inferredMetricsTieBreakers>
 </document>
