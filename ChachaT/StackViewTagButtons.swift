@@ -12,7 +12,6 @@ protocol StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String)
     func removeChosenTag(tagTitle: String)
     func doesChosenTagViewContain(tagTitle: String) -> Bool
-    func removeChoicesTag(tagTitle: String)
     func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags)
 }
 

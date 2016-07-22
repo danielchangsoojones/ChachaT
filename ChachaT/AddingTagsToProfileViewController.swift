@@ -35,7 +35,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         }
     }
     
-    
     @IBAction func addToProfilePressed(sender: UIButton) {
         for tagView in tagChosenView.tagViews {
             if let title = tagView.currentTitle {
@@ -50,7 +49,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     }
     
     //TODO: change this code to actually deal with specialty Tags? Maybe, maybe it doesn't have to do that.
-    override func addToProfileTagArray(title: String) {
+    override func createNewPersonalTag(title: String) {
         let newTag = createNewTag(title)
         chosenTagArray.append(newTag)
         self.tagChoicesDataArray.append(newTag)
@@ -58,14 +57,13 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     }
     
     func createNewTag(title: String) -> Tag {
-        let specialtyTagCategory = findFilterNameCategory(title)
+        let specialtyTagCategory = findSpecialtyCategoryName(title)
         return Tag(title: title, specialtyCategoryTitle: specialtyTagCategory)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setTagsInCurrentUserArray()
-        changeTheChoicesTagView()
+        setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
         // Do any additional setup after loading the view.
@@ -78,7 +76,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         let _ = SCLAlertView()
     }
     
-    func setTagsInCurrentUserArray() {
+    func setTagsInTagChoicesDataArray() {
         let query = Tag.query()
         if let currentUser = User.currentUser() {
                 query?.whereKey("createdBy", equalTo: currentUser)
@@ -104,60 +102,46 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             case TagAttributes.Generic.rawValue:
                 tagChoicesView.addTag(tag.title)
             case TagAttributes.SpecialtyButtons.rawValue:
-                if tag.title == "None" {
-                    tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: tag.specialtyCategoryTitle!)
-                } else if let specialtyTitle = findFilterNameCategory(tag.title)?.rawValue {
-                    //we were passed a value like "Black", which is part of the race category, so we make "Black" the title tag, and "Race" the specialty tag
-                    tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyTitle)
-                } else {
-                    //it is unknown specialty tag only if the alreadyCreatedSpecialtyTagArray does not contain it. Hence, we have to create a tag like "Hair Color: ?"
-                    tagChoicesView.addSpecialtyTag(questionMarkString, specialtyTagTitle: tag.title)
+                if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
+                    //should create tag that looks something like Hair Color : Blonde
+                    tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
                 }
-            case TagAttributes.SpecialtySingleSlider.rawValue:
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
                 let currentUser = User.currentUser()
                 if let age = currentUser?.calculateBirthDate() {
                     //we know the users current bday, so we make something like "Age: 19"
                     tagChoicesView.addSpecialtyTag(String(age), specialtyTagTitle: "Age")
-                } else {
-                    tagChoicesView.addSpecialtyTag(questionMarkString, specialtyTagTitle: "Age")
                 }
+            case TagAttributes.SpecialtySingleSlider.rawValue: break
             default: break
             }
         }
     }
-    
+
     //Purpose: this adds specialty tags to the array, as long as the user does not already have them.
     //For Example: If user already has Race: Black, then no need to create specialty tag
     func setSpecialtyTagsInArray() {
-        //this array is to hold any specialtyTags that the user has already set, hence, we do not need to set a defualt blank one
         var alreadyCreatedSpecialtyTagArray : [SpecialtyTags] = []
-        for tag in tagChoicesDataArray where tag.attribute == TagAttributes.SpecialtyButtons.rawValue {
-            if let specialtyCategoryName = tag.specialtyCategoryTitle {
-                if let specialtyTag = SpecialtyTags(rawValue: specialtyCategoryName) {
-                    //checking for tags with a specialty and adding to array
-                    alreadyCreatedSpecialtyTagArray.append(specialtyTag)
-                }
+        for tag in tagChoicesDataArray where tag.attribute != TagAttributes.Generic.rawValue {
+            if let specialtyCategoryName = findSpecialtyCategoryName(tag.title) {
+                //this array is to hold any specialtyTags that the user has already set, hence, we do not need to set a defualt one with ?
+                alreadyCreatedSpecialtyTagArray.append(specialtyCategoryName)
             }
         }
         for specialtyButtonTag in SpecialtyTags.specialtyButtonValues {
             if !alreadyCreatedSpecialtyTagArray.contains(specialtyButtonTag) {
                 //the users default tags do not already contain a specialty tag, so we want to create a generic one
                 //For Example: "Hair Color: ?"
-                self.tagChoicesDataArray.append(Tag(title: specialtyButtonTag.rawValue, specialtyCategoryTitle: specialtyButtonTag))
+                self.tagChoicesDataArray.append(Tag(title: questionMarkString, specialtyCategoryTitle: specialtyButtonTag))
             }
         }
         for specialtySingleSliderTag in SpecialtyTags.specialtySingleSliderValues {
-            self.tagChoicesDataArray.append(Tag(title: specialtySingleSliderTag.rawValue, specialtyCategoryTitle: specialtySingleSliderTag))
+            self.tagChoicesDataArray.append(Tag(title: questionMarkString, specialtyCategoryTitle: specialtySingleSliderTag))
         }
         for specialtyRangeSlider in SpecialtyTags.specialtyRangeSliderValues {
-            let age : Int = User.currentUser()!.calculateBirthDate()!
-            self.tagChoicesDataArray.append(Tag(title: String(age), specialtyCategoryTitle: specialtyRangeSlider))
+            //user has not inputed birthday, so need Age : ?
+            self.tagChoicesDataArray.append(Tag(title: questionMarkString, specialtyCategoryTitle: specialtyRangeSlider))
         }
-    }
-    
-    func changeTheChoicesTagView() {
-        //the user should be able to remove his/her tags because now they are editing them
-        tagChoicesView.enableRemoveButton = true
     }
 
     override func didReceiveMemoryWarning() {
@@ -167,9 +151,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 
 }
 
-//overrided super class methods
+//tag methods extension
 extension AddingTagsToProfileViewController {
-    
     //overriding this method because I want to not only see if tag exists with chosen tags
     //we also want to see if tag is in the already saved Parse tags because then the button
     //should be highlighted.
@@ -178,25 +161,11 @@ extension AddingTagsToProfileViewController {
         return (tagChosenView.tagExistsInTagListView(tagTitle) || existsInChoicesTagView)
     }
     
-    override func removeChoicesTag(tagTitle: String) {
-        super.removeChoicesTag(tagTitle)
-        let tagToDelete = findTag(TagView(title: tagTitle), tagArray: tagChoicesDataArray)
-        //TODO: Not sure if I should change this to delete with block since, I should probably
-        //check if the tag was really deleted before the user leaves the page
-        tagToDelete?.deleteInBackground()
-    }
-}
-
-extension AddingTagsToProfileViewController {
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-        sender.removeTagView(tagView)
         if sender.tag == 2 {
             //the remove button in theChosenTagView was pressed
+            sender.removeTagView(tagView)
             changeTagListViewWidth(tagView, extend: false)
-        } else if sender.tag == 1{
-            //we hit the remove button in theChoicesTagView
-            //TODO: if the tag is a specialty tag, then it should not be deleted, but replaced with a "(specialty tag name): ?"
-            //For Example: "Hair Color: ?"
         }
     }
     
@@ -220,7 +189,7 @@ extension AddingTagsToProfileViewController {
                 }
             } else {
                 //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
-                tagPressedAttributeActions(setCorrectTitle(title, tagView: tagView), tagView: tagView)
+                tagPressedAttributeActions(title, tagView: tagView)
             }
         }
     }
@@ -243,17 +212,6 @@ extension AddingTagsToProfileViewController {
         }
     }
     
-    //Purpose: the title might be a category name, "?", or just a generic name, so I need to create the correct title
-    func setCorrectTitle(title: String, tagView: TagView) -> String {
-    if title == questionMarkString {
-            //the tag that was pressed was something like this "Hair Color: ?"
-            if let specialtyTagView = tagView as? SpecialtyTagView {
-                return specialtyTagView.specialtyTagTitle
-            }
-        }
-        return title
-    }
-    
     //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
     //For Example: If the distance tag is pressed, then the tag displays a single button slider
     func tagPressedAttributeActions(title: String, tagView: TagView) {
@@ -264,7 +222,9 @@ extension AddingTagsToProfileViewController {
             case TagAttributes.SpecialtyButtons.rawValue:
                 //checking if we just got passed something like Black or Blonde, because then we need to convert it to a specialty tag category
                 //but if not, then we just need to pass the title because it is already a specialty tag category
-                createStackViewTagButtonsAndSpecialtyEnviroment(findFilterNameCategory(title)?.rawValue ?? title, pushOneButton: true, addNoneButton: true)
+                if let specialtyTagView = tagView as? SpecialtyTagView {
+                    createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagView.specialtyTagTitle, pushOneButton: true, addNoneButton: true)
+                }
             case TagAttributes.SpecialtySingleSlider.rawValue:
                 theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
                 createSpecialtyTagEnviroment(true)
@@ -278,16 +238,19 @@ extension AddingTagsToProfileViewController {
         }
         theSpecialtyTagEnviromentHolderView?.delegate = self
     }
-    
+}
+
+//pop up extensions
+extension AddingTagsToProfileViewController {
     func createBirthdayDatePickerPop() {
         DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
             (birthday) -> Void in
             let calendar : NSCalendar = NSCalendar.currentCalendar()
             let now = NSDate()
             let ageComponents = calendar.components(.Year,
-                    fromDate: birthday,
-                    toDate: now,
-                    options: [])
+                                                    fromDate: birthday,
+                                                    toDate: now,
+                                                    options: [])
             for tagView in self.tagChoicesView.tagViews where tagView is SpecialtyTagView {
                 let specialtyTagView = tagView as! SpecialtyTagView
                 if specialtyTagView.specialtyTagTitle == "Age" {
@@ -297,7 +260,7 @@ extension AddingTagsToProfileViewController {
             User.currentUser()!.birthDate = birthday
             //TODO: I probably should be doing something to make sure this actually saves, in case they exit the app very fast before it saves.
             User.currentUser()!.saveInBackground()
-            }
+        }
     }
     
     //Purpose: I want an editing SCLAlertView, with a textfield, to appear when the user taps a generic tag

@@ -77,7 +77,7 @@ func convertTagAttributeFromCategoryTitle(categoryTitle: String) -> TagAttribute
 
 //Purpose: to find which specialty group we are dealing with
 //For Example: It figures out whether the given string should be with Hair Color, Race, ect.
-func findFilterNameCategory(tagTitle: String) -> SpecialtyTags? {
+func findSpecialtyCategoryName(tagTitle: String) -> SpecialtyTags? {
     if let filterName = FilterNames(rawValue: tagTitle) {
         //we have a specialty generic tag
         if FilterNames.genderAllValues.contains(filterName) {

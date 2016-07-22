@@ -116,10 +116,6 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
             changeTagListViewWidth(tagView, extend: false)
         }
     }
-
-    func removeChoicesTag(tagTitle: String) {
-        tagChoicesView.removeTag(tagTitle)
-    }
     
     func doesChosenTagViewContain(tagTitle: String) -> Bool {
         return tagChosenView.tagExistsInTagListView(tagTitle)
@@ -145,13 +141,8 @@ extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
         createSpecialtyTagEnviroment(false)
     }
     
-    //need to override in subclass method
-    func addToProfileTagArray(title: String) {}
-}
-
-//search extension
-extension FilterTagViewController {
-
+    //need to override this in add to profile class
+    func createNewPersonalTag(title: String) {}
 }
 
 //tag helper extensions 
@@ -179,6 +170,7 @@ extension FilterTagViewController {
     
 }
 
+//search extension
 extension FilterTagViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
@@ -227,7 +219,7 @@ extension FilterTagViewController: UISearchBarDelegate {
     
     func addSpecialtyTagsToSearchDataArray() {
         for filterName in FilterNames.allValues {
-            searchDataArray.append(Tag(title: filterName.rawValue, specialtyCategoryTitle: findFilterNameCategory(filterName.rawValue)))
+            searchDataArray.append(Tag(title: filterName.rawValue, specialtyCategoryTitle: findSpecialtyCategoryName(filterName.rawValue)))
         }
     }
     

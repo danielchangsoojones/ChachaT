@@ -18,7 +18,7 @@ public enum SpecialtyTagEnviroments {
 
 protocol SpecialtyTagEnviromentHolderViewDelegate {
     func unhideChoicesTagListView()
-    func addToProfileTagArray(title: String)
+    func createNewPersonalTag(title: String)
 }
 
 class SpecialtyTagEnviromentHolderView: UIView {
@@ -53,7 +53,8 @@ class SpecialtyTagEnviromentHolderView: UIView {
             //we re-create the tagView with the original tags and then the created tag is already kept in
             if let createdTag = createdTag {
                 if let title = createdTag.currentTitle {
-                    delegate?.addToProfileTagArray(title)
+                    //the user has made a tag that was never in the database. Need to add the tag to the tagChoicesView and also have it in array to be saved to database.
+                    delegate?.createNewPersonalTag(title)
                 }
             }
         }
