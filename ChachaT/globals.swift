@@ -28,13 +28,6 @@ public enum StoryboardIdentifiers : String {
    case DistanceSingleRangeSlider
 }
 
-var anonymousFlowGlobal : AnonymousFlow = .MainPageFirstVisitMatchingPhase
-public enum AnonymousFlow {
-    case MainPageFirstVisitMatchingPhase
-    case MainPageSecondVisitFilteringStage
-    case MainPageThirdVisitSignUpPhase
-}
-
 //helper functions
 func isIphone3by2AR() -> Bool {
     let screenSize: CGRect = UIScreen.mainScreen().bounds
@@ -55,52 +48,6 @@ func setBottomBlur() -> CAGradientLayer {
     gradientLayer.locations = [0.0, 0.8]
     
     return gradientLayer
-}
-
-func createQuestionBubbleGUI(questionButton: ResizableButton) {
-    questionButton.titleLabel?.lineBreakMode = NSLineBreakMode.ByWordWrapping
-    questionButton.titleLabel?.textAlignment = NSTextAlignment.Center
-    questionButton.titleLabel?.numberOfLines = 0
-    questionButton.titleEdgeInsets = UIEdgeInsets(top: -5, left: 15, bottom: 0, right: 15)
-}
-
-func createBackgroundOverlay() -> UIView {
-    let overlayBackgroundColorView: UIView = {
-        $0.backgroundColor = HandBackgroundColorOverlay
-        $0.userInteractionEnabled = false
-        $0.alpha = 0
-        return $0
-    }(UIView())
-    return overlayBackgroundColorView
-}
-
-func createHandImageOverlay() -> UIImageView {
-    let theHandImage: UIImageView = {
-        $0.image = UIImage(named: "Hand")?.imageRotatedByDegrees(-25, flip: false)
-        $0.contentMode = .ScaleAspectFit
-        $0.alpha = 0
-        return $0
-    }(UIImageView())
-    return theHandImage
-}
-
-func createLabelForOverlay(labelString: String) -> UILabel {
-    let overlayLabel: UILabel = {
-        $0.text = labelString
-        $0.alpha = 0
-        $0.textColor = UIColor.whiteColor()
-        return $0
-    }(UILabel())
-    return overlayLabel
-}
-
-func animateOverlay(backgroundOverlayView: UIView) {
-    UIView.animateWithDuration(2, animations: {
-        for subview in backgroundOverlayView.subviews {
-            subview.alpha = 1
-        }
-        backgroundOverlayView.alpha = 1
-    })
 }
 
 //Text View methods
