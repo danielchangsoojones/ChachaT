@@ -33,6 +33,7 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theThirdBulletText: UILabel!
     @IBOutlet weak var editOrBackOrSaveButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
+    @IBOutlet weak var theUserOfCardTagListView: TagListView!
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -99,6 +100,7 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
         setNormalGUI()
         setupTapHandler()
+        loadTagsFromParse()
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -295,6 +297,33 @@ extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
         profileImage.image = image
     }
 }
+
+
+//the TagListView extenstion
+extension CardDetailViewController {
+    func loadTagsFromParse() {
+        setTagListAttributes()
+        let query = Tag.query()
+        if let userOfTheCard = userOfTheCard {
+            query?.whereKey("createdBy", equalTo: userOfTheCard)
+        }
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+            if error == nil {
+                for tag in objects as! [Tag] {
+                    //TODO: make a specialty tag and generic tag appear
+                    self.theUserOfCardTagListView.addTag(tag.title)
+                }
+            } else {
+                print(error)
+            }
+        })
+    }
+    
+    func setTagListAttributes() {
+        theUserOfCardTagListView.addChoicesTagListViewAttributes()
+    }
+}
+
 
 extension CardDetailViewController: SegueHandlerType {
     enum SegueIdentifier: String {

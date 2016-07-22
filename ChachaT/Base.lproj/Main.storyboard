@@ -381,9 +381,8 @@
                                                 <rect key="frame" x="290" y="122" width="20" height="20"/>
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="TagListView" customModule="ChachaT" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="433" width="600" height="312"/>
-                                                <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="312" id="qYw-rF-hQs"/>
                                                 </constraints>
@@ -475,6 +474,7 @@
                         <outlet property="theSecondBulletText" destination="MLZ-wk-Al1" id="CvR-zm-bkU"/>
                         <outlet property="theThirdBulletText" destination="QhN-sR-LNs" id="GAd-Lq-IIG"/>
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
+                        <outlet property="theUserOfCardTagListView" destination="dCe-w4-3mH" id="cLf-Xf-cmv"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
                         <segue destination="137-mi-AE4" kind="show" identifier="QuestionEditingPopUpSegue" id="QHg-xS-Tuv"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="LKh-Ql-dNR"/>
@@ -520,6 +520,6 @@
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="YWU-JH-Jpm"/>
+        <segue reference="LKh-Ql-dNR"/>
     </inferredMetricsTieBreakers>
 </document>
