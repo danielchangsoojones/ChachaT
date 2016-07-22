@@ -19,7 +19,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="fEb-nV-m3f" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNf-HX-Mif" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="817.5" y="-244"/>
+            <point key="canvasLocation" x="469.5" y="-282"/>
         </scene>
         <!--Background Animation View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -120,7 +120,7 @@
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="plM-0D-iM0">
                             <connections>
-                                <action selector="logOut:" destination="BYZ-38-t0r" id="M2m-EI-WmV"/>
+                                <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="YWU-JH-Jpm"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9F2-jI-qmF">
@@ -137,8 +137,7 @@
                         <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="iIV-nv-kuo" kind="presentation" identifier="MainTinderPageToQuestionOnboardingSegue" id="3lX-ep-9E2"/>
-                        <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="u00-Q4-cEz"/>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="dCe-pg-QWN"/>
+                        <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="2hX-Ts-O6M"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -355,65 +354,8 @@
                                                     </mask>
                                                 </variation>
                                             </view>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="XWC-yS-1iT" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="426" width="560" height="68"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="dDc-ea-ywZ"/>
-                                                    <constraint firstAttribute="width" constant="330" id="lA8-dY-3Rq"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="s8Z-3a-BZd"/>
-                                                </constraints>
-                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
-                                                    <color key="titleColor" red="0.047058823529411764" green="0.72941176470588232" blue="0.58823529411764708" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="dDc-ea-ywZ"/>
-                                                        <exclude reference="lA8-dY-3Rq"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="questionButtonOnePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="2S3-mP-ocr"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Hdx-yn-KHS" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="576" width="560" height="68"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" constant="330" id="eXZ-98-ah3"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="kkZ-NB-F8G"/>
-                                                </constraints>
-                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
-                                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="eXZ-98-ah3"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="questionButtonThreePressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="Mt0-dr-bGv"/>
-                                                </connections>
-                                            </button>
-                                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wKk-OW-7Uu">
-                                                <rect key="frame" x="20" y="651" width="560" height="60"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="60" id="H9a-sB-RtB"/>
-                                                    <constraint firstAttribute="width" constant="330" id="juy-EQ-jEd"/>
-                                                </constraints>
-                                                <state key="normal" title="Your Own Question..." backgroundImage="Custom Question Bubble">
-                                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="juy-EQ-jEd"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="customQuestionButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="9Zm-QF-6Eh"/>
-                                                    <segue destination="daK-C5-wmi" kind="show" identifier="FilterInputPageSegue" id="J40-Mu-xxa"/>
-                                                </connections>
-                                            </button>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Ask Taylor: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-Q8-gEl">
-                                                <rect key="frame" x="8" y="406" width="79" height="18"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Tags:" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="bjX-Q8-gEl">
+                                                <rect key="frame" x="8" y="406" width="37" height="18"/>
                                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
                                                 <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                                 <nil key="highlightedColor"/>
@@ -439,62 +381,42 @@
                                                 <rect key="frame" x="290" y="122" width="20" height="20"/>
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </activityIndicatorView>
-                                            <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="18q-bc-79v" customClass="ResizableButton" customModule="ChachaT" customModuleProvider="target">
-                                                <rect key="frame" x="20" y="500" width="560" height="68"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH">
+                                                <rect key="frame" x="0.0" y="433" width="600" height="312"/>
+                                                <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" constant="330" id="GgM-VQ-xLE"/>
-                                                    <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="60" id="hao-IK-1IR"/>
+                                                    <constraint firstAttribute="height" constant="312" id="qYw-rF-hQs"/>
                                                 </constraints>
-                                                <state key="normal" title="A question about you..." backgroundImage="Question Bubble">
-                                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                                                </state>
-                                                <variation key="default">
-                                                    <mask key="constraints">
-                                                        <exclude reference="GgM-VQ-xLE"/>
-                                                    </mask>
-                                                </variation>
-                                                <connections>
-                                                    <action selector="questionButtonTwoPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="MkN-hO-exi"/>
-                                                </connections>
-                                            </button>
+                                            </view>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" constant="-61" id="4Es-KN-xkx"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="leading" secondItem="8hk-xb-Z8g" secondAttribute="leading" id="4Pe-Ft-iwW"/>
-                                            <constraint firstItem="Hdx-yn-KHS" firstAttribute="trailing" secondItem="18q-bc-79v" secondAttribute="trailing" id="4w9-tQ-XHL"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="7US-qG-o0r"/>
-                                            <constraint firstItem="18q-bc-79v" firstAttribute="trailing" secondItem="XWC-yS-1iT" secondAttribute="trailing" id="7r0-Bm-rhL"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="leading" secondItem="dI7-Qj-h3R" secondAttribute="leading" id="865-Xw-5Lj"/>
-                                            <constraint firstItem="wKk-OW-7Uu" firstAttribute="leading" secondItem="Hdx-yn-KHS" secondAttribute="leading" id="BgS-dm-RFK"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="3" id="DjI-9k-vhI"/>
+                                            <constraint firstItem="dCe-w4-3mH" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="9" id="E0i-QV-clM"/>
                                             <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="FD2-qx-rfU"/>
-                                            <constraint firstItem="18q-bc-79v" firstAttribute="top" secondItem="XWC-yS-1iT" secondAttribute="bottom" constant="7" id="IoE-9N-CFe"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="bottom" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="M2A-2h-JId"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="M8H-h8-D88"/>
-                                            <constraint firstItem="wKk-OW-7Uu" firstAttribute="trailing" secondItem="Hdx-yn-KHS" secondAttribute="trailing" id="Nli-dx-Qpv"/>
-                                            <constraint firstItem="Hdx-yn-KHS" firstAttribute="top" secondItem="18q-bc-79v" secondAttribute="bottom" constant="7" id="O1l-9Z-qms"/>
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
-                                            <constraint firstItem="18q-bc-79v" firstAttribute="leading" secondItem="XWC-yS-1iT" secondAttribute="leading" id="Rge-W7-kyV"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerX" secondItem="v5S-4V-jao" secondAttribute="centerX" id="SVb-Sy-7Pv"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="100" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
-                                            <constraint firstItem="Hdx-yn-KHS" firstAttribute="leading" secondItem="18q-bc-79v" secondAttribute="leading" id="UgH-UO-xeA"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
-                                            <constraint firstAttribute="trailing" secondItem="XWC-yS-1iT" secondAttribute="trailing" constant="20" id="W3f-qc-E5z"/>
-                                            <constraint firstItem="XWC-yS-1iT" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="WNO-Zn-w7O"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
-                                            <constraint firstItem="wKk-OW-7Uu" firstAttribute="top" secondItem="Hdx-yn-KHS" secondAttribute="bottom" constant="7" id="avI-ZS-TjM"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="cEx-7Q-tPb"/>
-                                            <constraint firstAttribute="bottom" secondItem="wKk-OW-7Uu" secondAttribute="bottom" constant="59" id="k7Z-kK-QdY"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="m0d-Qv-Dsh"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerY" secondItem="g5O-C2-7n0" secondAttribute="centerY" id="mId-h5-nF5"/>
+                                            <constraint firstAttribute="bottom" secondItem="dCe-w4-3mH" secondAttribute="bottom" constant="25" id="ni6-JD-Kkw"/>
                                             <constraint firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="pYg-FL-5Gk"/>
                                             <constraint firstAttribute="bottom" secondItem="QhN-sR-LNs" secondAttribute="bottom" constant="20" id="sh9-cf-oXI"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" id="t67-ZE-aKb"/>
-                                            <constraint firstItem="XWC-yS-1iT" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="2" id="tBi-kw-wAa"/>
+                                            <constraint firstAttribute="trailing" secondItem="dCe-w4-3mH" secondAttribute="trailing" id="wlj-3e-3iH"/>
+                                            <constraint firstItem="dCe-w4-3mH" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="x9g-xW-zhk"/>
                                             <constraint firstAttribute="trailing" secondItem="dCo-OJ-te4" secondAttribute="trailing" id="xLZ-qp-Z4y"/>
                                         </constraints>
                                         <variation key="default">
@@ -545,14 +467,10 @@
                         <outlet property="editOrBackOrSaveButton" destination="i23-FF-3md" id="JjS-rL-JqS"/>
                         <outlet property="profileImage" destination="8hk-xb-Z8g" id="QQ4-0v-Dow"/>
                         <outlet property="theAgeLabel" destination="iG2-2N-iPj" id="TJR-gZ-ehy"/>
-                        <outlet property="theCustomQuestionButton" destination="wKk-OW-7Uu" id="KMB-2m-6Nk"/>
                         <outlet property="theFirstBulletText" destination="GZp-kG-YwR" id="1K2-x8-oMM"/>
                         <outlet property="theFullNameLabel" destination="dI7-Qj-h3R" id="jDQ-RN-H4a"/>
                         <outlet property="theFullNameTextField" destination="Cak-7g-UB7" id="RyF-75-ElM"/>
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
-                        <outlet property="theQuestionButtonOne" destination="XWC-yS-1iT" id="DzD-NB-Zhs"/>
-                        <outlet property="theQuestionButtonThree" destination="Hdx-yn-KHS" id="05G-SN-oAX"/>
-                        <outlet property="theQuestionButtonTwo" destination="18q-bc-79v" id="3Ly-Cl-wS5"/>
                         <outlet property="theSavingSpinner" destination="zLF-DG-mmb" id="DeZ-s9-0nd"/>
                         <outlet property="theSecondBulletText" destination="MLZ-wk-Al1" id="CvR-zm-bkU"/>
                         <outlet property="theThirdBulletText" destination="QhN-sR-LNs" id="GAd-Lq-IIG"/>
@@ -596,15 +514,12 @@
     <resources>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Chacha Circle Button" width="78" height="78"/>
-        <image name="Custom Question Bubble" width="340" height="68"/>
         <image name="Profile Main Page Button" width="60" height="59"/>
-        <image name="Question Bubble" width="340" height="68"/>
         <image name="Report User Button" width="5" height="20"/>
         <image name="Skip Main Page Button" width="81" height="79"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dCe-pg-QWN"/>
-        <segue reference="u00-Q4-cEz"/>
+        <segue reference="YWU-JH-Jpm"/>
     </inferredMetricsTieBreakers>
 </document>

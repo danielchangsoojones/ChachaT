@@ -11,7 +11,7 @@ import SnapKit
 import Parse
 import Foundation
 
-class FilterTagViewController: OverlayAnonymousFlowViewController {
+class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
     @IBOutlet weak var tagChosenView: TagListView!

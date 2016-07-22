@@ -18,7 +18,7 @@ public enum QuestionDetailState {
     case OtherUserProfileViewOnlyMode
 }
 
-class CardDetailViewController: OverlayAnonymousFlowViewController {
+class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theFirstBulletText: UILabel!
@@ -33,9 +33,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theThirdBulletText: UILabel!
     @IBOutlet weak var editOrBackOrSaveButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
-    @IBOutlet weak var theQuestionButtonOne: ResizableButton!
-    @IBOutlet weak var theQuestionButtonTwo: ResizableButton!
-    @IBOutlet weak var theQuestionButtonThree: ResizableButton!
     
     var fullNameTextFieldDidChange = false
     var titleTextFieldDidChange = false
@@ -89,22 +86,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
         }
     }
     
-    @IBAction func questionButtonOnePressed(sender: AnyObject) {
-        createQuestionPopUp(PopUpQuestionNumber.QuestionOne)
-    }
-    
-    @IBAction func questionButtonTwoPressed(sender: AnyObject) {
-        createQuestionPopUp(PopUpQuestionNumber.QuestionTwo)
-    }
-    
-    @IBAction func questionButtonThreePressed(sender: AnyObject) {
-        createQuestionPopUp(PopUpQuestionNumber.QuestionThree)
-    }
-
-    
-    @IBAction func customQuestionButtonPressed(sender: AnyObject) {
-    }
-    
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
         let alert = Alert(closeButtonHidden: false)
         alert.addButton("Block User") { 
@@ -117,7 +98,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         setNormalGUI()
-        createAnonymousFlow()
         setupTapHandler()
     }
     
@@ -143,27 +123,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
         popup.presentInViewController(self)
     }
     
-    func createQuestionPopUp(questionNumber: PopUpQuestionNumber) {
-        //look at STPopUp github for more info.
-        let storyboard = UIStoryboard(name: "Question", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailQuestionPopUpViewController") as! QuestionPopUpViewController 
-        vc.delegate = self
-        vc.popUpQuestionNumber = questionNumber
-        switch questionNumber {
-        case .QuestionOne: vc.currentQuestion = userOfTheCard?.questionOne
-        case .QuestionTwo: vc.currentQuestion = userOfTheCard?.questionTwo
-        case .QuestionThree: vc.currentQuestion = userOfTheCard?.questionThree
-        case .CustomQuestion: break
-        }
-        if questionDetailState == .EditingMode {
-            vc.questionPopUpState = .EditingMode
-            self.navigationController?.pushViewController(vc, animated: true)
-        } else {
-            self.presentViewController(vc, animated: true, completion: nil)
-        }
-        
-    }
-    
     func createBottomPicturePopUp() {
         let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
         let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
@@ -179,9 +138,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
     
     func setNormalGUI() {
         self.view.layer.addSublayer(setBottomBlur())
-        createQuestionBubbleGUI(theQuestionButtonOne)
-        createQuestionBubbleGUI(theQuestionButtonTwo)
-        createQuestionBubbleGUI(theQuestionButtonThree)
         editOrBackOrSaveButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
@@ -211,30 +167,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
             profileImage.backgroundColor = ChachaBombayGrey
             theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
             theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
-        }
-        do {
-            let question = try userOfTheCard?.questionOne?.fetchIfNeeded()
-            if let question = question {
-                theQuestionButtonOne.setTitle(question.question, forState: .Normal)
-            }
-            } catch {
-                print("there was an error fetching the question")
-            }
-        do {
-            let question = try userOfTheCard?.questionTwo?.fetchIfNeeded()
-            if let question = question {
-                theQuestionButtonTwo.setTitle(question.question, forState: .Normal)
-            }
-        } catch {
-            print("there was an error fetching the question")
-        }
-        do {
-            let question = try userOfTheCard?.questionThree?.fetchIfNeeded()
-            if let question = question {
-                theQuestionButtonThree.setTitle(question.question, forState: .Normal)
-            }
-        } catch {
-            print("there was an error fetching the question")
         }
     }
     
@@ -324,32 +256,6 @@ class CardDetailViewController: OverlayAnonymousFlowViewController {
 
 }
 
-//creating hand overlay
-extension CardDetailViewController {
-    func createHandOverlay() {
-        let theHandImage = createHandImageOverlay()
-        let overlayLabel = createLabelForOverlay("Filter who you want to see!")
-        createSemiTranslucentBlackOverlay([theHandImage, overlayLabel])
-        theHandImage.snp_makeConstraints { (make) in
-            make.center.equalTo(theQuestionButtonOne).offset(CGPointMake(20, 60))
-        }
-        overlayLabel.snp_makeConstraints { (make) in
-            make.center.equalTo(profileImage)
-        }
-    }
-    
-    func createAnonymousFlow() {
-        if PFAnonymousUtils.isLinkedWithUser(User.currentUser()) {
-            switch anonymousFlowGlobal {
-            case .MainPageFirstVisitMatchingPhase: createHandOverlay()
-            case .MainPageSecondVisitFilteringStage: break
-            case .MainPageThirdVisitSignUpPhase: break
-            }
-        }
-    }
-}
-
-
 protocol PopUpViewControllerDelegate{
     func passFactDescription(text: String, fact: Fact)
 }
@@ -360,21 +266,6 @@ extension CardDetailViewController: PopUpViewControllerDelegate {
         case .FactOne: theFirstBulletText.text = text
         case .FactTwo: theSecondBulletText.text = text
         case .FactThree: theThirdBulletText.text = text
-        }
-    }
-}
-
-protocol QuestionPopUpViewControllerDelegate{
-    func passQuestionText(text: String, questionNumber: PopUpQuestionNumber)
-}
-
-extension CardDetailViewController: QuestionPopUpViewControllerDelegate {
-    func passQuestionText(text: String, questionNumber: PopUpQuestionNumber) {
-        switch questionNumber {
-        case .QuestionOne: theQuestionButtonOne.setTitle(text, forState: .Normal)
-        case .QuestionTwo: theQuestionButtonTwo.setTitle(text, forState: .Normal)
-        case .QuestionThree: theQuestionButtonThree.setTitle(text, forState: .Normal)
-        case .CustomQuestion: break
         }
     }
 }

@@ -27,7 +27,7 @@ var audioPlayerWoosh = AVAudioPlayer()
 private let numberOfCards : UInt = 5
 
 //go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
-class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
+class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
@@ -35,6 +35,8 @@ class BackgroundAnimationViewController: OverlayAnonymousFlowViewController {
     @IBOutlet weak var theFilteringButton: UIButton!
 
     var userArray = [User]()
+    //I need to do some hacky stuff to get the loading rings around chacha logo
+    var rippleState = 0
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
     
@@ -220,18 +222,12 @@ extension BackgroundAnimationViewController: MagicMoveable {
 extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case MainTinderPageToQuestionOnboardingSegue
         case OnboardingPageSegue
         case BackgroundAnimationControllerToTagFilteringPageSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        case .MainTinderPageToQuestionOnboardingSegue:
-            let navigationVC = segue.destinationViewController as! UINavigationController
-            let destinationVC = navigationVC.viewControllers[0] as! QuestionPopUpViewController
-            destinationVC.fromOnboarding = true
-            destinationVC.questionPopUpState = .EditingMode
         case .BackgroundAnimationControllerToTagFilteringPageSegue:
             let destinationVC = segue.destinationViewController as! FilterQueryViewController
             destinationVC.mainPageDelegate = self
