@@ -13,7 +13,6 @@ import AVFoundation
 import Parse
 import EFTools
 import ParseUI
-import BlurryModalSegue
 import Ripple
 import SnapKit
 import Timepiece
