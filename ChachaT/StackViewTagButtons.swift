@@ -13,7 +13,7 @@ protocol StackViewTagButtonsDelegate {
     func removeChosenTag(tagTitle: String)
     func doesChosenTagViewContain(tagTitle: String) -> Bool
     func removeChoicesTag(tagTitle: String)
-    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, filterNameCategory: SpecialtyTags)
+    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags)
 }
 
 class StackViewTagButtons: UIStackView {
@@ -125,11 +125,9 @@ class StackViewTagButtons: UIStackView {
             if button == pushedButton {
                 //set the pushed button to highlighted
                 changeButtonHighlight(false, button: pushedButton, changeChosenTags: true, changeChoicesTag: true)
-//                if let filterNameCategory = findFilterNameCategory(button.titleLabel!.text!) {
                 if let filterCategory = SpecialtyTags(rawValue: filterCategory) {
-                    delegate?.editSpecialtyTagView((button.titleLabel?.text)!, originalTagTitle: originalTagTitle, filterNameCategory: filterCategory)
+                    delegate?.editSpecialtyTagView((button.titleLabel?.text)!, originalTagTitle: originalTagTitle, specialtyCategoryName: filterCategory)
                 }
-//                }
             } else {
                 //set the non-pushed buttons all to unhighlighted
                 changeButtonHighlight(true, button: button, changeChosenTags: true, changeChoicesTag: true)

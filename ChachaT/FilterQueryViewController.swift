@@ -46,7 +46,7 @@ class FilterQueryViewController: FilterTagViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDefaultTags()
+        loadChoicesViewTags()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
         // Do any additional setup after loading the view.
@@ -68,19 +68,19 @@ extension FilterQueryViewController {
         for specialtyTag in SpecialtyTags.specialtyButtonValues {
             let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
             setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtyButtons, specialtyCategoryTitle: specialtyTag))
+            tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
         //right now, the only characteristic for range slider is "Age Range"
         for specialtyTag in SpecialtyTags.specialtyRangeSliderValues {
             let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
             setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtyRangeSlider, specialtyCategoryTitle: specialtyTag))
+            tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
         //right now, the only characteristic for range slider is "Location"
         for specialtyTag in SpecialtyTags.specialtySingleSliderValues {
             let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
             setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtySingleSlider, specialtyCategoryTitle: specialtyTag))
+            tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
     }
     
@@ -92,7 +92,7 @@ extension FilterQueryViewController {
         tagView.highlightedBackgroundColor = specialtyTagColor
     }
     
-    func setDefaultTags() {
+    override func loadChoicesViewTags() {
         setSpecialtyTagsIntoDefaultView()
         //adding in generic tags
         //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
@@ -101,17 +101,17 @@ extension FilterQueryViewController {
         query?.whereKey("attribute", equalTo: TagAttributes.Generic.rawValue)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
             for tag in objects as! [Tag] {
-                self.currentUserTags.append(tag)
+                self.tagChoicesDataArray.append(tag)
                 self.tagChoicesView.addTag(tag.title)
             }
         })
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        for tag in currentUserTags where tag.specialtyCategoryTitle == title {
+        for tag in tagChoicesDataArray where tag.specialtyCategoryTitle == title {
             createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
         }
-        for tag in currentUserTags where tag.attribute == TagAttributes.Generic.rawValue && tag.title == title {
+        for tag in tagChoicesDataArray where tag.attribute == TagAttributes.Generic.rawValue && tag.title == title {
             let tagView = tagChosenView.addTag(tag.title)
             tagChoicesView.removeTag(tag.title)
             changeTagListViewWidth(tagView, extend: true)
@@ -127,32 +127,12 @@ extension FilterQueryViewController {
     }
 }
 
-extension FilterQueryViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
-        resetTagChoicesViewList()
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//search extension
+extension FilterQueryViewController {
+   override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         var filtered:[Tag] = []
         tagChoicesView.removeAllTags()
-        filtered = allParseTags.filter({ (tag) -> Bool in
+        filtered = searchDataArray.filter({ (tag) -> Bool in
             let tmp: NSString = tag.title
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
@@ -178,15 +158,8 @@ extension FilterQueryViewController: UISearchBarDelegate {
             for tag in filtered {
                 tagChoicesView.addTag(tag.title)
             }
-            createSpecialtyTagEnviroment(true)
+            createSpecialtyTagEnviroment(false)
         }
-    }
-    
-    func resetTagChoicesViewList() {
-        tagChoicesView.removeAllTags()
-        setDefaultTags()
-        createSpecialtyTagEnviroment(true)
-        theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }
 
