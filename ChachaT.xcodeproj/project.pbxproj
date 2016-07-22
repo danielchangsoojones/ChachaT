@@ -49,7 +49,6 @@
 		9289F6EC1CEB542800F42ACE /* Question.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289F6EB1CEB542800F42ACE /* Question.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */; };
-		929FDB7E1CFA096400ACE474 /* ResizableButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB7D1CFA096400ACE474 /* ResizableButton.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
@@ -117,7 +116,6 @@
 		9289F6EB1CEB542800F42ACE /* Question.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Question.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailPopUpViewController.swift; sourceTree = "<group>"; };
-		929FDB7D1CFA096400ACE474 /* ResizableButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResizableButton.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -267,7 +265,6 @@
 				926108581CEA11B9009F3E86 /* Alert.swift */,
 				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
-				929FDB7D1CFA096400ACE474 /* ResizableButton.swift */,
 				929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */,
 			);
 			name = globals;
@@ -528,7 +525,6 @@
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				9289F6EC1CEB542800F42ACE /* Question.swift in Sources */,
-				929FDB7E1CFA096400ACE474 /* ResizableButton.swift in Sources */,
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
