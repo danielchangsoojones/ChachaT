@@ -32,21 +32,18 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //setting the initial storyboard
         if User.currentUser() == nil {
-//            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
-//            
-//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//            
-//            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
+            self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
             
-            User.enableAutomaticUser()
-            User.currentUser()!.anonymous = true
-            User.currentUser()?.saveInBackground()
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
+            
+            self.window?.rootViewController = initialViewController
+            self.window?.makeKeyAndVisible()
             
         }
         
+        //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //        
 //                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)

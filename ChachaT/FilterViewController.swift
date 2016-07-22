@@ -521,12 +521,7 @@ extension FilterViewController {
             query?.whereKey("objectId", notEqualTo: (currentUser!.objectId)!)
             query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
                 if let users = objects as? [User] {
-                    //if we are in the anonymous flow, then we need to change the anonymousFlowPhase
-                    if anonymousFlowStage(.MainPageSecondVisitFilteringStage) {
-                        anonymousFlowGlobal = .MainPageThirdVisitSignUpPhase
-                    }
                     self.delegate?.passFilteredUserArray(users)
-                    self.delegate?.updateAnonymousFlow()
                     self.dismissViewControllerAnimated(true, completion: nil)
                 }
             })
