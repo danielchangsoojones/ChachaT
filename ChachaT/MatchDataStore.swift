@@ -1,0 +1,84 @@
+//
+//  DataStore.swift
+//  ElevenDates
+//
+//  Created by Brett Keck on 9/16/15.
+//  Copyright © 2015 Brett Keck. All rights reserved.
+//
+
+import UIKit
+
+class MatchDataStore: NSObject {
+    static let sharedInstance = MatchDataStore()
+    
+    func likePerson(user : User) {
+        matchUser(User.currentUser()!, user2: user, isMatch: true)
+    }
+    
+    func nopePerson(user : User) {
+        matchUser(User.currentUser()!, user2: user, isMatch: false)
+    }
+    
+    private func matchUser(user1 : User, user2 : User, isMatch : Bool) {
+        let match = Match()
+        match.currentUser = user1
+        match.targetUser = user2
+        match.isMatch = isMatch
+        
+        checkMatch(match)
+    }
+    
+    private func checkMatch(theMatch : Match) {
+        if theMatch.isMatch {
+            let matchQuery = Match.query()!
+            matchQuery.whereKey(Constants.currentUser, equalTo: theMatch.targetUser)
+            matchQuery.whereKey(Constants.targetUser, equalTo: theMatch.currentUser)
+            matchQuery.whereKey(Constants.isMatch, equalTo: true)
+            
+            matchQuery.getFirstObjectInBackgroundWithBlock({ (match, error) -> Void in
+                var mutualMatch = false
+                if let foundMatch = match as? Match {
+                    mutualMatch = true
+                    foundMatch.mutualMatch = mutualMatch
+                    foundMatch.saveInBackground()
+                }
+                self.updateOrInsertMatch(theMatch, mutualMatch: mutualMatch)
+            })
+        } else {
+            updateOrInsertMatch(theMatch, mutualMatch: false)
+        }
+    }
+    
+    private func updateOrInsertMatch(theMatch : Match, mutualMatch : Bool) {
+        // Create a query on Match
+        let query = Match.query()!
+        // The query has two clauses - currentUser is the current user,
+        // targetUser is the match's target user (use the Constants file)
+        query.whereKey(Constants.currentUser, equalTo: theMatch.currentUser)
+        query.whereKey(Constants.targetUser, equalTo: theMatch.targetUser)
+        
+        // Get the first object (in the background).  If a match is found, update
+        // that record with the proper isMatch and mutualMatch values and save it.
+        // If a match is not found, update the mutualMatch value of the 
+        // theMatch parameter and save that.
+        query.getFirstObjectInBackgroundWithBlock { (match, error) -> Void in
+            if let foundMatch = match as? Match {
+                foundMatch.isMatch = theMatch.isMatch
+                foundMatch.mutualMatch = mutualMatch
+                foundMatch.saveInBackground()
+            } else {
+                theMatch.mutualMatch = mutualMatch
+                theMatch.saveInBackground()
+            }
+        }
+    }
+}
+
+
+
+
+
+
+
+
+

@@ -11,7 +11,7 @@
                 <viewControllerPlaceholder storyboardName="Onboarding" id="fEb-nV-m3f" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aNf-HX-Mif" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="469.5" y="-282"/>
+            <point key="canvasLocation" x="1100.5" y="-157"/>
         </scene>
         <!--Background Animation View Controller-->
         <scene sceneID="tne-QT-ifu">
@@ -141,7 +141,7 @@
                 <viewControllerPlaceholder storyboardName="Filtering" id="daK-C5-wmi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aa-uD-aZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="452.5" y="907"/>
+            <point key="canvasLocation" x="1160.5" y="858"/>
         </scene>
         <!--Page Main View Controller-->
         <scene sceneID="F7M-Lw-zEq">
@@ -467,12 +467,11 @@
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
                         <outlet property="theUserOfCardTagListView" destination="dCe-w4-3mH" id="cLf-Xf-cmv"/>
                         <outlet property="titleTextField" destination="Asv-C1-hSe" id="9Vs-qh-q3k"/>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="LogInPageSegue" id="LKh-Ql-dNR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1717" y="348"/>
+            <point key="canvasLocation" x="1772" y="347"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="NJs-ik-5Gj">
@@ -501,7 +500,4 @@
         <image name="Skip Main Page Button" width="81" height="79"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
-    <inferredMetricsTieBreakers>
-        <segue reference="YWU-JH-Jpm"/>
-    </inferredMetricsTieBreakers>
 </document>

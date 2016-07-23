@@ -34,6 +34,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theFilteringButton: UIButton!
 
     var userArray = [User]()
+    private var matchDataStore = MatchDataStore.sharedInstance
     //I needed to do some hacky stuff to get the loading rings around chacha logo
     var rippleState = 0
     
@@ -120,6 +121,7 @@ extension BackgroundAnimationViewController {
 }
 
 //MARK: KolodaViewDelegate
+//BEWARE if the function is not being run, it is because some of the delegate names have been changed. Go to the delegate page and make sure they match up exactly
 extension BackgroundAnimationViewController: KolodaViewDelegate {
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
         kolodaView.resetCurrentCardIndex()
@@ -148,12 +150,13 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
         return animation
     }
     
-    func koloda(koloda: KolodaView, isSwipingCardInDirection direction: SwipeResultDirection) {
-        playSoundInBG(audioPlayerWoosh)
-    }
-    
-    func koloda(koloda: KolodaView, didSwipedCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
-    
+    func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+        let targetUser = userArray[Int(index)]
+        if direction == .Right {
+            matchDataStore.likePerson(targetUser)
+        } else if direction == .Left {
+            matchDataStore.nopePerson(targetUser)
+        }
     }
 }
 
@@ -182,6 +185,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
                                                   owner: self, options: nil)[0] as? OverlayView
     }
 }
+
 
 extension BackgroundAnimationViewController: MagicMoveable {
     var isMagic: Bool {
