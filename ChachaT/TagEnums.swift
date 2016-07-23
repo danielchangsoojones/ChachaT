@@ -20,6 +20,7 @@ public enum SpecialtyTags : String {
     static let specialtyButtonValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor]
     static let specialtySingleSliderValues = [Location]
     static let specialtyRangeSliderValues = [AgeRange]
+    static let allValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor, Location, AgeRange]
 }
 
 //TODO: change name to SpecialtyTagTitles

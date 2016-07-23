@@ -42,7 +42,7 @@ class FilterTagViewController: UIViewController {
     func addTagListViewAttributes() {
         //did this in code, rather than total storyboard because it has a lot of redundancy
         tagChoicesView.addChoicesTagListViewAttributes()
-        tagChosenView.addChoicesTagListViewAttributes()
+        tagChosenView.addChosenTagListViewAttributes()
     }
     
     override func didReceiveMemoryWarning() {
@@ -141,7 +141,7 @@ extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
         createSpecialtyTagEnviroment(false)
     }
     
-    //need to override this in add to profile class
+    //need to override this in addToProfileViewController class
     func createNewPersonalTag(title: String) {}
 }
 
