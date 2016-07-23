@@ -181,6 +181,9 @@ extension AddingTagsToProfileViewController {
         if sender.tag == 1 {
             if searchActive {
                 //we are in the process of searching, so we are dealing with the choices tag view still, but we want searching functionality
+                //enabling remove button, because the tag view in chosenTagViewList will have a remove button, so it will be longer.
+                //if we didn't add a remove button, then the TagListWidth would only extend for a normal tag width, not normalTagWidth + remove button
+                tagView.enableRemoveButton = true
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
