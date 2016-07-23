@@ -184,7 +184,13 @@ extension AddingTagsToProfileViewController {
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
-                if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+                if let specialtyTagView = tagView as? SpecialtyTagView {
+                    //checking if we are dealing with a specialty tag, because then we want to add specialty tag to chosen view
+                    let tag = Tag(title: title, specialtyCategoryTitle: SpecialtyTags(rawValue: specialtyTagView.specialtyTagTitle))
+                    addTagOrSpecialtyTag(tag, addToChosenView: true)
+                } else {
+                    //just add genric tag
+                    let tag = Tag(title: title, specialtyCategoryTitle: nil)
                     addTagOrSpecialtyTag(tag, addToChosenView: true)
                 }
             } else {
@@ -199,6 +205,7 @@ extension AddingTagsToProfileViewController {
             //the tag is a special tag
             if addToChosenView {
                 tagChosenView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
+                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
             }
@@ -206,6 +213,7 @@ extension AddingTagsToProfileViewController {
             //just a generic tag
             if addToChosenView {
                 tagChosenView.addTag(tag.title)
+                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addTag(tag.title)
             }
