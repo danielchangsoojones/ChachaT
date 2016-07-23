@@ -26,7 +26,9 @@ class FilterQueryViewController: FilterTagViewController {
         let query = Tag.query()
         //finding all tags that have a title that the user chose for the search
         //TODO: I'll need to do something if 0 people come up
-        query?.whereKey("title", containedIn: chosenTagArrayTitles)
+        if !chosenTagArrayTitles.isEmpty {
+            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+        }
         query?.includeKey("createdBy")
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
             if error == nil {
