@@ -42,7 +42,6 @@ class FilterQueryViewController: FilterTagViewController {
                 print(error)
             }
         })
-        
     }
     
     
@@ -52,6 +51,14 @@ class FilterQueryViewController: FilterTagViewController {
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
         // Do any additional setup after loading the view.
+    }
+    
+    //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
+    //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
+    override func loadChoicesViewTags() {
+        for tag in tagChoicesDataArray {
+            tagChoicesView.addTag(tag.title)
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -70,12 +77,6 @@ extension FilterQueryViewController {
         let specialtyTagColor = UIColor.blueColor()
         tagView.tagBackgroundColor = specialtyTagColor
         tagView.highlightedBackgroundColor = specialtyTagColor
-    }
-    
-    override func loadChoicesViewTags() {
-        for tag in tagChoicesDataArray {
-            tagChoicesView.addTag(tag.title)
-        }
     }
     
     func setTagsInTagChoicesDataArray() {
