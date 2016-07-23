@@ -57,7 +57,13 @@ class FilterQueryViewController: FilterTagViewController {
     //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
     override func loadChoicesViewTags() {
         for tag in tagChoicesDataArray {
-            tagChoicesView.addTag(tag.title)
+            if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
+                let specialtyTagView = tagChoicesView.addTag(specialtyCategoryTitle)
+                setSpecialtyTagAttributes(specialtyTagView)
+            } else {
+                //dealing with normal Generic tags
+                tagChoicesView.addTag(tag.title)
+            }
         }
     }
 
@@ -81,9 +87,8 @@ extension FilterQueryViewController {
                 for tag in objects as! [Tag] {
                     self.tagChoicesDataArray.append(tag)
                 }
-                //loadChoices tag view has to come before setting specialty tags because it adds the specialty tags twice if we do it the other way
-                self.loadChoicesViewTags()
                 self.setSpecialtyTagsIntoDefaultView()
+                self.loadChoicesViewTags()
             } else {
                 print(error)
             }
@@ -95,8 +100,6 @@ extension FilterQueryViewController {
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyTag in SpecialtyTags.allValues {
-            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
-            setSpecialtyTagAttributes(tagView)
             tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
     }
