@@ -20,6 +20,29 @@ let FilteringPageStackViewLinesColor = UIColor.rgba(red: 246, green: 248, blue: 
 let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178, alpha: 0.25)
 let HandBackgroundColorOverlay = UIColor.rgba(red: 0, green: 0, blue: 0, alpha: 0.65)
 
+//Match Constants
+struct Constants {
+    static let createdAt = "createdAt"
+    static let chatRoom = "chatRoom"
+    static let sender = "sender"
+    static let currentUser = "currentUser"
+    static let targetUser = "targetUser"
+    static let mutualMatch = "mutualMatch"
+    static let male = "male"
+    static let female = "female"
+    static let dateMatch = "DateMatch"
+    static let dateChat = "DateChat"
+    static let id = "id"
+    static let firstName = "first_name"
+    static let lastName = "last_name"
+    static let name = "name"
+    static let image = "image.jpg"
+    static let objectId = "objectId"
+    static let gender = "gender"
+    static let discoverable = "discoverable"
+    static let isMatch = "isMatch"
+}
+
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
