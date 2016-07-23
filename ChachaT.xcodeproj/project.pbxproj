@@ -17,6 +17,8 @@
 		920BF82B1D43167000104842 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF82A1D43167000104842 /* Match.swift */; };
 		920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8311D431CD000104842 /* MatchDataStore.swift */; };
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
+		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
+		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -83,6 +85,8 @@
 		920BF82A1D43167000104842 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		920BF8311D431CD000104842 /* MatchDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDataStore.swift; sourceTree = "<group>"; };
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
+		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
+		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -196,9 +200,18 @@
 		920BF82C1D431C5E00104842 /* Matching */ = {
 			isa = PBXGroup;
 			children = (
+				920BF8331D432E2500104842 /* MatchesViewController.swift */,
 				920BF8311D431CD000104842 /* MatchDataStore.swift */,
 			);
 			name = Matching;
+			sourceTree = "<group>";
+		};
+		920BF8351D4333CA00104842 /* Messaging */ = {
+			isa = PBXGroup;
+			children = (
+				920BF8381D4334DF00104842 /* ChatViewController.swift */,
+			);
+			name = Messaging;
 			sourceTree = "<group>";
 		};
 		9261080A1CDBCA32009F3E86 = {
@@ -223,15 +236,16 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
-				9288194D1D2BECC8000A8E04 /* Navigation/PageView Controllers */,
-				920BF82C1D431C5E00104842 /* Matching */,
-				928819441D286C70000A8E04 /* Profile */,
-				9273B7991CFF491D0001A608 /* Filtering */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
+				928819441D286C70000A8E04 /* Profile */,
+				920BF8351D4333CA00104842 /* Messaging */,
+				920BF82C1D431C5E00104842 /* Matching */,
+				9273B7991CFF491D0001A608 /* Filtering */,
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
+				9288194D1D2BECC8000A8E04 /* Navigation/PageView Controllers */,
 				9261085A1CEA1939009F3E86 /* Models */,
 				9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */,
 				9261083B1CE4EDF7009F3E86 /* sounds */,
@@ -305,6 +319,7 @@
 		9261085A1CEA1939009F3E86 /* Models */ = {
 			isa = PBXGroup;
 			children = (
+				920BF8361D43346B00104842 /* Chat.swift */,
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9288194B1D2BDCFC000A8E04 /* Tag.swift */,
 				920BF82A1D43167000104842 /* Match.swift */,
@@ -342,7 +357,6 @@
 				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
-				920BF8331D432E2500104842 /* MatchesViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -539,6 +553,7 @@
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
+				920BF8371D43346B00104842 /* Chat.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
@@ -568,6 +583,7 @@
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
 				9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */,
+				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,

@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         User.registerSubclass()
         Tag.registerSubclass()
         Match.registerSubclass()
+        Chat.registerSubclass()
         
         // Override point for customization after application launch.
         let configuration = ParseClientConfiguration {

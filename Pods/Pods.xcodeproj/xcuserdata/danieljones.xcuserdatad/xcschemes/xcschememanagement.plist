@@ -19,6 +19,16 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>JSQMessagesViewController.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>JSQSystemSoundPlayer.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Koloda.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -97,6 +107,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>1ED4DFAAD25E1999D0244868457A351E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>22393314BD84357CB62E2F569D7F4AA5</key>
 		<dict>
 			<key>primary</key>
@@ -117,12 +132,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4A648F13FD8F9A5045111BAE289466D8</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5572B1E8F94D55F0118EE73191C63205</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>56170867254AF3082A1840024F458BD3</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>639CBFFAFF13D90104F3E81AE3BA19BF</key>
+		<key>59CDDB315DD2B098E0CD9ED56B026F4B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,17 +157,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9DC2E3F90FC3889C288BBC78EA9E2F3D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>AD60D438A07EEC27A8EB3E8355E13E55</key>
+		<key>9262A1D11A6DD9BE3D9CF3EE85778F41</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>B272B33F162D6E5C3510BA50ECF2684B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B476E92E44AD3C81FBCF9F93002EBD36</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>B9E83429C883D6272CF5AEC9E0007A59</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,17 +192,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F38D96D0299A24CBA9FAD8055057269A</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>FDCBED7B344D29900EE17E3B8C96B7ED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>FE8BFFC6A67133361D26157A2D32FF53</key>
 		<dict>
 			<key>primary</key>
 			<true/>

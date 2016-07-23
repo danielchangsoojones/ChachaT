@@ -10,8 +10,21 @@ import UIKit
 import Parse
 
 class MatchesViewController: UIViewController {
-
-    @IBOutlet weak var theButton: UIButton!
+    
+    var matchArray : [Match] = []
+    
+    //go to messages page
+    @IBAction func theButtonPressed(sender: UIButton) {
+        if !matchArray.isEmpty {
+            let match = matchArray[0]
+            let chatVC = ChatViewController()
+            chatVC.currentUser = User.currentUser()
+            chatVC.otherUser = match.targetUser
+            
+            self.navigationController?.pushViewController(chatVC, animated: true)
+        }
+    }
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -35,7 +48,7 @@ class MatchesViewController: UIViewController {
         query?.findObjectsInBackgroundWithBlock({ (matches, error) in
             if error == nil {
                 for match in matches as! [Match] {
-                    self.theButton.setTitle(match.targetUser.fullName, forState: .Normal)
+                    self.matchArray.append(match)
                 }
             } else {
                 print(error)

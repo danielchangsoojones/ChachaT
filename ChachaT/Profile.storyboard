@@ -18,8 +18,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIe-lt-gb4">
-                                <rect key="frame" x="277" y="285" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="170" y="285" width="260" height="30"/>
+                                <state key="normal" title="Messaging Page(If you have matches)"/>
+                                <connections>
+                                    <action selector="theButtonPressed:" destination="mQC-oi-9Nn" eventType="touchUpInside" id="WS6-AR-ghj"/>
+                                </connections>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -28,9 +31,6 @@
                             <constraint firstItem="lIe-lt-gb4" firstAttribute="centerY" secondItem="U3W-vt-Yet" secondAttribute="centerY" id="w8P-5X-dRa"/>
                         </constraints>
                     </view>
-                    <connections>
-                        <outlet property="theButton" destination="lIe-lt-gb4" id="qHA-aS-QoC"/>
-                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="UjD-MX-SJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
