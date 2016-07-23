@@ -280,6 +280,13 @@ extension AddingTagsToProfileViewController {
             }
             self.tagChoicesView.layoutSubviews()
         }
+        alert.addButton("Delete") { 
+            if let tagToDelete = self.findTag(originalTagView, tagArray: self.tagChoicesDataArray) {
+                tagToDelete.deleteInBackground()
+                self.tagChoicesDataArray.removeAtIndex(self.tagChoicesDataArray.indexOf(tagToDelete)!)
+                self.tagChoicesView.removeTag(originalTagText)
+            }
+        }
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }
 }
