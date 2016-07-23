@@ -81,7 +81,6 @@ extension FilterTagViewController: TagListViewDelegate {
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        let originalTagChosenViewMaxX = tagChosenView.frame.maxX
         let tagWidth = tagView.intrinsicContentSize().width
         let tagPadding : CGFloat = self.tagChosenView.marginX
         //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
@@ -93,10 +92,14 @@ extension FilterTagViewController: TagListViewDelegate {
             self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
         }
         self.view.layoutIfNeeded()
+        //checking to see if tags have outgrown screen because then I want it to slide the newest tag into focus
         if self.view.frame.width <= theChosenTagHolderView.frame.width {
-            //TODO: did -100 because it looks better, and I could not figure out exact math. I want it to look like 8tracks, where after it grows bigger than the screen
-            //it stays in the same spot
-            theScrollView.setContentOffset(CGPointMake(originalTagChosenViewMaxX - 100, 0), animated: true)
+            //I want the scroll view to go to a content offset where I only see the newest added tags. 
+            //So, I find out how big the TagHolderViewWidth has grown. Then, I see how big the screen is, and the difference is the area that is off the screen.
+            //Therefore, I want to have contentOffset start at the end of the area that has been pushed off screen.
+            let screenWidth = self.view.frame.size.width
+            let chosenTagHolderViewWidth = theChosenTagHolderView.frame.size.width
+            theScrollView.setContentOffset(CGPointMake(chosenTagHolderViewWidth - screenWidth, 0), animated: true)
         }
     }
 
