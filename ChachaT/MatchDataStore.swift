@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 class MatchDataStore: NSObject {
     static let sharedInstance = MatchDataStore()
@@ -38,9 +39,12 @@ class MatchDataStore: NSObject {
             matchQuery.getFirstObjectInBackgroundWithBlock({ (match, error) -> Void in
                 var mutualMatch = false
                 if let foundMatch = match as? Match {
+                    self.createMatchAlert(theMatch.targetUser.fullName)
                     mutualMatch = true
                     foundMatch.mutualMatch = mutualMatch
                     foundMatch.saveInBackground()
+                } else if (error != nil) {
+                    print("ignore the error above becuase it just means the user did not find a match. It's not an error, just no match for the Match query")
                 }
                 self.updateOrInsertMatch(theMatch, mutualMatch: mutualMatch)
             })
@@ -70,6 +74,14 @@ class MatchDataStore: NSObject {
                 theMatch.mutualMatch = mutualMatch
                 theMatch.saveInBackground()
             }
+        }
+    }
+    
+    private func createMatchAlert(targetUserName: String?) {
+        if let targetUserName = targetUserName {
+            SCLAlertView().showInfo("Match!", subTitle: "You matched with \(targetUserName)")
+        } else {
+            SCLAlertView().showInfo("Match!", subTitle: "You have a match!")
         }
     }
 }
