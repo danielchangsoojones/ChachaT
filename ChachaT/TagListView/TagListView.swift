@@ -417,6 +417,24 @@ extension TagListView {
         addChoicesTagListViewAttributes()
         self.enableRemoveButton = true
     }
+    
+    //TODO: probably should be checking something about category name also.
+    func findTagView(tagTitle: String, CategoryName: String?) -> TagView? {
+        if let tagViewIndex = tagViews.indexOf({$0.titleLabel!.text == tagTitle}) {
+            return tagViews[tagViewIndex]
+        }
+        //if the tag view does not exist in the array
+        return nil
+    }
+    
+    func tagExistsInTagListView(title: String) -> Bool {
+        for tagView in tagViews {
+            if tagView.titleLabel?.text == title {
+                return true
+            }
+        }
+        return false
+    }
 }
 
 

@@ -46,7 +46,7 @@ class FilterQueryViewController: FilterTagViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        setDefaultTags()
+        setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
         // Do any additional setup after loading the view.
@@ -59,62 +59,70 @@ class FilterQueryViewController: FilterTagViewController {
 
 }
 
+
 //extension for working with tags
 extension FilterQueryViewController {
-    
-    //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
-    //I want mostly special tags like "Age Range", "Location", ect. to be there.
-    func setSpecialtyTagsIntoDefaultView() {
-        for specialtyTag in SpecialtyTags.specialtyButtonValues {
-            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
-            setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtyButtons, specialtyCategoryTitle: specialtyTag))
-        }
-        //right now, the only characteristic for range slider is "Age Range"
-        for specialtyTag in SpecialtyTags.specialtyRangeSliderValues {
-            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
-            setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtyRangeSlider, specialtyCategoryTitle: specialtyTag))
-        }
-        //right now, the only characteristic for range slider is "Location"
-        for specialtyTag in SpecialtyTags.specialtySingleSliderValues {
-            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
-            setSpecialtyTagAttributes(tagView)
-            currentUserTags.append(Tag(title: specialtyTag.rawValue, attribute: .SpecialtySingleSlider, specialtyCategoryTitle: specialtyTag))
-        }
-    }
-    
     //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
-    //Purpose: Make the specialty tags look different than just generic tags
+    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
     func setSpecialtyTagAttributes(tagView: TagView) {
         let specialtyTagColor = UIColor.blueColor()
         tagView.tagBackgroundColor = specialtyTagColor
         tagView.highlightedBackgroundColor = specialtyTagColor
     }
     
-    func setDefaultTags() {
-        setSpecialtyTagsIntoDefaultView()
+    override func loadChoicesViewTags() {
+        for tag in tagChoicesDataArray {
+            tagChoicesView.addTag(tag.title)
+        }
+    }
+    
+    func setTagsInTagChoicesDataArray() {
         //adding in generic tags
         //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
         //Although this whole function will change because I only want us to get a certain number of tags, and I don't want it to just be random.
         let query = Tag.query()
         query?.whereKey("attribute", equalTo: TagAttributes.Generic.rawValue)
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            for tag in objects as! [Tag] {
-                self.currentUserTags.append(tag)
-                self.tagChoicesView.addTag(tag.title)
+            if error == nil {
+                for tag in objects as! [Tag] {
+                    self.tagChoicesDataArray.append(tag)
+                }
+                self.setSpecialtyTagsIntoDefaultView()
+                self.loadChoicesViewTags()
+            } else {
+                print(error)
             }
         })
     }
     
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        for tag in currentUserTags where tag.specialtyCategoryTitle == title {
-            createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+    
+    //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
+    //I want mostly special tags like "Age Range", "Location", ect. to be there.
+    func setSpecialtyTagsIntoDefaultView() {
+        for specialtyTag in SpecialtyTags.allValues {
+            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
+            setSpecialtyTagAttributes(tagView)
+            tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
-        for tag in currentUserTags where tag.attribute == TagAttributes.Generic.rawValue && tag.title == title {
-            let tagView = tagChosenView.addTag(tag.title)
-            tagChoicesView.removeTag(tag.title)
-            changeTagListViewWidth(tagView, extend: true)
+    }
+    
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue:
+                let tagView = tagChosenView.addTag(tag.title)
+                tagChoicesView.removeTag(tag.title)
+                changeTagListViewWidth(tagView, extend: true)
+            case TagAttributes.SpecialtyButtons.rawValue:
+                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+            case TagAttributes.SpecialtySingleSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            default: break
+            }
         }
     }
     
@@ -127,32 +135,12 @@ extension FilterQueryViewController {
     }
 }
 
-extension FilterQueryViewController: UISearchBarDelegate {
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
-        searchActive = true
-        searchBar.showsCancelButton = true
-    }
-    
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
-        searchActive = false
-    }
-    
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
-        resetTagChoicesViewList()
-    }
-    
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        searchActive = false
-        searchBar.showsCancelButton = false
-    }
-    
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+//search extension
+extension FilterQueryViewController {
+   override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         var filtered:[Tag] = []
         tagChoicesView.removeAllTags()
-        filtered = allParseTags.filter({ (tag) -> Bool in
+        filtered = searchDataArray.filter({ (tag) -> Bool in
             let tmp: NSString = tag.title
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
@@ -178,15 +166,8 @@ extension FilterQueryViewController: UISearchBarDelegate {
             for tag in filtered {
                 tagChoicesView.addTag(tag.title)
             }
-            createSpecialtyTagEnviroment(true)
+            createSpecialtyTagEnviroment(false)
         }
-    }
-    
-    func resetTagChoicesViewList() {
-        tagChoicesView.removeAllTags()
-        setDefaultTags()
-        createSpecialtyTagEnviroment(true)
-        theSpecialtyTagEnviromentHolderView?.removeFromSuperview()
     }
 }
 

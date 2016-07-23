@@ -16,20 +16,25 @@ class Tag: PFObject, PFSubclassing {
     
     @NSManaged var createdBy: User?
     @NSManaged var title: String
-    @NSManaged var attribute: String
     @NSManaged var specialtyCategoryTitle: String?
+    //pre-set to generic, unless the variable is overrided in the initializer
+    @NSManaged var attribute: String
     
     override init() {
         super.init()
     }
     
-    init(title: String, attribute: TagAttributes, specialtyCategoryTitle: SpecialtyTags?) {
+    init(title: String, specialtyCategoryTitle: SpecialtyTags?) {
         super.init()
         self.title = title
         self.createdBy = User.currentUser()
-        self.attribute = attribute.rawValue
         if let specialtyCategoryTitle = specialtyCategoryTitle {
+            //the tag is a specialty Tag
             self.specialtyCategoryTitle = specialtyCategoryTitle.rawValue
+            self.attribute = convertTagAttributeFromCategoryTitle(specialtyCategoryTitle.rawValue).rawValue
+        } else {
+            //the tag is a generic tag
+            self.attribute = TagAttributes.Generic.rawValue
         }
     }
     
