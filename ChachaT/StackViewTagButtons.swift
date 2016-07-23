@@ -9,14 +9,13 @@
 import UIKit
 
 protocol StackViewTagButtonsDelegate {
-    func createChosenTag(tagTitle: String)
+    func createChosenTag(tagTitle: String, specialtyTagTitle: String)
     func removeChosenTag(tagTitle: String)
     func doesChosenTagViewContain(tagTitle: String) -> Bool
     func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags)
 }
 
 class StackViewTagButtons: UIStackView {
-    
     var delegate: StackViewTagButtonsDelegate?
     let noneButtonText = "None"
     var pushOneButton = false
@@ -101,7 +100,7 @@ class StackViewTagButtons: UIStackView {
         } else {
             changeButtonHighlight(buttonHighlighted, button: sender, changeChosenTags: true, changeChoicesTag: true)
             if let buttonTitle = sender.titleLabel?.text {
-                 delegate?.createChosenTag(buttonTitle)
+                 delegate?.createChosenTag(buttonTitle, specialtyTagTitle: filterCategory)
             }
         }
     }

@@ -103,9 +103,9 @@ extension FilterTagViewController: TagListViewDelegate {
 }
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {
-    func createChosenTag(tagTitle: String) {
-        let tagView = tagChosenView.addTag(tagTitle)
-        changeTagListViewWidth(tagView, extend: true)
+    func createChosenTag(tagTitle: String, specialtyTagTitle: String) {
+        let specialtyTagView = tagChosenView.addSpecialtyTag(tagTitle, specialtyTagTitle: specialtyTagTitle)
+        changeTagListViewWidth(specialtyTagView, extend: true)
     }
     
     func removeChosenTag(tagTitle: String) {
