@@ -68,17 +68,8 @@ class FilterQueryViewController: FilterTagViewController {
 
 }
 
-
-//extension for working with tags
+//setting default tags in view extension
 extension FilterQueryViewController {
-    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
-    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
-    func setSpecialtyTagAttributes(tagView: TagView) {
-        let specialtyTagColor = UIColor.blueColor()
-        tagView.tagBackgroundColor = specialtyTagColor
-        tagView.highlightedBackgroundColor = specialtyTagColor
-    }
-    
     func setTagsInTagChoicesDataArray() {
         //adding in generic tags
         //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
@@ -90,8 +81,9 @@ extension FilterQueryViewController {
                 for tag in objects as! [Tag] {
                     self.tagChoicesDataArray.append(tag)
                 }
-                self.setSpecialtyTagsIntoDefaultView()
+                //loadChoices tag view has to come before setting specialty tags because it adds the specialty tags twice if we do it the other way
                 self.loadChoicesViewTags()
+                self.setSpecialtyTagsIntoDefaultView()
             } else {
                 print(error)
             }
@@ -109,6 +101,18 @@ extension FilterQueryViewController {
         }
     }
     
+    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
+    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
+    func setSpecialtyTagAttributes(tagView: TagView) {
+        let specialtyTagColor = UIColor.blueColor()
+        tagView.tagBackgroundColor = specialtyTagColor
+        tagView.highlightedBackgroundColor = specialtyTagColor
+    }
+}
+
+
+//extension for tag actions
+extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
             switch tag.attribute {
