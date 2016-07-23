@@ -29,12 +29,19 @@ class FilterQueryViewController: FilterTagViewController {
         if !chosenTagArrayTitles.isEmpty {
             query?.whereKey("title", containedIn: chosenTagArrayTitles)
         }
+        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
         query?.includeKey("createdBy")
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
             if error == nil {
                 var userArray : [User] = []
+                var userDuplicateArray : [User] = []
                 for tag in objects as! [Tag] {
-                    userArray.append(tag.createdBy!)
+                    if !userDuplicateArray.contains(tag.createdBy!) {
+                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
+                        //this fixes that
+                        userDuplicateArray.append(tag.createdBy!)
+                        userArray.append(tag.createdBy!)
+                    }
                 }
                 self.mainPageDelegate?.passFilteredUserArray(userArray)
                 self.navigationController?.popViewControllerAnimated(true)
@@ -94,7 +101,6 @@ extension FilterQueryViewController {
             }
         })
     }
-    
     
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
