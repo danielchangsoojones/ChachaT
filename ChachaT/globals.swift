@@ -41,6 +41,7 @@ struct Constants {
     static let gender = "gender"
     static let discoverable = "discoverable"
     static let isMatch = "isMatch"
+    static let email = "email"
 }
 
 //storyboard identifiers
