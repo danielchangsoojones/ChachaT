@@ -419,9 +419,22 @@ extension TagListView {
     }
     
     //TODO: probably should be checking something about category name also.
-    func findTagView(tagTitle: String, CategoryName: String?) -> TagView? {
-        if let tagViewIndex = tagViews.indexOf({$0.titleLabel!.text == tagTitle}) {
-            return tagViews[tagViewIndex]
+    func findTagView(tagTitle: String, categoryName: String?) -> TagView? {
+        for tagView in tagViews {
+            if let categoryName = categoryName {
+                //dealing with specialty tag because it has a category name
+                let specialtyTagView = tagView as! SpecialtyTagView
+                if specialtyTagView.titleLabel!.text == tagTitle && specialtyTagView.specialtyTagTitle == categoryName {
+                    //checking if tagview is matching in tagTitle and specialtyTagTitle, because then we have found exact match
+                    return specialtyTagView
+                }
+            } else {
+                //dealing with normal generic tag
+                if tagView.titleLabel?.text == tagTitle && !(tagView is SpecialtyTagView) {
+                    //making sure we have title match and that we don't have the same title as a specialty tag view because it makes sure no specialty tag views get here
+                    return tagView
+                }
+            }
         }
         //if the tag view does not exist in the array
         return nil
