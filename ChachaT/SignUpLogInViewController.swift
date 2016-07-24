@@ -10,6 +10,7 @@ import UIKit
 import EFTools
 import Parse
 import SnapKit
+import ParseFacebookUtilsV4
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -30,6 +31,17 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     
     var signUpState = true
+    
+    @IBAction func facebookButtonPressed(sender: UIButton) {
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (user: PFUser?, error) in
+            if error == nil {
+                print(user)
+            } else {
+                print(error)
+            }
+        }
+    }
+    
     
     @IBAction func signUp(sender: AnyObject) {
         if allValidates() {
