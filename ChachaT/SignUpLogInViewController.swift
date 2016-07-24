@@ -34,13 +34,41 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     @IBAction func facebookButtonPressed(sender: UIButton) {
         PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (user: PFUser?, error) in
-            if error == nil {
-                print(user)
+            if let currentUser = user {
+                if currentUser.isNew {
+                    print("this is a new user that just signed up")
+                } else {
+                    print("the user has logged in successfully!")
+                }
             } else {
-                print(error)
+                print("there was an error logging in/signing up")
             }
         }
     }
+    
+//    func updateProfileFromFacebook(isNew : Bool) {
+//        if FBSDKAccessToken.currentAccessToken() != nil {
+//            FBSDKGraphRequest(graphPath: "me?fields=name,first_name,last_name", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
+//                if error == nil {
+//                    print("updating profile from facebook")
+//                    let currentUser = User.currentUser()!
+//                    
+//                    if isNew {
+//                        currentUser.discoverable = true
+//                    }
+//                    
+//                    let userData = result as! NSDictionary
+//                    currentUser.facebookId = userData[Constants.id] as! String
+//                    currentUser.firstName = userData[Constants.firstName] as! String
+//                    currentUser.lastName = userData[Constants.lastName] as! String
+//                    currentUser.name = userData[Constants.name] as! String
+//                    currentUser.saveInBackground()
+//                    
+//                    self.updateFacebookImage()
+//                }
+//            })
+//        }
+//    }
     
     
     @IBAction func signUp(sender: AnyObject) {
