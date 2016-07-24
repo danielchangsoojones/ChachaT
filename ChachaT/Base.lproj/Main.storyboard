@@ -112,7 +112,7 @@
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq">
                         <barButtonItem key="leftBarButtonItem" title="Log Out" id="plM-0D-iM0">
                             <connections>
-                                <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="YWU-JH-Jpm"/>
+                                <action selector="logOut:" destination="BYZ-38-t0r" id="a1t-2d-ckJ"/>
                             </connections>
                         </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="search" id="9F2-jI-qmF">
@@ -129,6 +129,7 @@
                         <outlet property="theFilteringButton" destination="NdX-3j-BI4" id="W3r-l0-4cf"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="2hX-Ts-O6M"/>
+                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

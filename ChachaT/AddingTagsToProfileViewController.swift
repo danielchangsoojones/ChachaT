@@ -181,10 +181,19 @@ extension AddingTagsToProfileViewController {
         if sender.tag == 1 {
             if searchActive {
                 //we are in the process of searching, so we are dealing with the choices tag view still, but we want searching functionality
+                //enabling remove button, because the tag view in chosenTagViewList will have a remove button, so it will be longer.
+                //if we didn't add a remove button, then the TagListWidth would only extend for a normal tag width, not normalTagWidth + remove button
+                tagView.enableRemoveButton = true
                 changeTagListViewWidth(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
-                if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+                if let specialtyTagView = tagView as? SpecialtyTagView {
+                    //checking if we are dealing with a specialty tag, because then we want to add specialty tag to chosen view
+                    let tag = Tag(title: title, specialtyCategoryTitle: SpecialtyTags(rawValue: specialtyTagView.specialtyTagTitle))
+                    addTagOrSpecialtyTag(tag, addToChosenView: true)
+                } else {
+                    //just add genric tag
+                    let tag = Tag(title: title, specialtyCategoryTitle: nil)
                     addTagOrSpecialtyTag(tag, addToChosenView: true)
                 }
             } else {
@@ -199,6 +208,7 @@ extension AddingTagsToProfileViewController {
             //the tag is a special tag
             if addToChosenView {
                 tagChosenView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
+                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
             }
@@ -206,6 +216,7 @@ extension AddingTagsToProfileViewController {
             //just a generic tag
             if addToChosenView {
                 tagChosenView.addTag(tag.title)
+                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addTag(tag.title)
             }
@@ -279,6 +290,13 @@ extension AddingTagsToProfileViewController {
                 self.replaceTag(originalTagView, newTag: newTag, tagArray: &self.chosenTagArray)
             }
             self.tagChoicesView.layoutSubviews()
+        }
+        alert.addButton("Delete") { 
+            if let tagToDelete = self.findTag(originalTagView, tagArray: self.tagChoicesDataArray) {
+                tagToDelete.deleteInBackground()
+                self.tagChoicesDataArray.removeAtIndex(self.tagChoicesDataArray.indexOf(tagToDelete)!)
+                self.tagChoicesView.removeTag(originalTagText)
+            }
         }
         alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
     }

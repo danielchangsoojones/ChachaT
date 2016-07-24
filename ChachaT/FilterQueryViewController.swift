@@ -26,13 +26,22 @@ class FilterQueryViewController: FilterTagViewController {
         let query = Tag.query()
         //finding all tags that have a title that the user chose for the search
         //TODO: I'll need to do something if 0 people come up
-        query?.whereKey("title", containedIn: chosenTagArrayTitles)
+        if !chosenTagArrayTitles.isEmpty {
+            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+        }
+        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
         query?.includeKey("createdBy")
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
             if error == nil {
                 var userArray : [User] = []
+                var userDuplicateArray : [User] = []
                 for tag in objects as! [Tag] {
-                    userArray.append(tag.createdBy!)
+                    if !userDuplicateArray.contains(tag.createdBy!) {
+                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
+                        //this fixes that
+                        userDuplicateArray.append(tag.createdBy!)
+                        userArray.append(tag.createdBy!)
+                    }
                 }
                 self.mainPageDelegate?.passFilteredUserArray(userArray)
                 self.navigationController?.popViewControllerAnimated(true)
@@ -40,7 +49,6 @@ class FilterQueryViewController: FilterTagViewController {
                 print(error)
             }
         })
-        
     }
     
     
@@ -51,6 +59,20 @@ class FilterQueryViewController: FilterTagViewController {
         tagChosenView.delegate = self
         // Do any additional setup after loading the view.
     }
+    
+    //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
+    //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
+    override func loadChoicesViewTags() {
+        for tag in tagChoicesDataArray {
+            if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
+                let specialtyTagView = tagChoicesView.addTag(specialtyCategoryTitle)
+                setSpecialtyTagAttributes(specialtyTagView)
+            } else {
+                //dealing with normal Generic tags
+                tagChoicesView.addTag(tag.title)
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -59,23 +81,8 @@ class FilterQueryViewController: FilterTagViewController {
 
 }
 
-
-//extension for working with tags
+//setting default tags in view extension
 extension FilterQueryViewController {
-    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
-    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
-    func setSpecialtyTagAttributes(tagView: TagView) {
-        let specialtyTagColor = UIColor.blueColor()
-        tagView.tagBackgroundColor = specialtyTagColor
-        tagView.highlightedBackgroundColor = specialtyTagColor
-    }
-    
-    override func loadChoicesViewTags() {
-        for tag in tagChoicesDataArray {
-            tagChoicesView.addTag(tag.title)
-        }
-    }
-    
     func setTagsInTagChoicesDataArray() {
         //adding in generic tags
         //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
@@ -95,17 +102,26 @@ extension FilterQueryViewController {
         })
     }
     
-    
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyTag in SpecialtyTags.allValues {
-            let tagView = tagChoicesView.addTag(specialtyTag.rawValue)
-            setSpecialtyTagAttributes(tagView)
             tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
     }
     
+    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
+    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
+    func setSpecialtyTagAttributes(tagView: TagView) {
+        let specialtyTagColor = UIColor.blueColor()
+        tagView.tagBackgroundColor = specialtyTagColor
+        tagView.highlightedBackgroundColor = specialtyTagColor
+    }
+}
+
+
+//extension for tag actions
+extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
             switch tag.attribute {

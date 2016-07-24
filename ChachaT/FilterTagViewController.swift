@@ -81,7 +81,6 @@ extension FilterTagViewController: TagListViewDelegate {
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        let originalTagChosenViewMaxX = tagChosenView.frame.maxX
         let tagWidth = tagView.intrinsicContentSize().width
         let tagPadding : CGFloat = self.tagChosenView.marginX
         //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
@@ -93,25 +92,29 @@ extension FilterTagViewController: TagListViewDelegate {
             self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
         }
         self.view.layoutIfNeeded()
+        //checking to see if tags have outgrown screen because then I want it to slide the newest tag into focus
         if self.view.frame.width <= theChosenTagHolderView.frame.width {
-            //TODO: did -100 because it looks better, and I could not figure out exact math. I want it to look like 8tracks, where after it grows bigger than the screen
-            //it stays in the same spot
-            theScrollView.setContentOffset(CGPointMake(originalTagChosenViewMaxX - 100, 0), animated: true)
+            //I want the scroll view to go to a content offset where I only see the newest added tags. 
+            //So, I find out how big the TagHolderViewWidth has grown. Then, I see how big the screen is, and the difference is the area that is off the screen.
+            //Therefore, I want to have contentOffset start at the end of the area that has been pushed off screen.
+            let screenWidth = self.view.frame.size.width
+            let chosenTagHolderViewWidth = theChosenTagHolderView.frame.size.width
+            theScrollView.setContentOffset(CGPointMake(chosenTagHolderViewWidth - screenWidth, 0), animated: true)
         }
     }
 
 }
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {
-    func createChosenTag(tagTitle: String) {
-        let tagView = tagChosenView.addTag(tagTitle)
-        changeTagListViewWidth(tagView, extend: true)
+    func createChosenTag(tagTitle: String, specialtyTagTitle: String) {
+        let specialtyTagView = tagChosenView.addSpecialtyTag(tagTitle, specialtyTagTitle: specialtyTagTitle)
+        changeTagListViewWidth(specialtyTagView, extend: true)
     }
     
     func removeChosenTag(tagTitle: String) {
         //finding the particular tagView, so we know what to pass to the changeTagListWidth
         //removeTag does not return a tagView like addTag does
-        if let tagView = tagChosenView.findTagView(tagTitle, CategoryName: nil) {
+        if let tagView = tagChosenView.findTagView(tagTitle, categoryName: nil) {
             tagChosenView.removeTag(tagTitle)
             changeTagListViewWidth(tagView, extend: false)
         }
@@ -128,7 +131,7 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
         //remove the previous tag from the actual backend
         //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
         tagToDelete?.deleteInBackground()
-        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, CategoryName: specialtyCategoryName.rawValue) {
+        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, categoryName: specialtyCategoryName.rawValue) {
             originalTagView.setTitle(newTagTitle, forState: .Normal)
         }
         chosenTagArray.append(newTag)
@@ -149,11 +152,22 @@ extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
 extension FilterTagViewController {
     //return a new array to set the old array to, and the replaced tag in case something is needed to be done with it
     func replaceTag(originalTagView: TagView, newTag: Tag, inout tagArray: [Tag]) -> Tag? {
-        if let tagIndex = tagArray.indexOf({$0.title == originalTagView.titleLabel?.text}) {
-            //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
-            let originalTag = tagArray[tagIndex]
-            tagArray[tagIndex] = newTag
-            return originalTag
+        if let originalSpecialtyTagView = originalTagView as? SpecialtyTagView {
+            //checks if specialty tag is equal in both title and specialtyTitle. That is how we know we have exact match
+            if let tagIndex = tagArray.indexOf({($0.title == originalTagView.titleLabel?.text && $0.specialtyCategoryTitle == originalSpecialtyTagView.specialtyTagTitle)}) {
+                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
+                let originalTag = tagArray[tagIndex]
+                tagArray[tagIndex] = newTag
+                return originalTag
+            }
+        } else {
+            //dealing with Generic tag
+            if let tagIndex = tagArray.indexOf({$0.title == originalTagView.titleLabel?.text}) {
+                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
+                let originalTag = tagArray[tagIndex]
+                tagArray[tagIndex] = newTag
+                return originalTag
+            }
         }
         //if the tag does not exist in the array
         return nil

@@ -63,8 +63,8 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLl-1C-M9m">
-                                <rect key="frame" x="271" y="366" width="59" height="30"/>
-                                <state key="normal" title="Matches"/>
+                                <rect key="frame" x="244" y="366" width="113" height="30"/>
+                                <state key="normal" title="Messaging Page"/>
                                 <connections>
                                     <segue destination="mQC-oi-9Nn" kind="show" id="qDy-bG-ipR"/>
                                 </connections>

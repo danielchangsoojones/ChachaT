@@ -49,7 +49,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 //        
-//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("FilterTagViewController") as! AddingTagsToProfileViewController
+//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileIndexViewController") as! ProfileIndexViewController
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()
