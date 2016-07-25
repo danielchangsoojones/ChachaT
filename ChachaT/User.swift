@@ -22,8 +22,8 @@ class User: PFUser {
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
     @NSManaged var location: PFGeoPoint?
+    @NSManaged var facebookId : String?
 
-    
     func calculateBirthDate() -> Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let now = NSDate()

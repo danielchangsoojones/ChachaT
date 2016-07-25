@@ -18,6 +18,7 @@ pod "Timepiece"
 pod 'Ripple'
 pod 'JSQMessagesViewController'
 pod 'ParseFacebookUtilsV4'
+pod 'Alamofire'
 
 
 post_install do |installer|

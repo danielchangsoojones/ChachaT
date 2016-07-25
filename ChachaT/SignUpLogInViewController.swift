@@ -11,6 +11,7 @@ import EFTools
 import Parse
 import SnapKit
 import ParseFacebookUtilsV4
+import Alamofire
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -41,6 +42,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                     self.updateProfileFromFacebook(true)
                 } else {
                     print("the user has logged in successfully!")
+                    //TODO: get rid of this, only needs to be in new user area, just for my testing, so I don't need a new facebook account everytime
                     self.updateProfileFromFacebook(true)
                 }
             } else {
@@ -54,21 +56,37 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     //look into Facebook Graph API to learn more
     func updateProfileFromFacebook(isNew : Bool) {
         if FBSDKAccessToken.currentAccessToken() != nil {
-            FBSDKGraphRequest(graphPath: "me?fields=email", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
+            FBSDKGraphRequest(graphPath: "me?fields=name", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
                 if error == nil {
                     print("updating profile from facebook")
                     let currentUser = User.currentUser()!
                     
                     let userData = result as! NSDictionary
                     print(userData)
-                    currentUser.fullName = userData[Constants.email] as? String
+                    currentUser.fullName = userData[Constants.name] as? String
+                    currentUser.facebookId = userData[Constants.id] as? String
                     currentUser.saveInBackground()
                     
-//                    self.updateFacebookImage()
+                    self.updateFacebookImage()
                 } else {
                     print(error)
                 }
             })
+        }
+    }
+    
+    func updateFacebookImage() {
+        let currentUser = User.currentUser()!
+        if let facebookId = currentUser.facebookId {
+            let pictureURL = "https://graph.facebook.com/" + facebookId + "/picture?type=square&width=600&height=600"
+            Alamofire.request(.GET, pictureURL).response { (request, response, data, error) -> Void in
+                if error == nil && data != nil {
+                    currentUser.profileImage = PFFile(name: Constants.profileImage, data: data!)
+                    currentUser.saveInBackground()
+                } else {
+                    print("Failed to update profile image from facebook: \(error)")
+                }
+            }
         }
     }
     

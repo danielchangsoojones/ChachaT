@@ -1,5 +1,6 @@
 PODS:
   - AFDateHelper (3.4.0)
+  - Alamofire (3.4.1)
   - Bolts (1.7.0):
     - Bolts/AppLinks (= 1.7.0)
     - Bolts/Tasks (= 1.7.0)
@@ -46,6 +47,7 @@ PODS:
   - TTRangeSlider (1.0.4)
 
 DEPENDENCIES:
+  - Alamofire
   - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, tag `1.0`)
   - JSQMessagesViewController
   - Koloda
@@ -70,6 +72,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   AFDateHelper: 1fd229b038d3e0286b848078cf073d9ee6a48ea8
+  Alamofire: 01a82e2f6c0f860ade35534c8dd88be61bdef40c
   Bolts: a0058fa3b331c5a1e4402d534f2dae36dbff31e4
   EFTools: ef1aeb77630c5c79f2c41a20c41eaa7457b3a6f3
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502

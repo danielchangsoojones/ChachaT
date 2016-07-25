@@ -85,6 +85,7 @@ strip_invalid_archs() {
 
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/Alamofire.framework"
   install_framework "Pods-ChachaT/Bolts.framework"
   install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/FBSDKCoreKit.framework"
@@ -108,6 +109,7 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "Pods-ChachaT/AFDateHelper.framework"
+  install_framework "Pods-ChachaT/Alamofire.framework"
   install_framework "Pods-ChachaT/Bolts.framework"
   install_framework "Pods-ChachaT/EFTools.framework"
   install_framework "Pods-ChachaT/FBSDKCoreKit.framework"
