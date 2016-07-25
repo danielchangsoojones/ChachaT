@@ -35,8 +35,6 @@ class BackgroundAnimationViewController: UIViewController {
 
     var userArray = [User]()
     private var matchDataStore = MatchDataStore.sharedInstance
-    //I needed to do some hacky stuff to get the loading rings around chacha logo
-    var rippleState = 0
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
     
@@ -71,7 +69,6 @@ class BackgroundAnimationViewController: UIViewController {
             audioPlayerWoosh = try AVAudioPlayer(contentsOfURL: wooshSound)
         }
         catch { }
-        
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
         createUserArray()
@@ -82,15 +79,8 @@ class BackgroundAnimationViewController: UIViewController {
         self.theMagicMovePlaceholderImage.hidden = true
     }
     
-    //TODO: figure out an actual way to get ripples to occur programmaticaly. Not just a hack way.
-    override func viewDidLayoutSubviews() {
-        super.viewDidLayoutSubviews()
-        rippleState += 1
-        //need to only do on rippleState 3 because the frame is not set for the center of the chachaLoadingImage
-        //I could not find the method to show when the frames are correct. This was the hacky way to get it to work.
-        if rippleState == 3 {
-            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
-        }
+    override func viewDidAppear(animated: Bool) {
+        ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {

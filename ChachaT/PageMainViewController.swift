@@ -12,6 +12,8 @@ import EFTools
 
 class PageMainViewController: PagesController {
     
+    var lockPaging = true
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -43,6 +45,14 @@ class PageMainViewController: PagesController {
         // Dispose of any resources that can be recreated.
     }
     
+    //TODO: terrance showed me how to lock a page, now I just need to use the delegate to have function that says to do something.
+//     override func pageViewController(pageViewController: UIPageViewController, viewControllerBeforeViewController viewController: UIViewController) -> UIViewController? {
+//        return lockPaging ? nil : super.pageViewController(pageViewController, viewControllerBeforeViewController: viewController)
+//    }
+//    
+//     override func pageViewController(pageViewController: UIPageViewController, viewControllerAfterViewController viewController: UIViewController) -> UIViewController? {
+//        return lockPaging ? nil : super.pageViewController(pageViewController, viewControllerAfterViewController: viewController)
+//    }
 }
 
 protocol PageMainViewControllerDelegate {
