@@ -33,6 +33,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Parse.initializeWithConfiguration(configuration)
         PFFacebookUtils.initializeFacebookWithApplicationLaunchOptions(launchOptions)
         
+        Instabug.startWithToken("c1d90288be3cf98624000127f6139a87", invocationEvent: IBGInvocationEvent.Shake)
+        
         //setting the initial storyboard
         if User.currentUser() == nil {
             self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
