@@ -36,11 +36,12 @@ struct Constants {
     static let firstName = "first_name"
     static let lastName = "last_name"
     static let name = "name"
-    static let image = "image.jpg"
+    static let profileImage = "profileImage.jpg"
     static let objectId = "objectId"
     static let gender = "gender"
     static let discoverable = "discoverable"
     static let isMatch = "isMatch"
+    static let email = "email"
 }
 
 //storyboard identifiers
