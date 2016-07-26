@@ -25,6 +25,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" alpha="0.26000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundMainPageGradientFullAlpha" translatesAutoresizingMaskIntoConstraints="NO" id="Puu-d4-KAF">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                            </imageView>
                             <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
@@ -32,7 +35,6 @@
                                         <rect key="frame" x="148" y="285" width="78" height="78"/>
                                     </imageView>
                                 </subviews>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.29999999999999999" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerY" secondItem="dsh-Hh-R5l" secondAttribute="centerY" id="YXs-Ih-feK"/>
                                     <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerX" secondItem="dsh-Hh-R5l" secondAttribute="centerX" id="tAa-1l-BQP"/>
@@ -97,15 +99,19 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstAttribute="trailing" secondItem="32I-zm-XDi" secondAttribute="trailing" id="514-y7-r0L"/>
+                            <constraint firstAttribute="trailing" secondItem="Puu-d4-KAF" secondAttribute="trailing" id="7xg-a6-H5B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="bottom" id="BEj-ig-fAu"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="bottom" id="Fqu-E7-qHc"/>
                             <constraint firstItem="32I-zm-XDi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="J1a-RW-927"/>
                             <constraint firstItem="32I-zm-XDi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JuR-HK-vJm"/>
+                            <constraint firstItem="Puu-d4-KAF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NYA-3H-zkS"/>
                             <constraint firstItem="dsh-Hh-R5l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OkH-82-grN"/>
                             <constraint firstItem="KXf-AU-SZT" firstAttribute="bottom" secondItem="dsh-Hh-R5l" secondAttribute="bottom" constant="-10" id="RNX-a5-g4P"/>
                             <constraint firstAttribute="trailing" secondItem="dsh-Hh-R5l" secondAttribute="trailing" id="WbO-ri-jsH"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Puu-d4-KAF" secondAttribute="bottom" id="aVe-Kb-l6y"/>
                             <constraint firstItem="KXf-AU-SZT" firstAttribute="leading" secondItem="dsh-Hh-R5l" secondAttribute="leading" constant="40" id="p6w-3g-Fkt"/>
                             <constraint firstItem="KXf-AU-SZT" firstAttribute="trailing" secondItem="dsh-Hh-R5l" secondAttribute="trailing" constant="-40" id="scf-eG-Vce"/>
+                            <constraint firstItem="Puu-d4-KAF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uPM-Ak-KfF"/>
                             <constraint firstItem="dsh-Hh-R5l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ziY-Es-KWY"/>
                         </constraints>
                     </view>
@@ -494,6 +500,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="BackgroundMainPageGradientFullAlpha" width="1468" height="2142"/>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Chacha Circle Button" width="78" height="78"/>
         <image name="Profile Main Page Button" width="60" height="59"/>
