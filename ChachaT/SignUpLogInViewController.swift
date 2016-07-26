@@ -203,8 +203,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             if success {
                 self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 let installation = PFInstallation.currentInstallation()
-                installation["user"] = PFUser.currentUser()
-                installation.saveInBackground()
+                installation!["user"] = PFUser.currentUser()
+                installation!.saveInBackground()
             }
             else {
                 if error != nil {
@@ -247,8 +247,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             if user != nil {
                 self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 let installation = PFInstallation.currentInstallation()
-                installation["user"] = PFUser.currentUser()
-                installation.saveEventually(nil)
+                installation!["user"] = PFUser.currentUser()
+                installation!.saveEventually(nil)
             }
         }
     }
