@@ -12,11 +12,11 @@ class ChachaNavigationViewController: UINavigationController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //for some reason, to make the navigation bar invisible except for buttons, I have to add empty image, so then it overrides the default navigation translucency, ect.
-        //these next two code lines are able to override the default so I get the tinder looking nav bar.
+        //hacky way of getting the navigation bar to look like Tinder's and have no background bar, just the buttons.
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.barStyle = .BlackTranslucent
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {
