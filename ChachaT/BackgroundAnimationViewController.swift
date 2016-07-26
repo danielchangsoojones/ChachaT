@@ -31,11 +31,14 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    @IBOutlet weak var theFilteringButton: UIButton!
-    @IBOutlet weak var theNavigationNotificationButton: UIBarButtonItem!
+    @IBOutlet weak var theApproveButton: UIButton!
+    @IBOutlet weak var theSkipButton: UIButton!
+    @IBOutlet weak var theMessageButton: UIButton!
+    @IBOutlet weak var theProfileButton: UIButton!
 
     var userArray = [User]()
     private var matchDataStore = MatchDataStore.sharedInstance
+    var rippleHasNotBeenStarted = true
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
     
@@ -73,7 +76,16 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     override func viewDidAppear(animated: Bool) {
-        ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+        if rippleHasNotBeenStarted {
+            //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
+            //this makes it only appear the first run time.
+            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+            rippleHasNotBeenStarted = false
+        }
+    }
+    
+    override func viewDidLayoutSubviews() {
+        setBottomButtonsIconAlphas()
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
@@ -109,6 +121,14 @@ class BackgroundAnimationViewController: UIViewController {
         performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
     }
     
+    func setBottomButtonsIconAlphas() {
+        let tealIconsAlpha : CGFloat = 0.5
+        let greyIconAlpha : CGFloat = 0.52
+        theApproveButton.imageView?.alpha = tealIconsAlpha
+        theMessageButton.imageView?.alpha = tealIconsAlpha
+        theSkipButton.imageView?.alpha = greyIconAlpha
+        theProfileButton.imageView?.alpha = greyIconAlpha
+    }
 }
 
 //queries
