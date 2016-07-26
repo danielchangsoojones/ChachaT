@@ -32,16 +32,12 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theFilteringButton: UIButton!
+    @IBOutlet weak var theNavigationNotificationButton: UIBarButtonItem!
 
     var userArray = [User]()
     private var matchDataStore = MatchDataStore.sharedInstance
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
-    
-    @IBAction func logOut(sender: UIBarButtonItem) {
-        User.logOut()
-        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
-    }
     
     @IBAction func segueToProfilePage(sender: AnyObject) {
         pageMainViewControllerDelegate!.moveToPageIndex(1)
@@ -54,13 +50,10 @@ class BackgroundAnimationViewController: UIViewController {
         kolodaView.swipe(.Right)
     }
     
-    @IBAction func searchButtonPressed(sender: UIBarButtonItem) {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
-    }
-    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        setNavigationButtons()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
@@ -90,7 +83,32 @@ class BackgroundAnimationViewController: UIViewController {
             theAudioPlayer.play()
         })
     }
-
+    
+    func setNavigationButtons() {
+        self.navigationItem.leftBarButtonItem = createNavigationButton("NotificationTabIcon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
+        self.navigationItem.rightBarButtonItem = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+    }
+    
+    func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
+        let navigationButtonAlpha : CGFloat = 0.75
+        let navigationButtonSideDimension : CGFloat = 20
+        let button = UIButton()
+        button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
+        button.addTarget(self, action:buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
+        button.frame=CGRectMake(0, 0, navigationButtonSideDimension, navigationButtonSideDimension)
+        button.alpha = navigationButtonAlpha
+        return UIBarButtonItem(customView: button)
+    }
+    
+    func logOut() {
+        User.logOut()
+        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
+    }
+    
+    func searchNavigationButtonPressed() {
+        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
+    }
+    
 }
 
 //queries

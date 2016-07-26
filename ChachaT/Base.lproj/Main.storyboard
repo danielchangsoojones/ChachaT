@@ -115,18 +115,7 @@
                             <constraint firstItem="dsh-Hh-R5l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ziY-Es-KWY"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="YI6-Zh-KAq">
-                        <barButtonItem key="leftBarButtonItem" title="Log Out" id="plM-0D-iM0">
-                            <connections>
-                                <action selector="logOut:" destination="BYZ-38-t0r" id="a1t-2d-ckJ"/>
-                            </connections>
-                        </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" systemItem="search" id="9F2-jI-qmF">
-                            <connections>
-                                <action selector="searchButtonPressed:" destination="BYZ-38-t0r" id="Mpz-wB-dyU"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" id="YI6-Zh-KAq"/>
                     <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>

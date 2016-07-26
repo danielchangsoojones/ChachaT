@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SnapKit
 
 class ChachaNavigationViewController: UINavigationController {
 
@@ -15,8 +16,8 @@ class ChachaNavigationViewController: UINavigationController {
         //hacky way of getting the navigation bar to look like Tinder's and have no background bar, just the buttons.
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
-
-        // Do any additional setup after loading the view.
+        self.navigationBar.barTintColor = UIColor.whiteColor()
+        setNavigationLogo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -24,15 +25,19 @@ class ChachaNavigationViewController: UINavigationController {
         // Dispose of any resources that can be recreated.
     }
     
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func setNavigationLogo() {
+        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+        imageView.contentMode = .ScaleAspectFit
+        let logo = UIImage(named: "Chacha-Teal-Logo")
+        imageView.image = logo
+        imageView.alpha = 0.5
+        self.navigationBar.addSubview(imageView)
+        imageView.snp_makeConstraints { (make) in
+            make.center.equalTo(self.navigationBar)
+            make.width.equalTo(100)
+            make.height.equalTo(100)
+        }
     }
-    */
 
 }
