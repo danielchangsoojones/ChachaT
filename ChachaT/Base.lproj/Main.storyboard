@@ -25,19 +25,27 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" alpha="0.26000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundMainPageGradientFullAlpha" translatesAutoresizingMaskIntoConstraints="NO" id="Puu-d4-KAF">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </imageView>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
-                                        <rect key="frame" x="148" y="285" width="78" height="78"/>
+                                    <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundMainPageGradient" translatesAutoresizingMaskIntoConstraints="NO" id="uN5-uW-dFI">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                                    </imageView>
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Chacha Circle Button" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
+                                        <rect key="frame" x="148" y="295" width="78" height="78"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="78" id="Qim-2a-oEF"/>
+                                            <constraint firstAttribute="height" constant="78" id="SsN-CR-kKR"/>
+                                        </constraints>
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerY" secondItem="dsh-Hh-R5l" secondAttribute="centerY" id="YXs-Ih-feK"/>
-                                    <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerX" secondItem="dsh-Hh-R5l" secondAttribute="centerX" id="tAa-1l-BQP"/>
+                                    <constraint firstItem="uN5-uW-dFI" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="top" id="0Xb-WI-Yrs"/>
+                                    <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerX" secondItem="dsh-Hh-R5l" secondAttribute="centerX" id="CjG-o6-0R0"/>
+                                    <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerY" secondItem="dsh-Hh-R5l" secondAttribute="centerY" id="hUl-Ru-V7W"/>
+                                    <constraint firstItem="uN5-uW-dFI" firstAttribute="leading" secondItem="dsh-Hh-R5l" secondAttribute="leading" id="hxD-zR-VY7"/>
+                                    <constraint firstAttribute="trailing" secondItem="uN5-uW-dFI" secondAttribute="trailing" id="l0D-FW-jYr"/>
+                                    <constraint firstAttribute="bottom" secondItem="uN5-uW-dFI" secondAttribute="bottom" id="r7E-8Y-7nx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
@@ -57,7 +65,7 @@
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-AU-SZT" userLabel="Button Stack View">
-                                <rect key="frame" x="40" y="594" width="295" height="59"/>
+                                <rect key="frame" x="20" y="594" width="335" height="59"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="b0O-jA-iWv" userLabel="Profile Button">
                                         <rect key="frame" x="0.0" y="6" width="47" height="47"/>
@@ -82,7 +90,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-4C-MkM" userLabel="Skip Button">
-                                        <rect key="frame" x="75" y="0.0" width="59" height="59"/>
+                                        <rect key="frame" x="88" y="0.0" width="59" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="81" id="09h-A4-aYK"/>
                                             <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="59" id="JJj-fO-nE6"/>
@@ -104,7 +112,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHW-wn-jru">
-                                        <rect key="frame" x="162" y="0.0" width="59" height="59"/>
+                                        <rect key="frame" x="188" y="0.0" width="59" height="59"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="59" id="ZO6-Mg-g80"/>
                                             <constraint firstAttribute="height" constant="59" id="ju2-OL-HGr"/>
@@ -116,7 +124,7 @@
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NdX-3j-BI4" userLabel="Filter Button">
-                                        <rect key="frame" x="248" y="6" width="47" height="47"/>
+                                        <rect key="frame" x="288" y="6" width="47" height="47"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="47" id="UZL-ax-L0b"/>
                                             <constraint firstAttribute="width" constant="47" id="XAw-eu-h8r"/>
@@ -136,21 +144,17 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="dsh-Hh-R5l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="4bI-G2-2Ls"/>
                             <constraint firstAttribute="trailing" secondItem="32I-zm-XDi" secondAttribute="trailing" id="514-y7-r0L"/>
-                            <constraint firstAttribute="trailing" secondItem="Puu-d4-KAF" secondAttribute="trailing" id="7xg-a6-H5B"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="bottom" id="BEj-ig-fAu"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="bottom" id="Fqu-E7-qHc"/>
+                            <constraint firstAttribute="trailing" secondItem="dsh-Hh-R5l" secondAttribute="trailing" id="HDm-8b-oYn"/>
                             <constraint firstItem="32I-zm-XDi" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="J1a-RW-927"/>
                             <constraint firstItem="32I-zm-XDi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JuR-HK-vJm"/>
-                            <constraint firstItem="Puu-d4-KAF" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="NYA-3H-zkS"/>
-                            <constraint firstItem="dsh-Hh-R5l" firstAttribute="top" secondItem="y3c-jy-aDJ" secondAttribute="bottom" id="OkH-82-grN"/>
-                            <constraint firstItem="KXf-AU-SZT" firstAttribute="bottom" secondItem="dsh-Hh-R5l" secondAttribute="bottom" constant="-14" id="RNX-a5-g4P"/>
-                            <constraint firstAttribute="trailing" secondItem="dsh-Hh-R5l" secondAttribute="trailing" id="WbO-ri-jsH"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="Puu-d4-KAF" secondAttribute="bottom" id="aVe-Kb-l6y"/>
-                            <constraint firstItem="KXf-AU-SZT" firstAttribute="leading" secondItem="dsh-Hh-R5l" secondAttribute="leading" constant="40" id="p6w-3g-Fkt"/>
-                            <constraint firstItem="KXf-AU-SZT" firstAttribute="trailing" secondItem="dsh-Hh-R5l" secondAttribute="trailing" constant="-40" id="scf-eG-Vce"/>
-                            <constraint firstItem="Puu-d4-KAF" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="uPM-Ak-KfF"/>
-                            <constraint firstItem="dsh-Hh-R5l" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="ziY-Es-KWY"/>
+                            <constraint firstItem="dsh-Hh-R5l" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="WzL-Dr-pF6"/>
+                            <constraint firstAttribute="trailing" secondItem="KXf-AU-SZT" secondAttribute="trailing" constant="20" id="dt6-wJ-gS9"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="bottom" id="hz3-7g-Zfr"/>
+                            <constraint firstItem="KXf-AU-SZT" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="20" id="mox-SF-ess"/>
+                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KXf-AU-SZT" secondAttribute="bottom" constant="14" id="yBv-Xz-ntc"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq"/>
@@ -530,13 +534,13 @@
         </scene>
     </scenes>
     <resources>
-        <image name="ApproveButtonIcon" width="925" height="792"/>
-        <image name="BackgroundMainPageGradientFullAlpha" width="1468" height="2142"/>
+        <image name="ApproveButtonIcon" width="44" height="37"/>
+        <image name="BackgroundMainPageGradient" width="414" height="736"/>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="Chacha Circle Button" width="78" height="78"/>
         <image name="MainPageButtonBackground" width="3736" height="3640"/>
         <image name="MessagingIcon" width="1043" height="877"/>
-        <image name="ProfileIcon" width="560" height="686"/>
+        <image name="ProfileIcon" width="22" height="28"/>
         <image name="RemoveButtonIcon" width="455" height="593"/>
         <image name="Report User Button" width="5" height="20"/>
         <image name="Top Line" width="375" height="1"/>
