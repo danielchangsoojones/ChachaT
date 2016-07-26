@@ -35,6 +35,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theSkipButton: UIButton!
     @IBOutlet weak var theMessageButton: UIButton!
     @IBOutlet weak var theProfileButton: UIButton!
+    @IBOutlet weak var theBackgroundGradient: UIImageView!
 
     var userArray = [User]()
     private var matchDataStore = MatchDataStore.sharedInstance
@@ -79,13 +80,9 @@ class BackgroundAnimationViewController: UIViewController {
         if rippleHasNotBeenStarted {
             //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
             //this makes it only appear the first run time.
-            ripple(theChachaLoadingImage.center, view: self.theBackgroundColorView)
+            ripple(theChachaLoadingImage.center, view: theBackgroundGradient)
             rippleHasNotBeenStarted = false
         }
-    }
-    
-    override func viewDidLayoutSubviews() {
-        setBottomButtonsIconAlphas()
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
@@ -97,18 +94,18 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func setNavigationButtons() {
-        self.navigationItem.leftBarButtonItem = createNavigationButton("NotificationTabIcon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
+        self.navigationItem.leftBarButtonItem = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
         self.navigationItem.rightBarButtonItem = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
     }
     
     func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
-        let navigationButtonAlpha : CGFloat = 0.75
+//        let navigationButtonAlpha : CGFloat = 0.75
         let navigationButtonSideDimension : CGFloat = 20
         let button = UIButton()
         button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
         button.addTarget(self, action:buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
         button.frame=CGRectMake(0, 0, navigationButtonSideDimension, navigationButtonSideDimension)
-        button.alpha = navigationButtonAlpha
+//        button.alpha = navigationButtonAlpha
         return UIBarButtonItem(customView: button)
     }
     
@@ -119,15 +116,6 @@ class BackgroundAnimationViewController: UIViewController {
     
     func searchNavigationButtonPressed() {
         performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
-    }
-    
-    func setBottomButtonsIconAlphas() {
-        let tealIconsAlpha : CGFloat = 0.5
-        let greyIconAlpha : CGFloat = 0.52
-        theApproveButton.imageView?.alpha = tealIconsAlpha
-        theMessageButton.imageView?.alpha = tealIconsAlpha
-        theSkipButton.imageView?.alpha = greyIconAlpha
-        theProfileButton.imageView?.alpha = greyIconAlpha
     }
 }
 
