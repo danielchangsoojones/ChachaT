@@ -480,10 +480,10 @@
             </objects>
             <point key="canvasLocation" x="1772" y="347"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Chacha Navigation View Controller-->
         <scene sceneID="NJs-ik-5Gj">
             <objects>
-                <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
