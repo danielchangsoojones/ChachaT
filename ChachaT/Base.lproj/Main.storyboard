@@ -172,11 +172,13 @@
                         <outlet property="theApproveButton" destination="qHW-wn-jru" id="IMq-4O-CMW"/>
                         <outlet property="theBackgroundColorView" destination="dsh-Hh-R5l" id="HgS-Re-cUg"/>
                         <outlet property="theBackgroundGradient" destination="uN5-uW-dFI" id="Wg7-Jw-Mw5"/>
+                        <outlet property="theBottomButtonStackView" destination="KXf-AU-SZT" id="P0V-zy-3cs"/>
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <outlet property="theMessageButton" destination="NdX-3j-BI4" id="aLa-NA-Zb9"/>
                         <outlet property="theProfileButton" destination="b0O-jA-iWv" id="8Eo-eo-YRk"/>
                         <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
+                        <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
                         <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="2hX-Ts-O6M"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                     </connections>

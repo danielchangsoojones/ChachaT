@@ -10,21 +10,31 @@ import UIKit
 import Koloda
 
 let defaultBottomOffset:CGFloat = 0
-let defaultTopOffset:CGFloat = 67
+let defaultTopOffset:CGFloat = 5
 let defaultHorizontalOffset:CGFloat = 10
 let defaultHeightRatio:CGFloat = 1.35
 let defaultHeightRatio3by2:CGFloat = 1.06
 let backgroundCardHorizontalMarginMultiplier:CGFloat = 0.25
 let backgroundCardScalePercent:CGFloat = 1.5
 
+//TODO: I wish I could just extend the KolodaViewDelegate, but it is not working.
+protocol CustomKolodaViewDelegate  {
+    func calculateKolodaViewCardHeight() -> (cardHeight: CGFloat, navigationAreaHeight: CGFloat)
+}
+
 class CustomKolodaView: KolodaView {
     
+    var customKolodaViewDelegate: CustomKolodaViewDelegate?
+    
     override func frameForCardAtIndex(index: UInt) -> CGRect {
+        let measurmentTuple = customKolodaViewDelegate?.calculateKolodaViewCardHeight()
+        let cardHeight = measurmentTuple?.cardHeight
+        let navigationAreaHeight = measurmentTuple?.navigationAreaHeight
         if index == 0 {
-            let topOffset:CGFloat = defaultTopOffset
+            let topOffset:CGFloat = navigationAreaHeight! + defaultTopOffset
             let xOffset:CGFloat = defaultHorizontalOffset
             let width = UIScreen.mainScreen().bounds.width - 2 * defaultHorizontalOffset
-            var height = width * defaultHeightRatio
+            var height = cardHeight! - defaultTopOffset //if we move the card down, then we need to make it that much shorter, so it doesn't go over buttons
             if isIphone3by2AR() {
                 height = height * 0.72
             }

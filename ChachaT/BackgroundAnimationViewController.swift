@@ -36,6 +36,10 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theMessageButton: UIButton!
     @IBOutlet weak var theProfileButton: UIButton!
     @IBOutlet weak var theBackgroundGradient: UIImageView!
+    @IBOutlet weak var theBottomButtonStackView: UIStackView!
+    
+    //constraint outlets
+    @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var userArray = [User]()
     private var matchDataStore = MatchDataStore.sharedInstance
@@ -61,6 +65,8 @@ class BackgroundAnimationViewController: UIViewController {
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
+        //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
+        kolodaView.customKolodaViewDelegate = self
         kolodaView.dataSource = self
         do {
             audioPlayerWoosh = try AVAudioPlayer(contentsOfURL: wooshSound)
@@ -138,7 +144,7 @@ extension BackgroundAnimationViewController {
 
 //MARK: KolodaViewDelegate
 //BEWARE if the function is not being run, it is because some of the delegate names have been changed. Go to the delegate page and make sure they match up exactly
-extension BackgroundAnimationViewController: KolodaViewDelegate {
+extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
         kolodaView.resetCurrentCardIndex()
     }
@@ -174,6 +180,17 @@ extension BackgroundAnimationViewController: KolodaViewDelegate {
             matchDataStore.nopePerson(targetUser)
         }
     }
+    
+    func calculateKolodaViewCardHeight() -> (cardHeight: CGFloat, navigationAreaHeight: CGFloat) {
+        let bottomAreaHeight = theStackViewBottomConstraint.constant + theBottomButtonStackView.frame.height
+        let cardOffsetFromBottomButtons : CGFloat = 0
+        let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        let frameHeight = self.view.frame.height
+        let cardHeight = frameHeight - (bottomAreaHeight + cardOffsetFromBottomButtons) - (navigationBarHeight! + statusBarHeight)
+        return (cardHeight, navigationBarHeight! + statusBarHeight)
+    }
+    
 }
 
 //MARK: KolodaViewDataSource
