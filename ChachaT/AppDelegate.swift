@@ -17,7 +17,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     var window: UIWindow?
 
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        
+         UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         //register parse subclasses
         User.registerSubclass()
         Tag.registerSubclass()
@@ -50,9 +50,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //        
-//                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        
-//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileIndexViewController") as! ProfileIndexViewController
+//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("BackgroundAnimationViewController") as! BackgroundAnimationViewController
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()

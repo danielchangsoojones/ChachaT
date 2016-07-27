@@ -56,6 +56,7 @@
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
+		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
 		92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */; };
@@ -127,6 +128,7 @@
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
 		92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
@@ -367,6 +369,7 @@
 			isa = PBXGroup;
 			children = (
 				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
+				92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */,
 			);
 			name = "Navigation/PageView Controllers";
 			sourceTree = "<group>";
@@ -576,6 +579,7 @@
 				928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */,
 				9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tag.swift in Sources */,
+				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				928819571D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
