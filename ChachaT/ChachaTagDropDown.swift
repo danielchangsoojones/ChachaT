@@ -1,0 +1,195 @@
+//
+//  ChachaTagDropDown.swift
+//  ChachaT
+//
+//  Created by Daniel Jones on 7/28/16.
+//  Copyright © 2016 Chong500Productions. All rights reserved.
+//
+
+import Foundation
+
+//I used code from the BTNavigationDropdownMenu framework to help me figure this out
+class ChachaTagDropDown: UIView {
+    // The animation duration of showing/hiding menu. Default is 0.3
+    var animationDuration: NSTimeInterval! {
+        get {
+            return self.configuration.animationDuration
+        }
+        set(value) {
+            self.configuration.animationDuration = value
+        }
+    }
+    
+    // The color of the mask layer. Default is blackColor()
+    var maskBackgroundColor: UIColor! {
+        get {
+            return self.configuration.maskBackgroundColor
+        }
+        set(value) {
+            self.configuration.maskBackgroundColor = value
+        }
+    }
+    
+    // The opacity of the mask layer. Default is 0.3
+    var maskBackgroundOpacity: CGFloat! {
+        get {
+            return self.configuration.maskBackgroundOpacity
+        }
+        set(value) {
+            self.configuration.maskBackgroundOpacity = value
+        }
+    }
+    
+    var isShown: Bool!
+    
+    private var configuration = DropDownConfiguration()
+    private var topSeparator: UIView!
+    private var menuButton: UIButton!
+    private var menuTitle: UILabel!
+    private var menuArrow: UIImageView!
+    private var backgroundView: UIView!
+    private var tags: [Tag]!
+    private var menuWrapper: UIView!
+    private var testingView: UIView!
+    private var dropDownOriginY : CGFloat = 0
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, tags: [Tag], popDownOriginY: CGFloat) {
+        //need to super init, but do not have the height yet, so just passing a size zero frame
+        super.init(frame: CGRectZero)
+        
+        self.dropDownOriginY = popDownOriginY
+        self.isShown = false
+        self.tags = tags
+        
+        //getting the top view controllers bounds
+        let window = UIScreen.mainScreen()
+        let menuWrapperBounds = window.bounds
+        
+        // Set up DropdownMenu
+        self.menuWrapper = UIView(frame: CGRectMake(menuWrapperBounds.origin.x, 0, menuWrapperBounds.width, menuWrapperBounds.height))
+        self.menuWrapper.clipsToBounds = true
+        self.menuWrapper.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
+        
+        // Init background view (under table view)
+        self.backgroundView = UIView(frame: menuWrapperBounds)
+        self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
+        self.backgroundView.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
+        
+        let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaTagDropDown.hideMenu));
+        self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
+        
+        testingView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
+        testingView.backgroundColor = UIColor.blueColor()
+        
+        // Add background view & table view to container view
+        self.menuWrapper.addSubview(self.backgroundView)
+        self.menuWrapper.addSubview(testingView)
+        
+        // Add Menu View to container view
+        containerView.addSubview(self.menuWrapper)
+        
+        // By default, hide menu view
+        self.menuWrapper.hidden = true
+//        self.menuWrapper.backgroundColor = UIColor.redColor()
+    }
+    
+    func show() {
+        if self.isShown == false {
+            self.showMenu()
+        }
+    }
+    
+    func hide() {
+        if self.isShown == true {
+            self.hideMenu()
+        }
+    }
+    
+    func toggle() {
+        if(self.isShown == true) {
+            self.hideMenu();
+        } else {
+            self.showMenu();
+        }
+    }
+    
+    func showMenu() {
+        self.menuWrapper.frame.origin.y = dropDownOriginY
+        
+        self.isShown = true
+        
+        // Visible menu view
+        self.menuWrapper.hidden = false
+        
+        // Change background alpha
+        self.backgroundView.alpha = 0
+        
+        // Animation
+        self.testingView.frame.origin.y = 0
+        
+        self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
+        
+        UIView.animateWithDuration(
+            self.configuration.animationDuration * 1.5,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.5,
+            options: [],
+            animations: {
+                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, UIScreen.mainScreen().bounds.width, 30)
+                self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
+            }, completion: nil
+        )
+    }
+    
+    func hideMenu() {
+        self.isShown = false
+        
+        // Change background alpha
+        self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
+        
+        UIView.animateWithDuration(
+            self.configuration.animationDuration * 1.5,
+            delay: 0,
+            usingSpringWithDamping: 0.7,
+            initialSpringVelocity: 0.5,
+            options: [],
+            animations: {
+                self.testingView.frame.origin.y = CGFloat(-200)
+            }, completion: nil
+        )
+        
+        // Animation
+        UIView.animateWithDuration(
+            self.configuration.animationDuration,
+            delay: 0,
+            options: UIViewAnimationOptions.TransitionNone,
+            animations: {
+                self.testingView.frame.origin.y = 0
+                self.backgroundView.alpha = 0
+            }, completion: { _ in
+                self.menuWrapper.hidden = true
+        })
+    }
+    
+    // MARK: BTConfiguration
+    class DropDownConfiguration {
+        var animationDuration: NSTimeInterval!
+        var maskBackgroundColor: UIColor!
+        var maskBackgroundOpacity: CGFloat!
+        
+        init() {
+            self.defaultValue()
+        }
+        
+        func defaultValue() {
+            self.animationDuration = 0.5
+            self.maskBackgroundColor = UIColor.blackColor()
+            self.maskBackgroundOpacity = 0.3
+        }
+    }
+}

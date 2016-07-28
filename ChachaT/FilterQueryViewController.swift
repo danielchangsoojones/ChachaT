@@ -14,41 +14,45 @@ class FilterQueryViewController: FilterTagViewController {
     var mainPageDelegate: FilterViewControllerDelegate?
     
     @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
-        var chosenTagArrayTitles : [String] = []
-        for tagView in tagChosenView.tagViews {
-            if let titleLabel = tagView.titleLabel {
-                if let title = titleLabel.text {
-                    //need to get title array because I want to do contained in query, which requires strings
-                    chosenTagArrayTitles.append(title)
-                }
-            }
-        }
-        let query = Tag.query()
-        //finding all tags that have a title that the user chose for the search
-        //TODO: I'll need to do something if 0 people come up
-        if !chosenTagArrayTitles.isEmpty {
-            query?.whereKey("title", containedIn: chosenTagArrayTitles)
-        }
-        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-        query?.includeKey("createdBy")
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                var userArray : [User] = []
-                var userDuplicateArray : [User] = []
-                for tag in objects as! [Tag] {
-                    if !userDuplicateArray.contains(tag.createdBy!) {
-                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
-                        //this fixes that
-                        userDuplicateArray.append(tag.createdBy!)
-                        userArray.append(tag.createdBy!)
-                    }
-                }
-                self.mainPageDelegate?.passFilteredUserArray(userArray)
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                print(error)
-            }
-        })
+        let navigationBarHeight = navigationController?.navigationBar.frame.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        let menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [], popDownOriginY: navigationBarHeight! + statusBarHeight)
+        menuView.show()
+//        var chosenTagArrayTitles : [String] = []
+//        for tagView in tagChosenView.tagViews {
+//            if let titleLabel = tagView.titleLabel {
+//                if let title = titleLabel.text {
+//                    //need to get title array because I want to do contained in query, which requires strings
+//                    chosenTagArrayTitles.append(title)
+//                }
+//            }
+//        }
+//        let query = Tag.query()
+//        //finding all tags that have a title that the user chose for the search
+//        //TODO: I'll need to do something if 0 people come up
+//        if !chosenTagArrayTitles.isEmpty {
+//            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+//        }
+//        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
+//        query?.includeKey("createdBy")
+//        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+//            if error == nil {
+//                var userArray : [User] = []
+//                var userDuplicateArray : [User] = []
+//                for tag in objects as! [Tag] {
+//                    if !userDuplicateArray.contains(tag.createdBy!) {
+//                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
+//                        //this fixes that
+//                        userDuplicateArray.append(tag.createdBy!)
+//                        userArray.append(tag.createdBy!)
+//                    }
+//                }
+//                self.mainPageDelegate?.passFilteredUserArray(userArray)
+//                self.navigationController?.popViewControllerAnimated(true)
+//            } else {
+//                print(error)
+//            }
+//        })
     }
     
     
