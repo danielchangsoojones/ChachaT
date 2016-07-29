@@ -19,6 +19,7 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
+		922C89841D4A07D500DE1373 /* ChachaTagDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -88,6 +89,7 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaTagDropDown.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -243,7 +245,7 @@
 				928819441D286C70000A8E04 /* Profile */,
 				920BF8351D4333CA00104842 /* Messaging */,
 				920BF82C1D431C5E00104842 /* Matching */,
-				9273B7991CFF491D0001A608 /* Filtering */,
+				9273B7991CFF491D0001A608 /* 8tracks Filtering Search */,
 				926108391CE4EDA0009F3E86 /* Tinder */,
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
@@ -331,7 +333,7 @@
 			name = Models;
 			sourceTree = "<group>";
 		};
-		9273B7991CFF491D0001A608 /* Filtering */ = {
+		9273B7991CFF491D0001A608 /* 8tracks Filtering Search */ = {
 			isa = PBXGroup;
 			children = (
 				920BF81A1D3FF5E300104842 /* TagListView */,
@@ -340,7 +342,7 @@
 				928819351D18E78B000A8E04 /* FilterTagViewController.swift */,
 				920BF8261D415FC000104842 /* FilterQueryViewController.swift */,
 			);
-			name = Filtering;
+			name = "8tracks Filtering Search";
 			sourceTree = "<group>";
 		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
@@ -350,6 +352,7 @@
 				9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */,
 				928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */,
 				928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */,
+				922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */,
 			);
 			name = "Subview Files";
 			sourceTree = "<group>";
@@ -578,6 +581,7 @@
 				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */,
 				9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */,
+				922C89841D4A07D500DE1373 /* ChachaTagDropDown.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tag.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				928819571D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift in Sources */,

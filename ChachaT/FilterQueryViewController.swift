@@ -12,43 +12,48 @@ import EFTools
 class FilterQueryViewController: FilterTagViewController {
     
     var mainPageDelegate: FilterViewControllerDelegate?
+    var menuView: ChachaTagDropDown!
+    
+    //constraint outlets
+    @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
     @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
-        var chosenTagArrayTitles : [String] = []
-        for tagView in tagChosenView.tagViews {
-            if let titleLabel = tagView.titleLabel {
-                if let title = titleLabel.text {
-                    //need to get title array because I want to do contained in query, which requires strings
-                    chosenTagArrayTitles.append(title)
-                }
-            }
-        }
-        let query = Tag.query()
-        //finding all tags that have a title that the user chose for the search
-        //TODO: I'll need to do something if 0 people come up
-        if !chosenTagArrayTitles.isEmpty {
-            query?.whereKey("title", containedIn: chosenTagArrayTitles)
-        }
-        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-        query?.includeKey("createdBy")
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                var userArray : [User] = []
-                var userDuplicateArray : [User] = []
-                for tag in objects as! [Tag] {
-                    if !userDuplicateArray.contains(tag.createdBy!) {
-                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
-                        //this fixes that
-                        userDuplicateArray.append(tag.createdBy!)
-                        userArray.append(tag.createdBy!)
-                    }
-                }
-                self.mainPageDelegate?.passFilteredUserArray(userArray)
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                print(error)
-            }
-        })
+        menuView.show()
+//        var chosenTagArrayTitles : [String] = []
+//        for tagView in tagChosenView.tagViews {
+//            if let titleLabel = tagView.titleLabel {
+//                if let title = titleLabel.text {
+//                    //need to get title array because I want to do contained in query, which requires strings
+//                    chosenTagArrayTitles.append(title)
+//                }
+//            }
+//        }
+//        let query = Tag.query()
+//        //finding all tags that have a title that the user chose for the search
+//        //TODO: I'll need to do something if 0 people come up
+//        if !chosenTagArrayTitles.isEmpty {
+//            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+//        }
+//        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
+//        query?.includeKey("createdBy")
+//        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+//            if error == nil {
+//                var userArray : [User] = []
+//                var userDuplicateArray : [User] = []
+//                for tag in objects as! [Tag] {
+//                    if !userDuplicateArray.contains(tag.createdBy!) {
+//                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
+//                        //this fixes that
+//                        userDuplicateArray.append(tag.createdBy!)
+//                        userArray.append(tag.createdBy!)
+//                    }
+//                }
+//                self.mainPageDelegate?.passFilteredUserArray(userArray)
+//                self.navigationController?.popViewControllerAnimated(true)
+//            } else {
+//                print(error)
+//            }
+//        })
     }
     
     
@@ -57,6 +62,9 @@ class FilterQueryViewController: FilterTagViewController {
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
+        let navigationBarHeight = navigationController?.navigationBar.frame.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
         // Do any additional setup after loading the view.
     }
     
@@ -79,6 +87,42 @@ class FilterQueryViewController: FilterTagViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension FilterQueryViewController : ChachaTagDropDownDelegate {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
+        if moveDown {
+            if let downDistance = downDistance {
+                tagChoicesViewTopConstraint.constant = downDistance
+            }
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: 0.7,
+                initialSpringVelocity: 0.5,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: nil
+            )
+        } else {
+            //we want to move the TagListView back up to original position, which is 0
+            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: springWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { (_) in
+                    self.tagChoicesView.shouldRearrangeViews = true
+            })
+        }
+    }
 }
 
 //setting default tags in view extension
@@ -123,23 +167,24 @@ extension FilterQueryViewController {
 //extension for tag actions
 extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                let tagView = tagChosenView.addTag(tag.title)
-                tagChoicesView.removeTag(tag.title)
-                changeTagListViewWidth(tagView, extend: true)
-            case TagAttributes.SpecialtyButtons.rawValue:
-                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
-            case TagAttributes.SpecialtySingleSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            default: break
-            }
-        }
+        menuView.hide()
+//        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+//            switch tag.attribute {
+//            case TagAttributes.Generic.rawValue:
+//                let tagView = tagChosenView.addTag(tag.title)
+//                tagChoicesView.removeTag(tag.title)
+//                changeTagListViewWidth(tagView, extend: true)
+//            case TagAttributes.SpecialtyButtons.rawValue:
+//                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+//            case TagAttributes.SpecialtySingleSlider.rawValue:
+//                //TODO: make the specialty slider come up
+//                break
+//            case TagAttributes.SpecialtyRangeSlider.rawValue:
+//                //TODO: make the specialty slider come up
+//                break
+//            default: break
+//            }
+//        }
     }
     
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
