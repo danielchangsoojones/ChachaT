@@ -14,6 +14,9 @@ class FilterQueryViewController: FilterTagViewController {
     var mainPageDelegate: FilterViewControllerDelegate?
     var menuView: ChachaTagDropDown!
     
+    //constraint outlets
+    @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
+    
     @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
         menuView.show()
 //        var chosenTagArrayTitles : [String] = []

@@ -120,6 +120,7 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="o7q-Z2-nEW"/>
+                        <outlet property="tagChoicesViewTopConstraint" destination="YFy-9F-nDv" id="fT9-nU-zsa"/>
                         <outlet property="tagChosenView" destination="fwh-y2-WnZ" id="0I6-no-hTx"/>
                         <outlet property="tagChosenViewWidthConstraint" destination="Tji-wA-N1P" id="ZfS-Hx-TP3"/>
                         <outlet property="theChosenTagHolderView" destination="MYZ-lm-Sxs" id="WZf-KF-1uM"/>
