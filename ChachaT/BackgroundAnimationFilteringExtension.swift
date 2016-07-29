@@ -11,12 +11,19 @@ import Foundation
 extension BackgroundAnimationViewController {
     //Purpose: For showing/unshowing the search bar in navigation bar
     func hideNavigationControllerComponents(hideSubviews: Bool) {
-        if hideSubviews {
-            self.navigationItem.rightBarButtonItem = nil
-            self.navigationItem.leftBarButtonItem = nil
-            if let chachaNavigationViewController = self.navigationController! as? ChachaNavigationViewController {
-                chachaNavigationViewController.navigationBarLogo.hidden = true
-            }
+        if let chachaNavigationViewController = self.navigationController! as? ChachaNavigationViewController {
+            self.navigationItem.rightBarButtonItem = hideSubviews ? nil : rightNavigationButton
+            self.navigationItem.leftBarButtonItem = hideSubviews ? nil : leftNavigationButton
+            chachaNavigationViewController.navigationBarLogo.hidden = hideSubviews
+            hideTinderSubviews(hideSubviews)
+        }
+    }
+    
+    func hideTinderSubviews(hide: Bool) {
+        //TODO: add in approve/skip button, it hides them both when we make one hidden.
+        let tinderSubviewsArray : [UIView] = [theMessageButton, theProfileButton, kolodaView]
+        for subviews in tinderSubviewsArray {
+            subviews.hidden = hide
         }
     }
 }

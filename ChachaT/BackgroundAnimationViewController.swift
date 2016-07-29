@@ -54,7 +54,8 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     @IBAction func skipCard(sender: AnyObject) {
-        kolodaView.swipe(.Left)
+        hideNavigationControllerComponents(false)
+//        kolodaView.swipe(.Left)
     }
     @IBAction func approveCard(sender: UIButton) {
         kolodaView.swipe(.Right)
