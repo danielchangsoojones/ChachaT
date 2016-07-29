@@ -111,7 +111,7 @@
                             </mask>
                         </variation>
                     </view>
-                    <navigationItem key="navigationItem" title="Search" id="bQw-lD-3pe">
+                    <navigationItem key="navigationItem" id="bQw-lD-3pe">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="ftD-az-mxw">
                             <connections>
                                 <action selector="theDoneButtonPressed:" destination="I1A-ko-WaS" id="8vU-Ua-Au2"/>

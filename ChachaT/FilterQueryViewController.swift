@@ -64,8 +64,22 @@ class FilterQueryViewController: FilterTagViewController {
         tagChosenView.delegate = self
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        //this bottom is just for testing
         self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
-        // Do any additional setup after loading the view.
+        hideNavigationControllerComponents(true)
+//        let testView = UIView(frame: CGRectMake(0, 0, 50, 50))
+//        testView.backgroundColor = UIColor.redColor()
+//        self.navigationController?.navigationBar.addSubview(testView)
+    }
+    
+    func hideNavigationControllerComponents(hideSubviews: Bool) {
+        if hideSubviews {
+            self.navigationItem.rightBarButtonItem = nil
+            self.navigationItem.setHidesBackButton(true, animated:true)
+        }
+        if let chachaNavigationViewController = self.navigationController! as? ChachaNavigationViewController {
+            chachaNavigationViewController.navigationBarLogo.hidden = true
+        }
     }
     
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.

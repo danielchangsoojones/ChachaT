@@ -10,6 +10,8 @@ import UIKit
 import SnapKit
 
 class ChachaNavigationViewController: UINavigationController {
+    
+    var navigationBarLogo: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -17,7 +19,7 @@ class ChachaNavigationViewController: UINavigationController {
         self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
         self.navigationBar.shadowImage = UIImage()
         self.navigationBar.barTintColor = UIColor.whiteColor()
-        setNavigationLogo()
+        self.navigationBarLogo = setNavigationLogo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -26,7 +28,7 @@ class ChachaNavigationViewController: UINavigationController {
     }
     
     
-    func setNavigationLogo() {
+    func setNavigationLogo() -> UIImageView {
         let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
         imageView.contentMode = .ScaleAspectFit
         let logo = UIImage(named: "Chacha-Teal-Logo")
@@ -38,6 +40,7 @@ class ChachaNavigationViewController: UINavigationController {
             make.width.equalTo(100)
             make.height.equalTo(100)
         }
+        return imageView
     }
 
 }
