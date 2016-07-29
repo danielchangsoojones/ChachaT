@@ -61,7 +61,7 @@ class FilterQueryViewController: FilterTagViewController {
         tagChosenView.delegate = self
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [], popDownOriginY: navigationBarHeight! + statusBarHeight)
+        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight)
         // Do any additional setup after loading the view.
     }
     
