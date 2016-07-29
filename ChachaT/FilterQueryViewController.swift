@@ -67,9 +67,19 @@ class FilterQueryViewController: FilterTagViewController {
         //this bottom is just for testing
         self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
         hideNavigationControllerComponents(true)
+        addSearchScrollView()
 //        let testView = UIView(frame: CGRectMake(0, 0, 50, 50))
 //        testView.backgroundColor = UIColor.redColor()
 //        self.navigationController?.navigationBar.addSubview(testView)
+    }
+    
+    func addSearchScrollView() {
+        //doesn't need frame size because we will use snapkit anyway to override
+        let scrollViewSearch = ScrollViewSearchView(frame: CGRectZero)
+        self.navigationController?.navigationBar.addSubview(scrollViewSearch)
+        scrollViewSearch.snp_makeConstraints { (make) in
+            make.edges.equalTo((self.navigationController?.navigationBar)!)
+        }
     }
     
     func hideNavigationControllerComponents(hideSubviews: Bool) {
