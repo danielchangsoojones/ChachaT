@@ -10,11 +10,14 @@ import Foundation
 import SnapKit
 
 protocol ChachaTagDropDownDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, downDistance: CGFloat?)
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?)
 }
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
 class ChachaTagDropDown: UIView {
+    
+    let springWithDamping : CGFloat = 0.7
+    let initialSpringVelocity : CGFloat = 0.5
     
     var delegate: ChachaTagDropDownDelegate?
     
@@ -140,13 +143,13 @@ class ChachaTagDropDown: UIView {
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
         
-        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, downDistance: testingView.frame.height)
+        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: testingView.frame.height)
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
             delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 0.5,
+            usingSpringWithDamping: springWithDamping,
+            initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
                 let tagListViewHeight = self.tagListView.intrinsicContentSize().height
@@ -163,13 +166,13 @@ class ChachaTagDropDown: UIView {
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
         
-        delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, downDistance: nil)
+        delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
             delay: 0,
-            usingSpringWithDamping: 0.7,
-            initialSpringVelocity: 0.5,
+            usingSpringWithDamping: springWithDamping,
+            initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
                 self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)

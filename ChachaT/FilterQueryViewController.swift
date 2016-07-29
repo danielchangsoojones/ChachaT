@@ -90,21 +90,34 @@ class FilterQueryViewController: FilterTagViewController {
 }
 
 extension FilterQueryViewController : ChachaTagDropDownDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, downDistance: CGFloat?) {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
         if moveDown {
             if let downDistance = downDistance {
                 tagChoicesViewTopConstraint.constant = downDistance
             }
             tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(animationDuration, animations: {
-                self.view.layoutIfNeeded()
-            })
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: 0.7,
+                initialSpringVelocity: 0.5,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: nil
+            )
         } else {
             //we want to move the TagListView back up to original position, which is 0
             tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
             tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(animationDuration, animations: {
-                self.view.layoutIfNeeded()
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: springWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
                 }, completion: { (_) in
                     self.tagChoicesView.shouldRearrangeViews = true
             })
