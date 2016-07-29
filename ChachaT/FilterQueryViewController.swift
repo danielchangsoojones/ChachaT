@@ -13,6 +13,7 @@ class FilterQueryViewController: FilterTagViewController {
     
     var mainPageDelegate: FilterViewControllerDelegate?
     var menuView: ChachaTagDropDown!
+    var scrollViewSearchView : ScrollViewSearchView?
     
     //constraint outlets
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
@@ -67,19 +68,17 @@ class FilterQueryViewController: FilterTagViewController {
         //this bottom is just for testing
         self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
         hideNavigationControllerComponents(true)
-        addSearchScrollView()
-//        let testView = UIView(frame: CGRectMake(0, 0, 50, 50))
-//        testView.backgroundColor = UIColor.redColor()
-//        self.navigationController?.navigationBar.addSubview(testView)
+        scrollViewSearchView = addSearchScrollView()
     }
     
-    func addSearchScrollView() {
-        //doesn't need frame size because we will use snapkit anyway to override
-        let scrollViewSearch = ScrollViewSearchView(frame: CGRectZero)
+    func addSearchScrollView() -> ScrollViewSearchView {
+        //getting the xib file for the scroll view
+        let scrollViewSearch = ScrollViewSearchView.instanceFromNib()
         self.navigationController?.navigationBar.addSubview(scrollViewSearch)
         scrollViewSearch.snp_makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
+        return scrollViewSearch
     }
     
     func hideNavigationControllerComponents(hideSubviews: Bool) {
@@ -191,24 +190,24 @@ extension FilterQueryViewController {
 //extension for tag actions
 extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        menuView.hide()
-//        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-//            switch tag.attribute {
-//            case TagAttributes.Generic.rawValue:
+        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue:
+                let tagView = scrollViewSearchView?.theTagChosenListView.addTag("bobybbobybkskdjfk")
 //                let tagView = tagChosenView.addTag(tag.title)
 //                tagChoicesView.removeTag(tag.title)
-//                changeTagListViewWidth(tagView, extend: true)
-//            case TagAttributes.SpecialtyButtons.rawValue:
-//                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
-//            case TagAttributes.SpecialtySingleSlider.rawValue:
-//                //TODO: make the specialty slider come up
-//                break
-//            case TagAttributes.SpecialtyRangeSlider.rawValue:
-//                //TODO: make the specialty slider come up
-//                break
-//            default: break
-//            }
-//        }
+                scrollViewSearchView?.changeTagListViewWidth(tagView!, extend: true)
+            case TagAttributes.SpecialtyButtons.rawValue:
+                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+            case TagAttributes.SpecialtySingleSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            default: break
+            }
+        }
     }
     
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {

@@ -7,7 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB">
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ScrollViewSearchView" customModule="ChachaT" customModuleProvider="target">
             <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
@@ -38,8 +38,8 @@
                             <variation key="default">
                                 <mask key="constraints">
                                     <exclude reference="TpB-aL-EgC"/>
-                                    <exclude reference="8rZ-S9-KRj"/>
                                     <exclude reference="3WK-az-AiH"/>
+                                    <exclude reference="8rZ-S9-KRj"/>
                                 </mask>
                             </variation>
                         </view>
@@ -59,8 +59,8 @@
                         <mask key="constraints">
                             <exclude reference="qPr-iq-sVq"/>
                             <exclude reference="0ef-Vk-5Ou"/>
-                            <exclude reference="nXa-V2-O4r"/>
                             <exclude reference="cn7-Ee-UcR"/>
+                            <exclude reference="nXa-V2-O4r"/>
                         </mask>
                     </variation>
                 </scrollView>
@@ -73,6 +73,12 @@
                 <constraint firstAttribute="bottom" secondItem="wnR-At-8N3" secondAttribute="bottom" id="xPh-Ey-Yfe"/>
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="theScrollView" destination="wnR-At-8N3" id="k8X-94-eOQ"/>
+                <outlet property="theTagChosenHolderView" destination="9NQ-uw-kwB" id="66j-0I-a5N"/>
+                <outlet property="theTagChosenListView" destination="ShF-V1-DNL" id="Z6a-7c-4Nb"/>
+                <outlet property="theTagListViewWidthConstraint" destination="Scz-8p-IDp" id="tKX-Hl-baU"/>
+            </connections>
             <point key="canvasLocation" x="796.5" y="351"/>
         </view>
     </objects>
