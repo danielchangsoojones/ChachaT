@@ -12,11 +12,9 @@ import EFTools
 class FilterQueryViewController: FilterTagViewController {
     
     var mainPageDelegate: FilterViewControllerDelegate?
+    var menuView: ChachaTagDropDown!
     
     @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
-        let navigationBarHeight = navigationController?.navigationBar.frame.height
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        let menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [], popDownOriginY: navigationBarHeight! + statusBarHeight)
         menuView.show()
 //        var chosenTagArrayTitles : [String] = []
 //        for tagView in tagChosenView.tagViews {
@@ -61,6 +59,9 @@ class FilterQueryViewController: FilterTagViewController {
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         tagChosenView.delegate = self
+        let navigationBarHeight = navigationController?.navigationBar.frame.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [], popDownOriginY: navigationBarHeight! + statusBarHeight)
         // Do any additional setup after loading the view.
     }
     
@@ -127,23 +128,24 @@ extension FilterQueryViewController {
 //extension for tag actions
 extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                let tagView = tagChosenView.addTag(tag.title)
-                tagChoicesView.removeTag(tag.title)
-                changeTagListViewWidth(tagView, extend: true)
-            case TagAttributes.SpecialtyButtons.rawValue:
-                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
-            case TagAttributes.SpecialtySingleSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            default: break
-            }
-        }
+        menuView.hide()
+//        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+//            switch tag.attribute {
+//            case TagAttributes.Generic.rawValue:
+//                let tagView = tagChosenView.addTag(tag.title)
+//                tagChoicesView.removeTag(tag.title)
+//                changeTagListViewWidth(tagView, extend: true)
+//            case TagAttributes.SpecialtyButtons.rawValue:
+//                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+//            case TagAttributes.SpecialtySingleSlider.rawValue:
+//                //TODO: make the specialty slider come up
+//                break
+//            case TagAttributes.SpecialtyRangeSlider.rawValue:
+//                //TODO: make the specialty slider come up
+//                break
+//            default: break
+//            }
+//        }
     }
     
     func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {

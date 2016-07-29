@@ -159,7 +159,7 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: 0.5,
             options: [],
             animations: {
-                self.testingView.frame.origin.y = CGFloat(-200)
+                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
             }, completion: nil
         )
         
@@ -169,7 +169,6 @@ class ChachaTagDropDown: UIView {
             delay: 0,
             options: UIViewAnimationOptions.TransitionNone,
             animations: {
-                self.testingView.frame.origin.y = 0
                 self.backgroundView.alpha = 0
             }, completion: { _ in
                 self.menuWrapper.hidden = true
