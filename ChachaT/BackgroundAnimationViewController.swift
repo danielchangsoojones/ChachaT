@@ -37,6 +37,8 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theProfileButton: UIButton!
     @IBOutlet weak var theBackgroundGradient: UIImageView!
     @IBOutlet weak var theBottomButtonStackView: UIStackView!
+    var leftNavigationButton: UIBarButtonItem?
+    var rightNavigationButton: UIBarButtonItem?
     
     //constraint outlets
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
@@ -100,8 +102,12 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func setNavigationButtons() {
-        self.navigationItem.leftBarButtonItem = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
-        self.navigationItem.rightBarButtonItem = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+        //need to hold the uinavigation button in a variable because we will be turning the actual navBarItems to nil when we want to disappear
+        //then when we want them to reappear, we will set back to our retained global variable.
+        leftNavigationButton = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
+        self.navigationItem.leftBarButtonItem = leftNavigationButton
+        rightNavigationButton = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+        self.navigationItem.rightBarButtonItem = rightNavigationButton
     }
     
     func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
@@ -121,7 +127,8 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func searchNavigationButtonPressed() {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
+        hideNavigationControllerComponents(true)
+//        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
     }
 }
 
