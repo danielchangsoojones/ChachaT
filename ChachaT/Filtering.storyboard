@@ -84,7 +84,35 @@
                             </scrollView>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="TagListView" customModule="ChachaT">
                                 <rect key="frame" x="0.0" y="143" width="600" height="457"/>
+                                <subviews>
+                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-vb-N7P" customClass="ScrollViewSearchView" customModule="ChachaT" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="207" width="600" height="44"/>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstAttribute="width" constant="50" id="FHq-co-k2v"/>
+                                            <constraint firstAttribute="height" constant="44" id="JSe-VU-Kqa"/>
+                                            <constraint firstAttribute="height" constant="50" id="wbh-cZ-cag"/>
+                                        </constraints>
+                                        <variation key="default">
+                                            <mask key="constraints">
+                                                <exclude reference="FHq-co-k2v"/>
+                                                <exclude reference="wbh-cZ-cag"/>
+                                            </mask>
+                                        </variation>
+                                    </view>
+                                </subviews>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <constraints>
+                                    <constraint firstAttribute="trailing" secondItem="dZA-vb-N7P" secondAttribute="trailing" id="49G-79-mqV"/>
+                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="centerX" secondItem="x2C-mZ-onz" secondAttribute="centerX" id="7Cy-V0-qmB"/>
+                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="leading" secondItem="x2C-mZ-onz" secondAttribute="leading" id="ccO-nd-hqm"/>
+                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="centerY" secondItem="x2C-mZ-onz" secondAttribute="centerY" id="tn9-LS-wJS"/>
+                                </constraints>
+                                <variation key="default">
+                                    <mask key="constraints">
+                                        <exclude reference="7Cy-V0-qmB"/>
+                                    </mask>
+                                </variation>
                             </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
