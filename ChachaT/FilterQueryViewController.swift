@@ -64,7 +64,7 @@ class FilterQueryViewController: FilterTagViewController {
         tagChosenView.delegate = self
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight)
+        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
         // Do any additional setup after loading the view.
     }
     
@@ -87,6 +87,29 @@ class FilterQueryViewController: FilterTagViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension FilterQueryViewController : ChachaTagDropDownDelegate {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, downDistance: CGFloat?) {
+        if moveDown {
+            if let downDistance = downDistance {
+                tagChoicesViewTopConstraint.constant = downDistance
+            }
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(animationDuration, animations: {
+                self.view.layoutIfNeeded()
+            })
+        } else {
+            //we want to move the TagListView back up to original position, which is 0
+            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(animationDuration, animations: {
+                self.view.layoutIfNeeded()
+                }, completion: { (_) in
+                    self.tagChoicesView.shouldRearrangeViews = true
+            })
+        }
+    }
 }
 
 //setting default tags in view extension

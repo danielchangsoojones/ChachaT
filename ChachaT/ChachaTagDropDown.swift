@@ -9,8 +9,15 @@
 import Foundation
 import SnapKit
 
+protocol ChachaTagDropDownDelegate {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, downDistance: CGFloat?)
+}
+
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
 class ChachaTagDropDown: UIView {
+    
+    var delegate: ChachaTagDropDownDelegate?
+    
     // The animation duration of showing/hiding menu. Default is 0.3
     var animationDuration: NSTimeInterval! {
         get {
@@ -55,10 +62,11 @@ class ChachaTagDropDown: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, tags: [Tag], popDownOriginY: CGFloat) {
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, tags: [Tag], popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
         super.init(frame: CGRectZero)
         
+        self.delegate = delegate
         self.dropDownOriginY = popDownOriginY
         self.isShown = false
         self.tags = tags
@@ -132,6 +140,8 @@ class ChachaTagDropDown: UIView {
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
         
+        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, downDistance: testingView.frame.height)
+        
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
             delay: 0,
@@ -152,6 +162,8 @@ class ChachaTagDropDown: UIView {
         
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
+        
+        delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, downDistance: nil)
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,

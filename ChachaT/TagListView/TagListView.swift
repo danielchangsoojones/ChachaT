@@ -201,6 +201,8 @@ public class TagListView: UIView {
         }
     }
     
+    var shouldRearrangeViews = true
+    
     // MARK: - Interface Builder
     
     public override func prepareForInterfaceBuilder() {
@@ -214,7 +216,15 @@ public class TagListView: UIView {
     public override func layoutSubviews() {
         super.layoutSubviews()
         
-        rearrangeViews()
+        //we want to rearrange the views for the majority of the times, but when the pop down occurs, we want to set ths shouldRearrangeViews to false, so then it doesn't update constraints and rearrange views
+        //we just want the whole thing to move downward, we don't want the extra movement of tags.
+        if shouldRearrangeViews {
+            rearrangeViews()
+        }
+    }
+    
+    func layOutSubviewsWithoutRearrangingViews() {
+        super.layoutSubviews()
     }
     
     private func rearrangeViews() {
