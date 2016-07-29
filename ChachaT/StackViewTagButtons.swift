@@ -10,8 +10,6 @@ import UIKit
 
 protocol StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String, specialtyTagTitle: String)
-    func removeChosenTag(tagTitle: String)
-    func doesChosenTagViewContain(tagTitle: String) -> Bool
     func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags)
 }
 
@@ -22,6 +20,7 @@ class StackViewTagButtons: UIStackView {
     var buttonArray: [UIButton] = []
     var originalTagTitle : String = "?"
     var filterCategory : String = ""
+    let tagHasNotBeenChosen = false //added in to get rid of errors
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -79,11 +78,11 @@ class StackViewTagButtons: UIStackView {
     func createButton(filterName: FilterNames) -> UIButton {
         let button: UIButton = {
             $0.setTitle(filterName.rawValue, forState: .Normal)
-            let tagHasNotBeenChosen = !(delegate?.doesChosenTagViewContain(filterName.rawValue))!
-            if !tagHasNotBeenChosen {
-                //this button title was the original text for the tag that we were passed. So, we want to save, so we know what to pass later to the delegate
-                originalTagTitle = filterName.rawValue
-            }
+//            let tagHasNotBeenChosen = !(delegate?.doesChosenTagViewContain(filterName.rawValue))!
+//            if !tagHasNotBeenChosen {
+//                //this button title was the original text for the tag that we were passed. So, we want to save, so we know what to pass later to the delegate
+//                originalTagTitle = filterName.rawValue
+//            }
             changeButtonHighlight(tagHasNotBeenChosen, button: $0, changeChosenTags: false, changeChoicesTag: false)
             $0.addTarget(self, action: #selector(buttonTapped), forControlEvents: .TouchUpInside)
             $0.layer.cornerRadius = 10

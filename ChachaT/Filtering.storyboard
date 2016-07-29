@@ -30,63 +30,11 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="EeK-zk-6fs">
-                                <rect key="frame" x="0.0" y="64" width="600" height="79"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="MYZ-lm-Sxs">
-                                        <rect key="frame" x="0.0" y="0.0" width="16" height="79"/>
-                                        <subviews>
-                                            <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fwh-y2-WnZ" customClass="TagListView" customModule="ChachaT">
-                                                <rect key="frame" x="8" y="28" width="0.0" height="24"/>
-                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="width" id="Tji-wA-N1P"/>
-                                                    <constraint firstAttribute="height" constant="24" id="wVG-G5-Ya9"/>
-                                                </constraints>
-                                            </view>
-                                        </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" secondItem="fwh-y2-WnZ" secondAttribute="width" constant="80" id="L3h-hq-jM4"/>
-                                            <constraint firstItem="fwh-y2-WnZ" firstAttribute="centerY" secondItem="MYZ-lm-Sxs" secondAttribute="centerY" id="LMc-kh-jfp"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="OgL-kN-RUR"/>
-                                            <constraint firstAttribute="trailing" secondItem="fwh-y2-WnZ" secondAttribute="trailing" constant="8" id="QPT-ze-uhC"/>
-                                            <constraint firstAttribute="width" secondItem="fwh-y2-WnZ" secondAttribute="width" id="Xqs-t2-Ghw"/>
-                                            <constraint firstItem="fwh-y2-WnZ" firstAttribute="leading" secondItem="MYZ-lm-Sxs" secondAttribute="leading" constant="8" id="b2C-x7-Dp3"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="OgL-kN-RUR"/>
-                                                <exclude reference="L3h-hq-jM4"/>
-                                                <exclude reference="Xqs-t2-Ghw"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstAttribute="height" secondItem="MYZ-lm-Sxs" secondAttribute="height" id="3xs-4G-M06"/>
-                                    <constraint firstAttribute="bottom" secondItem="MYZ-lm-Sxs" secondAttribute="bottom" id="5UV-7y-97p"/>
-                                    <constraint firstAttribute="trailing" secondItem="MYZ-lm-Sxs" secondAttribute="trailing" id="9Po-qe-G9U"/>
-                                    <constraint firstItem="MYZ-lm-Sxs" firstAttribute="height" secondItem="EeK-zk-6fs" secondAttribute="height" id="DRF-dg-B26"/>
-                                    <constraint firstAttribute="height" constant="79" id="OVW-Rk-oFr"/>
-                                    <constraint firstItem="MYZ-lm-Sxs" firstAttribute="top" secondItem="EeK-zk-6fs" secondAttribute="top" id="PQ3-s6-eBj"/>
-                                    <constraint firstItem="MYZ-lm-Sxs" firstAttribute="height" secondItem="EeK-zk-6fs" secondAttribute="height" id="fkO-rb-sqD"/>
-                                    <constraint firstAttribute="bottom" secondItem="MYZ-lm-Sxs" secondAttribute="bottom" id="oAd-GG-N4x"/>
-                                    <constraint firstItem="MYZ-lm-Sxs" firstAttribute="leading" secondItem="EeK-zk-6fs" secondAttribute="leading" id="zRD-Yq-BUd"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="3xs-4G-M06"/>
-                                        <exclude reference="5UV-7y-97p"/>
-                                        <exclude reference="fkO-rb-sqD"/>
-                                    </mask>
-                                </variation>
-                            </scrollView>
                             <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="TagListView" customModule="ChachaT">
-                                <rect key="frame" x="0.0" y="143" width="600" height="457"/>
+                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-vb-N7P" customClass="ScrollViewSearchView" customModule="ChachaT" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="207" width="600" height="44"/>
+                                        <rect key="frame" x="0.0" y="246" width="600" height="44"/>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="50" id="FHq-co-k2v"/>
@@ -117,27 +65,16 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="EeK-zk-6fs" secondAttribute="bottom" id="1TI-dS-Zse"/>
                             <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="6uQ-IO-THp"/>
                             <constraint firstItem="b8d-2d-LnC" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="AJf-Q2-TiT"/>
-                            <constraint firstItem="EeK-zk-6fs" firstAttribute="top" secondItem="b8d-2d-LnC" secondAttribute="bottom" id="Hsq-ps-ubv"/>
                             <constraint firstAttribute="trailing" secondItem="b8d-2d-LnC" secondAttribute="trailing" id="Ifm-xA-6pX"/>
                             <constraint firstItem="b8d-2d-LnC" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" id="U8S-ur-WFU"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerY" secondItem="SST-8Z-EKe" secondAttribute="centerY" id="W9p-k7-qWD"/>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="EeK-zk-6fs" secondAttribute="bottom" id="YFy-9F-nDv"/>
+                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="b8d-2d-LnC" secondAttribute="bottom" id="WV6-rQ-DMQ"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerX" secondItem="SST-8Z-EKe" secondAttribute="centerX" id="Z1y-H2-sLC"/>
                             <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="fom-1O-9lx"/>
-                            <constraint firstItem="EeK-zk-6fs" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="hmd-Dp-DSr"/>
                             <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="lso-BC-1e3"/>
-                            <constraint firstAttribute="trailing" secondItem="EeK-zk-6fs" secondAttribute="trailing" id="lwX-DL-Awt"/>
-                            <constraint firstItem="EeK-zk-6fs" firstAttribute="top" secondItem="SST-8Z-EKe" secondAttribute="top" id="x3t-Bi-mau"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="x3t-Bi-mau"/>
-                                <exclude reference="1TI-dS-Zse"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bQw-lD-3pe">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="ftD-az-mxw">
@@ -148,11 +85,6 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="o7q-Z2-nEW"/>
-                        <outlet property="tagChoicesViewTopConstraint" destination="YFy-9F-nDv" id="fT9-nU-zsa"/>
-                        <outlet property="tagChosenView" destination="fwh-y2-WnZ" id="0I6-no-hTx"/>
-                        <outlet property="tagChosenViewWidthConstraint" destination="Tji-wA-N1P" id="ZfS-Hx-TP3"/>
-                        <outlet property="theChosenTagHolderView" destination="MYZ-lm-Sxs" id="WZf-KF-1uM"/>
-                        <outlet property="theScrollView" destination="EeK-zk-6fs" id="cGL-cS-pde"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dv-y6-sJq" userLabel="First Responder" sceneMemberID="firstResponder"/>

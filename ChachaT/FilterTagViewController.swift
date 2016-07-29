@@ -14,11 +14,12 @@ import Foundation
 class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
-    @IBOutlet weak var tagChosenView: TagListView!
-    @IBOutlet weak var tagChosenViewWidthConstraint: NSLayoutConstraint!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
-    @IBOutlet weak var theChosenTagHolderView: UIView!
-    @IBOutlet weak var theScrollView: UIScrollView!
+    var scrollViewSearchView : ScrollViewSearchView?
+    var menuView: ChachaTagDropDown!
+    
+    //constraint outlets
+    @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
     var searchDataArray: [Tag] = []
     var tagChoicesDataArray: [Tag] = []
@@ -42,7 +43,17 @@ class FilterTagViewController: UIViewController {
     func addTagListViewAttributes() {
         //did this in code, rather than total storyboard because it has a lot of redundancy
         tagChoicesView.addChoicesTagListViewAttributes()
-        tagChosenView.addChosenTagListViewAttributes()
+    }
+    
+    func addSearchScrollView() -> ScrollViewSearchView {
+        //getting the xib file for the scroll view
+        let scrollViewSearch = ScrollViewSearchView.instanceFromNib()
+        scrollViewSearch.theTagChosenListView.delegate = self
+        self.navigationController?.navigationBar.addSubview(scrollViewSearch)
+        scrollViewSearch.snp_makeConstraints { (make) in
+            make.edges.equalTo((self.navigationController?.navigationBar)!)
+        }
+        return scrollViewSearch
     }
     
     override func didReceiveMemoryWarning() {
@@ -52,7 +63,7 @@ class FilterTagViewController: UIViewController {
 
 }
 
-extension FilterTagViewController: TagListViewDelegate {
+extension FilterTagViewController {
     func createStackViewTagButtonsAndSpecialtyEnviroment(categoryTitleText: String, pushOneButton: Bool, addNoneButton: Bool) {
         theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(filterCategory: categoryTitleText, addNoneButton: addNoneButton, stackViewButtonDelegate: self, pushOneButton: pushOneButton)
         theSpecialtyTagEnviromentHolderView?.delegate = self
@@ -70,36 +81,11 @@ extension FilterTagViewController: TagListViewDelegate {
                     let leadingTrailingOffset : CGFloat = 20
                     make.leading.equalTo(self.view).offset(leadingTrailingOffset)
                     make.trailing.equalTo(self.view).offset(-leadingTrailingOffset)
-                    make.top.equalTo(theChosenTagHolderView.snp_bottom)
+                    make.top.equalTo(self.view.snp_bottom)
                     make.bottom.equalTo(self.view)
                 })
             }
             theSpecialtyTagEnviromentHolderView.hidden = !showSpecialtyEnviroment
-        }
-    }
-    
-    
-    //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
-    func changeTagListViewWidth(tagView: TagView, extend: Bool) {
-        let tagWidth = tagView.intrinsicContentSize().width
-        let tagPadding : CGFloat = self.tagChosenView.marginX
-        //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
-        if extend {
-            //we are adding a tag, and need to make more room
-            self.tagChosenViewWidthConstraint.constant += tagWidth + tagPadding
-        } else {
-            //deleting a tag, so shrink view
-            self.tagChosenViewWidthConstraint.constant -= tagWidth + tagPadding
-        }
-        self.view.layoutIfNeeded()
-        //checking to see if tags have outgrown screen because then I want it to slide the newest tag into focus
-        if self.view.frame.width <= theChosenTagHolderView.frame.width {
-            //I want the scroll view to go to a content offset where I only see the newest added tags. 
-            //So, I find out how big the TagHolderViewWidth has grown. Then, I see how big the screen is, and the difference is the area that is off the screen.
-            //Therefore, I want to have contentOffset start at the end of the area that has been pushed off screen.
-            let screenWidth = self.view.frame.size.width
-            let chosenTagHolderViewWidth = theChosenTagHolderView.frame.size.width
-            theScrollView.setContentOffset(CGPointMake(chosenTagHolderViewWidth - screenWidth, 0), animated: true)
         }
     }
 
@@ -107,35 +93,24 @@ extension FilterTagViewController: TagListViewDelegate {
 
 extension FilterTagViewController: StackViewTagButtonsDelegate {
     func createChosenTag(tagTitle: String, specialtyTagTitle: String) {
-        let specialtyTagView = tagChosenView.addSpecialtyTag(tagTitle, specialtyTagTitle: specialtyTagTitle)
-        changeTagListViewWidth(specialtyTagView, extend: true)
-    }
-    
-    func removeChosenTag(tagTitle: String) {
-        //finding the particular tagView, so we know what to pass to the changeTagListWidth
-        //removeTag does not return a tagView like addTag does
-        if let tagView = tagChosenView.findTagView(tagTitle, categoryName: nil) {
-            tagChosenView.removeTag(tagTitle)
-            changeTagListViewWidth(tagView, extend: false)
+        if let scrollViewSearchView = scrollViewSearchView {
+            let tagView = scrollViewSearchView.theTagChosenListView.addTag(tagTitle)
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
         }
-    }
-    
-    func doesChosenTagViewContain(tagTitle: String) -> Bool {
-        return tagChosenView.tagExistsInTagListView(tagTitle)
     }
     
     func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags) {
-        let originalTagView = SpecialtyTagView(tagTitle: originalTagTitle, specialtyTagTitle: specialtyCategoryName.rawValue)
-        let newTag = Tag(title: newTagTitle, specialtyCategoryTitle: specialtyCategoryName)
-        let tagToDelete = replaceTag(originalTagView, newTag: newTag, tagArray: &tagChoicesDataArray)
-        //remove the previous tag from the actual backend
-        //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
-        tagToDelete?.deleteInBackground()
-        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, categoryName: specialtyCategoryName.rawValue) {
-            originalTagView.setTitle(newTagTitle, forState: .Normal)
-        }
-        chosenTagArray.append(newTag)
-        tagChoicesView.layoutSubviews()
+//        let originalTagView = SpecialtyTagView(tagTitle: originalTagTitle, specialtyTagTitle: specialtyCategoryName.rawValue)
+//        let newTag = Tag(title: newTagTitle, specialtyCategoryTitle: specialtyCategoryName)
+//        let tagToDelete = replaceTag(originalTagView, newTag: newTag, tagArray: &tagChoicesDataArray)
+//        //remove the previous tag from the actual backend
+//        //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
+//        tagToDelete?.deleteInBackground()
+//        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, categoryName: specialtyCategoryName.rawValue) {
+//            originalTagView.setTitle(newTagTitle, forState: .Normal)
+//        }
+//        chosenTagArray.append(newTag)
+//        tagChoicesView.layoutSubviews()
     }
 }
 
@@ -149,7 +124,17 @@ extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
 }
 
 //tag helper extensions 
-extension FilterTagViewController {
+extension FilterTagViewController : TagListViewDelegate {
+    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+        if sender.tag == 2 {
+            //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
+            sender.removeTagView(tagView)
+            if let scrollViewSearchView = scrollViewSearchView {
+                scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
+            }
+        }
+    }
+    
     //return a new array to set the old array to, and the replaced tag in case something is needed to be done with it
     func replaceTag(originalTagView: TagView, newTag: Tag, inout tagArray: [Tag]) -> Tag? {
         if let originalSpecialtyTagView = originalTagView as? SpecialtyTagView {

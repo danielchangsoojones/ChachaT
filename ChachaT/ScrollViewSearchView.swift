@@ -20,6 +20,7 @@ class ScrollViewSearchView: UIView {
     
     override init(frame: CGRect) {
         super.init(frame: frame)
+        theTagChosenListView.addChosenTagListViewAttributes()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -27,7 +28,8 @@ class ScrollViewSearchView: UIView {
     }
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
-    func changeTagListViewWidth(tagView: TagView, extend: Bool) {
+    //TODO: I probably need to update the tagview to have remove button enabled.
+    func rearrangeSearchArea(tagView: TagView, extend: Bool) {
         let tagWidth = tagView.intrinsicContentSize().width
         let tagPadding : CGFloat = self.theTagChosenListView.marginX
         //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
