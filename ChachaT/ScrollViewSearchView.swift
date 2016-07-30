@@ -40,6 +40,7 @@ class ScrollViewSearchView: UIView {
             //deleting a tag, so shrink view
             self.theTagListViewWidthConstraint.constant -= tagWidth + tagPadding
         }
+        
         self.layoutIfNeeded()
         //checking to see if tags have outgrown screen because then I want it to slide the newest tag into focus
         if self.frame.width <= theTagChosenHolderView.frame.width {

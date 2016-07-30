@@ -15,7 +15,7 @@ class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
-    var scrollViewSearchView : ScrollViewSearchView?
+    var scrollViewSearchView : ScrollViewSearchView!
     var menuView: ChachaTagDropDown!
     
     //constraint outlets
@@ -33,6 +33,7 @@ class FilterTagViewController: UIViewController {
         super.viewDidLoad()
         addTagListViewAttributes()
         setSearchDataArray()
+        scrollViewSearchView = addSearchScrollView()
     }
     
     func loadChoicesViewTags() {
@@ -53,6 +54,7 @@ class FilterTagViewController: UIViewController {
         scrollViewSearch.snp_makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
+        scrollViewSearch.hidden = true
         return scrollViewSearch
     }
     
@@ -61,6 +63,13 @@ class FilterTagViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+//for UI elements
+extension FilterTagViewController {
+    func setSearchNavigationBar() {
+        
+    }
 }
 
 extension FilterTagViewController {
@@ -185,6 +194,12 @@ extension FilterTagViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         resetTagChoicesViewList()
+        scrollViewSearchView.theTagChosenListView.addTag("hi")
+        if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
+            //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
+            searchBar.hidden = true
+            scrollViewSearchView?.hidden = false
+        }
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {

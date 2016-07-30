@@ -62,7 +62,6 @@ class FilterQueryViewController: FilterTagViewController {
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         //this bottom is just for testing
         self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
-        scrollViewSearchView = addSearchScrollView()
     }
     
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
