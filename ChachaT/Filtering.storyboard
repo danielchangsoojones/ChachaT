@@ -17,6 +17,20 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
+                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                                <subviews>
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="TagListView" customModule="ChachaT">
+                                        <rect key="frame" x="0.0" y="64" width="600" height="536"/>
+                                    </view>
+                                </subviews>
+                                <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.26000000000000001" colorSpace="calibratedRGB"/>
+                                <constraints>
+                                    <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="VSR-xX-ycl" secondAttribute="leading" id="kRI-uO-DCd"/>
+                                    <constraint firstAttribute="bottom" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="nZn-q1-PRP"/>
+                                    <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="r1U-4A-4XX"/>
+                                </constraints>
+                            </view>
                             <searchBar contentMode="redraw" placeholder="Search Tags" translatesAutoresizingMaskIntoConstraints="NO" id="b8d-2d-LnC">
                                 <rect key="frame" x="0.0" y="20" width="600" height="44"/>
                                 <constraints>
@@ -30,51 +44,28 @@
                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
                                 <rect key="frame" x="290" y="290" width="20" height="20"/>
                             </activityIndicatorView>
-                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="TagListView" customModule="ChachaT">
-                                <rect key="frame" x="0.0" y="64" width="600" height="536"/>
-                                <subviews>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dZA-vb-N7P" customClass="ScrollViewSearchView" customModule="ChachaT" customModuleProvider="target">
-                                        <rect key="frame" x="0.0" y="246" width="600" height="44"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="50" id="FHq-co-k2v"/>
-                                            <constraint firstAttribute="height" constant="44" id="JSe-VU-Kqa"/>
-                                            <constraint firstAttribute="height" constant="50" id="wbh-cZ-cag"/>
-                                        </constraints>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="FHq-co-k2v"/>
-                                                <exclude reference="wbh-cZ-cag"/>
-                                            </mask>
-                                        </variation>
-                                    </view>
-                                </subviews>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                <constraints>
-                                    <constraint firstAttribute="trailing" secondItem="dZA-vb-N7P" secondAttribute="trailing" id="49G-79-mqV"/>
-                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="centerX" secondItem="x2C-mZ-onz" secondAttribute="centerX" id="7Cy-V0-qmB"/>
-                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="leading" secondItem="x2C-mZ-onz" secondAttribute="leading" id="ccO-nd-hqm"/>
-                                    <constraint firstItem="dZA-vb-N7P" firstAttribute="centerY" secondItem="x2C-mZ-onz" secondAttribute="centerY" id="tn9-LS-wJS"/>
-                                </constraints>
-                                <variation key="default">
-                                    <mask key="constraints">
-                                        <exclude reference="7Cy-V0-qmB"/>
-                                    </mask>
-                                </variation>
-                            </view>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="6uQ-IO-THp"/>
+                            <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" constant="44" id="7oF-yd-eQx"/>
                             <constraint firstItem="b8d-2d-LnC" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="AJf-Q2-TiT"/>
                             <constraint firstAttribute="trailing" secondItem="b8d-2d-LnC" secondAttribute="trailing" id="Ifm-xA-6pX"/>
+                            <constraint firstItem="VSR-xX-ycl" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="Q8F-76-7kr"/>
                             <constraint firstItem="b8d-2d-LnC" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" id="U8S-ur-WFU"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerY" secondItem="SST-8Z-EKe" secondAttribute="centerY" id="W9p-k7-qWD"/>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="b8d-2d-LnC" secondAttribute="bottom" id="WV6-rQ-DMQ"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerX" secondItem="SST-8Z-EKe" secondAttribute="centerX" id="Z1y-H2-sLC"/>
-                            <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="fom-1O-9lx"/>
-                            <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="lso-BC-1e3"/>
+                            <constraint firstAttribute="trailing" secondItem="VSR-xX-ycl" secondAttribute="trailing" id="bpw-Ow-FPQ"/>
+                            <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="VSR-xX-ycl" secondAttribute="bottom" id="ckL-Av-Z06"/>
+                            <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="SST-8Z-EKe" secondAttribute="top" id="eQf-WH-dTZ"/>
+                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="b8d-2d-LnC" secondAttribute="bottom" id="fkx-hs-ePb"/>
+                            <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="b8d-2d-LnC" secondAttribute="bottom" id="hnN-tR-73z"/>
                         </constraints>
+                        <variation key="default">
+                            <mask key="constraints">
+                                <exclude reference="7oF-yd-eQx"/>
+                                <exclude reference="hnN-tR-73z"/>
+                            </mask>
+                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bQw-lD-3pe">
                         <barButtonItem key="rightBarButtonItem" title="Done" id="ftD-az-mxw">

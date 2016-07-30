@@ -23,6 +23,7 @@
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
 		922C898E1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C898D1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift */; };
+		922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -96,6 +97,7 @@
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
 		922C898D1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationFilteringExtension.swift; sourceTree = "<group>"; };
+		922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackgroundAnimationToSearchSegue.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -225,6 +227,14 @@
 			name = Messaging;
 			sourceTree = "<group>";
 		};
+		922C898F1D4C080F00DE1373 /* Custom Segues */ = {
+			isa = PBXGroup;
+			children = (
+				922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */,
+			);
+			name = "Custom Segues";
+			sourceTree = "<group>";
+		};
 		9261080A1CDBCA32009F3E86 = {
 			isa = PBXGroup;
 			children = (
@@ -247,6 +257,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
 				928819441D286C70000A8E04 /* Profile */,
 				920BF8351D4333CA00104842 /* Messaging */,
@@ -608,6 +619,7 @@
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
+				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

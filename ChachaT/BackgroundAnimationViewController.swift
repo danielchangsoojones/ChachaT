@@ -35,7 +35,6 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theSkipButton: UIButton!
     @IBOutlet weak var theMessageButton: UIButton!
     @IBOutlet weak var theProfileButton: UIButton!
-    @IBOutlet weak var theBackgroundGradient: UIImageView!
     @IBOutlet weak var theBottomButtonStackView: UIStackView!
     var leftNavigationButton: UIBarButtonItem?
     var rightNavigationButton: UIBarButtonItem?
@@ -64,6 +63,7 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        theBackgroundColorView.backgroundColor = ChachaTeal.colorWithAlphaComponent(BackgroundAnimationColorAlpha)
         setNavigationButtons()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
@@ -89,7 +89,7 @@ class BackgroundAnimationViewController: UIViewController {
         if rippleHasNotBeenStarted {
             //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
             //this makes it only appear the first run time.
-            ripple(theChachaLoadingImage.center, view: theBackgroundGradient)
+            ripple(theChachaLoadingImage.center, view: theBackgroundColorView)
             rippleHasNotBeenStarted = false
         }
     }
@@ -123,13 +123,31 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func logOut() {
-        User.logOut()
-        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
+        let view = UIView(frame: CGRectMake(100, 0, 20, 20))
+        view.backgroundColor = UIColor.redColor()
+        
+        navigationController?.navigationBar.addSubview(view)
+        
+        moveImage(view)
+//        User.logOut()
+//        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
+    }
+    
+    func moveImage(view: UIView){
+        var toPoint: CGPoint = CGPointMake(50.0, 0)
+        var fromPoint : CGPoint = view.frame.origin
+        
+        var movement = CABasicAnimation(keyPath: "position")
+        movement.additive = true
+        movement.fromValue =  NSValue(CGPoint: fromPoint)
+        movement.toValue =  NSValue(CGPoint: toPoint)
+        movement.duration = 0.3
+        
+        view.layer.addAnimation(movement, forKey: "move")
     }
     
     func searchNavigationButtonPressed() {
-        hideNavigationControllerComponents(true)
-//        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
+        performSegueWithIdentifier(SegueIdentifier.CustomBackgroundAnimationToSearchSegue, sender: self)
     }
 }
 
@@ -266,12 +284,12 @@ extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case OnboardingPageSegue
-        case BackgroundAnimationControllerToTagFilteringPageSegue
+        case CustomBackgroundAnimationToSearchSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        case .BackgroundAnimationControllerToTagFilteringPageSegue:
+        case .CustomBackgroundAnimationToSearchSegue:
             let destinationVC = segue.destinationViewController as! FilterQueryViewController
             destinationVC.mainPageDelegate = self
         default: break
