@@ -21,8 +21,12 @@ class CustomTagsSearchBar: UISearchBar {
         preferredBorderColor = borderColor
         preferredBorderWidth = borderWidth
         preferredBorderRadius = borderRadius
-        translucent = true //making the background of search box translucent
-        tintColor = UIColor.whiteColor()
+//        translucent = true //making the background of search box translucent
+//        searchBarStyle = .Minimal
+        tintColor = UIColor.whiteColor() //makes the cancel button of search bar and keyboard cursor a certain color
+        searchBarStyle = .Minimal
+        translucent = true //makes the background of searh box translucent, if I get rid of this, it turns black
+        
         setSearchIcon()
     }
     
@@ -59,7 +63,6 @@ class CustomTagsSearchBar: UISearchBar {
             searchField.layer.cornerRadius = preferredBorderRadius
             searchField.layer.borderColor = preferredBorderColor
             searchField.layer.borderWidth = preferredBorderWidth
-            searchField.backgroundColor = UIColor.clearColor()
         
         }
         

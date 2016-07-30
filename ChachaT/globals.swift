@@ -74,6 +74,15 @@ func setBottomBlur() -> CAGradientLayer {
     return gradientLayer
 }
 
+func showSearchBox(searchBoxHolder: UIView) -> CustomTagsSearchBar {
+    let searchBox = CustomTagsSearchBar(borderColor: UIColor.whiteColor().CGColor, borderWidth: 2.0, borderRadius: 10.0, placeHolderText: "Search Tags")
+    searchBoxHolder.addSubview(searchBox)
+    searchBox.snp_makeConstraints { (make) in
+        make.edges.equalTo(searchBoxHolder)
+    }
+    return searchBox
+}
+
 //Text View methods
 func editingBeginsTextView(textView: UITextView) {
     if textView.textColor == placeHolderTextColor {

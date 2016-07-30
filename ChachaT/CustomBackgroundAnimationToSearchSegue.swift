@@ -11,16 +11,6 @@ import SnapKit
 
 class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
     
-    
-    func showSearchBox(searchBoxHolder: UIView) -> CustomTagsSearchBar {
-        let searchBox = CustomTagsSearchBar(borderColor: UIColor.whiteColor().CGColor, borderWidth: 2.0, borderRadius: 10.0, placeHolderText: "Search Tags")
-        searchBoxHolder.addSubview(searchBox)
-        searchBox.snp_makeConstraints { (make) in
-            make.edges.equalTo(searchBoxHolder)
-        }
-        return searchBox
-    }
-    
 //    func hideTinderSubviews(hide: Bool, viewController: BackgroundAnimationViewController) {
 //        //TODO: add in approve/skip button, it hides them both when we make one hidden.
 //        let tinderSubviewsArray : [UIView] = [viewController.theMessageButton, viewController.theProfileButton, viewController.kolodaView]
@@ -42,10 +32,6 @@ class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
     
     func setUpSearchNavigationBar(viewController: UIViewController) {
         if let chachaNavigationVC = viewController.navigationController as? ChachaNavigationViewController {
-            let searchBar = showSearchBox(chachaNavigationVC.navigationBar)
-            if let filterQueryVC = viewController as? FilterQueryViewController {
-                searchBar.delegate = filterQueryVC
-            }
             viewController.navigationItem.hidesBackButton = true
             chachaNavigationVC.navigationBarLogo.hidden = true
         }

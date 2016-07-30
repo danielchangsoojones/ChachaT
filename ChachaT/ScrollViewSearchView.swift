@@ -14,17 +14,47 @@ class ScrollViewSearchView: UIView {
     @IBOutlet weak var theTagChosenListView: TagListView!
     @IBOutlet weak var theTagChosenHolderView: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
+    @IBOutlet weak var theSearchButton: UIButton!
+    @IBOutlet weak var theGoButton: UIButton!
+    @IBOutlet weak var theExitButton: UIButton!
+    var searchBox: CustomTagsSearchBar!
     
     //constraint outlet
     @IBOutlet weak var theTagListViewWidthConstraint: NSLayoutConstraint!
     
-    override init(frame: CGRect) {
-        super.init(frame: frame)
-        theTagChosenListView.addChosenTagListViewAttributes()
+    var searchBarDelegate: UISearchBarDelegate?
+    
+    @IBAction func searchButtonTapped(sender: UIButton) {
+        hideScrollSearchView(true)
     }
     
-    required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
+    @IBAction func goButtonTapped(sender: UIButton) {
+    }
+    
+    @IBAction func exitButtonTapped(sender: UIButton) {
+    }
+    
+    func hideScrollSearchView(hide: Bool) {
+        theScrollView.hidden = hide
+        searchBox.hidden = !hide
+    }
+    
+    
+    override func awakeFromNib() {
+        self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
+        theTagChosenListView.addChosenTagListViewAttributes()
+        setButtonBorders()
+        searchBox = showSearchBox(self)
+        hideScrollSearchView(true)
+    }
+    
+    func setButtonBorders() {
+        let buttonArray = [theSearchButton, theGoButton, theExitButton]
+        for button in buttonArray {
+            button.layer.cornerRadius = 15.0
+            button.layer.borderWidth = 1
+            button.layer.borderColor = UIColor.whiteColor().CGColor
+        }
     }
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.

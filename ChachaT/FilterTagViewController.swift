@@ -48,14 +48,14 @@ class FilterTagViewController: UIViewController {
     
     func addSearchScrollView() -> ScrollViewSearchView {
         //getting the xib file for the scroll view
-        let scrollViewSearch = ScrollViewSearchView.instanceFromNib()
-        scrollViewSearch.theTagChosenListView.delegate = self
-        self.navigationController?.navigationBar.addSubview(scrollViewSearch)
-        scrollViewSearch.snp_makeConstraints { (make) in
+        let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
+        scrollViewSearchView.theTagChosenListView.delegate = self
+        scrollViewSearchView.searchBox.delegate = self
+        self.navigationController?.navigationBar.addSubview(scrollViewSearchView)
+        scrollViewSearchView.snp_makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
-        scrollViewSearch.hidden = true
-        return scrollViewSearch
+        return scrollViewSearchView
     }
     
     override func didReceiveMemoryWarning() {
@@ -202,8 +202,7 @@ extension FilterTagViewController: UISearchBarDelegate {
         scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
-            searchBar.hidden = true
-            scrollViewSearchView?.hidden = false
+            scrollViewSearchView.hideScrollSearchView(false)
         }
     }
     

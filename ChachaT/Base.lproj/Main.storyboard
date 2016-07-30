@@ -50,21 +50,11 @@
                                             <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
                                         </constraints>
                                     </imageView>
-                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AR2-wb-glR">
-                                        <rect key="frame" x="138" y="284" width="100" height="100"/>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="100" id="4JM-tt-h4k"/>
-                                            <constraint firstAttribute="width" constant="100" id="FtM-3i-7Pf"/>
-                                        </constraints>
-                                    </view>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
                                     <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
                                     <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
-                                    <constraint firstItem="AR2-wb-glR" firstAttribute="centerX" secondItem="32I-zm-XDi" secondAttribute="centerX" id="aKG-2K-mPW"/>
-                                    <constraint firstItem="AR2-wb-glR" firstAttribute="centerY" secondItem="32I-zm-XDi" secondAttribute="centerY" id="tQO-XH-4Ww"/>
                                 </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-AU-SZT" userLabel="Button Stack View">
