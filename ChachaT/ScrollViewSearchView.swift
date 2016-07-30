@@ -26,6 +26,7 @@ class ScrollViewSearchView: UIView {
     
     @IBAction func searchButtonTapped(sender: UIButton) {
         hideScrollSearchView(true)
+        searchBox.becomeFirstResponder()
     }
     
     @IBAction func goButtonTapped(sender: UIButton) {
@@ -51,7 +52,7 @@ class ScrollViewSearchView: UIView {
     func setButtonBorders() {
         let buttonArray = [theSearchButton, theGoButton, theExitButton]
         for button in buttonArray {
-            button.layer.cornerRadius = 15.0
+            button.layer.cornerRadius = 20.0
             button.layer.borderWidth = 1
             button.layer.borderColor = UIColor.whiteColor().CGColor
         }

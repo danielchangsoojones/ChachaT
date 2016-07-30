@@ -14,8 +14,8 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnR-At-8N3">
                     <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
                     <subviews>
-                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
-                            <rect key="frame" x="0.0" y="0.0" width="147" height="74"/>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
+                            <rect key="frame" x="0.0" y="0.0" width="167" height="74"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="TagListView" customModule="ChachaT">
                                     <rect key="frame" x="8" y="25" width="0.0" height="24"/>
@@ -25,11 +25,11 @@
                                         <constraint firstAttribute="height" constant="24" id="wnR-Qe-QaA"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
-                                    <rect key="frame" x="31" y="22" width="102" height="30"/>
+                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
+                                    <rect key="frame" x="31" y="17" width="132" height="40"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-9o-qhN">
-                                            <rect key="frame" x="0.0" y="0.0" width="30" height="30"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                                             <state key="normal" image="SearchIconWhite">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
@@ -38,7 +38,11 @@
                                             </connections>
                                         </button>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-RE-n9V">
-                                            <rect key="frame" x="36" y="0.0" width="30" height="30"/>
+                                            <rect key="frame" x="46" y="0.0" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="aPp-vU-vyR"/>
+                                                <constraint firstAttribute="height" constant="40" id="g7r-va-uhs"/>
+                                            </constraints>
                                             <state key="normal" title="Go">
                                                 <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
@@ -46,8 +50,8 @@
                                                 <action selector="goButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SBt-i9-p54"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
-                                            <rect key="frame" x="72" y="0.0" width="30" height="30"/>
+                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
+                                            <rect key="frame" x="92" y="0.0" width="40" height="40"/>
                                             <state key="normal" title="Exit">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </state>
@@ -57,6 +61,8 @@
                                         </button>
                                     </subviews>
                                     <constraints>
+                                        <constraint firstItem="SPh-de-YPj" firstAttribute="height" secondItem="mcn-RE-n9V" secondAttribute="height" id="Pog-7M-cVb"/>
+                                        <constraint firstItem="SPh-de-YPj" firstAttribute="width" secondItem="mcn-RE-n9V" secondAttribute="width" id="b1f-eG-bRg"/>
                                         <constraint firstItem="jtV-9o-qhN" firstAttribute="height" secondItem="mcn-RE-n9V" secondAttribute="height" id="taZ-Qg-4kU"/>
                                         <constraint firstItem="jtV-9o-qhN" firstAttribute="width" secondItem="mcn-RE-n9V" secondAttribute="width" id="yzs-Dc-dDe"/>
                                     </constraints>
