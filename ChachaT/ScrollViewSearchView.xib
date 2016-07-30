@@ -14,7 +14,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnR-At-8N3">
                     <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
                     <subviews>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
                             <rect key="frame" x="0.0" y="0.0" width="167" height="74"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="TagListView" customModule="ChachaT">
@@ -25,7 +25,7 @@
                                         <constraint firstAttribute="height" constant="24" id="wnR-Qe-QaA"/>
                                     </constraints>
                                 </view>
-                                <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
                                     <rect key="frame" x="31" y="17" width="132" height="40"/>
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-9o-qhN">
@@ -50,7 +50,7 @@
                                                 <action selector="goButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SBt-i9-p54"/>
                                             </connections>
                                         </button>
-                                        <button opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
                                             <rect key="frame" x="92" y="0.0" width="40" height="40"/>
                                             <state key="normal" title="Exit">
                                                 <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>

@@ -63,7 +63,7 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        theBackgroundColorView.backgroundColor = ChachaTeal.colorWithAlphaComponent(BackgroundAnimationColorAlpha)
+        theBackgroundColorView.backgroundColor = BackgroundPageColor
         setNavigationButtons()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards

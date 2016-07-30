@@ -24,7 +24,6 @@
                                         <rect key="frame" x="0.0" y="64" width="600" height="536"/>
                                     </view>
                                 </subviews>
-                                <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="0.26000000000000001" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="VSR-xX-ycl" secondAttribute="leading" id="kRI-uO-DCd"/>
                                     <constraint firstAttribute="bottom" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="nZn-q1-PRP"/>
@@ -69,12 +68,22 @@
                     </view>
                     <navigationItem key="navigationItem" id="bQw-lD-3pe"/>
                     <connections>
+                        <outlet property="backgroundColorView" destination="VSR-xX-ycl" id="gnc-AV-l2U"/>
                         <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="o7q-Z2-nEW"/>
+                        <segue destination="Dth-C6-7C9" kind="presentation" identifier="SearchPageToTinderMainPageSegue" id="aQB-SX-kvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dv-y6-sJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1158" y="393"/>
+        </scene>
+        <!--BackgroundAnimationNavigationViewController-->
+        <scene sceneID="5RL-Tr-wwZ">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="BackgroundAnimationNavigationViewController" id="Dth-C6-7C9" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="e6P-J2-aHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1721.5" y="378"/>
         </scene>
     </scenes>
 </document>

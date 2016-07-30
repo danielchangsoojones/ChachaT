@@ -58,6 +58,7 @@ class FilterQueryViewController: FilterTagViewController {
         super.viewDidLoad()
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
+        scrollViewSearchView.scrollViewSearchViewDelegate = self
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         //this bottom is just for testing
@@ -184,6 +185,17 @@ extension FilterQueryViewController {
     }
 }
 
+extension FilterQueryViewController: ScrollViewSearchViewDelegate {
+    //TODO: pass user array and also create custom segue for the single page animation of doing searches.
+    func dismissPageAndPassUserArray() {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
+    }
+    
+    func dismissCurrentViewController() {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
+    }
+}
+
 //search extension
 extension FilterQueryViewController {
    override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -216,6 +228,19 @@ extension FilterQueryViewController {
                 tagChoicesView.addTag(tag.title)
             }
             createSpecialtyTagEnviroment(false)
+        }
+    }
+}
+
+extension FilterQueryViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case SearchPageToTinderMainPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        default: break
         }
     }
 }

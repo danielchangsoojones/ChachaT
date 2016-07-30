@@ -17,8 +17,7 @@ let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
 let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
 let FilteringPageStackViewLinesColor = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 0.75)
-
-let BackgroundAnimationColorAlpha : CGFloat = 0.26
+let BackgroundPageColor = ChachaTeal.colorWithAlphaComponent(0.4)
 
 //Match Constants
 struct Constants {

@@ -14,8 +14,10 @@ import Foundation
 class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: TagListView!
+    @IBOutlet weak var backgroundColorView: UIView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     var scrollViewSearchView : ScrollViewSearchView!
+    
     var menuView: ChachaTagDropDown!
     
     //constraint outlets
@@ -34,6 +36,7 @@ class FilterTagViewController: UIViewController {
         addTagListViewAttributes()
         setSearchDataArray()
         scrollViewSearchView = addSearchScrollView()
+        backgroundColorView.backgroundColor = BackgroundPageColor
     }
     
     func loadChoicesViewTags() {
@@ -63,13 +66,6 @@ class FilterTagViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-}
-
-//for UI elements
-extension FilterTagViewController {
-    func setSearchNavigationBar() {
-        
-    }
 }
 
 extension FilterTagViewController {
@@ -194,6 +190,8 @@ extension FilterTagViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         resetTagChoicesViewList()
+        let tagView = scrollViewSearchView.theTagChosenListView.addTag("hi")
+        scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
             scrollViewSearchView.hideScrollSearchView(false)

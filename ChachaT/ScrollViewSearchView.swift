@@ -9,6 +9,11 @@
 import Foundation
 import UIKit
 
+protocol ScrollViewSearchViewDelegate {
+    func dismissPageAndPassUserArray()
+    func dismissCurrentViewController()
+}
+
 class ScrollViewSearchView: UIView {
     
     @IBOutlet weak var theTagChosenListView: TagListView!
@@ -23,16 +28,18 @@ class ScrollViewSearchView: UIView {
     @IBOutlet weak var theTagListViewWidthConstraint: NSLayoutConstraint!
     
     var searchBarDelegate: UISearchBarDelegate?
+    var scrollViewSearchViewDelegate: ScrollViewSearchViewDelegate?
     
     @IBAction func searchButtonTapped(sender: UIButton) {
         hideScrollSearchView(true)
-        searchBox.becomeFirstResponder()
     }
     
     @IBAction func goButtonTapped(sender: UIButton) {
+        scrollViewSearchViewDelegate?.dismissPageAndPassUserArray()
     }
     
     @IBAction func exitButtonTapped(sender: UIButton) {
+        scrollViewSearchViewDelegate?.dismissCurrentViewController()
     }
     
     func hideScrollSearchView(hide: Bool) {
@@ -89,3 +96,5 @@ class ScrollViewSearchView: UIView {
         return UINib(nibName: "ScrollViewSearchView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! ScrollViewSearchView
     }
 }
+
+
