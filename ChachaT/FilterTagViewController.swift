@@ -17,7 +17,6 @@ class FilterTagViewController: UIViewController {
     @IBOutlet weak var backgroundColorView: UIView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     var scrollViewSearchView : ScrollViewSearchView!
-    
     var menuView: ChachaTagDropDown!
     
     //constraint outlets
