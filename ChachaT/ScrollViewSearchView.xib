@@ -15,7 +15,7 @@
                     <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
-                            <rect key="frame" x="0.0" y="0.0" width="16" height="74"/>
+                            <rect key="frame" x="0.0" y="0.0" width="195" height="74"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="TagListView" customModule="ChachaT">
                                     <rect key="frame" x="8" y="25" width="0.0" height="24"/>
@@ -25,12 +25,32 @@
                                         <constraint firstAttribute="height" constant="24" id="wnR-Qe-QaA"/>
                                     </constraints>
                                 </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
+                                    <rect key="frame" x="31" y="22" width="150" height="30"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-9o-qhN">
+                                            <rect key="frame" x="0.0" y="0.0" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-RE-n9V">
+                                            <rect key="frame" x="52" y="0.0" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
+                                            <rect key="frame" x="104" y="0.0" width="46" height="30"/>
+                                            <state key="normal" title="Button"/>
+                                        </button>
+                                    </subviews>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="calibratedRGB"/>
                             <constraints>
                                 <constraint firstAttribute="width" secondItem="ShF-V1-DNL" secondAttribute="width" id="3WK-az-AiH"/>
                                 <constraint firstAttribute="width" secondItem="ShF-V1-DNL" secondAttribute="width" constant="80" id="8rZ-S9-KRj"/>
+                                <constraint firstAttribute="trailing" secondItem="Qm8-QK-DG2" secondAttribute="trailing" constant="14" id="Mah-o7-OO0"/>
                                 <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="TpB-aL-EgC"/>
+                                <constraint firstItem="Qm8-QK-DG2" firstAttribute="leading" secondItem="ShF-V1-DNL" secondAttribute="trailing" constant="23" id="WSX-ob-yRB"/>
+                                <constraint firstItem="Qm8-QK-DG2" firstAttribute="centerY" secondItem="ShF-V1-DNL" secondAttribute="centerY" id="bBW-dX-iCD"/>
                                 <constraint firstItem="ShF-V1-DNL" firstAttribute="leading" secondItem="9NQ-uw-kwB" secondAttribute="leading" constant="8" id="hhd-Um-uzb"/>
                                 <constraint firstItem="ShF-V1-DNL" firstAttribute="centerY" secondItem="9NQ-uw-kwB" secondAttribute="centerY" id="jUA-my-n5Q"/>
                                 <constraint firstAttribute="trailing" secondItem="ShF-V1-DNL" secondAttribute="trailing" constant="8" id="rJ1-l2-7cv"/>
@@ -40,6 +60,7 @@
                                     <exclude reference="TpB-aL-EgC"/>
                                     <exclude reference="3WK-az-AiH"/>
                                     <exclude reference="8rZ-S9-KRj"/>
+                                    <exclude reference="rJ1-l2-7cv"/>
                                 </mask>
                             </variation>
                         </view>
