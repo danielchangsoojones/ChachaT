@@ -20,7 +20,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
-                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="TagListView" customModule="ChachaT">
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="ChachaT">
                                         <rect key="frame" x="0.0" y="20" width="600" height="580"/>
                                     </view>
                                 </subviews>
@@ -54,7 +54,7 @@
                     <navigationItem key="navigationItem" id="bQw-lD-3pe"/>
                     <connections>
                         <outlet property="backgroundColorView" destination="VSR-xX-ycl" id="gnc-AV-l2U"/>
-                        <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="o7q-Z2-nEW"/>
+                        <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="U2V-kU-JsF"/>
                         <outlet property="tagChoicesViewTopConstraint" destination="enx-ks-A6l" id="Gkh-z1-hcb"/>
                         <segue destination="Dth-C6-7C9" kind="presentation" identifier="SearchPageToTinderMainPageSegue" id="aQB-SX-kvS"/>
                     </connections>

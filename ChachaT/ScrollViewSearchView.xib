@@ -14,7 +14,7 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnR-At-8N3">
                     <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
                     <subviews>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
                             <rect key="frame" x="0.0" y="0.0" width="167" height="74"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="TagListView" customModule="ChachaT">

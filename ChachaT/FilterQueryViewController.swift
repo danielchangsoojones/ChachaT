@@ -70,8 +70,7 @@ class FilterQueryViewController: FilterTagViewController {
     override func loadChoicesViewTags() {
         for tag in tagChoicesDataArray {
             if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
-                let specialtyTagView = tagChoicesView.addTag(specialtyCategoryTitle)
-                setSpecialtyTagAttributes(specialtyTagView)
+                tagChoicesView.addTag(specialtyCategoryTitle)
             } else {
                 //dealing with normal Generic tags
                 tagChoicesView.addTag(tag.title)
@@ -149,14 +148,6 @@ extension FilterQueryViewController {
         for specialtyTag in SpecialtyTags.allValues {
             tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
-    }
-    
-    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
-    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
-    func setSpecialtyTagAttributes(tagView: TagView) {
-        let specialtyTagColor = UIColor.blueColor()
-        tagView.tagBackgroundColor = specialtyTagColor
-        tagView.highlightedBackgroundColor = specialtyTagColor
     }
 }
 

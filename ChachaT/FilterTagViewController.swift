@@ -13,7 +13,7 @@ import Foundation
 
 class FilterTagViewController: UIViewController {
     
-    @IBOutlet weak var tagChoicesView: TagListView!
+    @IBOutlet weak var tagChoicesView: ChachaChoicesTagListView!
     @IBOutlet weak var backgroundColorView: UIView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     var scrollViewSearchView : ScrollViewSearchView!
@@ -32,7 +32,6 @@ class FilterTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        addTagListViewAttributes()
         setSearchDataArray()
         scrollViewSearchView = addSearchScrollView()
         backgroundColorView.backgroundColor = BackgroundPageColor
@@ -40,12 +39,6 @@ class FilterTagViewController: UIViewController {
     
     func loadChoicesViewTags() {
         fatalError("This method must be overridden in subclasses")
-    }
-    
-    //TODO: probably could just sublcass tagListView instead of setting the attributes here
-    func addTagListViewAttributes() {
-        //did this in code, rather than total storyboard because it has a lot of redundancy
-        tagChoicesView.addChoicesTagListViewAttributes()
     }
     
     func addSearchScrollView() -> ScrollViewSearchView {
