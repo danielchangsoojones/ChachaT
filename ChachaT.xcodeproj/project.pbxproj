@@ -22,7 +22,6 @@
 		922C89841D4A07D500DE1373 /* ChachaTagDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
-		922C898E1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C898D1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift */; };
 		922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */; };
 		922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
@@ -97,7 +96,6 @@
 		922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaTagDropDown.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
-		922C898D1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationFilteringExtension.swift; sourceTree = "<group>"; };
 		922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackgroundAnimationToSearchSegue.swift; sourceTree = "<group>"; };
 		922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTagsSearchBar.swift; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -233,7 +231,6 @@
 			isa = PBXGroup;
 			children = (
 				922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */,
-				922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */,
 			);
 			name = "Custom Segues";
 			sourceTree = "<group>";
@@ -361,7 +358,6 @@
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				928819351D18E78B000A8E04 /* FilterTagViewController.swift */,
 				920BF8261D415FC000104842 /* FilterQueryViewController.swift */,
-				922C898D1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift */,
 			);
 			name = "8tracks Filtering Search";
 			sourceTree = "<group>";
@@ -376,6 +372,7 @@
 				922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */,
 				922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */,
 				922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */,
+				922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */,
 			);
 			name = "Subview Files";
 			sourceTree = "<group>";
@@ -611,7 +608,6 @@
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				928819571D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
-				922C898E1D4B4BAE00DE1373 /* BackgroundAnimationFilteringExtension.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
