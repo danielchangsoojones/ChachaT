@@ -43,6 +43,10 @@ struct Constants {
     static let email = "email"
 }
 
+struct ImageNames {
+    static let DownArrow = "DownArrow"
+}
+
 //storyboard identifiers
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController

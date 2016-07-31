@@ -350,6 +350,10 @@ public class TagListView: UIView {
         tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
         tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
+        //had to add this because I was trying to let annotation corner view appear, and it wasn't
+        //I tried putting this same code in the specialtyTagView class, but it was still masking the view, until I put it here. 
+        tagView.clipsToBounds = false
+        
         // Deselect all tags except this one
         tagView.onLongPress = { this in
             for tag in self.tagViews {

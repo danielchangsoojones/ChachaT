@@ -39,10 +39,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
         $0.distribution = .EqualSpacing
         return $0
     }(UIStackView())
-    let tagListView: TagListView = {
-        $0.addChosenTagListViewAttributes()
-        return $0
-    }(TagListView())
+    let tagListView = ChachaChosenTagListView()
     
     var createTagButtonText: String?
     var createdTag: TagView?
