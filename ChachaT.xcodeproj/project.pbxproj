@@ -203,15 +203,11 @@
 		920BF81A1D3FF5E300104842 /* TagListView */ = {
 			isa = PBXGroup;
 			children = (
+				922C899D1D4D934700DE1373 /* TagViews */,
+				922C899C1D4D933300DE1373 /* TagListViews */,
 				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 				920BF81C1D3FF5E300104842 /* Info.plist */,
-				920BF81D1D3FF5E300104842 /* TagListView.h */,
-				920BF81E1D3FF5E300104842 /* TagListView.swift */,
-				920BF81F1D3FF5E300104842 /* TagView.swift */,
-				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
 				92CEC1111D37F8DE005BD321 /* TagEnums.swift */,
-				922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */,
-				922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */,
 			);
 			path = TagListView;
 			sourceTree = "<group>";
@@ -239,6 +235,26 @@
 				922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */,
 			);
 			name = "Custom Segues";
+			sourceTree = "<group>";
+		};
+		922C899C1D4D933300DE1373 /* TagListViews */ = {
+			isa = PBXGroup;
+			children = (
+				920BF81D1D3FF5E300104842 /* TagListView.h */,
+				920BF81E1D3FF5E300104842 /* TagListView.swift */,
+				922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */,
+				922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */,
+			);
+			name = TagListViews;
+			sourceTree = "<group>";
+		};
+		922C899D1D4D934700DE1373 /* TagViews */ = {
+			isa = PBXGroup;
+			children = (
+				920BF81F1D3FF5E300104842 /* TagView.swift */,
+				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
+			);
+			name = TagViews;
 			sourceTree = "<group>";
 		};
 		9261080A1CDBCA32009F3E86 = {

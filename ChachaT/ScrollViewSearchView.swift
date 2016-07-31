@@ -16,7 +16,7 @@ protocol ScrollViewSearchViewDelegate {
 
 class ScrollViewSearchView: UIView {
     
-    @IBOutlet weak var theTagChosenListView: TagListView!
+    @IBOutlet weak var theTagChosenListView: ChachaChosenTagListView!
     @IBOutlet weak var theTagChosenHolderView: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
     @IBOutlet weak var theSearchButton: UIButton!
@@ -50,7 +50,6 @@ class ScrollViewSearchView: UIView {
     
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
-        theTagChosenListView.addChosenTagListViewAttributes()
         setButtonBorders()
         searchBox = showSearchBox(self)
         hideScrollSearchView(true)
