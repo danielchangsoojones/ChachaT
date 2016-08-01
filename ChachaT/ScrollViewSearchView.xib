@@ -1,0 +1,136 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="ScrollViewSearchView" customModule="ChachaT" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnR-At-8N3">
+                    <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
+                    <subviews>
+                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
+                            <rect key="frame" x="0.0" y="0.0" width="167" height="74"/>
+                            <subviews>
+                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="ChachaT">
+                                    <rect key="frame" x="8" y="25" width="0.0" height="24"/>
+                                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                    <constraints>
+                                        <constraint firstAttribute="width" id="Scz-8p-IDp"/>
+                                        <constraint firstAttribute="height" constant="24" id="wnR-Qe-QaA"/>
+                                    </constraints>
+                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
+                                    <rect key="frame" x="31" y="17" width="132" height="40"/>
+                                    <subviews>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-9o-qhN">
+                                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
+                                            <state key="normal" image="SearchIconWhite">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="searchButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="Hrz-DF-Pqa"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-RE-n9V">
+                                            <rect key="frame" x="46" y="0.0" width="40" height="40"/>
+                                            <constraints>
+                                                <constraint firstAttribute="width" constant="40" id="aPp-vU-vyR"/>
+                                                <constraint firstAttribute="height" constant="40" id="g7r-va-uhs"/>
+                                            </constraints>
+                                            <state key="normal" title="Go">
+                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="goButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SBt-i9-p54"/>
+                                            </connections>
+                                        </button>
+                                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
+                                            <rect key="frame" x="92" y="0.0" width="40" height="40"/>
+                                            <state key="normal" title="Exit">
+                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            </state>
+                                            <connections>
+                                                <action selector="exitButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="CcL-T8-xhE"/>
+                                            </connections>
+                                        </button>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="SPh-de-YPj" firstAttribute="height" secondItem="mcn-RE-n9V" secondAttribute="height" id="Pog-7M-cVb"/>
+                                        <constraint firstItem="SPh-de-YPj" firstAttribute="width" secondItem="mcn-RE-n9V" secondAttribute="width" id="b1f-eG-bRg"/>
+                                        <constraint firstItem="jtV-9o-qhN" firstAttribute="height" secondItem="mcn-RE-n9V" secondAttribute="height" id="taZ-Qg-4kU"/>
+                                        <constraint firstItem="jtV-9o-qhN" firstAttribute="width" secondItem="mcn-RE-n9V" secondAttribute="width" id="yzs-Dc-dDe"/>
+                                    </constraints>
+                                </stackView>
+                            </subviews>
+                            <constraints>
+                                <constraint firstAttribute="width" secondItem="ShF-V1-DNL" secondAttribute="width" id="3WK-az-AiH"/>
+                                <constraint firstAttribute="width" secondItem="ShF-V1-DNL" secondAttribute="width" constant="80" id="8rZ-S9-KRj"/>
+                                <constraint firstAttribute="trailing" secondItem="Qm8-QK-DG2" secondAttribute="trailing" constant="14" id="Mah-o7-OO0"/>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="79" id="TpB-aL-EgC"/>
+                                <constraint firstItem="Qm8-QK-DG2" firstAttribute="leading" secondItem="ShF-V1-DNL" secondAttribute="trailing" constant="23" id="WSX-ob-yRB"/>
+                                <constraint firstItem="Qm8-QK-DG2" firstAttribute="centerY" secondItem="ShF-V1-DNL" secondAttribute="centerY" id="bBW-dX-iCD"/>
+                                <constraint firstItem="ShF-V1-DNL" firstAttribute="leading" secondItem="9NQ-uw-kwB" secondAttribute="leading" constant="8" id="hhd-Um-uzb"/>
+                                <constraint firstItem="ShF-V1-DNL" firstAttribute="centerY" secondItem="9NQ-uw-kwB" secondAttribute="centerY" id="jUA-my-n5Q"/>
+                                <constraint firstAttribute="trailing" secondItem="ShF-V1-DNL" secondAttribute="trailing" constant="8" id="rJ1-l2-7cv"/>
+                            </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="TpB-aL-EgC"/>
+                                    <exclude reference="3WK-az-AiH"/>
+                                    <exclude reference="8rZ-S9-KRj"/>
+                                    <exclude reference="rJ1-l2-7cv"/>
+                                </mask>
+                            </variation>
+                        </view>
+                    </subviews>
+                    <constraints>
+                        <constraint firstAttribute="height" secondItem="9NQ-uw-kwB" secondAttribute="height" id="0ef-Vk-5Ou"/>
+                        <constraint firstItem="9NQ-uw-kwB" firstAttribute="top" secondItem="wnR-At-8N3" secondAttribute="top" id="6QB-pL-Db8"/>
+                        <constraint firstItem="9NQ-uw-kwB" firstAttribute="height" secondItem="wnR-At-8N3" secondAttribute="height" id="Yr8-Pm-pft"/>
+                        <constraint firstItem="9NQ-uw-kwB" firstAttribute="height" secondItem="wnR-At-8N3" secondAttribute="height" id="cn7-Ee-UcR"/>
+                        <constraint firstAttribute="trailing" secondItem="9NQ-uw-kwB" secondAttribute="trailing" id="gJD-KB-95z"/>
+                        <constraint firstAttribute="bottom" secondItem="9NQ-uw-kwB" secondAttribute="bottom" id="nXa-V2-O4r"/>
+                        <constraint firstAttribute="bottom" secondItem="9NQ-uw-kwB" secondAttribute="bottom" id="oCU-eE-slh"/>
+                        <constraint firstAttribute="height" constant="79" id="qPr-iq-sVq"/>
+                        <constraint firstItem="9NQ-uw-kwB" firstAttribute="leading" secondItem="wnR-At-8N3" secondAttribute="leading" id="sOn-KT-FCS"/>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="qPr-iq-sVq"/>
+                            <exclude reference="0ef-Vk-5Ou"/>
+                            <exclude reference="cn7-Ee-UcR"/>
+                            <exclude reference="nXa-V2-O4r"/>
+                        </mask>
+                    </variation>
+                </scrollView>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstItem="wnR-At-8N3" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="5Ol-L5-7Ga"/>
+                <constraint firstItem="wnR-At-8N3" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="MmT-gg-tlF"/>
+                <constraint firstAttribute="trailing" secondItem="wnR-At-8N3" secondAttribute="trailing" id="ozN-Cm-vMi"/>
+                <constraint firstAttribute="bottom" secondItem="wnR-At-8N3" secondAttribute="bottom" id="xPh-Ey-Yfe"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <connections>
+                <outlet property="theExitButton" destination="SPh-de-YPj" id="kEf-un-BVG"/>
+                <outlet property="theGoButton" destination="mcn-RE-n9V" id="EEo-1q-Qg5"/>
+                <outlet property="theScrollView" destination="wnR-At-8N3" id="k8X-94-eOQ"/>
+                <outlet property="theSearchButton" destination="jtV-9o-qhN" id="NEC-yO-SGO"/>
+                <outlet property="theTagChosenHolderView" destination="9NQ-uw-kwB" id="66j-0I-a5N"/>
+                <outlet property="theTagChosenListView" destination="ShF-V1-DNL" id="h8Y-lp-hhl"/>
+                <outlet property="theTagListViewWidthConstraint" destination="Scz-8p-IDp" id="tKX-Hl-baU"/>
+            </connections>
+            <point key="canvasLocation" x="796.5" y="351"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="SearchIconWhite" width="18" height="19"/>
+    </resources>
+</document>

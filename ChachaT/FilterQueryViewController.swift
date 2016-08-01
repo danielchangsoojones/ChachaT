@@ -12,48 +12,45 @@ import EFTools
 class FilterQueryViewController: FilterTagViewController {
     
     var mainPageDelegate: FilterViewControllerDelegate?
-    var menuView: ChachaTagDropDown!
-    
-    //constraint outlets
-    @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
     @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
-        menuView.show()
-//        var chosenTagArrayTitles : [String] = []
-//        for tagView in tagChosenView.tagViews {
-//            if let titleLabel = tagView.titleLabel {
-//                if let title = titleLabel.text {
-//                    //need to get title array because I want to do contained in query, which requires strings
-//                    chosenTagArrayTitles.append(title)
-//                }
-//            }
-//        }
-//        let query = Tag.query()
-//        //finding all tags that have a title that the user chose for the search
-//        //TODO: I'll need to do something if 0 people come up
-//        if !chosenTagArrayTitles.isEmpty {
-//            query?.whereKey("title", containedIn: chosenTagArrayTitles)
-//        }
-//        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-//        query?.includeKey("createdBy")
-//        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-//            if error == nil {
-//                var userArray : [User] = []
-//                var userDuplicateArray : [User] = []
-//                for tag in objects as! [Tag] {
-//                    if !userDuplicateArray.contains(tag.createdBy!) {
-//                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
-//                        //this fixes that
-//                        userDuplicateArray.append(tag.createdBy!)
-//                        userArray.append(tag.createdBy!)
-//                    }
-//                }
-//                self.mainPageDelegate?.passFilteredUserArray(userArray)
-//                self.navigationController?.popViewControllerAnimated(true)
-//            } else {
-//                print(error)
-//            }
-//        })
+        var chosenTagArrayTitles : [String] = []
+        if let scrollViewSearchView = scrollViewSearchView {
+            for tagView in scrollViewSearchView.theTagChosenListView.tagViews {
+                if let titleLabel = tagView.titleLabel {
+                    if let title = titleLabel.text {
+                        //need to get title array because I want to do contained in query, which requires strings
+                        chosenTagArrayTitles.append(title)
+                    }
+                }
+            }
+        }
+        let query = Tag.query()
+        //finding all tags that have a title that the user chose for the search
+        //TODO: I'll need to do something if 0 people come up
+        if !chosenTagArrayTitles.isEmpty {
+            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+        }
+        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
+        query?.includeKey("createdBy")
+        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
+            if error == nil {
+                var userArray : [User] = []
+                var userDuplicateArray : [User] = []
+                for tag in objects as! [Tag] {
+                    if !userDuplicateArray.contains(tag.createdBy!) {
+                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
+                        //this fixes that
+                        userDuplicateArray.append(tag.createdBy!)
+                        userArray.append(tag.createdBy!)
+                    }
+                }
+                self.mainPageDelegate?.passFilteredUserArray(userArray)
+                self.navigationController?.popViewControllerAnimated(true)
+            } else {
+                print(error)
+            }
+        })
     }
     
     
@@ -61,11 +58,14 @@ class FilterQueryViewController: FilterTagViewController {
         super.viewDidLoad()
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
-        tagChosenView.delegate = self
+        scrollViewSearchView.scrollViewSearchViewDelegate = self
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        //this bottom is just for testing
         self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
-        // Do any additional setup after loading the view.
+        
+        //For testing
+        let specialtyTagView = tagChoicesView.addSpecialtyTag("hi", specialtyTagTitle: "butter")
     }
     
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
@@ -73,8 +73,7 @@ class FilterQueryViewController: FilterTagViewController {
     override func loadChoicesViewTags() {
         for tag in tagChoicesDataArray {
             if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
-                let specialtyTagView = tagChoicesView.addTag(specialtyCategoryTitle)
-                setSpecialtyTagAttributes(specialtyTagView)
+                tagChoicesView.addTag(specialtyCategoryTitle)
             } else {
                 //dealing with normal Generic tags
                 tagChoicesView.addTag(tag.title)
@@ -153,46 +152,41 @@ extension FilterQueryViewController {
             tagChoicesDataArray.append(Tag(title: specialtyTag.rawValue, specialtyCategoryTitle: specialtyTag))
         }
     }
-    
-    //TODO: could potentially make a subclass of TagView to do this, but this works for now. Since, I am only changing one thing.
-    //Purpose: Make the specialty tags look different than just generic tags, but don't want the double sided tags because we only want clickable ones
-    func setSpecialtyTagAttributes(tagView: TagView) {
-        let specialtyTagColor = UIColor.blueColor()
-        tagView.tagBackgroundColor = specialtyTagColor
-        tagView.highlightedBackgroundColor = specialtyTagColor
-    }
 }
 
 
 //extension for tag actions
 extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        menuView.hide()
-//        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-//            switch tag.attribute {
-//            case TagAttributes.Generic.rawValue:
+        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
+            switch tag.attribute {
+            case TagAttributes.Generic.rawValue:
+                let tagView = scrollViewSearchView?.theTagChosenListView.addTag("bobybbobybkskdjfk")
 //                let tagView = tagChosenView.addTag(tag.title)
 //                tagChoicesView.removeTag(tag.title)
-//                changeTagListViewWidth(tagView, extend: true)
-//            case TagAttributes.SpecialtyButtons.rawValue:
-//                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
-//            case TagAttributes.SpecialtySingleSlider.rawValue:
-//                //TODO: make the specialty slider come up
-//                break
-//            case TagAttributes.SpecialtyRangeSlider.rawValue:
-//                //TODO: make the specialty slider come up
-//                break
-//            default: break
-//            }
-//        }
+                scrollViewSearchView?.rearrangeSearchArea(tagView!, extend: true)
+            case TagAttributes.SpecialtyButtons.rawValue:
+                createStackViewTagButtonsAndSpecialtyEnviroment(title, pushOneButton: false, addNoneButton: false)
+            case TagAttributes.SpecialtySingleSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            case TagAttributes.SpecialtyRangeSlider.rawValue:
+                //TODO: make the specialty slider come up
+                break
+            default: break
+            }
+        }
+    }
+}
+
+extension FilterQueryViewController: ScrollViewSearchViewDelegate {
+    //TODO: pass user array and also create custom segue for the single page animation of doing searches.
+    func dismissPageAndPassUserArray() {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
     }
     
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-        if sender.tag == 2 {
-            //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
-            sender.removeTagView(tagView)
-            changeTagListViewWidth(tagView, extend: false)
-        }
+    func dismissCurrentViewController() {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
     }
 }
 
@@ -228,6 +222,19 @@ extension FilterQueryViewController {
                 tagChoicesView.addTag(tag.title)
             }
             createSpecialtyTagEnviroment(false)
+        }
+    }
+}
+
+extension FilterQueryViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case SearchPageToTinderMainPageSegue
+    }
+    
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        default: break
         }
     }
 }

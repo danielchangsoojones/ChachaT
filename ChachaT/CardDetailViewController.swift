@@ -302,7 +302,6 @@ extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
 //the TagListView extenstion
 extension CardDetailViewController {
     func loadTagsFromParse() {
-        setTagListAttributes()
         let query = Tag.query()
         if let userOfTheCard = userOfTheCard {
             query?.whereKey("createdBy", equalTo: userOfTheCard)
@@ -319,9 +318,6 @@ extension CardDetailViewController {
         })
     }
     
-    func setTagListAttributes() {
-        theUserOfCardTagListView.addChoicesTagListViewAttributes()
-    }
 }
 
 

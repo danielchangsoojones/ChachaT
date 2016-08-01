@@ -17,8 +17,7 @@ let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
 let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
 let FilteringPageStackViewLinesColor = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 0.75)
-let BlurryFilteringPageBackground = UIColor.rgba(red: 178, green: 178, blue: 178, alpha: 0.25)
-let HandBackgroundColorOverlay = UIColor.rgba(red: 0, green: 0, blue: 0, alpha: 0.65)
+let BackgroundPageColor = ChachaTeal.colorWithAlphaComponent(0.4)
 
 //Match Constants
 struct Constants {
@@ -42,6 +41,10 @@ struct Constants {
     static let discoverable = "discoverable"
     static let isMatch = "isMatch"
     static let email = "email"
+}
+
+struct ImageNames {
+    static let DownArrow = "DownArrow"
 }
 
 //storyboard identifiers
@@ -72,6 +75,15 @@ func setBottomBlur() -> CAGradientLayer {
     gradientLayer.locations = [0.0, 0.8]
     
     return gradientLayer
+}
+
+func showSearchBox(searchBoxHolder: UIView) -> CustomTagsSearchBar {
+    let searchBox = CustomTagsSearchBar(borderColor: UIColor.whiteColor().CGColor, borderWidth: 2.0, borderRadius: 10.0, placeHolderText: "Search Tags")
+    searchBoxHolder.addSubview(searchBox)
+    searchBox.snp_makeConstraints { (make) in
+        make.edges.equalTo(searchBoxHolder)
+    }
+    return searchBox
 }
 
 //Text View methods

@@ -36,16 +36,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     }
     
     @IBAction func addToProfilePressed(sender: UIButton) {
-        for tagView in tagChosenView.tagViews {
-            if let title = tagView.currentTitle {
-                let tag = createNewTag(title)
-                chosenTagArray.append(tag)
-                self.tagChoicesDataArray.append(tag)
-                addTagOrSpecialtyTag(tag, addToChosenView: false)
-            }
-        }
-        tagChosenView.removeAllTags()
-        tagChosenViewWidthConstraint.constant = 0
+//        for tagView in tagChosenView.tagViews {
+//            if let title = tagView.currentTitle {
+//                let tag = createNewTag(title)
+//                chosenTagArray.append(tag)
+//                self.tagChoicesDataArray.append(tag)
+//                addTagOrSpecialtyTag(tag, addToChosenView: false)
+//            }
+//        }
+//        tagChosenView.removeAllTags()
+//        tagChosenViewWidthConstraint.constant = 0
     }
     
     //TODO: change this code to actually deal with specialty Tags? Maybe, maybe it doesn't have to do that.
@@ -65,7 +65,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         super.viewDidLoad()
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
-        tagChosenView.delegate = self
         // Do any additional setup after loading the view.
     }
     
@@ -153,21 +152,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 
 //tag methods extension
 extension AddingTagsToProfileViewController {
-    //overriding this method because I want to not only see if tag exists with chosen tags
-    //we also want to see if tag is in the already saved Parse tags because then the button
-    //should be highlighted.
-    override func doesChosenTagViewContain(tagTitle: String) -> Bool {
-        let existsInChoicesTagView = findTag(TagView(title: tagTitle), tagArray: tagChoicesDataArray) != nil
-        return (tagChosenView.tagExistsInTagListView(tagTitle) || existsInChoicesTagView)
-    }
-    
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
-        if sender.tag == 2 {
-            //the remove button in theChosenTagView was pressed
-            sender.removeTagView(tagView)
-            changeTagListViewWidth(tagView, extend: false)
-        }
-    }
     
     override func createSpecialtyTagEnviroment(showSpecialtyEnviroment: Bool) {
         super.createSpecialtyTagEnviroment(showSpecialtyEnviroment)
@@ -184,7 +168,7 @@ extension AddingTagsToProfileViewController {
                 //enabling remove button, because the tag view in chosenTagViewList will have a remove button, so it will be longer.
                 //if we didn't add a remove button, then the TagListWidth would only extend for a normal tag width, not normalTagWidth + remove button
                 tagView.enableRemoveButton = true
-                changeTagListViewWidth(tagView, extend: true)
+                scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
                 self.tagChoicesView.removeTag(title)
                 //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
                 if let specialtyTagView = tagView as? SpecialtyTagView {
@@ -207,16 +191,16 @@ extension AddingTagsToProfileViewController {
         if let specialtyCategoryTitle = tag.specialtyCategoryTitle {
             //the tag is a special tag
             if addToChosenView {
-                tagChosenView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
-                chosenTagArray.append(tag)
+//                tagChosenView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
+//                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addSpecialtyTag(tag.title, specialtyTagTitle: specialtyCategoryTitle)
             }
         } else {
             //just a generic tag
             if addToChosenView {
-                tagChosenView.addTag(tag.title)
-                chosenTagArray.append(tag)
+//                tagChosenView.addTag(tag.title)
+//                chosenTagArray.append(tag)
             } else {
                 tagChoicesView.addTag(tag.title)
             }

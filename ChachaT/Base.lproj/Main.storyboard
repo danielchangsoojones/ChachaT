@@ -28,9 +28,6 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" alpha="0.45000000000000001" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="BackgroundMainPageGradient" translatesAutoresizingMaskIntoConstraints="NO" id="uN5-uW-dFI">
-                                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                    </imageView>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChachaLoadingButton" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
                                         <rect key="frame" x="148" y="295" width="78" height="78"/>
                                         <constraints>
@@ -40,12 +37,8 @@
                                     </imageView>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="uN5-uW-dFI" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="top" id="0Xb-WI-Yrs"/>
                                     <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerX" secondItem="dsh-Hh-R5l" secondAttribute="centerX" id="CjG-o6-0R0"/>
                                     <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerY" secondItem="dsh-Hh-R5l" secondAttribute="centerY" id="hUl-Ru-V7W"/>
-                                    <constraint firstItem="uN5-uW-dFI" firstAttribute="leading" secondItem="dsh-Hh-R5l" secondAttribute="leading" id="hxD-zR-VY7"/>
-                                    <constraint firstAttribute="trailing" secondItem="uN5-uW-dFI" secondAttribute="trailing" id="l0D-FW-jYr"/>
-                                    <constraint firstAttribute="bottom" secondItem="uN5-uW-dFI" secondAttribute="bottom" id="r7E-8Y-7nx"/>
                                 </constraints>
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
@@ -171,7 +164,6 @@
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
                         <outlet property="theApproveButton" destination="qHW-wn-jru" id="IMq-4O-CMW"/>
                         <outlet property="theBackgroundColorView" destination="dsh-Hh-R5l" id="HgS-Re-cUg"/>
-                        <outlet property="theBackgroundGradient" destination="uN5-uW-dFI" id="Wg7-Jw-Mw5"/>
                         <outlet property="theBottomButtonStackView" destination="KXf-AU-SZT" id="P0V-zy-3cs"/>
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
@@ -179,7 +171,7 @@
                         <outlet property="theProfileButton" destination="b0O-jA-iWv" id="8Eo-eo-YRk"/>
                         <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
                         <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
-                        <segue destination="daK-C5-wmi" kind="show" identifier="BackgroundAnimationControllerToTagFilteringPageSegue" id="2hX-Ts-O6M"/>
+                        <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="ChachaT" customModuleProvider="target" id="2hX-Ts-O6M"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                     </connections>
                 </viewController>
@@ -546,7 +538,6 @@
     </scenes>
     <resources>
         <image name="Approve Button" width="81" height="81"/>
-        <image name="BackgroundMainPageGradient" width="414" height="736"/>
         <image name="Bullet Point" width="8" height="8"/>
         <image name="ChachaLoadingButton" width="78" height="78"/>
         <image name="Messaging Button" width="63" height="63"/>

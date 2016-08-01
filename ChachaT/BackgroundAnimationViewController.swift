@@ -35,8 +35,9 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theSkipButton: UIButton!
     @IBOutlet weak var theMessageButton: UIButton!
     @IBOutlet weak var theProfileButton: UIButton!
-    @IBOutlet weak var theBackgroundGradient: UIImageView!
     @IBOutlet weak var theBottomButtonStackView: UIStackView!
+    var leftNavigationButton: UIBarButtonItem?
+    var rightNavigationButton: UIBarButtonItem?
     
     //constraint outlets
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
@@ -61,6 +62,7 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        theBackgroundColorView.backgroundColor = BackgroundPageColor
         setNavigationButtons()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
@@ -86,7 +88,7 @@ class BackgroundAnimationViewController: UIViewController {
         if rippleHasNotBeenStarted {
             //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
             //this makes it only appear the first run time.
-            ripple(theChachaLoadingImage.center, view: theBackgroundGradient)
+            ripple(theChachaLoadingImage.center, view: theBackgroundColorView)
             rippleHasNotBeenStarted = false
         }
     }
@@ -100,8 +102,12 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func setNavigationButtons() {
-        self.navigationItem.leftBarButtonItem = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
-        self.navigationItem.rightBarButtonItem = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+        //need to hold the uinavigation button in a variable because we will be turning the actual navBarItems to nil when we want to disappear
+        //then when we want them to reappear, we will set back to our retained global variable.
+        leftNavigationButton = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
+        self.navigationItem.leftBarButtonItem = leftNavigationButton
+        rightNavigationButton = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+        self.navigationItem.rightBarButtonItem = rightNavigationButton
     }
     
     func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
@@ -116,12 +122,31 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func logOut() {
-        User.logOut()
-        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
+        let view = UIView(frame: CGRectMake(100, 0, 20, 20))
+        view.backgroundColor = UIColor.redColor()
+        
+        navigationController?.navigationBar.addSubview(view)
+        
+        moveImage(view)
+//        User.logOut()
+//        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
+    }
+    
+    func moveImage(view: UIView){
+        var toPoint: CGPoint = CGPointMake(50.0, 0)
+        var fromPoint : CGPoint = view.frame.origin
+        
+        var movement = CABasicAnimation(keyPath: "position")
+        movement.additive = true
+        movement.fromValue =  NSValue(CGPoint: fromPoint)
+        movement.toValue =  NSValue(CGPoint: toPoint)
+        movement.duration = 0.3
+        
+        view.layer.addAnimation(movement, forKey: "move")
     }
     
     func searchNavigationButtonPressed() {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationControllerToTagFilteringPageSegue, sender: self)
+        performSegueWithIdentifier(SegueIdentifier.CustomBackgroundAnimationToSearchSegue, sender: self)
     }
 }
 
@@ -258,12 +283,12 @@ extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case OnboardingPageSegue
-        case BackgroundAnimationControllerToTagFilteringPageSegue
+        case CustomBackgroundAnimationToSearchSegue
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        case .BackgroundAnimationControllerToTagFilteringPageSegue:
+        case .CustomBackgroundAnimationToSearchSegue:
             let destinationVC = segue.destinationViewController as! FilterQueryViewController
             destinationVC.mainPageDelegate = self
         default: break
