@@ -19,6 +19,7 @@ class SpecialtyTagView: TagView {
         self.tagTitle = tagTitle
         self.specialtyTagTitle = specialtyTagTitle
         super.init(frame: CGRectZero)
+        createFakeBorder(TagProperties.borderColor, borderWidth: TagProperties.borderWidth, cornerRadius: TagProperties.cornerRadius)
         addCornerAnnotationSubview()
         setTitle(tagTitle, forState: .Normal)
     }
@@ -27,7 +28,20 @@ class SpecialtyTagView: TagView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    
+    //Purpose: when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
+    //So, in the addSpecialtyTagMethod, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
+    //I couldn't change the borderWidth/borderColor in this class because, for some reason, they were not initialized yet. 
+    //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
+    func createFakeBorder(borderColor: UIColor, borderWidth: CGFloat, cornerRadius: CGFloat) {
+        let view = UIView(frame: self.frame)
+        view.layer.borderWidth = borderWidth
+        view.layer.borderColor = borderColor.CGColor
+        view.layer.cornerRadius = cornerRadius
+        self.addSubview(view)
+        view.snp_makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
+    }
     
     func addCornerAnnotationSubview() {
         let cornerAnnotationView = CornerAnnotationView()
