@@ -96,19 +96,19 @@ extension FilterTagViewController: StackViewTagButtonsDelegate {
         }
     }
     
-    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags) {
-//        let originalTagView = SpecialtyTagView(tagTitle: originalTagTitle, specialtyTagTitle: specialtyCategoryName.rawValue)
-//        let newTag = Tag(title: newTagTitle, specialtyCategoryTitle: specialtyCategoryName)
-//        let tagToDelete = replaceTag(originalTagView, newTag: newTag, tagArray: &tagChoicesDataArray)
-//        //remove the previous tag from the actual backend
-//        //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
-//        tagToDelete?.deleteInBackground()
-//        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, categoryName: specialtyCategoryName.rawValue) {
-//            originalTagView.setTitle(newTagTitle, forState: .Normal)
-//        }
-//        chosenTagArray.append(newTag)
-//        tagChoicesView.layoutSubviews()
-    }
+//    func editSpecialtyTagView(newTagTitle: String, originalTagTitle: String, specialtyCategoryName: SpecialtyTags) {
+////        let originalTagView = SpecialtyTagView(tagTitle: originalTagTitle, specialtyTagTitle: specialtyCategoryName.rawValue)
+////        let newTag = Tag(title: newTagTitle, specialtyCategoryTitle: specialtyCategoryName)
+////        let tagToDelete = replaceTag(originalTagView, newTag: newTag, tagArray: &tagChoicesDataArray)
+////        //remove the previous tag from the actual backend
+////        //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
+////        tagToDelete?.deleteInBackground()
+////        if let originalTagView = tagChoicesView.findTagView(originalTagTitle, categoryName: specialtyCategoryName.rawValue) {
+////            originalTagView.setTitle(newTagTitle, forState: .Normal)
+////        }
+////        chosenTagArray.append(newTag)
+////        tagChoicesView.layoutSubviews()
+//    }
 }
 
 extension FilterTagViewController: SpecialtyTagEnviromentHolderViewDelegate {
@@ -135,11 +135,11 @@ extension FilterTagViewController : TagListViewDelegate {
     //return a new array to set the old array to, and the replaced tag in case something is needed to be done with it
     func replaceTag(originalTagView: TagView, newTag: Tag, inout tagArray: [Tag]) -> Tag? {
         if let originalSpecialtyTagView = originalTagView as? SpecialtyTagView {
-            //checks if specialty tag is equal in both title and specialtyTitle. That is how we know we have exact match
-            if let tagIndex = tagArray.indexOf({($0.title == originalTagView.titleLabel?.text && $0.specialtyCategoryTitle == originalSpecialtyTagView.specialtyTagTitle)}) {
-                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
-                let originalTag = tagArray[tagIndex]
-                tagArray[tagIndex] = newTag
+            for tag in tagArray where tag.specialtyTagTitle == originalSpecialtyTagView.specialtyTagTitle.rawValue && tag.specialtyCategoryTitle == originalSpecialtyTagView.specialtyCategoryTitle.rawValue {
+                //checks if specialty tag is equal in both title and specialtyTitle. That is how we know we have exact match
+                let originalTag = tag
+                let indexOfTag = tagArray.indexOf(tag)
+                tagArray[indexOfTag!] = newTag
                 return originalTag
             }
         } else {
@@ -156,10 +156,19 @@ extension FilterTagViewController : TagListViewDelegate {
     }
     
     func findTag(tagView: TagView, tagArray: [Tag]) -> Tag? {
-        if let tagIndex = tagArray.indexOf({$0.title == tagView.titleLabel?.text}) {
-            //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
-            return tagArray[tagIndex]
+        if let specialtyTagView = tagView as? SpecialtyTagView {
+            //the tagView is a specialty one
+            for tag in tagArray where tag.specialtyTagTitle == specialtyTagView.specialtyTagTitle.rawValue && tag.specialtyCategoryTitle == specialtyTagView.specialtyCategoryTitle.rawValue {
+                return tag
+            }
+        } else {
+            //dealing with a generic tagview
+            if let tagIndex = tagArray.indexOf({$0.title == tagView.titleLabel?.text}) {
+                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
+                return tagArray[tagIndex]
+            }
         }
+
         //tag does not exist in array
         return nil
     }
@@ -208,10 +217,11 @@ extension FilterTagViewController: UISearchBarDelegate {
         let query = PFQuery(className: "Tag")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
-                for tag in tags {
-                    if !alreadyContainsTagArray.contains(tag.title) {
+                for tag in tags where tag.title != nil {
+                    //making sure tag title is not nil because we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
+                    if !alreadyContainsTagArray.contains(tag.title!) {
                         //our string array does not already contain the tag title, so we can add it to our searchable array
-                        alreadyContainsTagArray.append(tag.title)
+                        alreadyContainsTagArray.append(tag.title!)
                         self.searchDataArray.append(tag)
                     }
                 }
@@ -219,9 +229,12 @@ extension FilterTagViewController: UISearchBarDelegate {
         }
     }
     
+    //TODO: I bet this breaks when I try to pass something like Race. 
     func addSpecialtyTagsToSearchDataArray() {
-        for filterName in FilterNames.allValues {
-            searchDataArray.append(Tag(title: filterName.rawValue, specialtyCategoryTitle: findSpecialtyCategoryName(filterName.rawValue)))
+        for specialtyTagTitle in SpecialtyTagTitles.allValues {
+            if let specialtyCategoryTitle = findSpecialtyCategoryTitle(specialtyTagTitle.toString) {
+                searchDataArray.append(Tag(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle))
+            }
         }
     }
     

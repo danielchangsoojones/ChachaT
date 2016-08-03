@@ -7,89 +7,165 @@
 //
 
 //enums for tags
-//TODO: I think enum expressions could be helpful in making this simpler, but I am not sure how to do that at the moment
-//TODO: change name to SpecialtyTagCategoryTitles
-public enum SpecialtyTags : String {
-    case Gender
-    case Race
-    case Sexuality
-    case AgeRange = "Age Range"
-    case PoliticalAffiliation = "Political Affiliation"
-    case HairColor = "Hair Color"
-    case Location
-    static let specialtyButtonValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor]
-    static let specialtySingleSliderValues = [Location]
-    static let specialtyRangeSliderValues = [AgeRange]
-    static let allValues = [Gender, Race, Sexuality, PoliticalAffiliation, HairColor, Location, AgeRange]
+public enum SpecialtyCategoryTitles : Int {
+    //using Int to seperate the specialty tag slider from tags, ect.
+    case Gender = 0
+    case Race = 1
+    case Sexuality = 2
+    case PoliticalGroup = 3
+    case HairColor = 4
+    //single slider
+    case Location = 100
+    //range slider
+    case AgeRange = 200
+    
+    //saving the enums as Ints in database to make them changeable on the frontend side, also takes up less memory space on the backend.
+    var toString : String {
+        switch self {
+        case .Gender:
+            return "Gender"
+        case .Race:
+            return "Race"
+        case .Sexuality:
+            return "Sexuality"
+        case .AgeRange:
+            return "Age Range"
+        case .PoliticalGroup:
+            return "Political Group"
+        case .HairColor:
+            return "Hair Color"
+        case .Location:
+            return "Location"
+        }
+    }
+    
+    static let specialtyTagMenuCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor]
+    static let specialtySingleSliderCategories = [Location]
+    static let specialtyRangeSliderCategories = [AgeRange]
+    static let allCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
 }
 
-//TODO: change name to SpecialtyTagTitles
-public enum FilterNames : String {
+public enum SpecialtyTagTitles : Int {
     
-    case RaceBlackFilter = "Black"
-    case RaceWhiteFilter = "White"
-    case RaceLatinoFilter = "Latino"
-    case RaceAsianFilter = "Asian"
-    case HairColorBrunetteFilter = "Brunette"
-    case HairColorBlondeFilter = "Blonde"
-    case HairColorRedheadFilter = "Redhead"
-    case PoliticalAffiliationDemocratFilter = "Democrat"
-    case PoliticalAffiliationRepublicanFilter = "Republican"
-    case GenderMaleFilter = "Male"
-    case GenderFemaleFilter = "Female"
-    case SexualityStraightFilter = "Straight"
-    case SexualityGayFilter = "Gay"
-    case SexualityBisexualFilter = "Bisexual"
-    case NoneFilter = "None"
+    //In case I want to add other enums, I am seperating the Int categories by 100
+    case RaceBlack = 1
+    case RaceWhite = 2
+    case RaceLatino = 3
+    case RaceAsian = 4
+    case HairColorBrunette = 101
+    case HairColorBlonde = 102
+    case HairColorRedhead = 103
+    case PoliticalGroupDemocrat = 201
+    case PoliticalGroupRepublican = 202
+    case GenderMale = 301
+    case GenderFemale = 302
+    case SexualityStraight = 401
+    case SexualityGay = 402
+    case SexualityBisexual = 403
+    case None = 0
+    
+    //saving the enums as Ints in database to make them changeable on the frontend side, also takes up less memory space on the backend.
+    var toString : String {
+        switch self {
+        case .RaceBlack:
+            return "Black"
+        case .RaceWhite:
+            return "White"
+        case .RaceLatino:
+            return "Latino"
+        case .RaceAsian:
+            return "Asian"
+        case .HairColorBrunette:
+            return "Brunette"
+        case .HairColorBlonde:
+            return "Blonde"
+        case .HairColorRedhead:
+            return "Redhead"
+        case .PoliticalGroupDemocrat:
+            return "Democrat"
+        case .PoliticalGroupRepublican:
+            return "Republican"
+        case .GenderMale:
+            return "Male"
+        case .GenderFemale:
+            return "Female"
+        case .SexualityStraight:
+            return "Straight"
+        case .SexualityGay:
+            return "Gay"
+        case .SexualityBisexual:
+            return "Bisexual"
+        case .None:
+            return "None"
+        }
+    }
+    
+    static func stringRawValue(rawValue: String) -> SpecialtyTagTitles? {
+        for specialtyTagTitles in allValues where specialtyTagTitles.toString == rawValue  {
+            return specialtyTagTitles //found a match
+        }
+        return nil //none of the toStrings were equivalent to the passed string
+    }
     
     //this array lets me iterate over certain sections of the enum
-    static let raceAllValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, NoneFilter]
-    static let hairColorAllValues = [HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, NoneFilter]
-    static let genderAllValues = [GenderMaleFilter, GenderFemaleFilter, NoneFilter]
-    static let sexualityAllValues = [SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, NoneFilter]
-    static let politicalAffiliationAllValues = [PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter, NoneFilter]
-    static let allValues = [RaceBlackFilter, RaceWhiteFilter, RaceLatinoFilter, RaceAsianFilter, HairColorBrunetteFilter, HairColorBlondeFilter, HairColorRedheadFilter, GenderMaleFilter, GenderFemaleFilter, SexualityStraightFilter, SexualityGayFilter, SexualityBisexualFilter, PoliticalAffiliationDemocratFilter, PoliticalAffiliationRepublicanFilter, NoneFilter]
+    static let raceAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , None ]
+    static let hairColorAllValues = [HairColorBrunette , HairColorBlonde , HairColorRedhead , None ]
+    static let genderAllValues = [GenderMale , GenderFemale , None ]
+    static let sexualityAllValues = [SexualityStraight , SexualityGay , SexualityBisexual , None ]
+    static let politicalGroupAllValues = [PoliticalGroupDemocrat , PoliticalGroupRepublican , None ]
+    static let allValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , HairColorBrunette , HairColorBlonde , HairColorRedhead , GenderMale , GenderFemale , SexualityStraight , SexualityGay , SexualityBisexual , PoliticalGroupRepublican , PoliticalGroupDemocrat , None ]
 }
 
-public enum TagAttributes : String {
+public enum TagAttributes : Int {
     case Generic
-    case SpecialtyButtons
+    case SpecialtyTagMenu
     case SpecialtySingleSlider
     case SpecialtyRangeSlider
+    
+    //saving the enums as Ints in database to make them changeable on the frontend side, also takes up less memory space on the backend.
+    var toString : String {
+        switch self {
+        case .Generic:
+            return "Generic"
+        case .SpecialtyTagMenu:
+            return "SpecialtyTagMenu"
+        case .SpecialtySingleSlider:
+            return "SpecialtySingleSlider"
+        case .SpecialtyRangeSlider:
+            return "SpecialtyRangeSlider"
+        }
+    }
 }
 
 //helper functions for enums
 
-//Example: I pass Race and it returns .SpecialtyButtons
+//Example: I pass Race and it returns .SpecialtyTagMenu
 //Example: I pass Banana and it passes back .Generic because that is just a random tag
-func convertTagAttributeFromCategoryTitle(categoryTitle: String) -> TagAttributes {
-    if let specialtyCategoryTitle = SpecialtyTags(rawValue: categoryTitle) {
-        if SpecialtyTags.specialtyButtonValues.contains(specialtyCategoryTitle) {
-            return TagAttributes.SpecialtyButtons
-        } else if SpecialtyTags.specialtySingleSliderValues.contains(specialtyCategoryTitle) {
+func convertTagAttributeFromCategoryTitle(specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagAttributes {
+    if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(specialtyCategoryTitle) {
+            return TagAttributes.SpecialtyTagMenu
+        } else if SpecialtyCategoryTitles.specialtySingleSliderCategories.contains(specialtyCategoryTitle) {
             return .SpecialtySingleSlider
-        } else if SpecialtyTags.specialtyRangeSliderValues.contains(specialtyCategoryTitle) {
+        } else if SpecialtyCategoryTitles.specialtyRangeSliderCategories.contains(specialtyCategoryTitle) {
             return .SpecialtyRangeSlider
         }
-    }
-    //the tag was not supposed to be a special tag
-    return .Generic
+
+    return .Generic //the tag was not supposed to be a special tag
 }
 
 //Purpose: to find which specialty group we are dealing with
 //For Example: It figures out whether the given string should be with Hair Color, Race, ect.
-func findSpecialtyCategoryName(tagTitle: String) -> SpecialtyTags? {
-    if let filterName = FilterNames(rawValue: tagTitle) {
-        //we have a specialty generic tag
-        if FilterNames.genderAllValues.contains(filterName) {
+func findSpecialtyCategoryTitle(tagTitle: String) -> SpecialtyCategoryTitles? {
+    if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
+        if  SpecialtyTagTitles.genderAllValues.contains(specialtyTagTitle) {
             return .Gender
-        } else if FilterNames.hairColorAllValues.contains(filterName) {
+        } else if SpecialtyTagTitles.hairColorAllValues.contains(specialtyTagTitle) {
             return .HairColor
-        } else if FilterNames.sexualityAllValues.contains(filterName) {
+        } else if  SpecialtyTagTitles.sexualityAllValues.contains(specialtyTagTitle) {
             return .Sexuality
-        } else if FilterNames.politicalAffiliationAllValues.contains(filterName) {
-            return .PoliticalAffiliation
-        } else if FilterNames.raceAllValues.contains(filterName) {
+        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(specialtyTagTitle) {
+            return .PoliticalGroup
+        } else if  SpecialtyTagTitles.raceAllValues.contains(specialtyTagTitle) {
             return .Race
         }
     }

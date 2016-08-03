@@ -194,7 +194,8 @@ class ChachaTagDropDown: UIView {
     func createTagViewList(tags: [Tag]) -> TagListView {
         let tagListView = TagListView()
         for tag in tags {
-            tagListView.addTag(tag.title)
+            //TODO: make it add specialty tag or generic tag
+            tagListView.addTag(tag.title!)
         }
         return tagListView
     }
