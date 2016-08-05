@@ -32,7 +32,6 @@ class FilterTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        setSearchDataArray()
         scrollViewSearchView = addSearchScrollView()
         backgroundColorView.backgroundColor = BackgroundPageColor
     }
@@ -206,36 +205,6 @@ extension FilterTagViewController: UISearchBarDelegate {
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         fatalError("This method must be overridden in subclasses")
-    }
-    
-    //TODO; right now, my search is pulling down the entire tag table and then doing search,
-    //very ineffecient, and in future, I will have to do server side cloud code.
-    //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
-    func setSearchDataArray() {
-        addSpecialtyTagsToSearchDataArray()
-        var alreadyContainsTagArray: [String] = []
-        let query = PFQuery(className: "Tag")
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let tags = objects as? [Tag] {
-                for tag in tags where tag.title != nil {
-                    //making sure tag title is not nil because we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
-                    if !alreadyContainsTagArray.contains(tag.title!) {
-                        //our string array does not already contain the tag title, so we can add it to our searchable array
-                        alreadyContainsTagArray.append(tag.title!)
-                        self.searchDataArray.append(tag)
-                    }
-                }
-            }
-        }
-    }
-    
-    //TODO: I bet this breaks when I try to pass something like Race. 
-    func addSpecialtyTagsToSearchDataArray() {
-        for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            if let specialtyCategoryTitle = findSpecialtyCategoryTitle(specialtyTagTitle.toString) {
-                searchDataArray.append(Tag(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle))
-            }
-        }
     }
     
     func resetTagChoicesViewList() {
