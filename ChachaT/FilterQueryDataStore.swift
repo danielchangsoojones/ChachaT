@@ -20,7 +20,9 @@ class FilterQueryDataStore {
     
     var delegate: FilterQueryDataStoreDelegate?
     
-    init() {
+    init(delegate: FilterQueryDataStoreDelegate) {
+        self.delegate = delegate
+        setSearchDataArray()
     }
     
     //TODO; right now, my search is pulling down the entire tag table and then doing search,
@@ -32,8 +34,8 @@ class FilterQueryDataStore {
         let query = PFQuery(className: "Tag")
         query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
             if let tags = objects as? [Tag] {
-                for tag in tags where tag.title != nil {
-                    //making sure tag title is not nil because we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
+                for tag in tags where tag.attribute == TagAttributes.Generic.rawValue {
+                    //we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
                     if !alreadyContainsTagArray.contains(tag.title!) {
                         //our string array does not already contain the tag title, so we can add it to our searchable array
                         alreadyContainsTagArray.append(tag.title!)

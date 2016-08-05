@@ -56,6 +56,7 @@ class FilterQueryViewController: FilterTagViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setDataFromDataStore()
         setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
@@ -63,6 +64,10 @@ class FilterQueryViewController: FilterTagViewController {
 //        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         //this bottom is just for testing
 //        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
+    }
+    
+    func setDataFromDataStore() {
+        let _ = FilterQueryDataStore(delegate: self)
     }
     
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
@@ -214,7 +219,7 @@ extension FilterQueryViewController {
 //            theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
 //            theSpecialtyTagEnviromentHolderView?.setButtonText("Create New Tag?")
         } else {
-            //there is text, and we have a match, so the tagChoicesView changes accordingly
+            //there is text, and we have a match, soa the tagChoicesView changes accordingly
             searchActive = true
             for tag in filtered {
                 tagChoicesView.addTag(tag.titleToShowForTag())
