@@ -12,52 +12,11 @@ import EFTools
 class FilterQueryViewController: FilterTagViewController {
     
     var mainPageDelegate: FilterViewControllerDelegate?
-    
-    @IBAction func theDoneButtonPressed(sender: UIBarButtonItem) {
-        var chosenTagArrayTitles : [String] = []
-        if let scrollViewSearchView = scrollViewSearchView {
-            for tagView in scrollViewSearchView.theTagChosenListView.tagViews {
-                if let titleLabel = tagView.titleLabel {
-                    if let title = titleLabel.text {
-                        //need to get title array because I want to do contained in query, which requires strings
-                        chosenTagArrayTitles.append(title)
-                    }
-                }
-            }
-        }
-        let query = Tag.query()
-        //finding all tags that have a title that the user chose for the search
-        //TODO: I'll need to do something if 0 people come up
-        if !chosenTagArrayTitles.isEmpty {
-            query?.whereKey("title", containedIn: chosenTagArrayTitles)
-        }
-        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-        query?.includeKey("createdBy")
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                var userArray : [User] = []
-                var userDuplicateArray : [User] = []
-                for tag in objects as! [Tag] {
-                    if !userDuplicateArray.contains(tag.createdBy) {
-                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
-                        //this fixes that
-                        userDuplicateArray.append(tag.createdBy)
-                        userArray.append(tag.createdBy)
-                    }
-                }
-                self.mainPageDelegate?.passFilteredUserArray(userArray)
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                print(error)
-            }
-        })
-    }
-    
+    var dataStore : FilterQueryDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataFromDataStore()
-        setTagsInTagChoicesDataArray()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
 //        let navigationBarHeight = navigationController?.navigationBar.frame.height
@@ -67,7 +26,7 @@ class FilterQueryViewController: FilterTagViewController {
     }
     
     func setDataFromDataStore() {
-        let _ = FilterQueryDataStore(delegate: self)
+        dataStore = FilterQueryDataStore(delegate: self) //sets the data for the tag arrays
     }
     
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
@@ -127,32 +86,6 @@ extension FilterQueryViewController : ChachaTagDropDownDelegate {
 
 //setting default tags in view extension
 extension FilterQueryViewController {
-    func setTagsInTagChoicesDataArray() {
-        //adding in generic tags
-        //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
-        //Although this whole function will change because I only want us to get a certain number of tags, and I don't want it to just be random.
-        let query = Tag.query()
-        query?.whereKey("attribute", equalTo: TagAttributes.Generic.rawValue)
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                for tag in objects as! [Tag] {
-                    self.tagChoicesDataArray.append(tag)
-                }
-                self.setSpecialtyTagsIntoDefaultView()
-                self.loadChoicesViewTags()
-            } else {
-                print(error)
-            }
-        })
-    }
-    
-    //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
-    //I want mostly special tags like "Age Range", "Location", ect. to be there.
-    func setSpecialtyTagsIntoDefaultView() {
-        for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            tagChoicesDataArray.append(Tag(specialtyCategoryTitle: specialtyCategory))
-        }
-    }
 }
 
 
@@ -183,7 +116,18 @@ extension FilterQueryViewController {
 extension FilterQueryViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
+        var chosenTagArrayTitles : [String] = []
+        if let scrollViewSearchView = scrollViewSearchView {
+            for tagView in scrollViewSearchView.theTagChosenListView.tagViews {
+                if let titleLabel = tagView.titleLabel {
+                    if let title = titleLabel.text {
+                        //need to get title array because I want to do contained in query, which requires strings
+                        chosenTagArrayTitles.append(title)
+                    }
+                }
+            }
+        }
+        dataStore.findUserArray(chosenTagArrayTitles)
     }
     
     func dismissCurrentViewController() {
