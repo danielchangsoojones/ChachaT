@@ -310,7 +310,7 @@ extension CardDetailViewController {
             if error == nil {
                 for tag in objects as! [Tag] {
                     //TODO: make a specialty tag and generic tag appear
-                    self.theUserOfCardTagListView.addTag(tag.title)
+                    self.theUserOfCardTagListView.addTag(tag.title!)
                 }
             } else {
                 print(error)

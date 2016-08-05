@@ -12,16 +12,16 @@ import SnapKit
 
 class SpecialtyTagView: TagView {
     
-    var tagTitle : String
-    var specialtyTagTitle : String
+    var specialtyTagTitle : SpecialtyTagTitles
+    var specialtyCategoryTitle : SpecialtyCategoryTitles
     
-    init(tagTitle: String, specialtyTagTitle: String) {
-        self.tagTitle = tagTitle
-        self.specialtyTagTitle = specialtyTagTitle
+    init(tagTitle: SpecialtyTagTitles, specialtyTagTitle: SpecialtyCategoryTitles) {
+        self.specialtyTagTitle = tagTitle
+        self.specialtyCategoryTitle = specialtyTagTitle
         super.init(frame: CGRectZero)
         createFakeBorder(TagProperties.borderColor, borderWidth: TagProperties.borderWidth, cornerRadius: TagProperties.cornerRadius)
         addCornerAnnotationSubview()
-        setTitle(tagTitle, forState: .Normal)
+        setTitle(tagTitle.toString, forState: .Normal)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,7 +60,7 @@ class SpecialtyTagView: TagView {
     override func setTitle(title: String?, forState state: UIControlState) {
         super.setTitle(title, forState: .Normal)
         if let title = title {
-            tagTitle = title
+            specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title)!
         }
     }
     
