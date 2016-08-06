@@ -14,6 +14,7 @@ import Foundation
 class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: ChachaChoicesTagListView!
+    var tagChosenView : ChachaChosenTagListView!
     @IBOutlet weak var backgroundColorView: UIView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     var scrollViewSearchView : ScrollViewSearchView!
@@ -43,13 +44,18 @@ class FilterTagViewController: UIViewController {
     func addSearchScrollView() -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
-        scrollViewSearchView.theTagChosenListView.delegate = self
         scrollViewSearchView.searchBox.delegate = self
         self.navigationController?.navigationBar.addSubview(scrollViewSearchView)
         scrollViewSearchView.snp_makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
+        setChosenTagView(scrollViewSearchView)
         return scrollViewSearchView
+    }
+    
+    func setChosenTagView(scrollViewSearchView: ScrollViewSearchView) {
+        tagChosenView = scrollViewSearchView.theTagChosenListView
+        tagChosenView.delegate = self
     }
     
     override func didReceiveMemoryWarning() {
