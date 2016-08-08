@@ -59,6 +59,9 @@ class ChachaTagDropDown: UIView {
     private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
     private var tagListView : TagListView!
+    var arrowImage : UIImageView!
+    
+    let arrowImageInset: CGFloat = 5.0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -91,6 +94,7 @@ class ChachaTagDropDown: UIView {
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
         dropDownView.backgroundColor = UIColor.blueColor()
+        self.arrowImage = setArrowImageToView(dropDownView)
         self.tagListView = addTagListViewToView(dropDownView)
         
         // Add background view & table view to container view
@@ -139,11 +143,10 @@ class ChachaTagDropDown: UIView {
         
         // Animation
         self.dropDownView.frame.origin.y = 0
-        let tagListViewHeight = self.tagListView.intrinsicContentSize().height
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
         
-        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: tagListViewHeight)
+        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
@@ -153,7 +156,7 @@ class ChachaTagDropDown: UIView {
             options: [],
             animations: {
                 let screenSizeWidth = UIScreen.mainScreen().bounds.width
-                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, screenSizeWidth, tagListViewHeight)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, screenSizeWidth, self.getDropDownViewHeight())
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
             }, completion: nil
         )
@@ -199,11 +202,36 @@ class ChachaTagDropDown: UIView {
     
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectZero)
+        tagListView.backgroundColor = UIColor.redColor()
         view.addSubview(tagListView)
         tagListView.snp_makeConstraints { (make) in
-            make.edges.equalTo(view)
+            make.trailing.leading.equalTo(view)
+            make.top.equalTo(view)
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
         return tagListView
+    }
+    
+    func setArrowImageToView(superView: UIView) -> UIImageView {
+        let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
+        arrowImage.backgroundColor = UIColor.greenColor()
+        arrowImage.contentMode = .ScaleAspectFit
+        superView.addSubview(arrowImage)
+        arrowImage.snp_makeConstraints { (make) in
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(superView).inset(arrowImageInset).priorityLow()
+            make.height.equalTo(10).priorityLow()
+            make.width.equalTo(20).priorityLow()
+            make.centerX.equalTo(superView)
+        }
+        return arrowImage
+    }
+    
+    func getDropDownViewHeight() -> CGFloat {
+        let arrowImageHeight = arrowImage.intrinsicContentSize().height
+        let tagListViewHeight = tagListView.intrinsicContentSize().height
+        return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
     }
     
     class DropDownConfiguration {
