@@ -43,6 +43,8 @@ public class SpecialtyTagView: TagView {
         view.layer.borderWidth = borderWidth
         view.layer.borderColor = borderColor.CGColor
         view.layer.cornerRadius = cornerRadius
+        //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
+        view.userInteractionEnabled = false
         self.addSubview(view)
         view.snp_makeConstraints { (make) in
             make.edges.equalTo(self)

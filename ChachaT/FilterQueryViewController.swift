@@ -19,10 +19,6 @@ class FilterQueryViewController: FilterTagViewController {
         setDataFromDataStore()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
-//        let navigationBarHeight = navigationController?.navigationBar.frame.height
-//        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        //this bottom is just for testing
-//        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
     }
     
     func setDataFromDataStore() {
@@ -48,59 +44,15 @@ class FilterQueryViewController: FilterTagViewController {
 
 }
 
-extension FilterQueryViewController : ChachaTagDropDownDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
-        if moveDown {
-            if let downDistance = downDistance {
-                tagChoicesViewTopConstraint.constant = downDistance
-            }
-            tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(
-                animationDuration,
-                delay: 0,
-                usingSpringWithDamping: 0.7,
-                initialSpringVelocity: 0.5,
-                options: [],
-                animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: nil
-            )
-        } else {
-            //we want to move the TagListView back up to original position, which is 0
-            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
-            tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(
-                animationDuration,
-                delay: 0,
-                usingSpringWithDamping: springWithDamping,
-                initialSpringVelocity: initialSpringVelocity,
-                options: [],
-                animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: { (_) in
-                    self.tagChoicesView.shouldRearrangeViews = true
-            })
-        }
-    }
-}
-
 //extension for tag actions
 extension FilterQueryViewController {
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                break
-            case TagAttributes.SpecialtyTagMenu.rawValue:
-                break
-            case TagAttributes.SpecialtySingleSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            default: break
-            }
+        let tagAttribute = convertTagAttributeFromCategoryTitle(tagView.specialtyCategoryTitle)
+        switch tagAttribute {
+        case .SpecialtyTagMenu:
+            dropDownMenu.show()
+        default:
+            break
         }
     }
     

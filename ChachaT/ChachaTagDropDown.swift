@@ -57,7 +57,7 @@ class ChachaTagDropDown: UIView {
     private var backgroundView: UIView!
     private var tags: [Tag]!
     private var menuWrapper: UIView!
-    private var testingView: UIView!
+    private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
     private var tagListView : TagListView!
     
@@ -91,13 +91,13 @@ class ChachaTagDropDown: UIView {
         let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaTagDropDown.hideMenu));
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
-        testingView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
-        testingView.backgroundColor = UIColor.blueColor()
-        self.tagListView = addTagListViewToView(tags, view: testingView)
+        dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
+        dropDownView.backgroundColor = UIColor.blueColor()
+        self.tagListView = addTagListViewToView(tags, view: dropDownView)
         
         // Add background view & table view to container view
         self.menuWrapper.addSubview(self.backgroundView)
-        self.menuWrapper.addSubview(testingView)
+        self.menuWrapper.addSubview(dropDownView)
         
         // Add Menu View to container view
         containerView.addSubview(self.menuWrapper)
@@ -127,7 +127,7 @@ class ChachaTagDropDown: UIView {
         }
     }
     
-    func showMenu() {
+    private func showMenu() {
         self.menuWrapper.frame.origin.y = dropDownOriginY
         
         self.isShown = true
@@ -139,11 +139,12 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.alpha = 0
         
         // Animation
-        self.testingView.frame.origin.y = 0
+        self.dropDownView.frame.origin.y = 0
+        let tagListViewHeight = self.tagListView.intrinsicContentSize().height
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
         
-        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: testingView.frame.height)
+        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: tagListViewHeight)
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
@@ -152,15 +153,14 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                let tagListViewHeight = self.tagListView.intrinsicContentSize().height
                 let screenSizeWidth = UIScreen.mainScreen().bounds.width
-                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, screenSizeWidth, tagListViewHeight)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, screenSizeWidth, tagListViewHeight)
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
             }, completion: nil
         )
     }
     
-    func hideMenu() {
+    @objc private func hideMenu() {
         self.isShown = false
         
         // Change background alpha
@@ -175,7 +175,7 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
             }, completion: nil
         )
         
@@ -209,7 +209,6 @@ class ChachaTagDropDown: UIView {
         return tagListView
     }
     
-    // MARK: BTConfiguration
     class DropDownConfiguration {
         var animationDuration: NSTimeInterval!
         var maskBackgroundColor: UIColor!
