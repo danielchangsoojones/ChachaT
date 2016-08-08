@@ -204,15 +204,23 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		9205BA0C1D5637410080B7E2 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */,
+				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		920BF81A1D3FF5E300104842 /* TagListView */ = {
 			isa = PBXGroup;
 			children = (
+				9205BA0C1D5637410080B7E2 /* Subviews */,
 				922C899D1D4D934700DE1373 /* TagViews */,
 				922C899C1D4D933300DE1373 /* TagListViews */,
-				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 				920BF81C1D3FF5E300104842 /* Info.plist */,
 				92CEC1111D37F8DE005BD321 /* TagEnums.swift */,
-				922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */,
 			);
 			path = TagListView;
 			sourceTree = "<group>";

@@ -43,6 +43,13 @@ public enum SpecialtyCategoryTitles : Int {
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
     static let allCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
+    
+    static func stringRawValue(rawValue: String) -> SpecialtyCategoryTitles? {
+        for specialtyCategoryTitles in allCategories where specialtyCategoryTitles.toString == rawValue  {
+            return specialtyCategoryTitles //found a match
+        }
+        return nil //none of the toStrings were equivalent to the passed string
+    }
 }
 
 public enum SpecialtyTagTitles : Int {

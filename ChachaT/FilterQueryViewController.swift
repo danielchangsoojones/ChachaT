@@ -84,21 +84,13 @@ extension FilterQueryViewController : ChachaTagDropDownDelegate {
     }
 }
 
-//setting default tags in view extension
-extension FilterQueryViewController {
-}
-
-
 //extension for tag actions
 extension FilterQueryViewController {
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
         if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
             switch tag.attribute {
             case TagAttributes.Generic.rawValue:
                 break
-//                let tagView = tagChosenView.addTag(tag.title)
-//                tagChoicesView.removeTag(tag.title)
-//                scrollViewSearchView?.rearrangeSearchArea(tagView!, extend: true)
             case TagAttributes.SpecialtyTagMenu.rawValue:
                 break
             case TagAttributes.SpecialtySingleSlider.rawValue:
@@ -110,6 +102,14 @@ extension FilterQueryViewController {
             default: break
             }
         }
+    }
+    
+    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+        //TODO: make the search bar go to other view
+        let tagView = tagChosenView.addTag(title)
+        tagChoicesView.removeTag(title)
+        scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
+        scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
     }
 }
 

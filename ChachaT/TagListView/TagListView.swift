@@ -11,6 +11,7 @@ import UIKit
 @objc public protocol TagListViewDelegate {
     optional func tagPressed(title: String, tagView: TagView, sender: TagListView) -> Void
     optional func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) -> Void
+    optional func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) -> Void
 }
 
 @IBDesignable
@@ -328,48 +329,6 @@ public class TagListView: UIView {
         return tagView
     }
     
-    //Daniel Jones added this method in. It was not originally part of tagListView
-    public func addSpecialtyTag(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagView {
-        let tagView = SpecialtyTagView(tagTitle: specialtyTagTitle, specialtyTagTitle: specialtyCategoryTitle)
-        tagView.textColor = textColor
-        tagView.selectedTextColor = selectedTextColor
-        tagView.tagBackgroundColor = tagBackgroundColor
-        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
-        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
-        tagView.cornerRadius = cornerRadius
-        tagView.borderWidth = borderWidth
-        tagView.borderColor = borderColor
-        tagView.selectedBorderColor = selectedBorderColor
-        tagView.paddingX = paddingX
-        tagView.paddingY = paddingY
-        tagView.textFont = textFont
-        tagView.removeIconLineWidth = removeIconLineWidth
-        tagView.removeButtonIconSize = removeButtonIconSize
-        tagView.enableRemoveButton = enableRemoveButton
-        tagView.removeIconLineColor = removeIconLineColor
-        tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
-        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        
-        //when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
-        //So, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
-        //I couldn't change the borderWidth/borderColor in the actual specialtyTagView class because, for some reason, they were not initialized yet.
-        //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
-        tagView.borderColor = nil
-        tagView.borderWidth = 0
-        
-        //had to add this because I was trying to let annotation corner view appear, and it wasn't
-        //I tried putting this same code in the specialtyTagView class, but it was still masking the view, until I put it here. 
-        tagView.clipsToBounds = false
-        
-        // Deselect all tags except this one
-        tagView.onLongPress = { this in
-            for tag in self.tagViews {
-                tag.selected = (tag == this)
-            }
-        }
-        return addTagView(tagView)
-    }
-    
     public func removeTag(title: String) {
         // loop the array in reversed order to remove items during loop
         for index in (tagViews.count - 1).stride(through: 0, by: -1) {
@@ -419,6 +378,53 @@ public class TagListView: UIView {
 }
 
 extension TagListView {
+    //Daniel Jones added this method in. It was not originally part of tagListView
+    public func addSpecialtyTag(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagView {
+        let tagView = SpecialtyTagView(tagTitle: specialtyTagTitle, specialtyTagTitle: specialtyCategoryTitle)
+        tagView.textColor = textColor
+        tagView.selectedTextColor = selectedTextColor
+        tagView.tagBackgroundColor = tagBackgroundColor
+        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
+        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
+        tagView.cornerRadius = cornerRadius
+        tagView.borderWidth = borderWidth
+        tagView.borderColor = borderColor
+        tagView.selectedBorderColor = selectedBorderColor
+        tagView.paddingX = paddingX
+        tagView.paddingY = paddingY
+        tagView.textFont = textFont
+        tagView.removeIconLineWidth = removeIconLineWidth
+        tagView.removeButtonIconSize = removeButtonIconSize
+        tagView.enableRemoveButton = enableRemoveButton
+        tagView.removeIconLineColor = removeIconLineColor
+        tagView.addTarget(self, action: #selector(specialtyTagPressed(_:)), forControlEvents: .TouchUpInside)
+        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        //when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
+        //So, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
+        //I couldn't change the borderWidth/borderColor in the actual specialtyTagView class because, for some reason, they were not initialized yet.
+        //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
+        tagView.borderColor = nil
+        tagView.borderWidth = 0
+        
+        //had to add this because I was trying to let annotation corner view appear, and it wasn't
+        //I tried putting this same code in the specialtyTagView class, but it was still masking the view, until I put it here.
+        tagView.clipsToBounds = false
+        
+        // Deselect all tags except this one
+        tagView.onLongPress = { this in
+            for tag in self.tagViews {
+                tag.selected = (tag == this)
+            }
+        }
+        return addTagView(tagView)
+    }
+    
+    func specialtyTagPressed(sender: SpecialtyTagView!) {
+        sender.onTap?(sender)
+        delegate?.specialtyTagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
+    }
+    
     //TODO: probably should be checking something about category name also.
 //    func findTagView(tagTitle: String, categoryName: String?) -> TagView? {
 //        for tagView in tagViews {
