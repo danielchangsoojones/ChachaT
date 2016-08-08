@@ -26,10 +26,15 @@ class ChachaChoicesTagListView : TagListView {
     //keep this init despite it seeming to not do anything.
     override init(frame: CGRect) {
         super.init(frame: frame)
+        setProperties()
     }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+        setProperties()
+    }
+    
+    func setProperties() {
         borderColor = TagProperties.borderColor
         borderWidth = TagProperties.borderWidth
         textColor = TagProperties.textColor

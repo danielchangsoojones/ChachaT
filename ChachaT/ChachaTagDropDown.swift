@@ -55,7 +55,6 @@ class ChachaTagDropDown: UIView {
     
     private var configuration = DropDownConfiguration()
     private var backgroundView: UIView!
-    private var tags: [Tag]!
     private var menuWrapper: UIView!
     private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
@@ -65,14 +64,13 @@ class ChachaTagDropDown: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, tags: [Tag], popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
         super.init(frame: CGRectZero)
         
         self.delegate = delegate
         self.dropDownOriginY = popDownOriginY
         self.isShown = false
-        self.tags = tags
         
         //getting the top view controllers bounds
         let window = UIScreen.mainScreen()
@@ -93,7 +91,7 @@ class ChachaTagDropDown: UIView {
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
         dropDownView.backgroundColor = UIColor.blueColor()
-        self.tagListView = addTagListViewToView(tags, view: dropDownView)
+        self.tagListView = addTagListViewToView(dropDownView)
         
         // Add background view & table view to container view
         self.menuWrapper.addSubview(self.backgroundView)
@@ -107,8 +105,9 @@ class ChachaTagDropDown: UIView {
 //        self.menuWrapper.backgroundColor = UIColor.redColor()
     }
     
-    func show() {
+    func show(tagTitles: [String]) {
         if self.isShown == false {
+            addTags(tagTitles)
             self.showMenu()
         }
     }
@@ -165,6 +164,7 @@ class ChachaTagDropDown: UIView {
         
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
+        tagListView.removeAllTags() //menu is disappearing, so I want to get rid of all tags
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         
@@ -191,17 +191,14 @@ class ChachaTagDropDown: UIView {
         })
     }
     
-    func createTagViewList(tags: [Tag]) -> TagListView {
-        let tagListView = TagListView()
-        for tag in tags {
-            //TODO: make it add specialty tag or generic tag
-            tagListView.addTag(tag.title!)
+    func addTags(titleArray: [String]) {
+        for title in titleArray {
+            tagListView.addTag(title)
         }
-        return tagListView
     }
     
-    func addTagListViewToView(tags: [Tag], view: UIView) -> TagListView {
-        let tagListView = createTagViewList(tags)
+    func addTagListViewToView(view: UIView) -> TagListView {
+        let tagListView = ChachaChoicesTagListView(frame: CGRectZero)
         view.addSubview(tagListView)
         tagListView.snp_makeConstraints { (make) in
             make.edges.equalTo(view)

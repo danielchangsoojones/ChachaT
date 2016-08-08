@@ -62,8 +62,7 @@ class FilterTagViewController: UIViewController {
     func setDropDownMenu() {
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        dropDownMenu = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title:"banana")], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
-        dropDownMenu.delegate = self
+        dropDownMenu = ChachaTagDropDown(containerView: (navigationController?.view)!, popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
     }
     
     override func didReceiveMemoryWarning() {
