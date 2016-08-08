@@ -52,16 +52,21 @@ extension FilterQueryViewController {
         case .SpecialtyTagMenu:
             let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
             dropDownMenu.show(titleArray)
+            dropDownMenu.tagListView.delegate = self
         default:
             break
         }
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        let tagView = tagChosenView.addTag(title)
-        tagChoicesView.removeTag(title)
-        scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
-        scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        guard sender is ChachaChosenTagListView else {
+            //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable
+            let tagView = tagChosenView.addTag(title)
+            sender.removeTag(title)
+            scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
+            scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+            return
+        }
     }
 }
 

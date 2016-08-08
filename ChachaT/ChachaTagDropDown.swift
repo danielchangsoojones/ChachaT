@@ -58,7 +58,7 @@ class ChachaTagDropDown: UIView {
     private var menuWrapper: UIView!
     private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
-    private var tagListView : TagListView!
+    var tagListView : TagListView!
     var arrowImage : UIImageView!
     
     let arrowImageInset: CGFloat = 5.0
@@ -93,7 +93,8 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
-        dropDownView.backgroundColor = UIColor.blueColor()
+        dropDownView.backgroundColor = BackgroundPageColor
+//        addDropDownBackground()
         self.arrowImage = setArrowImageToView(dropDownView)
         self.tagListView = addTagListViewToView(dropDownView)
         
@@ -231,6 +232,15 @@ class ChachaTagDropDown: UIView {
     
     func arrowImagePressed(sender: UIImageView!) {
         hide()
+    }
+    
+    func addDropDownBackground() {
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = ChachaTeal
+        dropDownView.addSubview(backgroundView)
+        backgroundView.snp_makeConstraints { (make) in
+            make.edges.equalTo(dropDownView)
+        }
     }
     
     func getDropDownViewHeight() -> CGFloat {
