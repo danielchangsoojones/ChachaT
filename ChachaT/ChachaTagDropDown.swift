@@ -202,7 +202,6 @@ class ChachaTagDropDown: UIView {
     
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectZero)
-        tagListView.backgroundColor = UIColor.redColor()
         view.addSubview(tagListView)
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
@@ -215,8 +214,10 @@ class ChachaTagDropDown: UIView {
     
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
-        arrowImage.backgroundColor = UIColor.greenColor()
         arrowImage.contentMode = .ScaleAspectFit
+        let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
+        arrowImage.addGestureRecognizer(tap)
+        arrowImage.userInteractionEnabled = true
         superView.addSubview(arrowImage)
         arrowImage.snp_makeConstraints { (make) in
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
@@ -226,6 +227,10 @@ class ChachaTagDropDown: UIView {
             make.centerX.equalTo(superView)
         }
         return arrowImage
+    }
+    
+    func arrowImagePressed(sender: UIImageView!) {
+        hide()
     }
     
     func getDropDownViewHeight() -> CGFloat {
