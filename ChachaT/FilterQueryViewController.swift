@@ -105,7 +105,6 @@ extension FilterQueryViewController {
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        //TODO: make the search bar go to other view
         let tagView = tagChosenView.addTag(title)
         tagChoicesView.removeTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)

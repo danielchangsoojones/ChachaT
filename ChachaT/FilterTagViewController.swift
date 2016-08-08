@@ -196,8 +196,6 @@ extension FilterTagViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         resetTagChoicesViewList()
-        let tagView = scrollViewSearchView.theTagChosenListView.addTag("hi")
-        scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
             scrollViewSearchView.hideScrollSearchView(false)
