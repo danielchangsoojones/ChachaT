@@ -11,7 +11,6 @@ import EFTools
 
 class FilterQueryViewController: FilterTagViewController {
     
-    var mainPageDelegate: FilterViewControllerDelegate?
     var dataStore : FilterQueryDataStore!
     
     override func viewDidLoad() {
@@ -138,7 +137,12 @@ extension FilterQueryViewController: SegueHandlerType {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        default: break
+            case .SearchPageToTinderMainPageSegue:
+                //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
+                //the sender parameter is passed the user array
+                let navigationVC = segue.destinationViewController as! ChachaNavigationViewController
+                let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
+                rootVC.userArray = sender as! [User]
         }
     }
 }
