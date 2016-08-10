@@ -130,7 +130,6 @@ extension FilterQueryViewController : FilterQueryDataStoreDelegate {
     }
     
     func passUserArrayToMainPage(userArray: [User]) {
-        mainPageDelegate?.passFilteredUserArray(userArray)
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
     }
 }

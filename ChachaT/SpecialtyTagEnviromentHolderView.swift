@@ -39,7 +39,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
         $0.distribution = .EqualSpacing
         return $0
     }(UIStackView())
-    let tagListView = ChachaChosenTagListView()
+//    let tagListView = ChachaChosenTagListView()
     
     var createTagButtonText: String?
     var createdTag: TagView?
@@ -72,7 +72,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
             //had to pass this one in another initializer, since I want there to be some parameters passed through
             break
         case .CreateNewTag:
-            theSpecialtyView = tagListView
+//            theSpecialtyView = tagListView
             theTitleLabel.text = "That tag doesn't exist yet"
         }
         createStackView()
@@ -111,8 +111,8 @@ class SpecialtyTagEnviromentHolderView: UIView {
     }
     
     func updateTagListView(searchText: String) {
-        tagListView.removeAllTags()
-        createdTag = tagListView.addTag(searchText)
+//        tagListView.removeAllTags()
+//        createdTag = tagListView.addTag(searchText)
     }
     
     func createDistanceSliderView() {

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-class SpecialtyTagView: TagView {
+public class SpecialtyTagView: TagView {
     
     var specialtyTagTitle : SpecialtyTagTitles
     var specialtyCategoryTitle : SpecialtyCategoryTitles
@@ -21,10 +21,16 @@ class SpecialtyTagView: TagView {
         super.init(frame: CGRectZero)
         createFakeBorder(TagProperties.borderColor, borderWidth: TagProperties.borderWidth, cornerRadius: TagProperties.cornerRadius)
         addCornerAnnotationSubview()
-        setTitle(tagTitle.toString, forState: .Normal)
+        if tagTitle != .None {
+            //specialtyTagTitle has been set to something real
+            setTitle(tagTitle.toString, forState: .Normal)
+        } else {
+            //tag title equals none, so make the title something like "Race" or "Hair Color"
+            setTitle(specialtyTagTitle.toString, forState: .Normal)
+        }
     }
     
-    required init?(coder aDecoder: NSCoder) {
+    required public init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
@@ -37,6 +43,8 @@ class SpecialtyTagView: TagView {
         view.layer.borderWidth = borderWidth
         view.layer.borderColor = borderColor.CGColor
         view.layer.cornerRadius = cornerRadius
+        //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
+        view.userInteractionEnabled = false
         self.addSubview(view)
         view.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
@@ -57,10 +65,14 @@ class SpecialtyTagView: TagView {
     
     //need to override becuase when I set the button title, it was not setting the tagTitle variable in this class
     //hence, when we would say layoutSubviews was not changing to the new size because it still thought it was the old tagTitle
-    override func setTitle(title: String?, forState state: UIControlState) {
+    override public func setTitle(title: String?, forState state: UIControlState) {
         super.setTitle(title, forState: .Normal)
         if let title = title {
-            specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title)!
+            if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title) {
+                self.specialtyTagTitle = specialtyTagTitle
+            } else if let specialtyCategoryTitle = SpecialtyCategoryTitles.stringRawValue(title) {
+                self.specialtyCategoryTitle = specialtyCategoryTitle
+            }
         }
     }
     

@@ -40,7 +40,7 @@ class Tag: PFObject, PFSubclassing {
         super.init()
         self.title = nil
         self.createdBy = User.currentUser()!
-        self.specialtyTagTitle = -1
+        self.specialtyTagTitle = SpecialtyTagTitles.None.rawValue
         self.specialtyCategoryTitle = specialtyCategoryTitle.rawValue
         self.attribute = convertTagAttributeFromCategoryTitle(specialtyCategoryTitle).rawValue
     }

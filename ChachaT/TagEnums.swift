@@ -39,10 +39,34 @@ public enum SpecialtyCategoryTitles : Int {
         }
     }
     
+    var specialtyTagTitles : [SpecialtyTagTitles] {
+        switch self {
+        case .Gender:
+            return SpecialtyTagTitles.genderAllValues
+        case .Race:
+            return SpecialtyTagTitles.raceAllValues
+        case .Sexuality:
+            return SpecialtyTagTitles.sexualityAllValues
+        case .PoliticalGroup:
+            return SpecialtyTagTitles.politicalGroupAllValues
+        case .HairColor:
+            return SpecialtyTagTitles.hairColorAllValues
+        default:
+            return []
+        }
+    }
+    
     static let specialtyTagMenuCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor]
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
     static let allCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
+    
+    static func stringRawValue(rawValue: String) -> SpecialtyCategoryTitles? {
+        for specialtyCategoryTitles in allCategories where specialtyCategoryTitles.toString == rawValue  {
+            return specialtyCategoryTitles //found a match
+        }
+        return nil //none of the toStrings were equivalent to the passed string
+    }
 }
 
 public enum SpecialtyTagTitles : Int {

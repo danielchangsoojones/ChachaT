@@ -55,24 +55,25 @@ class ChachaTagDropDown: UIView {
     
     private var configuration = DropDownConfiguration()
     private var backgroundView: UIView!
-    private var tags: [Tag]!
     private var menuWrapper: UIView!
-    private var testingView: UIView!
+    private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
-    private var tagListView : TagListView!
+    var tagListView : TagListView!
+    var arrowImage : UIImageView!
+    
+    let arrowImageInset: CGFloat = 5.0
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, tags: [Tag], popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
         super.init(frame: CGRectZero)
         
         self.delegate = delegate
         self.dropDownOriginY = popDownOriginY
         self.isShown = false
-        self.tags = tags
         
         //getting the top view controllers bounds
         let window = UIScreen.mainScreen()
@@ -91,13 +92,15 @@ class ChachaTagDropDown: UIView {
         let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaTagDropDown.hideMenu));
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
-        testingView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
-        testingView.backgroundColor = UIColor.blueColor()
-        self.tagListView = addTagListViewToView(tags, view: testingView)
+        dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
+        dropDownView.backgroundColor = BackgroundPageColor
+//        addDropDownBackground()
+        self.arrowImage = setArrowImageToView(dropDownView)
+        self.tagListView = addTagListViewToView(dropDownView)
         
         // Add background view & table view to container view
         self.menuWrapper.addSubview(self.backgroundView)
-        self.menuWrapper.addSubview(testingView)
+        self.menuWrapper.addSubview(dropDownView)
         
         // Add Menu View to container view
         containerView.addSubview(self.menuWrapper)
@@ -107,8 +110,9 @@ class ChachaTagDropDown: UIView {
 //        self.menuWrapper.backgroundColor = UIColor.redColor()
     }
     
-    func show() {
+    func show(tagTitles: [String]) {
         if self.isShown == false {
+            addTags(tagTitles)
             self.showMenu()
         }
     }
@@ -127,7 +131,7 @@ class ChachaTagDropDown: UIView {
         }
     }
     
-    func showMenu() {
+    private func showMenu() {
         self.menuWrapper.frame.origin.y = dropDownOriginY
         
         self.isShown = true
@@ -139,11 +143,11 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.alpha = 0
         
         // Animation
-        self.testingView.frame.origin.y = 0
+        self.dropDownView.frame.origin.y = 0
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
         
-        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: testingView.frame.height)
+        delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
@@ -152,19 +156,19 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                let tagListViewHeight = self.tagListView.intrinsicContentSize().height
                 let screenSizeWidth = UIScreen.mainScreen().bounds.width
-                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, screenSizeWidth, tagListViewHeight)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, screenSizeWidth, self.getDropDownViewHeight())
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
             }, completion: nil
         )
     }
     
-    func hideMenu() {
+    @objc private func hideMenu() {
         self.isShown = false
         
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
+        tagListView.removeAllTags() //menu is disappearing, so I want to get rid of all tags
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         
@@ -175,7 +179,7 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                self.testingView.frame = CGRectMake(self.testingView.frame.origin.x, self.testingView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
             }, completion: nil
         )
         
@@ -191,25 +195,60 @@ class ChachaTagDropDown: UIView {
         })
     }
     
-    func createTagViewList(tags: [Tag]) -> TagListView {
-        let tagListView = TagListView()
-        for tag in tags {
-            //TODO: make it add specialty tag or generic tag
-            tagListView.addTag(tag.title!)
+    func addTags(titleArray: [String]) {
+        for title in titleArray {
+            tagListView.addTag(title)
         }
-        return tagListView
     }
     
-    func addTagListViewToView(tags: [Tag], view: UIView) -> TagListView {
-        let tagListView = createTagViewList(tags)
+    func addTagListViewToView(view: UIView) -> TagListView {
+        let tagListView = ChachaChoicesTagListView(frame: CGRectZero)
         view.addSubview(tagListView)
         tagListView.snp_makeConstraints { (make) in
-            make.edges.equalTo(view)
+            make.trailing.leading.equalTo(view)
+            make.top.equalTo(view)
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
         return tagListView
     }
     
-    // MARK: BTConfiguration
+    func setArrowImageToView(superView: UIView) -> UIImageView {
+        let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
+        arrowImage.contentMode = .ScaleAspectFit
+        let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
+        arrowImage.addGestureRecognizer(tap)
+        arrowImage.userInteractionEnabled = true
+        superView.addSubview(arrowImage)
+        arrowImage.snp_makeConstraints { (make) in
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(superView).inset(arrowImageInset).priorityLow()
+            make.height.equalTo(10).priorityLow()
+            make.width.equalTo(20).priorityLow()
+            make.centerX.equalTo(superView)
+        }
+        return arrowImage
+    }
+    
+    func arrowImagePressed(sender: UIImageView!) {
+        hide()
+    }
+    
+    func addDropDownBackground() {
+        let backgroundView = UIView()
+        backgroundView.backgroundColor = ChachaTeal
+        dropDownView.addSubview(backgroundView)
+        backgroundView.snp_makeConstraints { (make) in
+            make.edges.equalTo(dropDownView)
+        }
+    }
+    
+    func getDropDownViewHeight() -> CGFloat {
+        let arrowImageHeight = arrowImage.intrinsicContentSize().height
+        let tagListViewHeight = tagListView.intrinsicContentSize().height
+        return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
+    }
+    
     class DropDownConfiguration {
         var animationDuration: NSTimeInterval!
         var maskBackgroundColor: UIColor!

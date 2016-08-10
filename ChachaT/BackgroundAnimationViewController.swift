@@ -76,7 +76,11 @@ class BackgroundAnimationViewController: UIViewController {
         catch { }
         audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
-        createUserArray()
+        if userArray.isEmpty {
+            //if user array is empty, then that means we should load users
+            //if it is not empty, that means the userArray was passed from the search page, so don't load new users
+            createUserArray()
+        }
     }
     
     override func viewWillAppear(animated: Bool) {
@@ -122,27 +126,8 @@ class BackgroundAnimationViewController: UIViewController {
     }
     
     func logOut() {
-        let view = UIView(frame: CGRectMake(100, 0, 20, 20))
-        view.backgroundColor = UIColor.redColor()
-        
-        navigationController?.navigationBar.addSubview(view)
-        
-        moveImage(view)
-//        User.logOut()
-//        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
-    }
-    
-    func moveImage(view: UIView){
-        var toPoint: CGPoint = CGPointMake(50.0, 0)
-        var fromPoint : CGPoint = view.frame.origin
-        
-        var movement = CABasicAnimation(keyPath: "position")
-        movement.additive = true
-        movement.fromValue =  NSValue(CGPoint: fromPoint)
-        movement.toValue =  NSValue(CGPoint: toPoint)
-        movement.duration = 0.3
-        
-        view.layer.addAnimation(movement, forKey: "move")
+        User.logOut()
+        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
     }
     
     func searchNavigationButtonPressed() {
@@ -284,25 +269,6 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case OnboardingPageSegue
         case CustomBackgroundAnimationToSearchSegue
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        switch segueIdentifierForSegue(segue) {
-        case .CustomBackgroundAnimationToSearchSegue:
-            let destinationVC = segue.destinationViewController as! FilterQueryViewController
-            destinationVC.mainPageDelegate = self
-        default: break
-        }
-    }
-}
-
-protocol FilterViewControllerDelegate {
-    func passFilteredUserArray(filteredUserArray: [User])
-}
-extension BackgroundAnimationViewController: FilterViewControllerDelegate {
-    func passFilteredUserArray(filteredUserArray: [User]) {
-        userArray = filteredUserArray
-        self.kolodaView.reloadData()
     }
 }
 

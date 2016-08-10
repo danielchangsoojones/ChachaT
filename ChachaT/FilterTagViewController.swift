@@ -14,10 +14,11 @@ import Foundation
 class FilterTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: ChachaChoicesTagListView!
+    var tagChosenView : ChachaChosenTagListView!
     @IBOutlet weak var backgroundColorView: UIView!
     var theSpecialtyTagEnviromentHolderView : SpecialtyTagEnviromentHolderView?
     var scrollViewSearchView : ScrollViewSearchView!
-    var menuView: ChachaTagDropDown!
+    var dropDownMenu: ChachaTagDropDown!
     
     //constraint outlets
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
@@ -33,6 +34,7 @@ class FilterTagViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView()
+        setDropDownMenu()
         backgroundColorView.backgroundColor = BackgroundPageColor
     }
     
@@ -43,20 +45,30 @@ class FilterTagViewController: UIViewController {
     func addSearchScrollView() -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
-        scrollViewSearchView.theTagChosenListView.delegate = self
         scrollViewSearchView.searchBox.delegate = self
         self.navigationController?.navigationBar.addSubview(scrollViewSearchView)
         scrollViewSearchView.snp_makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
+        setChosenTagView(scrollViewSearchView)
         return scrollViewSearchView
+    }
+    
+    func setChosenTagView(scrollViewSearchView: ScrollViewSearchView) {
+        tagChosenView = scrollViewSearchView.theTagChosenListView
+        tagChosenView.delegate = self
+    }
+    
+    func setDropDownMenu() {
+        let navigationBarHeight = navigationController?.navigationBar.frame.height
+        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        dropDownMenu = ChachaTagDropDown(containerView: (navigationController?.view)!, popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 
 extension FilterTagViewController {
@@ -174,6 +186,42 @@ extension FilterTagViewController : TagListViewDelegate {
     
 }
 
+extension FilterTagViewController : ChachaTagDropDownDelegate {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
+        if moveDown {
+            if let downDistance = downDistance {
+                tagChoicesViewTopConstraint.constant = downDistance
+            }
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: springWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: nil
+            )
+        } else {
+            //we want to move the TagListView back up to original position, which is 0
+            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
+            tagChoicesView.shouldRearrangeViews = false
+            UIView.animateWithDuration(
+                animationDuration,
+                delay: 0,
+                usingSpringWithDamping: springWithDamping,
+                initialSpringVelocity: initialSpringVelocity,
+                options: [],
+                animations: {
+                    self.view.layoutIfNeeded()
+                }, completion: { (_) in
+                    self.tagChoicesView.shouldRearrangeViews = true
+            })
+        }
+    }
+}
+
 //search extension
 extension FilterTagViewController: UISearchBarDelegate {
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
@@ -190,8 +238,6 @@ extension FilterTagViewController: UISearchBarDelegate {
         searchBar.showsCancelButton = false
         searchBar.resignFirstResponder()
         resetTagChoicesViewList()
-        let tagView = scrollViewSearchView.theTagChosenListView.addTag("hi")
-        scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
             scrollViewSearchView.hideScrollSearchView(false)

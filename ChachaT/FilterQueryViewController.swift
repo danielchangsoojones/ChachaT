@@ -11,7 +11,6 @@ import EFTools
 
 class FilterQueryViewController: FilterTagViewController {
     
-    var mainPageDelegate: FilterViewControllerDelegate?
     var dataStore : FilterQueryDataStore!
     
     override func viewDidLoad() {
@@ -19,10 +18,6 @@ class FilterQueryViewController: FilterTagViewController {
         setDataFromDataStore()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
-//        let navigationBarHeight = navigationController?.navigationBar.frame.height
-//        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        //this bottom is just for testing
-//        self.menuView = ChachaTagDropDown(containerView: (navigationController?.view)!, tags: [Tag(title: "hi", specialtyCategoryTitle: nil)], popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
     }
     
     func setDataFromDataStore() {
@@ -48,67 +43,28 @@ class FilterQueryViewController: FilterTagViewController {
 
 }
 
-extension FilterQueryViewController : ChachaTagDropDownDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
-        if moveDown {
-            if let downDistance = downDistance {
-                tagChoicesViewTopConstraint.constant = downDistance
-            }
-            tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(
-                animationDuration,
-                delay: 0,
-                usingSpringWithDamping: 0.7,
-                initialSpringVelocity: 0.5,
-                options: [],
-                animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: nil
-            )
-        } else {
-            //we want to move the TagListView back up to original position, which is 0
-            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
-            tagChoicesView.shouldRearrangeViews = false
-            UIView.animateWithDuration(
-                animationDuration,
-                delay: 0,
-                usingSpringWithDamping: springWithDamping,
-                initialSpringVelocity: initialSpringVelocity,
-                options: [],
-                animations: {
-                    self.view.layoutIfNeeded()
-                }, completion: { (_) in
-                    self.tagChoicesView.shouldRearrangeViews = true
-            })
-        }
-    }
-}
-
-//setting default tags in view extension
-extension FilterQueryViewController {
-}
-
-
 //extension for tag actions
 extension FilterQueryViewController {
+    func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
+        let tagAttribute = convertTagAttributeFromCategoryTitle(tagView.specialtyCategoryTitle)
+        switch tagAttribute {
+        case .SpecialtyTagMenu:
+            let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
+            dropDownMenu.show(titleArray)
+            dropDownMenu.tagListView.delegate = self
+        default:
+            break
+        }
+    }
+    
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-            switch tag.attribute {
-            case TagAttributes.Generic.rawValue:
-                break
-//                let tagView = tagChosenView.addTag(tag.title)
-//                tagChoicesView.removeTag(tag.title)
-//                scrollViewSearchView?.rearrangeSearchArea(tagView!, extend: true)
-            case TagAttributes.SpecialtyTagMenu.rawValue:
-                break
-            case TagAttributes.SpecialtySingleSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            case TagAttributes.SpecialtyRangeSlider.rawValue:
-                //TODO: make the specialty slider come up
-                break
-            default: break
-            }
+        guard sender is ChachaChosenTagListView else {
+            //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable
+            let tagView = tagChosenView.addTag(title)
+            sender.removeTag(title)
+            scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
+            scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+            return
         }
     }
 }
@@ -181,7 +137,12 @@ extension FilterQueryViewController: SegueHandlerType {
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         switch segueIdentifierForSegue(segue) {
-        default: break
+            case .SearchPageToTinderMainPageSegue:
+                //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
+                //the sender parameter is passed the user array
+                let navigationVC = segue.destinationViewController as! ChachaNavigationViewController
+                let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
+                rootVC.userArray = sender as! [User]
         }
     }
 }
