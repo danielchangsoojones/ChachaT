@@ -10,7 +10,7 @@
 public enum SpecialtyCategoryTitles : Int {
     //using Int to seperate the specialty tag slider from tags, ect.
     case Gender = 0
-    case Race = 1
+    case Ethnicity = 1
     case Sexuality = 2
     case PoliticalGroup = 3
     case HairColor = 4
@@ -24,7 +24,7 @@ public enum SpecialtyCategoryTitles : Int {
         switch self {
         case .Gender:
             return "Gender"
-        case .Race:
+        case .Ethnicity:
             return "Race"
         case .Sexuality:
             return "Sexuality"
@@ -43,7 +43,7 @@ public enum SpecialtyCategoryTitles : Int {
         switch self {
         case .Gender:
             return SpecialtyTagTitles.genderAllValues
-        case .Race:
+        case .Ethnicity:
             return SpecialtyTagTitles.raceAllValues
         case .Sexuality:
             return SpecialtyTagTitles.sexualityAllValues
@@ -56,10 +56,10 @@ public enum SpecialtyCategoryTitles : Int {
         }
     }
     
-    static let specialtyTagMenuCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor]
+    static let specialtyTagMenuCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor]
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
-    static let allCategories = [Gender, Race, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
+    static let allCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
     
     static func stringRawValue(rawValue: String) -> SpecialtyCategoryTitles? {
         for specialtyCategoryTitles in allCategories where specialtyCategoryTitles.toString == rawValue  {
@@ -190,11 +190,20 @@ func findSpecialtyCategoryTitle(tagTitle: String) -> SpecialtyCategoryTitles? {
         } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(specialtyTagTitle) {
             return .PoliticalGroup
         } else if  SpecialtyTagTitles.raceAllValues.contains(specialtyTagTitle) {
-            return .Race
+            return .Ethnicity
         }
     }
     //return nil because it was in none of the above cases, shouldn't reach this point
     return nil
+}
+
+func tagTitleIsSpecial(tagTitle: String) -> Bool {
+    if SpecialtyTagTitles.stringRawValue(tagTitle) != nil {
+        //there is a specialtyTag associated with this title
+        return true
+    }
+    //return nil because it was in none of the above cases, shouldn't reach this point
+    return false
 }
 
 

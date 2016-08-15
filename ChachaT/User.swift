@@ -21,7 +21,6 @@ class User: PFUser {
     @NSManaged var factOne: String?
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
-    @NSManaged var location: PFGeoPoint?
     @NSManaged var facebookId : String?
 
     func calculateBirthDate() -> Int? {

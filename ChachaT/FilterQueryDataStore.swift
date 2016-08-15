@@ -87,19 +87,23 @@ class FilterQueryDataStore {
     
     //Purpose: the user clicked search, so we want to find the users that fit the criteria.
     func findUserArray(chosenTagArrayTitles: [String]) {
-        let query = Tag.query()
+        let query = Tags.query()
         //finding all tags that have a title that the user chose for the search
         //TODO: I'll need to do something if 0 people come up
         if !chosenTagArrayTitles.isEmpty {
-            query?.whereKey("title", containedIn: chosenTagArrayTitles)
+            //need to seperate the generic and specialty tags
+            let arraysTuple = filterGenericTagArrayAndSpecialtyTagArray(chosenTagArrayTitles)
+            let genericTagTitleArray = arraysTuple.genericTagTitleArray
+            let specialtyTagTitleArray = arraysTuple.specialtyTagTitleArray
+            query!.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
+            query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
+            query?.includeKey("createdBy")
         }
-        query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-        query?.includeKey("createdBy")
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
             if error == nil {
                 var userArray : [User] = []
                 var userDuplicateArray : [User] = []
-                for tag in objects as! [Tag] {
+                for tag in objects as! [Tags] {
                     if !userDuplicateArray.contains(tag.createdBy) {
                         //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
                         //this fixes that
@@ -114,8 +118,21 @@ class FilterQueryDataStore {
         })
     }
     
-    
-    
+    //Purpose: we need to seperate an array for specialty tags becuse the genericTags in Parse will not contain those titles in their array. We need to do special things with those.
+    func filterGenericTagArrayAndSpecialtyTagArray(stringArray: [String]) -> (genericTagTitleArray: [String], specialtyTagTitleArray: [String]) {
+        var specialtyTagTitleArray : [String] = []
+        var genericTagTitleArray : [String] = []
+        for tagTitle in stringArray {
+            if tagTitleIsSpecial(tagTitle) {
+                specialtyTagTitleArray.append(tagTitle)
+            } else {
+                //the tag is a generic tag
+                genericTagTitleArray.append(tagTitle)
+            }
+        }
+        return (genericTagTitleArray, specialtyTagTitleArray)
+    }
+
 }
 
 extension FilterQueryViewController : FilterQueryDataStoreDelegate {
