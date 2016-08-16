@@ -26,7 +26,7 @@ public class SpecialtyTagView: TagView {
             setTitle(tagTitle.toString, forState: .Normal)
         } else {
             //tag title equals none, so make the title something like "Race" or "Hair Color"
-            setTitle(specialtyTagTitle.toString, forState: .Normal)
+            setTitle(specialtyTagTitle.rawValue, forState: .Normal)
         }
     }
     
@@ -70,7 +70,7 @@ public class SpecialtyTagView: TagView {
         if let title = title {
             if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title) {
                 self.specialtyTagTitle = specialtyTagTitle
-            } else if let specialtyCategoryTitle = SpecialtyCategoryTitles.stringRawValue(title) {
+            } else if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: title) {
                 self.specialtyCategoryTitle = specialtyCategoryTitle
             }
         }

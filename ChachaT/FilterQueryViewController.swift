@@ -27,11 +27,13 @@ class FilterQueryViewController: FilterTagViewController {
     //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
     //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
     override func loadChoicesViewTags() {
-        for tag in tagChoicesDataArray {
-            if tag.isGeneric() {
-                tagChoicesView.addTag(tag.title!)
-            } else if let tagTuple = tag.isSpecial() {
-                tagChoicesView.addSpecialtyTag(tagTuple.specialtyTagTitle, specialtyCategoryTitle: tagTuple.specialtyCategoryTitle)
+        for tagTitle in tagChoicesDataArray {
+            if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: tagTitle) {
+                //the tagTitle is special
+                tagChoicesView.addSpecialtyTag(.None, specialtyCategoryTitle: specialtyCategoryTitle)
+            } else {
+                //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
+                tagChoicesView.addTag(tagTitle)
             }
         }
     }
@@ -94,12 +96,12 @@ extension FilterQueryViewController: ScrollViewSearchViewDelegate {
 //search extension
 extension FilterQueryViewController {
    override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        var filtered:[Tag] = []
+        var filtered:[String] = []
         tagChoicesView.removeAllTags()
-        filtered = searchDataArray.filter({ (tag) -> Bool in
+        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
             //finds the tagTitle, but if nil, then uses the specialtyTagTitle
             //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
-            let tmp: NSString = tag.titleToShowForTag()
+            let tmp: NSString = tagTitle
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
@@ -121,8 +123,8 @@ extension FilterQueryViewController {
         } else {
             //there is text, and we have a match, soa the tagChoicesView changes accordingly
             searchActive = true
-            for tag in filtered {
-                tagChoicesView.addTag(tag.titleToShowForTag())
+            for tagTitle in filtered {
+                tagChoicesView.addTag(tagTitle)
             }
             createSpecialtyTagEnviroment(false)
         }

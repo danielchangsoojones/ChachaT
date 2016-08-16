@@ -27,7 +27,7 @@ class CustomCardView: OverlayView {
             if let fullName = userOfTheCard?.fullName {
                 theFullNameLabel.text = fullName
             }
-            if let age = userOfTheCard?.calculateBirthDate() {
+            if let age = userOfTheCard?.age {
                 theAgeLabel.text = ", " + "\(age)"
             }
             if let profileImage = userOfTheCard?.profileImage {

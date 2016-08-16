@@ -22,8 +22,8 @@ class User: PFUser {
     @NSManaged var factTwo: String?
     @NSManaged var factThree: String?
     @NSManaged var facebookId : String?
-
-    func calculateBirthDate() -> Int? {
+    @NSManaged var location: PFGeoPoint
+    var age : Int? {
         let calendar : NSCalendar = NSCalendar.currentCalendar()
         let now = NSDate()
         if let birthDate = birthDate {
@@ -34,7 +34,6 @@ class User: PFUser {
             return ageComponents.year
         }
         return nil
-        
     }
     
 }

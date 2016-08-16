@@ -8,23 +8,24 @@
 
 import Foundation
 import Parse
+import SCLAlertView
 
 protocol FilterQueryDataStoreDelegate {
-    func getSearchDataArray(searchDataArray: [Tag])
-    func setChoicesViewTags(tagChoicesDataArray: [Tag])
+    func getSearchDataArray(searchDataArray: [String])
+    func setChoicesViewTags(tagChoicesDataArray: [String])
     func passUserArrayToMainPage(userArray: [User])
 }
 
 class FilterQueryDataStore {
-    var searchDataArray : [Tag] = [] //tags that will be available for searching
-    var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
+    var searchDataArray : [String] = [] //tags that will be available for searching
+    var tagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
     
     var delegate: FilterQueryDataStoreDelegate?
     
     init(delegate: FilterQueryDataStoreDelegate) {
         self.delegate = delegate
         setSearchDataArray()
-        setTagsInTagChoicesDataArray()
+        setSpecialtyTagsIntoDefaultView()
     }
     
     //TODO; right now, my search is pulling down the entire tag table and then doing search,
@@ -33,15 +34,16 @@ class FilterQueryDataStore {
     func setSearchDataArray() {
         addSpecialtyTagsToSearchDataArray()
         var alreadyContainsTagArray: [String] = []
-        let query = PFQuery(className: "Tag")
-        query.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
-            if let tags = objects as? [Tag] {
-                for tag in tags where tag.attribute == TagAttributes.Generic.rawValue {
-                    //we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
-                    if !alreadyContainsTagArray.contains(tag.title!) {
-                        //our string array does not already contain the tag title, so we can add it to our searchable array
-                        alreadyContainsTagArray.append(tag.title!)
-                        self.searchDataArray.append(tag)
+        let query = Tags.query()
+        query!.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let tags = objects as? [Tags] {
+                for tag in tags {
+                    for tagTitle in tag.genericTags {
+                        if !alreadyContainsTagArray.contains(tagTitle) {
+                            //our string array does not already contain the tag title, so we can add it to our searchable array
+                            alreadyContainsTagArray.append(tagTitle)
+                            self.searchDataArray.append(tagTitle)
+                        }
                     }
                     self.delegate?.getSearchDataArray(self.searchDataArray)
                 }
@@ -49,40 +51,20 @@ class FilterQueryDataStore {
         }
     }
     
-    //TODO: I bet this breaks when I try to pass something like Race.
+    //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
     func addSpecialtyTagsToSearchDataArray() {
         for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            if let specialtyCategoryTitle = findSpecialtyCategoryTitle(specialtyTagTitle.toString) {
-                searchDataArray.append(Tag(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle))
-            }
+            searchDataArray.append(specialtyTagTitle.toString)
         }
-    }
-    
-    func setTagsInTagChoicesDataArray() {
-        //adding in generic tags
-        //TODO: this is requerying the database every time to do this, it should just get the array once, and then use that.
-        //Although this whole function will change because I only want us to get a certain number of tags, and I don't want it to just be random.
-        let query = Tag.query()
-        query?.whereKey("attribute", equalTo: TagAttributes.Generic.rawValue)
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                for tag in objects as! [Tag] {
-                    self.tagChoicesDataArray.append(tag)
-                }
-                self.setSpecialtyTagsIntoDefaultView()
-                self.delegate?.setChoicesViewTags(self.tagChoicesDataArray)
-            } else {
-                print(error)
-            }
-        })
     }
     
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            tagChoicesDataArray.append(Tag(specialtyCategoryTitle: specialtyCategory))
+            tagChoicesDataArray.append(specialtyCategory.rawValue)
         }
+        delegate?.setChoicesViewTags(tagChoicesDataArray)
     }
     
     //Purpose: the user clicked search, so we want to find the users that fit the criteria.
@@ -96,22 +78,23 @@ class FilterQueryDataStore {
             let genericTagTitleArray = arraysTuple.genericTagTitleArray
             let specialtyTagTitleArray = arraysTuple.specialtyTagTitleArray
             query!.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
+            querySpecialtyTags(specialtyTagTitleArray, query: query!)
             query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
+            //TODO: see if I need to even have includeKey since doing select key
             query?.includeKey("createdBy")
+            query?.selectKeys(["createdBy"]) //we really only need to know the users
         }
         query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                var userArray : [User] = []
-                var userDuplicateArray : [User] = []
-                for tag in objects as! [Tags] {
-                    if !userDuplicateArray.contains(tag.createdBy) {
-                        //weeding out an duplicate users that might be added to array. Users that have all tags will come up as many times as the number of tags.
-                        //this fixes that
-                        userDuplicateArray.append(tag.createdBy)
+            if let objects = objects where error == nil {
+                if objects.isEmpty {
+                    SCLAlertView().showInfo("Important info", subTitle: "You are great")
+                } else {
+                    var userArray : [User] = []
+                    for tag in objects as! [Tags] {
                         userArray.append(tag.createdBy)
                     }
+                    self.delegate?.passUserArrayToMainPage(userArray)
                 }
-                self.delegate?.passUserArrayToMainPage(userArray)
             } else {
                 print(error)
             }
@@ -132,16 +115,36 @@ class FilterQueryDataStore {
         }
         return (genericTagTitleArray, specialtyTagTitleArray)
     }
-
+    
+    func querySpecialtyTags(specialtyTagTitleArray: [String], query: PFQuery) -> PFQuery {
+        for tagTitle in specialtyTagTitleArray {
+            if let specialtyCategoryTitle = findSpecialtyCategoryTitle(tagTitle) {
+                let attribute = convertTagAttributeFromCategoryTitle(specialtyCategoryTitle)
+                switch attribute {
+                case .SpecialtyTagMenu:
+                    if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
+                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
+                        query.whereKey(specialtyCategoryTitle.rawValue, equalTo: specialtyTagTitle.rawValue)
+                    }
+                case .SpecialtySingleSlider:
+                    break
+                case .SpecialtyRangeSlider:
+                    break
+                }
+            }
+        }
+        //return the same query after we have added the specialty criteria
+        return query
+    }
 }
 
 extension FilterQueryViewController : FilterQueryDataStoreDelegate {
     //TODO: for some reason, it would not let me call this setSearchDataArray, only get. Would like to change name to make it better.
-    func getSearchDataArray(searchDataArray: [Tag]) {
+    func getSearchDataArray(searchDataArray: [String]) {
         self.searchDataArray = searchDataArray
     }
     
-    func setChoicesViewTags(tagChoicesDataArray: [Tag]) {
+    func setChoicesViewTags(tagChoicesDataArray: [String]) {
         self.tagChoicesDataArray = tagChoicesDataArray
         loadChoicesViewTags()
     }
