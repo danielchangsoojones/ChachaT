@@ -69,36 +69,36 @@ class FilterQueryDataStore {
     
     //Purpose: the user clicked search, so we want to find the users that fit the criteria.
     func findUserArray(chosenTagArrayTitles: [String]) {
-        let query = Tags.query()
-        //finding all tags that have a title that the user chose for the search
-        //TODO: I'll need to do something if 0 people come up
         if !chosenTagArrayTitles.isEmpty {
+            let genericTagQuery = Tags.query()
             //need to seperate the generic and specialty tags
             let arraysTuple = filterGenericTagArrayAndSpecialtyTagArray(chosenTagArrayTitles)
             let genericTagTitleArray = arraysTuple.genericTagTitleArray
             let specialtyTagTitleArray = arraysTuple.specialtyTagTitleArray
-            query!.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
-            querySpecialtyTags(specialtyTagTitleArray, query: query!)
-            query?.whereKey("createdBy", notEqualTo: User.currentUser()!)
-            //TODO: see if I need to even have includeKey since doing select key
-            query?.includeKey("createdBy")
-            query?.selectKeys(["createdBy"]) //we really only need to know the users
-        }
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if let objects = objects where error == nil {
-                if objects.isEmpty {
-                    SCLAlertView().showInfo("Important info", subTitle: "You are great")
-                } else {
-                    var userArray : [User] = []
-                    for tag in objects as! [Tags] {
-                        userArray.append(tag.createdBy)
-                    }
-                    self.delegate?.passUserArrayToMainPage(userArray)
-                }
-            } else {
-                print(error)
+            if !genericTagTitleArray.isEmpty {
+                genericTagQuery!.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
             }
-        })
+            let finalQuery = querySpecialtyTags(specialtyTagTitleArray, query: genericTagQuery!)
+            finalQuery.whereKey("createdBy", notEqualTo: User.currentUser()!)
+            finalQuery.includeKey("createdBy")
+            finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
+            finalQuery.findObjectsInBackgroundWithBlock({ (objects, error) in
+                if let objects = objects where error == nil {
+                    if objects.isEmpty {
+                        print(objects)
+                        SCLAlertView().showInfo("Important info", subTitle: "You are great")
+                    } else {
+                        var userArray : [User] = []
+                        for tag in objects as! [Tags] {
+                            userArray.append(tag.createdBy)
+                        }
+                        self.delegate?.passUserArrayToMainPage(userArray)
+                    }
+                } else {
+                    print(error)
+                }
+            })
+        }
     }
     
     //Purpose: we need to seperate an array for specialty tags becuse the genericTags in Parse will not contain those titles in their array. We need to do special things with those.
@@ -118,18 +118,19 @@ class FilterQueryDataStore {
     
     func querySpecialtyTags(specialtyTagTitleArray: [String], query: PFQuery) -> PFQuery {
         for tagTitle in specialtyTagTitleArray {
-            if let specialtyCategoryTitle = findSpecialtyCategoryTitle(tagTitle) {
-                let attribute = convertTagAttributeFromCategoryTitle(specialtyCategoryTitle)
-                switch attribute {
-                case .SpecialtyTagMenu:
-                    if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
-                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
-                        query.whereKey(specialtyCategoryTitle.rawValue, equalTo: specialtyTagTitle.rawValue)
+            if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
+                if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
+                    if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
+                        switch tagAttribute {
+                        case .SpecialtyTagMenu:
+                            //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
+                            query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: specialtyTagTitle.rawValue)
+                        case .SpecialtySingleSlider:
+                            break
+                        case .SpecialtyRangeSlider:
+                            break
+                        }
                     }
-                case .SpecialtySingleSlider:
-                    break
-                case .SpecialtyRangeSlider:
-                    break
                 }
             }
         }

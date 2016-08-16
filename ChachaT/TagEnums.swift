@@ -19,12 +19,30 @@ public enum SpecialtyCategoryTitles : String {
     //range slider
     case AgeRange = "Age Range"
     
+    //Purpose: I have to make a special string for what the column is named in Parse, so then I can make sure this name matches up during the query
+    var parseColumnName: String {
+        switch self {
+        case .Gender:
+            return "gender"
+        case .Ethnicity:
+            return "ethnicity"
+        case .Sexuality:
+            return "sexuality"
+        case .PoliticalGroup:
+            return "politicalGroup"
+        case .HairColor:
+            return "hairColor"
+        default:
+            return ""
+        }
+    }
+    
     var specialtyTagTitles : [SpecialtyTagTitles] {
         switch self {
         case .Gender:
             return SpecialtyTagTitles.genderAllValues
         case .Ethnicity:
-            return SpecialtyTagTitles.raceAllValues
+            return SpecialtyTagTitles.ethnicityAllValues
         case .Sexuality:
             return SpecialtyTagTitles.sexualityAllValues
         case .PoliticalGroup:
@@ -34,6 +52,18 @@ public enum SpecialtyCategoryTitles : String {
         default:
             return []
         }
+    }
+    
+    //Purpose: find how the drop down menu is supposed to act, based on the tag attribute
+    var associatedTagAttribute : TagAttributes? {
+        if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(self) {
+            return .SpecialtyTagMenu
+        } else if SpecialtyCategoryTitles.specialtySingleSliderCategories.contains(self) {
+            return .SpecialtySingleSlider
+        } else if SpecialtyCategoryTitles.specialtyRangeSliderCategories.contains(self) {
+            return .SpecialtyRangeSlider
+        }
+        return nil
     }
     
     static let specialtyTagMenuCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor]
@@ -104,8 +134,23 @@ public enum SpecialtyTagTitles : Int {
         return nil //none of the toStrings were equivalent to the passed string
     }
     
+    var associatedSpecialtyCategoryTitle : SpecialtyCategoryTitles? {
+        if SpecialtyTagTitles.genderAllValues.contains(self) {
+            return .Gender
+        } else if SpecialtyTagTitles.hairColorAllValues.contains(self) {
+            return .HairColor
+        } else if  SpecialtyTagTitles.sexualityAllValues.contains(self) {
+            return .Sexuality
+        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(self) {
+            return .PoliticalGroup
+        } else if  SpecialtyTagTitles.ethnicityAllValues.contains(self) {
+            return .Ethnicity
+        }
+        return nil
+    }
+    
     //this array lets me iterate over certain sections of the enum
-    static let raceAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , None ]
+    static let ethnicityAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , None ]
     static let hairColorAllValues = [HairColorBrunette , HairColorBlonde , HairColorRedhead , None ]
     static let genderAllValues = [GenderMale , GenderFemale , None ]
     static let sexualityAllValues = [SexualityStraight , SexualityGay , SexualityBisexual , None ]
@@ -117,41 +162,6 @@ public enum TagAttributes {
     case SpecialtyTagMenu
     case SpecialtySingleSlider
     case SpecialtyRangeSlider
-}
-
-//helper functions for enums
-
-//Example: I pass Race and it returns .SpecialtyTagMenu
-//Example: I pass Banana and it passes back .Generic because that is just a random tag
-func convertTagAttributeFromCategoryTitle(specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagAttributes {
-    if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(specialtyCategoryTitle) {
-            return .SpecialtyTagMenu
-        } else if SpecialtyCategoryTitles.specialtySingleSliderCategories.contains(specialtyCategoryTitle) {
-            return .SpecialtySingleSlider
-        } else if SpecialtyCategoryTitles.specialtyRangeSliderCategories.contains(specialtyCategoryTitle) {
-            return .SpecialtyRangeSlider
-        }
-    return .SpecialtyTagMenu //should never reach this point
-}
-
-//Purpose: to find which specialty group we are dealing with
-//For Example: It figures out whether the given string should be with Hair Color, Race, ect.
-func findSpecialtyCategoryTitle(tagTitle: String) -> SpecialtyCategoryTitles? {
-    if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
-        if  SpecialtyTagTitles.genderAllValues.contains(specialtyTagTitle) {
-            return .Gender
-        } else if SpecialtyTagTitles.hairColorAllValues.contains(specialtyTagTitle) {
-            return .HairColor
-        } else if  SpecialtyTagTitles.sexualityAllValues.contains(specialtyTagTitle) {
-            return .Sexuality
-        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(specialtyTagTitle) {
-            return .PoliticalGroup
-        } else if  SpecialtyTagTitles.raceAllValues.contains(specialtyTagTitle) {
-            return .Ethnicity
-        }
-    }
-    //return nil because it was in none of the above cases, shouldn't reach this point
-    return nil
 }
 
 func tagTitleIsSpecial(tagTitle: String) -> Bool {

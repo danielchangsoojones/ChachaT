@@ -48,14 +48,15 @@ class FilterQueryViewController: FilterTagViewController {
 //extension for tag actions
 extension FilterQueryViewController {
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        let tagAttribute = convertTagAttributeFromCategoryTitle(tagView.specialtyCategoryTitle)
-        switch tagAttribute {
-        case .SpecialtyTagMenu:
-            let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-            dropDownMenu.show(titleArray)
-            dropDownMenu.tagListView.delegate = self
-        default:
-            break
+        if let tagAttribute = tagView.specialtyCategoryTitle.associatedTagAttribute {
+            switch tagAttribute {
+            case .SpecialtyTagMenu:
+                let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
+                dropDownMenu.show(titleArray)
+                dropDownMenu.tagListView.delegate = self
+            default:
+                break
+            }
         }
     }
     
@@ -89,7 +90,9 @@ extension FilterQueryViewController: ScrollViewSearchViewDelegate {
     }
     
     func dismissCurrentViewController() {
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: self)
+        //TODO: cache the user array from the previous search, so then we can just reupload that user array because the user hit exit, which means they canceled their search.
+        //Right Now, I am just sending empty user array, so it will work. 
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: [])
     }
 }
 
