@@ -61,6 +61,7 @@ class ChachaTagDropDown: UIView {
     var tagListView : TagListView?
     var singleSliderView: SingleSliderView?
     var arrowImage : UIImageView!
+    let screenSizeWidth = UIScreen.mainScreen().bounds.width
     
     let arrowImageInset: CGFloat = 5.0
     
@@ -95,9 +96,7 @@ class ChachaTagDropDown: UIView {
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
         dropDownView.backgroundColor = BackgroundPageColor
-//        addDropDownBackground()
         self.arrowImage = setArrowImageToView(dropDownView)
-        self.tagListView = addTagListViewToView(dropDownView)
         
         // Add background view & table view to container view
         self.menuWrapper.addSubview(self.backgroundView)
@@ -113,6 +112,7 @@ class ChachaTagDropDown: UIView {
     
     func show(tagTitles: [String]) {
         if self.isShown == false {
+            self.tagListView = addTagListViewToView(dropDownView)
             addTags(tagTitles)
             self.showMenu()
         }
@@ -157,8 +157,7 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                let screenSizeWidth = UIScreen.mainScreen().bounds.width
-                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, screenSizeWidth, self.getDropDownViewHeight())
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, self.screenSizeWidth, self.getDropDownViewHeight())
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
             }, completion: nil
         )
@@ -169,7 +168,7 @@ class ChachaTagDropDown: UIView {
         
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
-        tagListView.removeAllTags() //menu is disappearing, so I want to get rid of all tags
+        tagListView?.removeAllTags() //menu is disappearing, so I want to get rid of all tags
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         
@@ -180,7 +179,7 @@ class ChachaTagDropDown: UIView {
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, UIScreen.mainScreen().bounds.width, 0)
+                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, self.screenSizeWidth, 0)
             }, completion: nil
         )
         
@@ -198,12 +197,12 @@ class ChachaTagDropDown: UIView {
     
     func addTags(titleArray: [String]) {
         for title in titleArray {
-            tagListView.addTag(title)
+            tagListView?.addTag(title)
         }
     }
     
     func addTagListViewToView(view: UIView) -> TagListView {
-        let tagListView = ChachaChoicesTagListView(frame: CGRectZero)
+        let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
@@ -246,7 +245,7 @@ class ChachaTagDropDown: UIView {
     
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize().height
-        let tagListViewHeight = tagListView.intrinsicContentSize().height
+        let tagListViewHeight = tagListView!.intrinsicContentSize().height
         return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
     }
     
