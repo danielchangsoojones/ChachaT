@@ -58,7 +58,8 @@ class ChachaTagDropDown: UIView {
     private var menuWrapper: UIView!
     private var dropDownView: UIView!
     private var dropDownOriginY : CGFloat = 0
-    var tagListView : TagListView!
+    var tagListView : TagListView?
+    var singleSliderView: SingleSliderView?
     var arrowImage : UIImageView!
     
     let arrowImageInset: CGFloat = 5.0

@@ -63,7 +63,6 @@ class SpecialtyTagEnviromentHolderView: UIView {
         super.init(frame: CGRectMake(0, 0, 200, 200))
         switch specialtyTagEnviroment {
         case .DistanceSlider:
-            createDistanceSliderView()
             self.theTitleLabel.text = "Distance Radius"
         case .AgeRangeSlider:
             theSpecialtyView = AgeDoubleRangeSliderView()
@@ -115,12 +114,12 @@ class SpecialtyTagEnviromentHolderView: UIView {
 //        createdTag = tagListView.addTag(searchText)
     }
     
-    func createDistanceSliderView() {
-        let theDistanceSliderView = DistanceSliderView()
-        //had to set the initial value for the slider here because not loading when I put in the slider view class
-        theDistanceSliderView.theDistanceSlider.setValue(50.0, animated: false)
-        theSpecialtyView = theDistanceSliderView
-    }
+//    func createDistanceSliderView() {
+//        let theDistanceSliderView = DistanceSliderView()
+//        //had to set the initial value for the slider here because not loading when I put in the slider view class
+//        theDistanceSliderView.theDistanceSlider.setValue(50.0, animated: false)
+//        theSpecialtyView = theDistanceSliderView
+//    }
     
     func setButtonText(text: String) {
         createTagButtonText = text

@@ -52,7 +52,7 @@
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* FilterTagViewController.swift */; };
 		9288193B1D1AE588000A8E04 /* StackViewTagButtons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */; };
-		9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */; };
+		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
@@ -133,7 +133,7 @@
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* FilterTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagViewController.swift; sourceTree = "<group>"; };
 		9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = StackViewTagButtons.swift; sourceTree = "<group>"; };
-		9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DistanceSliderView.swift; sourceTree = "<group>"; };
+		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSliderView.swift; sourceTree = "<group>"; };
 		928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AgeDoubleRangeSliderView.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; };
@@ -402,7 +402,7 @@
 			isa = PBXGroup;
 			children = (
 				9288193A1D1AE588000A8E04 /* StackViewTagButtons.swift */,
-				9288193E1D1C2DEB000A8E04 /* DistanceSliderView.swift */,
+				9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */,
 				928819421D1C42B0000A8E04 /* AgeDoubleRangeSliderView.swift */,
 				928819561D2DFC45000A8E04 /* SpecialtyTagEnviromentHolderView.swift */,
 				922C89831D4A07D500DE1373 /* ChachaTagDropDown.swift */,
@@ -663,7 +663,7 @@
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
-				9288193F1D1C2DEB000A8E04 /* DistanceSliderView.swift in Sources */,
+				9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
