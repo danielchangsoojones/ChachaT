@@ -12,6 +12,7 @@ import EFTools
 class FilterQueryViewController: FilterTagViewController {
     
     var dataStore : FilterQueryDataStore!
+    var singleSliderChosenTagView: TagView? //need global variable
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -56,6 +57,7 @@ extension FilterQueryViewController {
                 dropDownMenu.tagListView!.delegate = self
             case .SpecialtySingleSlider:
                 dropDownMenu.showSingleSliderView()
+                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self)
             default:
                 break
             }
