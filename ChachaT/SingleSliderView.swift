@@ -10,11 +10,13 @@ import UIKit
 import SnapKit
 
 class SingleSliderView: UIView {
-    let theSliderLabel = UILabel()
+    //TODO: probably need to make the height actually based on something
+    let theSliderLabel = UILabel(frame: CGRectMake(0, 0, 0, 20))
     let theSlider = UISlider()
+    let sliderOffsetFromLabel : CGFloat = 5
     
     init() {
-        super.init(frame: CGRectMake(0, 0, 200, 200))
+        super.init(frame: CGRectMake(0, 0, 0, theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.frame.height))
         createSliderLabel()
         createSlider()
     }
@@ -34,7 +36,7 @@ class SingleSliderView: UIView {
         self.addSubview(theSlider)
         theSlider.snp_makeConstraints { (make) in
             make.trailing.leading.bottom.equalTo(self)
-            make.top.equalTo(theSliderLabel.snp_bottom).offset(10)
+            make.top.equalTo(theSliderLabel.snp_bottom).offset(sliderOffsetFromLabel)
         }
     }
     
@@ -49,10 +51,10 @@ class SingleSliderView: UIView {
     
     func createSliderLabel() {
         self.addSubview(theSliderLabel)
+        theSliderLabel.textColor = UIColor.whiteColor()
         theSliderLabel.snp_makeConstraints { (make) in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
         }
     }
-
 }

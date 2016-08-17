@@ -62,6 +62,7 @@ class ChachaTagDropDown: UIView {
     var singleSliderView: SingleSliderView?
     var arrowImage : UIImageView!
     let screenSizeWidth = UIScreen.mainScreen().bounds.width
+    var dropDownMenuType: TagAttributes = .SpecialtyTagMenu //just giving it a default
     
     let arrowImageInset: CGFloat = 5.0
     
@@ -110,10 +111,19 @@ class ChachaTagDropDown: UIView {
 //        self.menuWrapper.backgroundColor = UIColor.redColor()
     }
     
-    func show(tagTitles: [String]) {
+    func showTagListView(tagTitles: [String]) {
         if self.isShown == false {
+            //the dropdownmenu type is set to taglistview by defualt
             self.tagListView = addTagListViewToView(dropDownView)
             addTags(tagTitles)
+            self.showMenu()
+        }
+    }
+    
+    func showSingleSliderView() {
+        if self.isShown == false {
+            dropDownMenuType = .SpecialtySingleSlider
+            self.singleSliderView = addSingleSliderViewToView(dropDownView)
             self.showMenu()
         }
     }
@@ -213,6 +223,21 @@ class ChachaTagDropDown: UIView {
         return tagListView
     }
     
+    func addSingleSliderViewToView(view: UIView) -> SingleSliderView {
+        let theSliderView = SingleSliderView()
+        let sliderIntitalValue = theSliderView.theSlider.maximumValue / 2
+        theSliderView.theSlider.setValue(sliderIntitalValue, animated: false) //I have to set the initial value here, can't set in actual class for some reason
+        theSliderView.theSliderLabel.text =  "\(Int(sliderIntitalValue)) mi."
+        view.addSubview(theSliderView)
+        theSliderView.snp_makeConstraints { (make) in
+            make.trailing.equalTo(view).inset(10)
+            make.leading.equalTo(view).offset(10)
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
+        }
+        return theSliderView
+    }
+    
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
         arrowImage.contentMode = .ScaleAspectFit
@@ -245,8 +270,15 @@ class ChachaTagDropDown: UIView {
     
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize().height
-        let tagListViewHeight = tagListView!.intrinsicContentSize().height
-        return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
+        switch dropDownMenuType {
+        case .SpecialtyTagMenu:
+            let tagListViewHeight = tagListView!.intrinsicContentSize().height
+            return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
+        case .SpecialtySingleSlider:
+            return arrowImageHeight + singleSliderView!.frame.height + arrowImageInset * 2
+        case .SpecialtyRangeSlider:
+            return 0
+        }
     }
     
     class DropDownConfiguration {

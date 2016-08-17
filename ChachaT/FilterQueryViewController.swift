@@ -52,8 +52,10 @@ extension FilterQueryViewController {
             switch tagAttribute {
             case .SpecialtyTagMenu:
                 let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.show(titleArray)
+                dropDownMenu.showTagListView(titleArray)
                 dropDownMenu.tagListView!.delegate = self
+            case .SpecialtySingleSlider:
+                dropDownMenu.showSingleSliderView()
             default:
                 break
             }
