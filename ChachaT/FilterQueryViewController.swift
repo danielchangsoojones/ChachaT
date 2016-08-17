@@ -64,7 +64,6 @@ extension FilterQueryViewController {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable
             let tagView = tagChosenView.addTag(title)
-            sender.removeTag(title)
             scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
             scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
             return
@@ -132,6 +131,13 @@ extension FilterQueryViewController {
             createSpecialtyTagEnviroment(false)
         }
     }
+    
+    override func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        super.searchBarCancelButtonClicked(searchBar)
+        if tagChosenView.tagViews.isEmpty {
+            performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: nil)
+        }
+    }
 }
 
 extension FilterQueryViewController: SegueHandlerType {
@@ -144,10 +150,13 @@ extension FilterQueryViewController: SegueHandlerType {
         switch segueIdentifierForSegue(segue) {
             case .SearchPageToTinderMainPageSegue:
                 //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
-                //the sender parameter is passed the user array
-                let navigationVC = segue.destinationViewController as! ChachaNavigationViewController
-                let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
-                rootVC.userArray = sender as! [User]
+                if let userArray = sender as? [User] {
+                    //the sender parameter is passed the user array
+                    //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
+                    let navigationVC = segue.destinationViewController as! ChachaNavigationViewController
+                    let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
+                    rootVC.userArray = userArray
+                }
         }
     }
 }
