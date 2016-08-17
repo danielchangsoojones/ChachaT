@@ -20,7 +20,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
          UIApplication.sharedApplication().statusBarStyle = UIStatusBarStyle.LightContent
         //register parse subclasses
         User.registerSubclass()
-        Tag.registerSubclass()
+        Tags.registerSubclass()
         Match.registerSubclass()
         Chat.registerSubclass()
         

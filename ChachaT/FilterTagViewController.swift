@@ -23,10 +23,10 @@ class FilterTagViewController: UIViewController {
     //constraint outlets
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
-    var searchDataArray: [Tag] = []
-    var tagChoicesDataArray: [Tag] = []
+    var searchDataArray: [String] = []
+    var tagChoicesDataArray: [String] = []
     //Purpose: this array is for when you add a tag to your profile. It holds all the tags you added to profile, and then when you hit done. It will save them all to Parse.
-    var chosenTagArray : [Tag] = []
+    var chosenTagArray : [String] = []
     
     //search Variables
     var searchActive : Bool = false
@@ -137,53 +137,9 @@ extension FilterTagViewController : TagListViewDelegate {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
-            if let scrollViewSearchView = scrollViewSearchView {
-                scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
-            }
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
         }
     }
-    
-    //return a new array to set the old array to, and the replaced tag in case something is needed to be done with it
-    func replaceTag(originalTagView: TagView, newTag: Tag, inout tagArray: [Tag]) -> Tag? {
-        if let originalSpecialtyTagView = originalTagView as? SpecialtyTagView {
-            for tag in tagArray where tag.specialtyTagTitle == originalSpecialtyTagView.specialtyTagTitle.rawValue && tag.specialtyCategoryTitle == originalSpecialtyTagView.specialtyCategoryTitle.rawValue {
-                //checks if specialty tag is equal in both title and specialtyTitle. That is how we know we have exact match
-                let originalTag = tag
-                let indexOfTag = tagArray.indexOf(tag)
-                tagArray[indexOfTag!] = newTag
-                return originalTag
-            }
-        } else {
-            //dealing with Generic tag
-            if let tagIndex = tagArray.indexOf({$0.title == originalTagView.titleLabel?.text}) {
-                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
-                let originalTag = tagArray[tagIndex]
-                tagArray[tagIndex] = newTag
-                return originalTag
-            }
-        }
-        //if the tag does not exist in the array
-        return nil
-    }
-    
-    func findTag(tagView: TagView, tagArray: [Tag]) -> Tag? {
-        if let specialtyTagView = tagView as? SpecialtyTagView {
-            //the tagView is a specialty one
-            for tag in tagArray where tag.specialtyTagTitle == specialtyTagView.specialtyTagTitle.rawValue && tag.specialtyCategoryTitle == specialtyTagView.specialtyCategoryTitle.rawValue {
-                return tag
-            }
-        } else {
-            //dealing with a generic tagview
-            if let tagIndex = tagArray.indexOf({$0.title == tagView.titleLabel?.text}) {
-                //replace old tag in the array with our new one. Deleting from chosenTagArray because I don't want it saving to original backend.
-                return tagArray[tagIndex]
-            }
-        }
-
-        //tag does not exist in array
-        return nil
-    }
-    
 }
 
 extension FilterTagViewController : ChachaTagDropDownDelegate {

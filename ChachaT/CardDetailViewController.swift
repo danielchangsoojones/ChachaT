@@ -100,7 +100,6 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
         setNormalGUI()
         setupTapHandler()
-        loadTagsFromParse()
     }
     
     func createDetailPopUp(factNumber: Fact) {
@@ -147,7 +146,7 @@ class CardDetailViewController: UIViewController {
         if let title = userOfTheCard?.title {
             theTitleLabel.text = title
         }
-        if let age = userOfTheCard?.calculateBirthDate() {
+        if let age = userOfTheCard?.age {
             theAgeLabel.text = ", " + "\(age)"
         }
         if let factOne = userOfTheCard?.factOne {
@@ -180,7 +179,7 @@ class CardDetailViewController: UIViewController {
         if let fullName = userOfTheCard?.fullName {
             theFullNameTextField.text = fullName
         }
-        if let age = userOfTheCard?.calculateBirthDate() {
+        if let age = userOfTheCard?.age {
             theAgeLabel.text = ", " + "\(age)"
         }
         if let title = userOfTheCard?.title {
@@ -296,28 +295,6 @@ extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
         imageWasChanged = true
         profileImage.image = image
     }
-}
-
-
-//the TagListView extenstion
-extension CardDetailViewController {
-    func loadTagsFromParse() {
-        let query = Tag.query()
-        if let userOfTheCard = userOfTheCard {
-            query?.whereKey("createdBy", equalTo: userOfTheCard)
-        }
-        query?.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if error == nil {
-                for tag in objects as! [Tag] {
-                    //TODO: make a specialty tag and generic tag appear
-                    self.theUserOfCardTagListView.addTag(tag.title!)
-                }
-            } else {
-                print(error)
-            }
-        })
-    }
-    
 }
 
 

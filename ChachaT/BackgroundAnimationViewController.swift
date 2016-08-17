@@ -81,6 +81,16 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the userArray was passed from the search page, so don't load new users
             createUserArray()
         }
+        
+//        let tags = Tags()
+//        tags.createdBy = User.currentUser()!
+//        tags.genericTags = ["banana", "apple", "pear"]
+//        tags.gender = 302
+//        tags.ethnicity = 2
+//        tags.sexuality = 402
+//        tags.politicalGroup = 0
+//        tags.hairColor = 0
+//        tags.saveInBackground()
     }
     
     override func viewWillAppear(animated: Bool) {
