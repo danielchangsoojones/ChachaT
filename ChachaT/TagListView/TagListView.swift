@@ -380,7 +380,7 @@ public class TagListView: UIView {
 extension TagListView {
     //Daniel Jones added this method in. It was not originally part of tagListView
     public func addSpecialtyTag(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagView {
-        let tagView = SpecialtyTagView(tagTitle: specialtyTagTitle, specialtyTagTitle: specialtyCategoryTitle)
+        let tagView = SpecialtyTagView(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle)
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
         tagView.tagBackgroundColor = tagBackgroundColor

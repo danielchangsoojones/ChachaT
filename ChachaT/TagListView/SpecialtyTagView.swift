@@ -15,18 +15,18 @@ public class SpecialtyTagView: TagView {
     var specialtyTagTitle : SpecialtyTagTitles
     var specialtyCategoryTitle : SpecialtyCategoryTitles
     
-    init(tagTitle: SpecialtyTagTitles, specialtyTagTitle: SpecialtyCategoryTitles) {
-        self.specialtyTagTitle = tagTitle
-        self.specialtyCategoryTitle = specialtyTagTitle
+    init(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) {
+        self.specialtyTagTitle = specialtyTagTitle
+        self.specialtyCategoryTitle = specialtyCategoryTitle
         super.init(frame: CGRectZero)
         createFakeBorder(TagProperties.borderColor, borderWidth: TagProperties.borderWidth, cornerRadius: TagProperties.cornerRadius)
         addCornerAnnotationSubview()
-        if tagTitle != .None {
+        if specialtyTagTitle != .None {
             //specialtyTagTitle has been set to something real
-            setTitle(tagTitle.toString, forState: .Normal)
+            setTitle(specialtyTagTitle.toString, forState: .Normal)
         } else {
             //tag title equals none, so make the title something like "Race" or "Hair Color"
-            setTitle(specialtyTagTitle.rawValue, forState: .Normal)
+            setTitle(specialtyCategoryTitle.rawValue, forState: .Normal)
         }
     }
     

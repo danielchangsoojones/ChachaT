@@ -21,8 +21,8 @@ class CustomTagsSearchBar: UISearchBar {
         preferredBorderColor = borderColor
         preferredBorderWidth = borderWidth
         preferredBorderRadius = borderRadius
-        tintColor = UIColor.whiteColor() //makes the cancel button of search bar and keyboard cursor a certain color
-        
+        tintColor = UIColor(CGColor: borderColor) //makes the cancel button of search bar and keyboard cursor a certain color
+        showsCancelButton = true
         setSearchIcon()
     }
     
@@ -57,6 +57,11 @@ class CustomTagsSearchBar: UISearchBar {
             searchBarBackgroundView.alpha = 0
         }
         
+        if let index = indexOfCancelButtonInSubviews() {
+            let cancelButton = searchBarView.subviews[index] as! UIButton
+            cancelButton.setTitleColor(UIColor(CGColor: preferredBorderColor), forState: .Normal)
+        }
+        
         super.drawRect(rect)
     }
     
@@ -89,5 +94,22 @@ class CustomTagsSearchBar: UISearchBar {
         }
         return index
     }
+    
+    //Purpose: returns the index for the cancel button of the searchBar.
+    //For some reason, I can not get the cancel button to be white the initial time it is shown. Not sure why, but it only turns white after the search bar has been tapped
+    func indexOfCancelButtonInSubviews() -> Int! {
+        var index: Int!
+        let searchBarView = subviews[0]
+        
+        for i in 0 ..< searchBarView.subviews.count {
+            if searchBarView.subviews[i].isKindOfClass(UIButton) {
+                //this should find the cancel button, but if apple changes UISearchBar class, then this code could break
+                index = i
+                break
+            }
+        }
+        return index
+    }
+    
 
 }
