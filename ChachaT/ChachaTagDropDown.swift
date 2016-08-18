@@ -64,8 +64,6 @@ class ChachaTagDropDown: UIView {
     let screenSizeWidth = UIScreen.mainScreen().bounds.width
     var dropDownMenuType: TagAttributes = .SpecialtyTagMenu //just giving it a default
     
-    let arrowImageInset: CGFloat = 5.0
-    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
@@ -113,7 +111,7 @@ class ChachaTagDropDown: UIView {
     
     func showTagListView(tagTitles: [String]) {
         if self.isShown == false {
-            //the dropdownmenu type is set to taglistview by defualt
+            dropDownMenuType = .SpecialtyTagMenu
             self.tagListView = addTagListViewToView(dropDownView)
             addTags(tagTitles)
             self.showMenu()
@@ -157,6 +155,7 @@ class ChachaTagDropDown: UIView {
         self.dropDownView.frame.origin.y = 0
         
         self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
+        self.arrowImage.bringSubviewToFront(self.dropDownView)
         
         delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
@@ -178,7 +177,8 @@ class ChachaTagDropDown: UIView {
         
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
-        tagListView?.removeAllTags() //menu is disappearing, so I want to get rid of all tags
+        tagListView?.removeFromSuperview()
+        singleSliderView?.removeFromSuperview()
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         
@@ -211,12 +211,17 @@ class ChachaTagDropDown: UIView {
         }
     }
     
+    let arrowImageInset: CGFloat = 20.0
+    let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
+    
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
+        tagListView.backgroundColor = UIColor.redColor()
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
             make.top.equalTo(view)
+            make.height.equalTo(32).priorityLow()
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
@@ -235,19 +240,21 @@ class ChachaTagDropDown: UIView {
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
+        theSliderView.backgroundColor = UIColor.redColor()
         return theSliderView
     }
     
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
         arrowImage.contentMode = .ScaleAspectFit
+        arrowImage.backgroundColor = UIColor.redColor()
         let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
         arrowImage.addGestureRecognizer(tap)
         arrowImage.userInteractionEnabled = true
         superView.addSubview(arrowImage)
         arrowImage.snp_makeConstraints { (make) in
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
-            make.bottom.equalTo(superView).inset(arrowImageInset).priorityLow()
+            make.bottom.equalTo(superView).inset(arrowImageInset / arrowImageBottomInsetDivision).priorityLow()
             make.height.equalTo(10).priorityLow()
             make.width.equalTo(20).priorityLow()
             make.centerX.equalTo(superView)
@@ -270,12 +277,13 @@ class ChachaTagDropDown: UIView {
     
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize().height
+        let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
         switch dropDownMenuType {
         case .SpecialtyTagMenu:
             let tagListViewHeight = tagListView!.intrinsicContentSize().height
-            return arrowImageHeight + tagListViewHeight + arrowImageInset * 2
+            return tagListViewHeight + arrowImageHeightAndInsets
         case .SpecialtySingleSlider:
-            return arrowImageHeight + singleSliderView!.frame.height + arrowImageInset * 2
+            return singleSliderView!.frame.height + arrowImageHeightAndInsets
         case .SpecialtyRangeSlider:
             return 0
         }

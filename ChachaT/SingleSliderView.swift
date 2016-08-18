@@ -18,7 +18,6 @@ class SingleSliderView: UIView {
     //TODO: probably need to make the height actually based on something
     let theSliderLabel = UILabel(frame: CGRectMake(0, 0, 0, 20))
     let theSlider = UISlider()
-    let theDoneButton = UIButton(frame: CGRectMake(0, 0, 0, 20))
     let sliderOffsetFromLabel : CGFloat = 5
     
     private var delegate: SingleSliderViewDelegate?
@@ -73,14 +72,6 @@ class SingleSliderView: UIView {
         }
     }
     
-    func createDoneButton() {
-        self.addSubview(theDoneButton)
-        theDoneButton.setTitle("Done", forState: .Normal)
-        theDoneButton.snp_makeConstraints { (make) in
-            make.bottom.equalTo(self)
-            make.centerX.equalTo(self)
-        }
-    }
 }
 
 extension FilterQueryViewController: SingleSliderViewDelegate {
