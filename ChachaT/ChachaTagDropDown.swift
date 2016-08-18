@@ -111,7 +111,7 @@ class ChachaTagDropDown: UIView {
     
     func showTagListView(tagTitles: [String]) {
         if self.isShown == false {
-            dropDownMenuType = .SpecialtyTagMenu
+            dropDownMenuType = .SpecialtyTagMenu //even though defualted to this, I need to make sure it changes when it was a different type, and then goes back to .SpecialtyTagMenu
             self.tagListView = addTagListViewToView(dropDownView)
             addTags(tagTitles)
             self.showMenu()

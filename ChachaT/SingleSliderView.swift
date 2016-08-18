@@ -76,12 +76,16 @@ class SingleSliderView: UIView {
 
 extension FilterQueryViewController: SingleSliderViewDelegate {
     func createSingleSliderChosenTagView(sliderValue: Int) {
-        let tagTitle = "\(sliderValue) mi"
-        singleSliderChosenTagView = tagChosenView.addTag(tagTitle)
-        scrollViewSearchView.hideScrollSearchView(false)
-        scrollViewSearchView.rearrangeSearchArea(singleSliderChosenTagView!, extend: true)
+        if singleSliderChosenTagView == nil {
+            //only want to create new tag if the tag doesn't already exist
+            let tagTitle = "\(sliderValue) mi"
+            singleSliderChosenTagView = tagChosenView.addTag(tagTitle)
+            scrollViewSearchView.hideScrollSearchView(false)
+            scrollViewSearchView.rearrangeSearchArea(singleSliderChosenTagView!, extend: true)
+        }
     }
     
+    //TODO: when menu pressed twice, it doesn't create a new chosen distance tag.
     func editSingleSliderChosenTagViewValue(sliderValue: Int) {
         let tagTitle = "\(sliderValue) mi"
         singleSliderChosenTagView!.setTitle(tagTitle, forState: .Normal)
