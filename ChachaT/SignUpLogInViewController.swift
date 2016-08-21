@@ -83,6 +83,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 if error == nil && data != nil {
                     currentUser.profileImage = PFFile(name: Constants.profileImage, data: data!)
                     currentUser.saveInBackground()
+                    self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 } else {
                     print("Failed to update profile image from facebook: \(error)")
                 }

@@ -33,6 +33,10 @@ class EditProfileViewController: UIViewController {
                                                         options: [])
                 sender.setTitle("\(ageComponents.year)", forState: .Normal)
                 self.currentUser?.birthDate = birthday
+                //saving birthdate in two places in database because it will make querying easier with tags.
+                let tag = Tags()
+                tag.birthDate = birthday
+                tag.saveInBackground()
         }
     }
     

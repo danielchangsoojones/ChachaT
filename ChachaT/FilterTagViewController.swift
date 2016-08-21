@@ -25,8 +25,11 @@ class FilterTagViewController: UIViewController {
     
     var searchDataArray: [String] = []
     var tagChoicesDataArray: [String] = []
+    //TODO: probably get rid of chosenTagArray
     //Purpose: this array is for when you add a tag to your profile. It holds all the tags you added to profile, and then when you hit done. It will save them all to Parse.
     var chosenTagArray : [String] = []
+    var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ]
+    var theGenericChosenTagArray : [String] = []
     
     //search Variables
     var searchActive : Bool = false
@@ -138,6 +141,13 @@ extension FilterTagViewController : TagListViewDelegate {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
+            if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = nil
+            } else {
+                if let index = theGenericChosenTagArray.indexOf(title) {
+                        theGenericChosenTagArray.removeAtIndex(index)
+                }
+            }
         }
     }
 }

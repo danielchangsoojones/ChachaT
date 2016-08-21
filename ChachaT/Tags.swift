@@ -22,5 +22,6 @@ class Tags: PFObject, PFSubclassing {
     @NSManaged var sexuality: Int
     @NSManaged var politicalGroup: Int
     @NSManaged var hairColor: Int
-    
+    @NSManaged var birthDate: NSDate?
+    @NSManaged var location: PFGeoPoint
 }

@@ -82,15 +82,22 @@ class BackgroundAnimationViewController: UIViewController {
             createUserArray()
         }
         
-//        let tags = Tags()
-//        tags.createdBy = User.currentUser()!
-//        tags.genericTags = ["banana", "apple", "pear"]
-//        tags.gender = 302
-//        tags.ethnicity = 2
-//        tags.sexuality = 402
-//        tags.politicalGroup = 0
-//        tags.hairColor = 0
-//        tags.saveInBackground()
+//        PFGeoPoint.geoPointForCurrentLocationInBackground { (geoPoint, error) in
+//            if error == nil {
+//                let tags = Tags()
+//                tags.createdBy = User.currentUser()!
+//                tags.genericTags = ["banana", "apple", "pear"]
+//                tags.gender = 302
+//                tags.ethnicity = 2
+//                tags.sexuality = 402
+//                tags.politicalGroup = 0
+//                tags.hairColor = 0
+//                tags.location = geoPoint!
+//                tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
+//                tags.saveInBackground()
+//            }
+//        }
+
     }
     
     override func viewWillAppear(animated: Bool) {

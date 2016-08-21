@@ -63,6 +63,7 @@ class ChachaTagDropDown: UIView {
     var arrowImage : UIImageView!
     let screenSizeWidth = UIScreen.mainScreen().bounds.width
     var dropDownMenuType: TagAttributes = .SpecialtyTagMenu //just giving it a default
+    var specialtyCategoryTitle: SpecialtyCategoryTitles = .Ethnicity
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

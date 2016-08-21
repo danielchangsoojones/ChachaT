@@ -10,8 +10,8 @@ import UIKit
 import SnapKit
 
 protocol SingleSliderViewDelegate {
-    func editSingleSliderChosenTagViewValue(value: Int)
-    func createSingleSliderChosenTagView(sliderValue: Int)
+    func editSingleSliderChosenTagViewValue(value: Int, specialtyCategoryTitle: SpecialtyCategoryTitles)
+    func createSingleSliderChosenTagView(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles)
 }
 
 class SingleSliderView: UIView {
@@ -19,6 +19,8 @@ class SingleSliderView: UIView {
     let theSliderLabel = UILabel(frame: CGRectMake(0, 0, 0, 20))
     let theSlider = UISlider()
     let sliderOffsetFromLabel : CGFloat = 5
+    private var sliderType : SpecialtyCategoryTitles?
+    private var valueSuffix : String = ""
     
     private var delegate: SingleSliderViewDelegate?
     
@@ -28,9 +30,12 @@ class SingleSliderView: UIView {
         createSlider()
     }
     
-    func setDelegateAndCreateTagView(delegate: SingleSliderViewDelegate) {
+    //Purpose: pass something like Location and " mi"
+    func setDelegateAndCreateTagView(delegate: SingleSliderViewDelegate, specialtyCategoryTitle: SpecialtyCategoryTitles, valueSuffix: String) {
         self.delegate = delegate
-        delegate.createSingleSliderChosenTagView(50)
+        self.sliderType = specialtyCategoryTitle
+        self.valueSuffix = valueSuffix
+        delegate.createSingleSliderChosenTagView(50, specialtyCategoryTitle: sliderType!)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -60,7 +65,7 @@ class SingleSliderView: UIView {
         } else {
             theSliderLabel.text = "\(Int(sliderValue)) mi."
         }
-        delegate?.editSingleSliderChosenTagViewValue(Int(sliderValue))
+        delegate?.editSingleSliderChosenTagViewValue(Int(sliderValue), specialtyCategoryTitle: sliderType!)
     }
     
     func createSliderLabel() {
@@ -71,24 +76,31 @@ class SingleSliderView: UIView {
             make.top.equalTo(self)
         }
     }
-    
 }
 
 extension FilterQueryViewController: SingleSliderViewDelegate {
-    func createSingleSliderChosenTagView(sliderValue: Int) {
-        if singleSliderChosenTagView == nil {
-            //only want to create new tag if the tag doesn't already exist
-            let tagTitle = "\(sliderValue) mi"
-            singleSliderChosenTagView = tagChosenView.addTag(tagTitle)
-            scrollViewSearchView.hideScrollSearchView(false)
-            scrollViewSearchView.rearrangeSearchArea(singleSliderChosenTagView!, extend: true)
+    func createSingleSliderChosenTagView(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
+        if theSpecialtyChosenTagDictionary[specialtyCategoryTitle] == nil {
+            //the tagview doesn't exist
+            switch specialtyCategoryTitle {
+            case .Location:
+                //only want to create new tag if the tag doesn't already exist
+                let tagTitle = "\(sliderValue) mi"
+                let newTagView = tagChosenView.addTag(tagTitle)
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = newTagView
+                scrollViewSearchView.hideScrollSearchView(false)
+                scrollViewSearchView.rearrangeSearchArea(newTagView, extend: true)
+            default: break
+            }
         }
     }
     
     //TODO: when menu pressed twice, it doesn't create a new chosen distance tag.
-    func editSingleSliderChosenTagViewValue(sliderValue: Int) {
+    func editSingleSliderChosenTagViewValue(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         let tagTitle = "\(sliderValue) mi"
-        singleSliderChosenTagView!.setTitle(tagTitle, forState: .Normal)
-        tagChosenView.layoutSubviews() //to make the tag resize after the buttonTitle ("50 mi" to "100 mi") has become longer
+        if let chosenTagView = theSpecialtyChosenTagDictionary[specialtyCategoryTitle] {
+            chosenTagView!.setTitle(tagTitle, forState: .Normal)
+            tagChosenView.layoutSubviews() //to make the tag resize after the buttonTitle ("50 mi" to "100 mi") has become longer
+        }
     }
 }
