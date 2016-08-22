@@ -108,9 +108,10 @@ class FilterQueryDataStore {
                             query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
                         }
                     case .SpecialtyRangeSlider:
+                        let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-                        let minAge : NSDate = 18.years.ago
-                        let maxAge : NSDate = 30.years.ago
+                        let minAge : NSDate = maxAndMinTuple.minValue.years.ago
+                        let maxAge : NSDate = maxAndMinTuple.maxValue.years.ago
                         query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
                         query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
                     }
@@ -132,6 +133,21 @@ class FilterQueryDataStore {
             }
         }
         return nil
+    }
+    
+    func getRangeSliderValue(string: String) -> (minValue: Int, maxValue: Int) {
+        let spaceString : Character = "-"
+        if let index = string.characters.indexOf(spaceString) {
+            //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
+            let minValueSubstring = string.substringToIndex(index).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let maxValueSubstring = string.substringFromIndex(index.advancedBy(1)).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) //FromSubstring includes the index, so add 1
+            if let minValue = Int(minValueSubstring) {
+                if let maxValue = Int(maxValueSubstring) {
+                    return (minValue, maxValue)
+                }
+            }
+        }
+        return (0,0) //shouldn't reach this point
     }
 }
 
