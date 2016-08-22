@@ -108,7 +108,11 @@ class FilterQueryDataStore {
                             query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
                         }
                     case .SpecialtyRangeSlider:
-                        break
+                        //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
+                        let minAge : NSDate = 18.years.ago
+                        let maxAge : NSDate = 30.years.ago
+                        query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+                        query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
                     }
                 }
             }

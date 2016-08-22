@@ -190,6 +190,7 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
         tagListView?.removeFromSuperview()
         singleSliderView?.removeFromSuperview()
+        rangeSliderView?.removeFromSuperview()
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
         

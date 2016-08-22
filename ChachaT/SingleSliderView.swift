@@ -95,7 +95,6 @@ extension FilterQueryViewController: SingleSliderViewDelegate {
         }
     }
     
-    //TODO: when menu pressed twice, it doesn't create a new chosen distance tag.
     func editSingleSliderChosenTagViewValue(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         let tagTitle = "\(sliderValue) mi"
         if let chosenTagView = theSpecialtyChosenTagDictionary[specialtyCategoryTitle] {
