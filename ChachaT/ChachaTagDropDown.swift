@@ -60,10 +60,11 @@ class ChachaTagDropDown: UIView {
     private var dropDownOriginY : CGFloat = 0
     var tagListView : TagListView?
     var singleSliderView: SingleSliderView?
+    var rangeSliderView: DoubleRangeSliderView?
     var arrowImage : UIImageView!
     let screenSizeWidth = UIScreen.mainScreen().bounds.width
     var dropDownMenuType: TagAttributes = .SpecialtyTagMenu //just giving it a default
-    var specialtyCategoryTitle: SpecialtyCategoryTitles = .Ethnicity
+    var dropDownMenuCategoryType: SpecialtyCategoryTitles = .Ethnicity //had to give it an arbitrary defualt value
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -123,6 +124,15 @@ class ChachaTagDropDown: UIView {
         if self.isShown == false {
             dropDownMenuType = .SpecialtySingleSlider
             self.singleSliderView = addSingleSliderViewToView(dropDownView)
+            self.showMenu()
+        }
+    }
+    
+    func showRangeSliderView(delegate: DoubleRangeSliderViewDelegate, dropDownMenuCategoryType: SpecialtyCategoryTitles) {
+        if self.isShown == false {
+            self.dropDownMenuCategoryType = dropDownMenuCategoryType
+            dropDownMenuType = dropDownMenuCategoryType.associatedTagAttribute!
+            self.rangeSliderView = addDoubleRangeSliderToView(dropDownView, delegate: delegate)
             self.showMenu()
         }
     }
@@ -245,6 +255,20 @@ class ChachaTagDropDown: UIView {
         return theSliderView
     }
     
+    func addDoubleRangeSliderToView(view: UIView, delegate: DoubleRangeSliderViewDelegate) -> DoubleRangeSliderView {
+        let theSliderView = DoubleRangeSliderView(delegate: delegate, sliderCategoryType: dropDownMenuCategoryType)
+        theSliderView.theDoubleRangeLabel.text =  "\(Int(theSliderView.theDoubleRangeSlider.minValue)) - \(Int(theSliderView.theDoubleRangeSlider.maxValue))"
+        view.addSubview(theSliderView)
+        theSliderView.snp_makeConstraints { (make) in
+            make.trailing.equalTo(view).inset(10)
+            make.leading.equalTo(view).offset(10)
+            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
+            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
+        }
+        theSliderView.backgroundColor = UIColor.redColor()
+        return theSliderView
+    }
+    
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
         arrowImage.contentMode = .ScaleAspectFit
@@ -286,7 +310,7 @@ class ChachaTagDropDown: UIView {
         case .SpecialtySingleSlider:
             return singleSliderView!.frame.height + arrowImageHeightAndInsets
         case .SpecialtyRangeSlider:
-            return 0
+            return rangeSliderView!.frame.height + arrowImageHeightAndInsets
         }
     }
     

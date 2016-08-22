@@ -84,8 +84,8 @@ extension FilterQueryViewController {
                 }
                 dropDownMenu.showSingleSliderView()
                 dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
-            default:
-                break
+            case .SpecialtyRangeSlider:
+                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
             }
         }
     }

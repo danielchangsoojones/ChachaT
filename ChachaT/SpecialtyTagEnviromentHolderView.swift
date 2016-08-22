@@ -65,7 +65,7 @@ class SpecialtyTagEnviromentHolderView: UIView {
         case .DistanceSlider:
             self.theTitleLabel.text = "Distance Radius"
         case .AgeRangeSlider:
-            theSpecialtyView = AgeDoubleRangeSliderView()
+//            theSpecialtyView = AgeDoubleRangeSliderView()
             self.theTitleLabel.text = "Age Range"
         case .StackViewButtons:
             //had to pass this one in another initializer, since I want there to be some parameters passed through
