@@ -32,8 +32,10 @@ public enum SpecialtyCategoryTitles : String {
             return "politicalGroup"
         case .HairColor:
             return "hairColor"
-        default:
-            return ""
+        case .Location:
+            return "location"
+        case .AgeRange:
+            return "birthDate"
         }
     }
     

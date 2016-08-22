@@ -8,14 +8,15 @@
 
 import UIKit
 import EFTools
+import Parse
 
 class FilterQueryViewController: FilterTagViewController {
     
-    var dataStore : FilterQueryDataStore!
-    
+    var dataStore : FilterQueryDataStore!    
     override func viewDidLoad() {
         super.viewDidLoad()
         setDataFromDataStore()
+        setSpecialtyTagViewDictionary()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
     }
@@ -37,6 +38,15 @@ class FilterQueryViewController: FilterTagViewController {
             }
         }
     }
+    
+    //You're probably thinking "Why not just set the variable in the global variable?" Well, it for some fucking reason, it has to be set like it is in this function, or else the nil is not being recognized by the == nil operator
+    //no idea why, but this made it work.
+    func setSpecialtyTagViewDictionary() {
+        for category in SpecialtyCategoryTitles.allCategories {
+            //seeding the dictionary with all the specialty category titles, and setting value to nil.
+            theSpecialtyChosenTagDictionary[category] = nil
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -47,25 +57,52 @@ class FilterQueryViewController: FilterTagViewController {
 
 //extension for tag actions
 extension FilterQueryViewController {
+    //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        if let tagAttribute = tagView.specialtyCategoryTitle.associatedTagAttribute {
+        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
+        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
             switch tagAttribute {
             case .SpecialtyTagMenu:
-                let titleArray = tagView.specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.show(titleArray)
+                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
+                dropDownMenu.showTagListView(titleArray)
                 dropDownMenu.tagListView!.delegate = self
-            default:
-                break
+            case .SpecialtySingleSlider:
+                var valueSuffix = ""
+                if title == SpecialtyCategoryTitles.Location.rawValue {
+                    //they are trying to use location tag, we want to check they have location enabled
+                    //the user has to have location enabled in order to use this tag
+                    PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPoint, error) in
+                        if let geoPoint = geoPoint where error == nil {
+                            //saving location in two places in database because it makes easier querying with the tags.
+                            User.currentUser()!.location = geoPoint
+                            PFObject.saveAllInBackground([User.currentUser()!], block: nil)
+                        } else {
+                            print(error)
+                        }
+                    })
+                    valueSuffix = " mi"
+                }
+                dropDownMenu.showSingleSliderView()
+                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
+            case .SpecialtyRangeSlider:
+                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
             }
         }
     }
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         guard sender is ChachaChosenTagListView else {
-            //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable
+            //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
             let tagView = tagChosenView.addTag(title)
             scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
             scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+            if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
+                //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+            } else {
+                //just a generic tag pressed
+                theGenericChosenTagArray.append(title)
+            }
             return
         }
     }
@@ -85,7 +122,7 @@ extension FilterQueryViewController: ScrollViewSearchViewDelegate {
                 }
             }
         }
-        dataStore.findUserArray(chosenTagArrayTitles)
+        dataStore.findUserArray(theGenericChosenTagArray, specialtyTagDictionary: theSpecialtyChosenTagDictionary)
     }
     
     func dismissCurrentViewController() {

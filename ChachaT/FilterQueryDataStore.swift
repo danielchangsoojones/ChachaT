@@ -67,75 +67,87 @@ class FilterQueryDataStore {
         delegate?.setChoicesViewTags(tagChoicesDataArray)
     }
     
-    //Purpose: the user clicked search, so we want to find the users that fit the criteria.
-    func findUserArray(chosenTagArrayTitles: [String]) {
-        if !chosenTagArrayTitles.isEmpty {
-            let genericTagQuery = Tags.query()
-            //need to seperate the generic and specialty tags
-            let arraysTuple = filterGenericTagArrayAndSpecialtyTagArray(chosenTagArrayTitles)
-            let genericTagTitleArray = arraysTuple.genericTagTitleArray
-            let specialtyTagTitleArray = arraysTuple.specialtyTagTitleArray
-            if !genericTagTitleArray.isEmpty {
-                genericTagQuery!.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
-            }
-            let finalQuery = querySpecialtyTags(specialtyTagTitleArray, query: genericTagQuery!)
-            finalQuery.whereKey("createdBy", notEqualTo: User.currentUser()!)
-            finalQuery.includeKey("createdBy")
-            finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
-            finalQuery.findObjectsInBackgroundWithBlock({ (objects, error) in
-                if let objects = objects where error == nil {
-                    if objects.isEmpty {
-                        print(objects)
-                        SCLAlertView().showInfo("Important info", subTitle: "You are great")
-                    } else {
-                        var userArray : [User] = []
-                        for tag in objects as! [Tags] {
-                            userArray.append(tag.createdBy)
-                        }
-                        self.delegate?.passUserArrayToMainPage(userArray)
-                    }
+    func findUserArray(genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
+        let genericTagQuery = Tags.query()!
+        if !genericTagTitleArray.isEmpty {
+            genericTagQuery.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
+        }
+        let finalQuery = querySpecialtyTags(specialtyTagDictionary, query: genericTagQuery)
+        finalQuery.whereKey("createdBy", notEqualTo: User.currentUser()!)
+        finalQuery.includeKey("createdBy")
+        finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
+        finalQuery.findObjectsInBackgroundWithBlock({ (objects, error) in
+            if let objects = objects where error == nil {
+                if objects.isEmpty {
+                    print(objects)
+                    SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
                 } else {
-                    print(error)
+                    var userArray : [User] = []
+                    for tag in objects as! [Tags] {
+                        userArray.append(tag.createdBy)
+                    }
+                    self.delegate?.passUserArrayToMainPage(userArray)
                 }
-            })
-        }
-    }
-    
-    //Purpose: we need to seperate an array for specialty tags becuse the genericTags in Parse will not contain those titles in their array. We need to do special things with those.
-    func filterGenericTagArrayAndSpecialtyTagArray(stringArray: [String]) -> (genericTagTitleArray: [String], specialtyTagTitleArray: [String]) {
-        var specialtyTagTitleArray : [String] = []
-        var genericTagTitleArray : [String] = []
-        for tagTitle in stringArray {
-            if tagTitleIsSpecial(tagTitle) {
-                specialtyTagTitleArray.append(tagTitle)
             } else {
-                //the tag is a generic tag
-                genericTagTitleArray.append(tagTitle)
+                print(error)
             }
-        }
-        return (genericTagTitleArray, specialtyTagTitleArray)
+        })
     }
     
-    func querySpecialtyTags(specialtyTagTitleArray: [String], query: PFQuery) -> PFQuery {
-        for tagTitle in specialtyTagTitleArray {
-            if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(tagTitle) {
-                if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
-                    if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
-                        switch tagAttribute {
-                        case .SpecialtyTagMenu:
-                            //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
-                            query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: specialtyTagTitle.rawValue)
-                        case .SpecialtySingleSlider:
-                            break
-                        case .SpecialtyRangeSlider:
-                            break
+    func querySpecialtyTags(specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?], query: PFQuery) -> PFQuery {
+        for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
+            if let tagViewTitle = tagView?.currentTitle {
+                //the tagView is not nil and the title exists
+                if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
+                    switch tagAttribute {
+                    case .SpecialtyTagMenu:
+                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
+                    case .SpecialtySingleSlider:
+                        if let value = getSingleSliderValue(tagViewTitle) {
+                            query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
                         }
+                    case .SpecialtyRangeSlider:
+                        let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
+                        //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
+                        let minAge : NSDate = maxAndMinTuple.minValue.years.ago
+                        let maxAge : NSDate = maxAndMinTuple.maxValue.years.ago
+                        query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+                        query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
                     }
                 }
             }
         }
         //return the same query after we have added the specialty criteria
         return query
+    }
+    
+    
+    //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
+    func getSingleSliderValue(string: String) -> Double? {
+        let spaceString : Character = " "
+        if let index = string.characters.indexOf(spaceString) {
+            let substring = string.substringToIndex(index)
+            if let value = Double(substring) {
+                return value
+            }
+        }
+        return nil
+    }
+    
+    func getRangeSliderValue(string: String) -> (minValue: Int, maxValue: Int) {
+        let spaceString : Character = "-"
+        if let index = string.characters.indexOf(spaceString) {
+            //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
+            let minValueSubstring = string.substringToIndex(index).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
+            let maxValueSubstring = string.substringFromIndex(index.advancedBy(1)).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) //FromSubstring includes the index, so add 1
+            if let minValue = Int(minValueSubstring) {
+                if let maxValue = Int(maxValueSubstring) {
+                    return (minValue, maxValue)
+                }
+            }
+        }
+        return (0,0) //shouldn't reach this point
     }
 }
 
