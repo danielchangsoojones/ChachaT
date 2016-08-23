@@ -35,7 +35,6 @@ class FilterTagViewController: UIViewController {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView()
         setDropDownMenu()
-        backgroundColorView.backgroundColor = BackgroundPageColor
     }
     
     func loadChoicesViewTags() {

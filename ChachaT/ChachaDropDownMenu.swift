@@ -108,7 +108,6 @@ class ChachaDropDownMenu: UIView {
         
         // By default, hide menu view
         self.menuWrapper.hidden = true
-//        self.menuWrapper.backgroundColor = UIColor.redColor()
     }
     
     func showTagListView(tagTitles: [String]) {
@@ -229,7 +228,6 @@ class ChachaDropDownMenu: UIView {
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
-        tagListView.backgroundColor = UIColor.redColor()
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
             make.top.equalTo(view)
@@ -252,7 +250,6 @@ class ChachaDropDownMenu: UIView {
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
-        theSliderView.backgroundColor = UIColor.redColor()
         return theSliderView
     }
     
@@ -266,14 +263,12 @@ class ChachaDropDownMenu: UIView {
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
-        theSliderView.backgroundColor = UIColor.redColor()
         return theSliderView
     }
     
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
         arrowImage.contentMode = .ScaleAspectFit
-        arrowImage.backgroundColor = UIColor.redColor()
         let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
         arrowImage.addGestureRecognizer(tap)
         arrowImage.userInteractionEnabled = true

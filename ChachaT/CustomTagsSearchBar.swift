@@ -9,19 +9,15 @@
 import UIKit
 
 class CustomTagsSearchBar: UISearchBar {
-    var preferredBorderColor: CGColor!
-    var preferredBorderWidth: CGFloat!
-    var preferredBorderRadius: CGFloat!
+    var preferredBorderColor: CGColor = TagViewProperties.borderColor.CGColor
+    var preferredBorderWidth: CGFloat = TagViewProperties.borderWidth
+    var preferredBorderRadius: CGFloat = TagViewProperties.cornerRadius
     
-    init(borderColor: CGColor, borderWidth: CGFloat, borderRadius: CGFloat, placeHolderText: String) {
+    init(placeHolderText: String) {
         super.init(frame: CGRectZero) //will get set via snapkit constraints
-        
-        self.frame = frame
+        self.backgroundColor = UIColor.redColor()
         placeholder = placeHolderText
-        preferredBorderColor = borderColor
-        preferredBorderWidth = borderWidth
-        preferredBorderRadius = borderRadius
-        tintColor = UIColor(CGColor: borderColor) //makes the cancel button of search bar and keyboard cursor a certain color
+        tintColor = UIColor(CGColor: preferredBorderColor) //makes the cancel button of search bar and keyboard cursor a certain color
         showsCancelButton = true
         setSearchIcon()
     }
@@ -45,8 +41,10 @@ class CustomTagsSearchBar: UISearchBar {
             searchField.layer.cornerRadius = preferredBorderRadius
             searchField.layer.borderColor = preferredBorderColor
             searchField.layer.borderWidth = preferredBorderWidth
+            var bounds : CGRect = searchField.frame //saving frame, so we can set bounds after setting height
+            bounds.size.height = TagView.getTagViewHeight(TagViewProperties.paddingY) //height of tagViews should = height of search text field
+            searchField.bounds = bounds
             searchField.backgroundColor = UIColor.clearColor()
-        
         }
         
         //Hacky way to do this. Getting the subview and finding the backgroundview and then setting the alpha to invisible
