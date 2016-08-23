@@ -1,5 +1,5 @@
 //
-//  ChachaTagDropDown.swift
+//  ChachaDropDownMenu.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 7/28/16.
@@ -9,17 +9,17 @@
 import Foundation
 import SnapKit
 
-protocol ChachaTagDropDownDelegate {
+protocol ChachaDropDownMenuDelegate {
     func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?)
 }
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
-class ChachaTagDropDown: UIView {
+class ChachaDropDownMenu: UIView {
     
     let springWithDamping : CGFloat = 0.7
     let initialSpringVelocity : CGFloat = 0.5
     
-    var delegate: ChachaTagDropDownDelegate?
+    var delegate: ChachaDropDownMenuDelegate?
     
     // The animation duration of showing/hiding menu. Default is 0.3
     var animationDuration: NSTimeInterval! {
@@ -70,7 +70,7 @@ class ChachaTagDropDown: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaDropDownMenuDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
         super.init(frame: CGRectZero)
         
@@ -92,7 +92,7 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
         self.backgroundView.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
         
-        let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaTagDropDown.hideMenu));
+        let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaDropDownMenu.hideMenu));
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))

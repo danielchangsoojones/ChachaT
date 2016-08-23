@@ -165,7 +165,6 @@ extension FilterQueryViewController {
             for tagTitle in filtered {
                 tagChoicesView.addTag(tagTitle)
             }
-            createSpecialtyTagEnviroment(false)
         }
     }
     
