@@ -86,6 +86,20 @@ extension FilterTagViewController : TagListViewDelegate {
             }
         }
     }
+    
+    //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
+    func addTagToChosenTagListView(title: String) {
+        let tagView = tagChosenView.addTag(title)
+        scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
+        scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
+            //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
+            theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+        } else {
+            //just a generic tag pressed
+            theGenericChosenTagArray.append(title)
+        }
+    }
 }
 
 extension FilterTagViewController : ChachaDropDownMenuDelegate {
@@ -149,6 +163,11 @@ extension FilterTagViewController: UISearchBarDelegate {
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false
         searchBar.showsCancelButton = false
+        for tagView in tagChoicesView.selectedTags() {
+            if let currentTitle = tagView.currentTitle {
+                addTagToChosenTagListView(currentTitle)
+            }
+        }
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {

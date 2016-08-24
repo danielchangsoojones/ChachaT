@@ -93,16 +93,7 @@ extension FilterQueryViewController {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
-            let tagView = tagChosenView.addTag(title)
-            scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
-            scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-            if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
-                //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
-                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
-            } else {
-                //just a generic tag pressed
-                theGenericChosenTagArray.append(title)
-            }
+            addTagToChosenTagListView(title)
             return
         }
     }
@@ -162,8 +153,12 @@ extension FilterQueryViewController {
         } else {
             //there is text, and we have a match, soa the tagChoicesView changes accordingly
             searchActive = true
-            for tagTitle in filtered {
-                tagChoicesView.addTag(tagTitle)
+            for (index, tagTitle) in filtered.enumerate() {
+                let tagView = tagChoicesView.addTag(tagTitle)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.selected = true
+                }
             }
         }
     }

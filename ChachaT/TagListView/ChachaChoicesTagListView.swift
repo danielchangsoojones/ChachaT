@@ -46,6 +46,8 @@ class ChachaChoicesTagListView : TagListView {
         marginX = TagViewProperties.marginX //the horizontal space between TagViews
         marginY = TagViewProperties.marginY //the vertical space between TagViews
         alignment = .Center //makes the entire TagListView have a centered alignment, this isn't for text alignment
+        tagSelectedBackgroundColor = TagViewProperties.borderColor
+        selectedTextColor = TagViewProperties.tagInsidesColor
     }
 
 }

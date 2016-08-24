@@ -35,8 +35,10 @@
                                     <subviews>
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jtV-9o-qhN">
                                             <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                                            <state key="normal" image="SearchIconWhite">
-                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                            <fontDescription key="fontDescription" type="system" weight="thin" pointSize="39"/>
+                                            <inset key="contentEdgeInsets" minX="0.0" minY="0.0" maxX="0.0" maxY="7"/>
+                                            <state key="normal" title="+">
+                                                <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="searchButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="Hrz-DF-Pqa"/>
@@ -49,7 +51,7 @@
                                                 <constraint firstAttribute="height" constant="40" id="g7r-va-uhs"/>
                                             </constraints>
                                             <state key="normal" title="Go">
-                                                <color key="titleColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                                                <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="goButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SBt-i9-p54"/>
@@ -58,7 +60,7 @@
                                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
                                             <rect key="frame" x="92" y="0.0" width="40" height="40"/>
                                             <state key="normal" title="Exit">
-                                                <color key="titleColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                                             </state>
                                             <connections>
                                                 <action selector="exitButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="CcL-T8-xhE"/>
@@ -136,7 +138,4 @@
             <point key="canvasLocation" x="796.5" y="351"/>
         </view>
     </objects>
-    <resources>
-        <image name="SearchIconWhite" width="18" height="19"/>
-    </resources>
 </document>

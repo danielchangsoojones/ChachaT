@@ -15,7 +15,6 @@ class CustomTagsSearchBar: UISearchBar {
     
     init(placeHolderText: String) {
         super.init(frame: CGRectZero) //will get set via snapkit constraints
-        self.backgroundColor = UIColor.redColor()
         placeholder = placeHolderText
         tintColor = UIColor(CGColor: preferredBorderColor) //makes the cancel button of search bar and keyboard cursor a certain color
         showsCancelButton = true

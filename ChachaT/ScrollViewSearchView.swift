@@ -51,7 +51,6 @@ class ScrollViewSearchView: UIView {
     
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
-        theTagChosenHolderView.backgroundColor = UIColor.yellowColor()
         setButtonBorders()
         searchBox = showSearchBox(self)
         hideScrollSearchView(true)
