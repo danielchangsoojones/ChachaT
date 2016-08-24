@@ -1,5 +1,5 @@
 //
-//  ChachaTagDropDown.swift
+//  ChachaDropDownMenu.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 7/28/16.
@@ -9,17 +9,17 @@
 import Foundation
 import SnapKit
 
-protocol ChachaTagDropDownDelegate {
+protocol ChachaDropDownMenuDelegate {
     func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?)
 }
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
-class ChachaTagDropDown: UIView {
+class ChachaDropDownMenu: UIView {
     
     let springWithDamping : CGFloat = 0.7
     let initialSpringVelocity : CGFloat = 0.5
     
-    var delegate: ChachaTagDropDownDelegate?
+    var delegate: ChachaDropDownMenuDelegate?
     
     // The animation duration of showing/hiding menu. Default is 0.3
     var animationDuration: NSTimeInterval! {
@@ -70,7 +70,7 @@ class ChachaTagDropDown: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaTagDropDownDelegate) {
+    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaDropDownMenuDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
         super.init(frame: CGRectZero)
         
@@ -92,7 +92,7 @@ class ChachaTagDropDown: UIView {
         self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
         self.backgroundView.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
         
-        let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaTagDropDown.hideMenu));
+        let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaDropDownMenu.hideMenu));
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
@@ -108,7 +108,6 @@ class ChachaTagDropDown: UIView {
         
         // By default, hide menu view
         self.menuWrapper.hidden = true
-//        self.menuWrapper.backgroundColor = UIColor.redColor()
     }
     
     func showTagListView(tagTitles: [String]) {
@@ -229,7 +228,6 @@ class ChachaTagDropDown: UIView {
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
-        tagListView.backgroundColor = UIColor.redColor()
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
             make.top.equalTo(view)
@@ -252,7 +250,6 @@ class ChachaTagDropDown: UIView {
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
-        theSliderView.backgroundColor = UIColor.redColor()
         return theSliderView
     }
     
@@ -266,14 +263,12 @@ class ChachaTagDropDown: UIView {
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
             make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
         }
-        theSliderView.backgroundColor = UIColor.redColor()
         return theSliderView
     }
     
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
         arrowImage.contentMode = .ScaleAspectFit
-        arrowImage.backgroundColor = UIColor.redColor()
         let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
         arrowImage.addGestureRecognizer(tap)
         arrowImage.userInteractionEnabled = true

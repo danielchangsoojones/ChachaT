@@ -8,11 +8,12 @@
 
 import Foundation
 
-struct TagProperties {
+struct TagViewProperties {
     static let borderWidth : CGFloat = 1
-    static let borderColor = UIColor.whiteColor()
-    static let textColor = UIColor.whiteColor()
+    static let borderColor = CustomColors.JellyTeal
+    static let textColor = CustomColors.JellyTeal
     static let tagBackgroundColor = UIColor.clearColor()
+    static let tagInsidesColor = UIColor.whiteColor() //the tag insides for the chosen view
     static let cornerRadius : CGFloat = 16
     static let paddingX : CGFloat = 14 //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
     static let paddingY : CGFloat = 10 //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
@@ -35,15 +36,15 @@ class ChachaChoicesTagListView : TagListView {
     }
     
     func setProperties() {
-        borderColor = TagProperties.borderColor
-        borderWidth = TagProperties.borderWidth
-        textColor = TagProperties.textColor
-        tagBackgroundColor = TagProperties.tagBackgroundColor
-        cornerRadius = TagProperties.cornerRadius
-        paddingX = TagProperties.paddingX //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
-        paddingY = TagProperties.paddingY //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
-        marginX = TagProperties.marginX //the horizontal space between TagViews
-        marginY = TagProperties.marginY //the vertical space between TagViews
+        borderColor = TagViewProperties.borderColor
+        borderWidth = TagViewProperties.borderWidth
+        textColor = TagViewProperties.textColor
+        tagBackgroundColor = TagViewProperties.tagBackgroundColor
+        cornerRadius = TagViewProperties.cornerRadius
+        paddingX = TagViewProperties.paddingX //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
+        paddingY = TagViewProperties.paddingY //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
+        marginX = TagViewProperties.marginX //the horizontal space between TagViews
+        marginY = TagViewProperties.marginY //the vertical space between TagViews
         alignment = .Center //makes the entire TagListView have a centered alignment, this isn't for text alignment
     }
 

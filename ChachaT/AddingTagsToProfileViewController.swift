@@ -74,11 +74,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 //tag methods extension
 extension AddingTagsToProfileViewController {
     
-    override func createSpecialtyTagEnviroment(showSpecialtyEnviroment: Bool) {
-        super.createSpecialtyTagEnviroment(showSpecialtyEnviroment)
-        theYourTagsLabel.hidden = showSpecialtyEnviroment
-    }
-    
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
 //        //we only want to have an action for tag pressed if the user taps something in choices tag view
 //        //the tag from the choices tag view was pressed
@@ -204,17 +199,9 @@ extension AddingTagsToProfileViewController {
         } else if(filtered.count == 0){
             //there is text, but it has no matches in the database
             searchActive = true
-            if !(theSpecialtyTagEnviromentHolderView?.theSpecialtyView is TagListView) {
-                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
-                theSpecialtyTagEnviromentHolderView?.delegate = self
-            }
-            createSpecialtyTagEnviroment(true)
-            theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
-            theSpecialtyTagEnviromentHolderView?.setButtonText("Create New Tag?")
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true
-            createSpecialtyTagEnviroment(false)
         }
         theYourTagsLabel.hidden = searchActive
     }
