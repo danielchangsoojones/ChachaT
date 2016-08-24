@@ -21,8 +21,8 @@ class ChachaChosenTagListView : ChachaChoicesTagListView {
         //get rid of the border
         borderColor = nil
         borderWidth = 0
-        tagBackgroundColor = UIColor.whiteColor()
-        let tagInsidesColor = ChachaTeal
+        tagBackgroundColor = TagViewProperties.borderColor
+        let tagInsidesColor = TagViewProperties.tagInsidesColor
         enableRemoveButton = true
         removeIconLineColor = tagInsidesColor
         textColor = tagInsidesColor

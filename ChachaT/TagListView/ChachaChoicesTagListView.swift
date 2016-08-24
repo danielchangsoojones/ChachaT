@@ -13,6 +13,7 @@ struct TagViewProperties {
     static let borderColor = CustomColors.JellyTeal
     static let textColor = CustomColors.JellyTeal
     static let tagBackgroundColor = UIColor.clearColor()
+    static let tagInsidesColor = UIColor.whiteColor() //the tag insides for the chosen view
     static let cornerRadius : CGFloat = 16
     static let paddingX : CGFloat = 14 //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
     static let paddingY : CGFloat = 10 //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.

@@ -25,6 +25,7 @@ class ScrollViewSearchView: UIView {
     var searchBox: CustomTagsSearchBar!
     
     //constraint outlet
+    @IBOutlet weak var theGoButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var theTagListViewWidthConstraint: NSLayoutConstraint!
     
     var searchBarDelegate: UISearchBarDelegate?
@@ -50,6 +51,7 @@ class ScrollViewSearchView: UIView {
     
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
+        theTagChosenHolderView.backgroundColor = UIColor.yellowColor()
         setButtonBorders()
         searchBox = showSearchBox(self)
         hideScrollSearchView(true)
@@ -66,12 +68,18 @@ class ScrollViewSearchView: UIView {
     
     func setButtonBorders() {
         let buttonArray = [theSearchButton, theGoButton, theExitButton]
+        self.theGoButtonHeightConstraint.constant = TagView.getTagViewHeight(TagViewProperties.paddingY)
         for button in buttonArray {
-            button.layer.cornerRadius = 20.0
-            button.layer.borderWidth = 1
-            button.layer.borderColor = UIColor.whiteColor().CGColor
+            button.layer.cornerRadius = self.theGoButtonHeightConstraint.constant / 2
+            button.layer.borderWidth = TagViewProperties.borderWidth
+            button.layer.borderColor = TagViewProperties.borderColor.CGColor
         }
     }
+    
+//    func createCircularBorder(button: UIButton) {
+//        let cornerRadius = button.frame.size.width / 2
+//        self.profileImageView.clipsToBounds = YES;
+//    }
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     //TODO: I probably need to update the tagview to have remove button enabled.

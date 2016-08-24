@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -14,16 +14,21 @@
                 <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="wnR-At-8N3">
                     <rect key="frame" x="0.0" y="0.0" width="577" height="74"/>
                     <subviews>
-                        <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
-                            <rect key="frame" x="0.0" y="0.0" width="167" height="74"/>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
+                            <rect key="frame" x="0.0" y="0.0" width="177" height="74"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="ChachaT">
-                                    <rect key="frame" x="8" y="25" width="0.0" height="24"/>
+                                    <rect key="frame" x="8" y="-19" width="0.0" height="112"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>
                                         <constraint firstAttribute="width" id="Scz-8p-IDp"/>
                                         <constraint firstAttribute="height" constant="24" id="wnR-Qe-QaA"/>
                                     </constraints>
+                                    <variation key="default">
+                                        <mask key="constraints">
+                                            <exclude reference="wnR-Qe-QaA"/>
+                                        </mask>
+                                    </variation>
                                 </view>
                                 <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" spacing="6" translatesAutoresizingMaskIntoConstraints="NO" id="Qm8-QK-DG2">
                                     <rect key="frame" x="31" y="17" width="132" height="40"/>
@@ -121,6 +126,7 @@
             <connections>
                 <outlet property="theExitButton" destination="SPh-de-YPj" id="kEf-un-BVG"/>
                 <outlet property="theGoButton" destination="mcn-RE-n9V" id="EEo-1q-Qg5"/>
+                <outlet property="theGoButtonHeightConstraint" destination="g7r-va-uhs" id="4MT-xl-Jgd"/>
                 <outlet property="theScrollView" destination="wnR-At-8N3" id="k8X-94-eOQ"/>
                 <outlet property="theSearchButton" destination="jtV-9o-qhN" id="NEC-yO-SGO"/>
                 <outlet property="theTagChosenHolderView" destination="9NQ-uw-kwB" id="66j-0I-a5N"/>
