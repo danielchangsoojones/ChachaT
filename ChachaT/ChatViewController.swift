@@ -57,6 +57,7 @@ class ChatViewController: JSQMessagesViewController {
         self.loadMessages()
         
         // We check for new messages every 5 seconds
+        //Terrance Kunstek said this is a memory leak because when viewcontroller is dropped, the timer keeps going. He has code to fix this. 
         timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ChatViewController.loadMessages), userInfo: nil, repeats: true)
         
     }

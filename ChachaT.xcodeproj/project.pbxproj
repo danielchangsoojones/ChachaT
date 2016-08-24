@@ -815,9 +815,9 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dcj.Chong500Productions.ChachaT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.ChachaT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "85e8d001-a57b-4a19-b3b9-2131d73042aa";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -833,7 +833,7 @@
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = dcj.Chong500Productions.ChachaT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.ChachaT;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
