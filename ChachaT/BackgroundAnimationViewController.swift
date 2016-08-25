@@ -63,7 +63,7 @@ class BackgroundAnimationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         theBackgroundColorView.backgroundColor = BackgroundPageColor
-        setNavigationButtons()
+        setFakeNavigationBarView()
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
         kolodaView.delegate = self
@@ -122,25 +122,37 @@ class BackgroundAnimationViewController: UIViewController {
         })
     }
     
-    func setNavigationButtons() {
-        //need to hold the uinavigation button in a variable because we will be turning the actual navBarItems to nil when we want to disappear
-        //then when we want them to reappear, we will set back to our retained global variable.
-        leftNavigationButton = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
-        self.navigationItem.leftBarButtonItem = leftNavigationButton
-        rightNavigationButton = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
-        self.navigationItem.rightBarButtonItem = rightNavigationButton
+    //Purpose: we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
+    func setFakeNavigationBarView() {
+        self.navigationController?.navigationBarHidden = true
+        let fakeNavigationBarView = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height)
+        self.view.addSubview(fakeNavigationBarView)
+        fakeNavigationBarView.snp_makeConstraints { (make) in
+            make.trailing.leading.equalTo(self.view)
+            make.top.equalTo(self.view)
+            make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
+        }
     }
     
-    func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
-//        let navigationButtonAlpha : CGFloat = 0.75
-        let navigationButtonSideDimension : CGFloat = 20
-        let button = UIButton()
-        button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
-        button.addTarget(self, action:buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
-        button.frame=CGRectMake(0, 0, navigationButtonSideDimension, navigationButtonSideDimension)
-//        button.alpha = navigationButtonAlpha
-        return UIBarButtonItem(customView: button)
-    }
+//    func setNavigationButtons() {
+//        //need to hold the uinavigation button in a variable because we will be turning the actual navBarItems to nil when we want to disappear
+//        //then when we want them to reappear, we will set back to our retained global variable.
+//        leftNavigationButton = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
+//        self.navigationItem.leftBarButtonItem = leftNavigationButton
+//        rightNavigationButton = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
+//        self.navigationItem.rightBarButtonItem = rightNavigationButton
+//    }
+//    
+//    func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
+////        let navigationButtonAlpha : CGFloat = 0.75
+//        let navigationButtonSideDimension : CGFloat = 20
+//        let button = UIButton()
+//        button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
+//        button.addTarget(self, action:buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
+//        button.frame=CGRectMake(0, 0, navigationButtonSideDimension, navigationButtonSideDimension)
+////        button.alpha = navigationButtonAlpha
+//        return UIBarButtonItem(customView: button)
+//    }
     
     func logOut() {
         User.logOut()

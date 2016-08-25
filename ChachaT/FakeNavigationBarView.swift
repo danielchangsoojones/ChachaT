@@ -1,0 +1,108 @@
+//
+//  FakeNavigationBarView.swift
+//  ChachaT
+//
+//  Created by Daniel Jones on 8/25/16.
+//  Copyright © 2016 Chong500Productions. All rights reserved.
+//
+
+import Foundation
+import ExpandingMenu
+import SnapKit
+
+//we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
+class FakeNavigationBarView : UIView {
+    var expandingMenuButton: ExpandingMenuButton!
+    var navigationBarHeight: CGFloat = 44 //being a good coder, and make the actual view controller pass us the nav bar height, in case that apple changes the nav bar height one day
+    
+    init(navigationBarHeight: CGFloat) {
+        super.init(frame: CGRectZero)
+        self.navigationBarHeight = navigationBarHeight
+        setNavigationBarItems()
+        self.backgroundColor = UIColor.blueColor()
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setNavigationBarItems() {
+        createExpandingMenuButton() //creates the left Menu Button that creates a drop down menu
+        createRightBarButton()
+        createLogo()
+    }
+    
+    func createLogo() {
+        let logoImageView = UIImageView(image: UIImage(named: ImageNames.ChachaTealLogo))
+        logoImageView.contentMode = .ScaleAspectFit
+        logoImageView.backgroundColor = UIColor.redColor()
+        self.addSubview(logoImageView)
+        logoImageView.snp_makeConstraints { (make) in
+            make.centerX.equalTo(self)
+            make.centerY.equalTo(32)
+            make.height.equalTo(30)
+            make.width.equalTo(30)
+        }
+    }
+    
+    func createRightBarButton() {
+        let rightButton = UIButton(frame: CGRectMake(0, 0, ImportantDimensions.BarButtonItemSize.width, ImportantDimensions.BarButtonItemSize.height))
+        self.addSubview(rightButton)
+        rightButton.snp_makeConstraints { (make) in
+            make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
+            make.centerY.equalTo(ImportantDimensions.StatusBarHeight + (navigationBarHeight / 2))
+        }
+        rightButton.setImage(UIImage(named: ImageNames.SearchIcon), forState: .Normal)
+    }
+    
+    func createExpandingMenuButton() {
+        let menuButtonSize: CGSize = CGSize(width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height) //Can't set snapkit constraints on this because it won't let the drop down menu be created once I add constraints to it.
+        //we want the button to be at halfway point in the fake navigation bar. So, we have the midpoint of the superview's frame, but if we just used that, then the origin of the button would start at the midY. So, the origin has to be half of the subview higher.
+        let origin : CGPoint = CGPointMake(ImportantDimensions.BarButtonInset, self.frame.midY - (menuButtonSize.height / 2))
+        expandingMenuButton = ExpandingMenuButton(frame: CGRect(origin: origin, size: menuButtonSize), centerImage: UIImage(named: "Notification Tab Icon")!, centerHighlightedImage: UIImage(named: "Notification Tab Icon")!)
+        self.addSubview(expandingMenuButton)
+        configureExpandingMenuButton()
+    }
+    
+    private func configureExpandingMenuButton() {
+        
+        let item1 = ExpandingMenuItem(size: nil, title: "Music", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            print("Music")
+        }
+        let item2 = ExpandingMenuItem(size: nil, title: "Music", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            print("Beer")
+        }
+        
+//        let item2 = ExpandingMenuItem(size: nil, title: "Place", image: UIImage(named: "chooser-moment-icon-place")!, highlightedImage: UIImage(named: "chooser-moment-icon-place-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+//            print("Place")
+//        }
+//        
+//        let item3 = ExpandingMenuItem(size: nil, title: "Camera", image: UIImage(named: "chooser-moment-icon-camera")!, highlightedImage: UIImage(named: "chooser-moment-icon-camera-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+//            print("Camera")
+//        }
+//        
+//        let item4 = ExpandingMenuItem(size: nil, title: "Thought", image: UIImage(named: "chooser-moment-icon-thought")!, highlightedImage: UIImage(named: "chooser-moment-icon-thought-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+//            print("Thought")
+//        }
+//        
+//        let item5 = ExpandingMenuItem(size: nil, title: "Sleep", image: UIImage(named: "chooser-moment-icon-sleep")!, highlightedImage: UIImage(named: "chooser-moment-icon-sleep-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
+//            print("Sleep")
+//        }
+        
+        
+        expandingMenuButton.expandingDirection = .Bottom
+        
+        expandingMenuButton.addMenuItems([item1, item2])
+        
+        expandingMenuButton.willPresentMenuItems = { (menu) -> Void in
+            self.snp_updateConstraints(closure: { (make) in
+                make.trailing.leading.top.equalTo(self.superview!)
+                make.bottom.equalTo(self.superview!)
+            })
+        }
+        
+        expandingMenuButton.didDismissMenuItems = { (menu) -> Void in
+//            self.frame = CGRectMake(0, 0, 500, 64)
+        }
+    }
+}

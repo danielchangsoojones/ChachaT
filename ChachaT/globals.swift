@@ -49,6 +49,14 @@ struct Constants {
 
 struct ImageNames {
     static let DownArrow = "DownArrow"
+    static let SearchIcon = "SearchIcon"
+    static let ChachaTealLogo = "Chacha-Teal-Logo"
+}
+
+struct ImportantDimensions {
+    static let BarButtonItemSize : CGSize = CGSizeMake(22, 22) //as per the Apple Human Interface Guidelines
+    static let BarButtonInset : CGFloat = 22
+    static let StatusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
 }
 
 //storyboard identifiers
