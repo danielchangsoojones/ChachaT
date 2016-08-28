@@ -19,7 +19,6 @@ class FakeNavigationBarView : UIView {
         super.init(frame: CGRectZero)
         self.navigationBarHeight = navigationBarHeight
         setNavigationBarItems()
-        self.backgroundColor = UIColor.blueColor()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +38,7 @@ class FakeNavigationBarView : UIView {
         self.addSubview(logoImageView)
         logoImageView.snp_makeConstraints { (make) in
             make.centerX.equalTo(self)
-            make.centerY.equalTo(32)
+            make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
             make.height.equalTo(30)
             make.width.equalTo(30)
         }
@@ -50,11 +49,13 @@ class FakeNavigationBarView : UIView {
         self.addSubview(rightButton)
         rightButton.snp_makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
-            make.centerY.equalTo(ImportantDimensions.StatusBarHeight + (navigationBarHeight / 2))
+            make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
         rightButton.setImage(UIImage(named: ImageNames.SearchIcon), forState: .Normal)
     }
     
+    
+    //This button is the Left Bar Button item
     func createExpandingMenuButton() {
         let menuButtonSize: CGSize = CGSize(width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height) //Can't set snapkit constraints on this because it won't let the drop down menu be created once I add constraints to it.
         //we want the button to be at halfway point in the fake navigation bar. So, we have the midpoint of the superview's frame, but if we just used that, then the origin of the button would start at the midY. So, the origin has to be half of the subview higher.
@@ -91,6 +92,7 @@ class FakeNavigationBarView : UIView {
         
         
         expandingMenuButton.expandingDirection = .Bottom
+        expandingMenuButton.menuTitleDirection = .Right
         
         expandingMenuButton.addMenuItems([item1, item2])
         
@@ -107,7 +109,7 @@ class FakeNavigationBarView : UIView {
         if(!self.clipsToBounds && !self.hidden && self.alpha > 0.0){
             let subviews = self.subviews.reverse()
             for member in subviews {
-                var subPoint = member.convertPoint(point, fromView: self)
+                let subPoint = member.convertPoint(point, fromView: self)
                 if let result:UIView = member.hitTest(subPoint, withEvent:event) {
                     return result;
                 }
