@@ -58,7 +58,7 @@ class FakeNavigationBarView : UIView {
     func createExpandingMenuButton() {
         let menuButtonSize: CGSize = CGSize(width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height) //Can't set snapkit constraints on this because it won't let the drop down menu be created once I add constraints to it.
         //we want the button to be at halfway point in the fake navigation bar. So, we have the midpoint of the superview's frame, but if we just used that, then the origin of the button would start at the midY. So, the origin has to be half of the subview higher.
-        let origin : CGPoint = CGPointMake(ImportantDimensions.BarButtonInset, self.frame.midY - (menuButtonSize.height / 2))
+        let origin : CGPoint = CGPointMake(ImportantDimensions.BarButtonInset, ImportantDimensions.StatusBarHeight + (navigationBarHeight / 2) - (menuButtonSize.height / 2))
         expandingMenuButton = ExpandingMenuButton(frame: CGRect(origin: origin, size: menuButtonSize), centerImage: UIImage(named: "Notification Tab Icon")!, centerHighlightedImage: UIImage(named: "Notification Tab Icon")!)
         self.addSubview(expandingMenuButton)
         configureExpandingMenuButton()
@@ -95,14 +95,24 @@ class FakeNavigationBarView : UIView {
         expandingMenuButton.addMenuItems([item1, item2])
         
         expandingMenuButton.willPresentMenuItems = { (menu) -> Void in
-            self.snp_updateConstraints(closure: { (make) in
-                make.trailing.leading.top.equalTo(self.superview!)
-                make.bottom.equalTo(self.superview!)
-            })
         }
         
         expandingMenuButton.didDismissMenuItems = { (menu) -> Void in
-//            self.frame = CGRectMake(0, 0, 500, 64)
+
         }
+    }
+    
+    //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        if(!self.clipsToBounds && !self.hidden && self.alpha > 0.0){
+            let subviews = self.subviews.reverse()
+            for member in subviews {
+                var subPoint = member.convertPoint(point, fromView: self)
+                if let result:UIView = member.hitTest(subPoint, withEvent:event) {
+                    return result;
+                }
+            }
+        }
+        return nil
     }
 }
