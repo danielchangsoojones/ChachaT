@@ -32,7 +32,7 @@ class FilterQueryViewController: FilterTagViewController {
         for tagTitle in tagChoicesDataArray {
             if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: tagTitle) {
                 //the tagTitle is special
-                tagChoicesView.addSpecialtyTag(.None, specialtyCategoryTitle: specialtyCategoryTitle)
+                tagChoicesView.addSpecialtyTag(.GenderNone, specialtyCategoryTitle: specialtyCategoryTitle)
             } else {
                 //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
                 tagChoicesView.addTag(tagTitle)

@@ -11,6 +11,7 @@ import Parse
 import SCLAlertView
 
 class AddingTagsToProfileViewController: FilterTagViewController {
+    var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
@@ -51,7 +52,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tagChoicesView.delegate = self
-        tagChoicesView.addTag("banana")
         setDataFromDataStore()
         // Do any additional setup after loading the view.
     }
@@ -67,7 +67,15 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         dataStore = AddingTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
+    //TODO: figure out how to deal with .None Values
     override func loadChoicesViewTags() {
+        for specialtyTagTitle in specialtyTagChoicesDataArray {
+            tagChoicesView.addSpecialtyTag(specialtyTagTitle, specialtyCategoryTitle: specialtyTagTitle.associatedSpecialtyCategoryTitle!)
+        }
+        for tagTitle in tagChoicesDataArray {
+            //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
+            tagChoicesView.addTag(tagTitle)
+        }
     }
 
     override func didReceiveMemoryWarning() {
