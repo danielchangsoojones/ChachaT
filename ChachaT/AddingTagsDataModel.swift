@@ -25,6 +25,7 @@ class AddingTagsDataStore {
         //can use FirstObject because there really should only be one result returned anyway.
         query.getFirstObjectInBackgroundWithBlock { (object, error) in
             if let tag = object as? Tags where error == nil {
+                self.genericTagChoicesDataArray = tag.genericTags
                 self.loadCurrentUserSpecialtyTags(tag)
                 self.delegate?.setChoicesViewTags(self.genericTagChoicesDataArray, specialtyTagChoicesDataArray: self.specialtyTagChoicesDataArray)
             } else {

@@ -87,7 +87,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 
 //tag methods extension
 extension AddingTagsToProfileViewController {
-    
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         //we only want to have an action for tag pressed if the user taps something in choices tag view
         //the tag from the choices tag view was pressed
@@ -99,6 +98,19 @@ extension AddingTagsToProfileViewController {
                 self.dataStore.deleteTag(title)
             }
             alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
+        }
+    }
+    
+    func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
+        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
+        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
+            switch tagAttribute {
+            case .SpecialtyTagMenu:
+                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
+                dropDownMenu.showTagListView(titleArray)
+                dropDownMenu.tagListView!.delegate = self
+            default: break
+            }
         }
     }
     
