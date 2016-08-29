@@ -16,10 +16,9 @@ class ChachaNavigationViewController: UINavigationController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //hacky way of getting the navigation bar to look like Tinder's and have no background bar, just the buttons.
-        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-        self.navigationBar.shadowImage = UIImage()
+//        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
+//        self.navigationBar.shadowImage = UIImage()
         self.navigationBar.barTintColor = UIColor.whiteColor()
-        self.navigationBarLogo = setNavigationLogo()
     }
 
     override func didReceiveMemoryWarning() {
@@ -28,19 +27,19 @@ class ChachaNavigationViewController: UINavigationController {
     }
     
     
-    func setNavigationLogo() -> UIImageView {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
-        imageView.contentMode = .ScaleAspectFit
-        let logo = UIImage(named: "Chacha-Teal-Logo")
-        imageView.image = logo
-        imageView.alpha = 0.5
-        self.navigationBar.addSubview(imageView)
-        imageView.snp_makeConstraints { (make) in
-            make.center.equalTo(self.navigationBar)
-            make.width.equalTo(100)
-            make.height.equalTo(100)
-        }
-        return imageView
-    }
+//    func setNavigationLogo() -> UIImageView {
+//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
+//        imageView.contentMode = .ScaleAspectFit
+//        let logo = UIImage(named: "Chacha-Teal-Logo")
+//        imageView.image = logo
+//        imageView.alpha = 0.5
+//        self.navigationBar.addSubview(imageView)
+//        imageView.snp_makeConstraints { (make) in
+//            make.center.equalTo(self.navigationBar)
+//            make.width.equalTo(100)
+//            make.height.equalTo(100)
+//        }
+//        return imageView
+//    }
 
 }

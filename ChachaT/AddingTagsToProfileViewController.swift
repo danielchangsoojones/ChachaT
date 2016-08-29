@@ -13,12 +13,12 @@ import SCLAlertView
 class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var theAddToProfileButton: UIButton!
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
-    @IBOutlet weak var theYourTagsLabel: UILabel!
     
     var alreadySavedTags = false
     let questionMarkString = "?"
+    var dataStore : AddingTagsDataStore!
+
     
     @IBAction func theDoneButtonPressed(sender: AnyObject) {
 //        theActivityIndicator.startAnimating()
@@ -51,6 +51,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tagChoicesView.delegate = self
+        tagChoicesView.addTag("banana")
+        setDataFromDataStore()
         // Do any additional setup after loading the view.
     }
     
@@ -59,6 +61,10 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         //quickly, so I added this to already load a SCLAlertView, so then when a tag is hit, it loads quickly
         //this actually seems to make it work. But, maybe it is just an illusion to me...
         let _ = SCLAlertView()
+    }
+    
+    func setDataFromDataStore() {
+        dataStore = AddingTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
     override func loadChoicesViewTags() {
@@ -75,32 +81,17 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 extension AddingTagsToProfileViewController {
     
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-//        //we only want to have an action for tag pressed if the user taps something in choices tag view
-//        //the tag from the choices tag view was pressed
-//        //in storyboard, we made the tag for choices tag view = 1
-//        if sender.tag == 1 {
-//            if searchActive {
-//                //we are in the process of searching, so we are dealing with the choices tag view still, but we want searching functionality
-//                //enabling remove button, because the tag view in chosenTagViewList will have a remove button, so it will be longer.
-//                //if we didn't add a remove button, then the TagListWidth would only extend for a normal tag width, not normalTagWidth + remove button
-//                tagView.enableRemoveButton = true
-//                scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
-//                self.tagChoicesView.removeTag(title)
-//                //TODO: do something to let the user know that they have already inputed this tag, so no need to do it again. This should probably be added somewhere in tag view class.
-//                if let specialtyTagView = tagView as? SpecialtyTagView {
-//                    //checking if we are dealing with a specialty tag, because then we want to add specialty tag to chosen view
-////                    let tag = Tag(title: title, specialtyCategoryTitle: SpecialtyTags(rawValue: specialtyTagView.specialtyTagTitle))
-////                    addTagOrSpecialtyTag(tag, addToChosenView: true)
-//                } else {
-//                    //just add genric tag
-////                    let tag = Tag(title: title, specialtyCategoryTitle: nil)
-////                    addTagOrSpecialtyTag(tag, addToChosenView: true)
-//                }
-//            } else {
-//                //we are dealing with the choices tag view still, but want default user tag functionality like editing tags, ect. because we are not in search mode
-//                tagPressedAttributeActions(title, tagView: tagView)
-//            }
-//        }
+        //we only want to have an action for tag pressed if the user taps something in choices tag view
+        //the tag from the choices tag view was pressed
+        //in storyboard, we made the tag for choices tag view = 1 and only generic tag was pressed
+        if sender.tag == 1 {
+            let alertView = SCLAlertView()
+            alertView.addButton("Delete") {
+                print("Deleted Tag")
+                self.dataStore.deleteTag(title)
+            }
+            alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
+        }
     }
     
     //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
@@ -176,6 +167,5 @@ extension AddingTagsToProfileViewController {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             searchActive = true
         }
-        theYourTagsLabel.hidden = searchActive
     }
 }

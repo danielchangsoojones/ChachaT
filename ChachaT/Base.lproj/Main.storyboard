@@ -183,7 +183,7 @@
         <!--AddingTagsViewController-->
         <scene sceneID="lMl-sD-RRf">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="AddingTagsViewController" id="UlM-dd-WqK" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="AddingTags" referencedIdentifier="AddingTagsViewController" id="UlM-dd-WqK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8YR-PJ-1zN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1037.5" y="854"/>
