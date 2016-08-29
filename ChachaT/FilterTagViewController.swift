@@ -33,7 +33,7 @@ class FilterTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollViewSearchView = addSearchScrollView()
+        self.navigationController?.navigationBarHidden = false
         setDropDownMenu()
     }
     
@@ -41,7 +41,7 @@ class FilterTagViewController: UIViewController {
         fatalError("This method must be overridden in subclasses")
     }
     
-    func addSearchScrollView() -> ScrollViewSearchView {
+    func addSearchScrollView(holderView: UIView) -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
         scrollViewSearchView.searchBox.delegate = self

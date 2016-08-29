@@ -55,6 +55,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBAction func skipCard(sender: AnyObject) {
         kolodaView.swipe(.Left)
     }
+    
     @IBAction func approveCard(sender: UIButton) {
         kolodaView.swipe(.Right)
     }
@@ -63,19 +64,8 @@ class BackgroundAnimationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         theBackgroundColorView.backgroundColor = BackgroundPageColor
+        setKolodaAttributes()
         setFakeNavigationBarView()
-        kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
-        kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
-        kolodaView.delegate = self
-        //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
-        kolodaView.customKolodaViewDelegate = self
-        kolodaView.dataSource = self
-        do {
-            audioPlayerWoosh = try AVAudioPlayer(contentsOfURL: wooshSound)
-        }
-        catch { }
-        audioPlayerWoosh.prepareToPlay()
-        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal
         if userArray.isEmpty {
             //if user array is empty, then that means we should load users
             //if it is not empty, that means the userArray was passed from the search page, so don't load new users
@@ -102,6 +92,7 @@ class BackgroundAnimationViewController: UIViewController {
     
     override func viewWillAppear(animated: Bool) {
         super.viewWillAppear(animated)
+        self.navigationController?.navigationBarHidden = true //created a fake nav bar, so want to hide the real nav bar whenever I come on the screen
         self.theMagicMovePlaceholderImage.hidden = true
     }
     
@@ -124,8 +115,7 @@ class BackgroundAnimationViewController: UIViewController {
     
     //Purpose: we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
     func setFakeNavigationBarView() {
-        self.navigationController?.navigationBarHidden = true
-        let fakeNavigationBarView = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height)
+        let fakeNavigationBarView = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height, delegate: self)
         self.view.addSubview(fakeNavigationBarView)
         fakeNavigationBarView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(self.view)
@@ -134,34 +124,11 @@ class BackgroundAnimationViewController: UIViewController {
         }
     }
     
-//    func setNavigationButtons() {
-//        //need to hold the uinavigation button in a variable because we will be turning the actual navBarItems to nil when we want to disappear
-//        //then when we want them to reappear, we will set back to our retained global variable.
-//        leftNavigationButton = createNavigationButton("Notification Tab Icon", buttonAction: #selector(BackgroundAnimationViewController.logOut))
-//        self.navigationItem.leftBarButtonItem = leftNavigationButton
-//        rightNavigationButton = createNavigationButton("SearchIcon", buttonAction: #selector(BackgroundAnimationViewController.searchNavigationButtonPressed))
-//        self.navigationItem.rightBarButtonItem = rightNavigationButton
-//    }
-//    
-//    func createNavigationButton(imageName: String, buttonAction: Selector) -> UIBarButtonItem {
-////        let navigationButtonAlpha : CGFloat = 0.75
-//        let navigationButtonSideDimension : CGFloat = 20
-//        let button = UIButton()
-//        button.setImage(UIImage(named: imageName), forState: UIControlState.Normal)
-//        button.addTarget(self, action:buttonAction, forControlEvents: UIControlEvents.TouchUpInside)
-//        button.frame=CGRectMake(0, 0, navigationButtonSideDimension, navigationButtonSideDimension)
-////        button.alpha = navigationButtonAlpha
-//        return UIBarButtonItem(customView: button)
-//    }
-    
     func logOut() {
         User.logOut()
         performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
     }
     
-    func searchNavigationButtonPressed() {
-        performSegueWithIdentifier(SegueIdentifier.CustomBackgroundAnimationToSearchSegue, sender: self)
-    }
 }
 
 //queries
@@ -184,6 +151,21 @@ extension BackgroundAnimationViewController {
 //MARK: KolodaViewDelegate
 //BEWARE if the function is not being run, it is because some of the delegate names have been changed. Go to the delegate page and make sure they match up exactly
 extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
+    func setKolodaAttributes() {
+        kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
+        kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
+        kolodaView.delegate = self
+        //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
+        kolodaView.customKolodaViewDelegate = self
+        kolodaView.dataSource = self
+        do {
+            audioPlayerWoosh = try AVAudioPlayer(contentsOfURL: wooshSound)
+        }
+        catch { }
+        audioPlayerWoosh.prepareToPlay()
+        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal //not exactly sure how important this line is, but came with the Koloda code
+    }
+    
     func kolodaDidRunOutOfCards(koloda: KolodaView) {
         kolodaView.resetCurrentCardIndex()
     }
@@ -298,6 +280,7 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case OnboardingPageSegue
         case CustomBackgroundAnimationToSearchSegue
+        case BackgroundAnimationPageToAddingTagsPageSegue
     }
 }
 

@@ -15,8 +15,11 @@ class FakeNavigationBarView : UIView {
     var expandingMenuButton: ExpandingMenuButton!
     var navigationBarHeight: CGFloat = 44 //being a good coder, and make the actual view controller pass us the nav bar height, in case that apple changes the nav bar height one day
     
-    init(navigationBarHeight: CGFloat) {
+    var delegate: FakeNavigationBarDelegate?
+    
+    init(navigationBarHeight: CGFloat, delegate: FakeNavigationBarDelegate) {
         super.init(frame: CGRectZero)
+        self.delegate = delegate
         self.navigationBarHeight = navigationBarHeight
         setNavigationBarItems()
     }
@@ -46,6 +49,7 @@ class FakeNavigationBarView : UIView {
     
     func createRightBarButton() {
         let rightButton = UIButton(frame: CGRectMake(0, 0, ImportantDimensions.BarButtonItemSize.width, ImportantDimensions.BarButtonItemSize.height))
+        rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), forControlEvents: .TouchUpInside)
         self.addSubview(rightButton)
         rightButton.snp_makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
@@ -54,6 +58,9 @@ class FakeNavigationBarView : UIView {
         rightButton.setImage(UIImage(named: ImageNames.SearchIcon), forState: .Normal)
     }
     
+    func rightBarButtonPressed(sender: UIButton!) {
+        delegate?.rightBarButtonPressed(sender)
+    }
     
     //This button is the Left Bar Button item
     func createExpandingMenuButton() {
@@ -70,8 +77,8 @@ class FakeNavigationBarView : UIView {
         let item1 = ExpandingMenuItem(size: nil, title: "Music", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             print("Music")
         }
-        let item2 = ExpandingMenuItem(size: nil, title: "Music", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
-            print("Beer")
+        let item2 = ExpandingMenuItem(size: nil, title: "Add Tags", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            self.delegate?.segueToAddingTagsPage()
         }
         
 //        let item2 = ExpandingMenuItem(size: nil, title: "Place", image: UIImage(named: "chooser-moment-icon-place")!, highlightedImage: UIImage(named: "chooser-moment-icon-place-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
@@ -93,15 +100,8 @@ class FakeNavigationBarView : UIView {
         
         expandingMenuButton.expandingDirection = .Bottom
         expandingMenuButton.menuTitleDirection = .Right
-        
         expandingMenuButton.addMenuItems([item1, item2])
-        
-        expandingMenuButton.willPresentMenuItems = { (menu) -> Void in
-        }
-        
-        expandingMenuButton.didDismissMenuItems = { (menu) -> Void in
-
-        }
+    
     }
     
     //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.
@@ -116,5 +116,20 @@ class FakeNavigationBarView : UIView {
             }
         }
         return nil
+    }
+}
+
+protocol FakeNavigationBarDelegate {
+    func rightBarButtonPressed(sender: UIButton!)
+    func segueToAddingTagsPage()
+}
+
+extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
+    func rightBarButtonPressed(sender: UIButton!) {
+        performSegueWithIdentifier(SegueIdentifier.CustomBackgroundAnimationToSearchSegue, sender: self)
+    }
+    
+    func segueToAddingTagsPage() {
+        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue, sender: nil)
     }
 }

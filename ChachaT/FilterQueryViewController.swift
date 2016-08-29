@@ -15,6 +15,7 @@ class FilterQueryViewController: FilterTagViewController {
     var dataStore : FilterQueryDataStore!    
     override func viewDidLoad() {
         super.viewDidLoad()
+        scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         setDataFromDataStore()
         setSpecialtyTagViewDictionary()
         tagChoicesView.delegate = self

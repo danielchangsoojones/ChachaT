@@ -153,33 +153,6 @@ extension AddingTagsToProfileViewController {
             User.currentUser()!.saveInBackground()
         }
     }
-    
-    //Purpose: I want an editing SCLAlertView, with a textfield, to appear when the user taps a generic tag
-    func createEditingTextFieldPopUp(originalTagText: String, originalTagView: TagView) {
-        let alert = SCLAlertView()
-        let textField = alert.addTextField()
-        textField.text = originalTagText
-        alert.addButton("Done") {
-            if let editedTagText = textField.text {
-                originalTagView.setTitle(editedTagText, forState: .Normal)
-//                let newTag = Tag(title: editedTagText, specialtyCategoryTitle: nil)
-//                let originalTag = self.replaceTag(originalTagView, newTag: newTag, tagArray: &self.tagChoicesDataArray)
-                //remove the previous tag from the actual backend
-                //TODO: this will be done, without the user knowing if the removal was actually completed. Probably should change that. My other stuff is saving when I hit the done button, so I should also delete when the done button is hit.
-//                originalTag?.deleteInBackground()
-//                self.replaceTag(originalTagView, newTag: newTag, tagArray: &self.chosenTagArray)
-            }
-            self.tagChoicesView.layoutSubviews()
-        }
-        alert.addButton("Delete") { 
-//            if let tagToDelete = self.findTag(originalTagView, tagArray: self.tagChoicesDataArray) {
-//                tagToDelete.deleteInBackground()
-//                self.tagChoicesDataArray.removeAtIndex(self.tagChoicesDataArray.indexOf(tagToDelete)!)
-//                self.tagChoicesView.removeTag(originalTagText)
-//            }
-        }
-        alert.showEdit("Edit The Tag", subTitle: "", closeButtonTitle: "Cancel")
-    }
 }
 
 //search extension

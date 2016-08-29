@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -373,7 +373,7 @@
         <!--Add Tags To Your Profile-->
         <scene sceneID="uBc-WO-8Po">
             <objects>
-                <viewController storyboardIdentifier="FilterTagViewController" title="Add Tags To Your Profile" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AddingTagsViewController" title="Add Tags To Your Profile" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="in9-u2-WDu"/>
                         <viewControllerLayoutGuide type="bottom" id="Fr5-lD-rRN"/>
@@ -513,13 +513,9 @@
                     </navigationItem>
                     <connections>
                         <outlet property="tagChoicesView" destination="f8Q-9k-XpF" id="Odn-oM-mHy"/>
-                        <outlet property="tagChosenView" destination="2iB-AG-Xp8" id="bDk-dk-vHq"/>
-                        <outlet property="tagChosenViewWidthConstraint" destination="5AO-FB-Xpb" id="MQT-ER-5rL"/>
                         <outlet property="theActivityIndicator" destination="34F-hU-9oS" id="xVE-me-lTW"/>
                         <outlet property="theAddToProfileButton" destination="QqA-ji-qaT" id="sEk-YM-Gwa"/>
-                        <outlet property="theChosenTagHolderView" destination="KUC-4Y-beP" id="gL6-U7-idc"/>
                         <outlet property="theDoneButton" destination="Ttp-mV-XcO" id="EXm-Cf-SmR"/>
-                        <outlet property="theScrollView" destination="lRp-GR-lFB" id="Qqz-kT-cpp"/>
                         <outlet property="theYourTagsLabel" destination="eNU-C0-kVV" id="xXP-57-Ool"/>
                     </connections>
                 </viewController>
