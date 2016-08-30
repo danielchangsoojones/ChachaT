@@ -32,6 +32,8 @@
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
 		925D0FD91D75E61300DE20F9 /* AddingTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD81D75E61300DE20F9 /* AddingTagView.swift */; };
+		925D0FDC1D760E7500DE20F9 /* AddingTagMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */; };
+		925D0FDE1D760EE000DE20F9 /* AddingTagMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
 		9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9261081A1CDBCA32009F3E86 /* Main.storyboard */; };
 		9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9261081D1CDBCA32009F3E86 /* Assets.xcassets */; };
@@ -113,6 +115,8 @@
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsDataModel.swift; sourceTree = "<group>"; };
 		925D0FD81D75E61300DE20F9 /* AddingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagView.swift; sourceTree = "<group>"; };
+		925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagMenuView.swift; sourceTree = "<group>"; };
+		925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingTagMenuView.xib; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
@@ -318,6 +322,7 @@
 		925D0FD21D74981100DE20F9 /* Adding Tags */ = {
 			isa = PBXGroup;
 			children = (
+				925D0FDA1D760E2F00DE20F9 /* Subviews */,
 				925D0FD51D7498EC00DE20F9 /* Data Models */,
 				925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */,
 				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
@@ -331,6 +336,15 @@
 				925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */,
 			);
 			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */,
+				925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */,
+			);
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		9261080A1CDBCA32009F3E86 = {
@@ -600,6 +614,7 @@
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
+				925D0FDE1D760EE000DE20F9 /* AddingTagMenuView.xib in Resources */,
 				920BF8211D3FF5E300104842 /* Info.plist in Resources */,
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
@@ -700,6 +715,7 @@
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
+				925D0FDC1D760E7500DE20F9 /* AddingTagMenuView.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				920BF82B1D43167000104842 /* Match.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,

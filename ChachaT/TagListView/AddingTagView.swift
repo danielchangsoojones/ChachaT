@@ -67,7 +67,26 @@ protocol AddingTagViewDelegate {
 
 extension AddingTagsToProfileViewController: AddingTagViewDelegate {
     func textFieldDidChange(text: String) {
-        print("text")
+        helper()
+    }
+    
+    func helper() {
+        let addingTagMenuView = AddingTagMenuView.instanceFromNib()
+        self.view.addSubview(addingTagMenuView)
+        addingTagMenuView.snp_makeConstraints { (make) in
+            make.leading.trailing.bottom.equalTo(addingTagMenuView.superview!)
+            if let addingTagView = findAddingTagTagView() {
+                make.top.equalTo(addingTagView.snp_bottom)
+            }
+        }
+    }
+    
+    //Purpose: find the tagView that is an AddingTagView, because we want to do special things to that one.
+    func findAddingTagTagView() -> TagView? {
+        for tagView in tagChoicesView.tagViews where tagView is AddingTagView {
+            return tagView
+        }
+        return nil //shouldn't reach this point
     }
 }
 
