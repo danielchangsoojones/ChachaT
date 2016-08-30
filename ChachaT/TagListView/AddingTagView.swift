@@ -62,21 +62,33 @@ class AddingTagView: TagView {
 }
 
 protocol AddingTagViewDelegate {
-    func textFieldDidChange(text: String)
+    func textFieldDidChange(searchText: String)
 }
 
 extension AddingTagsToProfileViewController: AddingTagViewDelegate {
-    func textFieldDidChange(text: String) {
-        helper()
-    }
-    
-    func helper() {
-        let addingTagMenuView = AddingTagMenuView.instanceFromNib()
-        self.view.addSubview(addingTagMenuView)
-        addingTagMenuView.snp_makeConstraints { (make) in
-            make.leading.trailing.bottom.equalTo(addingTagMenuView.superview!)
-            if let addingTagView = findAddingTagTagView() {
-                make.top.equalTo(addingTagView.snp_bottom)
+    func textFieldDidChange(searchText: String) {
+        var filtered:[String] = []
+        addingTagMenuView.removeAllTags()
+        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
+            //finds the tagTitle, but if nil, then uses the specialtyTagTitle
+            //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
+            //TODO: make the first one to show up be the best matching word, like if I search "a" then apple should be in front of "banana"
+            let tmp: NSString = tagTitle
+            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
+            return range.location != NSNotFound
+        })
+        //we already check if the text is empty over in the AddingTagView class
+        if(filtered.count == 0){
+            //there is text, but it has no matches in the database
+            //TODO: it should say no matches to your search, maybe be the first to join?
+        } else {
+            //there is text, and we have a match, soa the tagChoicesView changes accordingly
+            for (index, tagTitle) in filtered.enumerate() {
+                let tagView = addingTagMenuView.addTag(tagTitle)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.selected = true
+                }
             }
         }
     }
@@ -88,6 +100,30 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         }
         return nil //shouldn't reach this point
     }
+}
+
+//textField Delegate Extension for the AddingTagView textField
+extension AddingTagsToProfileViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(textField: UITextField) {
+        createTagMenuView()
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        //TODO: remove the AddingTagMenuView from the superview.
+        addingTagMenuView.removeFromSuperview()
+    }
+    
+    func createTagMenuView() {
+        addingTagMenuView = AddingTagMenuView.instanceFromNib()
+        self.view.addSubview(addingTagMenuView)
+        addingTagMenuView.snp_makeConstraints { (make) in
+            make.leading.trailing.bottom.equalTo(addingTagMenuView.superview!)
+            if let addingTagView = findAddingTagTagView() {
+                make.top.equalTo(addingTagView.snp_bottom)
+            }
+        }
+    }
+    
 }
 
 

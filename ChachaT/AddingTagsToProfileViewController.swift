@@ -15,6 +15,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var theDoneButton: UIBarButtonItem!
+    var addingTagMenuView: AddingTagMenuView!
     
     var alreadySavedTags = false
     let questionMarkString = "?"
@@ -173,11 +174,6 @@ extension AddingTagsToProfileViewController {
             User.currentUser()!.saveInBackground()
         }
     }
-}
-
-//textField Delegate Extension for the AddingTagView textField 
-extension AddingTagsToProfileViewController: UITextFieldDelegate {
-    
 }
 
 //search extension

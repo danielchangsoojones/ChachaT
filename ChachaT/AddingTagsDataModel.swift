@@ -11,12 +11,14 @@ import Foundation
 class AddingTagsDataStore {
     var genericTagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
     var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
+    var searchDataArray : [String] = [] //tags that will be available for searching
     
     var delegate: AddingTagsDataStoreDelegate?
     
     init(delegate: AddingTagsDataStoreDelegate) {
         self.delegate = delegate
         loadCurrentUserTags()
+        setSearchDataArray()
     }
     
     func loadCurrentUserTags() {
@@ -61,14 +63,39 @@ class AddingTagsDataStore {
             }
         }
     }
+    
+    func setSearchDataArray() {
+        var alreadyContainsTagArray: [String] = []
+        let query = Tags.query()
+        query!.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+            if let tags = objects as? [Tags] {
+                for tag in tags {
+                    for tagTitle in tag.genericTags {
+                        if !alreadyContainsTagArray.contains(tagTitle) {
+                            //our string array does not already contain the tag title, so we can add it to our searchable array
+                            alreadyContainsTagArray.append(tagTitle)
+                            self.searchDataArray.append(tagTitle)
+                        }
+                    }
+                    self.delegate?.getSearchDataArray(self.searchDataArray)
+                }
+            }
+        }
+    }
+    
 }
 
 protocol AddingTagsDataStoreDelegate {
     func deleteTagView(title: String)
     func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles])
+    func getSearchDataArray(searchDataArray: [String])
 }
 
 extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
+    func getSearchDataArray(searchDataArray: [String]) {
+        self.searchDataArray = searchDataArray
+    }
+    
     func deleteTagView(title: String) {
         tagChoicesView.removeTag(title)
     }

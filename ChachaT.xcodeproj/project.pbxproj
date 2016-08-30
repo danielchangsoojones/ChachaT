@@ -114,7 +114,7 @@
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsDataModel.swift; sourceTree = "<group>"; };
-		925D0FD81D75E61300DE20F9 /* AddingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagView.swift; sourceTree = "<group>"; };
+		925D0FD81D75E61300DE20F9 /* AddingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddingTagView.swift; path = TagListView/AddingTagView.swift; sourceTree = "<group>"; };
 		925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagMenuView.swift; sourceTree = "<group>"; };
 		925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingTagMenuView.xib; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -305,7 +305,6 @@
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
 				92120D9A1D69F22700320822 /* TagViewCustomExtension.swift */,
-				925D0FD81D75E61300DE20F9 /* AddingTagView.swift */,
 			);
 			name = TagViews;
 			sourceTree = "<group>";
@@ -322,8 +321,8 @@
 		925D0FD21D74981100DE20F9 /* Adding Tags */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FDA1D760E2F00DE20F9 /* Subviews */,
 				925D0FD51D7498EC00DE20F9 /* Data Models */,
+				925D0FDA1D760E2F00DE20F9 /* Subviews */,
 				925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */,
 				928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */,
 			);
@@ -341,6 +340,7 @@
 		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				925D0FD81D75E61300DE20F9 /* AddingTagView.swift */,
 				925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */,
 				925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */,
 			);
