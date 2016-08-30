@@ -10,6 +10,8 @@ import Foundation
 //This type of tagView is for when we are in the addingTagViewsToProfilePage, we want to have a special tag view that holds a search bar, so we need to do some special stuff in this class, to make it all work correctly within the TagListView.
 class AddingTagView: TagView {
     private var searchBarPlaceHolderText: String = "Add Tag..."
+
+    var searchTextField : UITextField!
     
     var delegate: AddingTagViewDelegate?
     
@@ -31,9 +33,10 @@ class AddingTagView: TagView {
     
     //Purpose: the user should be able to type into the tag to find new tags
     func addTextFieldSubview(textFieldDelegate: UITextFieldDelegate) {
-        let searchTextField = UITextField()
+        searchTextField = UITextField()
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         searchTextField.delegate = textFieldDelegate
+        searchTextField.clearButtonMode = .Always
         self.addSubview(searchTextField)
         searchTextField.placeholder = searchBarPlaceHolderText
         searchTextField.snp_makeConstraints { (make) in
@@ -81,6 +84,8 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
             //TODO: it should say no matches to your search, maybe be the first to join?
+            view.gestureRecognizers?.removeAll()
+            addingTagMenuView.createNewTagTableView(searchText)
         } else {
             //there is text, and we have a match, soa the tagChoicesView changes accordingly
             for (index, tagTitle) in filtered.enumerate() {
@@ -94,9 +99,9 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
     }
     
     //Purpose: find the tagView that is an AddingTagView, because we want to do special things to that one.
-    func findAddingTagTagView() -> TagView? {
+    func findAddingTagTagView() -> AddingTagView? {
         for tagView in tagChoicesView.tagViews where tagView is AddingTagView {
-            return tagView
+            return tagView as? AddingTagView
         }
         return nil //shouldn't reach this point
     }
@@ -106,12 +111,26 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         //TODO: hide all tagViews that aren't AddingtagView
+        //this gesture recognizer fucks with the IndexRowAtPath for a tableView. So, I remove it when we get to the createNewTag TableView.
+        //TODO: set this in viewDidLoad/create viewControllerExtension because this creates gesture recognizer every time the textField is started.
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissKeyboard))
+        view.addGestureRecognizer(tap)
         createTagMenuView()
         addingTagMenuView.setDelegate(self)
     }
     
+    //Calls this function when the tap is recognized.
+    func dismissKeyboard() {
+        //Causes the view (or one of its embedded text fields) to resign the first responder status.
+        view.endEditing(true)
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
         addingTagMenuView.removeFromSuperview()
+    }
+    
+    func textFieldShouldClear(textField: UITextField) -> Bool {
+        return true
     }
     
     func createTagMenuView() {

@@ -93,7 +93,7 @@ class AddingTagsDataStore {
         query?.getFirstObjectInBackgroundWithBlock({ (object, error) in
             if let tag = object as? Tags where error == nil {
                 //I could just do addObject, which add anything. Technically, there should be only one anyway, but this makes sure only one will ever be added, so I guess if duplicates somehow got into the database. This would kind of self-clean it.
-                tag.addUniqueObject(title, forKey: "genericTags")
+                tag.addUniqueObject(title.lowercaseString, forKey: "genericTags")
                 tag.saveInBackground()
             } else if error != nil {
                 print(error)
@@ -119,7 +119,9 @@ extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
     }
     
     func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
-        self.tagChoicesDataArray = genericTagChoicesDataArray
+        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
+        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        self.tagChoicesDataArray = alphabeticallySortedArray
         self.specialtyTagChoicesDataArray = specialtyTagChoicesDataArray
         loadChoicesViewTags()
     }
