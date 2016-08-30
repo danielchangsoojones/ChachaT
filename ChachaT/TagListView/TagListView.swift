@@ -455,6 +455,38 @@ extension TagListView {
         }
         return false
     }
+    
+    func insertTagViewAtIndex(index: Int, tagView: TagView) {
+        //refactor this because I want to keep all attributes, but this is being used 3 times in code.
+        tagView.textColor = textColor
+        tagView.selectedTextColor = selectedTextColor
+        tagView.tagBackgroundColor = tagBackgroundColor
+        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
+        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
+        tagView.cornerRadius = cornerRadius
+        tagView.borderWidth = borderWidth
+        tagView.borderColor = borderColor
+        tagView.selectedBorderColor = selectedBorderColor
+        tagView.paddingX = paddingX
+        tagView.paddingY = paddingY
+        tagView.textFont = textFont
+        tagView.removeIconLineWidth = removeIconLineWidth
+        tagView.removeButtonIconSize = removeButtonIconSize
+        tagView.enableRemoveButton = enableRemoveButton
+        tagView.removeIconLineColor = removeIconLineColor
+        tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
+        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        // Deselect all tags except this one
+        tagView.onLongPress = { this in
+            for tag in self.tagViews {
+                tag.selected = (tag == this)
+            }
+        }
+        tagViews.insert(tagView, atIndex: index)
+        tagBackgroundViews.append(UIView(frame: tagView.bounds))
+        rearrangeViews()
+    }
 }
 
 

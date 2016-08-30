@@ -105,11 +105,12 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
 //textField Delegate Extension for the AddingTagView textField
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
+        //TODO: hide all tagViews that aren't AddingtagView
         createTagMenuView()
+        addingTagMenuView.setDelegate(self)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        //TODO: remove the AddingTagMenuView from the superview.
         addingTagMenuView.removeFromSuperview()
     }
     
