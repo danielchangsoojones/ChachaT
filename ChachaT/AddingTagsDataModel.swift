@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Parse
 
 class AddingTagsDataStore {
     var genericTagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
@@ -30,10 +31,11 @@ class AddingTagsDataStore {
             if let tag = object as? Tags where error == nil {
                 self.genericTagChoicesDataArray = tag.genericTags
                 self.loadCurrentUserSpecialtyTags(tag)
-                self.delegate?.setChoicesViewTags(self.genericTagChoicesDataArray, specialtyTagChoicesDataArray: self.specialtyTagChoicesDataArray)
             } else {
                 print(error)
             }
+            //this should load the tagViews even if there is error, so at least the user can see the AddingTagView
+            self.delegate?.setChoicesViewTags(self.genericTagChoicesDataArray, specialtyTagChoicesDataArray: self.specialtyTagChoicesDataArray)
         }
     }
     
@@ -96,7 +98,16 @@ class AddingTagsDataStore {
                 tag.addUniqueObject(title.lowercaseString, forKey: "genericTags")
                 tag.saveInBackground()
             } else if error != nil {
-                print(error)
+                let code = error!.code
+                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
+                    //the user has not created a Tags row yet, so create them a new Tags row
+                    let tags = Tags()
+                    tags.createdBy = User.currentUser()!
+                    tags.genericTags = [title]
+                    tags.saveInBackground()
+                } else {
+                    print(error)
+                }
             }
         })
     }

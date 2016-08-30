@@ -74,8 +74,8 @@ class FakeNavigationBarView : UIView {
     
     private func configureExpandingMenuButton() {
         
-        let item1 = ExpandingMenuItem(size: nil, title: "Music", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
-            print("Music")
+        let item1 = ExpandingMenuItem(size: nil, title: "Log Out", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            self.delegate?.logOut()
         }
         let item2 = ExpandingMenuItem(size: nil, title: "Add Tags", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToAddingTagsPage()
@@ -122,6 +122,7 @@ class FakeNavigationBarView : UIView {
 protocol FakeNavigationBarDelegate {
     func rightBarButtonPressed(sender: UIButton!)
     func segueToAddingTagsPage()
+    func logOut()
 }
 
 extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
@@ -131,5 +132,10 @@ extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     
     func segueToAddingTagsPage() {
         performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue, sender: nil)
+    }
+    
+    func logOut() {
+        User.logOut()
+        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
     }
 }

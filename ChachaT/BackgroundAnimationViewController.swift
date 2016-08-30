@@ -135,11 +135,6 @@ class BackgroundAnimationViewController: UIViewController {
         }
     }
     
-    func logOut() {
-        User.logOut()
-        performSegueWithIdentifier(.OnboardingPageSegue, sender: self)
-    }
-    
 }
 
 //queries
