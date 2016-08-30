@@ -9,18 +9,20 @@
 import Foundation
 //This type of tagView is for when we are in the addingTagViewsToProfilePage, we want to have a special tag view that holds a search bar, so we need to do some special stuff in this class, to make it all work correctly within the TagListView.
 class AddingTagView: TagView {
-    var searchBarPlaceHolderText: String!
+    private var searchBarPlaceHolderText: String = "Add Tag..."
     
-    init(searchBarPlaceHolderText: String, textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
+    var delegate: AddingTagViewDelegate?
+    
+    init(textFieldDelegate: UITextFieldDelegate, delegate: AddingTagViewDelegate, textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
         super.init(frame: CGRectZero)
-        self.searchBarPlaceHolderText = searchBarPlaceHolderText
+        self.delegate = delegate
         self.textFont = textFont
         self.paddingX = paddingX
         self.paddingY = paddingY
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
         self.tagBackgroundColor = tagBackgroundColor
-        addTextFieldSubview()
+        addTextFieldSubview(textFieldDelegate)
     }
     
     required internal init?(coder aDecoder: NSCoder) {
@@ -28,12 +30,25 @@ class AddingTagView: TagView {
     }
     
     //Purpose: the user should be able to type into the tag to find new tags
-    func addTextFieldSubview() {
-        let searchBar = UITextField()
-        self.addSubview(searchBar)
-        searchBar.placeholder = searchBarPlaceHolderText
-        searchBar.snp_makeConstraints { (make) in
+    func addTextFieldSubview(textFieldDelegate: UITextFieldDelegate) {
+        let searchTextField = UITextField()
+        searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
+        searchTextField.delegate = textFieldDelegate
+        self.addSubview(searchTextField)
+        searchTextField.placeholder = searchBarPlaceHolderText
+        searchTextField.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
+        }
+    }
+    
+    func textFieldDidChange(textField: UITextField) {
+        if let text = textField.text {
+            if text.isEmpty {
+                //if they type and then delete all their typing, then we should resign the keyboard.
+                textField.resignFirstResponder()
+            } else {
+                delegate?.textFieldDidChange(text)
+            }
         }
     }
     
@@ -45,3 +60,19 @@ class AddingTagView: TagView {
         return size
     }
 }
+
+protocol AddingTagViewDelegate {
+    func textFieldDidChange(text: String)
+}
+
+extension AddingTagsToProfileViewController: AddingTagViewDelegate {
+    func textFieldDidChange(text: String) {
+        print("text")
+    }
+}
+
+
+
+
+
+

@@ -80,7 +80,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     //Purpose: the first tag view needs to be a tag view that says "Add tags..." in a different color, and when the user clicks, they can start typing right there.
     //This should create a drop down menu of all available tags
     func createAddingTagView() {
-        let tagView = AddingTagView(searchBarPlaceHolderText: "Add Tag...", textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
+        let tagView = AddingTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
         //TODO: move this the AddingTagView class
         tagView.borderColor = UIColor.blackColor()
         tagChoicesView.addTagView(tagView)
@@ -173,6 +173,11 @@ extension AddingTagsToProfileViewController {
             User.currentUser()!.saveInBackground()
         }
     }
+}
+
+//textField Delegate Extension for the AddingTagView textField 
+extension AddingTagsToProfileViewController: UITextFieldDelegate {
+    
 }
 
 //search extension
