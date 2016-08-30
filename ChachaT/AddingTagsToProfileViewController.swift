@@ -53,7 +53,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         super.viewDidLoad()
         tagChoicesView.delegate = self
         setDataFromDataStore()
-        // Do any additional setup after loading the view.
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -67,8 +66,8 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         dataStore = AddingTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
-    //TODO: figure out how to deal with .None Values
     override func loadChoicesViewTags() {
+        createAddingTagView()
         for specialtyTagTitle in specialtyTagChoicesDataArray {
             tagChoicesView.addSpecialtyTag(specialtyTagTitle, specialtyCategoryTitle: specialtyTagTitle.associatedSpecialtyCategoryTitle!)
         }
@@ -77,6 +76,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
             tagChoicesView.addTag(tagTitle)
         }
     }
+    
+    //Purpose: the first tag view needs to be a tag view that says "Add tags..." in a different color, and when the user clicks, they can start typing right there.
+    //This should create a drop down menu of all available tags
+    func createAddingTagView() {
+        let tagView = AddingTagView(searchBarPlaceHolderText: "Add Tag...", textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
+        //TODO: move this the AddingTagView class
+        tagView.borderColor = UIColor.blackColor()
+        tagChoicesView.addTagView(tagView)
+    }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
