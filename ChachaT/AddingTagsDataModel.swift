@@ -21,6 +21,7 @@ class AddingTagsDataStore {
         setSearchDataArray()
     }
     
+    //TODO: if nothing exists, then it will print error because the user doesn't have a tags row. Should create one when the user signs up.
     func loadCurrentUserTags() {
         let query = Tags.query()!
         query.whereKey("createdBy", equalTo: User.currentUser()!)
@@ -81,6 +82,23 @@ class AddingTagsDataStore {
                 }
             }
         }
+    }
+    
+    //TODO: if the user has no tag yet, then we need to create a new one for them.
+    //TODO: save all the tags at once, instead of saving them one at a time.
+    func saveNewTag(title: String) {
+        let query = Tags.query()
+        query?.whereKey("createdBy", equalTo: User.currentUser()!)
+        //only did first object because the user should only have one tag row, so it should be the first and only object found.
+        query?.getFirstObjectInBackgroundWithBlock({ (object, error) in
+            if let tag = object as? Tags where error == nil {
+                //I could just do addObject, which add anything. Technically, there should be only one anyway, but this makes sure only one will ever be added, so I guess if duplicates somehow got into the database. This would kind of self-clean it.
+                tag.addUniqueObject(title, forKey: "genericTags")
+                tag.saveInBackground()
+            } else if error != nil {
+                print(error)
+            }
+        })
     }
     
 }

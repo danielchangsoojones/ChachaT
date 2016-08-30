@@ -72,16 +72,16 @@ class BackgroundAnimationViewController: UIViewController {
             createUserArray()
         }
         
-        let tags = Tags()
-        tags.createdBy = User.currentUser()!
-        tags.genericTags = ["banana", "apple", "pear"]
-        tags.gender = 302
-        tags.ethnicity = 2
-        tags.sexuality = 402
-        tags.politicalGroup = -201
-        tags.hairColor = -101
-        tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
-        tags.saveInBackground()
+//        let tags = Tags()
+//        tags.createdBy = User.currentUser()!
+//        tags.genericTags = ["banana", "apple", "pear"]
+//        tags.gender = 302
+//        tags.ethnicity = 2
+//        tags.sexuality = 402
+//        tags.politicalGroup = -201
+//        tags.hairColor = -101
+//        tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
+//        tags.saveInBackground()
         
 //        PFGeoPoint.geoPointForCurrentLocationInBackground { (geoPoint, error) in
 //            if error == nil {

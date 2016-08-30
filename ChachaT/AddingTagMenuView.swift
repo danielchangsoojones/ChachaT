@@ -58,5 +58,6 @@ extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
     func addNewTagToTagChoiceView(title: String, tagView: TagView) {
         //also passing the TagView because I get the feeling that I might need it in the future.
         tagChoicesView.insertTagViewAtIndex(1, tagView: tagView)
+        dataStore.saveNewTag(title)
     }
 }
