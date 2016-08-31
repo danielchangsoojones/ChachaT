@@ -425,6 +425,16 @@ extension TagListView {
         delegate?.specialtyTagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
     }
     
+    func findSpecialtyTagView(specialtyCategoryTitle: SpecialtyCategoryTitles) -> SpecialtyTagView? {
+        for tagView in tagViews where tagView is SpecialtyTagView {
+            let specialtyTagView = tagView as! SpecialtyTagView
+            if specialtyTagView.specialtyCategoryTitle == specialtyCategoryTitle {
+                return specialtyTagView
+            }
+        }
+        return nil
+    }
+    
     //TODO: probably should be checking something about category name also.
 //    func findTagView(tagTitle: String, categoryName: String?) -> TagView? {
 //        for tagView in tagViews {
@@ -454,6 +464,12 @@ extension TagListView {
             }
         }
         return false
+    }
+    
+    //Purpose: change the tagView title and then update the frames of everything, so it rearranges everything, and makes the TagView frame fit snuggly for the new title
+    func setTagViewTitle(tagView: TagView, title: String) {
+        tagView.setTitle(title, forState: .Normal)
+        self.layoutSubviews()
     }
     
     func insertTagViewAtIndex(index: Int, title: String = "", tagView: TagView? = nil) {

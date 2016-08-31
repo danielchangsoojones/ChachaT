@@ -108,6 +108,7 @@ extension FilterTagViewController : ChachaDropDownMenuDelegate {
             if let downDistance = downDistance {
                 tagChoicesViewTopConstraint.constant = downDistance
             }
+            //we don't want the TagListView to rearrange every time the dropDown moves, that looks bad. 
             tagChoicesView.shouldRearrangeViews = false
             UIView.animateWithDuration(
                 animationDuration,
@@ -117,6 +118,7 @@ extension FilterTagViewController : ChachaDropDownMenuDelegate {
                 options: [],
                 animations: {
                     self.view.layoutIfNeeded()
+                    self.tagChoicesView.shouldRearrangeViews = true
                 }, completion: nil
             )
         } else {

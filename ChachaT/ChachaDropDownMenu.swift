@@ -228,6 +228,7 @@ class ChachaDropDownMenu: UIView {
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
+        tagListView.tag = 3 //need to set this, so I can know which tagView (i.e. tagChosenView = 2, tagChoicesView = 1, dropDownTagView (this) = 3).
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
             make.top.equalTo(view)

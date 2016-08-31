@@ -97,17 +97,21 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 
 //tag methods extension
 extension AddingTagsToProfileViewController {
+    //TagListView tags: (tagChoicesView = 1, tagChosenView = 2, dropDownTagView = 3)
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
-        //we only want to have an action for tag pressed if the user taps something in choices tag view
-        //the tag from the choices tag view was pressed
-        //in storyboard, we made the tag for choices tag view = 1 and only generic tag was pressed
         if sender.tag == 1 {
+            //tagChoicesView pressed
             let alertView = SCLAlertView()
             alertView.addButton("Delete") {
                 print("Deleted Tag")
                 self.dataStore.deleteTag(title)
             }
             alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
+        } else if sender.tag == 3 {
+            //dropDownTagView pressed
+            if let specialtyTagView = tagChoicesView.findSpecialtyTagView(dropDownMenu.dropDownMenuCategoryType) {
+                tagChoicesView.setTagViewTitle(specialtyTagView, title: title)
+            }
         }
     }
     
@@ -122,33 +126,6 @@ extension AddingTagsToProfileViewController {
             default: break
             }
         }
-    }
-    
-    //Purpose: Tags have different functionality, so we need a switch statement to deal with all the different types
-    //For Example: If the distance tag is pressed, then the tag displays a single button slider
-    func tagPressedAttributeActions(title: String, tagView: TagView) {
-//        if let tag = findTag(tagView, tagArray: tagChoicesDataArray) {
-//            switch tag.attribute {
-//            case TagAttributes.Generic.rawValue:
-//                createEditingTextFieldPopUp(title, originalTagView: tagView)
-//            case TagAttributes.SpecialtyTagMenu.rawValue: break
-//                //checking if we just got passed something like Black or Blonde, because then we need to convert it to a specialty tag category
-//                //but if not, then we just need to pass the title because it is already a specialty tag category
-////                if let specialtyTagView = tagView as? SpecialtyTagView {
-////                    createStackViewTagButtonsAndSpecialtyEnviroment(specialtyTagView.specialtyTagTitle, pushOneButton: true, addNoneButton: true)
-////                }
-//            case TagAttributes.SpecialtySingleSlider.rawValue:
-//                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .DistanceSlider)
-//                createSpecialtyTagEnviroment(true)
-//            case TagAttributes.SpecialtyRangeSlider.rawValue:
-//                //birthday picker here because we don't want an age range slider, we want to know how old the user is
-//                createBirthdayDatePickerPop()
-//            default:
-//                //should never reach here, just had to implement because tagAttribute is string, not enum, because I needed to save it in Parse as Enum
-//                break
-//            }
-//        }
-//        theSpecialtyTagEnviromentHolderView?.delegate = self
     }
 }
 
@@ -172,30 +149,6 @@ extension AddingTagsToProfileViewController {
             User.currentUser()!.birthDate = birthday
             //TODO: I probably should be doing something to make sure this actually saves, in case they exit the app very fast before it saves.
             User.currentUser()!.saveInBackground()
-        }
-    }
-}
-
-//search extension
-extension AddingTagsToProfileViewController {
-    override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        var filtered:[String] = []
-        tagChoicesView.removeAllTags()
-        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
-            let tmp: NSString = tagTitle
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
-        if searchText.isEmpty {
-            //no text, so we want to stay on the tagChoicesView
-            searchActive = false
-            resetTagChoicesViewList()
-        } else if(filtered.count == 0){
-            //there is text, but it has no matches in the database
-            searchActive = true
-        } else {
-            //there is text, and we have a match, so the tagChoicesView changes accordingly
-            searchActive = true
         }
     }
 }
