@@ -33,7 +33,7 @@ class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
     func setUpSearchNavigationBar(viewController: UIViewController) {
         if let chachaNavigationVC = viewController.navigationController as? ChachaNavigationViewController {
             viewController.navigationItem.hidesBackButton = true
-            chachaNavigationVC.navigationBarLogo.hidden = true
+//            chachaNavigationVC.navigationBarLogo.hidden = true
         }
     }
     

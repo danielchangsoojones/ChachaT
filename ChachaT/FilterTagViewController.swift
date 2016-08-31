@@ -33,7 +33,7 @@ class FilterTagViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        scrollViewSearchView = addSearchScrollView()
+        self.navigationController?.navigationBarHidden = false
         setDropDownMenu()
     }
     
@@ -41,7 +41,7 @@ class FilterTagViewController: UIViewController {
         fatalError("This method must be overridden in subclasses")
     }
     
-    func addSearchScrollView() -> ScrollViewSearchView {
+    func addSearchScrollView(holderView: UIView) -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
         scrollViewSearchView.searchBox.delegate = self
@@ -108,6 +108,7 @@ extension FilterTagViewController : ChachaDropDownMenuDelegate {
             if let downDistance = downDistance {
                 tagChoicesViewTopConstraint.constant = downDistance
             }
+            //we don't want the TagListView to rearrange every time the dropDown moves, that looks bad. 
             tagChoicesView.shouldRearrangeViews = false
             UIView.animateWithDuration(
                 animationDuration,
@@ -117,6 +118,7 @@ extension FilterTagViewController : ChachaDropDownMenuDelegate {
                 options: [],
                 animations: {
                     self.view.layoutIfNeeded()
+                    self.tagChoicesView.shouldRearrangeViews = true
                 }, completion: nil
             )
         } else {

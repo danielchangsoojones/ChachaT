@@ -68,30 +68,53 @@ public enum SpecialtyCategoryTitles : String {
         return nil
     }
     
+    //TODO: there is probably a much smarter/more effecient/less manual way to do this. Just can't figure it out right now...
+    var noneValue : SpecialtyTagTitles? {
+        switch self {
+        case .Gender:
+            return .GenderNone
+        case .Ethnicity:
+            return .RaceNone
+        case .Sexuality:
+            return .SexualityNone
+        case .PoliticalGroup:
+            return .PoliticalGroupNone
+        case .HairColor:
+            return .HairColorNone
+        default:
+            return nil
+        }
+    }
+    
     static let specialtyTagMenuCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor]
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
-    static let allCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor, Location, AgeRange]
+    static let allCategories = [specialtyTagMenuCategories, specialtySingleSliderCategories, specialtyRangeSliderCategories].flatten()
 }
 
+//TODO: make a rawValue for private because if a user has not inputed a tag, then we want to put an exclamation point, but if they have just marked it as private, then we want to show it as private. 
 public enum SpecialtyTagTitles : Int {
     
     //In case I want to add other enums, I am seperating the Int categories by 100
+    case RaceNone = -1
     case RaceBlack = 1
     case RaceWhite = 2
     case RaceLatino = 3
     case RaceAsian = 4
+    case HairColorNone = -101
     case HairColorBrunette = 101
     case HairColorBlonde = 102
     case HairColorRedhead = 103
+    case PoliticalGroupNone = -201
     case PoliticalGroupDemocrat = 201
     case PoliticalGroupRepublican = 202
+    case GenderNone = -301
     case GenderMale = 301
     case GenderFemale = 302
+    case SexualityNone = -401
     case SexualityStraight = 401
     case SexualityGay = 402
     case SexualityBisexual = 403
-    case None = 0
     
     //saving the enums as Ints in database to make them changeable on the frontend side, also takes up less memory space on the backend.
     var toString : String {
@@ -124,7 +147,7 @@ public enum SpecialtyTagTitles : Int {
             return "Gay"
         case .SexualityBisexual:
             return "Bisexual"
-        case .None:
+        default:
             return "None"
         }
     }
@@ -152,12 +175,12 @@ public enum SpecialtyTagTitles : Int {
     }
     
     //this array lets me iterate over certain sections of the enum
-    static let ethnicityAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , None ]
-    static let hairColorAllValues = [HairColorBrunette , HairColorBlonde , HairColorRedhead , None ]
-    static let genderAllValues = [GenderMale , GenderFemale , None ]
-    static let sexualityAllValues = [SexualityStraight , SexualityGay , SexualityBisexual , None ]
-    static let politicalGroupAllValues = [PoliticalGroupDemocrat , PoliticalGroupRepublican , None ]
-    static let allValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , HairColorBrunette , HairColorBlonde , HairColorRedhead , GenderMale , GenderFemale , SexualityStraight , SexualityGay , SexualityBisexual , PoliticalGroupRepublican , PoliticalGroupDemocrat , None ]
+    static let ethnicityAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , RaceNone ]
+    static let hairColorAllValues = [HairColorBrunette , HairColorBlonde , HairColorRedhead , HairColorNone ]
+    static let genderAllValues = [GenderMale , GenderFemale , GenderNone ]
+    static let sexualityAllValues = [SexualityStraight , SexualityGay , SexualityBisexual , SexualityNone ]
+    static let politicalGroupAllValues = [PoliticalGroupDemocrat , PoliticalGroupRepublican , PoliticalGroupNone ]
+    static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].flatten()
 }
 
 public enum TagAttributes {

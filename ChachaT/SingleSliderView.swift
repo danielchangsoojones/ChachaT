@@ -98,8 +98,7 @@ extension FilterQueryViewController: SingleSliderViewDelegate {
     func editSingleSliderChosenTagViewValue(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         let tagTitle = "\(sliderValue) mi"
         if let chosenTagView = theSpecialtyChosenTagDictionary[specialtyCategoryTitle] {
-            chosenTagView!.setTitle(tagTitle, forState: .Normal)
-            tagChosenView.layoutSubviews() //to make the tag resize after the buttonTitle ("50 mi" to "100 mi") has become longer
+            tagChosenView.setTagViewTitle(chosenTagView!, title: tagTitle)
         }
     }
 }

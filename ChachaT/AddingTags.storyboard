@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G31" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="mYP-fS-yh2">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+    </dependencies>
+    <scenes>
+        <!--Add Tags To Your Profile-->
+        <scene sceneID="uBc-WO-8Po">
+            <objects>
+                <viewController storyboardIdentifier="AddingTagsViewController" title="Add Tags To Your Profile" id="mYP-fS-yh2" customClass="AddingTagsToProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="in9-u2-WDu"/>
+                        <viewControllerLayoutGuide type="bottom" id="Fr5-lD-rRN"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="qcq-BR-zCX">
+                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="34F-hU-9oS">
+                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            </activityIndicatorView>
+                            <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="f8Q-9k-XpF" customClass="ChachaChoicesTagListView" customModule="ChachaT">
+                                <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="top" secondItem="in9-u2-WDu" secondAttribute="bottom" id="2kv-cA-hCE"/>
+                            <constraint firstItem="34F-hU-9oS" firstAttribute="centerY" secondItem="qcq-BR-zCX" secondAttribute="centerY" id="2mX-BX-vpe"/>
+                            <constraint firstAttribute="trailing" secondItem="f8Q-9k-XpF" secondAttribute="trailing" id="8fM-Gg-TS3"/>
+                            <constraint firstItem="f8Q-9k-XpF" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="cSa-gs-RGF"/>
+                            <constraint firstItem="Fr5-lD-rRN" firstAttribute="top" secondItem="f8Q-9k-XpF" secondAttribute="bottom" id="k4o-c0-31r"/>
+                            <constraint firstItem="34F-hU-9oS" firstAttribute="centerX" secondItem="qcq-BR-zCX" secondAttribute="centerX" id="osL-TT-jvf"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Add Tags" id="lDu-8K-Y1l">
+                        <barButtonItem key="rightBarButtonItem" title="Back" id="Ttp-mV-XcO">
+                            <connections>
+                                <action selector="theDoneButtonPressed:" destination="mYP-fS-yh2" id="N2g-Fl-clP"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
+                    <connections>
+                        <outlet property="tagChoicesView" destination="f8Q-9k-XpF" id="8CZ-Kb-6in"/>
+                        <outlet property="tagChoicesViewTopConstraint" destination="2kv-cA-hCE" id="yRT-1D-oWm"/>
+                        <outlet property="theActivityIndicator" destination="34F-hU-9oS" id="xVE-me-lTW"/>
+                        <outlet property="theDoneButton" destination="Ttp-mV-XcO" id="EXm-Cf-SmR"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fZx-kU-P0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2143" y="513"/>
+        </scene>
+    </scenes>
+</document>

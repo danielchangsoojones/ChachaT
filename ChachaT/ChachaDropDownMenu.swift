@@ -110,9 +110,10 @@ class ChachaDropDownMenu: UIView {
         self.menuWrapper.hidden = true
     }
     
-    func showTagListView(tagTitles: [String]) {
+    func showTagListView(tagTitles: [String], specialtyCategoryTitle: SpecialtyCategoryTitles) {
         if self.isShown == false {
             dropDownMenuType = .SpecialtyTagMenu //even though defualted to this, I need to make sure it changes when it was a different type, and then goes back to .SpecialtyTagMenu
+            dropDownMenuCategoryType = specialtyCategoryTitle
             self.tagListView = addTagListViewToView(dropDownView)
             addTags(tagTitles)
             self.showMenu()
@@ -228,6 +229,7 @@ class ChachaDropDownMenu: UIView {
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
+        tagListView.tag = 3 //need to set this, so I can know which tagView (i.e. tagChosenView = 2, tagChoicesView = 1, dropDownTagView (this) = 3).
         tagListView.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(view)
             make.top.equalTo(view)

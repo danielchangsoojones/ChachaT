@@ -425,6 +425,16 @@ extension TagListView {
         delegate?.specialtyTagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
     }
     
+    func findSpecialtyTagView(specialtyCategoryTitle: SpecialtyCategoryTitles) -> SpecialtyTagView? {
+        for tagView in tagViews where tagView is SpecialtyTagView {
+            let specialtyTagView = tagView as! SpecialtyTagView
+            if specialtyTagView.specialtyCategoryTitle == specialtyCategoryTitle {
+                return specialtyTagView
+            }
+        }
+        return nil
+    }
+    
     //TODO: probably should be checking something about category name also.
 //    func findTagView(tagTitle: String, categoryName: String?) -> TagView? {
 //        for tagView in tagViews {
@@ -454,6 +464,46 @@ extension TagListView {
             }
         }
         return false
+    }
+    
+    //Purpose: change the tagView title and then update the frames of everything, so it rearranges everything, and makes the TagView frame fit snuggly for the new title
+    func setTagViewTitle(tagView: TagView, title: String) {
+        tagView.setTitle(title, forState: .Normal)
+        self.layoutSubviews()
+    }
+    
+    func insertTagViewAtIndex(index: Int, title: String = "", tagView: TagView? = nil) {
+        //refactor this because I want to keep all attributes, but this is being used 3 times in code.
+        let tagView = tagView ?? TagView(title: title)
+        
+        tagView.textColor = textColor
+        tagView.selectedTextColor = selectedTextColor
+        tagView.tagBackgroundColor = tagBackgroundColor
+        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
+        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
+        tagView.cornerRadius = cornerRadius
+        tagView.borderWidth = borderWidth
+        tagView.borderColor = borderColor
+        tagView.selectedBorderColor = selectedBorderColor
+        tagView.paddingX = paddingX
+        tagView.paddingY = paddingY
+        tagView.textFont = textFont
+        tagView.removeIconLineWidth = removeIconLineWidth
+        tagView.removeButtonIconSize = removeButtonIconSize
+        tagView.enableRemoveButton = enableRemoveButton
+        tagView.removeIconLineColor = removeIconLineColor
+        tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
+        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        // Deselect all tags except this one
+        tagView.onLongPress = { this in
+            for tag in self.tagViews {
+                tag.selected = (tag == this)
+            }
+        }
+        tagViews.insert(tagView, atIndex: index)
+        tagBackgroundViews.append(UIView(frame: tagView.bounds))
+        rearrangeViews()
     }
 }
 

@@ -84,8 +84,7 @@ extension FilterQueryViewController: DoubleRangeSliderViewDelegate {
     func editRangeSliderChosenTagViewValue(selectedMinValue: Int, selectedMaxValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         let tagTitle = "\(selectedMinValue) - \(selectedMaxValue)"
         if let chosenTagView = theSpecialtyChosenTagDictionary[specialtyCategoryTitle] {
-            chosenTagView!.setTitle(tagTitle, forState: .Normal)
-            tagChosenView.layoutSubviews() //to make the tag resize after the buttonTitle ("50 mi" to "100 mi") has become longer
+            tagChosenView.setTagViewTitle(chosenTagView!, title: tagTitle)
         }
     }
 }

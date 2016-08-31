@@ -21,7 +21,7 @@ public class SpecialtyTagView: TagView {
         super.init(frame: CGRectZero)
         createFakeBorder(TagViewProperties.borderColor, borderWidth: TagViewProperties.borderWidth, cornerRadius: TagViewProperties.cornerRadius)
         addCornerAnnotationSubview()
-        if specialtyTagTitle != .None {
+        if specialtyTagTitle.toString != "None" {
             //specialtyTagTitle has been set to something real
             setTitle(specialtyTagTitle.toString, forState: .Normal)
         } else {
