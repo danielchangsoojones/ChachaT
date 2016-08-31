@@ -68,12 +68,31 @@ public enum SpecialtyCategoryTitles : String {
         return nil
     }
     
+    //TODO: there is probably a much smarter/more effecient/less manual way to do this. Just can't figure it out right now...
+    var noneValue : SpecialtyTagTitles? {
+        switch self {
+        case .Gender:
+            return .GenderNone
+        case .Ethnicity:
+            return .RaceNone
+        case .Sexuality:
+            return .SexualityNone
+        case .PoliticalGroup:
+            return .PoliticalGroupNone
+        case .HairColor:
+            return .HairColorNone
+        default:
+            return nil
+        }
+    }
+    
     static let specialtyTagMenuCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor]
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
     static let allCategories = [specialtyTagMenuCategories, specialtySingleSliderCategories, specialtyRangeSliderCategories].flatten()
 }
 
+//TODO: make a rawValue for private because if a user has not inputed a tag, then we want to put an exclamation point, but if they have just marked it as private, then we want to show it as private. 
 public enum SpecialtyTagTitles : Int {
     
     //In case I want to add other enums, I am seperating the Int categories by 100

@@ -40,13 +40,35 @@ class AddingTagsDataStore {
     }
     
     //TODO: I have to manually add every new specialty category, somehow it should be able to use the Parse names from the Tag enum, and just get all of them
-    //TODO: do nil checks on these
     private func loadCurrentUserSpecialtyTags(tag: Tags) {
-        specialtyTagChoicesDataArray.append(SpecialtyTagTitles(rawValue: tag.ethnicity)!)
-        specialtyTagChoicesDataArray.append(SpecialtyTagTitles(rawValue: tag.hairColor)!)
-        specialtyTagChoicesDataArray.append(SpecialtyTagTitles(rawValue: tag.gender)!)
-        specialtyTagChoicesDataArray.append(SpecialtyTagTitles(rawValue: tag.politicalGroup)!)
-        specialtyTagChoicesDataArray.append(SpecialtyTagTitles(rawValue: tag.sexuality)!)
+        //Doing an awkward mass nil check, but necessary and couldn't think of better way.
+        let specialtyTagTitlesIntegers : [Int] = [tag.ethnicity, tag.hairColor, tag.gender, tag.politicalGroup, tag.sexuality]
+        var specialtyTagTitlesArray: [SpecialtyTagTitles] = []
+        for rawValue in specialtyTagTitlesIntegers {
+            if let specialtyTagTitle = SpecialtyTagTitles(rawValue: rawValue) {
+                specialtyTagTitlesArray.append(specialtyTagTitle)
+            }
+        }
+        specialtyTagChoicesDataArray = specialtyTagTitlesArray
+        setAnyNilSpecialtyTags()
+    }
+    
+    //Purpose: in the database, the user might not have set something like Gender yet, so we just want to show the specialty drop down tag "Gender"
+    func setAnyNilSpecialtyTags() {
+        var alreadyDisplayedSpecialtyCategoryTitles: [SpecialtyCategoryTitles] = []
+        var notYetDisplayedSpecialtyCategoryTitles: [SpecialtyTagTitles] = []
+        for specialtyTagTitle in specialtyTagChoicesDataArray {
+            if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
+                alreadyDisplayedSpecialtyCategoryTitles.append(specialtyCategoryTitle)
+            }
+        }
+        for specialtyCategoryTitle in SpecialtyCategoryTitles.specialtyTagMenuCategories where !alreadyDisplayedSpecialtyCategoryTitles.contains(specialtyCategoryTitle) {
+            if let noneValue = specialtyCategoryTitle.noneValue {
+                //the none value is the negative none TagEnum value. It means the tag has not yet been set or is private. So just show something like Gender instead of female.
+                notYetDisplayedSpecialtyCategoryTitles.append(noneValue)
+            }
+        }
+        specialtyTagChoicesDataArray.appendContentsOf(notYetDisplayedSpecialtyCategoryTitles)
     }
     
     //TODO: Doing 2 API calls to delete this tag. Plus, it has an API call for every tag deleted, should delete all at once. so it is probably best to figure out how to optimize this..
@@ -136,4 +158,5 @@ extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
         self.specialtyTagChoicesDataArray = specialtyTagChoicesDataArray
         loadChoicesViewTags()
     }
+    
 }
