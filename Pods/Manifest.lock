@@ -20,6 +20,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.14.0):
     - FBSDKCoreKit
+  - Fluent (0.1.1)
   - Instabug (5.3.2)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
@@ -53,6 +54,7 @@ DEPENDENCIES:
   - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, tag `1.0`)
   - ExpandingMenu (~> 0.1)
   - EZSwiftExtensions
+  - Fluent (~> 0.1)
   - JSQMessagesViewController
   - Koloda
   - Pages
@@ -83,6 +85,7 @@ SPEC CHECKSUMS:
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FBSDKCoreKit: 6e020b5db0b5bd1e01f5fb0902131befd129a502
   FBSDKLoginKit: da563567a108050ef83739c8c8c001ee9e25fa13
+  Fluent: 5fa2be9aca595edd4c28831a15c28ea2340f8560
   Instabug: 035bf24475ffac1bcb81f8c542774487bc72f528
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
@@ -101,6 +104,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 31c2a5f4ee623527797db070bf05fcfa91539db9
+PODFILE CHECKSUM: 0dea591d5884000268f58fb20d962063f94aa0f6
 
 COCOAPODS: 1.0.1
