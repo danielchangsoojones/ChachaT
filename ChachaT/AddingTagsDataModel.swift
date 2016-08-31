@@ -110,6 +110,7 @@ class AddingTagsDataStore {
     
     //TODO: if the user has no tag yet, then we need to create a new one for them.
     //TODO: save all the tags at once, instead of saving them one at a time.
+    //TODO: rename to save generic tag
     func saveNewTag(title: String) {
         let query = Tags.query()
         query?.whereKey("createdBy", equalTo: User.currentUser()!)
@@ -132,6 +133,34 @@ class AddingTagsDataStore {
                 }
             }
         })
+    }
+    
+    func saveSpecialtyTag(title: String) {
+        if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title) {
+            if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
+                let query = Tags.query()
+                query?.whereKey("createdBy", equalTo: User.currentUser()!)
+                //only did first object because the user should only have one tag row, so it should be the first and only object found.
+                query?.getFirstObjectInBackgroundWithBlock({ (object, error) in
+                    if let tag = object as? Tags where error == nil {
+                        //I could just do addObject, which add anything. Technically, there should be only one anyway, but this makes sure only one will ever be added, so I guess if duplicates somehow got into the database. This would kind of self-clean it.
+                        tag[specialtyCategoryTitle.parseColumnName] = specialtyTagTitle.rawValue
+                        tag.saveInBackground()
+                    } else if error != nil {
+                        let code = error!.code
+                        if code == PFErrorCode.ErrorObjectNotFound.rawValue {
+                            //the user has not created a Tags row yet, so create them a new Tags row
+                            let tags = Tags()
+                            tags.createdBy = User.currentUser()!
+                            tags.genericTags = [title]
+                            tags.saveInBackground()
+                        } else {
+                            print(error)
+                        }
+                    }
+                })
+            }
+        }
     }
     
 }

@@ -111,6 +111,7 @@ extension AddingTagsToProfileViewController {
             //dropDownTagView pressed
             if let specialtyTagView = tagChoicesView.findSpecialtyTagView(dropDownMenu.dropDownMenuCategoryType) {
                 tagChoicesView.setTagViewTitle(specialtyTagView, title: title)
+                dataStore.saveSpecialtyTag(title)
             }
         }
     }
@@ -121,7 +122,7 @@ extension AddingTagsToProfileViewController {
             switch tagAttribute {
             case .SpecialtyTagMenu:
                 let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.showTagListView(titleArray)
+                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
                 dropDownMenu.tagListView!.delegate = self
             default: break
             }
