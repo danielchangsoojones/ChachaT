@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7F4BEEA9CB050A432DA2F72E /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */; };
 		920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81B1D3FF5E300104842 /* CloseButton.swift */; };
 		920BF8211D3FF5E300104842 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920BF81C1D3FF5E300104842 /* Info.plist */; };
 		920BF8221D3FF5E300104842 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81E1D3FF5E300104842 /* TagListView.swift */; };
@@ -84,11 +85,11 @@
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
-		F655E776EC943B06E5A8E4F3 /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9430010B2BFBE69283C52C6B /* Pods_ChachaT.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		162090DFB081217222A2CCC6 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
+		7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
+		7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
 		920BF81B1D3FF5E300104842 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		920BF81C1D3FF5E300104842 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920BF81D1D3FF5E300104842 /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
@@ -170,8 +171,7 @@
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
-		9430010B2BFBE69283C52C6B /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
-		B01750B5B900A56471484C28 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
+		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -189,13 +189,22 @@
 				92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */,
 				92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */,
 				92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */,
-				F655E776EC943B06E5A8E4F3 /* Pods_ChachaT.framework in Frameworks */,
+				7F4BEEA9CB050A432DA2F72E /* Pods_ChachaT.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		04D0631263E9D1971946E255 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */,
+				7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 		5651C15A164084F13922B25B /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
@@ -209,7 +218,7 @@
 				92B8DF2C1CE9356E00AFA518 /* CoreGraphics.framework */,
 				92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */,
 				92B8DF281CE9356000AFA518 /* AudioToolbox.framework */,
-				9430010B2BFBE69283C52C6B /* Pods_ChachaT.framework */,
+				B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -354,7 +363,7 @@
 				9261081D1CDBCA32009F3E86 /* Assets.xcassets */,
 				926108141CDBCA32009F3E86 /* Products */,
 				5651C15A164084F13922B25B /* Frameworks */,
-				BFA60E1891DF6F443D90FC3D /* Pods */,
+				04D0631263E9D1971946E255 /* Pods */,
 			);
 			sourceTree = "<group>";
 		};
@@ -533,15 +542,6 @@
 			name = "Pop Ups";
 			sourceTree = "<group>";
 		};
-		BFA60E1891DF6F443D90FC3D /* Pods */ = {
-			isa = PBXGroup;
-			children = (
-				162090DFB081217222A2CCC6 /* Pods-ChachaT.debug.xcconfig */,
-				B01750B5B900A56471484C28 /* Pods-ChachaT.release.xcconfig */,
-			);
-			name = Pods;
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -549,13 +549,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "ChachaT" */;
 			buildPhases = (
-				130EA06B286CCE4B210A3C72 /* 📦 Check Pods Manifest.lock */,
+				3EC3AA9E6CFF964C9E2D1DDE /* [CP] Check Pods Manifest.lock */,
 				9261080F1CDBCA32009F3E86 /* Sources */,
 				926108101CDBCA32009F3E86 /* Frameworks */,
 				926108111CDBCA32009F3E86 /* Resources */,
-				582A8795456D26AB54348EC6 /* 📦 Embed Pods Frameworks */,
-				405A34D77C5ED01C93303EAB /* 📦 Copy Pods Resources */,
-				CAFE23290D56C440B29A7F5C /* Embed Pods Frameworks */,
+				03CAB80DB365E03DB1286BB9 /* [CP] Embed Pods Frameworks */,
+				C7E4CD53A6426747E00C6FB1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -625,14 +624,29 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
-		130EA06B286CCE4B210A3C72 /* 📦 Check Pods Manifest.lock */ = {
+		03CAB80DB365E03DB1286BB9 /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Check Pods Manifest.lock";
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		3EC3AA9E6CFF964C9E2D1DDE /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -640,49 +654,19 @@
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
 			showEnvVarsInLog = 0;
 		};
-		405A34D77C5ED01C93303EAB /* 📦 Copy Pods Resources */ = {
+		C7E4CD53A6426747E00C6FB1 /* [CP] Copy Pods Resources */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "📦 Copy Pods Resources";
+			name = "[CP] Copy Pods Resources";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-resources.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		582A8795456D26AB54348EC6 /* 📦 Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "📦 Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-frameworks.sh\"\n";
-			showEnvVarsInLog = 0;
-		};
-		CAFE23290D56C440B29A7F5C /* Embed Pods Frameworks */ = {
-			isa = PBXShellScriptBuildPhase;
-			buildActionMask = 2147483647;
-			files = (
-			);
-			inputPaths = (
-			);
-			name = "Embed Pods Frameworks";
-			outputPaths = (
-			);
-			runOnlyForDeploymentPostprocessing = 0;
-			shellPath = /bin/sh;
-			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 /* End PBXShellScriptBuildPhase section */
@@ -863,7 +847,7 @@
 		};
 		926108261CDBCA32009F3E86 /* Debug */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 162090DFB081217222A2CCC6 /* Pods-ChachaT.debug.xcconfig */;
+			baseConfigurationReference = 7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
@@ -881,7 +865,7 @@
 		};
 		926108271CDBCA32009F3E86 /* Release */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = B01750B5B900A56471484C28 /* Pods-ChachaT.release.xcconfig */;
+			baseConfigurationReference = 7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;

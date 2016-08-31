@@ -16,6 +16,7 @@ import ParseUI
 import Ripple
 import SnapKit
 import Timepiece
+import EZSwiftExtensions
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -63,6 +64,7 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(ez.appVersion)
         theBackgroundColorView.backgroundColor = BackgroundPageColor
         setKolodaAttributes()
         setFakeNavigationBarView()
