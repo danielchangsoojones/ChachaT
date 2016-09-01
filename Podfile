@@ -20,6 +20,7 @@ pod 'JSQMessagesViewController'
 pod 'ParseFacebookUtilsV4'
 pod 'Alamofire'
 pod 'ExpandingMenu', '~> 0.1'
+pod 'EZSwiftExtensions'
 
 
 post_install do |installer|

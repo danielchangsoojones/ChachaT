@@ -147,7 +147,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         
     }
     
-    func dismissKeyboard() {
+    override func dismissKeyboard() {
         view.endEditing(true)
     }
 
