@@ -34,6 +34,7 @@ class AddingTagView: TagView {
     //Purpose: the user should be able to type into the tag to find new tags
     func addTextFieldSubview(textFieldDelegate: UITextFieldDelegate) {
         searchTextField = UITextField()
+        searchTextField.autocorrectionType = .No
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
         searchTextField.delegate = textFieldDelegate
         searchTextField.clearButtonMode = .Always
