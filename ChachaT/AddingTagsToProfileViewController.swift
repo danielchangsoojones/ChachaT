@@ -37,6 +37,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         super.viewDidLoad()
         tagChoicesView.delegate = self
         setDataFromDataStore()
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
     }
     
     override func viewDidAppear(animated: Bool) {

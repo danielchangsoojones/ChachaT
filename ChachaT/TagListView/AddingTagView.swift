@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import EZSwiftExtensions
 //This type of tagView is for when we are in the addingTagViewsToProfilePage, we want to have a special tag view that holds a search bar, so we need to do some special stuff in this class, to make it all work correctly within the TagListView.
 class AddingTagView: TagView {
     private var searchBarPlaceHolderText: String = "Add Tag..."
@@ -84,13 +85,13 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         //we already check if the text is empty over in the AddingTagView class
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
+            //TODO: mabye figure out how to toggle gesture recognizers in the AddingTagMenuView class because it is just supposed to toggle the gesture recognizers for when the tableView appears
             toggleGestureRecognizers(self.view.gestureRecognizers, enable: false) //disabled gesture recognizers, so the tableview could work. Or else, it wasn't tappable when gesture recognizers exist.
             addingTagMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
             addingTagMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
             toggleGestureRecognizers(self.view.gestureRecognizers, enable: true) //making sure the gesture recognizers are enabled to dismiss the keyboard
-            
         }
     }
     
@@ -103,6 +104,7 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         }
     }
     
+    //TODO: could probably be a better way to get AddingTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
     //Purpose: find the tagView that is an AddingTagView, because we want to do special things to that one.
     func findAddingTagTagView() -> AddingTagView? {
         for tagView in tagChoicesView.tagViews where tagView is AddingTagView {
@@ -118,34 +120,49 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         //TODO: hide all tagViews that aren't AddingtagView
         //this gesture recognizer fucks with the IndexRowAtPath for a tableView. So, I remove it when we get to the createNewTag TableView.
         //TODO: set this in viewDidLoad/create viewControllerExtension because this creates gesture recognizer every time the textField is started.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissTheKeyboard))
         view.addGestureRecognizer(tap)
-        createTagMenuView()
-        addingTagMenuView.setDelegate(self)
+        addingTagMenuView?.hidden = false
+    }
+    
+    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
+        return true
     }
     
     //Calls this function when the tap is recognized.
-    func dismissKeyboard() {
+    func dismissTheKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        addingTagMenuView.removeFromSuperview()
+        addingTagMenuView?.hidden = true
     }
     
     func textFieldShouldClear(textField: UITextField) -> Bool {
         return true
     }
     
-    func createTagMenuView() {
+    func createTagMenuView(keyboardHeight: CGFloat) {
         addingTagMenuView = AddingTagMenuView.instanceFromNib()
+        addingTagMenuView.setDelegate(self)
         self.view.addSubview(addingTagMenuView)
         addingTagMenuView.snp_makeConstraints { (make) in
-            make.leading.trailing.bottom.equalTo(addingTagMenuView.superview!)
+            make.leading.trailing.equalTo(self.view)
+            make.bottom.equalTo(self.view).inset(keyboardHeight)
             if let addingTagView = findAddingTagTagView() {
                 make.top.equalTo(addingTagView.snp_bottom)
             }
+        }
+    }
+    
+    func keyboardWillShow(notification:NSNotification) {
+        let userInfo:NSDictionary = notification.userInfo!
+        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.CGRectValue()
+        let keyboardHeight = keyboardRectangle.height
+        if addingTagMenuView == nil {
+            createTagMenuView(keyboardHeight)
         }
     }
     
