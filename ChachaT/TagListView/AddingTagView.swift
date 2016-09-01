@@ -85,17 +85,12 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
             toggleGestureRecognizers(self.view.gestureRecognizers, enable: false) //disabled gesture recognizers, so the tableview could work. Or else, it wasn't tappable when gesture recognizers exist.
-            addingTagMenuView.createNewTagTableView(searchText)
+            addingTagMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
+            addingTagMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
             toggleGestureRecognizers(self.view.gestureRecognizers, enable: true) //making sure the gesture recognizers are enabled to dismiss the keyboard
-            for (index, tagTitle) in filtered.enumerate() {
-                let tagView = addingTagMenuView.addTag(tagTitle)
-                if index == 0 {
-                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
-                    tagView.selected = true
-                }
-            }
+            
         }
     }
     

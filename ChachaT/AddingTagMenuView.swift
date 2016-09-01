@@ -12,27 +12,18 @@ class AddingTagMenuView: UIView {
     
     @IBOutlet weak var addingMenuTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var backgroundView: UIView!
+    var tableView : UITableView?
     var newTagTitle: String = ""
     
     var delegate: AddingTagMenuDelegate?
     
     //TODO: make the tagView only go as tall as the keyboard height because the keyboard is blocking the last few tags. Or give the scroll view some extra spacing to fix this.
     override func awakeFromNib() {
-        setBackgroundViewProperties()
         addingMenuTagListView.delegate = self
     }
     
     func setDelegate(delegate: AddingTagMenuDelegate) {
         self.delegate = delegate
-    }
-    
-    func setBackgroundViewProperties() {
-//        backgroundView.alpha = 0.75
-    }
-    
-    func addTag(title: String) -> TagView {
-        let tagView = addingMenuTagListView.addTag(title)
-        return tagView
     }
     
     func removeAllTags() {
@@ -46,14 +37,50 @@ class AddingTagMenuView: UIView {
 }
 
 extension AddingTagMenuView: UITableViewDelegate, UITableViewDataSource {
-    //TODO: make a public function to call that is better naming convention
-    func createNewTagTableView(newTagTitle: String) {
+    enum MenuType {
+        case Tags
+        case Table
+    }
+    
+    func toggleMenuType(menuType: MenuType, newTagTitle: String?, tagTitles: [String]?) {
+        //if the menu is supposed to be tags, then we want it hidden
+        tableView?.hidden = menuType == .Tags
+        switch menuType {
+            case .Tags:
+                addTagsToTagListView(tagTitles)
+            case .Table:
+                if let newTagTitle = newTagTitle {
+                    if let tableView = self.tableView {
+                        //tableView already exists, update the data according to the newTagTitle
+                        self.newTagTitle = newTagTitle
+                        tableView.reloadData()
+                    } else {
+                        //create a whole tableview, since it has not been created yet.
+                        createNewTableView(newTagTitle)
+                    }
+                }
+        }
+    }
+    
+    private func addTagsToTagListView(tagTitles: [String]?) {
+        if let tagTitles = tagTitles {
+            for (index, tagTitle) in tagTitles.enumerate() {
+                let tagView = addingMenuTagListView.addTag(tagTitle)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.selected = true
+                }
+            }
+        }
+    }
+    
+    private func createNewTableView(newTagTitle: String) {
         self.newTagTitle = newTagTitle
-        let tableView = UITableView()
-        tableView.delegate = self
-        tableView.dataSource = self
-        self.addSubview(tableView)
-        tableView.snp_makeConstraints { (make) in
+        tableView = UITableView()
+        tableView!.delegate = self
+        tableView!.dataSource = self
+        self.addSubview(tableView!)
+        tableView!.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
         //TODO: somehow hide the scroll view/disable because the tableview has an automatic scroll view. But, can't just remove because the user might hit backspace
