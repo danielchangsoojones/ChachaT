@@ -21,7 +21,6 @@ pod 'ParseFacebookUtilsV4'
 pod 'Alamofire'
 pod 'ExpandingMenu', '~> 0.1'
 pod 'EZSwiftExtensions'
-pod 'Fluent', '~> 0.1'
 
 
 post_install do |installer|
