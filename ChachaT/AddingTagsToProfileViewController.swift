@@ -14,28 +14,11 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
-    @IBOutlet weak var theDoneButton: UIBarButtonItem!
     var addingTagMenuView: AddingTagMenuView!
     
     var alreadySavedTags = false
     let questionMarkString = "?"
     var dataStore : AddingTagsDataStore!
-
-    
-    @IBAction func theDoneButtonPressed(sender: AnyObject) {
-//        theActivityIndicator.startAnimating()
-//        theActivityIndicator.hidden = false
-//        theDoneButton.enabled = false
-//        PFObject.saveAllInBackground(chosenTagArray) { (success, error) in
-//            if success {
-//                self.theActivityIndicator.stopAnimating()
-//                self.navigationController?.popViewControllerAnimated(true)
-//            } else {
-//                self.theDoneButton.enabled = true
-//                print(error)
-//            }
-//        }
-    }
     
     @IBAction func addToProfilePressed(sender: UIButton) {
 //        for tagView in tagChosenView.tagViews {

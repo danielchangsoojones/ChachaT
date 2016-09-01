@@ -84,17 +84,26 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         //we already check if the text is empty over in the AddingTagView class
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
-            //TODO: it should say no matches to your search, maybe be the first to join?
-            view.gestureRecognizers?.removeAll()
+            toggleGestureRecognizers(self.view.gestureRecognizers, enable: false) //disabled gesture recognizers, so the tableview could work. Or else, it wasn't tappable when gesture recognizers exist.
             addingTagMenuView.createNewTagTableView(searchText)
         } else {
-            //there is text, and we have a match, soa the tagChoicesView changes accordingly
+            //there is text, and we have a match, so the tagChoicesView changes accordingly
+            toggleGestureRecognizers(self.view.gestureRecognizers, enable: true) //making sure the gesture recognizers are enabled to dismiss the keyboard
             for (index, tagTitle) in filtered.enumerate() {
                 let tagView = addingTagMenuView.addTag(tagTitle)
                 if index == 0 {
                     //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
                     tagView.selected = true
                 }
+            }
+        }
+    }
+    
+    //Purpose: we want to have a tap recognizer to see if anywhere but the keyboard was tapped, then the keyboard collapses. But, we had
+    private func toggleGestureRecognizers(gestureRecognizers: [UIGestureRecognizer]?, enable: Bool) {
+        if let gestureRecognizers = gestureRecognizers {
+            for gestureRecognizer in gestureRecognizers {
+                gestureRecognizer.enabled = enable
             }
         }
     }
@@ -121,7 +130,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
     }
     
     //Calls this function when the tap is recognized.
-    override func dismissKeyboard() {
+    func dismissKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
     }
