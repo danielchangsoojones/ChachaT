@@ -1,5 +1,5 @@
 //
-//  AddingTagView.swift
+//  CreationTagView.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 8/30/16.
@@ -7,16 +7,15 @@
 //
 
 import Foundation
-import EZSwiftExtensions
 //This type of tagView is for when we are in the addingTagViewsToProfilePage, we want to have a special tag view that holds a search bar, so we need to do some special stuff in this class, to make it all work correctly within the TagListView.
-class AddingTagView: TagView {
+class CreationTagView: TagView {
     private var searchBarPlaceHolderText: String = "Add Tag..."
 
     var searchTextField : UITextField!
     
-    var delegate: AddingTagViewDelegate?
+    var delegate: CreationTagViewDelegate?
     
-    init(textFieldDelegate: UITextFieldDelegate, delegate: AddingTagViewDelegate, textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
+    init(textFieldDelegate: UITextFieldDelegate, delegate: CreationTagViewDelegate, textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
         super.init(frame: CGRectZero)
         self.delegate = delegate
         self.textFont = textFont
@@ -66,11 +65,11 @@ class AddingTagView: TagView {
     }
 }
 
-protocol AddingTagViewDelegate {
+protocol CreationTagViewDelegate {
     func textFieldDidChange(searchText: String)
 }
 
-extension AddingTagsToProfileViewController: AddingTagViewDelegate {
+extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(searchText: String) {
         var filtered:[String] = []
         addingTagMenuView.removeAllTags()
@@ -82,7 +81,7 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
-        //we already check if the text is empty over in the AddingTagView class
+        //we already check if the text is empty over in the CreationTagView class
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
             //TODO: mabye figure out how to toggle gesture recognizers in the AddingTagMenuView class because it is just supposed to toggle the gesture recognizers for when the tableView appears
@@ -104,17 +103,17 @@ extension AddingTagsToProfileViewController: AddingTagViewDelegate {
         }
     }
     
-    //TODO: could probably be a better way to get AddingTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
-    //Purpose: find the tagView that is an AddingTagView, because we want to do special things to that one.
-    func findAddingTagTagView() -> AddingTagView? {
-        for tagView in tagChoicesView.tagViews where tagView is AddingTagView {
-            return tagView as? AddingTagView
+    //TODO: could probably be a better way to get CreationTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
+    //Purpose: find the tagView that is an CreationTagView, because we want to do special things to that one.
+    func findAddingTagTagView() -> CreationTagView? {
+        for tagView in tagChoicesView.tagViews where tagView is CreationTagView {
+            return tagView as? CreationTagView
         }
         return nil //shouldn't reach this point
     }
 }
 
-//textField Delegate Extension for the AddingTagView textField
+//textField Delegate Extension for the CreationTagView textField
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         //TODO: hide all tagViews that aren't AddingtagView

@@ -32,7 +32,7 @@
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
-		925D0FD91D75E61300DE20F9 /* AddingTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD81D75E61300DE20F9 /* AddingTagView.swift */; };
+		925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD81D75E61300DE20F9 /* CreationTagView.swift */; };
 		925D0FDC1D760E7500DE20F9 /* AddingTagMenuView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */; };
 		925D0FDE1D760EE000DE20F9 /* AddingTagMenuView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */; };
 		926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108161CDBCA32009F3E86 /* AppDelegate.swift */; };
@@ -114,9 +114,9 @@
 		922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerAnnotationView.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
-		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsDataModel.swift; sourceTree = "<group>"; };
-		925D0FD81D75E61300DE20F9 /* AddingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = AddingTagView.swift; path = TagListView/AddingTagView.swift; sourceTree = "<group>"; };
-		925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagMenuView.swift; sourceTree = "<group>"; };
+		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		925D0FD81D75E61300DE20F9 /* CreationTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CreationTagView.swift; path = TagListView/CreationTagView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagMenuView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AddingTagMenuView.xib; sourceTree = "<group>"; };
 		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -148,7 +148,7 @@
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSliderView.swift; sourceTree = "<group>"; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
-		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; };
+		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		9288194B1D2BDCFC000A8E04 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
@@ -349,7 +349,7 @@
 		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FD81D75E61300DE20F9 /* AddingTagView.swift */,
+				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
 				925D0FDB1D760E7500DE20F9 /* AddingTagMenuView.swift */,
 				925D0FDD1D760EE000DE20F9 /* AddingTagMenuView.xib */,
 			);
@@ -688,7 +688,7 @@
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
-				925D0FD91D75E61300DE20F9 /* AddingTagView.swift in Sources */,
+				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* FilterQueryViewController.swift in Sources */,

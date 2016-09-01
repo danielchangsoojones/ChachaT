@@ -34,7 +34,7 @@ class AddingTagsDataStore {
             } else {
                 print(error)
             }
-            //this should load the tagViews even if there is error, so at least the user can see the AddingTagView
+            //this should load the tagViews even if there is error, so at least the user can see the CreationTagView
             self.delegate?.setChoicesViewTags(self.genericTagChoicesDataArray, specialtyTagChoicesDataArray: self.specialtyTagChoicesDataArray)
         }
     }
