@@ -84,7 +84,7 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
         //we already check if the text is empty over in the CreationTagView class
         if(filtered.count == 0){
             //there is text, but it has no matches in the database
-            //TODO: mabye figure out how to toggle gesture recognizers in the AddingTagMenuView class because it is just supposed to toggle the gesture recognizers for when the tableView appears
+            //TODO: mabye figure out how to toggle gesture recognizers in the CreationMenuView class because it is just supposed to toggle the gesture recognizers for when the tableView appears
             toggleGestureRecognizers(self.view.gestureRecognizers, enable: false) //disabled gesture recognizers, so the tableview could work. Or else, it wasn't tappable when gesture recognizers exist.
             addingTagMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
         } else {
@@ -143,7 +143,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
     }
     
     func createTagMenuView(keyboardHeight: CGFloat) {
-        addingTagMenuView = AddingTagMenuView.instanceFromNib()
+        addingTagMenuView = CreationMenuView.instanceFromNib()
         addingTagMenuView.setDelegate(self)
         self.view.addSubview(addingTagMenuView)
         addingTagMenuView.snp_makeConstraints { (make) in

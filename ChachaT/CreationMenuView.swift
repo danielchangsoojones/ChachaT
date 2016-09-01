@@ -1,5 +1,5 @@
 //
-//  AddingTagMenuView.swift
+//  CreationMenuView.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 8/30/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AddingTagMenuView: UIView {
+class CreationMenuView: UIView {
     
     @IBOutlet weak var addingMenuTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var backgroundView: UIView!
@@ -30,13 +30,13 @@ class AddingTagMenuView: UIView {
         addingMenuTagListView.removeAllTags()
     }
     
-    class func instanceFromNib() -> AddingTagMenuView {
+    class func instanceFromNib() -> CreationMenuView {
         // the nibName has to match your class file and your xib file
-        return UINib(nibName: "AddingTagMenuView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! AddingTagMenuView
+        return UINib(nibName: "CreationMenuView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! CreationMenuView
     }
 }
 
-extension AddingTagMenuView: UITableViewDelegate, UITableViewDataSource {
+extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
     enum MenuType {
         case Tags
         case Table
@@ -108,7 +108,7 @@ extension AddingTagMenuView: UITableViewDelegate, UITableViewDataSource {
     }
 }
 
-extension AddingTagMenuView: TagListViewDelegate {
+extension CreationMenuView: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         delegate?.addNewTagToTagChoiceView(title, tagView: tagView)
     }
