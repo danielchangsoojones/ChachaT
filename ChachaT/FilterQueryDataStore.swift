@@ -151,7 +151,7 @@ class FilterQueryDataStore {
     }
 }
 
-extension FilterQueryViewController : FilterQueryDataStoreDelegate {
+extension SearchTagsViewController : FilterQueryDataStoreDelegate {
     //TODO: for some reason, it would not let me call this setSearchDataArray, only get. Would like to change name to make it better.
     func getSearchDataArray(searchDataArray: [String]) {
         self.searchDataArray = searchDataArray

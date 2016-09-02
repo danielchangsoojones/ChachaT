@@ -142,12 +142,12 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name:UIKeyboardWillHideNotification, object: nil)
         
         //hide keyboard when tap anywhere on screen
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(UIInputViewController.dismissKeyboard))
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignUpLogInViewController.dismissTheKeyboard))
         view.addGestureRecognizer(tap)
         
     }
     
-    override func dismissKeyboard() {
+    func dismissTheKeyboard() {
         view.endEditing(true)
     }
 

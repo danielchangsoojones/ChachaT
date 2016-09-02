@@ -35,18 +35,11 @@
                             <constraint firstItem="34F-hU-9oS" firstAttribute="centerX" secondItem="qcq-BR-zCX" secondAttribute="centerX" id="osL-TT-jvf"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Add Tags" id="lDu-8K-Y1l">
-                        <barButtonItem key="rightBarButtonItem" title="Back" id="Ttp-mV-XcO">
-                            <connections>
-                                <action selector="theDoneButtonPressed:" destination="mYP-fS-yh2" id="N2g-Fl-clP"/>
-                            </connections>
-                        </barButtonItem>
-                    </navigationItem>
+                    <navigationItem key="navigationItem" title="Add Tags" id="lDu-8K-Y1l"/>
                     <connections>
                         <outlet property="tagChoicesView" destination="f8Q-9k-XpF" id="8CZ-Kb-6in"/>
                         <outlet property="tagChoicesViewTopConstraint" destination="2kv-cA-hCE" id="yRT-1D-oWm"/>
                         <outlet property="theActivityIndicator" destination="34F-hU-9oS" id="xVE-me-lTW"/>
-                        <outlet property="theDoneButton" destination="Ttp-mV-XcO" id="EXm-Cf-SmR"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZx-kU-P0C" userLabel="First Responder" sceneMemberID="firstResponder"/>

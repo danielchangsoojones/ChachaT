@@ -64,7 +64,7 @@ extension DoubleRangeSliderView: TTRangeSliderDelegate {
 }
 
 //Purpose: change the chosen tags of the filterQueryPage, so that it will update/create as the slider changes.
-extension FilterQueryViewController: DoubleRangeSliderViewDelegate {
+extension SearchTagsViewController: DoubleRangeSliderViewDelegate {
     func createRangeSliderChosenTagView(selectedMinValue: Int, selectedMaxValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         if theSpecialtyChosenTagDictionary[specialtyCategoryTitle] == nil {
             //the tagview doesn't exist

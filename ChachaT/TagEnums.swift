@@ -97,21 +97,26 @@ public enum SpecialtyTagTitles : Int {
     
     //In case I want to add other enums, I am seperating the Int categories by 100
     case RaceNone = -1
+    case RacePrivate = -2
     case RaceBlack = 1
     case RaceWhite = 2
     case RaceLatino = 3
     case RaceAsian = 4
     case HairColorNone = -101
+    case HairColorPrivate = -102
     case HairColorBrunette = 101
     case HairColorBlonde = 102
     case HairColorRedhead = 103
     case PoliticalGroupNone = -201
+    case PoliticalGroupPrivate = -202
     case PoliticalGroupDemocrat = 201
     case PoliticalGroupRepublican = 202
     case GenderNone = -301
+    case GenderPrivate = -302
     case GenderMale = 301
     case GenderFemale = 302
     case SexualityNone = -401
+    case SexualityPrivate = -402
     case SexualityStraight = 401
     case SexualityGay = 402
     case SexualityBisexual = 403
@@ -147,8 +152,10 @@ public enum SpecialtyTagTitles : Int {
             return "Gay"
         case .SexualityBisexual:
             return "Bisexual"
-        default:
+        case .RaceNone, .HairColorNone, .PoliticalGroupNone, .GenderNone, .SexualityNone:
             return "None"
+        case .RacePrivate, .HairColorPrivate, .PoliticalGroupPrivate, .GenderPrivate, .SexualityPrivate:
+            return "Private"
         }
     }
     
