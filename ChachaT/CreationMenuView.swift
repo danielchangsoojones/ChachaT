@@ -21,7 +21,6 @@ class CreationMenuView: UIView {
     //TODO: make the tagView only go as tall as the keyboard height because the keyboard is blocking the last few tags. Or give the scroll view some extra spacing to fix this.
     override func awakeFromNib() {
         choicesTagListView.delegate = self
-        self.backgroundView.backgroundColor = UIColor.redColor()
     }
     
     func setDelegate(delegate: AddingTagMenuDelegate) {
@@ -90,7 +89,6 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
         tableView!.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
-        //TODO: somehow hide the scroll view/disable because the tableview has an automatic scroll view. But, can't just remove because the user might hit backspace
     }
     
     //TODO: have the tableView only be the height the cells that show, as in don't have extra useless cells.
@@ -131,7 +129,7 @@ extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
     func addNewTagToTagChoiceView(title: String, tagView: TagView?) {
         //also passing the TagView because I get the feeling that I might need it in the future.
         tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
-        if let addingTagView = findAddingTagTagView() {
+        if let addingTagView = findCreationTagView() {
             addingTagView.searchTextField.text = ""
             resignFirstResponder() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
         }

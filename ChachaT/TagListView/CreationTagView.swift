@@ -91,7 +91,7 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     
     //TODO: could probably be a better way to get CreationTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
     //Purpose: find the tagView that is an CreationTagView, because we want to do special things to that one.
-    func findAddingTagTagView() -> CreationTagView? {
+    func findCreationTagView() -> CreationTagView? {
         for tagView in tagChoicesView.tagViews where tagView is CreationTagView {
             return tagView as? CreationTagView
         }
@@ -102,11 +102,11 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
 //textField Delegate Extension for the CreationTagView textField
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
-        //TODO: hide all tagViews that aren't AddingtagView
+        //TODO: hide all tagViews that aren't the CreationTagView, meaning clear the screen.
         creationMenuView?.hidden = false
     }
     
-    //Calls this function when the tap is recognized.
+    //Calls this function when the tap is recognized anywhere on the screen that is not a tappable object.
     func dismissTheKeyboard() {
         //Causes the view (or one of its embedded text fields) to resign the first responder status.
         view.endEditing(true)
@@ -138,12 +138,11 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         creationMenuView.snp_remakeConstraints { (make) in
             make.leading.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view).inset(keyboardHeight)
-            if let addingTagView = findAddingTagTagView() {
+            if let addingTagView = findCreationTagView() {
                 make.top.equalTo(addingTagView.snp_bottom)
             }
         }
     }
-    
 }
 
 

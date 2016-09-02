@@ -349,8 +349,8 @@
 		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
 				925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */,
+				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
 				925D0FDD1D760EE000DE20F9 /* CreationMenuView.xib */,
 			);
 			name = Subviews;
