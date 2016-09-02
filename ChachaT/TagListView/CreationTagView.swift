@@ -72,34 +72,20 @@ protocol CreationTagViewDelegate {
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(searchText: String) {
         var filtered:[String] = []
-        addingTagMenuView.removeAllTags()
+        creationMenuView.removeAllTags()
         filtered = searchDataArray.filter({ (tagTitle) -> Bool in
-            //finds the tagTitle, but if nil, then uses the specialtyTagTitle
-            //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
             //TODO: make the first one to show up be the best matching word, like if I search "a" then apple should be in front of "banana"
             let tmp: NSString = tagTitle
             let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
             return range.location != NSNotFound
         })
         //we already check if the text is empty over in the CreationTagView class
-        if(filtered.count == 0){
+        if filtered.isEmpty {
             //there is text, but it has no matches in the database
-            //TODO: mabye figure out how to toggle gesture recognizers in the CreationMenuView class because it is just supposed to toggle the gesture recognizers for when the tableView appears
-            toggleGestureRecognizers(self.view.gestureRecognizers, enable: false) //disabled gesture recognizers, so the tableview could work. Or else, it wasn't tappable when gesture recognizers exist.
-            addingTagMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
+            creationMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
-            addingTagMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
-            toggleGestureRecognizers(self.view.gestureRecognizers, enable: true) //making sure the gesture recognizers are enabled to dismiss the keyboard
-        }
-    }
-    
-    //Purpose: we want to have a tap recognizer to see if anywhere but the keyboard was tapped, then the keyboard collapses. But, we had
-    private func toggleGestureRecognizers(gestureRecognizers: [UIGestureRecognizer]?, enable: Bool) {
-        if let gestureRecognizers = gestureRecognizers {
-            for gestureRecognizer in gestureRecognizers {
-                gestureRecognizer.enabled = enable
-            }
+            creationMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
         }
     }
     
@@ -117,15 +103,7 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(textField: UITextField) {
         //TODO: hide all tagViews that aren't AddingtagView
-        //this gesture recognizer fucks with the IndexRowAtPath for a tableView. So, I remove it when we get to the createNewTag TableView.
-        //TODO: set this in viewDidLoad/create viewControllerExtension because this creates gesture recognizer every time the textField is started.
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissTheKeyboard))
-        view.addGestureRecognizer(tap)
-        addingTagMenuView?.hidden = false
-    }
-    
-    func textFieldShouldBeginEditing(textField: UITextField) -> Bool {
-        return true
+        creationMenuView?.hidden = false
     }
     
     //Calls this function when the tap is recognized.
@@ -135,24 +113,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(textField: UITextField) {
-        addingTagMenuView?.hidden = true
-    }
-    
-    func textFieldShouldClear(textField: UITextField) -> Bool {
-        return true
-    }
-    
-    func createTagMenuView(keyboardHeight: CGFloat) {
-        addingTagMenuView = CreationMenuView.instanceFromNib()
-        addingTagMenuView.setDelegate(self)
-        self.view.addSubview(addingTagMenuView)
-        addingTagMenuView.snp_makeConstraints { (make) in
-            make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view).inset(keyboardHeight)
-            if let addingTagView = findAddingTagTagView() {
-                make.top.equalTo(addingTagView.snp_bottom)
-            }
-        }
+        creationMenuView?.hidden = true
     }
     
     func keyboardWillShow(notification:NSNotification) {
@@ -160,8 +121,26 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.CGRectValue()
         let keyboardHeight = keyboardRectangle.height
-        if addingTagMenuView == nil {
-            createTagMenuView(keyboardHeight)
+        //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
+        //But, we can only get the keyboard height through this notification.
+        //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
+        createTagMenuView(keyboardHeight)
+        
+    }
+    
+    func createTagMenuView(keyboardHeight: CGFloat) {
+        if creationMenuView == nil {
+            creationMenuView = CreationMenuView.instanceFromNib()
+            creationMenuView.setDelegate(self)
+        }
+        self.view.addSubview(creationMenuView)
+        //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
+        creationMenuView.snp_remakeConstraints { (make) in
+            make.leading.trailing.equalTo(self.view)
+            make.bottom.equalTo(self.view).inset(keyboardHeight)
+            if let addingTagView = findAddingTagTagView() {
+                make.top.equalTo(addingTagView.snp_bottom)
+            }
         }
     }
     

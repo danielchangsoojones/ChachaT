@@ -14,7 +14,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
-    var addingTagMenuView: CreationMenuView!
+    var creationMenuView: CreationMenuView!
     
     var alreadySavedTags = false
     let questionMarkString = "?"
@@ -37,7 +37,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         super.viewDidLoad()
         tagChoicesView.delegate = self
         setDataFromDataStore()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        setTapGestureToCloseKeyboard()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -71,7 +71,16 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         tagChoicesView.addTagView(tagView)
     }
     
-
+    //Purpose: the user should be able to tap, when keyboard is showing, anywhere to dismiss the keyboard
+    //IF YOU EVER HAVE WEIRD GESTURES NOT BEING RECOGNIZED, THIS GESTURE RECOGNIZER IS PROBABLY THE PROBLEM
+    func setTapGestureToCloseKeyboard() {
+        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissTheKeyboard))
+        view.addGestureRecognizer(tap)
+        //gesture recognizers usually fucks with tableView SelectAtIndexRow, but setting this property to false allows the tap to pass through to the tableView
+        tap.cancelsTouchesInView = false
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

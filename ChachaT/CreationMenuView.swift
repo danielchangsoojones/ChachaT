@@ -8,9 +8,10 @@
 
 import Foundation
 
+//This is the menu that appears when you start typing in the CreationTagView. It shows all the available tags in the database, and if none exist, then it shows you how to create a new one.
 class CreationMenuView: UIView {
     
-    @IBOutlet weak var addingMenuTagListView: ChachaChoicesTagListView!
+    @IBOutlet weak var choicesTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var backgroundView: UIView!
     var tableView : UITableView?
     var newTagTitle: String = ""
@@ -19,15 +20,21 @@ class CreationMenuView: UIView {
     
     //TODO: make the tagView only go as tall as the keyboard height because the keyboard is blocking the last few tags. Or give the scroll view some extra spacing to fix this.
     override func awakeFromNib() {
-        addingMenuTagListView.delegate = self
+        choicesTagListView.delegate = self
+        self.backgroundView.backgroundColor = UIColor.redColor()
     }
     
     func setDelegate(delegate: AddingTagMenuDelegate) {
         self.delegate = delegate
     }
     
+    func reset() {
+        removeAllTags()
+        tableView?.hidden = true
+    }
+    
     func removeAllTags() {
-        addingMenuTagListView.removeAllTags()
+        choicesTagListView.removeAllTags()
     }
     
     class func instanceFromNib() -> CreationMenuView {
@@ -65,7 +72,7 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
     private func addTagsToTagListView(tagTitles: [String]?) {
         if let tagTitles = tagTitles {
             for (index, tagTitle) in tagTitles.enumerate() {
-                let tagView = addingMenuTagListView.addTag(tagTitle)
+                let tagView = choicesTagListView.addTag(tagTitle)
                 if index == 0 {
                     //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
                     tagView.selected = true
@@ -103,7 +110,8 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
         if indexPath.row == 0 {
             delegate?.addNewTagToTagChoiceView(newTagTitle, tagView: nil)
-            self.removeFromSuperview()
+            reset()
+            self.hidden = true
         }
     }
 }
@@ -111,6 +119,7 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
 extension CreationMenuView: TagListViewDelegate {
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         delegate?.addNewTagToTagChoiceView(title, tagView: tagView)
+        reset()
     }
 }
 
@@ -124,7 +133,7 @@ extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
         tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
         if let addingTagView = findAddingTagTagView() {
             addingTagView.searchTextField.text = ""
-            resignFirstResponder()
+            resignFirstResponder() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
         }
         dataStore.saveNewTag(title)
     }
