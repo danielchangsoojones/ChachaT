@@ -23,10 +23,6 @@ class CreationMenuView: UIView {
         choicesTagListView.delegate = self
     }
     
-    func setDelegate(delegate: AddingTagMenuDelegate) {
-        self.delegate = delegate
-    }
-    
     func reset() {
         removeAllTags()
         tableView?.hidden = true
@@ -36,9 +32,11 @@ class CreationMenuView: UIView {
         choicesTagListView.removeAllTags()
     }
     
-    class func instanceFromNib() -> CreationMenuView {
+    class func instanceFromNib(delegate: AddingTagMenuDelegate) -> CreationMenuView {
         // the nibName has to match your class file and your xib file
-        return UINib(nibName: "CreationMenuView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! CreationMenuView
+        let nib = UINib(nibName: "CreationMenuView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! CreationMenuView
+        nib.delegate = delegate
+        return nib
     }
 }
 

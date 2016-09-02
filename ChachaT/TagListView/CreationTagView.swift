@@ -125,13 +125,11 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         //But, we can only get the keyboard height through this notification.
         //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
         createTagMenuView(keyboardHeight)
-        
     }
     
     func createTagMenuView(keyboardHeight: CGFloat) {
         if creationMenuView == nil {
-            creationMenuView = CreationMenuView.instanceFromNib()
-            creationMenuView.setDelegate(self)
+            creationMenuView = CreationMenuView.instanceFromNib(self)
         }
         self.view.addSubview(creationMenuView)
         //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
