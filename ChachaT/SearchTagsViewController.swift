@@ -1,5 +1,5 @@
 //
-//  FilterQueryViewController.swift
+//  SearchTagsViewController.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 7/21/16.
@@ -10,7 +10,7 @@ import UIKit
 import EFTools
 import Parse
 
-class FilterQueryViewController: SuperTagViewController {
+class SearchTagsViewController: SuperTagViewController {
     var tagChosenView : ChachaChosenTagListView!
     var scrollViewSearchView : ScrollViewSearchView!
     var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
@@ -79,7 +79,7 @@ class FilterQueryViewController: SuperTagViewController {
 }
 
 //extension for tag actions
-extension FilterQueryViewController : TagListViewDelegate {
+extension SearchTagsViewController : TagListViewDelegate {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
         let specialtyCategoryTitle = tagView.specialtyCategoryTitle
@@ -151,7 +151,7 @@ extension FilterQueryViewController : TagListViewDelegate {
     }
 }
 
-extension FilterQueryViewController: ScrollViewSearchViewDelegate {
+extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
         var chosenTagArrayTitles : [String] = []
@@ -176,7 +176,7 @@ extension FilterQueryViewController: ScrollViewSearchViewDelegate {
 }
 
 //search extension
-extension FilterQueryViewController : UISearchBarDelegate {
+extension SearchTagsViewController : UISearchBarDelegate {
    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
         let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         tagChoicesView.removeAllTags()
@@ -233,7 +233,7 @@ extension FilterQueryViewController : UISearchBarDelegate {
     }
 }
 
-extension FilterQueryViewController: SegueHandlerType {
+extension SearchTagsViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case SearchPageToTinderMainPageSegue

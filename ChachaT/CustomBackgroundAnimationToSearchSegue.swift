@@ -40,7 +40,7 @@ class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
     override func perform() {
         //we don't want to alter these global variables, so we set them in holder variables
         let sourceVC = self.sourceViewController as! BackgroundAnimationViewController
-        let destinationVC = self.destinationViewController as! FilterQueryViewController
+        let destinationVC = self.destinationViewController as! SearchTagsViewController
         
         UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: {
             }) { (finished) in

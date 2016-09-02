@@ -13,7 +13,7 @@
 		920BF8221D3FF5E300104842 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81E1D3FF5E300104842 /* TagListView.swift */; };
 		920BF8231D3FF5E300104842 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81F1D3FF5E300104842 /* TagView.swift */; };
 		920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */; };
-		920BF8271D415FC000104842 /* FilterQueryViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8261D415FC000104842 /* FilterQueryViewController.swift */; };
+		920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8261D415FC000104842 /* SearchTagsViewController.swift */; };
 		920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8281D41DF9400104842 /* EditProfileViewController.swift */; };
 		920BF82B1D43167000104842 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF82A1D43167000104842 /* Match.swift */; };
 		920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8311D431CD000104842 /* MatchDataStore.swift */; };
@@ -96,7 +96,7 @@
 		920BF81E1D3FF5E300104842 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		920BF81F1D3FF5E300104842 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
 		920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyTagView.swift; sourceTree = "<group>"; };
-		920BF8261D415FC000104842 /* FilterQueryViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterQueryViewController.swift; sourceTree = "<group>"; };
+		920BF8261D415FC000104842 /* SearchTagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		920BF8281D41DF9400104842 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
 		920BF82A1D43167000104842 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		920BF8311D431CD000104842 /* MatchDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDataStore.swift; sourceTree = "<group>"; };
@@ -107,7 +107,7 @@
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
-		922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomBackgroundAnimationToSearchSegue.swift; sourceTree = "<group>"; };
+		922C89901D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CustomBackgroundAnimationToSearchSegue.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTagsSearchBar.swift; sourceTree = "<group>"; };
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
@@ -145,8 +145,8 @@
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
-		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSliderView.swift; sourceTree = "<group>"; };
-		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; };
+		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
@@ -167,7 +167,7 @@
 		92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
-		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterQueryDataStore.swift; sourceTree = "<group>"; };
+		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
@@ -479,7 +479,7 @@
 				928819391D1AE484000A8E04 /* Subview Files */,
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				928819351D18E78B000A8E04 /* SuperTagViewController.swift */,
-				920BF8261D415FC000104842 /* FilterQueryViewController.swift */,
+				920BF8261D415FC000104842 /* SearchTagsViewController.swift */,
 			);
 			name = "8tracks Filtering Search";
 			sourceTree = "<group>";
@@ -691,7 +691,7 @@
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
-				920BF8271D415FC000104842 /* FilterQueryViewController.swift in Sources */,
+				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,

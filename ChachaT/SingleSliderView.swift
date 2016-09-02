@@ -78,7 +78,7 @@ class SingleSliderView: UIView {
     }
 }
 
-extension FilterQueryViewController: SingleSliderViewDelegate {
+extension SearchTagsViewController: SingleSliderViewDelegate {
     func createSingleSliderChosenTagView(sliderValue: Int, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         if theSpecialtyChosenTagDictionary[specialtyCategoryTitle] == nil {
             //the tagview doesn't exist
