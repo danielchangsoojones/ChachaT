@@ -16,22 +16,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     var creationMenuView: CreationMenuView!
     
-    var alreadySavedTags = false
-    let questionMarkString = "?"
     var dataStore : AddingTagsDataStore!
-    
-    @IBAction func addToProfilePressed(sender: UIButton) {
-//        for tagView in tagChosenView.tagViews {
-//            if let title = tagView.currentTitle {
-//                let tag = createNewTag(title)
-//                chosenTagArray.append(tag)
-//                self.tagChoicesDataArray.append(tag)
-//                addTagOrSpecialtyTag(tag, addToChosenView: false)
-//            }
-//        }
-//        tagChosenView.removeAllTags()
-//        tagChosenViewWidthConstraint.constant = 0
-    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -85,7 +70,6 @@ class AddingTagsToProfileViewController: FilterTagViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
 }
 
 //tag methods extension
@@ -101,7 +85,7 @@ extension AddingTagsToProfileViewController {
             }
             alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
-            //dropDownTagView pressed
+            //ChachaDropDownTagView pressed
             if let specialtyTagView = tagChoicesView.findSpecialtyTagView(dropDownMenu.dropDownMenuCategoryType) {
                 tagChoicesView.setTagViewTitle(specialtyTagView, title: title)
                 dataStore.saveSpecialtyTag(title)
@@ -119,30 +103,6 @@ extension AddingTagsToProfileViewController {
                 dropDownMenu.tagListView!.delegate = self
             default: break
             }
-        }
-    }
-}
-
-//pop up extensions
-extension AddingTagsToProfileViewController {
-    func createBirthdayDatePickerPop() {
-        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
-            (birthday) -> Void in
-            let calendar : NSCalendar = NSCalendar.currentCalendar()
-            let now = NSDate()
-            let ageComponents = calendar.components(.Year,
-                                                    fromDate: birthday,
-                                                    toDate: now,
-                                                    options: [])
-            for tagView in self.tagChoicesView.tagViews where tagView is SpecialtyTagView {
-                let specialtyTagView = tagView as! SpecialtyTagView
-//                if specialtyTagView.specialtyTagTitle == "Age" {
-//                    tagView.setTitle("\(ageComponents.year)", forState: .Normal)
-//                }
-            }
-            User.currentUser()!.birthDate = birthday
-            //TODO: I probably should be doing something to make sure this actually saves, in case they exit the app very fast before it saves.
-            User.currentUser()!.saveInBackground()
         }
     }
 }
