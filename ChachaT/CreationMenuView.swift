@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol AddingTagMenuDelegate {
+    func addNewTagToTagChoiceView(title: String, tagView: TagView?)
+}
+
 //This is the menu that appears when you start typing in the CreationTagView. It shows all the available tags in the database, and if none exist, then it shows you how to create a new one.
 class CreationMenuView: UIView {
     
@@ -117,21 +121,4 @@ extension CreationMenuView: TagListViewDelegate {
         delegate?.addNewTagToTagChoiceView(title, tagView: tagView)
         reset()
     }
-}
-
-protocol AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(title: String, tagView: TagView?)
-}
-
-extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(title: String, tagView: TagView?) {
-        //also passing the TagView because I get the feeling that I might need it in the future.
-        tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
-        if let addingTagView = findCreationTagView() {
-            addingTagView.searchTextField.text = ""
-            resignFirstResponder() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
-        }
-        dataStore.saveNewTag(title)
-    }
-    
 }

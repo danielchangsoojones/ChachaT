@@ -7,6 +7,11 @@
 //
 
 import Foundation
+
+protocol CreationTagViewDelegate {
+    func textFieldDidChange(searchText: String)
+}
+
 //This type of tagView is for when we are in the addingTagViewsToProfilePage, we want to have a special tag view that holds a search bar, so we need to do some special stuff in this class, to make it all work correctly within the TagListView.
 class CreationTagView: TagView {
     private var searchBarPlaceHolderText: String = "Add Tag..."
@@ -62,78 +67,6 @@ class CreationTagView: TagView {
         size.height = textFont.pointSize + paddingY * 2
         size.width += paddingX * 2
         return size
-    }
-}
-
-protocol CreationTagViewDelegate {
-    func textFieldDidChange(searchText: String)
-}
-
-extension AddingTagsToProfileViewController: CreationTagViewDelegate {
-    func textFieldDidChange(searchText: String) {
-        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
-        creationMenuView.removeAllTags()
-        //we already check if the text is empty over in the CreationTagView class
-        if filtered.isEmpty {
-            //there is text, but it has no matches in the database
-            creationMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
-        } else {
-            //there is text, and we have a match, so the tagChoicesView changes accordingly
-            creationMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
-        }
-    }
-    
-    //TODO: could probably be a better way to get CreationTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
-    //Purpose: find the tagView that is an CreationTagView, because we want to do special things to that one.
-    func findCreationTagView() -> CreationTagView? {
-        for tagView in tagChoicesView.tagViews where tagView is CreationTagView {
-            return tagView as? CreationTagView
-        }
-        return nil //shouldn't reach this point
-    }
-}
-
-//textField Delegate Extension for the CreationTagView textField
-extension AddingTagsToProfileViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(textField: UITextField) {
-        //TODO: hide all tagViews that aren't the CreationTagView, meaning clear the screen.
-        creationMenuView?.hidden = false
-    }
-    
-    //Calls this function when the tap is recognized anywhere on the screen that is not a tappable object.
-    func dismissTheKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
-    func textFieldDidEndEditing(textField: UITextField) {
-        creationMenuView?.hidden = true
-    }
-    
-    func keyboardWillShow(notification:NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo!
-        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.CGRectValue()
-        let keyboardHeight = keyboardRectangle.height
-        //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
-        //But, we can only get the keyboard height through this notification.
-        //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
-        createTagMenuView(keyboardHeight)
-    }
-    
-    func createTagMenuView(keyboardHeight: CGFloat) {
-        if creationMenuView == nil {
-            creationMenuView = CreationMenuView.instanceFromNib(self)
-        }
-        self.view.addSubview(creationMenuView)
-        //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
-        creationMenuView.snp_remakeConstraints { (make) in
-            make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view).inset(keyboardHeight)
-            if let addingTagView = findCreationTagView() {
-                make.top.equalTo(addingTagView.snp_bottom)
-            }
-        }
     }
 }
 
