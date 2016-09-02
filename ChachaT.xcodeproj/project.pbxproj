@@ -20,7 +20,6 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
-		92120D9B1D69F22700320822 /* TagViewCustomExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92120D9A1D69F22700320822 /* TagViewCustomExtension.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -103,7 +102,6 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
-		92120D9A1D69F22700320822 /* TagViewCustomExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagViewCustomExtension.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -313,7 +311,6 @@
 			children = (
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
-				92120D9A1D69F22700320822 /* TagViewCustomExtension.swift */,
 			);
 			name = TagViews;
 			sourceTree = "<group>";
@@ -714,7 +711,6 @@
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
-				92120D9B1D69F22700320822 /* TagViewCustomExtension.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,

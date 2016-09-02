@@ -292,33 +292,9 @@ public class TagListView: UIView {
     
     public func addTag(title: String) -> TagView {
         let tagView = TagView(title: title)
-        
-        tagView.textColor = textColor
-        tagView.selectedTextColor = selectedTextColor
-        tagView.tagBackgroundColor = tagBackgroundColor
-        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
-        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
-        tagView.cornerRadius = cornerRadius
-        tagView.borderWidth = borderWidth
-        tagView.borderColor = borderColor
-        tagView.selectedBorderColor = selectedBorderColor
-        tagView.paddingX = paddingX
-        tagView.paddingY = paddingY
-        tagView.textFont = textFont
-        tagView.removeIconLineWidth = removeIconLineWidth
-        tagView.removeButtonIconSize = removeButtonIconSize
-        tagView.enableRemoveButton = enableRemoveButton
-        tagView.removeIconLineColor = removeIconLineColor
-        tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
-        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
-        
-        // Deselect all tags except this one
-        tagView.onLongPress = { this in
-            for tag in self.tagViews {
-                tag.selected = (tag == this)
-            }
-        }
-        return addTagView(tagView)
+        let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
+
+        return addTagView(attributedTagView)
     }
     
     public func addTagView(tagView: TagView) -> TagView {
@@ -381,43 +357,20 @@ extension TagListView {
     //Daniel Jones added this method in. It was not originally part of tagListView
     public func addSpecialtyTag(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagView {
         let tagView = SpecialtyTagView(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle)
-        tagView.textColor = textColor
-        tagView.selectedTextColor = selectedTextColor
-        tagView.tagBackgroundColor = tagBackgroundColor
-        tagView.highlightedBackgroundColor = tagHighlightedBackgroundColor
-        tagView.selectedBackgroundColor = tagSelectedBackgroundColor
-        tagView.cornerRadius = cornerRadius
-        tagView.borderWidth = borderWidth
-        tagView.borderColor = borderColor
-        tagView.selectedBorderColor = selectedBorderColor
-        tagView.paddingX = paddingX
-        tagView.paddingY = paddingY
-        tagView.textFont = textFont
-        tagView.removeIconLineWidth = removeIconLineWidth
-        tagView.removeButtonIconSize = removeButtonIconSize
-        tagView.enableRemoveButton = enableRemoveButton
-        tagView.removeIconLineColor = removeIconLineColor
-        tagView.addTarget(self, action: #selector(specialtyTagPressed(_:)), forControlEvents: .TouchUpInside)
-        tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
         
         //when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
         //So, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
         //I couldn't change the borderWidth/borderColor in the actual specialtyTagView class because, for some reason, they were not initialized yet.
         //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
-        tagView.borderColor = nil
-        tagView.borderWidth = 0
+        attributedTagView.borderColor = nil
+        attributedTagView.borderWidth = 0
         
         //had to add this because I was trying to let annotation corner view appear, and it wasn't
         //I tried putting this same code in the specialtyTagView class, but it was still masking the view, until I put it here.
-        tagView.clipsToBounds = false
+        attributedTagView.clipsToBounds = false
         
-        // Deselect all tags except this one
-        tagView.onLongPress = { this in
-            for tag in self.tagViews {
-                tag.selected = (tag == this)
-            }
-        }
-        return addTagView(tagView)
+        return addTagView(attributedTagView)
     }
     
     func specialtyTagPressed(sender: SpecialtyTagView!) {
@@ -435,28 +388,6 @@ extension TagListView {
         return nil
     }
     
-    //TODO: probably should be checking something about category name also.
-//    func findTagView(tagTitle: String, categoryName: String?) -> TagView? {
-//        for tagView in tagViews {
-//            if let categoryName = categoryName {
-//                //dealing with specialty tag because it has a category name
-//                let specialtyTagView = tagView as! SpecialtyTagView
-//                if specialtyTagView.titleLabel!.text == tagTitle && specialtyTagView.specialtyTagTitle == categoryName {
-//                    //checking if tagview is matching in tagTitle and specialtyTagTitle, because then we have found exact match
-//                    return specialtyTagView
-//                }
-//            } else {
-//                //dealing with normal generic tag
-//                if tagView.titleLabel?.text == tagTitle && !(tagView is SpecialtyTagView) {
-//                    //making sure we have title match and that we don't have the same title as a specialty tag view because it makes sure no specialty tag views get here
-//                    return tagView
-//                }
-//            }
-//        }
-//        //if the tag view does not exist in the array
-//        return nil
-//    }
-    
     func tagExistsInTagListView(title: String) -> Bool {
         for tagView in tagViews {
             if tagView.titleLabel?.text == title {
@@ -472,10 +403,8 @@ extension TagListView {
         self.layoutSubviews()
     }
     
-    func insertTagViewAtIndex(index: Int, title: String = "", tagView: TagView? = nil) {
-        //refactor this because I want to keep all attributes, but this is being used 3 times in code.
-        let tagView = tagView ?? TagView(title: title)
-        
+    //Purpose: apply all the properties of the TagListView to a tagView
+    func setTagViewAttributes(tagView: TagView, actionOnTap: Selector) -> TagView {
         tagView.textColor = textColor
         tagView.selectedTextColor = selectedTextColor
         tagView.tagBackgroundColor = tagBackgroundColor
@@ -492,7 +421,8 @@ extension TagListView {
         tagView.removeButtonIconSize = removeButtonIconSize
         tagView.enableRemoveButton = enableRemoveButton
         tagView.removeIconLineColor = removeIconLineColor
-        tagView.addTarget(self, action: #selector(tagPressed(_:)), forControlEvents: .TouchUpInside)
+        
+        tagView.addTarget(self, action: actionOnTap, forControlEvents: .TouchUpInside)
         tagView.removeButton.addTarget(self, action: #selector(removeButtonPressed(_:)), forControlEvents: .TouchUpInside)
         
         // Deselect all tags except this one
@@ -501,8 +431,16 @@ extension TagListView {
                 tag.selected = (tag == this)
             }
         }
-        tagViews.insert(tagView, atIndex: index)
-        tagBackgroundViews.append(UIView(frame: tagView.bounds))
+        return tagView
+    }
+    
+    func insertTagViewAtIndex(index: Int, title: String = "", tagView: TagView? = nil) {
+        //refactor this because I want to keep all attributes, but this is being used 3 times in code.
+        let tagView = tagView ?? TagView(title: title)
+        let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
+        
+        tagViews.insert(attributedTagView, atIndex: index)
+        tagBackgroundViews.append(UIView(frame: attributedTagView.bounds))
         rearrangeViews()
     }
 }
