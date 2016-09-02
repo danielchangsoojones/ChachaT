@@ -58,7 +58,7 @@
 		926108591CEA11B9009F3E86 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108581CEA11B9009F3E86 /* Alert.swift */; };
 		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
-		928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* FilterTagViewController.swift */; };
+		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
@@ -144,7 +144,7 @@
 		9261085B1CEA196C009F3E86 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
-		928819351D18E78B000A8E04 /* FilterTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTagViewController.swift; sourceTree = "<group>"; };
+		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SingleSliderView.swift; sourceTree = "<group>"; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -478,7 +478,7 @@
 				920BF81A1D3FF5E300104842 /* TagListView */,
 				928819391D1AE484000A8E04 /* Subview Files */,
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
-				928819351D18E78B000A8E04 /* FilterTagViewController.swift */,
+				928819351D18E78B000A8E04 /* SuperTagViewController.swift */,
 				920BF8261D415FC000104842 /* FilterQueryViewController.swift */,
 			);
 			name = "8tracks Filtering Search";
@@ -710,7 +710,7 @@
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
 				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
-				928819361D18E78B000A8E04 /* FilterTagViewController.swift in Sources */,
+				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,

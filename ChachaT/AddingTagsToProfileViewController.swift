@@ -10,7 +10,7 @@ import UIKit
 import Parse
 import SCLAlertView
 
-class AddingTagsToProfileViewController: FilterTagViewController {
+class AddingTagsToProfileViewController: SuperTagViewController {
     var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
     
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -73,7 +73,7 @@ class AddingTagsToProfileViewController: FilterTagViewController {
 }
 
 //tag methods extension
-extension AddingTagsToProfileViewController {
+extension AddingTagsToProfileViewController : TagListViewDelegate {
     //TagListView tags: (tagChoicesView = 1, tagChosenView = 2, dropDownTagView = 3)
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 1 {

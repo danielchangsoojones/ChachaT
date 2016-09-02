@@ -63,7 +63,7 @@ struct ImportantDimensions {
 public enum StoryboardIdentifiers : String {
    case BottomPicturePopUpViewController
    case QuestionOnboardingCell
-   case FilterTagViewController
+   case SuperTagViewController
    case DistanceSingleRangeSlider
 }
 

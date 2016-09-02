@@ -10,9 +10,14 @@ import UIKit
 import EFTools
 import Parse
 
-class FilterQueryViewController: FilterTagViewController {
+class FilterQueryViewController: SuperTagViewController {
+    var tagChosenView : ChachaChosenTagListView!
+    var scrollViewSearchView : ScrollViewSearchView!
+    var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
+    var theGenericChosenTagArray : [String] = []
     
-    var dataStore : FilterQueryDataStore!    
+    var dataStore : FilterQueryDataStore!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
@@ -48,6 +53,23 @@ class FilterQueryViewController: FilterTagViewController {
             theSpecialtyChosenTagDictionary[category] = nil
         }
     }
+    
+    func setChosenTagView(scrollViewSearchView: ScrollViewSearchView) {
+        tagChosenView = scrollViewSearchView.theTagChosenListView
+        tagChosenView.delegate = self
+    }
+    
+    func addSearchScrollView(holderView: UIView) -> ScrollViewSearchView {
+        //getting the xib file for the scroll view
+        let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
+        scrollViewSearchView.searchBox.delegate = self
+        self.navigationController?.navigationBar.addSubview(scrollViewSearchView)
+        scrollViewSearchView.snp_makeConstraints { (make) in
+            make.edges.equalTo((self.navigationController?.navigationBar)!)
+        }
+        setChosenTagView(scrollViewSearchView)
+        return scrollViewSearchView
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -57,7 +79,7 @@ class FilterQueryViewController: FilterTagViewController {
 }
 
 //extension for tag actions
-extension FilterQueryViewController {
+extension FilterQueryViewController : TagListViewDelegate {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
         let specialtyCategoryTitle = tagView.specialtyCategoryTitle
@@ -98,6 +120,35 @@ extension FilterQueryViewController {
             return
         }
     }
+    
+    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+        if sender.tag == 2 {
+            //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
+            sender.removeTagView(tagView)
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
+            if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = nil
+            } else {
+                if let index = theGenericChosenTagArray.indexOf(title) {
+                    theGenericChosenTagArray.removeAtIndex(index)
+                }
+            }
+        }
+    }
+    
+    //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
+    func addTagToChosenTagListView(title: String) {
+        let tagView = tagChosenView.addTag(title)
+        scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
+        scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
+            //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
+            theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+        } else {
+            //just a generic tag pressed
+            theGenericChosenTagArray.append(title)
+        }
+    }
 }
 
 extension FilterQueryViewController: ScrollViewSearchViewDelegate {
@@ -125,32 +176,16 @@ extension FilterQueryViewController: ScrollViewSearchViewDelegate {
 }
 
 //search extension
-extension FilterQueryViewController {
-   override func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-        var filtered:[String] = []
+extension FilterQueryViewController : UISearchBarDelegate {
+   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         tagChoicesView.removeAllTags()
-        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
-            //finds the tagTitle, but if nil, then uses the specialtyTagTitle
-            //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
-            let tmp: NSString = tagTitle
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
         if searchText.isEmpty {
             //no text, so we want to stay on the tagChoicesView
             searchActive = false
             resetTagChoicesViewList()
         } else if(filtered.count == 0){
             //there is text, but it has no matches in the database
-            //TODO: it should say no matches to your search, maybe be the first to join?
-//            searchActive = true
-//            if !(theSpecialtyTagEnviromentHolderView?.theSpecialtyView is TagListView) {
-//                theSpecialtyTagEnviromentHolderView = SpecialtyTagEnviromentHolderView(specialtyTagEnviroment: .CreateNewTag)
-//                theSpecialtyTagEnviromentHolderView?.delegate = self
-//            }
-//            createSpecialtyTagEnviroment(false)
-//            theSpecialtyTagEnviromentHolderView?.updateTagListView(searchText)
-//            theSpecialtyTagEnviromentHolderView?.setButtonText("Create New Tag?")
         } else {
             //there is text, and we have a match, soa the tagChoicesView changes accordingly
             searchActive = true
@@ -164,10 +199,36 @@ extension FilterQueryViewController {
         }
     }
     
-    override func searchBarCancelButtonClicked(searchBar: UISearchBar) {
-        super.searchBarCancelButtonClicked(searchBar)
+    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+        searchActive = true
+        searchBar.showsCancelButton = true
+    }
+    
+    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+        searchActive = false
+    }
+    
+    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.showsCancelButton = false
+        searchBar.resignFirstResponder()
+        resetTagChoicesViewList()
+        if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
+            //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
+            scrollViewSearchView.hideScrollSearchView(false)
+        }
         if tagChosenView.tagViews.isEmpty {
             performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: nil)
+        }
+    }
+    
+    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+        searchActive = false
+        searchBar.showsCancelButton = false
+        for tagView in tagChoicesView.selectedTags() {
+            if let currentTitle = tagView.currentTitle {
+                addTagToChosenTagListView(currentTitle)
+            }
         }
     }
 }

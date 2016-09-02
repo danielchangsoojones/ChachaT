@@ -71,14 +71,8 @@ protocol CreationTagViewDelegate {
 
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(searchText: String) {
-        var filtered:[String] = []
+        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         creationMenuView.removeAllTags()
-        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
-            //TODO: make the first one to show up be the best matching word, like if I search "a" then apple should be in front of "banana"
-            let tmp: NSString = tagTitle
-            let range = tmp.rangeOfString(searchText, options: NSStringCompareOptions.CaseInsensitiveSearch)
-            return range.location != NSNotFound
-        })
         //we already check if the text is empty over in the CreationTagView class
         if filtered.isEmpty {
             //there is text, but it has no matches in the database
