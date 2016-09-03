@@ -503,12 +503,20 @@
 		9275FB821D7A030600D8131D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				9275FB8B1D7B571200D8131D /* PhotoEditing */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
+		9275FB8B1D7B571200D8131D /* PhotoEditing */ = {
+			isa = PBXGroup;
+			children = (
 				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
 				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
 				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
 			);
-			name = Subviews;
+			name = PhotoEditing;
 			sourceTree = "<group>";
 		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
