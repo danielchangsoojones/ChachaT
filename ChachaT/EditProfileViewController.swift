@@ -84,7 +84,7 @@ class EditProfileViewController: UIViewController {
 
 extension UIStackView {
     public override func intrinsicContentSize() -> CGSize {
-        return CGSize(width: 200, height: 200)
+        return CGSize(width: 100, height: 200)
     }
 }
 
@@ -101,14 +101,16 @@ extension EditProfileViewController{
         let insideVerticalStackView = createInsideStackView(.Vertical, numberOfViews: PhotoEditingViewConstants.numberOfViewsInInsideVerticalStackView)
         let insideHorizontalStackView = createInsideStackView(.Horizontal, numberOfViews: PhotoEditingViewConstants.numberOfViewsInInsideHorizontalStackView)
         let largePhotoEditingView = PhotoEditingView(frame: CGRect(x: 0, y: 0, w: 200, h: 200))
-//        let placeholder = UIView(frame: CGRect(x: 0, y: 0, w: 100, h: 100))
-//        placeholder.backgroundColor = UIColor.blueColor()
+//        largePhotoEditingView.snp_makeConstraints { (make) in
+//            make.width.equalTo(200)
+//        }
+        let placeholder = PhotoEditingView(frame: CGRect(x: 0, y: 0, w: 100, h: 100))
         let horizontalStackView = createStackView(.Horizontal, views: [largePhotoEditingView, insideVerticalStackView])
 //        print(horizontalStackView.intrinsicContentSize())
 //        print(insideHorizontalStackView.intrinsicContentSize())
 //        print(horizontalStackView.frame)
 //        print(insideHorizontalStackView.frame)
-        let masterStackView = createStackView(.Vertical, views: [horizontalStackView, insideHorizontalStackView])
+        let masterStackView = createStackView(.Vertical, views: [horizontalStackView, placeholder])
         self.view.addSubview(masterStackView)
         masterStackView.snp_makeConstraints { (make) in
             make.trailing.leading.top.equalTo(self.view)
