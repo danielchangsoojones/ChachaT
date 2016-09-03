@@ -161,6 +161,9 @@
                             </connections>
                         </barButtonItem>
                     </navigationItem>
+                    <connections>
+                        <outlet property="photoLayoutView" destination="ggM-LL-fqe" id="Oyl-gv-X6X"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sO-nf-LbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

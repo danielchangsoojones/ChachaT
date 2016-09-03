@@ -8,6 +8,10 @@
 
 import Foundation
 
+protocol PhotoEditingDelegate {
+    func photoPressed(photoNumber: Int, imageSize: CGSize)
+}
+
 class PhotoEditingMasterLayoutView: UIView {
     private struct PhotoEditingViewConstants {
         //a sidingStackView is one of the rows, surrounding the large PhotoEditingView, on the outside of the square that holds the mini PhotoEditingViews.
@@ -18,6 +22,10 @@ class PhotoEditingMasterLayoutView: UIView {
         static let mainPhotoEditingViewSideDimension : CGFloat = 100 //the real frame gets set by how wide the stackView gets snapkitted(constraints), this sets the intrinsicContentSize for things to calculate off of.
         static let stackViewSpacing : CGFloat = 5
     }
+    
+    var delegate : PhotoEditingDelegate?
+    var masterStackView: UIStackView!
+    var photoNumber : Int = 0
     
     init() {
         super.init(frame: CGRectZero)
@@ -33,7 +41,7 @@ class PhotoEditingMasterLayoutView: UIView {
         let sidingStackViews = createSidingStackViews()
         let largePhotoEditingView = createPhotoEditingView(CGRect(x: 0, y: 0, w: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension, h: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension)) //the main photo that is surrounded by the siding
         let innerHorizontalStackView = createStackView(.Horizontal, distribution: .FillProportionally, views: [largePhotoEditingView, sidingStackViews.verticalSiding])
-        let masterStackView = createStackView(.Vertical, distribution: .FillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
+        masterStackView = createStackView(.Vertical, distribution: .FillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
         self.addSubview(masterStackView)
         masterStackView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
@@ -69,15 +77,38 @@ class PhotoEditingMasterLayoutView: UIView {
     //a PhotoEditingView is the pictures that are clickable on the editingProfile Page, where you can add new photos to your profile.
     func createPhotoEditingView(frame: CGRect) -> PhotoEditingView {
         let photoEditingView = PhotoEditingView(frame: frame)
+        photoNumber = photoNumber + 1
+        photoEditingView.tag = photoNumber
         photoEditingView.addTapGesture(target: self, action: #selector(PhotoEditingMasterLayoutView.photoTapped(_:)))
         return photoEditingView
     }
     
     func photoTapped(sender: UIGestureRecognizer) {
         if let photoEditingView = sender.view as? PhotoEditingView {
-            //do something with the tag of each PhotoEditingView
+            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.imageView.frame.size)
         }
     }
-    //TODO: make scrollView
+    
+    func setNewImage(image: UIImage, photoNumber: Int) {
+        let photoEditingSubviews = getSubviewsOfView(masterStackView)
+        for subview in photoEditingSubviews where subview.tag == photoNumber {
+            subview.imageView.image = image //should be only one photoEditingView that has any given tag
+        }
+    }
+    
+    //Purpose: recursively find all subviews, including subviews of subviews, that are in a view.
+    func getSubviewsOfView(view:UIView) -> [PhotoEditingView] {
+        var photoEditingSubviewArray : [PhotoEditingView] = []
+        
+        for subview in view.subviews {
+            photoEditingSubviewArray = photoEditingSubviewArray + getSubviewsOfView(subview)
+            
+            if let subview = subview as? PhotoEditingView {
+                photoEditingSubviewArray.append(subview)
+            }
+        }
+        
+        return photoEditingSubviewArray
+    }
     
 }

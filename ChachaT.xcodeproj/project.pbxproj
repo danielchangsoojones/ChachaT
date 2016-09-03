@@ -519,6 +519,13 @@
 			name = PhotoEditing;
 			sourceTree = "<group>";
 		};
+		9275FB8C1D7B64AF00D8131D /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "Data Models";
+			sourceTree = "<group>";
+		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -531,6 +538,7 @@
 		928819441D286C70000A8E04 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				9275FB8C1D7B64AF00D8131D /* Data Models */,
 				9275FB811D7A02F900D8131D /* Edit Profile */,
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,

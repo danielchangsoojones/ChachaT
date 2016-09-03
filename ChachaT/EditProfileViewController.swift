@@ -14,6 +14,9 @@ import EZSwiftExtensions
 
 class EditProfileViewController: UIViewController {
     
+    @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
+    
+    var photoNumberToChange: Int!
     let currentUser = User.currentUser()
     
     @IBAction func theAgeButtonTapped(sender: UIButton) {
@@ -49,29 +52,9 @@ class EditProfileViewController: UIViewController {
         })
     }
     
-    func imageTapped() {
-        createBottomPicturePopUp()
-    }
-    
-    func createBottomPicturePopUp() {
-//        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-//        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
-//        vc.bottomPicturePopUpViewControllerDelegate = self
-//        vc.profileImageSize = self.theProfileImageView.frame.size
-//        let popup = STPopupController(rootViewController: vc)
-//        popup.navigationBar.barTintColor = ChachaTeal
-//        popup.navigationBar.tintColor = UIColor.whiteColor()
-//        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-//        popup.style = STPopupStyle.BottomSheet
-//        popup.presentInViewController(self)
-    }
-    
     override func viewDidLoad() {
         super.viewDidLoad()
-        let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-//        theProfileImageView.userInteractionEnabled = true
-//        theProfileImageView.addGestureRecognizer(tap)
-        
+        photoLayoutView.delegate = self
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,9 +64,29 @@ class EditProfileViewController: UIViewController {
 
 }
 
+extension EditProfileViewController: PhotoEditingDelegate {
+    func photoPressed(photoNumber: Int, imageSize: CGSize) {
+        photoNumberToChange = photoNumber
+        createBottomPicturePopUp(imageSize)
+    }
+    
+    func createBottomPicturePopUp(imageSize: CGSize) {
+        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
+        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
+        vc.bottomPicturePopUpViewControllerDelegate = self
+        vc.profileImageSize = imageSize
+        let popup = STPopupController(rootViewController: vc)
+        popup.navigationBar.barTintColor = ChachaTeal
+        popup.navigationBar.tintColor = UIColor.whiteColor()
+        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        popup.style = STPopupStyle.BottomSheet
+        popup.presentInViewController(self)
+    }
+}
+
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
-//        theProfileImageView.image = image
+        photoLayoutView.setNewImage(image, photoNumber: photoNumberToChange)
 //        let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(theProfileImageView.image!, 0.6)!)
 //        currentUser!.profileImage = file
     }
