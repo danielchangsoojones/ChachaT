@@ -36,7 +36,6 @@ class CustomCardView: OverlayView {
             } else {
                 theCardMainImage.backgroundColor = ChachaBombayGrey
             }
-            
         }
     }
     

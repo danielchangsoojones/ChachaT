@@ -58,6 +58,8 @@
 		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */; };
+		9275FB841D7A037D00D8131D /* ProfilePhotoView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB831D7A037D00D8131D /* ProfilePhotoView.xib */; };
+		9275FB861D7A0F2C00D8131D /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
@@ -144,6 +146,8 @@
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
+		9275FB831D7A037D00D8131D /* ProfilePhotoView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ProfilePhotoView.xib; sourceTree = "<group>"; };
+		9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -484,6 +488,23 @@
 			name = "8tracks Filtering Search";
 			sourceTree = "<group>";
 		};
+		9275FB811D7A02F900D8131D /* Edit Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9275FB821D7A030600D8131D /* Subviews */,
+			);
+			name = "Edit Profile";
+			sourceTree = "<group>";
+		};
+		9275FB821D7A030600D8131D /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				9275FB831D7A037D00D8131D /* ProfilePhotoView.xib */,
+				9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
 			isa = PBXGroup;
 			children = (
@@ -496,6 +517,7 @@
 		928819441D286C70000A8E04 /* Profile */ = {
 			isa = PBXGroup;
 			children = (
+				9275FB811D7A02F900D8131D /* Edit Profile */,
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
@@ -611,6 +633,7 @@
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
+				9275FB841D7A037D00D8131D /* ProfilePhotoView.xib in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
@@ -709,6 +732,7 @@
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
+				9275FB861D7A0F2C00D8131D /* ProfilePhotoView.swift in Sources */,
 				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,

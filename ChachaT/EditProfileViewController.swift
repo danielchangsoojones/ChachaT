@@ -13,13 +13,6 @@ import STPopup
 
 class EditProfileViewController: UIViewController {
     
-    @IBOutlet weak var theNameTextField: UITextField!
-    @IBOutlet weak var theTitleTextField: UITextField!
-    @IBOutlet weak var theFactOneTextField: UITextField!
-    @IBOutlet weak var theFactTwoTextField: UITextField!
-    @IBOutlet weak var theFactThreeTextField: UITextField!
-    @IBOutlet weak var theProfileImageView: PFImageView!
-    
     let currentUser = User.currentUser()
     
     @IBAction func theAgeButtonTapped(sender: UIButton) {
@@ -41,11 +34,11 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
-        currentUser?.fullName = theNameTextField.text
-        currentUser?.title = theTitleTextField.text
-        currentUser?.factOne = theFactOneTextField.text
-        currentUser?.factTwo = theFactTwoTextField.text
-        currentUser?.factThree = theFactThreeTextField.text
+//        currentUser?.fullName = theNameTextField.text
+//        currentUser?.title = theTitleTextField.text
+//        currentUser?.factOne = theFactOneTextField.text
+//        currentUser?.factTwo = theFactTwoTextField.text
+//        currentUser?.factThree = theFactThreeTextField.text
         currentUser?.saveInBackgroundWithBlock({ (success, error) in
             if success {
                 self.navigationController?.popViewControllerAnimated(true)
@@ -60,23 +53,23 @@ class EditProfileViewController: UIViewController {
     }
     
     func createBottomPicturePopUp() {
-        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
-        vc.bottomPicturePopUpViewControllerDelegate = self
-        vc.profileImageSize = self.theProfileImageView.frame.size
-        let popup = STPopupController(rootViewController: vc)
-        popup.navigationBar.barTintColor = ChachaTeal
-        popup.navigationBar.tintColor = UIColor.whiteColor()
-        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        popup.style = STPopupStyle.BottomSheet
-        popup.presentInViewController(self)
+//        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
+//        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
+//        vc.bottomPicturePopUpViewControllerDelegate = self
+//        vc.profileImageSize = self.theProfileImageView.frame.size
+//        let popup = STPopupController(rootViewController: vc)
+//        popup.navigationBar.barTintColor = ChachaTeal
+//        popup.navigationBar.tintColor = UIColor.whiteColor()
+//        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+//        popup.style = STPopupStyle.BottomSheet
+//        popup.presentInViewController(self)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-        theProfileImageView.userInteractionEnabled = true
-        theProfileImageView.addGestureRecognizer(tap)
+//        theProfileImageView.userInteractionEnabled = true
+//        theProfileImageView.addGestureRecognizer(tap)
     }
 
     override func didReceiveMemoryWarning() {
@@ -88,8 +81,8 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
-        theProfileImageView.image = image
-        let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(theProfileImageView.image!, 0.6)!)
-        currentUser!.profileImage = file
+//        theProfileImageView.image = image
+//        let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(theProfileImageView.image!, 0.6)!)
+//        currentUser!.profileImage = file
     }
 }
