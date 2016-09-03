@@ -20,8 +20,8 @@
                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="DrivingGirl" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-M3-vGg">
                     <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
                 </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INc-Yj-93N">
-                    <rect key="frame" x="182" y="169" width="8" height="21"/>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INc-Yj-93N">
+                    <rect key="frame" x="153" y="171" width="39" height="21"/>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -30,11 +30,11 @@
             <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="j1i-M3-vGg" secondAttribute="trailing" id="MpQ-CS-2MO"/>
-                <constraint firstAttribute="trailing" secondItem="INc-Yj-93N" secondAttribute="trailing" constant="10" id="Uq0-rv-cjX"/>
-                <constraint firstAttribute="bottom" secondItem="INc-Yj-93N" secondAttribute="bottom" constant="10" id="YIu-rp-OTf"/>
                 <constraint firstItem="j1i-M3-vGg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YRx-wE-pSN"/>
+                <constraint firstAttribute="bottom" secondItem="INc-Yj-93N" secondAttribute="bottom" constant="8" id="c6A-fD-MWo"/>
                 <constraint firstItem="j1i-M3-vGg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="efJ-Xs-XR1"/>
                 <constraint firstAttribute="bottom" secondItem="j1i-M3-vGg" secondAttribute="bottom" id="fHx-JP-VdB"/>
+                <constraint firstAttribute="trailing" secondItem="INc-Yj-93N" secondAttribute="trailing" constant="8" id="nhc-V3-dev"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

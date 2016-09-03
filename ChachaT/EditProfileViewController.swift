@@ -17,6 +17,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     
     var photoNumberToChange: Int!
+    let dataStore = EditProfileDataStore()
     let currentUser = User.currentUser()
     
     @IBAction func theAgeButtonTapped(sender: UIButton) {
@@ -38,18 +39,19 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
+        dataStore.saveEverything()
 //        currentUser?.fullName = theNameTextField.text
 //        currentUser?.title = theTitleTextField.text
 //        currentUser?.factOne = theFactOneTextField.text
 //        currentUser?.factTwo = theFactTwoTextField.text
 //        currentUser?.factThree = theFactThreeTextField.text
-        currentUser?.saveInBackgroundWithBlock({ (success, error) in
-            if success {
-                self.navigationController?.popViewControllerAnimated(true)
-            } else {
-                print(error)
-            }
-        })
+//        currentUser?.saveInBackgroundWithBlock({ (success, error) in
+//            if success {
+//                self.navigationController?.popViewControllerAnimated(true)
+//            } else {
+//                print(error)
+//            }
+//        })
     }
     
     override func viewDidLoad() {
@@ -87,7 +89,6 @@ extension EditProfileViewController: PhotoEditingDelegate {
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
         photoLayoutView.setNewImage(image, photoNumber: photoNumberToChange)
-//        let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(theProfileImageView.image!, 0.6)!)
-//        currentUser!.profileImage = file
+        dataStore.saveProfileImage(image, photoNumber: photoNumberToChange)
     }
 }

@@ -62,6 +62,7 @@
 		9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */; };
 		9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */; };
 		9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */; };
+		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
@@ -152,6 +153,7 @@
 		9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingView.swift; sourceTree = "<group>"; };
 		9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingMasterLayoutView.swift; sourceTree = "<group>"; };
 		9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingStackView.swift; sourceTree = "<group>"; };
+		9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDataStore.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -511,10 +513,11 @@
 		9275FB8B1D7B571200D8131D /* PhotoEditing */ = {
 			isa = PBXGroup;
 			children = (
-				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
-				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
+				9275FB8D1D7B785400D8131D /* BottomMenuPopUp */,
 				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
 				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
+				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
+				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 			);
 			name = PhotoEditing;
 			sourceTree = "<group>";
@@ -522,8 +525,17 @@
 		9275FB8C1D7B64AF00D8131D /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
+				9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */,
 			);
 			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		9275FB8D1D7B785400D8131D /* BottomMenuPopUp */ = {
+			isa = PBXGroup;
+			children = (
+				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
+			);
+			name = BottomMenuPopUp;
 			sourceTree = "<group>";
 		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
@@ -581,7 +593,6 @@
 				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
 				929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */,
 				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
-				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
 			);
 			name = "Pop Ups";
 			sourceTree = "<group>";
@@ -742,6 +753,7 @@
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,
+				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
 				925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */,
