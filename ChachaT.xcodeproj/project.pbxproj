@@ -59,7 +59,9 @@
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */; };
 		9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB831D7A037D00D8131D /* PhotoEditingView.xib */; };
-		9275FB861D7A0F2C00D8131D /* ProfilePhotoView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */; };
+		9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */; };
+		9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */; };
+		9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
@@ -147,7 +149,9 @@
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		9275FB831D7A037D00D8131D /* PhotoEditingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditingView.xib; sourceTree = "<group>"; };
-		9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfilePhotoView.swift; sourceTree = "<group>"; };
+		9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingView.swift; sourceTree = "<group>"; };
+		9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingMasterLayoutView.swift; sourceTree = "<group>"; };
+		9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingStackView.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -500,7 +504,9 @@
 			isa = PBXGroup;
 			children = (
 				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
-				9275FB851D7A0F2C00D8131D /* ProfilePhotoView.swift */,
+				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
+				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
+				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -712,6 +718,7 @@
 				922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
+				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
@@ -732,9 +739,10 @@
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
-				9275FB861D7A0F2C00D8131D /* ProfilePhotoView.swift in Sources */,
+				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
+				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
