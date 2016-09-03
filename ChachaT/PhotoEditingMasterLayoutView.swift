@@ -30,7 +30,7 @@ class PhotoEditingMasterLayoutView: UIView {
     
     func setLayout() {
         let sidingStackViews = createSidingStackViews()
-        let largePhotoEditingView = PhotoEditingView(frame: CGRect(x: 0, y: 0, w: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension, h: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension)) //the main photo that is surrounded by the siding
+        let largePhotoEditingView = createPhotoEditingView(CGRect(x: 0, y: 0, w: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension, h: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension)) //the main photo that is surrounded by the siding
         let innerHorizontalStackView = createStackView(.Horizontal, distribution: .FillProportionally, views: [largePhotoEditingView, sidingStackViews.verticalSiding])
         let masterStackView = createStackView(.Vertical, distribution: .FillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
         self.addSubview(masterStackView)
@@ -68,6 +68,15 @@ class PhotoEditingMasterLayoutView: UIView {
     //a PhotoEditingView is the pictures that are clickable on the editingProfile Page, where you can add new photos to your profile.
     func createPhotoEditingView(frame: CGRect) -> PhotoEditingView {
         let photoEditingView = PhotoEditingView(frame: frame)
+        photoEditingView.addTapGesture(target: self, action: #selector(PhotoEditingMasterLayoutView.photoTapped(_:)))
         return photoEditingView
     }
+    
+    func photoTapped(sender: UIGestureRecognizer) {
+        if let photoEditingView = sender.view as? PhotoEditingView {
+            //do something with the tag of each PhotoEditingView
+        }
+    }
+    //TODO: make scrollView
+    
 }
