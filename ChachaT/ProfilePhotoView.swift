@@ -1,5 +1,5 @@
 //
-//  ProfilePhotoView.swift
+//  PhotoEditingView.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 9/2/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfilePhotoView: UIView {
+class PhotoEditingView: UIView {
     
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var numberLabel: UILabel!
@@ -28,9 +28,9 @@ class ProfilePhotoView: UIView {
         xibSetup()
     }
     
-    //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type ProfilePhotoView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
+    //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
     func xibSetup() {
-        NSBundle.mainBundle().loadNibNamed("ProfilePhotoView", owner: self, options: nil)[0] as! UIView
+        NSBundle.mainBundle().loadNibNamed("PhotoEditingView", owner: self, options: nil)[0] as! UIView
         //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
         self.addSubview(view)
         view.frame = self.bounds
