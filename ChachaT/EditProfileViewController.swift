@@ -69,7 +69,6 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         let tap = UITapGestureRecognizer(target: self, action: #selector(imageTapped))
-        setPhotoEditingLayout()
 //        theProfileImageView.userInteractionEnabled = true
 //        theProfileImageView.addGestureRecognizer(tap)
         
@@ -80,20 +79,6 @@ class EditProfileViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
 
-}
-
-//set up PhotoEditingView layout
-extension EditProfileViewController{
-    func setPhotoEditingLayout() {
-        let photoEditingMasterLayoutView = PhotoEditingMasterLayoutView()
-        self.view.addSubview(photoEditingMasterLayoutView)
-        photoEditingMasterLayoutView.snp_makeConstraints { (make) in
-            make.leading.trailing.equalTo(self.view)
-            make.top.equalTo(self.view)
-            make.height.equalTo(300)
-        }
-    }
-    
 }
 
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
