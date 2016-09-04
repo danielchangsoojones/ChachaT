@@ -37,7 +37,7 @@ class AboutView: UIView {
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
     func xibSetup() {
-        NSBundle.mainBundle().loadNibNamed("PhotoEditingView", owner: self, options: nil)[0] as! UIView
+        NSBundle.mainBundle().loadNibNamed("AboutView", owner: self, options: nil)[0] as! UIView
         //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
         self.addSubview(view)
         view.frame = self.bounds
@@ -45,6 +45,7 @@ class AboutView: UIView {
     
 }
 
+//needed to manually create placeholder for a textview
 extension AboutView: UITextViewDelegate {
     func setTextView() {
         theAutoGrowingTextView.delegate = self
@@ -66,7 +67,7 @@ extension AboutView: UITextViewDelegate {
     
     func textViewShouldBeginEditing(aTextView: UITextView) -> Bool
     {
-        if aTextView == nameTextView && aTextView.text == PLACEHOLDER_TEXT
+        if aTextView == theAutoGrowingTextView && aTextView.text == AboutViewConstants.textViewPlaceholder
         {
             // move cursor to start
             moveCursorToStart(aTextView)
@@ -92,7 +93,7 @@ extension AboutView: UITextViewDelegate {
         {
             // check if the only text is the placeholder and remove it if needed
             // unless they've hit the delete button with the placeholder displayed
-            if textView == nameTextView && textView.text == PLACEHOLDER_TEXT
+            if textView == theAutoGrowingTextView && textView.text == AboutViewConstants.textViewPlaceholder
             {
                 if text.utf16.count == 0 // they hit the back button
                 {
@@ -105,7 +106,7 @@ extension AboutView: UITextViewDelegate {
         }
         else  // no text, so show the placeholder
         {
-            applyPlaceholderStyle(textView, placeholderText: PLACEHOLDER_TEXT)
+            applyPlaceholderStyle(textView, placeholderText: AboutViewConstants.textViewPlaceholder)
             moveCursorToStart(textView)
             return false
         }

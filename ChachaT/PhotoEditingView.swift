@@ -10,18 +10,16 @@ import UIKit
 
 class PhotoEditingView: UIView {
     
-    //not really sure why these outlets seem to not be connected to anything. They work as if they are fine. It might have something to do with the fact that we set the File's owner as a class, and not the View type. 
-    @IBOutlet weak var imageView: UIImageView!
-    @IBOutlet weak var numberLabel: UILabel!
-    // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
-    @IBOutlet var view: UIView!
-
+    @IBOutlet var theView: UIView!
+    @IBOutlet weak var theImageView: UIImageView!
+    @IBOutlet weak var theNumberLabel: UILabel!
+    
     
     //Called when the view is created programmatically
     init(frame: CGRect, number: Int) {
         super.init(frame: frame)
         xibSetup()
-        numberLabel.text = number.toString
+        theNumberLabel.text = number.toString
     }
     
     //Called when the view is created via storyboard
@@ -41,8 +39,8 @@ class PhotoEditingView: UIView {
     func xibSetup() {
         NSBundle.mainBundle().loadNibNamed("PhotoEditingView", owner: self, options: nil)[0] as! UIView
         //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
-        self.addSubview(view)
-        view.frame = self.bounds
+        self.addSubview(theView)
+        theView.frame = self.bounds
     }
     
 }
