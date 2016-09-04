@@ -63,6 +63,8 @@
 		9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */; };
 		9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */; };
 		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
+		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
+		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
 		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
@@ -154,6 +156,8 @@
 		9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingMasterLayoutView.swift; sourceTree = "<group>"; };
 		9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingStackView.swift; sourceTree = "<group>"; };
 		9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDataStore.swift; sourceTree = "<group>"; };
+		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
+		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -505,6 +509,7 @@
 		9275FB821D7A030600D8131D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
+				9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */,
 				9275FB8B1D7B571200D8131D /* PhotoEditing */,
 			);
 			name = Subviews;
@@ -536,6 +541,15 @@
 				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
 			);
 			name = BottomMenuPopUp;
+			sourceTree = "<group>";
+		};
+		9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */ = {
+			isa = PBXGroup;
+			children = (
+				9275FB911D7C6A4900D8131D /* AboutView.xib */,
+				9275FB931D7C715800D8131D /* AboutView.swift */,
+			);
+			name = "Bio (Bullet Point) Entry";
 			sourceTree = "<group>";
 		};
 		928819391D1AE484000A8E04 /* Subview Files */ = {
@@ -663,6 +677,7 @@
 				925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */,
 				928819461D286CA8000A8E04 /* Profile.storyboard in Resources */,
 				926108331CE25C22009F3E86 /* woosh.wav in Resources */,
+				9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
@@ -764,6 +779,7 @@
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */,
+				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
