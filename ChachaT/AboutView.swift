@@ -12,6 +12,7 @@ import MBAutoGrowingTextView
 class AboutView: UIView {
     private struct AboutViewConstants {
         static let textViewPlaceholder = "Something about you..."
+        static let initialCharacterCount : Int = 500
     }
     
     
@@ -27,12 +28,16 @@ class AboutView: UIView {
     init(frame: CGRect, number: Int) {
         super.init(frame: frame)
         xibSetup()
+        GUISetup()
+        setBulletPointNumber(number)
+
     }
     
     //Called when the view is created via storyboard
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xibSetup()
+        GUISetup()
     }
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
@@ -43,11 +48,24 @@ class AboutView: UIView {
         view.frame = self.bounds
     }
     
+    func GUISetup() {
+        initialCharacterCountSetup()
+        textViewSetup()
+    }
+    
+    func initialCharacterCountSetup() {
+        theCharacterCount.text = "\(AboutViewConstants.initialCharacterCount)"
+    }
+    
+    func setBulletPointNumber(number: Int) {
+        let prefixString = "Bullet Point #"
+        theTitleLabel.text = prefixString + "\(number)"
+    }
 }
 
 //needed to manually create placeholder for a textview
 extension AboutView: UITextViewDelegate {
-    func setTextView() {
+    func textViewSetup() {
         theAutoGrowingTextView.delegate = self
     }
     
@@ -110,5 +128,11 @@ extension AboutView: UITextViewDelegate {
             moveCursorToStart(textView)
             return false
         }
+    }
+    
+    func textViewDidChange(textView: UITextView) {
+        let characterCount = textView.text.characters.count
+        let charactersLeft = AboutViewConstants.initialCharacterCount - characterCount
+        theCharacterCount.text = "\(charactersLeft)"
     }
 }
