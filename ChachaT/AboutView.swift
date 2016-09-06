@@ -66,6 +66,7 @@ class AboutView: UIView {
 extension AboutView: UITextViewDelegate {
     func textViewSetup() {
         theAutoGrowingTextView.delegate = self
+        applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: AboutViewConstants.textViewPlaceholder)
     }
     
     func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)

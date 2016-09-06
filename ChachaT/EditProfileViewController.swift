@@ -13,6 +13,10 @@ import STPopup
 import EZSwiftExtensions
 
 class EditProfileViewController: UIViewController {
+    private struct EditProfileConstants {
+        static let numberOfBulletPoints : Int = 3
+    }
+    
     
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
@@ -23,7 +27,7 @@ class EditProfileViewController: UIViewController {
     
     var thePhotoNumberToChange: Int!
     //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
-    var theBulletPointWasEditedDictionary : [Int : Bool] = [1 : false , 2 : false, 3 : false]
+    var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
     let dataStore = EditProfileDataStore()
     let currentUser = User.currentUser()
     
@@ -48,18 +52,6 @@ class EditProfileViewController: UIViewController {
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
         saveBulletPointsIfEdited()
         dataStore.saveEverything()
-//        currentUser?.fullName = theNameTextField.text
-//        currentUser?.title = theTitleTextField.text
-//        currentUser?.factOne = theFactOneTextField.text
-//        currentUser?.factTwo = theFactTwoTextField.text
-//        currentUser?.factThree = theFactThreeTextField.text
-//        currentUser?.saveInBackgroundWithBlock({ (success, error) in
-//            if success {
-//                self.navigationController?.popViewControllerAnimated(true)
-//            } else {
-//                print(error)
-//            }
-//        })
     }
     
     override func viewDidLoad() {
@@ -68,11 +60,18 @@ class EditProfileViewController: UIViewController {
         bulletPointsSetup()
     }
     
-    //TODO: refactor this by going through subviews, so we don't have to change code if we added another one.
+    override func viewWillAppear(animated: Bool) {
+        bulletPointsSetup()
+    }
+    
     func bulletPointsSetup() {
-        theBulletPointOneView.setImportantInformation(self, bulletPointNumber: 1)
-        theBulletPointTwoView.setImportantInformation(self, bulletPointNumber: 2)
-        theBulletPointThreeView.setImportantInformation(self, bulletPointNumber: 3)
+        for (index, subview) in theStackView.subviews.enumerate() {
+            if let aboutView = subview as? AboutView {
+                let bulletPointNumber = index + 1 //the index starts at 0, but bullet point # starts at 1
+                aboutView.setImportantInformation(self, bulletPointNumber: bulletPointNumber)
+                theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
+            }
+        }
     }
 
     override func didReceiveMemoryWarning() {
@@ -112,7 +111,6 @@ extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
 extension EditProfileViewController: AboutViewDelegate {
     func textHasChanged(bulletPointNumber: Int) {
         theBulletPointWasEditedDictionary[bulletPointNumber] = true
-        print("the text has changed")
     }
     
     func saveBulletPointsIfEdited() {
