@@ -16,7 +16,7 @@ protocol AboutViewDelegate {
 class AboutView: UIView {
     private struct AboutViewConstants {
         static let textViewPlaceholder = "Something about you..."
-        static let initialCharacterCount : Int = 500
+        static let maxCharacterCount : Int = 500
     }
     
     
@@ -51,7 +51,7 @@ class AboutView: UIView {
     }
     
     func initialCharacterCountSetup() {
-        theCharacterCount.text = "\(AboutViewConstants.initialCharacterCount)"
+        theCharacterCount.text = "\(AboutViewConstants.maxCharacterCount)"
     }
     
     func setImportantInformation(delegate: AboutViewDelegate, bulletPointNumber: Int) {
@@ -108,6 +108,10 @@ extension AboutView: UITextViewDelegate {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 // have text, so don't show the placeholder
         {
+            if newLength > AboutViewConstants.maxCharacterCount {
+                //the textview has hit its maximum character count
+                return false
+            }
             // check if the only text is the placeholder and remove it if needed
             // unless they've hit the delete button with the placeholder displayed
             if textView == theAutoGrowingTextView && textView.text == AboutViewConstants.textViewPlaceholder
@@ -131,7 +135,7 @@ extension AboutView: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         let characterCount = textView.text.characters.count
-        let charactersLeft = AboutViewConstants.initialCharacterCount - characterCount
+        let charactersLeft = AboutViewConstants.maxCharacterCount - characterCount
         theCharacterCount.text = "\(charactersLeft)"
     }
     
