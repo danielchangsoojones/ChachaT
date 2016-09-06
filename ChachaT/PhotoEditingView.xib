@@ -5,11 +5,11 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="ProfilePhotoView" customModule="ChachaT" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoEditingView" customModule="ChachaT" customModuleProvider="target">
             <connections>
-                <outlet property="imageView" destination="j1i-M3-vGg" id="7Id-Kz-JO2"/>
-                <outlet property="numberLabel" destination="INc-Yj-93N" id="d8r-4W-JAY"/>
-                <outlet property="view" destination="iN0-l3-epB" id="8Io-KL-lH8"/>
+                <outlet property="theImageView" destination="j1i-M3-vGg" id="azd-Si-fL9"/>
+                <outlet property="theNumberLabel" destination="INc-Yj-93N" id="Hlc-0F-GBP"/>
+                <outlet property="theView" destination="iN0-l3-epB" id="AXc-cX-w94"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>

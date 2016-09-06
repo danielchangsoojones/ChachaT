@@ -85,14 +85,14 @@ class PhotoEditingMasterLayoutView: UIView {
     
     func photoTapped(sender: UIGestureRecognizer) {
         if let photoEditingView = sender.view as? PhotoEditingView {
-            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.imageView.frame.size)
+            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size)
         }
     }
     
     func setNewImage(image: UIImage, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
-            subview.imageView.image = image //should be only one photoEditingView that has any given tag
+            subview.theImageView.image = image //should be only one photoEditingView that has any given tag
         }
     }
     
