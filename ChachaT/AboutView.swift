@@ -9,6 +9,10 @@
 import UIKit
 import MBAutoGrowingTextView
 
+protocol AboutViewDelegate {
+    func textHasChanged(bulletPointNumber: Int)
+}
+
 class AboutView: UIView {
     private struct AboutViewConstants {
         static let textViewPlaceholder = "Something about you..."
@@ -23,15 +27,8 @@ class AboutView: UIView {
     @IBOutlet weak var theCharacterCount: UILabel!
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
     
-    
-    //Called when the view is created programmatically
-    init(frame: CGRect, number: Int) {
-        super.init(frame: frame)
-        xibSetup()
-        GUISetup()
-        setBulletPointNumber(number)
-
-    }
+    var theBulletPointNumber : Int!
+    var delegate : AboutViewDelegate?
     
     //Called when the view is created via storyboard
     required init?(coder aDecoder: NSCoder) {
@@ -57,9 +54,11 @@ class AboutView: UIView {
         theCharacterCount.text = "\(AboutViewConstants.initialCharacterCount)"
     }
     
-    func setBulletPointNumber(number: Int) {
+    func setImportantInformation(delegate: AboutViewDelegate, bulletPointNumber: Int) {
+        self.delegate = delegate
+        self.theBulletPointNumber = bulletPointNumber
         let prefixString = "Bullet Point #"
-        theTitleLabel.text = prefixString + "\(number)"
+        theTitleLabel.text = prefixString + "\(bulletPointNumber)"
     }
 }
 
@@ -134,5 +133,13 @@ extension AboutView: UITextViewDelegate {
         let characterCount = textView.text.characters.count
         let charactersLeft = AboutViewConstants.initialCharacterCount - characterCount
         theCharacterCount.text = "\(charactersLeft)"
+    }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        delegate?.textHasChanged(theBulletPointNumber)
+    }
+    
+    func getCurrentText() -> String {
+        return theAutoGrowingTextView.text
     }
 }

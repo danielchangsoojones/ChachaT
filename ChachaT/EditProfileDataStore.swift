@@ -32,11 +32,17 @@ class EditProfileDataStore {
         if photoNumber == 1 {
             currentUser.profileImage = file
         } else {
-            var suffix = photoNumber.toString
-            suffix.capitalizeFirst()
+            let suffix = photoNumber.toString
             let parseColumnName = prefix + suffix
             currentUser[parseColumnName] = file
         }
+    }
+    
+    func bulletPointWasEdited(text: String, bulletPointNumber: Int) {
+        let prefix = "bulletPoint"
+        let suffix = bulletPointNumber.toString
+        let parseColumnName = prefix + suffix
+        currentUser[parseColumnName] = text
     }
 }
 

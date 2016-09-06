@@ -32,9 +32,9 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
         theSaveButton.enabled = false
         let currentUser = User.currentUser()
         switch factNumber{
-        case .FactOne: currentUser?.factOne = theDescriptionTextView.text
-        case .FactTwo: currentUser?.factTwo = theDescriptionTextView.text
-        case .FactThree: currentUser?.factThree = theDescriptionTextView.text
+        case .FactOne: currentUser?.bulletPoint1 = theDescriptionTextView.text
+        case .FactTwo: currentUser?.bulletPoint2 = theDescriptionTextView.text
+        case .FactThree: currentUser?.bulletPoint3 = theDescriptionTextView.text
         }
         theActivitySpinner.hidden = false
         theActivitySpinner.startAnimating()

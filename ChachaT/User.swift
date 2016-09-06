@@ -17,15 +17,15 @@ class User: PFUser {
     @NSManaged var lowercaseUsername: String?
     @NSManaged var birthDate: NSDate?
     @NSManaged var profileImage: PFFile?
-    @NSManaged var profileImageTwo: PFFile?
-    @NSManaged var profileImageThree: PFFile?
-    @NSManaged var profileImageFour: PFFile?
-    @NSManaged var profileImageFive: PFFile?
-    @NSManaged var profileImageSix: PFFile?
+    @NSManaged var profileImage2: PFFile?
+    @NSManaged var profileImage3: PFFile?
+    @NSManaged var profileImage4: PFFile?
+    @NSManaged var profileImage5: PFFile?
+    @NSManaged var profileImage6: PFFile?
     @NSManaged var title: String?
-    @NSManaged var factOne: String?
-    @NSManaged var factTwo: String?
-    @NSManaged var factThree: String?
+    @NSManaged var bulletPoint1: String?
+    @NSManaged var bulletPoint2: String?
+    @NSManaged var bulletPoint3: String?
     @NSManaged var facebookId : String?
     @NSManaged var location: PFGeoPoint
     var age : Int? {

@@ -15,8 +15,15 @@ import EZSwiftExtensions
 class EditProfileViewController: UIViewController {
     
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
+    @IBOutlet weak var theStackView: UIStackView!
     
-    var photoNumberToChange: Int!
+    @IBOutlet weak var theBulletPointOneView: AboutView!
+    @IBOutlet weak var theBulletPointTwoView: AboutView!
+    @IBOutlet weak var theBulletPointThreeView: AboutView!
+    
+    var thePhotoNumberToChange: Int!
+    //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
+    var theBulletPointWasEditedDictionary : [Int : Bool] = [1 : false , 2 : false, 3 : false]
     let dataStore = EditProfileDataStore()
     let currentUser = User.currentUser()
     
@@ -39,6 +46,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
+        saveBulletPointsIfEdited()
         dataStore.saveEverything()
 //        currentUser?.fullName = theNameTextField.text
 //        currentUser?.title = theTitleTextField.text
@@ -57,6 +65,14 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoLayoutView.delegate = self
+        bulletPointsSetup()
+    }
+    
+    //TODO: refactor this by going through subviews, so we don't have to change code if we added another one.
+    func bulletPointsSetup() {
+        theBulletPointOneView.setImportantInformation(self, bulletPointNumber: 1)
+        theBulletPointTwoView.setImportantInformation(self, bulletPointNumber: 2)
+        theBulletPointThreeView.setImportantInformation(self, bulletPointNumber: 3)
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +84,7 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: PhotoEditingDelegate {
     func photoPressed(photoNumber: Int, imageSize: CGSize) {
-        photoNumberToChange = photoNumber
+        thePhotoNumberToChange = photoNumber
         createBottomPicturePopUp(imageSize)
     }
     
@@ -88,7 +104,31 @@ extension EditProfileViewController: PhotoEditingDelegate {
 
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
-        photoLayoutView.setNewImage(image, photoNumber: photoNumberToChange)
-        dataStore.saveProfileImage(image, photoNumber: photoNumberToChange)
+        photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
+        dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+    }
+}
+
+extension EditProfileViewController: AboutViewDelegate {
+    func textHasChanged(bulletPointNumber: Int) {
+        theBulletPointWasEditedDictionary[bulletPointNumber] = true
+        print("the text has changed")
+    }
+    
+    func saveBulletPointsIfEdited() {
+        for (num, wasEdited) in theBulletPointWasEditedDictionary where wasEdited {
+            if let aboutView = findAboutView(num) {
+                dataStore.bulletPointWasEdited(aboutView.getCurrentText(), bulletPointNumber: num)
+            }
+        }
+    }
+    
+    func findAboutView(num: Int) -> AboutView? {
+        for subview in self.theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView where aboutView.theBulletPointNumber == num {
+                return aboutView
+            }
+        }
+        return nil //shouldn't reach here
     }
 }
