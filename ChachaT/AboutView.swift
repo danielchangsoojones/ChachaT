@@ -19,16 +19,28 @@ class AboutView: UIView {
         static let maxCharacterCount : Int = 500
     }
     
-    
     // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
     @IBOutlet var view: UIView!
     
     @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theCharacterCount: UILabel!
+    @IBOutlet weak var theInputContentView: UIView!
+    //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
     
     var theBulletPointNumber : Int!
     var delegate : AboutViewDelegate?
+    
+    init(title: String) {
+        super.init(frame: CGRectZero)
+        xibSetup()
+        theTitleLabel.text = title
+    }
+    
+    convenience init(title: String, rightTitle: String) {
+        self.init(title: title)
+        theCharacterCount.text = rightTitle
+    }
     
     //Called when the view is created via storyboard
     required init?(coder aDecoder: NSCoder) {

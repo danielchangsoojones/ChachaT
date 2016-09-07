@@ -57,6 +57,7 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoLayoutView.delegate = self
+        theStackView.addArrangedSubview(AboutView())
         bulletPointsSetup()
     }
     
