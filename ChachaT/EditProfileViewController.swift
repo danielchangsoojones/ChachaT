@@ -15,6 +15,7 @@ import EZSwiftExtensions
 class EditProfileViewController: UIViewController {
     private struct EditProfileConstants {
         static let numberOfBulletPoints : Int = 3
+        static let bulletPointPlaceholder = "Something About You..."
     }
     
     
@@ -57,21 +58,16 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoLayoutView.delegate = self
-        theStackView.addArrangedSubview(AboutView(title: "Bullet Point #", rightTitle: "500", placeHolder: "Something About You...", bulletPointNumber: 3, type: .GrowingTextView, delegate: self))
-        bulletPointsSetup()
-    }
-    
-    override func viewWillAppear(animated: Bool) {
         bulletPointsSetup()
     }
     
     func bulletPointsSetup() {
-        for (index, subview) in theStackView.subviews.enumerate() {
-            if let aboutView = subview as? AboutView {
-                let bulletPointNumber = index + 1 //the index starts at 0, but bullet point # starts at 1
-                aboutView.setImportantInformation(self, bulletPointNumber: bulletPointNumber)
-                theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
-            }
+        let titlePrefix = "Bullet Point #"
+        for index in 1...EditProfileConstants.numberOfBulletPoints {
+            let title = titlePrefix + "\(index)"
+            let aboutView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .GrowingTextView, delegate: self)
+            theStackView.addArrangedSubview(aboutView)
+            theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
         }
     }
 

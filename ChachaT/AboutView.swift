@@ -45,11 +45,10 @@ class AboutView: UIView {
         GUISetup(type)
     }
     
-    //for initializing the autogrowingtextField
-    convenience init(title: String, rightTitle: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType, delegate: AboutViewDelegate) {
+    //for initializing the autogrowingtextField (bullet points)
+    convenience init(title: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType, delegate: AboutViewDelegate) {
         self.init(title: title, placeHolder: placeHolder, type: type, delegate: delegate)
         theBulletPointNumber = bulletPointNumber
-        theCharacterCount.text = rightTitle
     }
     
     //Called when the view is created via storyboard
@@ -80,13 +79,6 @@ class AboutView: UIView {
     
     func initialCharacterCountSetup() {
         theCharacterCount.text = "\(AboutViewConstants.maxCharacterCount)"
-    }
-    
-    func setImportantInformation(delegate: AboutViewDelegate, bulletPointNumber: Int) {
-        self.delegate = delegate
-        self.theBulletPointNumber = bulletPointNumber
-        let prefixString = "Bullet Point #"
-        theTitleLabel.text = prefixString + "\(bulletPointNumber)"
     }
 }
 
