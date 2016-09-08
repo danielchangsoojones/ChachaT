@@ -102,7 +102,7 @@
                                 <rect key="frame" x="0.0" y="64" width="600" height="766"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="155-yz-ccQ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="766"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="ChachaT" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="584" height="297"/>
@@ -111,22 +111,8 @@
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR">
-                                                <rect key="frame" x="10" y="315" width="580" height="384"/>
-                                                <subviews>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Qk4-LO-baz" customClass="AboutView" customModule="ChachaT" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="580" height="128"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="fZS-Hd-Cj9" customClass="AboutView" customModule="ChachaT" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="128" width="580" height="128"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="zDc-lg-16d" customClass="AboutView" customModule="ChachaT" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="256" width="580" height="128"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
-                                                </subviews>
+                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR">
+                                                <rect key="frame" x="10" y="315" width="580" height="128"/>
                                             </stackView>
                                         </subviews>
                                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -197,9 +183,6 @@
                     <size key="freeformSize" width="600" height="830"/>
                     <connections>
                         <outlet property="photoLayoutView" destination="ggM-LL-fqe" id="Oyl-gv-X6X"/>
-                        <outlet property="theBulletPointOneView" destination="Qk4-LO-baz" id="a4t-H8-G8a"/>
-                        <outlet property="theBulletPointThreeView" destination="zDc-lg-16d" id="Oa9-Cc-kb9"/>
-                        <outlet property="theBulletPointTwoView" destination="fZS-Hd-Cj9" id="fAm-CS-fjo"/>
                         <outlet property="theStackView" destination="gwk-8T-bhR" id="Xid-jN-aBy"/>
                     </connections>
                 </viewController>

@@ -15,8 +15,13 @@ protocol AboutViewDelegate {
 
 class AboutView: UIView {
     private struct AboutViewConstants {
-        static let textViewPlaceholder = "Something about you..."
         static let maxCharacterCount : Int = 500
+    }
+    
+    enum AboutViewType {
+        case GrowingTextView
+        case NormalTextField
+        case TappableCell
     }
     
     // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
@@ -29,16 +34,21 @@ class AboutView: UIView {
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
     
     var theBulletPointNumber : Int!
+    var thePlaceholderText : String = ""
     var delegate : AboutViewDelegate?
     
-    init(title: String) {
+    init(title: String, placeHolder: String, type: AboutViewType, delegate: AboutViewDelegate) {
         super.init(frame: CGRectZero)
         xibSetup()
+        self.thePlaceholderText = placeHolder
         theTitleLabel.text = title
+        GUISetup(type)
     }
     
-    convenience init(title: String, rightTitle: String) {
-        self.init(title: title)
+    //for initializing the autogrowingtextField
+    convenience init(title: String, rightTitle: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType, delegate: AboutViewDelegate) {
+        self.init(title: title, placeHolder: placeHolder, type: type, delegate: delegate)
+        theBulletPointNumber = bulletPointNumber
         theCharacterCount.text = rightTitle
     }
     
@@ -46,7 +56,6 @@ class AboutView: UIView {
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
         xibSetup()
-        GUISetup()
     }
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
@@ -57,9 +66,16 @@ class AboutView: UIView {
         view.frame = self.bounds
     }
     
-    func GUISetup() {
-        initialCharacterCountSetup()
-        textViewSetup()
+    func GUISetup(type: AboutViewType) {
+        switch type {
+        case .GrowingTextView:
+            initialCharacterCountSetup()
+            autoGrowingTextViewSetup()
+        case .NormalTextField:
+            textFieldSetup()
+        case .TappableCell:
+            break
+        }
     }
     
     func initialCharacterCountSetup() {
@@ -76,9 +92,9 @@ class AboutView: UIView {
 
 //needed to manually create placeholder for a textview
 extension AboutView: UITextViewDelegate {
-    func textViewSetup() {
+    func autoGrowingTextViewSetup() {
         theAutoGrowingTextView.delegate = self
-        applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: AboutViewConstants.textViewPlaceholder)
+        applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: thePlaceholderText)
     }
     
     func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)
@@ -97,7 +113,7 @@ extension AboutView: UITextViewDelegate {
     
     func textViewShouldBeginEditing(aTextView: UITextView) -> Bool
     {
-        if aTextView == theAutoGrowingTextView && aTextView.text == AboutViewConstants.textViewPlaceholder
+        if aTextView == theAutoGrowingTextView && aTextView.text == thePlaceholderText
         {
             // move cursor to start
             moveCursorToStart(aTextView)
@@ -127,7 +143,7 @@ extension AboutView: UITextViewDelegate {
             }
             // check if the only text is the placeholder and remove it if needed
             // unless they've hit the delete button with the placeholder displayed
-            if textView == theAutoGrowingTextView && textView.text == AboutViewConstants.textViewPlaceholder
+            if textView == theAutoGrowingTextView && textView.text == thePlaceholderText
             {
                 if text.utf16.count == 0 // they hit the back button
                 {
@@ -140,7 +156,7 @@ extension AboutView: UITextViewDelegate {
         }
         else  // no text, so show the placeholder
         {
-            applyPlaceholderStyle(textView, placeholderText: AboutViewConstants.textViewPlaceholder)
+            applyPlaceholderStyle(textView, placeholderText: thePlaceholderText)
             moveCursorToStart(textView)
             return false
         }
@@ -160,3 +176,17 @@ extension AboutView: UITextViewDelegate {
         return theAutoGrowingTextView.text
     }
 }
+
+//extension for the normal textField
+extension AboutView : UITextFieldDelegate {
+    func textFieldSetup() {
+        let textField = UITextField()
+        textField.delegate = self
+        textField.placeholder = thePlaceholderText
+        theInputContentView.addSubview(textField)
+        textField.snp_makeConstraints { (make) in
+            make.edges.equalTo(theInputContentView)
+        }
+    }
+}
+
