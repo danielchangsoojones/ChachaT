@@ -29,6 +29,7 @@ class AboutView: UIView {
     //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
     var theTextField: UITextField?
+    var theInnerLabel: UILabel?
     
     var theBulletPointNumber : Int?
     var thePlaceholderText : String = ""
@@ -50,10 +51,13 @@ class AboutView: UIView {
         theBulletPointNumber = bulletPointNumber
     }
     
-    //Called when the view is created via storyboard
+    convenience init(title: String, placeHolder: String, innerText: String?, action: (sender: AboutView) -> (), type: AboutViewType) {
+        self.init(title: title, placeHolder: placeHolder, type: type)
+        tappableCellSetup(innerText, action: action)
+    }
+    
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        xibSetup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
@@ -207,6 +211,27 @@ extension AboutView : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         wasEdited = true
+    }
+}
+
+//tappable cell extension
+extension AboutView {
+    func tappableCellSetup(innerText: String?, action: (sender: AboutView) -> ()) {
+        theInnerLabel = UILabel()
+        theInnerLabel!.text = innerText ?? thePlaceholderText
+        theInputContentView.addSubview(theInnerLabel!)
+        theInnerLabel!.snp_makeConstraints(closure: { (make) in
+            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
+            make.leading.equalTo(theInputContentView).offset(10)
+            make.centerY.equalTo(theInputContentView)
+        })
+        theInputContentView.addTapGesture { (tapped) in
+            action(sender: self)
+        }
+    }
+    
+    func setInnerTitle(text: String) {
+        theInnerLabel?.text = text
     }
 }
 

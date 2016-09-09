@@ -43,6 +43,8 @@ class EditProfileDataStore {
         switch title {
         case EditProfileConstants.fullNameTitle:
             currentUser.fullName = text
+        case EditProfileConstants.schoolOrJobTitle:
+            currentUser.title = text
         default:
             break
         }
@@ -54,6 +56,14 @@ class EditProfileDataStore {
         let parseColumnName = prefix + suffix
         //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
         currentUser[parseColumnName] = text
+    }
+    
+    func saveAge(birthday: NSDate) {
+        currentUser.birthDate = birthday
+        //saving birthdate in two places in database because it will make querying easier with tags.
+        let tag = Tags()
+        tag.birthDate = birthday
+        tag.saveInBackground()
     }
 }
 

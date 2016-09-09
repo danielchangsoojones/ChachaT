@@ -11,6 +11,7 @@ import Parse
 import ParseUI
 import STPopup
 import EZSwiftExtensions
+import Timepiece
 
 struct EditProfileConstants {
     static let numberOfBulletPoints : Int = 3
@@ -18,6 +19,10 @@ struct EditProfileConstants {
     static let bulletPointTitle = "Bullet Point #"
     static let fullNameTitle = "Full Name"
     static let fullNamePlaceholder = "Enter Your Full Name..."
+    static let schoolOrJobTitle = "School/Job Title"
+    static let schoolOrJobPlaceholder = "Enter Your School or Job"
+    static let ageTitle = "Age"
+    static let agePlaceholder = "Tap to enter your birthday..."
 }
 
 class EditProfileViewController: UIViewController {
@@ -35,26 +40,9 @@ class EditProfileViewController: UIViewController {
     let dataStore = EditProfileDataStore()
     let currentUser = User.currentUser()
     
-    @IBAction func theAgeButtonTapped(sender: UIButton) {
-        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
-                (birthday) -> Void in
-                let calendar : NSCalendar = NSCalendar.currentCalendar()
-                let now = NSDate()
-                let ageComponents = calendar.components(.Year,
-                                                        fromDate: birthday,
-                                                        toDate: now,
-                                                        options: [])
-                sender.setTitle("\(ageComponents.year)", forState: .Normal)
-                self.currentUser?.birthDate = birthday
-                //saving birthdate in two places in database because it will make querying easier with tags.
-                let tag = Tags()
-                tag.birthDate = birthday
-                tag.saveInBackground()
-        }
-    }
-    
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
         saveTextIfEdited()
+        resignFirstResponder()
         dataStore.saveEverything()
     }
     
@@ -63,6 +51,8 @@ class EditProfileViewController: UIViewController {
         photoLayoutView.delegate = self
         bulletPointsSetup()
         fullNameViewSetup()
+        schoolOrJobViewSetup()
+        ageViewSetup()
     }
     
     func bulletPointsSetup() {
@@ -78,7 +68,17 @@ class EditProfileViewController: UIViewController {
     func fullNameViewSetup() {
         let fullNameView = AboutView(title: EditProfileConstants.fullNameTitle, placeHolder: EditProfileConstants.fullNamePlaceholder, type: .NormalTextField)
         theStackView.addArrangedSubview(fullNameView)
-    } 
+    }
+    
+    func schoolOrJobViewSetup() {
+        let schoolOrJobView = AboutView(title: EditProfileConstants.schoolOrJobTitle, placeHolder: EditProfileConstants.schoolOrJobPlaceholder, type: .NormalTextField)
+        theStackView.addArrangedSubview(schoolOrJobView)
+    }
+    
+    func ageViewSetup() {
+        let ageView = AboutView(title: EditProfileConstants.ageTitle, placeHolder: EditProfileConstants.agePlaceholder, innerText: nil, action: {(sender: AboutView) in self.ageCellTapped(sender) }, type: .TappableCell)
+        theStackView.addArrangedSubview(ageView)
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -112,6 +112,32 @@ extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
         photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
         dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
     }
+}
+
+//age extension
+extension EditProfileViewController {
+    func ageCellTapped(sender: AboutView) {
+        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
+            (birthday) -> Void in
+            let actualBirthday : NSDate = birthday - 1.day //for some reason, the birthday passed is one day ahead, even though it is entered correctly, so we need to subtract one
+            let age = self.calculateAge(actualBirthday)
+            sender.setInnerTitle("\(age)")
+            self.dataStore.saveAge(actualBirthday)
+        }
+    }
+    
+    func calculateAge(birthday: NSDate) -> Int {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        let ageComponents = calendar.components(.Year,
+                                                fromDate: birthday,
+                                                toDate: now,
+                                                options: [])
+        return ageComponents.year
+    }
+    
+    
+    
 }
 
 extension EditProfileViewController {
