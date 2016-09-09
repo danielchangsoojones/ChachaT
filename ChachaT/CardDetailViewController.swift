@@ -149,13 +149,13 @@ class CardDetailViewController: UIViewController {
         if let age = userOfTheCard?.age {
             theAgeLabel.text = ", " + "\(age)"
         }
-        if let factOne = userOfTheCard?.factOne {
+        if let factOne = userOfTheCard?.bulletPoint1 {
             theFirstBulletText.text = factOne
         }
-        if let factTwo = userOfTheCard?.factTwo {
+        if let factTwo = userOfTheCard?.bulletPoint2 {
             theSecondBulletText.text = factTwo
         }
-        if let factThree = userOfTheCard?.factThree {
+        if let factThree = userOfTheCard?.bulletPoint3 {
             theThirdBulletText.text = factThree
         }
         if questionDetailState == .ProfileViewOnlyMode {

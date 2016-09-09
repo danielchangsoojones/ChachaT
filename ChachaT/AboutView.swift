@@ -11,33 +11,59 @@ import MBAutoGrowingTextView
 
 class AboutView: UIView {
     private struct AboutViewConstants {
-        static let textViewPlaceholder = "Something about you..."
-        static let initialCharacterCount : Int = 500
+        static let maxCharacterCount : Int = 500
+        static let maxTextFieldCharacterCount : Int = 30
     }
     
+    enum AboutViewType {
+        case GrowingTextView
+        case NormalTextField
+        case TappableCell
+        case SegueCell
+    }
     
     // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
     @IBOutlet var view: UIView!
     
     @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theCharacterCount: UILabel!
+    @IBOutlet weak var theInputContentView: UIView!
+    //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
+    var theTextField: UITextField?
+    var theInnerLabel: UILabel?
     
+    var theBulletPointNumber : Int?
+    var thePlaceholderText : String = ""
+    var wasEdited : Bool = false
+    var theType : AboutViewType = .GrowingTextView
     
-    //Called when the view is created programmatically
-    init(frame: CGRect, number: Int) {
-        super.init(frame: frame)
+    init(title: String, placeHolder: String, type: AboutViewType) {
+        super.init(frame: CGRectZero)
         xibSetup()
-        GUISetup()
-        setBulletPointNumber(number)
-
+        self.thePlaceholderText = placeHolder
+        self.theTitleLabel.text = title
+        self.theType = type
+        GUISetup(type)
     }
     
-    //Called when the view is created via storyboard
+    //for initializing the autogrowingtextField (bullet points)
+    convenience init(title: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType) {
+        self.init(title: title, placeHolder: placeHolder, type: type)
+        theBulletPointNumber = bulletPointNumber
+    }
+    
+    //for intializing the tappable cells
+    convenience init(title: String, placeHolder: String, innerText: String?, action: (sender: AboutView) -> (), type: AboutViewType) {
+        self.init(title: title, placeHolder: placeHolder, type: type)
+        tappableCellSetup(innerText, action: action)
+        if type == .SegueCell {
+            segueIndicatorSetup()
+        }
+    }
+    
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        xibSetup()
-        GUISetup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
@@ -48,25 +74,75 @@ class AboutView: UIView {
         view.frame = self.bounds
     }
     
-    func GUISetup() {
-        initialCharacterCountSetup()
-        textViewSetup()
+    func GUISetup(type: AboutViewType) {
+        hideBulletPointComponents(true) //want the autoGrowingTextView to not be shown, unless it is supposed to be
+        switch type {
+        case .GrowingTextView:
+            initialCharacterCountSetup()
+            autoGrowingTextViewSetup()
+            hideBulletPointComponents(false) //it is supposed to be shown
+        case .NormalTextField:
+            textFieldSetup()
+        default:
+            break
+        }
+    }
+    
+    func hideBulletPointComponents(hide: Bool) {
+        theAutoGrowingTextView.hidden = hide
+        theCharacterCount.hidden = hide
     }
     
     func initialCharacterCountSetup() {
-        theCharacterCount.text = "\(AboutViewConstants.initialCharacterCount)"
+        theCharacterCount.text = "\(AboutViewConstants.maxCharacterCount)"
     }
     
-    func setBulletPointNumber(number: Int) {
-        let prefixString = "Bullet Point #"
-        theTitleLabel.text = prefixString + "\(number)"
+    func getType() -> AboutViewType {
+        return theType
+    }
+    
+    func getCurrentText() -> String? {
+        if theAutoGrowingTextView.hidden {
+            if let textField = theTextField where textField.text != nil {
+                return textField.text!
+            }
+        } else {
+            return theAutoGrowingTextView.text
+        }
+        return nil //shouldn't reach here unless they edited the textView to have no text
+    }
+    
+    //Purpose: sees which textfield, textview, or label to change, based upon which ones are not nil/hidden
+    func setCurrentText(text: String) {
+        if theAutoGrowingTextView.hidden {
+            if let textField = theTextField {
+                textField.text = text
+            } else if theInnerLabel != nil {
+                setInnerTitle(text)
+            }
+        } else {
+            theAutoGrowingTextView.text = text
+            applyNonPlaceholderStyle(theAutoGrowingTextView)
+        }
+    }
+    
+    func getTitle() -> String {
+        return theTitleLabel.text ?? ""
     }
 }
 
-//needed to manually create placeholder for a textview
+//extension for the autogrowingTextView
 extension AboutView: UITextViewDelegate {
-    func textViewSetup() {
+    func autoGrowingTextViewSetup() {
         theAutoGrowingTextView.delegate = self
+        applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: thePlaceholderText)
+    }
+    
+    func getBulletPointNumber() -> Int? {
+        if let theBulletPointNumber = theBulletPointNumber {
+            return theBulletPointNumber
+        }
+        return nil
     }
     
     func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)
@@ -85,7 +161,7 @@ extension AboutView: UITextViewDelegate {
     
     func textViewShouldBeginEditing(aTextView: UITextView) -> Bool
     {
-        if aTextView == theAutoGrowingTextView && aTextView.text == AboutViewConstants.textViewPlaceholder
+        if aTextView == theAutoGrowingTextView && aTextView.text == thePlaceholderText
         {
             // move cursor to start
             moveCursorToStart(aTextView)
@@ -109,9 +185,13 @@ extension AboutView: UITextViewDelegate {
         let newLength = textView.text.utf16.count + text.utf16.count - range.length
         if newLength > 0 // have text, so don't show the placeholder
         {
+            if newLength > AboutViewConstants.maxCharacterCount {
+                //the textview has hit its maximum character count
+                return false
+            }
             // check if the only text is the placeholder and remove it if needed
             // unless they've hit the delete button with the placeholder displayed
-            if textView == theAutoGrowingTextView && textView.text == AboutViewConstants.textViewPlaceholder
+            if textView == theAutoGrowingTextView && textView.text == thePlaceholderText
             {
                 if text.utf16.count == 0 // they hit the back button
                 {
@@ -124,7 +204,7 @@ extension AboutView: UITextViewDelegate {
         }
         else  // no text, so show the placeholder
         {
-            applyPlaceholderStyle(textView, placeholderText: AboutViewConstants.textViewPlaceholder)
+            applyPlaceholderStyle(textView, placeholderText: thePlaceholderText)
             moveCursorToStart(textView)
             return false
         }
@@ -132,7 +212,69 @@ extension AboutView: UITextViewDelegate {
     
     func textViewDidChange(textView: UITextView) {
         let characterCount = textView.text.characters.count
-        let charactersLeft = AboutViewConstants.initialCharacterCount - characterCount
+        let charactersLeft = AboutViewConstants.maxCharacterCount - characterCount
         theCharacterCount.text = "\(charactersLeft)"
     }
+    
+    func textViewDidBeginEditing(textView: UITextView) {
+        wasEdited = true
+    }
 }
+
+//extension for the normal textField
+extension AboutView : UITextFieldDelegate {
+    func textFieldSetup() {
+        theTextField = UITextField()
+        theTextField!.delegate = self
+        theTextField!.placeholder = thePlaceholderText
+        theInputContentView.addSubview(theTextField!)
+        theTextField!.snp_makeConstraints { (make) in
+            make.edges.equalTo(theInputContentView)
+        }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        wasEdited = true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= AboutViewConstants.maxTextFieldCharacterCount
+    }
+}
+
+//tappable/segue cell extension
+extension AboutView {
+    func tappableCellSetup(innerText: String?, action: (sender: AboutView) -> ()) {
+        theInnerLabel = UILabel()
+        theInnerLabel!.text = innerText ?? thePlaceholderText
+        theInputContentView.addSubview(theInnerLabel!)
+        theInnerLabel!.snp_makeConstraints(closure: { (make) in
+            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
+            make.leading.equalTo(theInputContentView).offset(10)
+            make.centerY.equalTo(theInputContentView)
+        })
+        theInputContentView.addTapGesture { (tapped) in
+            action(sender: self)
+        }
+    }
+    
+    func segueIndicatorSetup() {
+        let image = UIImage(named: "DropDownUpArrow")
+        let rotatedImage = image?.imageRotatedByDegrees(90, flip: false)
+        let imageView = UIImageView(image: rotatedImage)
+        theInputContentView.addSubview(imageView)
+        imageView.snp_makeConstraints(closure: { (make) in
+            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
+            make.trailing.equalTo(theInputContentView).inset(10)
+            make.centerY.equalTo(theInputContentView)
+        })
+    }
+    
+    func setInnerTitle(text: String) {
+        theInnerLabel?.text = text
+    }
+}
+

@@ -7,56 +7,95 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 import STPopup
 import EZSwiftExtensions
+import Timepiece
+import EFTools
+
+struct EditProfileConstants {
+    static let numberOfBulletPoints : Int = 3
+    static let bulletPointPlaceholder = "Something About You..."
+    static let bulletPointTitle = "Bullet Point #"
+    static let fullNameTitle = "Full Name"
+    static let fullNamePlaceholder = "Enter Your Full Name..."
+    static let schoolOrJobTitle = "School/Job Title"
+    static let schoolOrJobPlaceholder = "Enter Your School or Job"
+    static let ageTitle = "Age"
+    static let agePlaceholder = "Tap to enter your birthday..."
+    static let tagSegueTitle = "Tags"
+    static let tagSeguePlaceholder = "See your tags..."
+}
 
 class EditProfileViewController: UIViewController {
-    
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
+    @IBOutlet weak var theStackView: UIStackView!
     
-    var photoNumberToChange: Int!
-    let dataStore = EditProfileDataStore()
+    @IBOutlet weak var theBulletPointOneView: AboutView!
+    @IBOutlet weak var theBulletPointTwoView: AboutView!
+    @IBOutlet weak var theBulletPointThreeView: AboutView!
+    
+    var thePhotoNumberToChange: Int!
+    var theEditedTextFieldArray : [UIView] = []
+    //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
+    var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
+    var dataStore : EditProfileDataStore!
     let currentUser = User.currentUser()
     
-    @IBAction func theAgeButtonTapped(sender: UIButton) {
-        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
-                (birthday) -> Void in
-                let calendar : NSCalendar = NSCalendar.currentCalendar()
-                let now = NSDate()
-                let ageComponents = calendar.components(.Year,
-                                                        fromDate: birthday,
-                                                        toDate: now,
-                                                        options: [])
-                sender.setTitle("\(ageComponents.year)", forState: .Normal)
-                self.currentUser?.birthDate = birthday
-                //saving birthdate in two places in database because it will make querying easier with tags.
-                let tag = Tags()
-                tag.birthDate = birthday
-                tag.saveInBackground()
-        }
-    }
-    
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
+        saveTextIfEdited()
+        resignFirstResponder()
         dataStore.saveEverything()
-//        currentUser?.fullName = theNameTextField.text
-//        currentUser?.title = theTitleTextField.text
-//        currentUser?.factOne = theFactOneTextField.text
-//        currentUser?.factTwo = theFactTwoTextField.text
-//        currentUser?.factThree = theFactThreeTextField.text
-//        currentUser?.saveInBackgroundWithBlock({ (success, error) in
-//            if success {
-//                self.navigationController?.popViewControllerAnimated(true)
-//            } else {
-//                print(error)
-//            }
-//        })
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         photoLayoutView.delegate = self
+        bulletPointsSetup()
+        fullNameViewSetup()
+        schoolOrJobViewSetup()
+        ageViewSetup()
+        tagPageSegueViewSetup()
+        dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
+    }
+    
+    func dataStoreSetup() {
+        dataStore = EditProfileDataStore(delegate: self)
+        dataStore.loadEverything()
+    }
+    
+    func bulletPointsSetup() {
+        let titlePrefix = EditProfileConstants.bulletPointTitle
+        for index in 1...EditProfileConstants.numberOfBulletPoints {
+            let title = titlePrefix + "\(index)"
+            let bulletPointView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .GrowingTextView)
+            theStackView.addArrangedSubview(bulletPointView)
+            theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
+        }
+    }
+    
+    func fullNameViewSetup() {
+        let fullNameView = AboutView(title: EditProfileConstants.fullNameTitle, placeHolder: EditProfileConstants.fullNamePlaceholder, type: .NormalTextField)
+        theStackView.addArrangedSubview(fullNameView)
+    }
+    
+    func schoolOrJobViewSetup() {
+        let schoolOrJobView = AboutView(title: EditProfileConstants.schoolOrJobTitle, placeHolder: EditProfileConstants.schoolOrJobPlaceholder, type: .NormalTextField)
+        theStackView.addArrangedSubview(schoolOrJobView)
+    }
+    
+    func ageViewSetup() {
+        //TODO: make
+        let ageView = AboutView(title: EditProfileConstants.ageTitle, placeHolder: EditProfileConstants.agePlaceholder, innerText: nil, action: { (sender) in
+            self.ageCellTapped(sender)
+            }, type: .TappableCell)
+        theStackView.addArrangedSubview(ageView)
+    }
+    
+    func tagPageSegueViewSetup() {
+        let tagSegueView = AboutView(title: EditProfileConstants.tagSegueTitle, placeHolder: EditProfileConstants.tagSeguePlaceholder, innerText: nil, action: { (sender) in
+            self.performSegueWithIdentifier(.EditProfileToAddingTagsSegue, sender: nil)
+            }, type: .SegueCell)
+        theStackView.addArrangedSubview(tagSegueView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -68,7 +107,7 @@ class EditProfileViewController: UIViewController {
 
 extension EditProfileViewController: PhotoEditingDelegate {
     func photoPressed(photoNumber: Int, imageSize: CGSize) {
-        photoNumberToChange = photoNumber
+        thePhotoNumberToChange = photoNumber
         createBottomPicturePopUp(imageSize)
     }
     
@@ -88,7 +127,84 @@ extension EditProfileViewController: PhotoEditingDelegate {
 
 extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     func passImage(image: UIImage) {
-        photoLayoutView.setNewImage(image, photoNumber: photoNumberToChange)
-        dataStore.saveProfileImage(image, photoNumber: photoNumberToChange)
+        photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
+        dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+    }
+}
+
+//age extension
+extension EditProfileViewController {
+    func ageCellTapped(sender: AboutView) {
+        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
+            (birthday) -> Void in
+            let actualBirthday : NSDate = birthday - 1.day //for some reason, the birthday passed is one day ahead, even though it is entered correctly, so we need to subtract one
+            let age = self.calculateAge(actualBirthday)
+            sender.setInnerTitle("\(age)")
+            self.dataStore.saveAge(actualBirthday)
+        }
+    }
+    
+    func calculateAge(birthday: NSDate) -> Int {
+        let calendar : NSCalendar = NSCalendar.currentCalendar()
+        let now = NSDate()
+        let ageComponents = calendar.components(.Year,
+                                                fromDate: birthday,
+                                                toDate: now,
+                                                options: [])
+        return ageComponents.year
+    }
+}
+
+extension EditProfileViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case EditProfileToAddingTagsSegue
+    }
+}
+
+extension EditProfileViewController : EditProfileDataStoreDelegate {
+    func loadBulletPoint(text: String, num: Int) {
+        let prefix = EditProfileConstants.bulletPointTitle
+        let suffix = num.toString
+        let title = prefix + suffix
+        loadText(text, title: title)
+    }
+    
+    func loadProfileImage(file: AnyObject, num: Int) {
+        photoLayoutView.setNewImageFromFile(file, photoNumber: num)
+    }
+    
+    func loadText(text: String, title: String) {
+        let aboutView = findAboutView(title)
+        aboutView?.setCurrentText(text)
+    }
+    
+    func findAboutView(title: String) -> AboutView? {
+        for subview in theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView where aboutView.getTitle() == title {
+                return aboutView
+            }
+        }
+        return nil //didn't find a matching aboutView
+    }
+    
+    func saveTextIfEdited() {
+        for subview in theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView where aboutView.wasEdited {
+                //this view has been edited, so we need to save it
+                if let text = aboutView.getCurrentText() {
+                    switch aboutView.theType {
+                    case .GrowingTextView:
+                        if let bulletPointNumber = aboutView.getBulletPointNumber() {
+                            dataStore.bulletPointWasEdited(text, bulletPointNumber: bulletPointNumber)
+                        }
+                    case .NormalTextField:
+                        dataStore.textFieldWasEdited(text, title: aboutView.theTitleLabel.text!)
+                    default:
+                        break
+                    }
+                }
+            }
+        }
     }
 }
