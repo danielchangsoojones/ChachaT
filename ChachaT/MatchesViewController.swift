@@ -11,6 +11,7 @@ import Parse
 
 class MatchesViewController: UIViewController {
     
+    @IBOutlet weak var theTableView: UITableView!
     var matchArray : [Match] = []
     
     //go to messages page
@@ -28,7 +29,10 @@ class MatchesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        matchesQuery()
+        let view = UIView(frame: CGRect(x: 0, y: 0, w: 200, h: 200))
+        view.backgroundColor = UIColor.blueColor()
+        theTableView.tableHeaderView = view
+//        matchesQuery()
         // Do any additional setup after loading the view.
     }
 
@@ -55,5 +59,31 @@ class MatchesViewController: UIViewController {
             }
         })
     }
+
+}
+
+extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 100
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return 50
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        let view = UIView(frame: CGRect(x: 0, y: 0, w: 300, h: 300))
+        view.backgroundColor = UIColor.yellowColor()
+        return view
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let currentRow = indexPath.row
+        let cell = UITableViewCell()
+        cell.textLabel?.text = currentRow.toString
+    
+        return cell
+    }
+    
 
 }

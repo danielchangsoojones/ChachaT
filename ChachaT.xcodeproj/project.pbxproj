@@ -88,6 +88,7 @@
 		92B8DF371CE9359B00AFA518 /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */; };
 		92B8DF391CE935AA00AFA518 /* libz.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF381CE935AA00AFA518 /* libz.tbd */; };
 		92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */; };
+		92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB4F1D83510E00E05C05 /* Matches.storyboard */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -181,6 +182,7 @@
 		92B8DF361CE9359B00AFA518 /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		92B8DF381CE935AA00AFA518 /* libz.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libz.tbd; path = usr/lib/libz.tbd; sourceTree = SDKROOT; };
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
+		92BCEB4F1D83510E00E05C05 /* Matches.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Matches.storyboard; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -261,6 +263,7 @@
 		920BF82C1D431C5E00104842 /* Matching */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB4F1D83510E00E05C05 /* Matches.storyboard */,
 				920BF8331D432E2500104842 /* MatchesViewController.swift */,
 				920BF8311D431CD000104842 /* MatchDataStore.swift */,
 			);
@@ -678,6 +681,7 @@
 				928819461D286CA8000A8E04 /* Profile.storyboard in Resources */,
 				926108331CE25C22009F3E86 /* woosh.wav in Resources */,
 				9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */,
+				92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
 				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
