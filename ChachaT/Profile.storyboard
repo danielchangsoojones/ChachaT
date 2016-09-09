@@ -89,7 +89,7 @@
         <!--Edit Profile-->
         <scene sceneID="Dhh-ST-gQG">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" id="Si2-TA-hhX" customClass="EditProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="Si2-TA-hhX" customClass="EditProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D5t-g4-nOf"/>
                         <viewControllerLayoutGuide type="bottom" id="zdl-Zf-LL4"/>

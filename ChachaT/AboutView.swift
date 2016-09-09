@@ -12,6 +12,7 @@ import MBAutoGrowingTextView
 class AboutView: UIView {
     private struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
+        static let maxTextFieldCharacterCount : Int = 30
     }
     
     enum AboutViewType {
@@ -234,6 +235,13 @@ extension AboutView : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(textField: UITextField) {
         wasEdited = true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        guard let text = textField.text else { return true }
+        
+        let newLength = text.characters.count + string.characters.count - range.length
+        return newLength <= AboutViewConstants.maxTextFieldCharacterCount
     }
 }
 
