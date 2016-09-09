@@ -106,7 +106,6 @@
                                         <subviews>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="ChachaT" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="584" height="297"/>
-                                                <color key="backgroundColor" red="1" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
                                                 </constraints>
@@ -115,7 +114,7 @@
                                                 <rect key="frame" x="10" y="315" width="580" height="128"/>
                                             </stackView>
                                         </subviews>
-                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="28x-9I-4UJ"/>
                                             <constraint firstAttribute="bottom" secondItem="gwk-8T-bhR" secondAttribute="bottom" constant="67" id="JS4-zR-K33"/>
@@ -153,7 +152,6 @@
                                 </variation>
                             </scrollView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="u1t-Ch-jFt" firstAttribute="height" secondItem="ozl-f8-GDF" secondAttribute="height" id="8ds-f3-zZG"/>
                             <constraint firstItem="u1t-Ch-jFt" firstAttribute="top" secondItem="D5t-g4-nOf" secondAttribute="bottom" id="J1F-ZS-nVF"/>
