@@ -46,7 +46,9 @@ class SuperTagViewController: UIViewController {
     func setDropDownMenu() {
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
-        dropDownMenu = ChachaDropDownMenu(containerView: (navigationController?.view)!, popDownOriginY: navigationBarHeight! + statusBarHeight, delegate: self)
+        if let navigationBarHeight = navigationBarHeight {
+            dropDownMenu = ChachaDropDownMenu(containerView: (navigationController?.view)!, popDownOriginY: navigationBarHeight + statusBarHeight, delegate: self)
+        }
     }
     
     override func didReceiveMemoryWarning() {

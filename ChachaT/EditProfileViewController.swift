@@ -7,11 +7,10 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 import STPopup
 import EZSwiftExtensions
 import Timepiece
+import EFTools
 
 struct EditProfileConstants {
     static let numberOfBulletPoints : Int = 3
@@ -23,6 +22,8 @@ struct EditProfileConstants {
     static let schoolOrJobPlaceholder = "Enter Your School or Job"
     static let ageTitle = "Age"
     static let agePlaceholder = "Tap to enter your birthday..."
+    static let tagSegueTitle = "Tags"
+    static let tagSeguePlaceholder = "See your tags..."
 }
 
 class EditProfileViewController: UIViewController {
@@ -53,6 +54,7 @@ class EditProfileViewController: UIViewController {
         fullNameViewSetup()
         schoolOrJobViewSetup()
         ageViewSetup()
+        tagPageSegueViewSetup()
     }
     
     func bulletPointsSetup() {
@@ -76,8 +78,18 @@ class EditProfileViewController: UIViewController {
     }
     
     func ageViewSetup() {
-        let ageView = AboutView(title: EditProfileConstants.ageTitle, placeHolder: EditProfileConstants.agePlaceholder, innerText: nil, action: {(sender: AboutView) in self.ageCellTapped(sender) }, type: .TappableCell)
+        //TODO: make
+        let ageView = AboutView(title: EditProfileConstants.ageTitle, placeHolder: EditProfileConstants.agePlaceholder, innerText: nil, action: { (sender) in
+            self.ageCellTapped(sender)
+            }, type: .TappableCell)
         theStackView.addArrangedSubview(ageView)
+    }
+    
+    func tagPageSegueViewSetup() {
+        let tagSegueView = AboutView(title: EditProfileConstants.tagSegueTitle, placeHolder: EditProfileConstants.tagSeguePlaceholder, innerText: nil, action: { (sender) in
+            self.performSegueWithIdentifier(.EditProfileToAddingTagsSegue, sender: nil)
+            }, type: .SegueCell)
+        theStackView.addArrangedSubview(tagSegueView)
     }
 
     override func didReceiveMemoryWarning() {
@@ -135,10 +147,19 @@ extension EditProfileViewController {
                                                 options: [])
         return ageComponents.year
     }
-    
-    
-    
 }
+
+extension EditProfileViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case EditProfileToAddingTagsSegue
+    }
+    
+    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    //        switch segueIdentifierForSegue(segue) {
+    //    }
+}
+
 
 extension EditProfileViewController {
     func saveTextIfEdited() {

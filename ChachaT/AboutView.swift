@@ -18,6 +18,7 @@ class AboutView: UIView {
         case GrowingTextView
         case NormalTextField
         case TappableCell
+        case SegueCell
     }
     
     // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
@@ -51,9 +52,13 @@ class AboutView: UIView {
         theBulletPointNumber = bulletPointNumber
     }
     
+    //for intializing the tappable cells
     convenience init(title: String, placeHolder: String, innerText: String?, action: (sender: AboutView) -> (), type: AboutViewType) {
         self.init(title: title, placeHolder: placeHolder, type: type)
         tappableCellSetup(innerText, action: action)
+        if type == .SegueCell {
+            segueIndicatorSetup()
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -77,7 +82,7 @@ class AboutView: UIView {
             hideBulletPointComponents(false) //it is supposed to be shown
         case .NormalTextField:
             textFieldSetup()
-        case .TappableCell:
+        default:
             break
         }
     }
@@ -214,7 +219,7 @@ extension AboutView : UITextFieldDelegate {
     }
 }
 
-//tappable cell extension
+//tappable/segue cell extension
 extension AboutView {
     func tappableCellSetup(innerText: String?, action: (sender: AboutView) -> ()) {
         theInnerLabel = UILabel()
@@ -228,6 +233,18 @@ extension AboutView {
         theInputContentView.addTapGesture { (tapped) in
             action(sender: self)
         }
+    }
+    
+    func segueIndicatorSetup() {
+        let image = UIImage(named: "DropDownUpArrow")
+        let rotatedImage = image?.imageRotatedByDegrees(90, flip: false)
+        let imageView = UIImageView(image: rotatedImage)
+        theInputContentView.addSubview(imageView)
+        imageView.snp_makeConstraints(closure: { (make) in
+            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
+            make.trailing.equalTo(theInputContentView).inset(10)
+            make.centerY.equalTo(theInputContentView)
+        })
     }
     
     func setInnerTitle(text: String) {

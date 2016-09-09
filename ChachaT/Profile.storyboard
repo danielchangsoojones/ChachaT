@@ -184,11 +184,20 @@
                     <connections>
                         <outlet property="photoLayoutView" destination="ggM-LL-fqe" id="Oyl-gv-X6X"/>
                         <outlet property="theStackView" destination="gwk-8T-bhR" id="Xid-jN-aBy"/>
+                        <segue destination="Dim-SF-KDG" kind="show" identifier="EditProfileToAddingTagsSegue" id="ToD-It-t0K"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sO-nf-LbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1372" y="1242"/>
+            <point key="canvasLocation" x="1364" y="1388"/>
+        </scene>
+        <!--AddingTagsViewController-->
+        <scene sceneID="i0z-1y-9bf">
+            <objects>
+                <viewControllerPlaceholder storyboardName="AddingTags" referencedIdentifier="AddingTagsViewController" id="Dim-SF-KDG" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="VVr-Qj-o86" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1903.5" y="1334"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZoA-oy-tlM">
