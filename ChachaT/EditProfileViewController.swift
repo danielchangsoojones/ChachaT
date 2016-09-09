@@ -38,7 +38,7 @@ class EditProfileViewController: UIViewController {
     var theEditedTextFieldArray : [UIView] = []
     //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
     var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
-    let dataStore = EditProfileDataStore()
+    var dataStore : EditProfileDataStore!
     let currentUser = User.currentUser()
     
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
@@ -55,6 +55,12 @@ class EditProfileViewController: UIViewController {
         schoolOrJobViewSetup()
         ageViewSetup()
         tagPageSegueViewSetup()
+        dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
+    }
+    
+    func dataStoreSetup() {
+        dataStore = EditProfileDataStore(delegate: self)
+        dataStore.loadEverything()
     }
     
     func bulletPointsSetup() {
@@ -154,14 +160,34 @@ extension EditProfileViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case EditProfileToAddingTagsSegue
     }
-    
-    //    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-    //        switch segueIdentifierForSegue(segue) {
-    //    }
 }
 
-
-extension EditProfileViewController {
+extension EditProfileViewController : EditProfileDataStoreDelegate {
+    func loadBulletPoint(text: String, num: Int) {
+        let prefix = EditProfileConstants.bulletPointTitle
+        let suffix = num.toString
+        let title = prefix + suffix
+        loadText(text, title: title)
+    }
+    
+    func loadProfileImage(file: AnyObject, num: Int) {
+        photoLayoutView.setNewImageFromFile(file, photoNumber: num)
+    }
+    
+    func loadText(text: String, title: String) {
+        let aboutView = findAboutView(title)
+        aboutView?.setCurrentText(text)
+    }
+    
+    func findAboutView(title: String) -> AboutView? {
+        for subview in theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView where aboutView.getTitle() == title {
+                return aboutView
+            }
+        }
+        return nil //didn't find a matching aboutView
+    }
+    
     func saveTextIfEdited() {
         for subview in theStackView.arrangedSubviews {
             if let aboutView = subview as? AboutView where aboutView.wasEdited {

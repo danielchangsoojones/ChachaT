@@ -99,6 +99,35 @@ class AboutView: UIView {
     func getType() -> AboutViewType {
         return theType
     }
+    
+    func getCurrentText() -> String? {
+        if theAutoGrowingTextView.hidden {
+            if let textField = theTextField where textField.text != nil {
+                return textField.text!
+            }
+        } else {
+            return theAutoGrowingTextView.text
+        }
+        return nil //shouldn't reach here unless they edited the textView to have no text
+    }
+    
+    //Purpose: sees which textfield, textview, or label to change, based upon which ones are not nil/hidden
+    func setCurrentText(text: String) {
+        if theAutoGrowingTextView.hidden {
+            if let textField = theTextField {
+                textField.text = text
+            } else if theInnerLabel != nil {
+                setInnerTitle(text)
+            }
+        } else {
+            theAutoGrowingTextView.text = text
+            applyNonPlaceholderStyle(theAutoGrowingTextView)
+        }
+    }
+    
+    func getTitle() -> String {
+        return theTitleLabel.text ?? ""
+    }
 }
 
 //extension for the autogrowingTextView
@@ -188,17 +217,6 @@ extension AboutView: UITextViewDelegate {
     
     func textViewDidBeginEditing(textView: UITextView) {
         wasEdited = true
-    }
-    
-    func getCurrentText() -> String? {
-        if theAutoGrowingTextView.hidden {
-            if let textField = theTextField where textField.text != nil {
-                return textField.text!
-            }
-        } else {
-            return theAutoGrowingTextView.text
-        }
-        return nil //shouldn't reach here unless they edited the textView to have no text
     }
 }
 
