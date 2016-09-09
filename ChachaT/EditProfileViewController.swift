@@ -12,13 +12,15 @@ import ParseUI
 import STPopup
 import EZSwiftExtensions
 
+struct EditProfileConstants {
+    static let numberOfBulletPoints : Int = 3
+    static let bulletPointPlaceholder = "Something About You..."
+    static let bulletPointTitle = "Bullet Point #"
+    static let fullNameTitle = "Full Name"
+    static let fullNamePlaceholder = "Enter Your Full Name..."
+}
+
 class EditProfileViewController: UIViewController {
-    private struct EditProfileConstants {
-        static let numberOfBulletPoints : Int = 3
-        static let bulletPointPlaceholder = "Something About You..."
-    }
-    
-    
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
     
@@ -27,6 +29,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var theBulletPointThreeView: AboutView!
     
     var thePhotoNumberToChange: Int!
+    var theEditedTextFieldArray : [UIView] = []
     //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
     var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
     let dataStore = EditProfileDataStore()
@@ -51,7 +54,7 @@ class EditProfileViewController: UIViewController {
     }
     
     @IBAction func theSaveButtonPressed(sender: UIBarButtonItem) {
-        saveBulletPointsIfEdited()
+        saveTextIfEdited()
         dataStore.saveEverything()
     }
     
@@ -59,17 +62,23 @@ class EditProfileViewController: UIViewController {
         super.viewDidLoad()
         photoLayoutView.delegate = self
         bulletPointsSetup()
+        fullNameViewSetup()
     }
     
     func bulletPointsSetup() {
-        let titlePrefix = "Bullet Point #"
+        let titlePrefix = EditProfileConstants.bulletPointTitle
         for index in 1...EditProfileConstants.numberOfBulletPoints {
             let title = titlePrefix + "\(index)"
-            let aboutView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .GrowingTextView, delegate: self)
-            theStackView.addArrangedSubview(aboutView)
+            let bulletPointView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .GrowingTextView)
+            theStackView.addArrangedSubview(bulletPointView)
             theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
         }
     }
+    
+    func fullNameViewSetup() {
+        let fullNameView = AboutView(title: EditProfileConstants.fullNameTitle, placeHolder: EditProfileConstants.fullNamePlaceholder, type: .NormalTextField)
+        theStackView.addArrangedSubview(fullNameView)
+    } 
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -105,25 +114,24 @@ extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
     }
 }
 
-extension EditProfileViewController: AboutViewDelegate {
-    func textHasChanged(bulletPointNumber: Int) {
-        theBulletPointWasEditedDictionary[bulletPointNumber] = true
-    }
-    
-    func saveBulletPointsIfEdited() {
-        for (num, wasEdited) in theBulletPointWasEditedDictionary where wasEdited {
-            if let aboutView = findAboutView(num) {
-                dataStore.bulletPointWasEdited(aboutView.getCurrentText(), bulletPointNumber: num)
+extension EditProfileViewController {
+    func saveTextIfEdited() {
+        for subview in theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView where aboutView.wasEdited {
+                //this view has been edited, so we need to save it
+                if let text = aboutView.getCurrentText() {
+                    switch aboutView.theType {
+                    case .GrowingTextView:
+                        if let bulletPointNumber = aboutView.getBulletPointNumber() {
+                            dataStore.bulletPointWasEdited(text, bulletPointNumber: bulletPointNumber)
+                        }
+                    case .NormalTextField:
+                        dataStore.textFieldWasEdited(text, title: aboutView.theTitleLabel.text!)
+                    default:
+                        break
+                    }
+                }
             }
         }
-    }
-    
-    func findAboutView(num: Int) -> AboutView? {
-        for subview in self.theStackView.arrangedSubviews {
-            if let aboutView = subview as? AboutView where aboutView.theBulletPointNumber == num {
-                return aboutView
-            }
-        }
-        return nil //shouldn't reach here
     }
 }

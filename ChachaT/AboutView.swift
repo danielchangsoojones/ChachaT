@@ -9,10 +9,6 @@
 import UIKit
 import MBAutoGrowingTextView
 
-protocol AboutViewDelegate {
-    func textHasChanged(bulletPointNumber: Int)
-}
-
 class AboutView: UIView {
     private struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
@@ -32,22 +28,25 @@ class AboutView: UIView {
     @IBOutlet weak var theInputContentView: UIView!
     //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
+    var theTextField: UITextField?
     
-    var theBulletPointNumber : Int!
+    var theBulletPointNumber : Int?
     var thePlaceholderText : String = ""
-    var delegate : AboutViewDelegate?
+    var wasEdited : Bool = false
+    var theType : AboutViewType = .GrowingTextView
     
-    init(title: String, placeHolder: String, type: AboutViewType, delegate: AboutViewDelegate) {
+    init(title: String, placeHolder: String, type: AboutViewType) {
         super.init(frame: CGRectZero)
         xibSetup()
         self.thePlaceholderText = placeHolder
-        theTitleLabel.text = title
+        self.theTitleLabel.text = title
+        self.theType = type
         GUISetup(type)
     }
     
     //for initializing the autogrowingtextField (bullet points)
-    convenience init(title: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType, delegate: AboutViewDelegate) {
-        self.init(title: title, placeHolder: placeHolder, type: type, delegate: delegate)
+    convenience init(title: String, placeHolder: String, bulletPointNumber: Int, type: AboutViewType) {
+        self.init(title: title, placeHolder: placeHolder, type: type)
         theBulletPointNumber = bulletPointNumber
     }
     
@@ -66,10 +65,12 @@ class AboutView: UIView {
     }
     
     func GUISetup(type: AboutViewType) {
+        hideBulletPointComponents(true) //want the autoGrowingTextView to not be shown, unless it is supposed to be
         switch type {
         case .GrowingTextView:
             initialCharacterCountSetup()
             autoGrowingTextViewSetup()
+            hideBulletPointComponents(false) //it is supposed to be shown
         case .NormalTextField:
             textFieldSetup()
         case .TappableCell:
@@ -77,16 +78,32 @@ class AboutView: UIView {
         }
     }
     
+    func hideBulletPointComponents(hide: Bool) {
+        theAutoGrowingTextView.hidden = hide
+        theCharacterCount.hidden = hide
+    }
+    
     func initialCharacterCountSetup() {
         theCharacterCount.text = "\(AboutViewConstants.maxCharacterCount)"
     }
+    
+    func getType() -> AboutViewType {
+        return theType
+    }
 }
 
-//needed to manually create placeholder for a textview
+//extension for the autogrowingTextView
 extension AboutView: UITextViewDelegate {
     func autoGrowingTextViewSetup() {
         theAutoGrowingTextView.delegate = self
         applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: thePlaceholderText)
+    }
+    
+    func getBulletPointNumber() -> Int? {
+        if let theBulletPointNumber = theBulletPointNumber {
+            return theBulletPointNumber
+        }
+        return nil
     }
     
     func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)
@@ -161,24 +178,35 @@ extension AboutView: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(textView: UITextView) {
-        delegate?.textHasChanged(theBulletPointNumber)
+        wasEdited = true
     }
     
-    func getCurrentText() -> String {
-        return theAutoGrowingTextView.text
+    func getCurrentText() -> String? {
+        if theAutoGrowingTextView.hidden {
+            if let textField = theTextField where textField.text != nil {
+                return textField.text!
+            }
+        } else {
+            return theAutoGrowingTextView.text
+        }
+        return nil //shouldn't reach here unless they edited the textView to have no text
     }
 }
 
 //extension for the normal textField
 extension AboutView : UITextFieldDelegate {
     func textFieldSetup() {
-        let textField = UITextField()
-        textField.delegate = self
-        textField.placeholder = thePlaceholderText
-        theInputContentView.addSubview(textField)
-        textField.snp_makeConstraints { (make) in
+        theTextField = UITextField()
+        theTextField!.delegate = self
+        theTextField!.placeholder = thePlaceholderText
+        theInputContentView.addSubview(theTextField!)
+        theTextField!.snp_makeConstraints { (make) in
             make.edges.equalTo(theInputContentView)
         }
+    }
+    
+    func textFieldDidBeginEditing(textField: UITextField) {
+        wasEdited = true
     }
 }
 

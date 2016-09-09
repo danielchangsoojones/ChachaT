@@ -34,7 +34,17 @@ class EditProfileDataStore {
         } else {
             let suffix = photoNumber.toString
             let parseColumnName = prefix + suffix
+            //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
             currentUser[parseColumnName] = file
+        }
+    }
+    
+    func textFieldWasEdited(text: String, title: String) {
+        switch title {
+        case EditProfileConstants.fullNameTitle:
+            currentUser.fullName = text
+        default:
+            break
         }
     }
     
@@ -42,6 +52,7 @@ class EditProfileDataStore {
         let prefix = "bulletPoint"
         let suffix = bulletPointNumber.toString
         let parseColumnName = prefix + suffix
+        //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
         currentUser[parseColumnName] = text
     }
 }
