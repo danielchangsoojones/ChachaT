@@ -9,6 +9,10 @@
 import UIKit
 
 class ScrollingMatchesTableViewCell: UITableViewCell {
+    private struct ScrollingMatchesConstants {
+        static let circleRatioToCell : CGFloat = 0.2
+    }
+    
     
     init() {
         //TODO: put the reuse identifier in a global place
@@ -26,7 +30,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         matchesScrollView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
-        let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * 0.2, h: self.frame.height)
+        let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
         let circle = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
         let circleTwo = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
         let label = UILabel()
