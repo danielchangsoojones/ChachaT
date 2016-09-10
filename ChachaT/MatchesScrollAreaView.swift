@@ -17,11 +17,53 @@ class MatchesScrollAreaView: UIView {
     @IBOutlet var view: UIView!
     
     @IBOutlet weak var theStackView: UIStackView!
+    var scrollView : UIScrollView = UIScrollView(frame: CGRect(x: 0,y: 0,width: 600, height: 100))
+    var contentView : UIView = UIView()
+    var stackView : UIStackView = UIStackView()
     
     init() {
         super.init(frame: CGRectZero)
-        xibSetup()
-        addMatchView("Daniel", imageFile: User.currentUser()!.profileImage!)
+        addScrollView()
+    }
+    
+    func addScrollView() {
+        self.addSubview(scrollView)
+        scrollView.backgroundColor = UIColor.blueColor()
+        addContentView()
+        scrollView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
+    }
+    
+    func addContentView() {
+        scrollView.addSubview(contentView)
+        contentView.backgroundColor = UIColor.redColor()
+        addStackView()
+        contentView.snp_makeConstraints { (make) in
+            make.edges.equalTo(scrollView)
+            make.height.equalTo(self)
+        }
+    }
+    
+    func addStackView() {
+        contentView.addSubview(stackView)
+        addLabel()
+        stackView.snp_makeConstraints { (make) in
+            make.leading.top.bottom.trailing.equalTo(contentView)
+        }
+    }
+
+    func addLabel() {
+        let label = UILabel()
+        label.text = "butthole5"
+        let labelf = UILabel()
+        labelf.text = "butthole7"
+        let labelg = UILabel()
+        labelg.text = "butthole7jaklsdjfalsdjfl;ad asdkjfas;jdfklsajdf dsalkjflasjdf;lkas saldkjfasdljfkl;asjdfkl; salkdjfl;asjk"
+        stackView.addArrangedSubview(label)
+        stackView.addArrangedSubview(labelg)
+        stackView.addArrangedSubview(labelf)
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,7 +81,7 @@ class MatchesScrollAreaView: UIView {
     
     func addMatchView(name: String, imageFile: AnyObject) {
         let circleProfileView = CircleProfileView(name: name, circleViewSize: MatchesScrollConstants.circleViewSize, imageFile: imageFile)
-        theStackView.addArrangedSubview(circleProfileView)
+        stackView.addArrangedSubview(circleProfileView)
     }
 
 }
