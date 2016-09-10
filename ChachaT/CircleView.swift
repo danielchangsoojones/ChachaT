@@ -11,11 +11,11 @@ import Foundation
 class CircleView : UIView {
     var theImageView = UIImageView()
     
-    init(file: AnyObject, cornerRadius: CGFloat) {
+    init(file: AnyObject, diameter: CGFloat) {
         super.init(frame: CGRectZero)
         theImageView.loadFromFile(file)
         imageViewSetup()
-        makeCircular(theImageView, cornerRadius: cornerRadius)
+        makeCircular(theImageView, diameter: diameter)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -29,8 +29,8 @@ class CircleView : UIView {
         }
     }
     
-    func makeCircular(view: UIView, cornerRadius: CGFloat) {
-        theImageView.setCornerRadius(radius: cornerRadius)
+    func makeCircular(view: UIView, diameter: CGFloat) {
+        theImageView.setCornerRadius(radius: diameter / 2)
         theImageView.clipsToBounds = true
     }
 }

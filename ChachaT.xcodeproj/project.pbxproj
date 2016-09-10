@@ -456,6 +456,7 @@
 		9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB601D847F3A00E05C05 /* Circle Views */,
 				92BCEB5F1D847C4000E05C05 /* Scroll Views */,
 				926108581CEA11B9009F3E86 /* Alert.swift */,
 				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
@@ -611,7 +612,6 @@
 			children = (
 				92BCEB521D8366DD00E05C05 /* Tableview Cells */,
 				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
-				92BCEB591D837F7400E05C05 /* CircleView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -630,6 +630,14 @@
 				92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */,
 			);
 			name = "Scroll Views";
+			sourceTree = "<group>";
+		};
+		92BCEB601D847F3A00E05C05 /* Circle Views */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB591D837F7400E05C05 /* CircleView.swift */,
+			);
+			name = "Circle Views";
 			sourceTree = "<group>";
 		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
