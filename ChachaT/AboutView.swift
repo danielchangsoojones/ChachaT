@@ -62,6 +62,7 @@ class AboutView: UIView {
         }
     }
     
+    //use this to initialize from storyboard, but we haven't needed to do that
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

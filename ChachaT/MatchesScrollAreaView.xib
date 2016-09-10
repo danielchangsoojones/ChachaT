@@ -5,7 +5,12 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="MatchesScrollAreaView" customModule="ChachaT" customModuleProvider="target">
+            <connections>
+                <outlet property="theStackView" destination="ySi-1S-9Mt" id="29R-cQ-Q6p"/>
+                <outlet property="view" destination="iN0-l3-epB" id="bV2-2s-67H"/>
+            </connections>
+        </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
             <rect key="frame" x="0.0" y="0.0" width="510" height="86"/>
@@ -17,17 +22,23 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="s12-fo-V6o" userLabel="Content View">
                             <rect key="frame" x="0.0" y="0.0" width="15" height="86"/>
                             <subviews>
-                                <view contentMode="scaleToFill" placeholderIntrinsicWidth="12" placeholderIntrinsicHeight="43" translatesAutoresizingMaskIntoConstraints="NO" id="rA3-7t-g5t">
-                                    <rect key="frame" x="0.0" y="21" width="12" height="43"/>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                </view>
+                                <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="7" placeholderIntrinsicHeight="53" distribution="fillEqually" spacing="2" translatesAutoresizingMaskIntoConstraints="NO" id="ySi-1S-9Mt">
+                                    <rect key="frame" x="4" y="0.0" width="7" height="86"/>
+                                </stackView>
                             </subviews>
                             <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             <constraints>
-                                <constraint firstAttribute="trailing" secondItem="rA3-7t-g5t" secondAttribute="trailing" constant="3" id="ExI-D2-jZE"/>
-                                <constraint firstItem="rA3-7t-g5t" firstAttribute="leading" secondItem="s12-fo-V6o" secondAttribute="leading" id="N4B-5t-EG5"/>
-                                <constraint firstItem="rA3-7t-g5t" firstAttribute="centerY" secondItem="s12-fo-V6o" secondAttribute="centerY" id="b9r-qi-3Iz"/>
+                                <constraint firstAttribute="bottom" secondItem="ySi-1S-9Mt" secondAttribute="bottom" id="2p3-6j-wez"/>
+                                <constraint firstAttribute="trailing" secondItem="ySi-1S-9Mt" secondAttribute="trailing" constant="4" id="9HK-93-q6P"/>
+                                <constraint firstItem="ySi-1S-9Mt" firstAttribute="leading" secondItem="s12-fo-V6o" secondAttribute="leading" constant="4" id="9Vw-0v-aNE"/>
+                                <constraint firstItem="ySi-1S-9Mt" firstAttribute="centerY" secondItem="s12-fo-V6o" secondAttribute="centerY" id="e4Z-mV-XBT"/>
+                                <constraint firstItem="ySi-1S-9Mt" firstAttribute="top" secondItem="s12-fo-V6o" secondAttribute="top" id="iNC-aX-zjs"/>
                             </constraints>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="e4Z-mV-XBT"/>
+                                </mask>
+                            </variation>
                         </view>
                     </subviews>
                     <constraints>

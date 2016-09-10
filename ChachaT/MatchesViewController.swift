@@ -82,14 +82,6 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, w: 300, h: 300))
         view.backgroundColor = UIColor.yellowColor()
-        let sideDimension : CGFloat = 20
-        let circleView = CircleView(file: User.currentUser()!.profileImage!, cornerRadius: sideDimension / 2)
-        view.addSubview(circleView)
-        circleView.snp_makeConstraints { (make) in
-            make.center.equalTo(view)
-            make.height.equalTo(sideDimension)
-            make.width.equalTo(sideDimension)
-        }
         return view
     }
     
@@ -98,7 +90,8 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         let currentSection = indexPath.section
         if currentSection == 0 {
             //the matches area
-            
+            let matchesCell = ScrollingMatchesTableViewCell()
+            return matchesCell
         }
         let cell = UITableViewCell()
         cell.textLabel?.text = currentRow.toString
