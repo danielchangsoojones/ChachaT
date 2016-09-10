@@ -14,50 +14,37 @@ class MatchesViewController: UIViewController {
         static let numberOfSections : Int = 2
     }
     
-    
     @IBOutlet weak var theTableView: UITableView!
-    var matchArray : [Match] = []
+    var matchedUsers : [User] = []
+    var dataStore : MatchDataStore!
     
     //go to messages page
     @IBAction func theButtonPressed(sender: UIButton) {
-        if !matchArray.isEmpty {
-            let match = matchArray[0]
-            let chatVC = ChatViewController()
-            chatVC.currentUser = User.currentUser()
-            chatVC.otherUser = match.targetUser
-            
-            self.navigationController?.pushViewController(chatVC, animated: true)
-        }
+//        if !matchArray.isEmpty {
+//            let match = matchArray[0]
+//            let chatVC = ChatViewController()
+//            chatVC.currentUser = User.currentUser()
+//            chatVC.otherUser = match.targetUser
+//            
+//            self.navigationController?.pushViewController(chatVC, animated: true)
+//        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        dataStoreSetup()
+    }
+    
+    func dataStoreSetup() {
+        dataStore = MatchDataStore(delegate: self)
+        dataStore.findMatchedUsers()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func matchesQuery() {
-        // query on DateMatch
-        let query = Match.query()
-        // where currentUser is DateUser.currentUser()! and mutualMatch is true
-        query!.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
-        query!.whereKey(Constants.mutualMatch, equalTo: true)
-        // include targetUser key
-        query!.includeKey(Constants.targetUser)
-        query?.findObjectsInBackgroundWithBlock({ (matches, error) in
-            if error == nil {
-                for match in matches as! [Match] {
-                    self.matchArray.append(match)
-                }
-            } else {
-                print(error)
-            }
-        })
     }
 
 }
@@ -90,7 +77,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         let currentSection = indexPath.section
         if currentSection == 0 {
             //the matches area
-            let matchesCell = ScrollingMatchesTableViewCell()
+            let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers)
             return matchesCell
         }
         let cell = UITableViewCell()
@@ -98,6 +85,11 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     
         return cell
     }
-    
+}
 
+extension MatchesViewController: MatchDataStoreDelegate {
+    func passMatchedUsers(matches: [User]) {
+        matchedUsers = matches
+        theTableView.reloadData()
+    }
 }

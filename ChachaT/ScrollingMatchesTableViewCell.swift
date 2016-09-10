@@ -13,10 +13,15 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         static let circleRatioToCell : CGFloat = 0.2
     }
     
-    init() {
-        //TODO: put the reuse identifier in a global place
+    var matchedUsers : [User] = []
+    var matchesScrollView: AutoGrowingHorizontalScrollView = AutoGrowingHorizontalScrollView()
+    
+    init(matchedUsers: [User]) {
+        //TODO: Figure out what to call this reuse identifier
         super.init(style: .Default, reuseIdentifier: "hi")
+        self.matchedUsers = matchedUsers
         matchesScrollViewSetup()
+        addProfileCircles(matchedUsers)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -24,26 +29,28 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     }
     
     func matchesScrollViewSetup() {
-        let matchesScrollView = AutoGrowingHorizontalScrollView()
         self.addSubview(matchesScrollView)
         matchesScrollView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
+    }
+    
+    func addProfileCircles(users: [User]) {
         let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
-        let circle = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
-        circle.tapped { (tapped) in
-            if let sender = tapped.view as? CircleProfileView {
-                if let name = sender.getLabelTitle() {
-                    print(name)
+        for user in matchedUsers {
+            if let fullName = user.fullName, profileImage = user.profileImage {
+                let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
+                circleProfileView.tapped { (tapped) in
+                    if let sender = tapped.view as? CircleProfileView {
+                        if let name = sender.getLabelTitle() {
+                            //TODO: what if two people have the same first name?
+                            print(name)
+                        }
+                    }
                 }
+                matchesScrollView.addView(circleProfileView)
             }
         }
-        let circleTwo = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
-        let label = UILabel()
-        label.text = "booyah"
-        matchesScrollView.addView(circle)
-        matchesScrollView.addView(circleTwo)
-        matchesScrollView.addView(label)
     }
 
 }

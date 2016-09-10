@@ -30,6 +30,7 @@ class CircleProfileView: UIView {
         }
     }
     
+    //TODO: make the name label resize so it doesn't go over the screen
     func nameLabelSetup(name: String) {
         theNameLabel.text = name
         self.addSubview(theNameLabel)

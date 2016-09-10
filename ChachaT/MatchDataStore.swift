@@ -9,8 +9,23 @@
 import UIKit
 import SCLAlertView
 
+protocol MatchDataStoreDelegate {
+    func passMatchedUsers(matchedUsers: [User])
+}
+
 class MatchDataStore: NSObject {
     static let sharedInstance = MatchDataStore()
+    
+    var delegate: MatchDataStoreDelegate?
+    
+    override init() {
+        super.init()
+    }
+    
+    init(delegate: MatchDataStoreDelegate) {
+        super.init()
+        self.delegate = delegate
+    }
     
     func likePerson(user : User) {
         matchUser(User.currentUser()!, user2: user, isMatch: true)
@@ -82,6 +97,26 @@ class MatchDataStore: NSObject {
             SCLAlertView().showInfo("Match!", subTitle: "You matched with \(targetUserName)")
         } else {
             SCLAlertView().showInfo("Match!", subTitle: "You have a match!")
+        }
+    }
+    
+    func findMatchedUsers() {
+        var matchedUsers : [User] = []
+        let query = Match.query()!
+        query.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
+        query.whereKey(Constants.mutualMatch, equalTo: true)
+        query.includeKey(Constants.targetUser)
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let objects = objects where error == nil {
+                for object in objects {
+                    if let match = object as? Match {
+                        matchedUsers.append(match.targetUser)
+                    }
+                }
+                self.delegate?.passMatchedUsers(matchedUsers)
+            } else {
+                print(error)
+            }
         }
     }
 }

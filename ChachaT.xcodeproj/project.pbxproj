@@ -271,10 +271,10 @@
 		920BF82C1D431C5E00104842 /* Matching */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB611D849F3000E05C05 /* Data Models */,
 				92BCEB511D8366C800E05C05 /* Subviews */,
 				92BCEB4F1D83510E00E05C05 /* Matches.storyboard */,
 				920BF8331D432E2500104842 /* MatchesViewController.swift */,
-				920BF8311D431CD000104842 /* MatchDataStore.swift */,
 			);
 			name = Matching;
 			sourceTree = "<group>";
@@ -638,6 +638,14 @@
 				92BCEB591D837F7400E05C05 /* CircleView.swift */,
 			);
 			name = "Circle Views";
+			sourceTree = "<group>";
+		};
+		92BCEB611D849F3000E05C05 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				920BF8311D431CD000104842 /* MatchDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
