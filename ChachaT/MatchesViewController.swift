@@ -16,6 +16,7 @@ class MatchesViewController: UIViewController {
     
     @IBOutlet weak var theTableView: UITableView!
     var matchedUsers : [User] = []
+    var chats : [Chat] = []
     var dataStore : MatchDataStore!
     
     //go to messages page
@@ -40,6 +41,7 @@ class MatchesViewController: UIViewController {
     func dataStoreSetup() {
         dataStore = MatchDataStore(delegate: self)
         dataStore.findMatchedUsers()
+        dataStore.findChats()
     }
 
     override func didReceiveMemoryWarning() {
@@ -54,8 +56,10 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         if section == 0 {
             //the matches area
             return 1
+        } else {
+            //the messaging area
+            return chats.count
         }
-        return 100
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
@@ -79,17 +83,23 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
             //the matches area
             let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers)
             return matchesCell
+        } else {
+            //the messages area
+            let currentChat = chats[currentRow]
+            let chatCell = ChatTableViewCell(chat: currentChat)
+            return chatCell
         }
-        let cell = UITableViewCell()
-        cell.textLabel?.text = currentRow.toString
-    
-        return cell
     }
 }
 
 extension MatchesViewController: MatchDataStoreDelegate {
     func passMatchedUsers(matches: [User]) {
         matchedUsers = matches
+        theTableView.reloadData()
+    }
+    
+    func passChats(chats: [Chat]) {
+        self.chats = chats
         theTableView.reloadData()
     }
 }

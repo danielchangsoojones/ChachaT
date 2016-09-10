@@ -11,12 +11,14 @@ import SCLAlertView
 
 protocol MatchDataStoreDelegate {
     func passMatchedUsers(matchedUsers: [User])
+    func passChats(chats: [Chat])
 }
 
 class MatchDataStore: NSObject {
     static let sharedInstance = MatchDataStore()
     
     var delegate: MatchDataStoreDelegate?
+    let currentUser = User.currentUser()!
     
     override init() {
         super.init()
@@ -107,16 +109,32 @@ class MatchDataStore: NSObject {
         query.whereKey(Constants.mutualMatch, equalTo: true)
         query.includeKey(Constants.targetUser)
         query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let objects = objects where error == nil {
-                for object in objects {
-                    if let match = object as? Match {
-                        matchedUsers.append(match.targetUser)
-                    }
+            if let matches = objects as? [Match] where error == nil {
+                for match in matches {
+                    matchedUsers.append(match.targetUser)
                 }
                 self.delegate?.passMatchedUsers(matchedUsers)
             } else {
                 print(error)
             }
+        }
+    }
+    
+    //TODO: figure out which chats have not been read yet, and how to group chats of the same name to the same message cell, as in we don't need two cells for a message sent from the same person.
+    func findChats() {
+        var chatsArray : [Chat] = []
+        let query = Chat.query()!
+        query.includeKey("sender")
+        query.whereKey("chatRoom", containsString: currentUser.objectId!)
+        query.findObjectsInBackgroundWithBlock { (objects, error) in
+            if let chats = objects as? [Chat] where error == nil {
+                for chat in chats {
+                    chatsArray.append(chat)
+                }
+            } else {
+                print("error")
+            }
+            self.delegate?.passChats(chatsArray)
         }
     }
 }

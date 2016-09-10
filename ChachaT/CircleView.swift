@@ -11,11 +11,15 @@ import Foundation
 class CircleView : UIView {
     var theImageView = UIImageView()
     
-    init(file: AnyObject, diameter: CGFloat) {
+    init(diameter: CGFloat) {
         super.init(frame: CGRectZero)
-        theImageView.loadFromFile(file)
         imageViewSetup()
         makeCircular(theImageView, diameter: diameter)
+    }
+    
+    convenience init(file: AnyObject?, diameter: CGFloat) {
+        self.init(diameter: diameter)
+        theImageView.loadFromFile(file)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -23,6 +27,7 @@ class CircleView : UIView {
     }
     
     func imageViewSetup() {
+        theImageView.backgroundColor = UIColor.grayColor() //in case no picture, it just shows grey
         self.addSubview(theImageView)
         theImageView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)

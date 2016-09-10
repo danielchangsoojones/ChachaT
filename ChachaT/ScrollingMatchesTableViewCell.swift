@@ -16,9 +16,9 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     var matchedUsers : [User] = []
     var matchesScrollView: AutoGrowingHorizontalScrollView = AutoGrowingHorizontalScrollView()
     
+    //TODO: make there be some sort of spinner or loading view to show that we are waiting for the server to pulls matches down
     init(matchedUsers: [User]) {
-        //TODO: Figure out what to call this reuse identifier
-        super.init(style: .Default, reuseIdentifier: "hi")
+        super.init(style: .Default, reuseIdentifier: "scrollingMatchesTableViewCell")
         self.matchedUsers = matchedUsers
         matchesScrollViewSetup()
         addProfileCircles(matchedUsers)

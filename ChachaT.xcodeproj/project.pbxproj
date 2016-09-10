@@ -93,6 +93,7 @@
 		92BCEB5A1D837F7400E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB591D837F7400E05C05 /* CircleView.swift */; };
 		92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */; };
 		92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */; };
+		92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -191,6 +192,7 @@
 		92BCEB591D837F7400E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoGrowingHorizontalScrollView.swift; sourceTree = "<group>"; };
 		92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingMatchesTableViewCell.swift; sourceTree = "<group>"; };
+		92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -619,6 +621,7 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */,
+				92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
 			sourceTree = "<group>";
@@ -842,6 +845,7 @@
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				92BCEB5A1D837F7400E05C05 /* CircleView.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
+				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
