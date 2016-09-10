@@ -10,6 +10,10 @@ import UIKit
 import Parse
 
 class MatchesViewController: UIViewController {
+    private struct MatchesConstants {
+        static let numberOfSections : Int = 2
+    }
+    
     
     @IBOutlet weak var theTableView: UITableView!
     var matchArray : [Match] = []
@@ -29,10 +33,6 @@ class MatchesViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        let view = UIView(frame: CGRect(x: 0, y: 0, w: 200, h: 200))
-        view.backgroundColor = UIColor.blueColor()
-        theTableView.tableHeaderView = view
-//        matchesQuery()
         // Do any additional setup after loading the view.
     }
 
@@ -64,7 +64,15 @@ class MatchesViewController: UIViewController {
 
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            //the matches area
+            return 1
+        }
         return 100
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return MatchesConstants.numberOfSections
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
@@ -74,11 +82,24 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         let view = UIView(frame: CGRect(x: 0, y: 0, w: 300, h: 300))
         view.backgroundColor = UIColor.yellowColor()
+        let sideDimension : CGFloat = 20
+        let circleView = CircleView(file: User.currentUser()!.profileImage!, cornerRadius: sideDimension / 2)
+        view.addSubview(circleView)
+        circleView.snp_makeConstraints { (make) in
+            make.center.equalTo(view)
+            make.height.equalTo(sideDimension)
+            make.width.equalTo(sideDimension)
+        }
         return view
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let currentRow = indexPath.row
+        let currentSection = indexPath.section
+        if currentSection == 0 {
+            //the matches area
+            
+        }
         let cell = UITableViewCell()
         cell.textLabel?.text = currentRow.toString
     
