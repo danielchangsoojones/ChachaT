@@ -1,5 +1,5 @@
 //
-//  MatchesScrollAreaView.swift
+//  AutoGrowingHorizontalScrollView.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 9/9/16.
@@ -8,7 +8,7 @@
 
 import UIKit
 
-class MatchesScrollAreaView: UIView {
+class AutoGrowingHorizontalScrollView: UIView {
     
     var theScrollView : UIScrollView = UIScrollView()
     var theContentView : UIView = UIView()
@@ -57,6 +57,7 @@ class MatchesScrollAreaView: UIView {
     
     //Purpose: any type of view can be added to this scroll view, and it will grow accordingly.
     func addView(view: UIView) {
+        //Remember: stackViews calculate things based off of intrinsic content size, so make sure the view passed has one set (labels have a defualt one for size of text, UIViews do not have ones set by defualt.)
         theStackView.addArrangedSubview(view)
     }
     

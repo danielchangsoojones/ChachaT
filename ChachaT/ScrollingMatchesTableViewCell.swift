@@ -21,7 +21,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     }
     
     func matchesScrollViewSetup() {
-        let matchesScrollView = MatchesScrollAreaView()
+        let matchesScrollView = AutoGrowingHorizontalScrollView()
         self.addSubview(matchesScrollView)
         matchesScrollView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)

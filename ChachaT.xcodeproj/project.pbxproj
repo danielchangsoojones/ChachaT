@@ -91,7 +91,7 @@
 		92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB4F1D83510E00E05C05 /* Matches.storyboard */; };
 		92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB571D837DD700E05C05 /* CircleProfileView.swift */; };
 		92BCEB5A1D837F7400E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB591D837F7400E05C05 /* CircleView.swift */; };
-		92BCEB5C1D83813400E05C05 /* MatchesScrollAreaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5B1D83813400E05C05 /* MatchesScrollAreaView.swift */; };
+		92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */; };
 		92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
@@ -189,7 +189,7 @@
 		92BCEB4F1D83510E00E05C05 /* Matches.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Matches.storyboard; sourceTree = "<group>"; };
 		92BCEB571D837DD700E05C05 /* CircleProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
 		92BCEB591D837F7400E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
-		92BCEB5B1D83813400E05C05 /* MatchesScrollAreaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesScrollAreaView.swift; sourceTree = "<group>"; };
+		92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoGrowingHorizontalScrollView.swift; sourceTree = "<group>"; };
 		92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingMatchesTableViewCell.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
@@ -456,6 +456,7 @@
 		9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB5F1D847C4000E05C05 /* Scroll Views */,
 				926108581CEA11B9009F3E86 /* Alert.swift */,
 				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
@@ -609,7 +610,6 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB521D8366DD00E05C05 /* Tableview Cells */,
-				92BCEB5B1D83813400E05C05 /* MatchesScrollAreaView.swift */,
 				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
 				92BCEB591D837F7400E05C05 /* CircleView.swift */,
 			);
@@ -622,6 +622,14 @@
 				92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */,
 			);
 			name = "Tableview Cells";
+			sourceTree = "<group>";
+		};
+		92BCEB5F1D847C4000E05C05 /* Scroll Views */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */,
+			);
+			name = "Scroll Views";
 			sourceTree = "<group>";
 		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
@@ -791,7 +799,7 @@
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */,
-				92BCEB5C1D83813400E05C05 /* MatchesScrollAreaView.swift in Sources */,
+				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
