@@ -13,7 +13,6 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         static let circleRatioToCell : CGFloat = 0.2
     }
     
-    
     init() {
         //TODO: put the reuse identifier in a global place
         super.init(style: .Default, reuseIdentifier: "hi")
@@ -32,6 +31,13 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         }
         let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
         let circle = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
+        circle.tapped { (tapped) in
+            if let sender = tapped.view as? CircleProfileView {
+                if let name = sender.getLabelTitle() {
+                    print(name)
+                }
+            }
+        }
         let circleTwo = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
         let label = UILabel()
         label.text = "booyah"
