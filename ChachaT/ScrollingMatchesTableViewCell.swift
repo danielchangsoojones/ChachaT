@@ -26,12 +26,13 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         matchesScrollView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
-        print(self.frame)
-        let circleProfileViewFrame = CGRect(x: 0, y: 0, w: 20, h: 20)
+        let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * 0.2, h: self.frame.height)
         let circle = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
+        let circleTwo = CircleProfileView(frame: circleProfileViewFrame, name: "Daniel", imageFile: User.currentUser()!.profileImage!)
         let label = UILabel()
         label.text = "booyah"
         matchesScrollView.addView(circle)
+        matchesScrollView.addView(circleTwo)
         matchesScrollView.addView(label)
     }
 

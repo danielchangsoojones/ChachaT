@@ -611,7 +611,6 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB521D8366DD00E05C05 /* Tableview Cells */,
-				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -635,6 +634,7 @@
 		92BCEB601D847F3A00E05C05 /* Circle Views */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
 				92BCEB591D837F7400E05C05 /* CircleView.swift */,
 			);
 			name = "Circle Views";
