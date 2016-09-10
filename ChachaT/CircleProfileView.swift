@@ -11,6 +11,7 @@ import Foundation
 class CircleProfileView: UIView {
     let theNameLabel = UILabel()
     
+    //TODO: set the intrinsic content size to calculate correctly
     init(name: String, circleViewSize: CGSize, imageFile: AnyObject) {
         super.init(frame: CGRectZero)
         theNameLabel.text = name

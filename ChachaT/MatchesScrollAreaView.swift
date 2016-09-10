@@ -9,79 +9,59 @@
 import UIKit
 
 class MatchesScrollAreaView: UIView {
-    private struct MatchesScrollConstants {
-        static let circleViewSize : CGSize = CGSize(width: 20, height: 20)
-    }
     
-    // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
-    @IBOutlet var view: UIView!
-    
-    @IBOutlet weak var theStackView: UIStackView!
-    var scrollView : UIScrollView = UIScrollView(frame: CGRect(x: 0,y: 0,width: 600, height: 100))
-    var contentView : UIView = UIView()
-    var stackView : UIStackView = UIStackView()
+    var theScrollView : UIScrollView = UIScrollView()
+    var theContentView : UIView = UIView()
+    var theStackView : UIStackView = UIStackView()
     
     init() {
         super.init(frame: CGRectZero)
-        addScrollView()
+        scrollViewSetup()
     }
     
-    func addScrollView() {
-        self.addSubview(scrollView)
-        scrollView.backgroundColor = UIColor.blueColor()
-        addContentView()
-        scrollView.snp_makeConstraints { (make) in
+    private func scrollViewSetup() {
+        self.addSubview(theScrollView)
+        theScrollView.backgroundColor = UIColor.blueColor()
+        contentViewSetup()
+        theScrollView.snp_makeConstraints { (make) in
+            //the scroll view is snapped to the edges of the view because we want the whole view to be scrollable
+            //so, it is just like normal autolayout, where we constrain it to the edges
             make.edges.equalTo(self)
         }
     }
     
-    func addContentView() {
-        scrollView.addSubview(contentView)
-        contentView.backgroundColor = UIColor.redColor()
-        addStackView()
-        contentView.snp_makeConstraints { (make) in
-            make.edges.equalTo(scrollView)
+    //The scroll view needs a content view because the scrollview calculates its size based upon its content. But, a scrollview can only pay attention to one subview(as in you can not have two views in a scroll view and expect it to calculate the correct size). So, to circumvent this problem. There is a single content view, where we can then put multiple subviews. The scrollview only sees this single content view, and is able to calculate its size correctly. In the content view, we use autolayout constraints like we normally would, and just make sure that the content view calculates its size from its inner subviews.
+    private func contentViewSetup() {
+        theScrollView.addSubview(theContentView)
+        theContentView.backgroundColor = UIColor.redColor()
+        stackViewSetup()
+        theContentView.snp_makeConstraints { (make) in
+            //Tricky area: when the edges of theContentView are pinned to the scrollView. It is not like usual autolayout where theContentView grows to the size of theScrollView. It is telling theScrollView what theScrollView's content size should be.
+            //So, it's not telling the ContentView to be the same frame size as the displayed ScrollView frame, it's rather telling Scrollview that the ContentView is its content and so if contentview is larger than the ScrollView frame then you get scrolling. This is the key to having a scrollView that grows with its contentSize. Ask Daniel Jones if more clarification needed.
+            make.edges.equalTo(theScrollView)
+            //We only want the scrollView to scroll horizontally. By setting the heights of theContentView and self.frame equal, we basically say the scrollView does not need to grow in the vertical direction.
             make.height.equalTo(self)
         }
     }
     
-    func addStackView() {
-        contentView.addSubview(stackView)
-        addLabel()
-        stackView.snp_makeConstraints { (make) in
-            make.leading.top.bottom.trailing.equalTo(contentView)
+    //We add a stackView to the contentView because StackViews are great for automatically resizing. Everytime we add an arranged subview to the stack view, it will make the stackView grow and space in a proportional way.
+    private func stackViewSetup() {
+        theContentView.addSubview(theStackView)
+        theStackView.snp_makeConstraints { (make) in
+            //we set the edges of the Stack View to the contentView because it tells the Stack View to cover whatever area the contentView covers.
+            //Additionally, by setting the edges of the Stack View to contentView, the content view is able to caclulate its own size because the constraint basically tell it how big the subviews are inside of theContentView.
+            //So, when we add an arranged subview to the stack view, it makes the stack view grow to fit the new arranged subview, then the content view calculates the new size of the stack view, which allows the ContentView to know what size it should be. And then, the scrollView can calculate its size based upon theContentView size.
+            make.edges.equalTo(theContentView)
         }
     }
-
-    func addLabel() {
-        let label = UILabel()
-        label.text = "butthole5"
-        let labelf = UILabel()
-        labelf.text = "butthole7"
-        let labelg = UILabel()
-        labelg.text = "butthole7jaklsdjfalsdjfl;ad asdkjfas;jdfklsajdf dsalkjflasjdf;lkas saldkjfasdljfkl;asjdfkl; salkdjfl;asjk"
-        stackView.addArrangedSubview(label)
-        stackView.addArrangedSubview(labelg)
-        stackView.addArrangedSubview(labelf)
-        
+    
+    //Purpose: any type of view can be added to this scroll view, and it will grow accordingly.
+    func addView(view: UIView) {
+        theStackView.addArrangedSubview(view)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
-    func xibSetup() {
-        //this name must match the nib file name
-        NSBundle.mainBundle().loadNibNamed("MatchesScrollAreaView", owner: self, options: nil)[0] as! UIView
-        //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
-        self.addSubview(view)
-        view.frame = self.bounds
-    }
-    
-    func addMatchView(name: String, imageFile: AnyObject) {
-        let circleProfileView = CircleProfileView(name: name, circleViewSize: MatchesScrollConstants.circleViewSize, imageFile: imageFile)
-        stackView.addArrangedSubview(circleProfileView)
     }
 
 }
