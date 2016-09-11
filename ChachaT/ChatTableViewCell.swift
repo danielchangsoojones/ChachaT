@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Timepiece
 
 class ChatTableViewCell: UITableViewCell {
     
@@ -24,7 +25,7 @@ class ChatTableViewCell: UITableViewCell {
         self.user = chat.sender
         self.chat = chat
         profileCircleSetup()
-        timeStampSetup(NSDate())
+        timeStampSetup(chat.createdAt!)
         if let name = user.fullName {
             nameLabelSetup(name)
         }
@@ -62,14 +63,31 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     //TODO: set the timestamp to a real time
-    func timeStampSetup(time: NSDate) {
-        theTimeStamp.text = "12"
+    func timeStampSetup(dateCreated: NSDate) {
+        theTimeStamp.text = formatTimeStamp(dateCreated)
         self.addSubview(theTimeStamp)
         theTimeStamp.snp_makeConstraints { (make) in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
-            //TODO: probably should make the width and heights to a constraint
-            make.width.equalTo(30)
+            //TODO: make the width have a high priority for growing or whatever
+            make.width.equalTo(100)
+        }
+    }
+    
+    func formatTimeStamp(date: NSDate) -> String {
+        let formatter = NSDateFormatter()
+        let lessThan24Hours : Bool = date >= 1.day.ago
+        if lessThan24Hours {
+            formatter.dateFormat = "h:mm a"
+            formatter.AMSymbol = "AM"
+            formatter.PMSymbol = "PM"
+            let dateString = formatter.stringFromDate(date) //ex: "10:15 AM"
+            return dateString
+        } else {
+            formatter.dateStyle = .MediumStyle
+            formatter.timeStyle = .NoStyle
+            let dateString = formatter.stringFromDate(date) //ex: "Sep 10, 2015"
+            return dateString
         }
     }
     
