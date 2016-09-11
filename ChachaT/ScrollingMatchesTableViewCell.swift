@@ -8,18 +8,25 @@
 
 import UIKit
 
+protocol ScrollingMatchesCellDelegate {
+    func segueToChatVC(otherUser: User)
+}
+
 class ScrollingMatchesTableViewCell: UITableViewCell {
     private struct ScrollingMatchesConstants {
         static let circleRatioToCell : CGFloat = 0.2
     }
     
+    var delegate: ScrollingMatchesCellDelegate?
+    
     var matchedUsers : [User] = []
     var matchesScrollView: AutoGrowingHorizontalScrollView = AutoGrowingHorizontalScrollView()
     
     //TODO: make there be some sort of spinner or loading view to show that we are waiting for the server to pulls matches down
-    init(matchedUsers: [User]) {
+    init(matchedUsers: [User], delegate: ScrollingMatchesCellDelegate) {
         super.init(style: .Default, reuseIdentifier: "scrollingMatchesTableViewCell")
         self.matchedUsers = matchedUsers
+        self.delegate = delegate
         matchesScrollViewSetup()
         addProfileCircles(matchedUsers)
     }
@@ -41,12 +48,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
             if let fullName = user.fullName, profileImage = user.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
                 circleProfileView.tapped { (tapped) in
-                    if let sender = tapped.view as? CircleProfileView {
-                        if let name = sender.getLabelTitle() {
-                            //TODO: what if two people have the same first name?
-                            print(name)
-                        }
-                    }
+                    self.delegate?.segueToChatVC(user)
                 }
                 matchesScrollView.addView(circleProfileView)
             }

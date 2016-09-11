@@ -13,6 +13,8 @@ class ChatTableViewCell: UITableViewCell {
     var theNameLabel : UILabel = UILabel()
     var theCircleView : CircleView!
     var theTimeStamp : UILabel = UILabel()
+    var theMessagePreviewLabel : UILabel = UILabel()
+    var theUnreadNotificationBubble : CircleView!
     
     var user: User!
     var chat: Chat!
@@ -26,7 +28,8 @@ class ChatTableViewCell: UITableViewCell {
         if let name = user.fullName {
             nameLabelSetup(name)
         }
-        
+        unreadNotificationBubbleSetup()
+        messagePreviewLabelSetup(chat.chatText)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,6 +73,23 @@ class ChatTableViewCell: UITableViewCell {
         }
     }
     
+    func messagePreviewLabelSetup(message: String) {
+        theMessagePreviewLabel.text = message
+        self.addSubview(theMessagePreviewLabel)
+        theMessagePreviewLabel.snp_makeConstraints { (make) in
+            make.leading.equalTo(theNameLabel)
+            make.top.equalTo(theNameLabel.snp_bottom)
+            make.trailing.equalTo(theUnreadNotificationBubble)
+        }
+    }
     
-
+    func unreadNotificationBubbleSetup() {
+        let diameter : CGFloat = 10
+        theUnreadNotificationBubble = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
+        self.addSubview(theUnreadNotificationBubble)
+        theUnreadNotificationBubble.snp_makeConstraints { (make) in
+            make.top.equalTo(theTimeStamp.snp_bottom)
+            make.trailing.equalTo(self)
+        }
+    }
 }

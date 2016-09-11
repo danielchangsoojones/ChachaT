@@ -21,27 +21,20 @@ class MatchesViewController: UIViewController {
     
     //go to messages page
     @IBAction func theButtonPressed(sender: UIButton) {
-//        if !matchArray.isEmpty {
-//            let match = matchArray[0]
-//            let chatVC = ChatViewController()
-//            chatVC.currentUser = User.currentUser()
-//            chatVC.otherUser = match.targetUser
-//            
-//            self.navigationController?.pushViewController(chatVC, animated: true)
-//        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        navigationController?.navigationBarHidden = false
         dataStoreSetup()
     }
     
     func dataStoreSetup() {
         dataStore = MatchDataStore(delegate: self)
         dataStore.findMatchedUsers()
-        dataStore.findChats()
+        dataStore.findChatRooms()
     }
 
     override func didReceiveMemoryWarning() {
@@ -81,7 +74,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         let currentSection = indexPath.section
         if currentSection == 0 {
             //the matches area
-            let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers)
+            let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers, delegate: self)
             return matchesCell
         } else {
             //the messages area
@@ -89,6 +82,25 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
             let chatCell = ChatTableViewCell(chat: currentChat)
             return chatCell
         }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let currentRow = indexPath.row
+        let currentSection = indexPath.section
+        if currentSection == 1 {
+            //the messaging area
+            let currentChat = chats[currentRow]
+            segueToChatVC(currentChat.receiver)
+        }
+    }
+}
+
+extension MatchesViewController : ScrollingMatchesCellDelegate {
+    func segueToChatVC(otherUser: User) {
+        let chatVC = ChatViewController()
+        chatVC.currentUser = User.currentUser()
+        chatVC.otherUser = otherUser
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
 }
 

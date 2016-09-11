@@ -287,6 +287,7 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case OnboardingPageSegue
         case CustomBackgroundAnimationToSearchSegue
         case BackgroundAnimationPageToAddingTagsPageSegue
+        case BackgroundAnimationToMatchesSegue
     }
 }
 
