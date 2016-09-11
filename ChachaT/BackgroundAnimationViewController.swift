@@ -48,10 +48,6 @@ class BackgroundAnimationViewController: UIViewController {
     
     var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
     
-    @IBAction func segueToProfilePage(sender: AnyObject) {
-        pageMainViewControllerDelegate!.moveToPageIndex(1)
-    }
-    
     @IBAction func skipCard(sender: AnyObject) {
         kolodaView.swipe(.Left)
     }
