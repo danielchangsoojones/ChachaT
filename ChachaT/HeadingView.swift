@@ -33,13 +33,12 @@ class HeadingView: UIView {
     
     //TODO: make the diameter of the circle equal to how big the number width. But, the height needs to be the same as the titleLabel. So probably won't be a circle anymore.
     func circleViewSetup(num: Int) {
-        let diameter = theTitleLabel.frame.height
+        let diameter : CGFloat = 20
         theCircleView = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
         self.addSubview(theCircleView)
         theCircleView.snp_makeConstraints { (make) in
             make.leading.equalTo(theTitleLabel.snp_trailing)
             make.centerY.equalTo(self)
-            make.width.height.equalTo(20)
         }
         addNumberToCircle(num)
     }

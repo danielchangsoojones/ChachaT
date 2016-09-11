@@ -95,6 +95,7 @@
 		92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */; };
 		92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */; };
 		92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB651D856C2E00E05C05 /* HeadingView.swift */; };
+		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -195,6 +196,7 @@
 		92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingMatchesTableViewCell.swift; sourceTree = "<group>"; };
 		92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		92BCEB651D856C2E00E05C05 /* HeadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
+		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -432,9 +434,9 @@
 			children = (
 				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
+				92BCEB6A1D85B49900E05C05 /* Card Detail */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
-				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 			);
@@ -662,6 +664,23 @@
 			name = "Tableview headings";
 			sourceTree = "<group>";
 		};
+		92BCEB6A1D85B49900E05C05 /* Card Detail */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB6B1D85B4AA00E05C05 /* Subviews */,
+				9261084A1CE50816009F3E86 /* CardDetailViewController.swift */,
+			);
+			name = "Card Detail";
+			sourceTree = "<group>";
+		};
+		92BCEB6B1D85B4AA00E05C05 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -866,6 +885,7 @@
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
+				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,

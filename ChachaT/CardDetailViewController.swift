@@ -20,14 +20,13 @@ public enum QuestionDetailState {
 
 class CardDetailViewController: UIViewController {
     
+    
+    @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var profileImage: PFImageView!
-    @IBOutlet weak var theFirstBulletText: UILabel!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     @IBOutlet weak var theFullNameLabel: UILabel!
     @IBOutlet weak var theAgeLabel: UILabel!
     @IBOutlet weak var theTitleLabel: UILabel!
-    @IBOutlet weak var theSecondBulletText: UILabel!
-    @IBOutlet weak var theThirdBulletText: UILabel!
     @IBOutlet weak var theBackButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theUserOfCardTagListView: TagListView!
@@ -66,14 +65,15 @@ class CardDetailViewController: UIViewController {
         if let age = userOfTheCard?.age {
             theAgeLabel.text = ", " + "\(age)"
         }
+        let bulletPointViewWidth = theBulletPointsStackView.frame.width
         if let factOne = userOfTheCard?.bulletPoint1 {
-            theFirstBulletText.text = factOne
+            bulletPointSetup(factOne, width: bulletPointViewWidth)
         }
         if let factTwo = userOfTheCard?.bulletPoint2 {
-            theSecondBulletText.text = factTwo
+            bulletPointSetup(factTwo, width: bulletPointViewWidth)
         }
         if let factThree = userOfTheCard?.bulletPoint3 {
-            theThirdBulletText.text = factThree
+            bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
         if let profileImage = userOfTheCard?.profileImage {
             self.profileImage.file = profileImage
@@ -83,6 +83,11 @@ class CardDetailViewController: UIViewController {
             theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
             theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
         }
+    }
+    
+    func bulletPointSetup(text: String, width: CGFloat) {
+        let bulletPointView = BulletPointView(text: text, width: width)
+        theBulletPointsStackView.addArrangedSubview(bulletPointView)
     }
     
     private func setupTapHandler() {
