@@ -26,8 +26,6 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
     var factNumber: Fact = .FactOne
     var factDescriptionText: String?
     
-    var delegate: PopUpViewControllerDelegate?
-    
     @IBAction func save(sender: AnyObject) {
         theSaveButton.enabled = false
         let currentUser = User.currentUser()
@@ -40,7 +38,6 @@ class UserDetailPopUpViewController: PopUpSuperViewController {
         theActivitySpinner.startAnimating()
         currentUser?.saveInBackgroundWithBlock({ (success, error) in
             if success {
-                self.delegate?.passFactDescription(self.theDescriptionTextView.text, fact: self.factNumber)
                 self.dismissViewControllerAnimated(true, completion: nil)
             }
         })
