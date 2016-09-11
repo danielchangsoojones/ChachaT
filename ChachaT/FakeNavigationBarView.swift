@@ -74,8 +74,8 @@ class FakeNavigationBarView : UIView {
     
     private func configureExpandingMenuButton() {
         
-        let item1 = ExpandingMenuItem(size: nil, title: "Log Out", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
-            self.delegate?.logOut()
+        let item1 = ExpandingMenuItem(size: nil, title: "Edit Profile", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            self.delegate?.segueToEditProfilePage()
         }
         let item2 = ExpandingMenuItem(size: nil, title: "Add Tags", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToAddingTagsPage()
@@ -83,27 +83,13 @@ class FakeNavigationBarView : UIView {
         let item3 = ExpandingMenuItem(size: nil, title: "Messaging", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToMatchesPage()
         }
-        
-//        let item2 = ExpandingMenuItem(size: nil, title: "Place", image: UIImage(named: "chooser-moment-icon-place")!, highlightedImage: UIImage(named: "chooser-moment-icon-place-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-//            print("Place")
-//        }
-//        
-//        let item3 = ExpandingMenuItem(size: nil, title: "Camera", image: UIImage(named: "chooser-moment-icon-camera")!, highlightedImage: UIImage(named: "chooser-moment-icon-camera-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-//            print("Camera")
-//        }
-//        
-//        let item4 = ExpandingMenuItem(size: nil, title: "Thought", image: UIImage(named: "chooser-moment-icon-thought")!, highlightedImage: UIImage(named: "chooser-moment-icon-thought-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-//            print("Thought")
-//        }
-//        
-//        let item5 = ExpandingMenuItem(size: nil, title: "Sleep", image: UIImage(named: "chooser-moment-icon-sleep")!, highlightedImage: UIImage(named: "chooser-moment-icon-sleep-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
-//            print("Sleep")
-//        }
-        
+        let item4 = ExpandingMenuItem(size: nil, title: "Log Out", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            self.delegate?.logOut()
+        }
         
         expandingMenuButton.expandingDirection = .Bottom
         expandingMenuButton.menuTitleDirection = .Right
-        expandingMenuButton.addMenuItems([item1, item2, item3])
+        expandingMenuButton.addMenuItems([item1, item2, item3, item4])
     }
     
     //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.
@@ -124,6 +110,7 @@ class FakeNavigationBarView : UIView {
 protocol FakeNavigationBarDelegate {
     func rightBarButtonPressed(sender: UIButton!)
     func segueToAddingTagsPage()
+    func segueToEditProfilePage()
     func segueToMatchesPage()
     func logOut()
 }
@@ -139,6 +126,10 @@ extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     
     func segueToMatchesPage() {
         performSegueWithIdentifier(.BackgroundAnimationToMatchesSegue, sender: nil)
+    }
+    
+    func segueToEditProfilePage() {
+        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationToEditProfileSegue, sender: nil)
     }
     
     func logOut() {

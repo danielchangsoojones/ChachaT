@@ -49,6 +49,7 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        self.navigationController?.navigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
         photoLayoutView.delegate = self
         bulletPointsSetup()
         fullNameViewSetup()

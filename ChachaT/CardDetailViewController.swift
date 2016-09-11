@@ -20,72 +20,23 @@ public enum QuestionDetailState {
 
 class CardDetailViewController: UIViewController {
     
+    
+    @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var profileImage: PFImageView!
-    @IBOutlet weak var theFirstBulletText: UILabel!
-    @IBOutlet weak var theCustomQuestionButton: UIButton!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
-    @IBOutlet weak var theFullNameTextField: UITextField!
     @IBOutlet weak var theFullNameLabel: UILabel!
     @IBOutlet weak var theAgeLabel: UILabel!
-    @IBOutlet weak var titleTextField: UITextField!
     @IBOutlet weak var theTitleLabel: UILabel!
-    @IBOutlet weak var theSecondBulletText: UILabel!
-    @IBOutlet weak var theThirdBulletText: UILabel!
-    @IBOutlet weak var editOrBackOrSaveButton: UIButton!
+    @IBOutlet weak var theBackButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theUserOfCardTagListView: TagListView!
     
-    var fullNameTextFieldDidChange = false
-    var titleTextFieldDidChange = false
-    var imageWasChanged = false
-    //need to set this to editing if I want to have profile that is editable
-    var questionDetailState : QuestionDetailState = .OtherUserProfileViewOnlyMode
-    
     var userOfTheCard: User? = User.currentUser()
     
-    @IBAction func editOrBackOrSavePressed(sender: AnyObject) {
-        switch questionDetailState {
-        case .EditingMode:
-            //the user is editing right now, and will hit the save button to save their work
-            if fullNameTextFieldDidChange {
-                let fullNameText = theFullNameTextField.text
-                userOfTheCard?.fullName = fullNameText
-                userOfTheCard?.lowercaseFullName = fullNameText?.lowercaseString
-            }
-            theProfileImageButtonOverlay.setImage(nil, forState: .Normal)
-            if imageWasChanged {
-                let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(profileImage.image!, 0.6)!)
-                userOfTheCard!.profileImage = file
-            }
-            if titleTextFieldDidChange {
-                userOfTheCard?.title = titleTextField.text
-            }
-            theFullNameTextField.userInteractionEnabled = false
-            titleTextField.userInteractionEnabled = false
-            theSavingSpinner.hidden = false
-            theSavingSpinner.startAnimating()
-            userOfTheCard?.saveInBackgroundWithBlock({ (success, error) in
-                if success {
-                    self.theSavingSpinner.stopAnimating()
-                    self.theSavingSpinner.hidden = true
-                    self.editOrBackOrSaveButton.setTitle("Edit", forState: .Normal)
-                } else {
-                    let _ = Alert(title: "Problem Saving Profile", subtitle: "Please try to save again", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
-                }
-            })
-            questionDetailState = .ProfileViewOnlyMode
-        case .ProfileViewOnlyMode:
-            //the user is on the profile page, but not currently wanting to edit anything. Only looking.
-                titleTextField.userInteractionEnabled = true
-                theFullNameTextField.userInteractionEnabled = true
-                editOrBackOrSaveButton.setTitle("Save", forState: .Normal)
-                questionDetailState = .EditingMode
-                setEditingGUI()
-        case .OtherUserProfileViewOnlyMode:
-            //the user is on the normal card view and looking at another user. This just dismisses the detail view back to the card stack
-            self.dismissViewControllerAnimated(false, completion: nil)
-        }
+    @IBAction func backButtonPressed(sender: AnyObject) {
+        self.dismissViewControllerAnimated(false, completion: nil)
     }
+    
     
     @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
         let alert = Alert(closeButtonHidden: false)
@@ -102,44 +53,9 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
-    func createDetailPopUp(factNumber: Fact) {
-        //look at STPopUp github for more info.
-        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier("UserDetailPopUpViewController") as! UserDetailPopUpViewController
-        vc.delegate = self
-        vc.factNumber = factNumber
-        switch factNumber {
-        case .FactOne:
-            vc.factDescriptionText = theFirstBulletText.text
-        case .FactTwo:
-            vc.factDescriptionText = theSecondBulletText.text
-        case .FactThree:
-            vc.factDescriptionText = theThirdBulletText.text
-        }
-        let popup = STPopupController(rootViewController: vc)
-        popup.containerView.layer.cornerRadius = 10.0
-        popup.navigationBar.barTintColor = ChachaTeal
-        popup.navigationBar.tintColor = UIColor.whiteColor()
-        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        popup.presentInViewController(self)
-    }
-    
-    func createBottomPicturePopUp() {
-        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-        let vc = storyboard.instantiateViewControllerWithIdentifier(StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
-        vc.bottomPicturePopUpViewControllerDelegate = self
-        vc.profileImageSize = self.profileImage.frame.size
-        let popup = STPopupController(rootViewController: vc)
-        popup.navigationBar.barTintColor = ChachaTeal
-        popup.navigationBar.tintColor = UIColor.whiteColor()
-        popup.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
-        popup.style = STPopupStyle.BottomSheet
-        popup.presentInViewController(self)
-    }
-    
     func setNormalGUI() {
         self.view.layer.addSublayer(setBottomBlur())
-        editOrBackOrSaveButton.layer.cornerRadius = 10
+        theBackButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }
@@ -149,17 +65,15 @@ class CardDetailViewController: UIViewController {
         if let age = userOfTheCard?.age {
             theAgeLabel.text = ", " + "\(age)"
         }
+        let bulletPointViewWidth = theBulletPointsStackView.frame.width
         if let factOne = userOfTheCard?.bulletPoint1 {
-            theFirstBulletText.text = factOne
+            bulletPointSetup(factOne, width: bulletPointViewWidth)
         }
         if let factTwo = userOfTheCard?.bulletPoint2 {
-            theSecondBulletText.text = factTwo
+            bulletPointSetup(factTwo, width: bulletPointViewWidth)
         }
         if let factThree = userOfTheCard?.bulletPoint3 {
-            theThirdBulletText.text = factThree
-        }
-        if questionDetailState == .ProfileViewOnlyMode {
-            editOrBackOrSaveButton.setTitle("edit", forState: .Normal)
+            bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
         if let profileImage = userOfTheCard?.profileImage {
             self.profileImage.file = profileImage
@@ -171,104 +85,21 @@ class CardDetailViewController: UIViewController {
         }
     }
     
-    func setEditingGUI() {
-        //to see if any of the textfields have actually been changed.
-        theFullNameTextField.addTarget(self, action: #selector(CardDetailViewController.fullNameTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        titleTextField.addTarget(self, action: #selector(CardDetailViewController.titleTextFieldDidChange(_:)), forControlEvents: UIControlEvents.EditingChanged)
-        
-        if let fullName = userOfTheCard?.fullName {
-            theFullNameTextField.text = fullName
-        }
-        if let age = userOfTheCard?.age {
-            theAgeLabel.text = ", " + "\(age)"
-        }
-        if let title = userOfTheCard?.title {
-            titleTextField.text = title
-        }
-        theProfileImageButtonOverlay.setImage(UIImage(named: "camera-Colored"), forState: .Normal)
-//        theProfileImageButtonOverlay.setTitle("", forState: .Normal)
-        self.theFullNameLabel.hidden = true
-        self.theFullNameTextField.hidden = false
-        self.titleTextField.hidden = false
-        theFullNameTextField.attributedPlaceholder = NSAttributedString(string: "Full Name", attributes: [NSForegroundColorAttributeName: ChachaTeal])
-        theTitleLabel.hidden = true
-        theCustomQuestionButton.setTitle("Set Filters", forState: .Normal)
+    func bulletPointSetup(text: String, width: CGFloat) {
+        let bulletPointView = BulletPointView(text: text, width: width)
+        theBulletPointsStackView.addArrangedSubview(bulletPointView)
     }
-    
-    func fullNameTextFieldDidChange(textField: UITextField) {
-        fullNameTextFieldDidChange = true
-    }
-    
-    func titleTextFieldDidChange(textField: UITextField) {
-        titleTextFieldDidChange = true
-    }
-    
-    
     
     private func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
-            if self.questionDetailState == .OtherUserProfileViewOnlyMode {
-                self.dismissViewControllerAnimated(false, completion: nil)
-            } else if self.questionDetailState == .EditingMode {
-                //put image picker/camera picker here
-                self.createBottomPicturePopUp()
-            }
+            self.dismissViewControllerAnimated(false, completion: nil)
         }
-        
-        theAgeLabel.tapped { _ in
-            if self.questionDetailState == .EditingMode {
-                DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .Date) {
-                    (birthday) -> Void in
-                    let calendar : NSCalendar = NSCalendar.currentCalendar()
-                    let now = NSDate()
-                    let ageComponents = calendar.components(.Year,
-                        fromDate: birthday,
-                        toDate: now,
-                        options: [])
-                    self.theAgeLabel.text = ", " + "\(ageComponents.year)"
-                    self.userOfTheCard?.birthDate = birthday
-                    self.userOfTheCard?.saveInBackground()
-                }
-            }
-        }
-        
-            theFirstBulletText.tapped { (_) in
-                if self.questionDetailState == .EditingMode {
-                    self.createDetailPopUp(Fact.FactOne)
-                }
-            }
-            
-            theSecondBulletText.tapped { (_) in
-                if self.questionDetailState == .EditingMode {
-                    self.createDetailPopUp(Fact.FactTwo)
-                }
-            }
-            
-            theThirdBulletText.tapped { (_) in
-                if self.questionDetailState == .EditingMode {
-                    self.createDetailPopUp(Fact.FactThree)
-                }
-            }
     }
     
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
 
-}
-
-protocol PopUpViewControllerDelegate{
-    func passFactDescription(text: String, fact: Fact)
-}
-
-extension CardDetailViewController: PopUpViewControllerDelegate {
-    func passFactDescription(text: String, fact: Fact) {
-        switch fact {
-        case .FactOne: theFirstBulletText.text = text
-        case .FactTwo: theSecondBulletText.text = text
-        case .FactThree: theThirdBulletText.text = text
-        }
-    }
 }
 
 extension CardDetailViewController: MagicMoveable {
@@ -287,27 +118,5 @@ extension CardDetailViewController: MagicMoveable {
     
     var magicViews: [UIView] {
         return [profileImage]
-    }
-}
-
-extension CardDetailViewController: BottomPicturePopUpViewControllerDelegate {
-    func passImage(image: UIImage) {
-        imageWasChanged = true
-        profileImage.image = image
-    }
-}
-
-
-extension CardDetailViewController: SegueHandlerType {
-    enum SegueIdentifier: String {
-        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case LogInPageSegue
-        case CardDetailPageToQuestionPageSegue
-    }
-    
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        switch segueIdentifierForSegue(segue) {
-        default: break
-        }
     }
 }
