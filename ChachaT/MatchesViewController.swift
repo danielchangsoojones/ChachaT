@@ -12,6 +12,9 @@ import Parse
 class MatchesViewController: UIViewController {
     private struct MatchesConstants {
         static let numberOfSections : Int = 2
+        static let heightForSectionHeader : CGFloat = 40
+        static let sectionZeroHeadingTitle : String = "Matches"
+        static let sectionOneHeadingTitle : String = "Messages"
     }
     
     @IBOutlet weak var theTableView: UITableView!
@@ -60,13 +63,23 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
-        return 50
+        return MatchesConstants.heightForSectionHeader
     }
     
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
-        let view = UIView(frame: CGRect(x: 0, y: 0, w: 300, h: 300))
-        view.backgroundColor = UIColor.yellowColor()
-        return view
+        if section == 0 {
+            //the matches area
+            let notificationNumber = matchedUsers.count
+            let headingView = HeadingView(text: MatchesConstants.sectionZeroHeadingTitle, notificationNumber: notificationNumber)
+            return headingView
+        } else if section == 1 {
+            //the messaging area
+            //TODO: the notification number should really be the number of total chats. So, if another user sent 30 messages, it only shows up as one chat cell, but it should still have a total count of 20. So, that means we have to pass an array of chats from dataStore that are in another array called samePersonNotification or something.
+            let notificationNumber = chats.count
+            let headingView = HeadingView(text: MatchesConstants.sectionOneHeadingTitle, notificationNumber: notificationNumber)
+            return headingView
+        }
+        return nil
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
