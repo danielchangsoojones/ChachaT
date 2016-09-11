@@ -8,7 +8,7 @@
         <!--Matches View Controller-->
         <scene sceneID="30Z-pb-IYp">
             <objects>
-                <viewController storyboardIdentifier="MatchesViewController" id="2aZ-bn-jtV" customClass="MatchesViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="MatchesViewController" automaticallyAdjustsScrollViewInsets="NO" id="2aZ-bn-jtV" customClass="MatchesViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="5fT-s5-ens"/>
                         <viewControllerLayoutGuide type="bottom" id="VwA-Qo-Cis"/>
