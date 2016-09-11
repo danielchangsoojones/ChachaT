@@ -90,7 +90,11 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         if currentSection == 1 {
             //the messaging area
             let currentChat = chats[currentRow]
-            segueToChatVC(currentChat.receiver)
+            currentChat.readByReceiver = true //after they click the cell to see messages, then that means they have read it.
+            currentChat.saveInBackground()
+            //the otherUser should be whichever one the currentUser is not
+            let otherUser : User = currentChat.sender == User.currentUser() ? currentChat.receiver : currentChat.sender
+            segueToChatVC(otherUser)
         }
     }
 }

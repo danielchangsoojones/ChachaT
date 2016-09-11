@@ -17,5 +17,6 @@ class Chat: PFObject, PFSubclassing {
     @NSManaged var chatRoom : String
     @NSManaged var sender : User
     @NSManaged var receiver : User //not sure if having user receiver is scalable for group chats
+    @NSManaged var readByReceiver : Bool
     @NSManaged var chatText : String
 }

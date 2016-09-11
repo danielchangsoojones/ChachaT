@@ -91,5 +91,6 @@ class ChatTableViewCell: UITableViewCell {
             make.top.equalTo(theTimeStamp.snp_bottom)
             make.trailing.equalTo(self)
         }
+        theUnreadNotificationBubble.hidden = chat.readByReceiver //if the user has already read this message, then don't show the unread bubble
     }
 }
