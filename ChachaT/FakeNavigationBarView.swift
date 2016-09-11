@@ -80,6 +80,9 @@ class FakeNavigationBarView : UIView {
         let item2 = ExpandingMenuItem(size: nil, title: "Add Tags", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToAddingTagsPage()
         }
+        let item3 = ExpandingMenuItem(size: nil, title: "Messaging", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+            self.delegate?.segueToMatchesPage()
+        }
         
 //        let item2 = ExpandingMenuItem(size: nil, title: "Place", image: UIImage(named: "chooser-moment-icon-place")!, highlightedImage: UIImage(named: "chooser-moment-icon-place-highlighted")!, backgroundImage: UIImage(named: "chooser-moment-button"), backgroundHighlightedImage: UIImage(named: "chooser-moment-button-highlighted")) { () -> Void in
 //            print("Place")
@@ -100,8 +103,7 @@ class FakeNavigationBarView : UIView {
         
         expandingMenuButton.expandingDirection = .Bottom
         expandingMenuButton.menuTitleDirection = .Right
-        expandingMenuButton.addMenuItems([item1, item2])
-    
+        expandingMenuButton.addMenuItems([item1, item2, item3])
     }
     
     //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.
@@ -122,6 +124,7 @@ class FakeNavigationBarView : UIView {
 protocol FakeNavigationBarDelegate {
     func rightBarButtonPressed(sender: UIButton!)
     func segueToAddingTagsPage()
+    func segueToMatchesPage()
     func logOut()
 }
 
@@ -132,6 +135,10 @@ extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     
     func segueToAddingTagsPage() {
         performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue, sender: nil)
+    }
+    
+    func segueToMatchesPage() {
+        performSegueWithIdentifier(.BackgroundAnimationToMatchesSegue, sender: nil)
     }
     
     func logOut() {

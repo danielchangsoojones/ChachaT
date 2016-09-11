@@ -1,0 +1,54 @@
+//
+//  CircleView.swift
+//  ChachaT
+//
+//  Created by Daniel Jones on 9/9/16.
+//  Copyright © 2016 Chong500Productions. All rights reserved.
+//
+
+import Foundation
+
+class CircleView : UIView {
+    var theDiameter: CGFloat = 0
+    var theImageView = UIImageView()
+    
+    init(diameter: CGFloat) {
+        super.init(frame: CGRectZero)
+        self.theDiameter = diameter
+        imageViewSetup()
+        makeCircular(theImageView, diameter: diameter)
+    }
+    
+    //init for just a circle with color
+    convenience init(diameter: CGFloat, color: UIColor) {
+        self.init(diameter: diameter)
+        theImageView.backgroundColor = color
+    }
+    
+    convenience init(file: AnyObject?, diameter: CGFloat) {
+        self.init(diameter: diameter)
+        theImageView.loadFromFile(file)
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func imageViewSetup() {
+        theImageView.backgroundColor = UIColor.grayColor() //in case no picture, it just shows grey
+        self.addSubview(theImageView)
+        theImageView.snp_makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
+    }
+    
+    func makeCircular(view: UIView, diameter: CGFloat) {
+        theImageView.setCornerRadius(radius: diameter / 2)
+        theImageView.clipsToBounds = true
+    }
+    
+    //when the CircleView is shown on superview. This is how it calculates its height and width. Normally, UIView's have no intrinsic contentSize, so needed to be overrided.
+    override func intrinsicContentSize() -> CGSize {
+        return CGSize(width: theDiameter,height: theDiameter)
+    }
+}

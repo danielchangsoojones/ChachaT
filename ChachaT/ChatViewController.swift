@@ -122,7 +122,9 @@ class ChatViewController: JSQMessagesViewController {
         let chat = Chat()
         chat.chatRoom = chatroom
         chat.sender = User.currentUser()!
+        chat.receiver = otherUser
         chat.chatText = text
+        chat.readByReceiver = false
         
         chat.saveInBackgroundWithBlock { (succeeded, error) in
             if error == nil {

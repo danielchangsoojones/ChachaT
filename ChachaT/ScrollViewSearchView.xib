@@ -17,7 +17,7 @@
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
                             <rect key="frame" x="0.0" y="0.0" width="177" height="74"/>
                             <subviews>
-                                <view tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="ChachaT">
+                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="ChachaT">
                                     <rect key="frame" x="8" y="-19" width="0.0" height="112"/>
                                     <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                     <constraints>

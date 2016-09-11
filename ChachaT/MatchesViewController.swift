@@ -10,50 +10,125 @@ import UIKit
 import Parse
 
 class MatchesViewController: UIViewController {
+    private struct MatchesConstants {
+        static let numberOfSections : Int = 2
+        static let heightForSectionHeader : CGFloat = 40
+        static let sectionZeroHeadingTitle : String = "Matches"
+        static let sectionOneHeadingTitle : String = "Messages"
+    }
     
-    var matchArray : [Match] = []
+    @IBOutlet weak var theTableView: UITableView!
+    var matchedUsers : [User] = []
+    var chats : [Chat] = []
+    var dataStore : MatchDataStore!
     
     //go to messages page
     @IBAction func theButtonPressed(sender: UIButton) {
-        if !matchArray.isEmpty {
-            let match = matchArray[0]
-            let chatVC = ChatViewController()
-            chatVC.currentUser = User.currentUser()
-            chatVC.otherUser = match.targetUser
-            
-            self.navigationController?.pushViewController(chatVC, animated: true)
-        }
     }
     
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        matchesQuery()
         // Do any additional setup after loading the view.
+        navigationController?.navigationBarHidden = false
+        dataStoreSetup()
+    }
+    
+    func dataStoreSetup() {
+        dataStore = MatchDataStore(delegate: self)
+        dataStore.findMatchedUsers()
+        dataStore.findChatRooms()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func matchesQuery() {
-        // query on DateMatch
-        let query = Match.query()
-        // where currentUser is DateUser.currentUser()! and mutualMatch is true
-        query!.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
-        query!.whereKey(Constants.mutualMatch, equalTo: true)
-        // include targetUser key
-        query!.includeKey(Constants.targetUser)
-        query?.findObjectsInBackgroundWithBlock({ (matches, error) in
-            if error == nil {
-                for match in matches as! [Match] {
-                    self.matchArray.append(match)
-                }
-            } else {
-                print(error)
-            }
-        })
-    }
 
+}
+
+extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if section == 0 {
+            //the matches area
+            return 1
+        } else {
+            //the messaging area
+            return chats.count
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return MatchesConstants.numberOfSections
+    }
+    
+    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+        return MatchesConstants.heightForSectionHeader
+    }
+    
+    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+        if section == 0 {
+            //the matches area
+            let notificationNumber = matchedUsers.count
+            let headingView = HeadingView(text: MatchesConstants.sectionZeroHeadingTitle, notificationNumber: notificationNumber)
+            return headingView
+        } else if section == 1 {
+            //the messaging area
+            //TODO: the notification number should really be the number of total chats. So, if another user sent 30 messages, it only shows up as one chat cell, but it should still have a total count of 20. So, that means we have to pass an array of chats from dataStore that are in another array called samePersonNotification or something.
+            let notificationNumber = chats.count
+            let headingView = HeadingView(text: MatchesConstants.sectionOneHeadingTitle, notificationNumber: notificationNumber)
+            return headingView
+        }
+        return nil
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+        let currentRow = indexPath.row
+        let currentSection = indexPath.section
+        if currentSection == 0 {
+            //the matches area
+            let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers, delegate: self)
+            return matchesCell
+        } else {
+            //the messages area
+            let currentChat = chats[currentRow]
+            let chatCell = ChatTableViewCell(chat: currentChat)
+            return chatCell
+        }
+    }
+    
+    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
+        let currentRow = indexPath.row
+        let currentSection = indexPath.section
+        if currentSection == 1 {
+            //the messaging area
+            let currentChat = chats[currentRow]
+            currentChat.readByReceiver = true //after they click the cell to see messages, then that means they have read it.
+            currentChat.saveInBackground()
+            //the otherUser should be whichever one the currentUser is not
+            let otherUser : User = currentChat.sender == User.currentUser() ? currentChat.receiver : currentChat.sender
+            segueToChatVC(otherUser)
+        }
+    }
+}
+
+extension MatchesViewController : ScrollingMatchesCellDelegate {
+    func segueToChatVC(otherUser: User) {
+        let chatVC = ChatViewController()
+        chatVC.currentUser = User.currentUser()
+        chatVC.otherUser = otherUser
+        self.navigationController?.pushViewController(chatVC, animated: true)
+    }
+}
+
+extension MatchesViewController: MatchDataStoreDelegate {
+    func passMatchedUsers(matches: [User]) {
+        matchedUsers = matches
+        theTableView.reloadData()
+    }
+    
+    func passChats(chats: [Chat]) {
+        self.chats = chats
+        theTableView.reloadData()
+    }
 }
