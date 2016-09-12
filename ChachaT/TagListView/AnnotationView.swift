@@ -1,5 +1,5 @@
 //
-//  CornerAnnotationView.swift
+//  AnnotationView.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 7/30/16.
@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CornerAnnotationView: UIView {
+class AnnotationView: UIView {
     init() {
         super.init(frame: CGRectMake(0, 0, 20, 20))
         makeViewCircular()

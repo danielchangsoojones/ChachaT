@@ -20,7 +20,7 @@ public class SpecialtyTagView: TagView {
         self.specialtyCategoryTitle = specialtyCategoryTitle
         super.init(frame: CGRectZero)
         createFakeBorder(TagViewProperties.borderColor, borderWidth: TagViewProperties.borderWidth, cornerRadius: TagViewProperties.cornerRadius)
-        addCornerAnnotationSubview()
+        addFrontAnnotationSubview()
         if specialtyTagTitle.toString != "None" {
             //specialtyTagTitle has been set to something real
             setTitle(specialtyTagTitle.toString, forState: .Normal)
@@ -51,12 +51,12 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    func addCornerAnnotationSubview() {
-        let cornerAnnotationView = CornerAnnotationView()
+    func addFrontAnnotationSubview() {
+        let annotationView = AnnotationView()
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
-        cornerAnnotationView.userInteractionEnabled = false
-        self.addSubview(cornerAnnotationView)
-        cornerAnnotationView.snp_makeConstraints { (make) in
+        annotationView.userInteractionEnabled = false
+        self.addSubview(annotationView)
+        annotationView.snp_makeConstraints { (make) in
             make.leading.equalTo(self).offset(-5)
             make.top.equalTo(self).offset(-5)
             make.width.height.equalTo(20.0)

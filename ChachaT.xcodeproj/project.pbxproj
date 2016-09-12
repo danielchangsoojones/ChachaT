@@ -27,7 +27,7 @@
 		922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */; };
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
-		922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */; };
+		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
@@ -125,7 +125,7 @@
 		922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTagsSearchBar.swift; sourceTree = "<group>"; };
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
-		922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerAnnotationView.swift; sourceTree = "<group>"; };
+		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnnotationView.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -256,7 +256,7 @@
 		9205BA0C1D5637410080B7E2 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */,
+				922C899E1D4DA26900DE1373 /* AnnotationView.swift */,
 				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 			);
 			name = Subviews;
@@ -847,7 +847,7 @@
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
-				922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */,
+				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
