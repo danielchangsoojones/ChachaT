@@ -359,17 +359,6 @@ extension TagListView {
         let tagView = SpecialtyTagView(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
         
-        //when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
-        //So, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
-        //I couldn't change the borderWidth/borderColor in the actual specialtyTagView class because, for some reason, they were not initialized yet.
-        //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
-        attributedTagView.borderColor = nil
-        attributedTagView.borderWidth = 0
-        
-        //had to add this because I was trying to let annotation corner view appear, and it wasn't
-        //I tried putting this same code in the specialtyTagView class, but it was still masking the view, until I put it here.
-        attributedTagView.clipsToBounds = false
-        
         return addTagView(attributedTagView)
     }
     

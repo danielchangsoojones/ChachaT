@@ -38,9 +38,10 @@ class ChachaChoicesTagListView : TagListView {
     func setProperties() {
         borderColor = TagViewProperties.borderColor
         borderWidth = TagViewProperties.borderWidth
+        textFont = UIFont(name: "Helvetica Neue", size: 30)!
         textColor = TagViewProperties.textColor
         tagBackgroundColor = TagViewProperties.tagBackgroundColor
-        cornerRadius = TagViewProperties.cornerRadius
+        //TODO: to keep nice rounded circles, the cornerRadius might need to be calculated somehow, becuase as it grows, the radius is less circular.
         paddingX = TagViewProperties.paddingX //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
         paddingY = TagViewProperties.paddingY //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
         marginX = TagViewProperties.marginX //the horizontal space between TagViews
@@ -48,6 +49,8 @@ class ChachaChoicesTagListView : TagListView {
         alignment = .Center //makes the entire TagListView have a centered alignment, this isn't for text alignment
         tagSelectedBackgroundColor = TagViewProperties.borderColor
         selectedTextColor = TagViewProperties.tagInsidesColor
+        //TODO: set TextFont to struct because this is unsafe coding where if the textFont is set after this line, it won't calculate the correct height
+        cornerRadius = (textFont.pointSize + TagViewProperties.paddingY * 2) / 2 //makes the tagView have nice rounded corners, no matter size.
     }
 
 }

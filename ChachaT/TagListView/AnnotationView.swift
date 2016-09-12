@@ -8,31 +8,28 @@
 
 import Foundation
 
-class AnnotationView: UIView {
-    init() {
-        super.init(frame: CGRectMake(0, 0, 20, 20))
-        makeViewCircular()
-        createDownArrowImageView(ImageNames.DownArrow)
-        self.backgroundColor = UIColor.whiteColor()
+class AnnotationView: Circle {
+    private struct AnnotationConstants {
+        static let imageToCircleRatio : CGFloat = 0.75
+    }
+    
+    init(diameter: CGFloat, color: UIColor, imageName: String) {
+        super.init(diameter: diameter, color: color)
+        imageViewSetup(imageName)
     }
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func createDownArrowImageView(imageName: String) {
-        let arrowImageView = UIImageView(image: UIImage(named: imageName))
-        self.addSubview(arrowImageView)
-        arrowImageView.snp_makeConstraints { (make) in
+    func imageViewSetup(imageName: String) {
+        let imageView = UIImageView(image: UIImage(named: imageName))
+        imageView.contentMode = .ScaleAspectFit
+        self.addSubview(imageView)
+        imageView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
-            make.width.equalTo(self.frame.width * 0.75)
-            make.height.equalTo(self.frame.height * 0.75)
+            make.height.equalTo(self.frame.height * AnnotationConstants.imageToCircleRatio)
+            make.width.equalTo(self.frame.width * AnnotationConstants.imageToCircleRatio)
         }
-    }
-    
-    func makeViewCircular() {
-        self.layer.cornerRadius = min(self.frame.size.height, self.frame.size.width) / 2.0
-        self.clipsToBounds = true
-        self.backgroundColor = backgroundColor
     }
 }

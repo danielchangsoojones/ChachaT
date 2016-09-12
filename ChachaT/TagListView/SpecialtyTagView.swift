@@ -11,16 +11,54 @@ import UIKit
 import SnapKit
 
 public class SpecialtyTagView: TagView {
+    //when the specialtyTagView is initialized, the properties have not been set yet. So, we need to override all these variables when set.
+   //The specialtyTagView thinks its intrinsicContentSize is based upon the defualt paddingY, intsead of the manually set PaddingY, so, we say that when the paddintY is set, we want to add the annotationView, so then the annotationView height will be the same as the specialtyTagView's manually set PaddingY.
+    @IBInspectable override public var paddingY: CGFloat {
+        didSet {
+            updateOrCreateAnnotationView(annotationView)
+        }
+    }
+    
+    //Purpose: the intrinsicContentSize.height is dependent upon the textFont and the paddingY, so we don't know which will be set first. So, to protect against someone not setting PaddingY or textFont before the other. We just have the annotationView update or create depending on if the annotationView has already been created. That way, it doesn't matter which characteristic is set first. This is safe programming.
+    override var textFont: UIFont {
+        didSet {
+            updateOrCreateAnnotationView(annotationView)
+        }
+    }
+    
+    public override var cornerRadius: CGFloat {
+        didSet {
+            fakeBorder.layer.cornerRadius = cornerRadius
+        }
+    }
+    
+    public override var borderWidth: CGFloat {
+        didSet {
+            //get rid of the actual border, so we can show the fake border
+            //The fake border doesn't overlap other views, it goes beneath
+            fakeBorder.layer.borderWidth = self.borderWidth
+            super.borderWidth = 0
+        }
+    }
+    
+    public override var borderColor: UIColor? {
+        didSet {
+            fakeBorder.layer.borderColor = borderColor?.CGColor
+        }
+    }
     
     var specialtyTagTitle : SpecialtyTagTitles
     var specialtyCategoryTitle : SpecialtyCategoryTitles
+    
+    var annotationView: AnnotationView?
+    var fakeBorder: UIView!
     
     init(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         self.specialtyTagTitle = specialtyTagTitle
         self.specialtyCategoryTitle = specialtyCategoryTitle
         super.init(frame: CGRectZero)
-        createFakeBorder(TagViewProperties.borderColor, borderWidth: TagViewProperties.borderWidth, cornerRadius: TagViewProperties.cornerRadius)
-        addFrontAnnotationSubview()
+        createFakeBorder()
+        //TODO: should keep the view's only job to display things, not logic
         if specialtyTagTitle.toString != "None" {
             //specialtyTagTitle has been set to something real
             setTitle(specialtyTagTitle.toString, forState: .Normal)
@@ -35,31 +73,37 @@ public class SpecialtyTagView: TagView {
     }
     
     //Purpose: when I was using the real tag border, it was going above the corner annotation because the border is drawn after all subviews are added.
-    //So, in the addSpecialtyTagMethod, I had to make the borderWidth = 0 and borderColor = nil, getting rid of actual border
-    //I couldn't change the borderWidth/borderColor in this class because, for some reason, they were not initialized yet. 
-    //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the corner annotation.
-    func createFakeBorder(borderColor: UIColor, borderWidth: CGFloat, cornerRadius: CGFloat) {
-        let view = UIView(frame: self.frame)
-        view.layer.borderWidth = borderWidth
-        view.layer.borderColor = borderColor.CGColor
-        view.layer.cornerRadius = cornerRadius
+    //So, in the borderWidth didSet method above, I make the borderWidth = 0 getting rid of the actual border.
+    //So, then I create this border view, that looks like all the other borders, but is actually its own view, and this fake border does not cover the annotationView.
+    func createFakeBorder() {
+        fakeBorder = UIView(frame: self.frame)
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
-        view.userInteractionEnabled = false
-        self.addSubview(view)
-        view.snp_makeConstraints { (make) in
+        fakeBorder.userInteractionEnabled = false
+        self.addSubview(fakeBorder)
+        fakeBorder.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }
     
-    func addFrontAnnotationSubview() {
-        let annotationView = AnnotationView()
+    func addAnnotationSubview() {
+        let annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: UIColor.redColor(), imageName: ImageNames.DownArrow)
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.userInteractionEnabled = false
         self.addSubview(annotationView)
         annotationView.snp_makeConstraints { (make) in
-            make.leading.equalTo(self).offset(-5)
-            make.top.equalTo(self).offset(-5)
-            make.width.height.equalTo(20.0)
+            make.leading.equalTo(self)
+            make.centerY.equalTo(self)
+        }
+    }
+    
+    //Purpose: the characteristics of the tagView are not created on initilization. So, we need to update or create the annotationView, depending on if it was already created or not.
+    func updateOrCreateAnnotationView(annotationView: AnnotationView?) {
+        if let annotationView = annotationView {
+            //theAnnotationView has been made already, but not with the updated characteristics, so we must remove the annotationView and remake it.
+            annotationView.updateDiameter(self.intrinsicContentSize().height)
+        } else {
+            //the annotationView has not been created yet or has been removed from superview, and we must re-add it.
+            addAnnotationSubview()
         }
     }
     
