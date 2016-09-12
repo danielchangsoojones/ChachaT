@@ -17,7 +17,7 @@ class CustomTagsSearchBar: UISearchBar {
         super.init(frame: CGRectZero) //will get set via snapkit constraints
         placeholder = placeHolderText
         tintColor = UIColor(CGColor: preferredBorderColor) //makes the cancel button of search bar and keyboard cursor a certain color
-        showsCancelButton = true
+        enableCancelButton(self)
         setSearchIcon()
     }
     
@@ -108,5 +108,18 @@ class CustomTagsSearchBar: UISearchBar {
         return index
     }
     
-
+    //This is a hacky way to do things. But, by defualt, a UISearchBar only lets the cancelButton be clickable when the firstResponder is active. But, we want the cancel button to be a way for the user to exit the page. So, when the user was coming to the search page at first, and if they tried to click cancel, it wasn't responding. The user had to hit the searchBar TextField, which would bring up the first responder, and then they could hit cancel. This function fixes things and lets the cancel button be pushed the first time. 
+    func enableCancelButton (searchBar : UISearchBar) {
+        showsCancelButton = true
+        for view1 in searchBar.subviews {
+            for view2 in view1.subviews {
+                if view2.isKindOfClass(UIButton) {
+                    let button = view2 as! UIButton
+                    button.enabled = true
+                    button.userInteractionEnabled = true
+                }
+            }
+        }
+    }
+    
 }

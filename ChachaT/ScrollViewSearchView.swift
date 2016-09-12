@@ -75,11 +75,6 @@ class ScrollViewSearchView: UIView {
         }
     }
     
-//    func createCircularBorder(button: UIButton) {
-//        let cornerRadius = button.frame.size.width / 2
-//        self.profileImageView.clipsToBounds = YES;
-//    }
-    
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     //TODO: I probably need to update the tagview to have remove button enabled.
     func rearrangeSearchArea(tagView: TagView, extend: Bool) {
