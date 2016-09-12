@@ -201,7 +201,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
-        searchBar.showsCancelButton = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -210,8 +209,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
         resetTagChoicesViewList()
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
@@ -224,7 +221,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false
-        searchBar.showsCancelButton = false
         for tagView in tagChoicesView.selectedTags() {
             if let currentTitle = tagView.currentTitle {
                 addTagToChosenTagListView(currentTitle)

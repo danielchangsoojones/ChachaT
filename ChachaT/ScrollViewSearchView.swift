@@ -31,6 +31,8 @@ class ScrollViewSearchView: UIView {
     var searchBarDelegate: UISearchBarDelegate?
     var scrollViewSearchViewDelegate: ScrollViewSearchViewDelegate?
     
+    var firstAppearance = true
+    
     @IBAction func searchButtonTapped(sender: UIButton) {
         hideScrollSearchView(true)
     }
@@ -44,10 +46,23 @@ class ScrollViewSearchView: UIView {
     }
     
     func hideScrollSearchView(hide: Bool) {
+        if firstAppearance {
+            firstAppearance = false
+        } else {
+            //this is not the first time the searchBar is being shown
+            toggleFirstResponder(hide)
+        }
         theScrollView.hidden = hide
         searchBox.hidden = !hide
     }
     
+    func toggleFirstResponder(becomeResponder: Bool) {
+        if becomeResponder {
+            searchBox.becomeFirstResponder()
+        } else {
+            resignFirstResponder()
+        }
+    }
     
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
