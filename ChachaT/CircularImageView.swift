@@ -8,7 +8,7 @@
 
 import Foundation
 
-class CircularImageView: Circle {
+class CircularImageView: CircleView {
     var theImageView = UIImageView()
     
     init(file: AnyObject?, diameter: CGFloat) {

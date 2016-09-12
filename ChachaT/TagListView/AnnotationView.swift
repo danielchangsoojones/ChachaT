@@ -8,7 +8,7 @@
 
 import Foundation
 
-class AnnotationView: Circle {
+class AnnotationView: CircleView {
     private struct AnnotationConstants {
         static let imageToCircleRatio : CGFloat = 0.75
     }
