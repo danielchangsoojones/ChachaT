@@ -231,6 +231,7 @@ extension TagView {
     
     //Purpose: the search bar text field needs to calculate height to the same height as the tagViews. Like in 8tracks
     static func getTagViewHeight(paddingY: CGFloat) -> CGFloat {
+        //TODO: this textFont is not based upon the actual textSize just a constant, unsafe programming because what if someone updates the textFont, this wouldn't be updated.
         let textFont : UIFont = UIFont.systemFontOfSize(12)
         return textFont.pointSize + paddingY * 2 //this is the tagView height
     }

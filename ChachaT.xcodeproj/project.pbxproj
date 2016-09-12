@@ -27,7 +27,7 @@
 		922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */; };
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
-		922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */; };
+		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
@@ -90,12 +90,13 @@
 		92B8DF3B1CE935B500AFA518 /* libsqlite3.tbd in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */; };
 		92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB4F1D83510E00E05C05 /* Matches.storyboard */; };
 		92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB571D837DD700E05C05 /* CircleProfileView.swift */; };
-		92BCEB5A1D837F7400E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB591D837F7400E05C05 /* CircleView.swift */; };
 		92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */; };
 		92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */; };
 		92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */; };
 		92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB651D856C2E00E05C05 /* HeadingView.swift */; };
 		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
+		92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6E1D87115B00E05C05 /* CircleView.swift */; };
+		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -125,7 +126,7 @@
 		922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomTagsSearchBar.swift; sourceTree = "<group>"; };
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
-		922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CornerAnnotationView.swift; sourceTree = "<group>"; };
+		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -191,12 +192,13 @@
 		92B8DF3A1CE935B500AFA518 /* libsqlite3.tbd */ = {isa = PBXFileReference; lastKnownFileType = "sourcecode.text-based-dylib-definition"; name = libsqlite3.tbd; path = usr/lib/libsqlite3.tbd; sourceTree = SDKROOT; };
 		92BCEB4F1D83510E00E05C05 /* Matches.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Matches.storyboard; sourceTree = "<group>"; };
 		92BCEB571D837DD700E05C05 /* CircleProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleProfileView.swift; sourceTree = "<group>"; };
-		92BCEB591D837F7400E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircleView.swift; sourceTree = "<group>"; };
 		92BCEB5B1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoGrowingHorizontalScrollView.swift; sourceTree = "<group>"; };
 		92BCEB5D1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollingMatchesTableViewCell.swift; sourceTree = "<group>"; };
 		92BCEB621D84B16100E05C05 /* ChatTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatTableViewCell.swift; sourceTree = "<group>"; };
 		92BCEB651D856C2E00E05C05 /* HeadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
+		92BCEB6E1D87115B00E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircleView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -256,7 +258,7 @@
 		9205BA0C1D5637410080B7E2 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				922C899E1D4DA26900DE1373 /* CornerAnnotationView.swift */,
+				922C899E1D4DA26900DE1373 /* AnnotationView.swift */,
 				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 			);
 			name = Subviews;
@@ -643,7 +645,8 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
-				92BCEB591D837F7400E05C05 /* CircleView.swift */,
+				92BCEB701D87457000E05C05 /* CircularImageView.swift */,
+				92BCEB6E1D87115B00E05C05 /* CircleView.swift */,
 			);
 			name = "Circle Views";
 			sourceTree = "<group>";
@@ -847,12 +850,13 @@
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
-				922C899F1D4DA26900DE1373 /* CornerAnnotationView.swift in Sources */,
+				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
 				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
+				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
@@ -873,7 +877,6 @@
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
-				92BCEB5A1D837F7400E05C05 /* CircleView.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
@@ -883,6 +886,7 @@
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
+				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,

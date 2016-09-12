@@ -21,7 +21,7 @@ class CircleProfileView: UIView {
     }
     
     func circleViewSetup(diameter: CGFloat, file: AnyObject) {
-        circleView = CircleView(file: file, diameter: diameter)
+        circleView = CircularImageView(file: file, diameter: diameter)
         self.addSubview(circleView)
         circleView.snp_makeConstraints { (make) in
             make.center.equalTo(self)

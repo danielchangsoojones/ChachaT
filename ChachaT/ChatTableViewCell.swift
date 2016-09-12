@@ -12,7 +12,7 @@ import Timepiece
 class ChatTableViewCell: UITableViewCell {
     
     var theNameLabel : UILabel = UILabel()
-    var theCircleView : CircleView!
+    var theCircleImageView : CircularImageView!
     var theTimeStamp : UILabel = UILabel()
     var theMessagePreviewLabel : UILabel = UILabel()
     var theUnreadNotificationBubble : CircleView!
@@ -40,9 +40,9 @@ class ChatTableViewCell: UITableViewCell {
     func profileCircleSetup() {
         //TODO: the diameter for this should be the same as the diameter for the scrolling matches view
         let diameter : CGFloat = self.frame.width * 0.2
-        theCircleView = CircleView(file: user.profileImage, diameter: diameter)
-        self.addSubview(theCircleView)
-        theCircleView.snp_makeConstraints { (make) in
+        theCircleImageView = CircularImageView(file: user.profileImage, diameter: diameter)
+        self.addSubview(theCircleImageView)
+        theCircleImageView.snp_makeConstraints { (make) in
             make.centerY.equalTo(self)
             //TODO: make this offset make it line up with the other matches scroll view bubbles
             make.leading.equalTo(self).offset(10)
@@ -56,8 +56,8 @@ class ChatTableViewCell: UITableViewCell {
         self.addSubview(theNameLabel)
         theNameLabel.snp_makeConstraints { (make) in
             //TODO: line up the top of timestamp and the top of the nameLabel
-            make.top.equalTo(theCircleView).offset(10)
-            make.leading.equalTo(theCircleView.snp_trailing)
+            make.top.equalTo(theCircleImageView).offset(10)
+            make.leading.equalTo(theCircleImageView.snp_trailing)
             make.trailing.equalTo(theTimeStamp.snp_leading)
         }
     }
