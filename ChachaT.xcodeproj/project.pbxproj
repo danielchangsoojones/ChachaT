@@ -97,6 +97,7 @@
 		92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB651D856C2E00E05C05 /* HeadingView.swift */; };
 		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
 		92BCEB6F1D87115B00E05C05 /* Circle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6E1D87115B00E05C05 /* Circle.swift */; };
+		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -199,6 +200,7 @@
 		92BCEB651D856C2E00E05C05 /* HeadingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeadingView.swift; sourceTree = "<group>"; };
 		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
 		92BCEB6E1D87115B00E05C05 /* Circle.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Circle.swift; sourceTree = "<group>"; };
+		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CircularImageView.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -647,6 +649,7 @@
 				92BCEB571D837DD700E05C05 /* CircleProfileView.swift */,
 				92BCEB591D837F7400E05C05 /* CircleView.swift */,
 				92BCEB6E1D87115B00E05C05 /* Circle.swift */,
+				92BCEB701D87457000E05C05 /* CircularImageView.swift */,
 			);
 			name = "Circle Views";
 			sourceTree = "<group>";
@@ -887,6 +890,7 @@
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
+				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
