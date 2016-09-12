@@ -38,7 +38,6 @@ class ChachaChoicesTagListView : TagListView {
     func setProperties() {
         borderColor = TagViewProperties.borderColor
         borderWidth = TagViewProperties.borderWidth
-        textFont = UIFont(name: "Helvetica Neue", size: 30)!
         textColor = TagViewProperties.textColor
         tagBackgroundColor = TagViewProperties.tagBackgroundColor
         //TODO: to keep nice rounded circles, the cornerRadius might need to be calculated somehow, becuase as it grows, the radius is less circular.

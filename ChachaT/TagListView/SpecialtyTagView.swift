@@ -46,6 +46,13 @@ public class SpecialtyTagView: TagView {
             fakeBorder.layer.borderColor = borderColor?.CGColor
         }
     }
+
+    public override var paddingX: CGFloat {
+        didSet {
+            let annotationViewDiameter = intrinsicContentSize().height
+            titleEdgeInsets.left = paddingX + annotationViewDiameter
+        }
+    }
     
     var specialtyTagTitle : SpecialtyTagTitles
     var specialtyCategoryTitle : SpecialtyCategoryTitles
@@ -56,16 +63,15 @@ public class SpecialtyTagView: TagView {
     init(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) {
         self.specialtyTagTitle = specialtyTagTitle
         self.specialtyCategoryTitle = specialtyCategoryTitle
-        super.init(frame: CGRectZero)
-        createFakeBorder()
         //TODO: should keep the view's only job to display things, not logic
         if specialtyTagTitle.toString != "None" {
             //specialtyTagTitle has been set to something real
-            setTitle(specialtyTagTitle.toString, forState: .Normal)
+            super.init(title: specialtyTagTitle.toString)
         } else {
             //tag title equals none, so make the title something like "Race" or "Hair Color"
-            setTitle(specialtyCategoryTitle.rawValue, forState: .Normal)
+            super.init(title: specialtyCategoryTitle.rawValue)
         }
+        createFakeBorder()
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -86,7 +92,7 @@ public class SpecialtyTagView: TagView {
     }
     
     func addAnnotationSubview() {
-        let annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: UIColor.redColor(), imageName: ImageNames.DownArrow)
+        let annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: TagViewProperties.borderColor, imageName: ImageNames.DownArrow)
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.userInteractionEnabled = false
         self.addSubview(annotationView)
@@ -118,6 +124,13 @@ public class SpecialtyTagView: TagView {
                 self.specialtyCategoryTitle = specialtyCategoryTitle
             }
         }
+    }
+    
+    public override func intrinsicContentSize() -> CGSize {
+        let height = super.intrinsicContentSize().height //height is still calculated like a normal tagView
+        let annotationViewDiameter = height
+        let width = super.intrinsicContentSize().width + annotationViewDiameter
+        return CGSize(width: width, height: height)
     }
     
 }
