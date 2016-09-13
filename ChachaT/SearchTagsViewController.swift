@@ -141,6 +141,7 @@ extension SearchTagsViewController : TagListViewDelegate {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        resetTagChoicesViewList()
         if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
             //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
             theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
@@ -173,6 +174,10 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
         //Right Now, I am just sending empty user array, so it will work. 
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: [])
     }
+    
+    func scrollViewSearchViewTapOccurred() {
+        dropDownMenu.hide()
+    }
 }
 
 //search extension
@@ -201,7 +206,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
         searchActive = true
-        searchBar.showsCancelButton = true
     }
     
     func searchBarTextDidEndEditing(searchBar: UISearchBar) {
@@ -210,8 +214,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(searchBar: UISearchBar) {
         searchActive = false
-        searchBar.showsCancelButton = false
-        searchBar.resignFirstResponder()
         resetTagChoicesViewList()
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
@@ -224,13 +226,14 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
         searchActive = false
-        searchBar.showsCancelButton = false
         for tagView in tagChoicesView.selectedTags() {
             if let currentTitle = tagView.currentTitle {
                 addTagToChosenTagListView(currentTitle)
             }
         }
     }
+    
+    
 }
 
 extension SearchTagsViewController: SegueHandlerType {

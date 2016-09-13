@@ -15,6 +15,9 @@ protocol ChachaDropDownMenuDelegate {
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
 class ChachaDropDownMenu: UIView {
+    private struct DropDownConstants {
+        static let dropDownBackgroundColor: UIColor = UIColor.whiteColor()
+    }
     
     let springWithDamping : CGFloat = 0.7
     let initialSpringVelocity : CGFloat = 0.5
@@ -96,7 +99,7 @@ class ChachaDropDownMenu: UIView {
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
         dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
-        dropDownView.backgroundColor = BackgroundPageColor
+        dropDownView.backgroundColor = DropDownConstants.dropDownBackgroundColor
         self.arrowImage = setArrowImageToView(dropDownView)
         
         // Add background view & table view to container view
@@ -155,6 +158,7 @@ class ChachaDropDownMenu: UIView {
         self.menuWrapper.frame.origin.y = dropDownOriginY
         
         self.isShown = true
+        resignFirstResponder() //don't want a keyboard up when the menu gets shown.
         
         // Visible menu view
         self.menuWrapper.hidden = false
@@ -269,7 +273,7 @@ class ChachaDropDownMenu: UIView {
     }
     
     func setArrowImageToView(superView: UIView) -> UIImageView {
-        let arrowImage = UIImageView(image: UIImage(named: "DropDownUpArrow"))
+        let arrowImage = UIImageView(image: UIImage(named: ImageNames.dropDownUpArrow))
         arrowImage.contentMode = .ScaleAspectFit
         let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
         arrowImage.addGestureRecognizer(tap)
@@ -287,15 +291,6 @@ class ChachaDropDownMenu: UIView {
     
     func arrowImagePressed(sender: UIImageView!) {
         hide()
-    }
-    
-    func addDropDownBackground() {
-        let backgroundView = UIView()
-        backgroundView.backgroundColor = ChachaTeal
-        dropDownView.addSubview(backgroundView)
-        backgroundView.snp_makeConstraints { (make) in
-            make.edges.equalTo(dropDownView)
-        }
     }
     
     func getDropDownViewHeight() -> CGFloat {
@@ -324,7 +319,7 @@ class ChachaDropDownMenu: UIView {
         func defaultValue() {
             self.animationDuration = 0.5
             self.maskBackgroundColor = UIColor.blackColor()
-            self.maskBackgroundOpacity = 0.3
+            self.maskBackgroundOpacity = 0.6
         }
     }
 }
