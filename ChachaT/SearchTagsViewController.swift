@@ -231,6 +231,8 @@ extension SearchTagsViewController : UISearchBarDelegate {
             }
         }
     }
+    
+    
 }
 
 extension SearchTagsViewController: SegueHandlerType {
