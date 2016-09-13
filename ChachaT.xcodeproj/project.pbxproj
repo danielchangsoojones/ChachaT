@@ -97,6 +97,8 @@
 		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
 		92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6E1D87115B00E05C05 /* CircleView.swift */; };
 		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
+		92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB731D88A8DF00E05C05 /* Settings.storyboard */; };
+		92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
@@ -199,6 +201,8 @@
 		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
 		92BCEB6E1D87115B00E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircleView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		92BCEB731D88A8DF00E05C05 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
+		92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
@@ -413,6 +417,7 @@
 			children = (
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
+				92BCEB721D88A8C500E05C05 /* Setttings */,
 				928819441D286C70000A8E04 /* Profile */,
 				920BF8351D4333CA00104842 /* Messaging */,
 				920BF82C1D431C5E00104842 /* Matching */,
@@ -684,6 +689,15 @@
 			name = Subviews;
 			sourceTree = "<group>";
 		};
+		92BCEB721D88A8C500E05C05 /* Setttings */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB731D88A8DF00E05C05 /* Settings.storyboard */,
+				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
+			);
+			name = Setttings;
+			sourceTree = "<group>";
+		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -779,6 +793,7 @@
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
 				920BF8211D3FF5E300104842 /* Info.plist in Resources */,
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
+				92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
 			);
@@ -875,6 +890,7 @@
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
+				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
