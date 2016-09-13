@@ -141,6 +141,7 @@ extension SearchTagsViewController : TagListViewDelegate {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        resetTagChoicesViewList()
         if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
             //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
             theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
