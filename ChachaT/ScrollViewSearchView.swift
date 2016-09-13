@@ -12,6 +12,7 @@ import UIKit
 protocol ScrollViewSearchViewDelegate {
     func dismissPageAndPassUserArray()
     func dismissCurrentViewController()
+    func scrollViewSearchViewTapOccurred()
 }
 
 class ScrollViewSearchView: UIView {
@@ -115,6 +116,12 @@ class ScrollViewSearchView: UIView {
             let chosenTagHolderViewWidth = theTagChosenHolderView.frame.size.width
             theScrollView.setContentOffset(CGPointMake(chosenTagHolderViewWidth - screenWidth, 0), animated: true)
         }
+    }
+    
+    //Purpose: we need to override this, to tell whenever a hit occured on the view. When it does, we still let the tap pass through to the subview, but, we let the delegate know that somewhere on the view, it was hit.
+    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+        scrollViewSearchViewDelegate?.scrollViewSearchViewTapOccurred()
+        return super.hitTest(point, withEvent: event)
     }
     
     class func instanceFromNib() -> ScrollViewSearchView {

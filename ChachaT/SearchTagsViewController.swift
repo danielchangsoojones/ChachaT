@@ -173,6 +173,10 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
         //Right Now, I am just sending empty user array, so it will work. 
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: [])
     }
+    
+    func scrollViewSearchViewTapOccurred() {
+        dropDownMenu.hide()
+    }
 }
 
 //search extension

@@ -158,6 +158,7 @@ class ChachaDropDownMenu: UIView {
         self.menuWrapper.frame.origin.y = dropDownOriginY
         
         self.isShown = true
+        resignFirstResponder() //don't want a keyboard up when the menu gets shown.
         
         // Visible menu view
         self.menuWrapper.hidden = false
