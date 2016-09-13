@@ -99,9 +99,9 @@
 		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
 		92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB731D88A8DF00E05C05 /* Settings.storyboard */; };
 		92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */; };
+		92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
-		92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -203,9 +203,9 @@
 		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92BCEB731D88A8DF00E05C05 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
 		92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
+		92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationDataStore.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* FilterQueryDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = FilterQueryDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
-		92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageMainViewController.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
 		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
@@ -439,6 +439,7 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
+				92BCEB791D88BEB800E05C05 /* Data Models */,
 				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
 				92BCEB6A1D85B49900E05C05 /* Card Detail */,
@@ -603,7 +604,6 @@
 		9288194D1D2BECC8000A8E04 /* Navigation/PageView Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				92E59B031CF52CD100B0B1A4 /* PageMainViewController.swift */,
 				92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */,
 			);
 			name = "Navigation/PageView Controllers";
@@ -696,6 +696,14 @@
 				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
 			);
 			name = Setttings;
+			sourceTree = "<group>";
+		};
+		92BCEB791D88BEB800E05C05 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
@@ -861,6 +869,7 @@
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
+				92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
@@ -874,7 +883,6 @@
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
-				92E59B041CF52CD100B0B1A4 /* PageMainViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,

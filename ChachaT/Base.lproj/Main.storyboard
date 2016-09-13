@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="s5O-Gk-Yh3">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="hLe-I3-MDq">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
@@ -180,16 +180,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aa-uD-aZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1390.5" y="833"/>
-        </scene>
-        <!--Page Main View Controller-->
-        <scene sceneID="F7M-Lw-zEq">
-            <objects>
-                <pageViewController storyboardIdentifier="PageMainViewController" autoresizesArchivedViewToFullSize="NO" transitionStyle="scroll" navigationOrientation="horizontal" spineLocation="none" id="s5O-Gk-Yh3" customClass="PageMainViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
-                    <navigationItem key="navigationItem" id="bCJ-lW-7uC"/>
-                </pageViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="3zf-Dg-75B" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-448" y="387"/>
         </scene>
         <!--Card Detail View Controller-->
         <scene sceneID="Tui-ct-3pW">

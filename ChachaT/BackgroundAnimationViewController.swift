@@ -43,10 +43,8 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var userArray = [User]()
-    private var matchDataStore = MatchDataStore.sharedInstance
+    private var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var rippleHasNotBeenStarted = true
-    
-    var pageMainViewControllerDelegate: PageMainViewControllerDelegate?
     
     @IBAction func skipCard(sender: AnyObject) {
         kolodaView.swipe(.Left)
@@ -198,9 +196,9 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
         let targetUser = userArray[Int(index)]
         if direction == .Right {
-            matchDataStore.likePerson(targetUser)
+            dataStore.likePerson(targetUser)
         } else if direction == .Left {
-            matchDataStore.nopePerson(targetUser)
+            dataStore.nopePerson(targetUser)
         }
     }
     
