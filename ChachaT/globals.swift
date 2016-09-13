@@ -51,6 +51,7 @@ struct ImageNames {
     static let DownArrow = "DownArrow"
     static let SearchIcon = "SearchIcon"
     static let ChachaTealLogo = "Chacha-Teal-Logo"
+    static let dropDownUpArrow = "DropDownUpArrow"
 }
 
 struct ImportantDimensions {

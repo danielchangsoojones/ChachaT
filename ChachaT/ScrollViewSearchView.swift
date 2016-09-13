@@ -61,6 +61,7 @@ class ScrollViewSearchView: UIView {
             searchBox.becomeFirstResponder()
         } else {
             resignFirstResponder()
+            searchBox.text = ""
         }
     }
     
