@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import Pages
 import ParseFacebookUtilsV4
 
 @UIApplicationMain

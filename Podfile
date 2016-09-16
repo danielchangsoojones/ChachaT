@@ -12,7 +12,6 @@ pod 'EFTools/Basic', :git => 'https://github.com/ElevenFifty/EFTools.git', :tag 
 pod 'Parse'
 pod 'ParseUI'
 pod 'STPopup'
-pod 'Pages'
 pod "TTRangeSlider"
 pod "Timepiece"
 pod 'Ripple'
