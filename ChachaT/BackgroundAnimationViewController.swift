@@ -105,7 +105,7 @@ class BackgroundAnimationViewController: UIViewController {
         if rippleHasNotBeenStarted {
             //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
             //this makes it only appear the first run time.
-            ripple(theChachaLoadingImage.center, view: theBackgroundColorView)
+            ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.colorWithAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
     }
