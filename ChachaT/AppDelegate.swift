@@ -38,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileIndexViewController") as! ProfileIndexViewController
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
