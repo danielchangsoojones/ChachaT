@@ -142,17 +142,17 @@
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
-                        <segue destination="Z8r-2V-bSE" kind="show" identifier="BackgroundAnimationToEditProfileSegue" id="8X3-g7-6o4"/>
+                        <segue destination="Z8r-2V-bSE" kind="show" identifier="BackgroundAnimationToProfileIndexSegue" id="8X3-g7-6o4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1151.5" y="387.5"/>
         </scene>
-        <!--EditProfileViewController-->
+        <!--ProfileIndexViewController-->
         <scene sceneID="aXI-jz-yB4">
             <objects>
-                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="EditProfileViewController" id="Z8r-2V-bSE" sceneMemberID="viewController"/>
+                <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileIndexViewController" id="Z8r-2V-bSE" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnd-cT-l9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="883.5" y="803"/>

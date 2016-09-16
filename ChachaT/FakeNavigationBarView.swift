@@ -74,7 +74,7 @@ class FakeNavigationBarView : UIView {
     
     private func configureExpandingMenuButton() {
         
-        let item1 = ExpandingMenuItem(size: nil, title: "Edit Profile", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
+        let item1 = ExpandingMenuItem(size: nil, title: "Profile", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToEditProfilePage()
         }
         let item2 = ExpandingMenuItem(size: nil, title: "Add Tags", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
@@ -129,7 +129,7 @@ extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     }
     
     func segueToEditProfilePage() {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationToEditProfileSegue, sender: nil)
+        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationToProfileIndexSegue, sender: nil)
     }
     
     func logOut() {
