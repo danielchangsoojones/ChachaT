@@ -57,7 +57,7 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        theBackgroundColorView.backgroundColor = BackgroundPageColor
+        backgroundGradientSetup()
         setKolodaAttributes()
         setFakeNavigationBarView()
         if userArray.isEmpty {
@@ -108,6 +108,20 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView)
             rippleHasNotBeenStarted = false
         }
+    }
+    
+    func backgroundGradientSetup() {
+        let gradientLayer = CAGradientLayer()
+        gradientLayer.frame = self.view.bounds
+        
+        let color1 = UIColor.whiteColor().CGColor as CGColorRef
+        let color2 = CustomColors.PeriwinkleGray.CGColor as CGColorRef
+        
+        gradientLayer.colors = [color1, color2]
+        
+        gradientLayer.locations = [0, 1.0]
+        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+
     }
     
     func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
