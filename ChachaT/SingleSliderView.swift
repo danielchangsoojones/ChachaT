@@ -44,10 +44,10 @@ class SingleSliderView: UIView {
     
     func createSlider() {
         theSlider.minimumTrackTintColor = ChachaTeal
-        theSlider.maximumTrackTintColor = UIColor.whiteColor()
+        theSlider.maximumTrackTintColor = CustomColors.BombayGrey
         theSlider.maximumValue = 101
         theSlider.minimumValue = 1
-        theSlider.thumbTintColor = UIColor.whiteColor()
+        theSlider.thumbTintColor = CustomColors.BombayGrey
         theSlider.continuous = true // false makes it call only once you let go
         theSlider.addTarget(self, action: #selector(SingleSliderView.valueChanged(_:)), forControlEvents: .ValueChanged)
         self.addSubview(theSlider)

@@ -18,6 +18,7 @@ class CustomCardView: OverlayView {
     @IBOutlet weak var theAgeLabel: UILabel!
     @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theCardMainImage: PFImageView!
+    @IBOutlet weak var thePersonalInfoHolderView: UIView!
     
     var userOfTheCard : User? {
         didSet {
@@ -43,6 +44,13 @@ class CustomCardView: OverlayView {
     
     override func awakeFromNib() {
         super.awakeFromNib()
+        
+        //Rounded corners
+        self.layer.cornerRadius = 10.0
+        self.layer.masksToBounds = true
+        //TODO: I just want the border to go around thePersonalInfoHolderView, but right now, it is going around the whole card because I coluld not figure out how to do that. 
+        self.layer.borderColor = CustomColors.BombayGrey.CGColor
+        self.layer.borderWidth = 0.5
     }
 }
 
