@@ -71,6 +71,7 @@ class ProfileIndexViewController: UIViewController {
     
     func settingsButtonSetup() {
         let buttonView = createButtonView()
+        buttonView.addTapGesture(target: self, action: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
         
         //By setting the height for the circleButton and label, and then constraining these to the buttonView, the buttonView is able to calculate its necessary size.
         //TODO: put image name in struct above
@@ -94,10 +95,6 @@ class ProfileIndexViewController: UIViewController {
     
     private func createButtonView() -> UIView {
         let theView = UIView()
-        theView.tapped { (tapp) in
-            print("cococ=a")
-        }
-        theView.backgroundColor = UIColor.redColor()
         return theView
     }
     
