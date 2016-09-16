@@ -6,37 +6,6 @@
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Matches View Controller-->
-        <scene sceneID="TN1-qv-iFP">
-            <objects>
-                <viewController id="mQC-oi-9Nn" customClass="MatchesViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xYf-XA-1XG"/>
-                        <viewControllerLayoutGuide type="bottom" id="H9Y-BF-hsP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="U3W-vt-Yet">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIe-lt-gb4">
-                                <rect key="frame" x="170" y="285" width="260" height="30"/>
-                                <state key="normal" title="Messaging Page(If you have matches)"/>
-                                <connections>
-                                    <action selector="theButtonPressed:" destination="mQC-oi-9Nn" eventType="touchUpInside" id="WS6-AR-ghj"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="lIe-lt-gb4" firstAttribute="centerX" secondItem="U3W-vt-Yet" secondAttribute="centerX" id="YhB-Pr-pyt"/>
-                            <constraint firstItem="lIe-lt-gb4" firstAttribute="centerY" secondItem="U3W-vt-Yet" secondAttribute="centerY" id="w8P-5X-dRa"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UjD-MX-SJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1372" y="-160"/>
-        </scene>
         <!--Profile-->
         <scene sceneID="8Ge-7n-FwY">
             <objects>
