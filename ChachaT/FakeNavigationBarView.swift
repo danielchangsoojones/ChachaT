@@ -9,11 +9,13 @@
 import Foundation
 import ExpandingMenu
 import SnapKit
+import RKNotificationHub
 
 //we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
 class FakeNavigationBarView : UIView {
     var expandingMenuButton: ExpandingMenuButton!
     var navigationBarHeight: CGFloat = 44 //being a good coder, and make the actual view controller pass us the nav bar height, in case that apple changes the nav bar height one day
+    var hub : RKNotificationHub?
     
     var delegate: FakeNavigationBarDelegate?
     
@@ -90,6 +92,23 @@ class FakeNavigationBarView : UIView {
         expandingMenuButton.expandingDirection = .Bottom
         expandingMenuButton.menuTitleDirection = .Right
         expandingMenuButton.addMenuItems([item1, item2, item3, item4])
+    }
+    
+    func incrementNotifications(amount: Int) {
+        if hub == nil {
+            //the hub does not exist yet
+            hub = RKNotificationHub(view: expandingMenuButton)
+            hub?.setCircleColor(CustomColors.JellyTeal, labelColor: UIColor.whiteColor())
+            hub?.scaleCircleSizeBy(0.75)
+            hub?.moveCircleByX(5, y: -5)
+        }
+        hub?.incrementBy(Int32(amount))
+        hub?.pop()
+    }
+    
+    func decrementNotifications(amount: Int) {
+        hub?.decrementBy(Int32(amount))
+        hub?.pop()
     }
     
     //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.

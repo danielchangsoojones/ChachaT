@@ -21,6 +21,7 @@ pod 'Alamofire'
 pod 'ExpandingMenu', '~> 0.1'
 pod 'EZSwiftExtensions'
 pod 'MBAutoGrowingTextView', '~> 0.1.0'
+pod 'RKNotificationHub'
 
 
 post_install do |installer|

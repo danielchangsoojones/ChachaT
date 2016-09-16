@@ -127,6 +127,7 @@ class BackgroundAnimationViewController: UIViewController {
             make.top.equalTo(self.view)
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
         }
+        fakeNavigationBarView.incrementNotifications(20)
     }
     
 }

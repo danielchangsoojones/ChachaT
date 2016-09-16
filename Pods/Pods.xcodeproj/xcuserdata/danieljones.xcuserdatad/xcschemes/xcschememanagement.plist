@@ -94,6 +94,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>RKNotificationHub.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>Ripple.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -172,7 +177,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>47FF4AAF648047B1B201452793E61B9B</key>
+		<key>45AB42035CE1539B929F5726F363857D</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -183,6 +188,11 @@
 			<true/>
 		</dict>
 		<key>59CDDB315DD2B098E0CD9ED56B026F4B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>668904DD5801B7A4D6391C6A34476F5E</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -202,12 +212,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>7898F11B70BC198B3673D14F0DF54831</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>79C040AFDDCE1BCBF6D8B5EB0B85887F</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>8978C7FB7007A28B676AB1EA004C3923</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>8FAD7D0C000072AF98225AC57E8B9CDB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,12 +247,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A67B2C96A98F3C4D5DB84011C233BD87</key>
+		<key>A1B1E600045B4F8BC9E983A4791481E6</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BAEF2CD5E8ED9846EC0844DE5E9900A6</key>
+		<key>AD1B4AC34F07961227DFADE39E4B2CE2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -242,17 +262,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C8FBED008C185564EB3646154DE7647D</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>E1F78B1C5F8F2CCD0E68552EAF2B9B52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>EF41A3E3EB7D4810C2FCCAF77B1394DF</key>
 		<dict>
 			<key>primary</key>
 			<true/>
