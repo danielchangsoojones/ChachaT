@@ -10,20 +10,111 @@ import UIKit
 import EFTools
 
 class ProfileIndexViewController: UIViewController {
-
-    @IBAction func addingTagsToProfileButtonPressed(sender: UIButton) {
-        performSegueWithIdentifier(.AddingTagsToProfileSegue, sender: self)
+    private struct ProfileIndexConstants {
+        static let buttonImageInset: CGFloat = 20
+        static let settingsTitle = "Settings"
     }
+    
+    @IBOutlet weak var theButtonStackView: UIStackView!
+    @IBOutlet weak var theUpperBackgroundView: UIView!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. 
+        self.navigationController?.navigationBarHidden = false
+        settingsButtonSetup()
+        profileButtonSetup()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func editButtonPressed(sender: UITapGestureRecognizer) {
+        performSegueWithIdentifier(.ProfileIndexToEditProfileSegue, sender: nil)
+    }
+    
+    func profileButtonPressed(sender: UITapGestureRecognizer) {
+        performSegueWithIdentifier(.ProfileIndexToCardDetailPageSegue, sender: nil)
+    }
+    
+    func settingsButtonPressed(sender: UITapGestureRecognizer) {
+        performSegueWithIdentifier(.ProfileIndexToSettingsPage, sender: nil)
+    }
+    
+    func profileButtonSetup() {
+        let profileBubble = CircularImageView(file: User.currentUser()?.profileImage, diameter: 150)
+        profileBubble.addTapGesture(target: self, action: #selector(ProfileIndexViewController.profileButtonPressed(_:)))
+        theUpperBackgroundView.addSubview(profileBubble)
+        profileBubble.snp_makeConstraints { (make) in
+            make.center.equalTo(theUpperBackgroundView)
+        }
+        editProfileButtonSetup(profileBubble)
+    }
+    
+    func editProfileButtonSetup(profileBubble: UIView) {
+        let editButton = CircleView(diameter: 50, color: UIColor.whiteColor())
+        editButton.addTapGesture(target: self, action: #selector(ProfileIndexViewController.editButtonPressed(_:)))
+        theUpperBackgroundView.addSubview(editButton)
+        editButton.snp_makeConstraints { (make) in
+            make.bottom.equalTo(profileBubble)
+            make.trailing.equalTo(profileBubble)
+        }
+        let imageView = UIImageView(image: UIImage(named: "EditingPencil"))
+        editButton.addSubview(imageView)
+        imageView.snp_makeConstraints { (make) in
+            make.center.equalTo(editButton)
+            make.height.width.equalTo(editButton.frame.height - ProfileIndexConstants.buttonImageInset)
+        }
+    }
+    
+    func settingsButtonSetup() {
+        let buttonView = createButtonView()
+        buttonView.addTapGesture(target: self, action: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
+        
+        //By setting the height for the circleButton and label, and then constraining these to the buttonView, the buttonView is able to calculate its necessary size.
+        //TODO: put image name in struct above
+        let circleButton = createButtonCircle(UIImage(named: "SettingsGear")!)
+        buttonView.addSubview(circleButton)
+        circleButton.snp_makeConstraints { (make) in
+            make.top.equalTo(buttonView)
+            make.leading.trailing.equalTo(buttonView)
+        }
+        
+        let label = createButtonLabel(ProfileIndexConstants.settingsTitle)
+        buttonView.addSubview(label)
+        label.snp_makeConstraints { (make) in
+            make.bottom.equalTo(buttonView)
+            make.top.equalTo(circleButton.snp_bottom)
+            make.centerX.equalTo(buttonView)
+        }
+        
+        theButtonStackView.addArrangedSubview(buttonView)
+    }
+    
+    private func createButtonView() -> UIView {
+        let theView = UIView()
+        return theView
+    }
+    
+    private func createButtonLabel(text: String) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        return label
+    }
+    
+    private func createButtonCircle(image: UIImage) -> UIView {
+        //TODO: make the constant mean something
+        let circleView = CircleView(diameter: 100, color: CustomColors.JellyTeal)
+        let imageView = UIImageView(image: image)
+        circleView.addSubview(imageView)
+        imageView.snp_makeConstraints { (make) in
+            make.center.equalTo(circleView)
+            //TODO: make the constant mean something
+            make.height.width.equalTo(circleView.frame.height - 20)
+        }
+        return circleView
     }
 
 }
@@ -31,12 +122,21 @@ class ProfileIndexViewController: UIViewController {
 extension ProfileIndexViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case AddingTagsToProfileSegue
+        case ProfileIndexToCardDetailPageSegue
+        case ProfileIndexToEditProfileSegue
+        case ProfileIndexToSettingsPage
     }
     
-//    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-//        switch segueIdentifierForSegue(segue) {
-//    }
+    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .ProfileIndexToCardDetailPageSegue:
+            //TODO: make the nav bar disappear, and they can just hit the back button on the image.
+            let cardDetailVC = segue.destinationViewController as! CardDetailViewController
+            cardDetailVC.userOfTheCard = User.currentUser()
+        default:
+            break
+        }
+    }
 }
 
 

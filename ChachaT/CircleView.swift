@@ -21,7 +21,7 @@ class CircleView: UIView {
     }
     
     func makeCircular(diameter: CGFloat) {
-        self.setCornerRadius(radius: diameter / 2)
+        self.setCornerRadius(radius: (diameter / 2))
         self.clipsToBounds = true
     }
     

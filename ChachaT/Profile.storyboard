@@ -1,42 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yJw-Sh-Q3J">
     <dependencies>
         <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
     </dependencies>
     <scenes>
-        <!--Matches View Controller-->
-        <scene sceneID="TN1-qv-iFP">
-            <objects>
-                <viewController id="mQC-oi-9Nn" customClass="MatchesViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="xYf-XA-1XG"/>
-                        <viewControllerLayoutGuide type="bottom" id="H9Y-BF-hsP"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="U3W-vt-Yet">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lIe-lt-gb4">
-                                <rect key="frame" x="170" y="285" width="260" height="30"/>
-                                <state key="normal" title="Messaging Page(If you have matches)"/>
-                                <connections>
-                                    <action selector="theButtonPressed:" destination="mQC-oi-9Nn" eventType="touchUpInside" id="WS6-AR-ghj"/>
-                                </connections>
-                            </button>
-                        </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <constraints>
-                            <constraint firstItem="lIe-lt-gb4" firstAttribute="centerX" secondItem="U3W-vt-Yet" secondAttribute="centerX" id="YhB-Pr-pyt"/>
-                            <constraint firstItem="lIe-lt-gb4" firstAttribute="centerY" secondItem="U3W-vt-Yet" secondAttribute="centerY" id="w8P-5X-dRa"/>
-                        </constraints>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="UjD-MX-SJj" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1372" y="-160"/>
-        </scene>
-        <!--Profile Index View Controller-->
+        <!--Profile-->
         <scene sceneID="8Ge-7n-FwY">
             <objects>
                 <viewController storyboardIdentifier="ProfileIndexViewController" id="FWd-U8-Jgx" customClass="ProfileIndexViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
@@ -48,43 +18,53 @@
                         <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="UKB-hL-shh">
-                                <rect key="frame" x="228" y="285" width="145" height="30"/>
-                                <state key="normal" title="Add Tags To Yourself"/>
-                                <connections>
-                                    <action selector="addingTagsToProfileButtonPressed:" destination="FWd-U8-Jgx" eventType="touchUpInside" id="WB0-eW-y6G"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ClW-Sa-fQK">
-                                <rect key="frame" x="263" y="328" width="75" height="30"/>
-                                <state key="normal" title="Edit Profile"/>
-                                <connections>
-                                    <segue destination="Si2-TA-hhX" kind="show" identifier="ProfileIndexPageToEditProfilePage" id="6wl-Li-heC"/>
-                                </connections>
-                            </button>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tLl-1C-M9m">
-                                <rect key="frame" x="244" y="366" width="113" height="30"/>
-                                <state key="normal" title="Messaging Page"/>
-                                <connections>
-                                    <segue destination="mQC-oi-9Nn" kind="show" id="qDy-bG-ipR"/>
-                                </connections>
-                            </button>
+                            <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
+                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            </view>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA">
+                                <rect key="frame" x="20" y="274" width="560" height="316"/>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="UKB-hL-shh" firstAttribute="centerY" secondItem="iEg-Es-KxU" secondAttribute="centerY" id="3RS-9X-iEC"/>
-                            <constraint firstItem="ClW-Sa-fQK" firstAttribute="centerX" secondItem="iEg-Es-KxU" secondAttribute="centerX" id="FOm-oL-bcD"/>
-                            <constraint firstItem="ClW-Sa-fQK" firstAttribute="top" secondItem="UKB-hL-shh" secondAttribute="bottom" constant="13" id="GHB-FK-NcP"/>
-                            <constraint firstItem="tLl-1C-M9m" firstAttribute="top" secondItem="ClW-Sa-fQK" secondAttribute="bottom" constant="8" id="ZTt-x5-DLh"/>
-                            <constraint firstItem="UKB-hL-shh" firstAttribute="centerX" secondItem="iEg-Es-KxU" secondAttribute="centerX" id="iPG-8y-mnx"/>
-                            <constraint firstItem="tLl-1C-M9m" firstAttribute="centerX" secondItem="iEg-Es-KxU" secondAttribute="centerX" id="u2S-RU-hm4"/>
+                            <constraint firstItem="6rx-WT-UoA" firstAttribute="top" secondItem="UPa-l3-a2J" secondAttribute="bottom" constant="10" id="4Be-Bc-32H"/>
+                            <constraint firstItem="6rx-WT-UoA" firstAttribute="leading" secondItem="iEg-Es-KxU" secondAttribute="leading" constant="20" id="67H-Vs-sET"/>
+                            <constraint firstItem="UPa-l3-a2J" firstAttribute="leading" secondItem="iEg-Es-KxU" secondAttribute="leading" id="8m3-fN-mMz"/>
+                            <constraint firstAttribute="trailing" secondItem="6rx-WT-UoA" secondAttribute="trailing" constant="20" id="Gc4-mQ-2yj"/>
+                            <constraint firstItem="UPa-l3-a2J" firstAttribute="height" secondItem="iEg-Es-KxU" secondAttribute="height" multiplier="1/3" id="Imf-gC-Dcy"/>
+                            <constraint firstItem="UPa-l3-a2J" firstAttribute="top" secondItem="iab-pd-kb6" secondAttribute="bottom" id="L8b-Wr-X0C"/>
+                            <constraint firstAttribute="trailing" secondItem="UPa-l3-a2J" secondAttribute="trailing" id="sts-XE-cNG"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="qt7-0Y-BIE"/>
+                    <navigationItem key="navigationItem" title="Profile" id="qt7-0Y-BIE"/>
+                    <connections>
+                        <outlet property="theButtonStackView" destination="6rx-WT-UoA" id="E3d-oE-rk7"/>
+                        <outlet property="theUpperBackgroundView" destination="UPa-l3-a2J" id="RAj-FG-9Mg"/>
+                        <segue destination="Si2-TA-hhX" kind="show" identifier="ProfileIndexToEditProfileSegue" id="hBf-Mv-AVU"/>
+                        <segue destination="DnT-3j-PZJ" kind="show" identifier="ProfileIndexToCardDetailPageSegue" id="gIl-zM-83q"/>
+                        <segue destination="pl2-TI-YyZ" kind="show" identifier="ProfileIndexToSettingsPage" id="2c2-IT-jV1"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9b-39-CQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="530"/>
+        </scene>
+        <!--CardDetailViewController-->
+        <scene sceneID="3Zh-A1-SxU">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CardDetailViewController" id="DnT-3j-PZJ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="fpp-eA-MBc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1862.5" y="401"/>
+        </scene>
+        <!--SettingsTableViewController-->
+        <scene sceneID="ADV-BG-RR9">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsTableViewController" id="pl2-TI-YyZ" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Anb-AL-Nwm" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1851.5" y="595"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Dhh-ST-gQG">

@@ -73,7 +73,6 @@
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
 		9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288194B1D2BDCFC000A8E04 /* Tags.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
-		929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
@@ -177,7 +176,6 @@
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		9288194B1D2BDCFC000A8E04 /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
-		929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserDetailPopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
@@ -415,6 +413,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
 				92BCEB721D88A8C500E05C05 /* Setttings */,
@@ -440,7 +439,6 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB791D88BEB800E05C05 /* Data Models */,
-				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
 				92BCEB6A1D85B49900E05C05 /* Card Detail */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
@@ -718,7 +716,6 @@
 			isa = PBXGroup;
 			children = (
 				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
-				929A71E21CEBBCAF000C9549 /* UserDetailPopUpViewController.swift */,
 				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
 			);
 			name = "Pop Ups";
@@ -922,7 +919,6 @@
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
-				929A71E31CEBBCAF000C9549 /* UserDetailPopUpViewController.swift in Sources */,
 				9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,

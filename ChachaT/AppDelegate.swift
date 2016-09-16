@@ -8,7 +8,6 @@
 
 import UIKit
 import Parse
-import Pages
 import ParseFacebookUtilsV4
 
 @UIApplicationMain
@@ -39,7 +38,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             
-            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("SignUpLogInViewController") as! SignUpLogInViewController
+            let initialViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileIndexViewController") as! ProfileIndexViewController
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
@@ -49,9 +48,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
 //        
-//                    let storyboard = UIStoryboard(name: "Matches", bundle: nil)
+//                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 //        
-//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("MatchesViewController") as! MatchesViewController
+//                    let initialViewController = storyboard.instantiateViewControllerWithIdentifier("ProfileIndexViewController") as! ProfileIndexViewController
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()

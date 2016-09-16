@@ -282,7 +282,7 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case CustomBackgroundAnimationToSearchSegue
         case BackgroundAnimationPageToAddingTagsPageSegue
         case BackgroundAnimationToMatchesSegue
-        case BackgroundAnimationToEditProfileSegue
+        case BackgroundAnimationToProfileIndexSegue
     }
 }
 
