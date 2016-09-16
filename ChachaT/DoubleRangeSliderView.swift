@@ -44,7 +44,7 @@ class DoubleRangeSliderView: UIView {
         theDoubleRangeSlider.maxLabelColour = ChachaTeal
         theDoubleRangeSlider.minLabelColour = ChachaTeal
         theDoubleRangeSlider.minDistance = 0
-        theDoubleRangeSlider.tintColor = PeriwinkleGray
+        theDoubleRangeSlider.tintColor = CustomColors.BombayGrey
         theDoubleRangeSlider.tintColorBetweenHandles = ChachaTeal
         theDoubleRangeSlider.handleDiameter = 27
         theDoubleRangeSlider.selectedHandleDiameterMultiplier = 1.2

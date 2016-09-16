@@ -13,6 +13,7 @@ import Parse
 //colors
 struct CustomColors {
     static let JellyTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
+    static let BombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
 }
 
 let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
