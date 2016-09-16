@@ -119,7 +119,7 @@ class BackgroundAnimationViewController: UIViewController {
         
         gradientLayer.colors = [color1, color2]
         
-        gradientLayer.locations = [0, 1.0]
+        gradientLayer.locations = [0.5, 0.75]
         self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
 
     }
@@ -240,10 +240,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         
         cardView.backgroundColor = UIColor.clearColor()
         cardView.userOfTheCard = userArray[Int(index)]
-        
-        //Rounded corners
-        cardView.layer.cornerRadius = 10.0
-        cardView.layer.masksToBounds = true
         
         return cardView
     }

@@ -62,6 +62,7 @@
                 <outlet property="theAgeLabel" destination="Js5-bq-7SC" id="fbP-PM-dNo"/>
                 <outlet property="theCardMainImage" destination="qhL-rn-cDC" id="CYI-28-X7v"/>
                 <outlet property="theFullNameLabel" destination="hic-8h-7Bo" id="osK-HE-3Sb"/>
+                <outlet property="thePersonalInfoHolderView" destination="aDJ-pE-4t4" id="8Ad-JE-d7d"/>
                 <outlet property="theTitleLabel" destination="T6l-F0-VzE" id="1Bs-Ku-RnJ"/>
             </connections>
         </view>
