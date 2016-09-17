@@ -104,13 +104,16 @@ public class SpecialtyTagView: TagView {
     
     //Purpose: the characteristics of the tagView are not created on initilization. So, we need to update or create the annotationView, depending on if it was already created or not.
     func updateOrCreateAnnotationView(annotationView: AnnotationView?) {
+        let annotationViewDiameter = self.intrinsicContentSize().height
         if let annotationView = annotationView {
             //theAnnotationView has been made already, but not with the updated characteristics, so we must remove the annotationView and remake it.
-            annotationView.updateDiameter(self.intrinsicContentSize().height)
+            annotationView.updateDiameter(annotationViewDiameter)
         } else {
             //the annotationView has not been created yet or has been removed from superview, and we must re-add it.
             addAnnotationSubview()
         }
+        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow the annotationViewDiameter is bigger than the actual annoationView.
+        titleEdgeInsets.left = 20
     }
     
     //need to override becuase when I set the button title, it was not setting the tagTitle variable in this class
