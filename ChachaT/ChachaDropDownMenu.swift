@@ -90,7 +90,11 @@ class ChachaDropDownMenu: UIView {
         self.menuWrapper.clipsToBounds = true
         self.menuWrapper.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
         
-        // Init background view (under table view)
+        let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ChachaDropDownMenu.hideMenu))
+        swipeUpRecognizer.direction = .Up
+        menuWrapper.addGestureRecognizer(swipeUpRecognizer)
+        
+        // Init background view (under top view)
         self.backgroundView = UIView(frame: menuWrapperBounds)
         self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
         self.backgroundView.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
