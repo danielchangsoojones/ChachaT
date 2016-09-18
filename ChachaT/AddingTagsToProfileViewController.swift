@@ -94,15 +94,11 @@ extension AddingTagsToProfileViewController : TagListViewDelegate {
     }
     
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
-        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
-            switch tagAttribute {
-            case .SpecialtyTagMenu:
-                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
-                dropDownMenu.tagListView!.delegate = self
-            default: break
-            }
+        switch tagView.tagAttribute {
+        case .SpecialtyTagMenu:
+            dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
+            dropDownMenu.tagListView!.delegate = self
+        default: break
         }
     }
 }

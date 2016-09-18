@@ -109,6 +109,8 @@ extension SearchTagsViewController : TagListViewDelegate {
                 dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
             case .SpecialtyRangeSlider:
                 dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
+            default:
+                break
             }
         }
     }

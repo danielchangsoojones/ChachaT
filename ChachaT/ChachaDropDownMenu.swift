@@ -233,7 +233,7 @@ class ChachaDropDownMenu: UIView {
     
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
-    
+
     func addTagListViewToView(view: UIView) -> TagListView {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         view.addSubview(tagListView)
@@ -308,6 +308,8 @@ class ChachaDropDownMenu: UIView {
             return singleSliderView!.frame.height + arrowImageHeightAndInsets
         case .SpecialtyRangeSlider:
             return rangeSliderView!.frame.height + arrowImageHeightAndInsets
+        default:
+            break
         }
     }
     

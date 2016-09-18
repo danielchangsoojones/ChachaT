@@ -28,8 +28,7 @@ class AnnotationView: CircleView {
         self.addSubview(imageView)
         imageView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
-            make.height.equalTo(self.frame.height * AnnotationConstants.imageToCircleRatio)
-            make.width.equalTo(self.frame.width * AnnotationConstants.imageToCircleRatio)
+            make.height.width.equalTo(self).multipliedBy(AnnotationConstants.imageToCircleRatio)
         }
     }
 }

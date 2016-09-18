@@ -191,6 +191,7 @@ public enum SpecialtyTagTitles : Int {
 }
 
 public enum TagAttributes {
+    case NoAction
     case SpecialtyTagMenu
     case SpecialtySingleSlider
     case SpecialtyRangeSlider

@@ -114,6 +114,8 @@ class FilterQueryDataStore {
                         let maxAge : NSDate = maxAndMinTuple.maxValue.years.ago
                         query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
                         query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+                    default:
+                        break
                     }
                 }
             }
