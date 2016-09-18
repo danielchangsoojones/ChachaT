@@ -416,7 +416,7 @@
 				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				926108531CEA0E95009F3E86 /* Onboarding */,
-				92BCEB721D88A8C500E05C05 /* Setttings */,
+				92BCEB721D88A8C500E05C05 /* Settings */,
 				928819441D286C70000A8E04 /* Profile */,
 				920BF8351D4333CA00104842 /* Messaging */,
 				920BF82C1D431C5E00104842 /* Matching */,
@@ -687,13 +687,13 @@
 			name = Subviews;
 			sourceTree = "<group>";
 		};
-		92BCEB721D88A8C500E05C05 /* Setttings */ = {
+		92BCEB721D88A8C500E05C05 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
 				92BCEB731D88A8DF00E05C05 /* Settings.storyboard */,
 				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
 			);
-			name = Setttings;
+			name = Settings;
 			sourceTree = "<group>";
 		};
 		92BCEB791D88BEB800E05C05 /* Data Models */ = {

@@ -112,8 +112,9 @@ public class SpecialtyTagView: TagView {
             //the annotationView has not been created yet or has been removed from superview, and we must re-add it.
             addAnnotationSubview()
         }
-        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow the annotationViewDiameter is bigger than the actual annoationView.
-        titleEdgeInsets.left = 20
+        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
+        print(titleEdgeInsets)
+        titleEdgeInsets.left = annotationViewDiameter
     }
     
     //need to override becuase when I set the button title, it was not setting the tagTitle variable in this class

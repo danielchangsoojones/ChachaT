@@ -110,6 +110,7 @@ extension AddingTagsToProfileViewController : TagListViewDelegate {
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(searchText: String) {
         let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
+        //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
         creationMenuView.removeAllTags()
         //we already check if the text is empty over in the CreationTagView class
         if filtered.isEmpty {
