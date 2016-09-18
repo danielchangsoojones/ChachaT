@@ -59,12 +59,10 @@ class SuperTagViewController: UIViewController {
 }
 
 extension SuperTagViewController : ChachaDropDownMenuDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?) {
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat) {
         if moveDown {
-            if let downDistance = downDistance {
-                tagChoicesViewTopConstraint.constant = downDistance
-            }
-            //we don't want the TagListView to rearrange every time the dropDown moves, that looks bad. 
+                tagChoicesViewTopConstraint.constant += downDistance
+            //we don't want the TagListView to rearrange every time the dropDown moves, that looks bad.
             tagChoicesView.shouldRearrangeViews = false
             UIView.animateWithDuration(
                 animationDuration,
@@ -79,7 +77,7 @@ extension SuperTagViewController : ChachaDropDownMenuDelegate {
             )
         } else {
             //we want to move the TagListView back up to original position, which is 0
-            tagChoicesViewTopConstraint.constant -= tagChoicesViewTopConstraint.constant
+            tagChoicesViewTopConstraint.constant -= downDistance
             tagChoicesView.shouldRearrangeViews = false
             UIView.animateWithDuration(
                 animationDuration,

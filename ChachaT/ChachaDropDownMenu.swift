@@ -10,7 +10,7 @@ import Foundation
 import SnapKit
 
 protocol ChachaDropDownMenuDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat?)
+    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat)
 }
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
@@ -200,7 +200,7 @@ class ChachaDropDownMenu: UIView {
         singleSliderView?.removeFromSuperview()
         rangeSliderView?.removeFromSuperview()
         
-        delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: nil)
+        delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
         UIView.animateWithDuration(
             self.configuration.animationDuration * 1.5,
