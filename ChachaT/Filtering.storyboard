@@ -21,7 +21,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
                                 <subviews>
                                     <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="ChachaT">
-                                        <rect key="frame" x="0.0" y="20" width="600" height="580"/>
+                                        <rect key="frame" x="0.0" y="30" width="600" height="570"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -43,7 +43,7 @@
                             <constraint firstAttribute="trailing" secondItem="VSR-xX-ycl" secondAttribute="trailing" id="bpw-Ow-FPQ"/>
                             <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="VSR-xX-ycl" secondAttribute="bottom" id="ckL-Av-Z06"/>
                             <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="SST-8Z-EKe" secondAttribute="top" id="eQf-WH-dTZ"/>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" id="enx-ks-A6l"/>
+                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" constant="10" id="enx-ks-A6l"/>
                         </constraints>
                         <variation key="default">
                             <mask key="constraints">

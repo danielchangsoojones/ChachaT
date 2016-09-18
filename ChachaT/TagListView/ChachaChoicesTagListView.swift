@@ -15,7 +15,7 @@ struct TagViewProperties {
     static let textFont = UIFont.systemFontOfSize(16.0)
     static let tagBackgroundColor = UIColor.clearColor()
     static let tagInsidesColor = UIColor.whiteColor() //the tag insides for the chosen view
-    static let cornerRadius : CGFloat = 16
+    static let cornerRadius : CGFloat = (TagViewProperties.textFont.pointSize + TagViewProperties.paddingY * 2) / 2 //makes the tagView have nice rounded corners, no matter size.
     static let paddingX : CGFloat = 14 //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
     static let paddingY : CGFloat = 15 //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
     static let marginX : CGFloat = 9 //the horizontal space between TagViews
@@ -49,7 +49,7 @@ class ChachaChoicesTagListView : TagListView {
         alignment = .Center //makes the entire TagListView have a centered alignment, this isn't for text alignment
         tagSelectedBackgroundColor = TagViewProperties.borderColor
         selectedTextColor = TagViewProperties.tagInsidesColor
-        cornerRadius = (TagViewProperties.textFont.pointSize + TagViewProperties.paddingY * 2) / 2 //makes the tagView have nice rounded corners, no matter size.
+        cornerRadius = TagViewProperties.cornerRadius
     }
 
 }

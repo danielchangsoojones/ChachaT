@@ -113,7 +113,6 @@ public class SpecialtyTagView: TagView {
             addAnnotationSubview()
         }
         //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
-        print(titleEdgeInsets)
         titleEdgeInsets.left = annotationViewDiameter
     }
     
