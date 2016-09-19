@@ -14,8 +14,9 @@ extension ChachaDropDownMenu {
         let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
         tagListView.delegate = tagListViewDelegate
         tagListView.tag = 3 //need to set this, so I can know which tagView (i.e. tagChosenView = 2, tagChoicesView = 1, dropDownTagView (this) = 3).
-        addTags(tagTitles, tagListView: tagListView) //Since, I am adding the tags before I the tagView is added to the screen, the tags have a kind of cool animation. The way to make the tags just appear normally would be to add them after the view/height has been created, but then there are some problems about having the height grow according to the size of the add tags.
+        addTags(tagTitles, tagListView: tagListView)
         self.innerView = tagListView
+        self.innerView?.frame = CGRect(origin: CGPointZero, size: tagListView.intrinsicContentSize()) //need to set the frame, so the dropDownMenu knows how to calculate the height
         addTagListViewToView(dropDownView, subview: innerView!)
         self.show()
     }

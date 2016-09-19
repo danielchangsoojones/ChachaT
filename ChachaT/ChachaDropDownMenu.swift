@@ -189,9 +189,6 @@ class ChachaDropDownMenu: UIView {
         // Change background alpha
         self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
         innerView?.removeFromSuperview()
-//        tagListView?.removeFromSuperview()
-//        singleSliderView?.removeFromSuperview()
-//        rangeSliderView?.removeFromSuperview()
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
@@ -273,23 +270,7 @@ class ChachaDropDownMenu: UIView {
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize().height
         let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
-        if innerView is TagListView {
-            let tagListViewHeight = innerView!.intrinsicContentSize().height
-            return tagListViewHeight + arrowImageHeightAndInsets
-        } else {
-            return 0
-        }
-//        switch dropDownMenuType {
-//        case .TagChoices:
-//            let tagListViewHeight = tagListView!.intrinsicContentSize().height
-//            return tagListViewHeight + arrowImageHeightAndInsets
-//        case .SingleSlider:
-//            return singleSliderView!.frame.height + arrowImageHeightAndInsets
-//        case .RangeSlider:
-//            return rangeSliderView!.frame.height + arrowImageHeightAndInsets
-//        default:
-//            return 0
-//        }
+        return innerView!.frame.height + arrowImageHeightAndInsets
     }
     
     class DropDownConfiguration {
