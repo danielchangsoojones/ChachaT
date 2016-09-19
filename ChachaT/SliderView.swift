@@ -31,13 +31,17 @@ class SliderView: UIView {
     var delegate: SliderViewDelegate?
     
     init(maxValue: Int, minValue : Int = SliderViewConstants.minValue, suffix: String, isRangeSlider: Bool, delegate: SliderViewDelegate) {
-        super.init(frame: CGRectMake(0, 0, 0, theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.frame.height))
+//        super.init(frame: CGRectMake(0, 0, 0, theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.frame.height))
+        super.init(frame: CGRectZero)
+//        super.init(frame: CGRect(x: 0, y: 0, w: 0, h: 100))
         self.delegate = delegate
         self.suffix = suffix
         self.maxValue = maxValue
         self.minValue = minValue
         createSliderLabel()
         addSliderToView(isRangeSlider)
+        //TODO: make this all come from intrinsic contentSize, and then we can just set those in all of our methods. 
+        self.frame = CGRect(x: 0, y: 0, w: 0, h: theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.intrinsicContentSize().height) //this makes the frame calculatable, so we can calculate the height for other views
     }
     
     required init?(coder aDecoder: NSCoder) {
