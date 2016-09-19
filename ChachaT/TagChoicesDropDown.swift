@@ -17,18 +17,8 @@ extension ChachaDropDownMenu {
         addTags(tagTitles, tagListView: tagListView)
         self.innerView = tagListView
         self.innerView?.frame = CGRect(origin: CGPointZero, size: tagListView.intrinsicContentSize()) //need to set the frame, so the dropDownMenu knows how to calculate the height
-        addTagListViewToView(dropDownView, subview: innerView!)
+        addInnerView()
         self.show()
-    }
-    
-    private func addTagListViewToView(superview: UIView, subview: UIView) {
-        superview.addSubview(subview)
-        subview.snp_makeConstraints { (make) in
-            make.trailing.leading.equalTo(superview)
-            make.top.equalTo(superview)
-            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
-            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
-        }
     }
     
     private func addTags(titleArray: [String], tagListView: TagListView) {

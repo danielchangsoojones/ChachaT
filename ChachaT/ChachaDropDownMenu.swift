@@ -246,6 +246,17 @@ class ChachaDropDownMenu: UIView {
 //        return theSliderView
 //    }
     
+    func addInnerView(sideOffset: CGFloat = 0) {
+        dropDownView.addSubview(innerView!)
+        //the view will grow to whatever size is necessary to fit its innerView
+        innerView!.snp_makeConstraints { (make) in
+            make.leading.equalToSuperview().offset(sideOffset)
+            make.trailing.equalToSuperview().inset(sideOffset)
+            make.top.equalToSuperview()
+            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset) //not sure why inset() does not work, but it doesn't
+        }
+    }
+    
     func setArrowImageToView(superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: ImageNames.dropDownUpArrow))
         arrowImage.contentMode = .ScaleAspectFit
