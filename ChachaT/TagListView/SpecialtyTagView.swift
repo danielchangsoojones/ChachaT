@@ -58,8 +58,7 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    var tagAttribute : TagAttributes = .NoAction
-    var innerTags : [Tags] = [] //if this type is a specialty tag menu, then we want to hold all the tags that should appear in the dropDownMenu. For Example, the tag "Ethnicity" would hold the tags ("Black", "White", etc.)
+    var tagAttribute : TagAttributes = .Generic
     
     var annotationView: AnnotationView!
     var fakeBorder: UIView!
@@ -69,12 +68,6 @@ public class SpecialtyTagView: TagView {
         super.init(title: tagTitle)
         addAnnotationSubview()
         createFakeBorder()
-    }
-    
-    //init for the Tag Menu because we can pass the inner tags also. 
-    convenience init(tagTitle: String, innerTags: [Tags], tagAttribute: TagAttributes) {
-        self.init(tagTitle: tagTitle, tagAttribute: tagAttribute)
-        self.innerTags = innerTags
     }
     
     required public init?(coder aDecoder: NSCoder) {
@@ -107,7 +100,7 @@ public class SpecialtyTagView: TagView {
     
     func setAnnotationImage(tagAttribute: TagAttributes) -> String {
         switch tagAttribute {
-        case .SpecialtyTagMenu, .SpecialtyRangeSlider, .SpecialtySingleSlider:
+        case .DropDownMenu:
             return AnnotationImages.dropDownMenu
         default:
             return ""
@@ -119,10 +112,6 @@ public class SpecialtyTagView: TagView {
         annotationView.updateDiameter(annotationViewDiameter)
         //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
         titleEdgeInsets.left = annotationViewDiameter
-    }
-    
-    func getInnerTags() -> [Tags] {
-        return innerTags
     }
     
     public override func intrinsicContentSize() -> CGSize {

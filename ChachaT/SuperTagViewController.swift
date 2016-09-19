@@ -23,7 +23,7 @@ class SuperTagViewController: UIViewController {
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
     var searchDataArray: [String] = []
-    var tagChoicesDataArray: [String] = []
+    var tagChoicesDataArray: [Tag] = []
     
     //search Variables
     var searchActive : Bool = false
@@ -35,7 +35,15 @@ class SuperTagViewController: UIViewController {
     }
     
     func loadChoicesViewTags() {
-        fatalError("This method must be overridden in subclasses")
+        for tag in tagChoicesDataArray {
+            switch tag.attribute {
+            case .DropDownMenu:
+                let dropDownTag = tag as! DropDownTag
+                tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory)
+            case .Generic:
+                tagChoicesView.addTag(tag.title)
+            }
+        }
     }
     
     func resetTagChoicesViewList() {
@@ -47,11 +55,10 @@ class SuperTagViewController: UIViewController {
         let navigationBarHeight = navigationController?.navigationBar.frame.height
         let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
         if let navigationBarHeight = navigationBarHeight {
-            dropDownMenu = ChachaDropDownMenu(containerView: self.view, popDownOriginY: navigationBarHeight + statusBarHeight, delegate: self)
+//            dropDownMenu = ChachaDropDownMenu(containerView: self.view, popDownOriginY: navigationBarHeight + statusBarHeight, delegate: self)
         }
     }
 
-    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

@@ -171,21 +171,21 @@ protocol AddingTagsDataStoreDelegate {
     func getSearchDataArray(searchDataArray: [String])
 }
 
-extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
-    func getSearchDataArray(searchDataArray: [String]) {
-        self.searchDataArray = searchDataArray
-    }
-    
-    func deleteTagView(title: String) {
-        tagChoicesView.removeTag(title)
-    }
-    
-    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
-        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
-        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-        self.tagChoicesDataArray = alphabeticallySortedArray
-        self.specialtyTagChoicesDataArray = specialtyTagChoicesDataArray
-        loadChoicesViewTags()
-    }
-    
-}
+//extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
+//    func getSearchDataArray(searchDataArray: [String]) {
+//        self.searchDataArray = searchDataArray
+//    }
+//    
+//    func deleteTagView(title: String) {
+//        tagChoicesView.removeTag(title)
+//    }
+//    
+//    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
+//        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
+//        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+//        self.tagChoicesDataArray = []
+//        self.specialtyTagChoicesDataArray = specialtyTagChoicesDataArray
+//        loadChoicesViewTags()
+//    }
+//    
+//}

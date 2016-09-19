@@ -355,9 +355,15 @@ public class TagListView: UIView {
 
 extension TagListView {
     //Daniel Jones added this method in. It was not originally part of tagListView
-    public func addSpecialtyTag(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) -> TagView {
-//        let tagView = SpecialtyTagView(specialtyTagTitle: specialtyTagTitle, specialtyCategoryTitle: specialtyCategoryTitle)
-        let tagView = SpecialtyTagView(tagTitle: "Hi", tagAttribute: .SpecialtyTagMenu)
+    public func addSpecialtyTag(tagTitle: String, tagAttribute: TagAttributes) -> TagView {
+        let tagView = SpecialtyTagView(tagTitle: "Hi", tagAttribute: tagAttribute)
+        let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
+        
+        return addTagView(attributedTagView)
+    }
+    
+    public func addDropDownTag(tagTitle: String, specialtyCategoryTitle: String) -> TagView {
+        let tagView = DropDownTagView(tagTitle: tagTitle, specialtyCategoryTitle: specialtyCategoryTitle)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
         
         return addTagView(attributedTagView)
@@ -371,9 +377,9 @@ extension TagListView {
     func findSpecialtyTagView(specialtyCategoryTitle: SpecialtyCategoryTitles) -> SpecialtyTagView? {
         for tagView in tagViews where tagView is SpecialtyTagView {
             let specialtyTagView = tagView as! SpecialtyTagView
-            if specialtyTagView.specialtyCategoryTitle == specialtyCategoryTitle {
-                return specialtyTagView
-            }
+//            if specialtyTagView.specialtyCategoryTitle == specialtyCategoryTitle {
+//                return specialtyTagView
+//            }
         }
         return nil
     }

@@ -12,13 +12,13 @@ import SCLAlertView
 
 protocol FilterQueryDataStoreDelegate {
     func getSearchDataArray(searchDataArray: [String])
-    func setChoicesViewTags(tagChoicesDataArray: [String])
+    func setChoicesViewTags(tagChoicesDataArray: [Tag])
     func passUserArrayToMainPage(userArray: [User])
 }
 
 class FilterQueryDataStore {
     var searchDataArray : [String] = [] //tags that will be available for searching
-    var tagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
+    var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
     var delegate: FilterQueryDataStoreDelegate?
     
@@ -62,7 +62,11 @@ class FilterQueryDataStore {
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            tagChoicesDataArray.append(specialtyCategory.rawValue)
+            //TODO: .TagChoices should not be the dropDownAttribute every time. This is just for testing.
+            if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
+                let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, dropDownAttribute: dropDownAttribute)
+                tagChoicesDataArray.append(dropDownTag)
+            }
         }
         delegate?.setChoicesViewTags(tagChoicesDataArray)
     }
@@ -98,24 +102,22 @@ class FilterQueryDataStore {
         for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
             if let tagViewTitle = tagView?.currentTitle {
                 //the tagView is not nil and the title exists
-                if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
+                if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
                     switch tagAttribute {
-                    case .SpecialtyTagMenu:
+                    case .TagChoices:
                         //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
                         query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
-                    case .SpecialtySingleSlider:
+                    case .SingleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
                             query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
                         }
-                    case .SpecialtyRangeSlider:
+                    case .RangeSlider:
                         let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
                         let minAge : NSDate = maxAndMinTuple.minValue.years.ago
                         let maxAge : NSDate = maxAndMinTuple.maxValue.years.ago
                         query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
                         query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
-                    default:
-                        break
                     }
                 }
             }
@@ -159,7 +161,7 @@ extension SearchTagsViewController : FilterQueryDataStoreDelegate {
         self.searchDataArray = searchDataArray
     }
     
-    func setChoicesViewTags(tagChoicesDataArray: [String]) {
+    func setChoicesViewTags(tagChoicesDataArray: [Tag]) {
         self.tagChoicesDataArray = tagChoicesDataArray
         loadChoicesViewTags()
     }

@@ -28,6 +28,9 @@
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
 		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
+		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
+		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
+		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
@@ -128,6 +131,9 @@
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
 		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
+		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -349,6 +355,7 @@
 			children = (
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
+				9258849E1D902704006D7C01 /* DropDownTagView.swift */,
 			);
 			name = TagViews;
 			sourceTree = "<group>";
@@ -507,6 +514,8 @@
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9288194B1D2BDCFC000A8E04 /* Tags.swift */,
 				920BF82A1D43167000104842 /* Match.swift */,
+				925884A01D903A58006D7C01 /* Tag.swift */,
+				925884A21D903B32006D7C01 /* DropDownTag.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -859,6 +868,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925884A11D903A58006D7C01 /* Tag.swift in Sources */,
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
@@ -881,10 +891,12 @@
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
+				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,
 				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
 				925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */,
+				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,

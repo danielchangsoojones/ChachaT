@@ -31,20 +31,6 @@ class SearchTagsViewController: SuperTagViewController {
         dataStore = FilterQueryDataStore(delegate: self) //sets the data for the tag arrays
     }
     
-    //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
-    //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
-    override func loadChoicesViewTags() {
-        for tagTitle in tagChoicesDataArray {
-            if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: tagTitle) {
-                //the tagTitle is special
-                tagChoicesView.addSpecialtyTag(.GenderNone, specialtyCategoryTitle: specialtyCategoryTitle)
-            } else {
-                //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
-                tagChoicesView.addTag(tagTitle)
-            }
-        }
-    }
-    
     //You're probably thinking "Why not just set the variable in the global variable?" Well, it for some fucking reason, it has to be set like it is in this function, or else the nil is not being recognized by the == nil operator
     //no idea why, but this made it work.
     func setSpecialtyTagViewDictionary() {
@@ -82,36 +68,65 @@ class SearchTagsViewController: SuperTagViewController {
 extension SearchTagsViewController : TagListViewDelegate {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
-        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
-            switch tagAttribute {
-            case .SpecialtyTagMenu:
-                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
-                dropDownMenu.tagListView!.delegate = self
-            case .SpecialtySingleSlider:
-                var valueSuffix = ""
-                if title == SpecialtyCategoryTitles.Location.rawValue {
-                    //they are trying to use location tag, we want to check they have location enabled
-                    //the user has to have location enabled in order to use this tag
-                    PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPoint, error) in
-                        if let geoPoint = geoPoint where error == nil {
-                            //saving location in two places in database because it makes easier querying with the tags.
-                            User.currentUser()!.location = geoPoint
-                            PFObject.saveAllInBackground([User.currentUser()!], block: nil)
-                        } else {
-                            print(error)
-                        }
-                    })
-                    valueSuffix = " mi"
-                }
-                dropDownMenu.showSingleSliderView()
-                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
-            case .SpecialtyRangeSlider:
-                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
-            default:
-                break
+        switch tagView.tagAttribute {
+        case .DropDownMenu:
+            let dropDownTagView = tagView as! DropDownTagView
+            if let dropDownTag = findDropDownTag(dropDownTagView.specialtyCategoryTitle, array: tagChoicesDataArray) {
+                dropDownActions(dropDownTag.dropDownAttribute)
             }
+        default:
+            break
+        }
+        
+        
+        
+//        switch tagView.tagAttribute {
+//            case .SpecialtyTagMenu:
+//                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
+//                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
+//                dropDownMenu.tagListView!.delegate = self
+//            case .SpecialtySingleSlider:
+//                var valueSuffix = ""
+//                if title == SpecialtyCategoryTitles.Location.rawValue {
+//                    //they are trying to use location tag, we want to check they have location enabled
+//                    //the user has to have location enabled in order to use this tag
+//                    PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPoint, error) in
+//                        if let geoPoint = geoPoint where error == nil {
+//                            //saving location in two places in database because it makes easier querying with the tags.
+//                            User.currentUser()!.location = geoPoint
+//                            PFObject.saveAllInBackground([User.currentUser()!], block: nil)
+//                        } else {
+//                            print(error)
+//                        }
+//                    })
+//                    valueSuffix = " mi"
+//                }
+//                dropDownMenu.showSingleSliderView()
+//                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
+//            case .SpecialtyRangeSlider:
+//                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
+//            default:
+//                break
+//            }
+    }
+    
+    func findDropDownTag(specialtyCategory: String, array: [Tag]) -> DropDownTag? {
+        for tag in array {
+            if let dropDownTag = tag as? DropDownTag where dropDownTag.specialtyCategory == specialtyCategory {
+                return dropDownTag
+            }
+        }
+        return nil
+    }
+    
+    func dropDownActions(dropDownAttribute: DropDownAttributes) {
+        switch dropDownAttribute {
+        case .TagChoices:
+            print("tag Choices Drop Down Menu should appear")
+        case .RangeSlider:
+            print("range slider Drop Down Menu should appear")
+        case .SingleSlider:
+            print("single slider Drop Down Menu should appear")
         }
     }
     
@@ -178,7 +193,7 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     }
     
     func scrollViewSearchViewTapOccurred() {
-        dropDownMenu.hide()
+//        dropDownMenu.hide()
     }
 }
 
