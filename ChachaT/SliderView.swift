@@ -10,20 +10,21 @@ import UIKit
 import TTRangeSlider
 
 protocol SliderViewDelegate {
-    func sliderValueChanged(text: String)
-    func sliderCreated(text: String)
+    func sliderValueChanged(text: String, suffix: String)
 }
 
 class SliderView: UIView {
     private struct SliderViewConstants {
         static let sliderLabelTextColor = CustomColors.JellyTeal
         static let minValue : Int = 1
+        static let sliderOffsetFromLabel : CGFloat = 5
+        static let selectedTrackColor : UIColor = CustomColors.JellyTeal
+        static let nonSelectedTrackColor : UIColor = CustomColors.BombayGrey
     }
     
     //TODO: add some of these constants to the struct
     let theSliderLabel = UILabel(frame: CGRectMake(0, 0, 0, 20))
     var theSlider = UIView()
-    let sliderOffsetFromLabel : CGFloat = 5
     var suffix : String = ""
     var maxValue : Int = 0
     var minValue : Int = SliderViewConstants.minValue
@@ -31,17 +32,13 @@ class SliderView: UIView {
     var delegate: SliderViewDelegate?
     
     init(maxValue: Int, minValue : Int = SliderViewConstants.minValue, suffix: String, isRangeSlider: Bool, delegate: SliderViewDelegate) {
-//        super.init(frame: CGRectMake(0, 0, 0, theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.frame.height))
         super.init(frame: CGRectZero)
-//        super.init(frame: CGRect(x: 0, y: 0, w: 0, h: 100))
         self.delegate = delegate
         self.suffix = suffix
         self.maxValue = maxValue
         self.minValue = minValue
         createSliderLabel()
         addSliderToView(isRangeSlider)
-        //TODO: make this all come from intrinsic contentSize, and then we can just set those in all of our methods. 
-        self.frame = CGRect(x: 0, y: 0, w: 0, h: theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.intrinsicContentSize().height) //this makes the frame calculatable, so we can calculate the height for other views
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -70,9 +67,15 @@ class SliderView: UIView {
         theSlider.snp_makeConstraints { (make) in
             make.trailing.leading.equalTo(self)
             make.bottom.equalTo(self)
-            make.top.equalTo(theSliderLabel.snp_bottom).offset(sliderOffsetFromLabel)
+            make.top.equalTo(theSliderLabel.snp_bottom).offset(SliderViewConstants.sliderOffsetFromLabel)
         }
-        delegate?.sliderCreated(sliderText)
+        delegate?.sliderValueChanged(sliderText, suffix: suffix)
+    }
+    
+    override func intrinsicContentSize() -> CGSize {
+        let height = theSliderLabel.frame.height + SliderViewConstants.sliderOffsetFromLabel + theSlider.intrinsicContentSize().height
+        let width : CGFloat = 0
+        return CGSize(width: width, height: height)
     }
 }
 
@@ -80,20 +83,20 @@ class SliderView: UIView {
 extension SliderView {
     func createSingleSlider(maxValue: Int) -> UISlider {
         let slider = UISlider()
-        slider.minimumTrackTintColor = ChachaTeal
-        slider.maximumTrackTintColor = CustomColors.BombayGrey
+        slider.minimumTrackTintColor = SliderViewConstants.selectedTrackColor
+        slider.maximumTrackTintColor = SliderViewConstants.nonSelectedTrackColor
         slider.maximumValue = maxValue.toFloat
-        slider.minimumValue = 1
-        slider.thumbTintColor = CustomColors.BombayGrey
+        slider.minimumValue = SliderViewConstants.minValue.toFloat
+        slider.thumbTintColor = SliderViewConstants.nonSelectedTrackColor
         slider.continuous = true // false makes it call only once you let go
-        slider.addTarget(self, action: #selector(SingleSliderView.valueChanged(_:)), forControlEvents: .ValueChanged)
+        slider.addTarget(self, action: #selector(SliderView.valueChanged(_:)), forControlEvents: .ValueChanged)
         return slider
     }
     
     func valueChanged(sender: UISlider) {
         let sliderValue = round(sender.value)
         let text = setSingleSliderLabelText(Int(sliderValue))
-        delegate?.sliderValueChanged(text)
+        delegate?.sliderValueChanged(text, suffix: suffix)
     }
     
     func setSingleSliderLabelText(num: Int) -> String {
@@ -121,11 +124,11 @@ extension SliderView : TTRangeSliderDelegate {
         rangeSlider.minValue = minValue.toFloat
         rangeSlider.selectedMaximum = maxValue.toFloat
         rangeSlider.selectedMinimum = minValue.toFloat
-        rangeSlider.maxLabelColour = ChachaTeal
-        rangeSlider.minLabelColour = ChachaTeal
+        rangeSlider.maxLabelColour = SliderViewConstants.selectedTrackColor
+        rangeSlider.minLabelColour = SliderViewConstants.selectedTrackColor
         rangeSlider.minDistance = 0
-        rangeSlider.tintColor = CustomColors.BombayGrey
-        rangeSlider.tintColorBetweenHandles = ChachaTeal
+        rangeSlider.tintColor = SliderViewConstants.nonSelectedTrackColor
+        rangeSlider.tintColorBetweenHandles = SliderViewConstants.selectedTrackColor
         rangeSlider.handleDiameter = 27
         rangeSlider.selectedHandleDiameterMultiplier = 1.2
         return rangeSlider
@@ -146,6 +149,6 @@ extension SliderView : TTRangeSliderDelegate {
     
     func rangeSlider(sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
         let text = setRangeSliderLabelText(Int(selectedMinimum), maxValue: Int(selectedMaximum))
-        delegate?.sliderValueChanged(text)
+        delegate?.sliderValueChanged(text, suffix: suffix)
     }
 }

@@ -77,37 +77,6 @@ extension SearchTagsViewController : TagListViewDelegate {
         default:
             break
         }
-        
-        
-        
-//        switch tagView.tagAttribute {
-//            case .SpecialtyTagMenu:
-//                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-//                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
-//                dropDownMenu.tagListView!.delegate = self
-//            case .SpecialtySingleSlider:
-//                var valueSuffix = ""
-//                if title == SpecialtyCategoryTitles.Location.rawValue {
-//                    //they are trying to use location tag, we want to check they have location enabled
-//                    //the user has to have location enabled in order to use this tag
-//                    PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPoint, error) in
-//                        if let geoPoint = geoPoint where error == nil {
-//                            //saving location in two places in database because it makes easier querying with the tags.
-//                            User.currentUser()!.location = geoPoint
-//                            PFObject.saveAllInBackground([User.currentUser()!], block: nil)
-//                        } else {
-//                            print(error)
-//                        }
-//                    })
-//                    valueSuffix = " mi"
-//                }
-//                dropDownMenu.showSingleSliderView()
-//                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
-//            case .SpecialtyRangeSlider:
-//                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
-//            default:
-//                break
-//            }
     }
     
     func findDropDownTag(specialtyCategory: String, array: [Tag]) -> DropDownTag? {
@@ -170,12 +139,28 @@ extension SearchTagsViewController : TagListViewDelegate {
 }
 
 extension SearchTagsViewController: SliderViewDelegate {
-    func sliderCreated(text: String) {
-        print(text)
+    func sliderValueChanged(text: String, suffix: String) {
+        scrollViewSearchView.hideScrollSearchView(false)
+        if let tagView = findTagViewWithSuffix(suffix) {
+            //the tagView has already been created
+            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
+            tagView.setTitle(text, forState: .Normal)
+        } else {
+            //tagView has never been created
+            let tagView = tagChosenView.addTag(text)
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
+        }
     }
     
-    func sliderValueChanged(text: String) {
-        print(text)
+    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
+    func findTagViewWithSuffix(suffix: String) -> TagView? {
+        for tagView in tagChosenView.tagViews {
+            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
+            if let currentTitle = tagView.currentTitle where currentTitle.hasSuffix(suffix) {
+                return tagView
+            }
+        }
+        return nil
     }
 }
 
@@ -203,7 +188,7 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     }
     
     func scrollViewSearchViewTapOccurred() {
-//        dropDownMenu.hide()
+        dropDownMenu.hide()
     }
 }
 

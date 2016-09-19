@@ -112,16 +112,6 @@ class ChachaDropDownMenu: UIView {
         // By default, hide menu view
         self.menuWrapper.hidden = true
     }
-
-//    
-//    func showRangeSliderView(delegate: DoubleRangeSliderViewDelegate, dropDownMenuCategoryType: SpecialtyCategoryTitles) {
-//        if self.isShown == false {
-//            self.dropDownMenuCategoryType = dropDownMenuCategoryType
-//            dropDownMenuType = dropDownMenuCategoryType.associatedTagAttribute!
-//            self.rangeSliderView = addDoubleRangeSliderToView(dropDownView, delegate: delegate)
-//            self.showMenu()
-//        }
-//    }
     
     func hide() {
         if self.isShown == true {
@@ -211,21 +201,6 @@ class ChachaDropDownMenu: UIView {
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
     
-
-//    
-//    func addDoubleRangeSliderToView(view: UIView, delegate: DoubleRangeSliderViewDelegate) -> DoubleRangeSliderView {
-//        let theSliderView = DoubleRangeSliderView(delegate: delegate, sliderCategoryType: dropDownMenuCategoryType)
-//        theSliderView.theDoubleRangeLabel.text =  "\(Int(theSliderView.theDoubleRangeSlider.minValue)) - \(Int(theSliderView.theDoubleRangeSlider.maxValue))"
-//        view.addSubview(theSliderView)
-//        theSliderView.snp_makeConstraints { (make) in
-//            make.trailing.equalTo(view).inset(10)
-//            make.leading.equalTo(view).offset(10)
-//            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
-//            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
-//        }
-//        return theSliderView
-//    }
-    
     func addInnerView(sideOffset: CGFloat = 0) {
         dropDownView.addSubview(innerView!)
         //the view will grow to whatever size is necessary to fit its innerView
@@ -261,7 +236,7 @@ class ChachaDropDownMenu: UIView {
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize().height
         let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
-        return innerView!.frame.height + arrowImageHeightAndInsets
+        return innerView!.intrinsicContentSize().height + arrowImageHeightAndInsets
     }
     
     class DropDownConfiguration {

@@ -72,8 +72,6 @@
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
-		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
-		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
@@ -181,8 +179,6 @@
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
-		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
@@ -309,23 +305,20 @@
 			name = Messaging;
 			sourceTree = "<group>";
 		};
-		92120D9C1D6BF95B00320822 /* ChachaDropDownSubviews */ = {
+		92120D9C1D6BF95B00320822 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */,
-				928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */,
 				925884AA1D90809E006D7C01 /* SliderView.swift */,
 			);
-			name = ChachaDropDownSubviews;
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		92120D9D1D6BFA4200320822 /* ChachaDropDown */ = {
 			isa = PBXGroup;
 			children = (
 				922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */,
-				92120D9C1D6BF95B00320822 /* ChachaDropDownSubviews */,
-				925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */,
-				925884A81D907C48006D7C01 /* SliderDropDown.swift */,
+				925884AC1D909F35006D7C01 /* Extensions */,
+				92120D9C1D6BF95B00320822 /* Subviews */,
 			);
 			name = ChachaDropDown;
 			sourceTree = "<group>";
@@ -367,6 +360,15 @@
 				9258849E1D902704006D7C01 /* DropDownTagView.swift */,
 			);
 			name = TagViews;
+			sourceTree = "<group>";
+		};
+		925884AC1D909F35006D7C01 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */,
+				925884A81D907C48006D7C01 /* SliderDropDown.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		925D0FCF1D6F634400DE20F9 /* Xibs */ = {
@@ -902,7 +904,6 @@
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
-				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,
 				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
 				925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */,
 				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
@@ -943,7 +944,6 @@
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
-				9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
