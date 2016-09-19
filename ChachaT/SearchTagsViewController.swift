@@ -124,9 +124,9 @@ extension SearchTagsViewController : TagListViewDelegate {
         case .TagChoices:
             dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
         case .RangeSlider:
-            print("range slider Drop Down Menu should appear")
+            dropDownMenu.addSlider(true, sliderDelegate: self)
         case .SingleSlider:
-            print("single slider Drop Down Menu should appear")
+            dropDownMenu.addSlider(false, sliderDelegate: self)
         }
     }
     
@@ -166,6 +166,16 @@ extension SearchTagsViewController : TagListViewDelegate {
             //just a generic tag pressed
             theGenericChosenTagArray.append(title)
         }
+    }
+}
+
+extension SearchTagsViewController: SliderViewDelegate {
+    func sliderCreated(text: String) {
+        print(text)
+    }
+    
+    func sliderValueChanged(text: String) {
+        print(text)
     }
 }
 
@@ -249,8 +259,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
             }
         }
     }
-    
-    
 }
 
 extension SearchTagsViewController: SegueHandlerType {

@@ -112,14 +112,7 @@ class ChachaDropDownMenu: UIView {
         // By default, hide menu view
         self.menuWrapper.hidden = true
     }
-    
-//    func showSingleSliderView() {
-//        if self.isShown == false {
-//            dropDownMenuType = .SpecialtySingleSlider
-//            self.singleSliderView = addSingleSliderViewToView(dropDownView)
-//            self.showMenu()
-//        }
-//    }
+
 //    
 //    func showRangeSliderView(delegate: DoubleRangeSliderViewDelegate, dropDownMenuCategoryType: SpecialtyCategoryTitles) {
 //        if self.isShown == false {
@@ -218,20 +211,7 @@ class ChachaDropDownMenu: UIView {
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
     
-//    func addSingleSliderViewToView(view: UIView) -> SingleSliderView {
-//        let theSliderView = SingleSliderView()
-//        let sliderIntitalValue = theSliderView.theSlider.maximumValue / 2
-//        theSliderView.theSlider.setValue(sliderIntitalValue, animated: false) //I have to set the initial value here, can't set in actual class for some reason
-//        theSliderView.theSliderLabel.text =  "\(Int(sliderIntitalValue)) mi."
-//        view.addSubview(theSliderView)
-//        theSliderView.snp_makeConstraints { (make) in
-//            make.trailing.equalTo(view).inset(10)
-//            make.leading.equalTo(view).offset(10)
-//            //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
-//            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset).priorityLow() //not sure why inset(5) does not work, but it doesn't
-//        }
-//        return theSliderView
-//    }
+
 //    
 //    func addDoubleRangeSliderToView(view: UIView, delegate: DoubleRangeSliderViewDelegate) -> DoubleRangeSliderView {
 //        let theSliderView = DoubleRangeSliderView(delegate: delegate, sliderCategoryType: dropDownMenuCategoryType)

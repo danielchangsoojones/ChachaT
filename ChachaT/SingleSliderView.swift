@@ -30,6 +30,13 @@ class SingleSliderView: UIView {
         createSlider()
     }
     
+    init(maxValue: Int, suffix: String, delegate: SingleSliderViewDelegate) {
+        super.init(frame: CGRectMake(0, 0, 0, theSliderLabel.frame.height + sliderOffsetFromLabel + theSlider.frame.height))
+        self.delegate = delegate
+        createSliderLabel()
+        createSlider()
+    }
+    
     //Purpose: pass something like Location and " mi"
     func setDelegateAndCreateTagView(delegate: SingleSliderViewDelegate, specialtyCategoryTitle: SpecialtyCategoryTitles, valueSuffix: String) {
         self.delegate = delegate
