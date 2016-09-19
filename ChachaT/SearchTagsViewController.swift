@@ -72,7 +72,7 @@ extension SearchTagsViewController : TagListViewDelegate {
         case .DropDownMenu:
             let dropDownTagView = tagView as! DropDownTagView
             if let dropDownTag = findDropDownTag(dropDownTagView.specialtyCategoryTitle, array: tagChoicesDataArray) {
-                dropDownActions(dropDownTag.dropDownAttribute)
+                dropDownActions(dropDownTag)
             }
         default:
             break
@@ -119,10 +119,10 @@ extension SearchTagsViewController : TagListViewDelegate {
         return nil
     }
     
-    func dropDownActions(dropDownAttribute: DropDownAttributes) {
-        switch dropDownAttribute {
+    func dropDownActions(dropDownTag: DropDownTag) {
+        switch dropDownTag.dropDownAttribute {
         case .TagChoices:
-            print("tag Choices Drop Down Menu should appear")
+            dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
         case .RangeSlider:
             print("range slider Drop Down Menu should appear")
         case .SingleSlider:

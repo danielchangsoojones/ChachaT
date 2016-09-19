@@ -64,7 +64,10 @@ class FilterQueryDataStore {
         for specialtyCategory in SpecialtyCategoryTitles.allCategories {
             //TODO: .TagChoices should not be the dropDownAttribute every time. This is just for testing.
             if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
-                let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, dropDownAttribute: dropDownAttribute)
+                let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
+                    $0.toString
+                }
+                let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
                 tagChoicesDataArray.append(dropDownTag)
             }
         }

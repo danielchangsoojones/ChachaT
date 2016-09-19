@@ -31,6 +31,7 @@
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
+		925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
@@ -134,6 +135,7 @@
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
+		925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagChoicesDropDown.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -317,6 +319,7 @@
 			children = (
 				922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */,
 				92120D9C1D6BF95B00320822 /* ChachaDropDownSubviews */,
+				925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */,
 			);
 			name = ChachaDropDown;
 			sourceTree = "<group>";
@@ -910,6 +913,7 @@
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
+				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
