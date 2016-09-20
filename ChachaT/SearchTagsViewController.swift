@@ -92,10 +92,8 @@ extension SearchTagsViewController : TagListViewDelegate {
         switch dropDownTag.dropDownAttribute {
         case .TagChoices:
             dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
-        case .RangeSlider:
-            dropDownMenu.addSlider(true, sliderDelegate: self)
-        case .SingleSlider:
-            dropDownMenu.addSlider(false, sliderDelegate: self)
+        case .RangeSlider, .SingleSlider:
+            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .RangeSlider, sliderDelegate: self)
         }
     }
     

@@ -10,13 +10,13 @@ import Foundation
 
 //This extension is for dealing with sliders in the dropDownMenu
 extension ChachaDropDownMenu {
-    func addSlider(isRangeSlider: Bool, sliderDelegate: SliderViewDelegate) {
+    func addSlider(minValue: Int = 0, maxValue: Int, suffix: String, isRangeSlider: Bool, sliderDelegate: SliderViewDelegate) {
         var sliderView : SliderView!
         if isRangeSlider {
-            sliderView = SliderView(maxValue: 100, minValue: 10, suffix: "pi", isRangeSlider: true, delegate: sliderDelegate)
+            sliderView = SliderView(maxValue: maxValue, minValue: minValue, suffix: suffix, isRangeSlider: true, delegate: sliderDelegate)
         } else {
             //a single slider
-            sliderView = SliderView(maxValue: 40, suffix: "ty", isRangeSlider: false, delegate: sliderDelegate)
+            sliderView = SliderView(maxValue: maxValue, suffix: suffix, isRangeSlider: false, delegate: sliderDelegate)
         }
         self.innerView = sliderView
         addInnerView()

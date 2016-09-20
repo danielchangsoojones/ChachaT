@@ -16,6 +16,10 @@ class DropDownTagView: SpecialtyTagView {
         self.specialtyCategoryTitle = specialtyCategoryTitle
     }
     
+    func makePrivate() {
+        annotationView.updateImage("SettingsGear")
+    }
+    
     required internal init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

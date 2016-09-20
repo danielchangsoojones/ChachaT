@@ -356,7 +356,7 @@ public class TagListView: UIView {
 extension TagListView {
     //Daniel Jones added this method in. It was not originally part of tagListView
     public func addSpecialtyTag(tagTitle: String, tagAttribute: TagAttributes) -> TagView {
-        let tagView = SpecialtyTagView(tagTitle: "Hi", tagAttribute: tagAttribute)
+        let tagView = SpecialtyTagView(tagTitle: tagTitle, tagAttribute: tagAttribute)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
         
         return addTagView(attributedTagView)
