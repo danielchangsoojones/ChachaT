@@ -11,8 +11,9 @@ import UIKit
 import SnapKit
 
 public class SpecialtyTagView: TagView {
-    private struct AnnotationImages {
+    struct AnnotationImages {
         static let dropDownMenu = ImageNames.DownArrow
+        static let isPrivate = "SettingsGear"
     }
     
     

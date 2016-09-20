@@ -40,7 +40,9 @@ class SuperTagViewController: UIViewController {
             case .DropDownMenu:
                 let dropDownTag = tag as! DropDownTag
                 let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-                tagView.makePrivate()
+                if dropDownTag.isPrivate {
+                    tagView.makePrivate()
+                }
             case .Generic:
                 tagChoicesView.addTag(tag.title)
             }
