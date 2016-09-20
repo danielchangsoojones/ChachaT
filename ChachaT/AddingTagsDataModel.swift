@@ -11,7 +11,6 @@ import Parse
 
 class AddingTagsDataStore {
     var genericTagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
-    var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
     var searchDataArray : [String] = [] //tags that will be available for searching
     
     var delegate: AddingTagsDataStoreDelegate?
@@ -171,21 +170,20 @@ protocol AddingTagsDataStoreDelegate {
     func getSearchDataArray(searchDataArray: [String])
 }
 
-//extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
-//    func getSearchDataArray(searchDataArray: [String]) {
-//        self.searchDataArray = searchDataArray
-//    }
-//    
-//    func deleteTagView(title: String) {
-//        tagChoicesView.removeTag(title)
-//    }
-//    
-//    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
-//        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
-//        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-//        self.tagChoicesDataArray = []
-//        self.specialtyTagChoicesDataArray = specialtyTagChoicesDataArray
-//        loadChoicesViewTags()
-//    }
-//    
-//}
+extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
+    func getSearchDataArray(searchDataArray: [String]) {
+        self.searchDataArray = searchDataArray
+    }
+    
+    func deleteTagView(title: String) {
+        tagChoicesView.removeTag(title)
+    }
+    
+    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
+        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
+        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
+        self.tagChoicesDataArray = []
+        loadChoicesViewTags()
+    }
+    
+}

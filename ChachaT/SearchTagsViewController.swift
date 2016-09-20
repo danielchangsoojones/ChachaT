@@ -56,6 +56,16 @@ class SearchTagsViewController: SuperTagViewController {
         setChosenTagView(scrollViewSearchView)
         return scrollViewSearchView
     }
+    
+    override func dropDownActions(dropDownTag: DropDownTag) {
+        super.dropDownActions(dropDownTag)
+        switch dropDownTag.dropDownAttribute {
+        case .RangeSlider, .SingleSlider:
+            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .RangeSlider, sliderDelegate: self)
+        default:
+            break
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -65,7 +75,7 @@ class SearchTagsViewController: SuperTagViewController {
 }
 
 //extension for tag actions
-extension SearchTagsViewController : TagListViewDelegate {
+extension SearchTagsViewController {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
         switch tagView.tagAttribute {
@@ -76,24 +86,6 @@ extension SearchTagsViewController : TagListViewDelegate {
             }
         default:
             break
-        }
-    }
-    
-    func findDropDownTag(specialtyCategory: String, array: [Tag]) -> DropDownTag? {
-        for tag in array {
-            if let dropDownTag = tag as? DropDownTag where dropDownTag.specialtyCategory == specialtyCategory {
-                return dropDownTag
-            }
-        }
-        return nil
-    }
-    
-    func dropDownActions(dropDownTag: DropDownTag) {
-        switch dropDownTag.dropDownAttribute {
-        case .TagChoices:
-            dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
-        case .RangeSlider, .SingleSlider:
-            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .RangeSlider, sliderDelegate: self)
         }
     }
     
@@ -136,32 +128,6 @@ extension SearchTagsViewController : TagListViewDelegate {
     }
 }
 
-extension SearchTagsViewController: SliderViewDelegate {
-    func sliderValueChanged(text: String, suffix: String) {
-        scrollViewSearchView.hideScrollSearchView(false)
-        if let tagView = findTagViewWithSuffix(suffix) {
-            //the tagView has already been created
-            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
-            tagView.setTitle(text, forState: .Normal)
-        } else {
-            //tagView has never been created
-            let tagView = tagChosenView.addTag(text)
-            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
-        }
-    }
-    
-    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
-    func findTagViewWithSuffix(suffix: String) -> TagView? {
-        for tagView in tagChosenView.tagViews {
-            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
-            if let currentTitle = tagView.currentTitle where currentTitle.hasSuffix(suffix) {
-                return tagView
-            }
-        }
-        return nil
-    }
-}
-
 extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
@@ -187,6 +153,32 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     
     func scrollViewSearchViewTapOccurred() {
         dropDownMenu.hide()
+    }
+}
+
+extension SearchTagsViewController: SliderViewDelegate {
+    func sliderValueChanged(text: String, suffix: String) {
+        scrollViewSearchView.hideScrollSearchView(false)
+        if let tagView = findTagViewWithSuffix(suffix) {
+            //the tagView has already been created
+            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
+            tagView.setTitle(text, forState: .Normal)
+        } else {
+            //tagView has never been created
+            let tagView = tagChosenView.addTag(text)
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
+        }
+    }
+    
+    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
+    func findTagViewWithSuffix(suffix: String) -> TagView? {
+        for tagView in tagChosenView.tagViews {
+            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
+            if let currentTitle = tagView.currentTitle where currentTitle.hasSuffix(suffix) {
+                return tagView
+            }
+        }
+        return nil
     }
 }
 

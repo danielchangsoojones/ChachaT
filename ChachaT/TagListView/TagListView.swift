@@ -374,16 +374,6 @@ extension TagListView {
         delegate?.specialtyTagPressed?(sender.currentTitle ?? "", tagView: sender, sender: self)
     }
     
-    func findSpecialtyTagView(specialtyCategoryTitle: SpecialtyCategoryTitles) -> SpecialtyTagView? {
-        for tagView in tagViews where tagView is SpecialtyTagView {
-            let specialtyTagView = tagView as! SpecialtyTagView
-//            if specialtyTagView.specialtyCategoryTitle == specialtyCategoryTitle {
-//                return specialtyTagView
-//            }
-        }
-        return nil
-    }
-    
     func tagExistsInTagListView(title: String) -> Bool {
         for tagView in tagViews {
             if tagView.titleLabel?.text == title {

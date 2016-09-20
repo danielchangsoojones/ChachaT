@@ -61,10 +61,32 @@ class SuperTagViewController: UIViewController {
             dropDownMenu = ChachaDropDownMenu(containerView: self.view, popDownOriginY: navigationBarHeight + statusBarHeight, delegate: self)
         }
     }
+    
+    func dropDownActions(dropDownTag: DropDownTag) {
+        switch dropDownTag.dropDownAttribute {
+        case .TagChoices:
+            dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
+        default:
+            break
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+//dealing with the tagListView
+extension SuperTagViewController : TagListViewDelegate {
+    //Purpose: find the corresponding DropDownTag model to the DropDownTagView, which we find by matching the specialtyCategory titles.
+    func findDropDownTag(specialtyCategory: String, array: [Tag]) -> DropDownTag? {
+        for tag in array {
+            if let dropDownTag = tag as? DropDownTag where dropDownTag.specialtyCategory == specialtyCategory {
+                return dropDownTag
+            }
+        }
+        return nil
     }
 }
 
