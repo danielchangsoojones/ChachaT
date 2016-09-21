@@ -18,7 +18,7 @@ class MatchesViewController: UIViewController {
     }
     
     @IBOutlet weak var theTableView: UITableView!
-    var matchedUsers : [User] = []
+    var matches : [Connection] = []
     var chats : [Chat] = []
     var dataStore : MatchDataStore!
     
@@ -69,7 +69,8 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
     func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             //the matches area
-            let notificationNumber = matchedUsers.count
+            //TODO: make the notification number based upon the number of new matches. Not the total
+            let notificationNumber = matches.count
             let headingView = HeadingView(text: MatchesConstants.sectionZeroHeadingTitle, notificationNumber: notificationNumber)
             return headingView
         } else if section == 1 {
@@ -87,7 +88,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         let currentSection = indexPath.section
         if currentSection == 0 {
             //the matches area
-            let matchesCell = ScrollingMatchesTableViewCell(matchedUsers: matchedUsers, delegate: self)
+            let matchesCell = ScrollingMatchesTableViewCell(matches: matches, delegate: self)
             return matchesCell
         } else {
             //the messages area
@@ -118,17 +119,5 @@ extension MatchesViewController : ScrollingMatchesCellDelegate {
         chatVC.currentUser = User.currentUser()
         chatVC.otherUser = otherUser
         self.navigationController?.pushViewController(chatVC, animated: true)
-    }
-}
-
-extension MatchesViewController: MatchDataStoreDelegate {
-    func passMatchedUsers(matches: [User]) {
-        matchedUsers = matches
-        theTableView.reloadData()
-    }
-    
-    func passChats(chats: [Chat]) {
-        self.chats = chats
-        theTableView.reloadData()
     }
 }

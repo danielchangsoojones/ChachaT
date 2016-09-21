@@ -28,6 +28,7 @@
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
 		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
+		923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7ED61D9303E30033A8A2 /* Connection.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
@@ -132,6 +133,7 @@
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
 		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		923C7ED61D9303E30033A8A2 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
@@ -527,6 +529,7 @@
 				920BF82A1D43167000104842 /* Match.swift */,
 				925884A01D903A58006D7C01 /* Tag.swift */,
 				925884A21D903B32006D7C01 /* DropDownTag.swift */,
+				923C7ED61D9303E30033A8A2 /* Connection.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -891,6 +894,7 @@
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
+				923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,

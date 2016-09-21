@@ -7,12 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
-
-protocol MatchDataStoreDelegate {
-    func passMatchedUsers(matchedUsers: [User])
-    func passChats(chats: [Chat])
-}
 
 class MatchDataStore: NSObject {
     var delegate: MatchDataStoreDelegate?
@@ -28,7 +22,7 @@ class MatchDataStore: NSObject {
     }
     
     func findMatchedUsers() {
-        var matchedUsers : [User] = []
+        var connections : [Connection] = []
         let query = Match.query()!
         query.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
         query.whereKey(Constants.mutualMatch, equalTo: true)
@@ -36,9 +30,10 @@ class MatchDataStore: NSObject {
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if let matches = objects as? [Match] where error == nil {
                 for match in matches {
-                    matchedUsers.append(match.targetUser)
+                    let connection = Connection(targetUser: match.targetUser)
+                    connections.append(connection)
                 }
-                self.delegate?.passMatchedUsers(matchedUsers)
+                self.delegate?.passMatches(connections)
             } else {
                 print(error)
             }
@@ -69,6 +64,23 @@ class MatchDataStore: NSObject {
             }
             self.delegate?.passChats(chatsArray)
         }
+    }
+}
+
+protocol MatchDataStoreDelegate {
+    func passMatches(matches: [Connection])
+    func passChats(chats: [Chat])
+}
+
+extension MatchesViewController: MatchDataStoreDelegate {
+    func passMatches(matches: [Connection]) {
+        self.matches = matches
+        theTableView.reloadData()
+    }
+    
+    func passChats(chats: [Chat]) {
+        self.chats = chats
+        theTableView.reloadData()
     }
 }
 

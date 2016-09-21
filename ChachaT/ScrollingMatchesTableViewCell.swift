@@ -19,16 +19,16 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     
     var delegate: ScrollingMatchesCellDelegate?
     
-    var matchedUsers : [User] = []
+    var matches: [Connection] = []
     var matchesScrollView: AutoGrowingHorizontalScrollView = AutoGrowingHorizontalScrollView()
     
     //TODO: make there be some sort of spinner or loading view to show that we are waiting for the server to pulls matches down
-    init(matchedUsers: [User], delegate: ScrollingMatchesCellDelegate) {
+    init(matches: [Connection], delegate: ScrollingMatchesCellDelegate) {
         super.init(style: .Default, reuseIdentifier: "scrollingMatchesTableViewCell")
-        self.matchedUsers = matchedUsers
+        self.matches = matches
         self.delegate = delegate
         matchesScrollViewSetup()
-        addProfileCircles(matchedUsers)
+        addProfileCircles(matches)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,13 +42,13 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         }
     }
     
-    func addProfileCircles(users: [User]) {
+    func addProfileCircles(matches: [Connection]) {
         let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
-        for user in matchedUsers {
-            if let fullName = user.fullName, profileImage = user.profileImage {
+        for match in matches {
+            if let fullName = match.targetUser.fullName, profileImage = match.targetUser.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
                 circleProfileView.tapped { (tapped) in
-                    self.delegate?.segueToChatVC(user)
+                    self.delegate?.segueToChatVC(match.targetUser)
                 }
                 matchesScrollView.addView(circleProfileView)
             }
