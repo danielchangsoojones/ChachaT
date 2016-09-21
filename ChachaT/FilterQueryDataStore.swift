@@ -1,5 +1,5 @@
 //
-//  FilterQueryDataStore.swift
+//  SearchTagsDataStore.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 8/3/16.
@@ -10,13 +10,13 @@ import Foundation
 import Parse
 import SCLAlertView
 
-class FilterQueryDataStore {
+class SearchTagsDataStore {
     var searchDataArray : [Tag] = [] //tags that will be available for searching
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
-    var delegate: FilterQueryDataStoreDelegate?
+    var delegate: SearchTagsDataStoreDelegate?
     
-    init(delegate: FilterQueryDataStoreDelegate) {
+    init(delegate: SearchTagsDataStoreDelegate) {
         self.delegate = delegate
         setSearchDataArray()
         setSpecialtyTagsIntoDefaultView()
@@ -154,11 +154,11 @@ class FilterQueryDataStore {
     }
 }
 
-protocol FilterQueryDataStoreDelegate : TagDataStoreDelegate {
+protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passUserArrayToMainPage(userArray: [User])
 }
 
-extension SearchTagsViewController : FilterQueryDataStoreDelegate {
+extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
     }

@@ -16,7 +16,7 @@ class SearchTagsViewController: SuperTagViewController {
     var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
     var theGenericChosenTagArray : [String] = []
     
-    var dataStore : FilterQueryDataStore!
+    var dataStore : SearchTagsDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,7 +28,7 @@ class SearchTagsViewController: SuperTagViewController {
     }
     
     func setDataFromDataStore() {
-        dataStore = FilterQueryDataStore(delegate: self) //sets the data for the tag arrays
+        dataStore = SearchTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
     //You're probably thinking "Why not just set the variable in the global variable?" Well, it for some fucking reason, it has to be set like it is in this function, or else the nil is not being recognized by the == nil operator
