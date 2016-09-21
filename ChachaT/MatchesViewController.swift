@@ -19,13 +19,8 @@ class MatchesViewController: UIViewController {
     
     @IBOutlet weak var theTableView: UITableView!
     var matches : [Connection] = []
-    var chats : [Chat] = []
+    var chatRooms : [ChatRoom] = []
     var dataStore : MatchDataStore!
-    
-    //go to messages page
-    @IBAction func theButtonPressed(sender: UIButton) {
-    }
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,7 +49,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
             return 1
         } else {
             //the messaging area
-            return chats.count
+            return chatRooms.count
         }
     }
     
@@ -76,7 +71,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         } else if section == 1 {
             //the messaging area
             //TODO: the notification number should really be the number of total chats. So, if another user sent 30 messages, it only shows up as one chat cell, but it should still have a total count of 20. So, that means we have to pass an array of chats from dataStore that are in another array called samePersonNotification or something.
-            let notificationNumber = chats.count
+            let notificationNumber = chatRooms.count
             let headingView = HeadingView(text: MatchesConstants.sectionOneHeadingTitle, notificationNumber: notificationNumber)
             return headingView
         }
@@ -92,8 +87,8 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
             return matchesCell
         } else {
             //the messages area
-            let currentChat = chats[currentRow]
-            let chatCell = ChatTableViewCell(chat: currentChat)
+            let currentChatRoom = chatRooms[currentRow]
+            let chatCell = ChatTableViewCell(chatRoom: currentChatRoom)
             return chatCell
         }
     }
@@ -103,12 +98,12 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         let currentSection = indexPath.section
         if currentSection == 1 {
             //the messaging area
-            let currentChat = chats[currentRow]
-            currentChat.readByReceiver = true //after they click the cell to see messages, then that means they have read it.
-            currentChat.saveInBackground()
+            let currentChatRoom = chatRooms[currentRow]
+            dataStore.messagesHaveBeenRead(currentChatRoom)
             //the otherUser should be whichever one the currentUser is not
-            let otherUser : User = currentChat.sender == User.currentUser() ? currentChat.receiver : currentChat.sender
-            segueToChatVC(otherUser)
+            if let otherUser = currentChatRoom.getOtherUser() {
+                segueToChatVC(otherUser)
+            }
         }
     }
 }

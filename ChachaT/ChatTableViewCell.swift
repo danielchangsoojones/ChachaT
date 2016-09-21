@@ -17,20 +17,22 @@ class ChatTableViewCell: UITableViewCell {
     var theMessagePreviewLabel : UILabel = UILabel()
     var theUnreadNotificationBubble : CircleView!
     
-    var user: User!
-    var chat: Chat!
+    var user: User?
+    var chatRoom: ChatRoom!
+    var newestMessage: Message!
     
-    init(chat: Chat) {
+    init(chatRoom: ChatRoom) {
         super.init(style: .Default, reuseIdentifier: "chatTableViewCell")
-        self.user = chat.sender
-        self.chat = chat
+        self.user = chatRoom.getOtherUser()
+        self.chatRoom = chatRoom
         profileCircleSetup()
-        timeStampSetup(chat.createdAt!)
-        if let name = user.fullName {
+        newestMessage = chatRoom.messages[0]
+        timeStampSetup(newestMessage.dateSent)
+        if let name = user!.fullName {
             nameLabelSetup(name)
         }
         unreadNotificationBubbleSetup()
-        messagePreviewLabelSetup(chat.chatText)
+        messagePreviewLabelSetup(newestMessage.body)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -40,7 +42,7 @@ class ChatTableViewCell: UITableViewCell {
     func profileCircleSetup() {
         //TODO: the diameter for this should be the same as the diameter for the scrolling matches view
         let diameter : CGFloat = self.frame.width * 0.2
-        theCircleImageView = CircularImageView(file: user.profileImage, diameter: diameter)
+        theCircleImageView = CircularImageView(file: user!.profileImage, diameter: diameter)
         self.addSubview(theCircleImageView)
         theCircleImageView.snp_makeConstraints { (make) in
             make.centerY.equalTo(self)
@@ -109,6 +111,6 @@ class ChatTableViewCell: UITableViewCell {
             make.top.equalTo(theTimeStamp.snp_bottom)
             make.trailing.equalTo(self)
         }
-        theUnreadNotificationBubble.hidden = chat.readByReceiver //if the user has already read this message, then don't show the unread bubble
+        theUnreadNotificationBubble.hidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble
     }
 }
