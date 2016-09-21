@@ -11,16 +11,16 @@ import Parse
 import SCLAlertView
 
 class AddingTagsToProfileViewController: SuperTagViewController {
-    var specialtyTagChoicesDataArray : [SpecialtyTagTitles] = [] //specialty tags that get added to the choices tag view. Need to have an int array to differentiate between the None types
-    
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     var creationMenuView: CreationMenuView!
     
     var dataStore : AddingTagsDataStore!
+    var tappedDropDownTagView : DropDownTagView? //a global variable to hold the dropDownTag that was tapped to pull down a ChachaDropDownMenu
     
     override func viewDidLoad() {
         super.viewDidLoad()
         tagChoicesView.delegate = self
+        createCreationTagView()
         setDataFromDataStore()
         setTapGestureToCloseKeyboard()
     }
@@ -34,17 +34,6 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     
     func setDataFromDataStore() {
         dataStore = AddingTagsDataStore(delegate: self) //sets the data for the tag arrays
-    }
-    
-    override func loadChoicesViewTags() {
-        createCreationTagView()
-        for specialtyTagTitle in specialtyTagChoicesDataArray {
-            tagChoicesView.addSpecialtyTag(specialtyTagTitle, specialtyCategoryTitle: specialtyTagTitle.associatedSpecialtyCategoryTitle!)
-        }
-        for tagTitle in tagChoicesDataArray {
-            //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
-            tagChoicesView.addTag(tagTitle)
-        }
     }
     
     //Purpose: the first tag view needs to be a tag view that says "Add tags..." in a different color, and when the user clicks, they can start typing right there.
@@ -73,7 +62,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
 }
 
 //tag methods extension
-extension AddingTagsToProfileViewController : TagListViewDelegate {
+extension AddingTagsToProfileViewController {
     //TagListView tags: (tagChoicesView = 1, tagChosenView = 2, dropDownTagView = 3)
     func tagPressed(title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 1 {
@@ -86,23 +75,21 @@ extension AddingTagsToProfileViewController : TagListViewDelegate {
             alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
-            if let specialtyTagView = tagChoicesView.findSpecialtyTagView(dropDownMenu.dropDownMenuCategoryType) {
-                tagChoicesView.setTagViewTitle(specialtyTagView, title: title)
+            if let dropDownTagView = tappedDropDownTagView {
+                tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
                 dataStore.saveSpecialtyTag(title)
             }
         }
     }
     
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
-        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
-            switch tagAttribute {
-            case .SpecialtyTagMenu:
-                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
-                dropDownMenu.tagListView!.delegate = self
-            default: break
+        switch tagView.tagAttribute {
+        case .DropDownMenu:
+            tappedDropDownTagView = tagView as? DropDownTagView
+            if let dropDownTag = findDropDownTag(tappedDropDownTagView!.specialtyCategoryTitle, array: tagChoicesDataArray) {
+                dropDownActions(dropDownTag)
             }
+        default: break
         }
     }
 }

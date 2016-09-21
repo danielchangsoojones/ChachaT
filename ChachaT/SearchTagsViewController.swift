@@ -16,7 +16,7 @@ class SearchTagsViewController: SuperTagViewController {
     var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
     var theGenericChosenTagArray : [String] = []
     
-    var dataStore : FilterQueryDataStore!
+    var dataStore : SearchTagsDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -28,21 +28,7 @@ class SearchTagsViewController: SuperTagViewController {
     }
     
     func setDataFromDataStore() {
-        dataStore = FilterQueryDataStore(delegate: self) //sets the data for the tag arrays
-    }
-    
-    //the compiler was randomly crashing because it thought this function wasn't overriding super class. I think I had to put this function in main class instead of extension because compiler might look for overrided methods in extensions later.
-    //It happens randomly.Or I could fix it by just getting rid of error creator in superclass
-    override func loadChoicesViewTags() {
-        for tagTitle in tagChoicesDataArray {
-            if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: tagTitle) {
-                //the tagTitle is special
-                tagChoicesView.addSpecialtyTag(.GenderNone, specialtyCategoryTitle: specialtyCategoryTitle)
-            } else {
-                //just a generic tag. Right now, I am only adding specialtyTagCategories (Race, Hair Color) to the default view, but that could change
-                tagChoicesView.addTag(tagTitle)
-            }
-        }
+        dataStore = SearchTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
     //You're probably thinking "Why not just set the variable in the global variable?" Well, it for some fucking reason, it has to be set like it is in this function, or else the nil is not being recognized by the == nil operator
@@ -70,6 +56,16 @@ class SearchTagsViewController: SuperTagViewController {
         setChosenTagView(scrollViewSearchView)
         return scrollViewSearchView
     }
+    
+    override func dropDownActions(dropDownTag: DropDownTag) {
+        super.dropDownActions(dropDownTag)
+        switch dropDownTag.dropDownAttribute {
+        case .RangeSlider, .SingleSlider:
+            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .RangeSlider, sliderDelegate: self)
+        default:
+            break
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -79,37 +75,17 @@ class SearchTagsViewController: SuperTagViewController {
 }
 
 //extension for tag actions
-extension SearchTagsViewController : TagListViewDelegate {
+extension SearchTagsViewController {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
     func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        let specialtyCategoryTitle = tagView.specialtyCategoryTitle
-        if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
-            switch tagAttribute {
-            case .SpecialtyTagMenu:
-                let titleArray = specialtyCategoryTitle.specialtyTagTitles.map{$0.toString} //making the array into a string
-                dropDownMenu.showTagListView(titleArray, specialtyCategoryTitle: specialtyCategoryTitle)
-                dropDownMenu.tagListView!.delegate = self
-            case .SpecialtySingleSlider:
-                var valueSuffix = ""
-                if title == SpecialtyCategoryTitles.Location.rawValue {
-                    //they are trying to use location tag, we want to check they have location enabled
-                    //the user has to have location enabled in order to use this tag
-                    PFGeoPoint.geoPointForCurrentLocationInBackground({ (geoPoint, error) in
-                        if let geoPoint = geoPoint where error == nil {
-                            //saving location in two places in database because it makes easier querying with the tags.
-                            User.currentUser()!.location = geoPoint
-                            PFObject.saveAllInBackground([User.currentUser()!], block: nil)
-                        } else {
-                            print(error)
-                        }
-                    })
-                    valueSuffix = " mi"
-                }
-                dropDownMenu.showSingleSliderView()
-                dropDownMenu.singleSliderView?.setDelegateAndCreateTagView(self, specialtyCategoryTitle: specialtyCategoryTitle, valueSuffix: valueSuffix)
-            case .SpecialtyRangeSlider:
-                dropDownMenu.showRangeSliderView(self, dropDownMenuCategoryType: specialtyCategoryTitle)
+        switch tagView.tagAttribute {
+        case .DropDownMenu:
+            let dropDownTagView = tagView as! DropDownTagView
+            if let dropDownTag = findDropDownTag(dropDownTagView.specialtyCategoryTitle, array: tagChoicesDataArray) {
+                dropDownActions(dropDownTag)
             }
+        default:
+            break
         }
     }
     
@@ -180,6 +156,32 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     }
 }
 
+extension SearchTagsViewController: SliderViewDelegate {
+    func sliderValueChanged(text: String, suffix: String) {
+        scrollViewSearchView.hideScrollSearchView(false)
+        if let tagView = findTagViewWithSuffix(suffix) {
+            //the tagView has already been created
+            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
+            tagView.setTitle(text, forState: .Normal)
+        } else {
+            //tagView has never been created
+            let tagView = tagChosenView.addTag(text)
+            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
+        }
+    }
+    
+    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
+    func findTagViewWithSuffix(suffix: String) -> TagView? {
+        for tagView in tagChosenView.tagViews {
+            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
+            if let currentTitle = tagView.currentTitle where currentTitle.hasSuffix(suffix) {
+                return tagView
+            }
+        }
+        return nil
+    }
+}
+
 //search extension
 extension SearchTagsViewController : UISearchBarDelegate {
    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -232,8 +234,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
             }
         }
     }
-    
-    
 }
 
 extension SearchTagsViewController: SegueHandlerType {

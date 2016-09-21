@@ -56,14 +56,13 @@ public enum SpecialtyCategoryTitles : String {
         }
     }
     
-    //Purpose: find how the drop down menu is supposed to act, based on the tag attribute
-    var associatedTagAttribute : TagAttributes? {
+    var associatedDropDownAttribute : DropDownAttributes? {
         if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(self) {
-            return .SpecialtyTagMenu
+            return .TagChoices
         } else if SpecialtyCategoryTitles.specialtySingleSliderCategories.contains(self) {
-            return .SpecialtySingleSlider
+            return .SingleSlider
         } else if SpecialtyCategoryTitles.specialtyRangeSliderCategories.contains(self) {
-            return .SpecialtyRangeSlider
+            return .RangeSlider
         }
         return nil
     }
@@ -191,9 +190,8 @@ public enum SpecialtyTagTitles : Int {
 }
 
 public enum TagAttributes {
-    case SpecialtyTagMenu
-    case SpecialtySingleSlider
-    case SpecialtyRangeSlider
+    case Generic
+    case DropDownMenu
 }
 
 func tagTitleIsSpecial(tagTitle: String) -> Bool {

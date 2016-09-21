@@ -22,8 +22,8 @@ class SuperTagViewController: UIViewController {
     //constraint outlets
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
-    var searchDataArray: [String] = []
-    var tagChoicesDataArray: [String] = []
+    var searchDataArray: [Tag] = []
+    var tagChoicesDataArray: [Tag] = []
     
     //search Variables
     var searchActive : Bool = false
@@ -35,7 +35,18 @@ class SuperTagViewController: UIViewController {
     }
     
     func loadChoicesViewTags() {
-        fatalError("This method must be overridden in subclasses")
+        for tag in tagChoicesDataArray {
+            switch tag.attribute {
+            case .DropDownMenu:
+                let dropDownTag = tag as! DropDownTag
+                let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
+                if dropDownTag.isPrivate {
+                    tagView.makePrivate()
+                }
+            case .Generic:
+                tagChoicesView.addTag(tag.title)
+            }
+        }
     }
     
     func resetTagChoicesViewList() {
@@ -50,18 +61,39 @@ class SuperTagViewController: UIViewController {
             dropDownMenu = ChachaDropDownMenu(containerView: self.view, popDownOriginY: navigationBarHeight + statusBarHeight, delegate: self)
         }
     }
-
     
+    func dropDownActions(dropDownTag: DropDownTag) {
+        switch dropDownTag.dropDownAttribute {
+        case .TagChoices:
+            dropDownMenu.addTagListView(dropDownTag.innerTagTitles, specialtyCategory: dropDownTag.specialtyCategory, tagListViewDelegate: self)
+        default:
+            break
+        }
+    }
+
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 }
 
+//dealing with the tagListView
+extension SuperTagViewController : TagListViewDelegate {
+    //Purpose: find the corresponding DropDownTag model to the DropDownTagView, which we find by matching the specialtyCategory titles.
+    func findDropDownTag(specialtyCategory: String, array: [Tag]) -> DropDownTag? {
+        for tag in array {
+            if let dropDownTag = tag as? DropDownTag where dropDownTag.specialtyCategory == specialtyCategory {
+                return dropDownTag
+            }
+        }
+        return nil
+    }
+}
+
 extension SuperTagViewController : ChachaDropDownMenuDelegate {
     func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat) {
         if moveDown {
-                tagChoicesViewTopConstraint.constant += downDistance
+            tagChoicesViewTopConstraint.constant += downDistance
             //we don't want the TagListView to rearrange every time the dropDown moves, that looks bad.
             tagChoicesView.shouldRearrangeViews = false
             UIView.animateWithDuration(
@@ -96,9 +128,12 @@ extension SuperTagViewController : ChachaDropDownMenuDelegate {
 
 //search functionality
 extension SuperTagViewController {
-    func filterArray(searchText: String, searchDataArray: [String]) -> [String] {
+    func filterArray(searchText: String, searchDataArray: [Tag]) -> [String] {
         var filtered:[String] = []
-        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
+        let searchDataTitleArray: [String] = searchDataArray.map {
+            $0.title
+        }
+        filtered = searchDataTitleArray.filter({ (tagTitle) -> Bool in
             //finds the tagTitle, but if nil, then uses the specialtyTagTitle
             //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
             let tmp: NSString = tagTitle
@@ -106,6 +141,24 @@ extension SuperTagViewController {
             return range.location != NSNotFound
         })
         return filtered
+    }
+}
+
+protocol TagDataStoreDelegate {
+    func setSearchDataArray(searchDataArray: [Tag])
+    func setChoicesViewTagsArray(tagChoicesDataArray: [Tag])
+}
+
+extension SuperTagViewController : TagDataStoreDelegate {
+    func setSearchDataArray(searchDataArray: [Tag]) {
+        self.searchDataArray = searchDataArray
+    }
+    
+    func setChoicesViewTagsArray(tagChoicesDataArray: [Tag]) {
+        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
+        let alphabeticallySortedArray = tagChoicesDataArray.sort { $0.title.localizedCaseInsensitiveCompare($1.title) == NSComparisonResult.OrderedAscending }
+        self.tagChoicesDataArray = alphabeticallySortedArray
+        loadChoicesViewTags()
     }
 }
 

@@ -28,6 +28,12 @@
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
 		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
+		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
+		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
+		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
+		925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */; };
+		925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A81D907C48006D7C01 /* SliderDropDown.swift */; };
+		925884AB1D90809E006D7C01 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884AA1D90809E006D7C01 /* SliderView.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */; };
@@ -66,8 +72,6 @@
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
-		9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */; };
-		928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
@@ -128,6 +132,12 @@
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
 		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
+		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
+		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
+		925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagChoicesDropDown.swift; sourceTree = "<group>"; };
+		925884A81D907C48006D7C01 /* SliderDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDropDown.swift; sourceTree = "<group>"; };
+		925884AA1D90809E006D7C01 /* SliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataModel.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -169,8 +179,6 @@
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
-		9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SingleSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = DoubleRangeSliderView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
@@ -297,20 +305,20 @@
 			name = Messaging;
 			sourceTree = "<group>";
 		};
-		92120D9C1D6BF95B00320822 /* ChachaDropDownSubviews */ = {
+		92120D9C1D6BF95B00320822 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				9288193E1D1C2DEB000A8E04 /* SingleSliderView.swift */,
-				928819421D1C42B0000A8E04 /* DoubleRangeSliderView.swift */,
+				925884AA1D90809E006D7C01 /* SliderView.swift */,
 			);
-			name = ChachaDropDownSubviews;
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		92120D9D1D6BFA4200320822 /* ChachaDropDown */ = {
 			isa = PBXGroup;
 			children = (
 				922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */,
-				92120D9C1D6BF95B00320822 /* ChachaDropDownSubviews */,
+				925884AC1D909F35006D7C01 /* Extensions */,
+				92120D9C1D6BF95B00320822 /* Subviews */,
 			);
 			name = ChachaDropDown;
 			sourceTree = "<group>";
@@ -349,8 +357,18 @@
 			children = (
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
+				9258849E1D902704006D7C01 /* DropDownTagView.swift */,
 			);
 			name = TagViews;
+			sourceTree = "<group>";
+		};
+		925884AC1D909F35006D7C01 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+				925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */,
+				925884A81D907C48006D7C01 /* SliderDropDown.swift */,
+			);
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		925D0FCF1D6F634400DE20F9 /* Xibs */ = {
@@ -507,6 +525,8 @@
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9288194B1D2BDCFC000A8E04 /* Tags.swift */,
 				920BF82A1D43167000104842 /* Match.swift */,
+				925884A01D903A58006D7C01 /* Tag.swift */,
+				925884A21D903B32006D7C01 /* DropDownTag.swift */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -859,6 +879,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925884A11D903A58006D7C01 /* Tag.swift in Sources */,
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
@@ -881,10 +902,11 @@
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
+				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
-				928819431D1C42B0000A8E04 /* DoubleRangeSliderView.swift in Sources */,
 				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
 				925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */,
+				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* FilterQueryDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
@@ -898,6 +920,7 @@
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
+				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
@@ -912,14 +935,15 @@
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
+				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
+				925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */,
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
-				9288193F1D1C2DEB000A8E04 /* SingleSliderView.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,

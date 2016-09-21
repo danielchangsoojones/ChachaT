@@ -11,18 +11,24 @@ import UIKit
 import SnapKit
 
 public class SpecialtyTagView: TagView {
+    struct AnnotationImages {
+        static let dropDownMenu = ImageNames.DownArrow
+        static let isPrivate = "SettingsGear"
+    }
+    
+    
     //when the specialtyTagView is initialized, the properties have not been set yet. So, we need to override all these variables when set.
    //The specialtyTagView thinks its intrinsicContentSize is based upon the defualt paddingY, intsead of the manually set PaddingY, so, we say that when the paddintY is set, we want to add the annotationView, so then the annotationView height will be the same as the specialtyTagView's manually set PaddingY.
     @IBInspectable override public var paddingY: CGFloat {
         didSet {
-            updateOrCreateAnnotationView(annotationView)
+            updateAnnotationView()
         }
     }
     
     //Purpose: the intrinsicContentSize.height is dependent upon the textFont and the paddingY, so we don't know which will be set first. So, to protect against someone not setting PaddingY or textFont before the other. We just have the annotationView update or create depending on if the annotationView has already been created. That way, it doesn't matter which characteristic is set first. This is safe programming.
     override var textFont: UIFont {
         didSet {
-            updateOrCreateAnnotationView(annotationView)
+            updateAnnotationView()
         }
     }
     
@@ -49,28 +55,19 @@ public class SpecialtyTagView: TagView {
 
     public override var paddingX: CGFloat {
         didSet {
-            let annotationViewDiameter = intrinsicContentSize().height
-            titleEdgeInsets.left = paddingX + annotationViewDiameter
+            updateAnnotationView()
         }
     }
     
-    var specialtyTagTitle : SpecialtyTagTitles
-    var specialtyCategoryTitle : SpecialtyCategoryTitles
+    var tagAttribute : TagAttributes = .Generic
     
-    var annotationView: AnnotationView?
+    var annotationView: AnnotationView!
     var fakeBorder: UIView!
     
-    init(specialtyTagTitle: SpecialtyTagTitles, specialtyCategoryTitle: SpecialtyCategoryTitles) {
-        self.specialtyTagTitle = specialtyTagTitle
-        self.specialtyCategoryTitle = specialtyCategoryTitle
-        //TODO: should keep the view's only job to display things, not logic
-        if specialtyTagTitle.toString != "None" {
-            //specialtyTagTitle has been set to something real
-            super.init(title: specialtyTagTitle.toString)
-        } else {
-            //tag title equals none, so make the title something like "Race" or "Hair Color"
-            super.init(title: specialtyCategoryTitle.rawValue)
-        }
+    init(tagTitle: String, tagAttribute: TagAttributes) {
+        self.tagAttribute = tagAttribute
+        super.init(title: tagTitle)
+        addAnnotationSubview()
         createFakeBorder()
     }
     
@@ -92,7 +89,7 @@ public class SpecialtyTagView: TagView {
     }
     
     func addAnnotationSubview() {
-        let annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: TagViewProperties.borderColor, imageName: ImageNames.DownArrow)
+        annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.userInteractionEnabled = false
         self.addSubview(annotationView)
@@ -102,31 +99,20 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    //Purpose: the characteristics of the tagView are not created on initilization. So, we need to update or create the annotationView, depending on if it was already created or not.
-    func updateOrCreateAnnotationView(annotationView: AnnotationView?) {
-        let annotationViewDiameter = self.intrinsicContentSize().height
-        if let annotationView = annotationView {
-            //theAnnotationView has been made already, but not with the updated characteristics, so we must remove the annotationView and remake it.
-            annotationView.updateDiameter(annotationViewDiameter)
-        } else {
-            //the annotationView has not been created yet or has been removed from superview, and we must re-add it.
-            addAnnotationSubview()
+    func setAnnotationImage(tagAttribute: TagAttributes) -> String {
+        switch tagAttribute {
+        case .DropDownMenu:
+            return AnnotationImages.dropDownMenu
+        default:
+            return ""
         }
-        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
-        titleEdgeInsets.left = annotationViewDiameter
     }
     
-    //need to override becuase when I set the button title, it was not setting the tagTitle variable in this class
-    //hence, when we would say layoutSubviews was not changing to the new size because it still thought it was the old tagTitle
-    override public func setTitle(title: String?, forState state: UIControlState) {
-        super.setTitle(title, forState: .Normal)
-        if let title = title {
-            if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title) {
-                self.specialtyTagTitle = specialtyTagTitle
-            } else if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: title) {
-                self.specialtyCategoryTitle = specialtyCategoryTitle
-            }
-        }
+    func updateAnnotationView() {
+        let annotationViewDiameter = self.intrinsicContentSize().height
+        annotationView.updateDiameter(annotationViewDiameter)
+        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
+        titleEdgeInsets.left = annotationViewDiameter
     }
     
     public override func intrinsicContentSize() -> CGSize {

@@ -1,5 +1,5 @@
 //
-//  FilterQueryDataStore.swift
+//  SearchTagsDataStore.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 8/3/16.
@@ -10,19 +10,13 @@ import Foundation
 import Parse
 import SCLAlertView
 
-protocol FilterQueryDataStoreDelegate {
-    func getSearchDataArray(searchDataArray: [String])
-    func setChoicesViewTags(tagChoicesDataArray: [String])
-    func passUserArrayToMainPage(userArray: [User])
-}
-
-class FilterQueryDataStore {
-    var searchDataArray : [String] = [] //tags that will be available for searching
-    var tagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
+class SearchTagsDataStore {
+    var searchDataArray : [Tag] = [] //tags that will be available for searching
+    var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
-    var delegate: FilterQueryDataStoreDelegate?
+    var delegate: SearchTagsDataStoreDelegate?
     
-    init(delegate: FilterQueryDataStoreDelegate) {
+    init(delegate: SearchTagsDataStoreDelegate) {
         self.delegate = delegate
         setSearchDataArray()
         setSpecialtyTagsIntoDefaultView()
@@ -42,10 +36,11 @@ class FilterQueryDataStore {
                         if !alreadyContainsTagArray.contains(tagTitle) {
                             //our string array does not already contain the tag title, so we can add it to our searchable array
                             alreadyContainsTagArray.append(tagTitle)
-                            self.searchDataArray.append(tagTitle)
+                            let tag = Tag(title: tagTitle, attribute: .Generic)
+                            self.searchDataArray.append(tag)
                         }
                     }
-                    self.delegate?.getSearchDataArray(self.searchDataArray)
+                    self.delegate?.setSearchDataArray(self.searchDataArray)
                 }
             }
         }
@@ -54,7 +49,8 @@ class FilterQueryDataStore {
     //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
     func addSpecialtyTagsToSearchDataArray() {
         for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            searchDataArray.append(specialtyTagTitle.toString)
+            let tag = Tag(title: specialtyTagTitle.toString, attribute: .Generic)
+            searchDataArray.append(tag)
         }
     }
     
@@ -62,9 +58,16 @@ class FilterQueryDataStore {
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            tagChoicesDataArray.append(specialtyCategory.rawValue)
+            //TODO: .TagChoices should not be the dropDownAttribute every time. This is just for testing.
+            if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
+                let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
+                    $0.toString
+                }
+                let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
+                tagChoicesDataArray.append(dropDownTag)
+            }
         }
-        delegate?.setChoicesViewTags(tagChoicesDataArray)
+        delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
     }
     
     func findUserArray(genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
@@ -98,16 +101,16 @@ class FilterQueryDataStore {
         for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
             if let tagViewTitle = tagView?.currentTitle {
                 //the tagView is not nil and the title exists
-                if let tagAttribute = specialtyCategoryTitle.associatedTagAttribute {
+                if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
                     switch tagAttribute {
-                    case .SpecialtyTagMenu:
+                    case .TagChoices:
                         //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
                         query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
-                    case .SpecialtySingleSlider:
+                    case .SingleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
                             query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
                         }
-                    case .SpecialtyRangeSlider:
+                    case .RangeSlider:
                         let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
                         let minAge : NSDate = maxAndMinTuple.minValue.years.ago
@@ -151,17 +154,11 @@ class FilterQueryDataStore {
     }
 }
 
-extension SearchTagsViewController : FilterQueryDataStoreDelegate {
-    //TODO: for some reason, it would not let me call this setSearchDataArray, only get. Would like to change name to make it better.
-    func getSearchDataArray(searchDataArray: [String]) {
-        self.searchDataArray = searchDataArray
-    }
-    
-    func setChoicesViewTags(tagChoicesDataArray: [String]) {
-        self.tagChoicesDataArray = tagChoicesDataArray
-        loadChoicesViewTags()
-    }
-    
+protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
+    func passUserArrayToMainPage(userArray: [User])
+}
+
+extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
     }

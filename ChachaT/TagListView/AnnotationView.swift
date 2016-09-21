@@ -13,6 +13,8 @@ class AnnotationView: CircleView {
         static let imageToCircleRatio : CGFloat = 0.75
     }
     
+    private var theImageView: UIImageView!
+    
     init(diameter: CGFloat, color: UIColor, imageName: String) {
         super.init(diameter: diameter, color: color)
         imageViewSetup(imageName)
@@ -23,13 +25,16 @@ class AnnotationView: CircleView {
     }
     
     func imageViewSetup(imageName: String) {
-        let imageView = UIImageView(image: UIImage(named: imageName))
-        imageView.contentMode = .ScaleAspectFit
-        self.addSubview(imageView)
-        imageView.snp_makeConstraints { (make) in
+        theImageView = UIImageView(image: UIImage(named: imageName))
+        theImageView.contentMode = .ScaleAspectFit
+        self.addSubview(theImageView)
+        theImageView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
-            make.height.equalTo(self.frame.height * AnnotationConstants.imageToCircleRatio)
-            make.width.equalTo(self.frame.width * AnnotationConstants.imageToCircleRatio)
+            make.height.width.equalTo(self).multipliedBy(AnnotationConstants.imageToCircleRatio)
         }
+    }
+    
+    func updateImage(imageName: String) {
+        theImageView.image = UIImage(named: imageName)
     }
 }
