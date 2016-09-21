@@ -10,14 +10,8 @@ import Foundation
 import Parse
 import SCLAlertView
 
-protocol FilterQueryDataStoreDelegate {
-    func getSearchDataArray(searchDataArray: [String])
-    func setChoicesViewTags(tagChoicesDataArray: [Tag])
-    func passUserArrayToMainPage(userArray: [User])
-}
-
 class FilterQueryDataStore {
-    var searchDataArray : [String] = [] //tags that will be available for searching
+    var searchDataArray : [Tag] = [] //tags that will be available for searching
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
     var delegate: FilterQueryDataStoreDelegate?
@@ -42,10 +36,11 @@ class FilterQueryDataStore {
                         if !alreadyContainsTagArray.contains(tagTitle) {
                             //our string array does not already contain the tag title, so we can add it to our searchable array
                             alreadyContainsTagArray.append(tagTitle)
-                            self.searchDataArray.append(tagTitle)
+                            let tag = Tag(title: tagTitle, attribute: .Generic)
+                            self.searchDataArray.append(tag)
                         }
                     }
-                    self.delegate?.getSearchDataArray(self.searchDataArray)
+                    self.delegate?.setSearchDataArray(self.searchDataArray)
                 }
             }
         }
@@ -54,7 +49,8 @@ class FilterQueryDataStore {
     //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
     func addSpecialtyTagsToSearchDataArray() {
         for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            searchDataArray.append(specialtyTagTitle.toString)
+            let tag = Tag(title: specialtyTagTitle.toString, attribute: .Generic)
+            searchDataArray.append(tag)
         }
     }
     
@@ -71,7 +67,7 @@ class FilterQueryDataStore {
                 tagChoicesDataArray.append(dropDownTag)
             }
         }
-        delegate?.setChoicesViewTags(tagChoicesDataArray)
+        delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
     }
     
     func findUserArray(genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
@@ -158,17 +154,11 @@ class FilterQueryDataStore {
     }
 }
 
+protocol FilterQueryDataStoreDelegate : TagDataStoreDelegate {
+    func passUserArrayToMainPage(userArray: [User])
+}
+
 extension SearchTagsViewController : FilterQueryDataStoreDelegate {
-    //TODO: for some reason, it would not let me call this setSearchDataArray, only get. Would like to change name to make it better.
-    func getSearchDataArray(searchDataArray: [String]) {
-        self.searchDataArray = searchDataArray
-    }
-    
-    func setChoicesViewTags(tagChoicesDataArray: [Tag]) {
-        self.tagChoicesDataArray = tagChoicesDataArray
-        loadChoicesViewTags()
-    }
-    
     func passUserArrayToMainPage(userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
     }

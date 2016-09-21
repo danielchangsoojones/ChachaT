@@ -22,7 +22,7 @@ class SuperTagViewController: UIViewController {
     //constraint outlets
     @IBOutlet weak var tagChoicesViewTopConstraint: NSLayoutConstraint!
     
-    var searchDataArray: [String] = []
+    var searchDataArray: [Tag] = []
     var tagChoicesDataArray: [Tag] = []
     
     //search Variables
@@ -128,9 +128,12 @@ extension SuperTagViewController : ChachaDropDownMenuDelegate {
 
 //search functionality
 extension SuperTagViewController {
-    func filterArray(searchText: String, searchDataArray: [String]) -> [String] {
+    func filterArray(searchText: String, searchDataArray: [Tag]) -> [String] {
         var filtered:[String] = []
-        filtered = searchDataArray.filter({ (tagTitle) -> Bool in
+        let searchDataTitleArray: [String] = searchDataArray.map {
+            $0.title
+        }
+        filtered = searchDataTitleArray.filter({ (tagTitle) -> Bool in
             //finds the tagTitle, but if nil, then uses the specialtyTagTitle
             //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
             let tmp: NSString = tagTitle
@@ -138,6 +141,24 @@ extension SuperTagViewController {
             return range.location != NSNotFound
         })
         return filtered
+    }
+}
+
+protocol TagDataStoreDelegate {
+    func setSearchDataArray(searchDataArray: [Tag])
+    func setChoicesViewTagsArray(tagChoicesDataArray: [Tag])
+}
+
+extension SuperTagViewController : TagDataStoreDelegate {
+    func setSearchDataArray(searchDataArray: [Tag]) {
+        self.searchDataArray = searchDataArray
+    }
+    
+    func setChoicesViewTagsArray(tagChoicesDataArray: [Tag]) {
+        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
+        let alphabeticallySortedArray = tagChoicesDataArray.sort { $0.title.localizedCaseInsensitiveCompare($1.title) == NSComparisonResult.OrderedAscending }
+        self.tagChoicesDataArray = alphabeticallySortedArray
+        loadChoicesViewTags()
     }
 }
 

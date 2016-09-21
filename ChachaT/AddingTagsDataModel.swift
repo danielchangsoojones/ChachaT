@@ -10,8 +10,8 @@ import Foundation
 import Parse
 
 class AddingTagsDataStore {
-    var genericTagChoicesDataArray : [String] = [] //tags that get added to the choices tag view
-    var searchDataArray : [String] = [] //tags that will be available for searching
+    var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
+    var searchDataArray : [Tag] = [] //tags that will be available for searching
     
     var delegate: AddingTagsDataStoreDelegate?
     
@@ -28,13 +28,16 @@ class AddingTagsDataStore {
         //can use FirstObject because there really should only be one result returned anyway.
         query.getFirstObjectInBackgroundWithBlock { (object, error) in
             if let tag = object as? Tags where error == nil {
-                self.genericTagChoicesDataArray = tag.genericTags
+                for tagTitle in tag.genericTags {
+                    let newTag = Tag(title: tagTitle, attribute: .Generic)
+                    self.tagChoicesDataArray.append(newTag)
+                }
                 self.loadCurrentUserSpecialtyTags(tag)
             } else {
                 print(error)
             }
             //this should load the tagViews even if there is error, so at least the user can see the CreationTagView
-            self.delegate?.setChoicesViewTags(self.genericTagChoicesDataArray, specialtyTagChoicesDataArray: self.specialtyTagChoicesDataArray)
+            self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
         }
     }
     
@@ -42,32 +45,46 @@ class AddingTagsDataStore {
     private func loadCurrentUserSpecialtyTags(tag: Tags) {
         //Doing an awkward mass nil check, but necessary and couldn't think of better way.
         let specialtyTagTitlesIntegers : [Int] = [tag.ethnicity, tag.hairColor, tag.gender, tag.politicalGroup, tag.sexuality]
-        var specialtyTagTitlesArray: [SpecialtyTagTitles] = []
         for rawValue in specialtyTagTitlesIntegers {
             if let specialtyTagTitle = SpecialtyTagTitles(rawValue: rawValue) {
-                specialtyTagTitlesArray.append(specialtyTagTitle)
+                if let tagAttribute = specialtyTagTitle.associatedSpecialtyCategoryTitle?.associatedDropDownAttribute {
+                    var dropDownTag : DropDownTag!
+                    switch tagAttribute {
+                    case .TagChoices:
+                        let innerTagTitles : [String] = specialtyTagTitle.associatedSpecialtyCategoryTitle!.specialtyTagTitles.map {
+                            $0.toString
+                        }
+                        dropDownTag = DropDownTag(tagTitle: specialtyTagTitle.toString, specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: .TagChoices)
+                    case .SingleSlider:
+                        //TODO: I only have one slider for Location, so I am just setting it to a constant...
+                        dropDownTag = DropDownTag(specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, maxValue: 50, suffix: "mi", dropDownAttribute: .SingleSlider)
+                    case .RangeSlider:
+                        dropDownTag = DropDownTag(specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, minValue: 18, maxValue: 65, suffix: "yrs", dropDownAttribute: .RangeSlider)
+                    }
+                    tagChoicesDataArray.append(dropDownTag)
+                }
             }
         }
-        specialtyTagChoicesDataArray = specialtyTagTitlesArray
         setAnyNilSpecialtyTags()
     }
     
     //Purpose: in the database, the user might not have set something like Gender yet, so we just want to show the specialty drop down tag "Gender"
     func setAnyNilSpecialtyTags() {
         var alreadyDisplayedSpecialtyCategoryTitles: [SpecialtyCategoryTitles] = []
-        var notYetDisplayedSpecialtyCategoryTitles: [SpecialtyTagTitles] = []
-        for specialtyTagTitle in specialtyTagChoicesDataArray {
-            if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
-                alreadyDisplayedSpecialtyCategoryTitles.append(specialtyCategoryTitle)
+        for tag in tagChoicesDataArray {
+            if let dropDownTag = tag as? DropDownTag {
+                if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: dropDownTag.specialtyCategory) {
+                    alreadyDisplayedSpecialtyCategoryTitles.append(specialtyCategoryTitle)
+                }
             }
         }
         for specialtyCategoryTitle in SpecialtyCategoryTitles.specialtyTagMenuCategories where !alreadyDisplayedSpecialtyCategoryTitles.contains(specialtyCategoryTitle) {
-            if let noneValue = specialtyCategoryTitle.noneValue {
-                //the none value is the negative none TagEnum value. It means the tag has not yet been set or is private. So just show something like Gender instead of female.
-                notYetDisplayedSpecialtyCategoryTitles.append(noneValue)
+            let innerTagTitles : [String] = specialtyCategoryTitle.specialtyTagTitles.map {
+                $0.toString
             }
+            let dropDownTag = DropDownTag(specialtyCategory: specialtyCategoryTitle.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: .TagChoices)
+            tagChoicesDataArray.append(dropDownTag)
         }
-        specialtyTagChoicesDataArray.appendContentsOf(notYetDisplayedSpecialtyCategoryTitles)
     }
     
     //TODO: Doing 2 API calls to delete this tag. Plus, it has an API call for every tag deleted, should delete all at once. so it is probably best to figure out how to optimize this..
@@ -98,10 +115,11 @@ class AddingTagsDataStore {
                         if !alreadyContainsTagArray.contains(tagTitle) {
                             //our string array does not already contain the tag title, so we can add it to our searchable array
                             alreadyContainsTagArray.append(tagTitle)
-                            self.searchDataArray.append(tagTitle)
+                            let tag = Tag(title: tagTitle, attribute: .Generic)
+                            self.searchDataArray.append(tag)
                         }
                     }
-                    self.delegate?.getSearchDataArray(self.searchDataArray)
+                    self.delegate?.setSearchDataArray(self.searchDataArray)
                 }
             }
         }
@@ -164,26 +182,12 @@ class AddingTagsDataStore {
     
 }
 
-protocol AddingTagsDataStoreDelegate {
+protocol AddingTagsDataStoreDelegate : TagDataStoreDelegate {
     func deleteTagView(title: String)
-    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles])
-    func getSearchDataArray(searchDataArray: [String])
 }
 
 extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
-    func getSearchDataArray(searchDataArray: [String]) {
-        self.searchDataArray = searchDataArray
-    }
-    
     func deleteTagView(title: String) {
         tagChoicesView.removeTag(title)
     }
-    
-    func setChoicesViewTags(genericTagChoicesDataArray: [String], specialtyTagChoicesDataArray : [SpecialtyTagTitles]) {
-        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
-        let alphabeticallySortedArray = genericTagChoicesDataArray.sort { $0.localizedCaseInsensitiveCompare($1) == NSComparisonResult.OrderedAscending }
-        self.tagChoicesDataArray = []
-        loadChoicesViewTags()
-    }
-    
 }

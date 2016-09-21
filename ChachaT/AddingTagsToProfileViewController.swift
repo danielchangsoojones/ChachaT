@@ -20,6 +20,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         tagChoicesView.delegate = self
+        createCreationTagView()
         setDataFromDataStore()
         setTapGestureToCloseKeyboard()
     }
