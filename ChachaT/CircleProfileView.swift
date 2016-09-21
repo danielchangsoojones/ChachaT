@@ -15,7 +15,7 @@ class CircleProfileView: UIView {
     //TODO: set the intrinsic content size to calculate correctly
     init(frame: CGRect, name: String, imageFile: AnyObject) {
         super.init(frame: frame)
-        let diameter = frame.size.height > frame.size.width ? frame.size.width : frame.size.height //set diameter to shorter dimension
+        let diameter = frame.size.width
         circleViewSetup(diameter, file: imageFile)
         nameLabelSetup(name)
     }
@@ -25,8 +25,6 @@ class CircleProfileView: UIView {
         self.addSubview(circleView)
         circleView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
-            //needed to explicitly set the width/height of the circleView. If I don't then, the circleView thinks it must calculate its size off of its subviews. And, this makes the view do weird sizing things. At least, that is what I think is happening, and explicitly setting the height/width fixes the problem.
-            make.width.height.equalTo(diameter)
         }
     }
     
