@@ -28,6 +28,10 @@
 		922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */; };
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
 		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
+		923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7ED61D9303E30033A8A2 /* Connection.swift */; };
+		923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDA1D9309200033A8A2 /* ChatRoom.swift */; };
+		923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDC1D930B2F0033A8A2 /* Message.swift */; };
+		923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
@@ -132,6 +136,10 @@
 		922C89981D4D86C800DE1373 /* ChachaChoicesTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChoicesTagListView.swift; sourceTree = "<group>"; };
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
 		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		923C7ED61D9303E30033A8A2 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
+		923C7EDA1D9309200033A8A2 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
+		923C7EDC1D930B2F0033A8A2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
+		923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataStore.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
@@ -300,6 +308,7 @@
 		920BF8351D4333CA00104842 /* Messaging */ = {
 			isa = PBXGroup;
 			children = (
+				923C7EDE1D94223D0033A8A2 /* Data Models */,
 				920BF8381D4334DF00104842 /* ChatViewController.swift */,
 			);
 			name = Messaging;
@@ -360,6 +369,37 @@
 				9258849E1D902704006D7C01 /* DropDownTagView.swift */,
 			);
 			name = TagViews;
+			sourceTree = "<group>";
+		};
+		923C7ED81D9308F20033A8A2 /* Internal Models */ = {
+			isa = PBXGroup;
+			children = (
+				923C7ED61D9303E30033A8A2 /* Connection.swift */,
+				925884A21D903B32006D7C01 /* DropDownTag.swift */,
+				925884A01D903A58006D7C01 /* Tag.swift */,
+				923C7EDA1D9309200033A8A2 /* ChatRoom.swift */,
+				923C7EDC1D930B2F0033A8A2 /* Message.swift */,
+			);
+			name = "Internal Models";
+			sourceTree = "<group>";
+		};
+		923C7ED91D9308FA0033A8A2 /* Parse Models */ = {
+			isa = PBXGroup;
+			children = (
+				920BF8361D43346B00104842 /* Chat.swift */,
+				9261085B1CEA196C009F3E86 /* User.swift */,
+				9288194B1D2BDCFC000A8E04 /* Tags.swift */,
+				920BF82A1D43167000104842 /* Match.swift */,
+			);
+			name = "Parse Models";
+			sourceTree = "<group>";
+		};
+		923C7EDE1D94223D0033A8A2 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		925884AC1D909F35006D7C01 /* Extensions */ = {
@@ -521,12 +561,8 @@
 		9261085A1CEA1939009F3E86 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				920BF8361D43346B00104842 /* Chat.swift */,
-				9261085B1CEA196C009F3E86 /* User.swift */,
-				9288194B1D2BDCFC000A8E04 /* Tags.swift */,
-				920BF82A1D43167000104842 /* Match.swift */,
-				925884A01D903A58006D7C01 /* Tag.swift */,
-				925884A21D903B32006D7C01 /* DropDownTag.swift */,
+				923C7ED91D9308FA0033A8A2 /* Parse Models */,
+				923C7ED81D9308F20033A8A2 /* Internal Models */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -548,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				9275FB821D7A030600D8131D /* Subviews */,
+				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -614,7 +651,6 @@
 				9275FB811D7A02F900D8131D /* Edit Profile */,
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
-				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
@@ -886,11 +922,13 @@
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,
 				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */,
+				923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
+				923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
@@ -900,6 +938,7 @@
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataModel.swift in Sources */,
+				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
@@ -932,6 +971,7 @@
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
 				9288194C1D2BDCFC000A8E04 /* Tags.swift in Sources */,
+				923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,

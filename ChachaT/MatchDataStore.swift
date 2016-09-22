@@ -7,12 +7,6 @@
 //
 
 import UIKit
-import SCLAlertView
-
-protocol MatchDataStoreDelegate {
-    func passMatchedUsers(matchedUsers: [User])
-    func passChats(chats: [Chat])
-}
 
 class MatchDataStore: NSObject {
     var delegate: MatchDataStoreDelegate?
@@ -28,7 +22,7 @@ class MatchDataStore: NSObject {
     }
     
     func findMatchedUsers() {
-        var matchedUsers : [User] = []
+        var connections : [Connection] = []
         let query = Match.query()!
         query.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
         query.whereKey(Constants.mutualMatch, equalTo: true)
@@ -36,9 +30,10 @@ class MatchDataStore: NSObject {
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if let matches = objects as? [Match] where error == nil {
                 for match in matches {
-                    matchedUsers.append(match.targetUser)
+                    let connection = Connection(targetUser: match.targetUser)
+                    connections.append(connection)
                 }
-                self.delegate?.passMatchedUsers(matchedUsers)
+                self.delegate?.passMatches(connections)
             } else {
                 print(error)
             }
@@ -50,8 +45,8 @@ class MatchDataStore: NSObject {
     //
     //Purpose: This finds the chat rooms for the currentUser. It only gets the first message of a chat room, and then passes that newest chat to the view controller. We only want one cell per chat room, so even if two users have 50 messages together, we don't want 50 cells. Just one cell with the newest message.
     func findChatRooms() {
-        var chatsArray : [Chat] = []
-        var chatRooms : [String] = []
+        var chatRooms : [ChatRoom] = []
+        var alreadyContainedChats: [String] = []
         let query = Chat.query()!
         query.includeKey("sender")
         query.whereKey("chatRoom", containsString: currentUser.objectId!)
@@ -59,16 +54,41 @@ class MatchDataStore: NSObject {
         query.findObjectsInBackgroundWithBlock { (objects, error) in
             if let chats = objects as? [Chat] where error == nil {
                 for chat in chats {
-                    if !chatRooms.contains(chat.chatRoom) {
-                        chatRooms.append(chat.chatRoom)
-                        chatsArray.append(chat)
+                    if !alreadyContainedChats.contains(chat.chatRoom) {
+                        alreadyContainedChats.append(chat.chatRoom)
+                        //TODO: make the message have an actual date for the date sent
+                        let message = Message(sender: chat.sender, body: chat.chatText, hasBeenRead: chat.readByReceiver, dateSent: NSDate())
+                        let chatRoom = ChatRoom(users: [chat.sender, chat.receiver], messages: [message])
+                        chatRooms.append(chatRoom)
                     }
                 }
             } else {
                 print("error")
             }
-            self.delegate?.passChats(chatsArray)
+            self.delegate?.passChatRooms(chatRooms)
         }
+    }
+    
+    func messagesHaveBeenRead(chatRoom: ChatRoom) {
+        //TODO: make the chatroom say that all messages have been read
+        
+    }
+}
+
+protocol MatchDataStoreDelegate {
+    func passMatches(matches: [Connection])
+    func passChatRooms(rooms: [ChatRoom])
+}
+
+extension MatchesViewController: MatchDataStoreDelegate {
+    func passMatches(matches: [Connection]) {
+        self.matches = matches
+        theTableView.reloadData()
+    }
+    
+    func passChatRooms(rooms: [ChatRoom]) {
+        self.chatRooms = rooms
+        theTableView.reloadData()
     }
 }
 

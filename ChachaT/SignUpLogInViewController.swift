@@ -35,15 +35,14 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     //TODO: make logOut work for facebook
     @IBAction func facebookButtonPressed(sender: UIButton) {
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (user: PFUser?, error) in
-            if let currentUser = user {
+        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (user, error) in
+            if let currentUser = user as? User {
                 if currentUser.isNew {
                     print("this is a new user that just signed up")
                     self.updateProfileFromFacebook(true)
                 } else {
-                    print("the user has logged in successfully!")
-                    //TODO: get rid of this, only needs to be in new user area, just for my testing, so I don't need a new facebook account everytime
-                    self.updateProfileFromFacebook(true)
+                    //let the facebook user sign-in
+                    self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: nil)
                 }
             } else {
                 print("there was an error logging in/signing up")
