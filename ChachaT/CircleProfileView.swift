@@ -31,11 +31,13 @@ class CircleProfileView: UIView {
     //TODO: make the name label resize so it doesn't go over the screen
     func nameLabelSetup(name: String) {
         theNameLabel.text = name
+        theNameLabel.lineBreakMode = .ByClipping
         self.addSubview(theNameLabel)
         theNameLabel.snp_makeConstraints { (make) in
             //TODO: put these constants in a struct
             make.top.equalTo(circleView.snp_bottom)
             make.centerX.equalTo(self)
+            make.width.lessThanOrEqualTo(circleView)
         }
     }
     
