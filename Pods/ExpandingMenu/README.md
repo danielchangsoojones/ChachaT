@@ -12,7 +12,7 @@ ExpandingMenu is written in Swift.
 ## Requirements
 
 - iOS 8.0+
-- Xcode 7.0+
+- Xcode 8.0+
 
 ## Installation
 
@@ -31,7 +31,9 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'ExpandingMenu', '~> 0.1'
+target '<Your Target Name>' do
+    pod 'ExpandingMenu', '~> 0.3'
+end
 ```
 
 Then, run the following command:
@@ -52,10 +54,14 @@ $ brew install carthage
 To integrate ExpandingMenu into your Xcode project using Carthage, specify it in your `Cartfile`:
 
 ```ogdl
-github "monoqlo/ExpandingMenu" ~> 0.1
+github "monoqlo/ExpandingMenu" ~> 0.3
 ```
 
 Run `carthage update` to build the framework and drag the built `ExpandingMenu.framework` into your Xcode project.
+
+### Manually
+1. Download and drop ```/ExpandingMenu```folder in your project.  
+2. Congratulations!  
 
 ## Usage
 
@@ -131,6 +137,9 @@ menuButton.enabledFoldingAnimations = [.MenuItemMoving, .MenuItemFade, .MenuButt
 // Title
 item.title = "text"
 item.titleColor = UIColor.redColor()
+
+// Title margin to menu item
+item.titleMargin = 4
 ```
 
 ## Author
