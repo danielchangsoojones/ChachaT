@@ -34,26 +34,23 @@ class ChatViewController: JSQMessagesViewController {
     var outgoingBubbleImageView : JSQMessagesBubbleImage!
     var incomingBubbleImageView : JSQMessagesBubbleImage!
     
+    var dataStore: ChatDataStore!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataStore = ChatDataStore(delegate: self)
         
         self.title = "Chat"
         
-        // We create a chatroom for each user pair. it needs to be the same for both
-        // so we always put smaller user id first
-        self.senderId = User.currentUser()!.objectId
-        self.senderDisplayName = User.currentUser()!.fullName
-        self.chatroom = currentUser.objectId > otherUser.objectId ?
-            "\(currentUser.objectId)-\(otherUser.objectId)" :
-        "\(otherUser.objectId)-\(currentUser.objectId)"
+        self.senderId = dataStore.getsenderID()
+        self.senderDisplayName = dataStore.getSenderDisplayName()
+        self.chatroom = dataStore.getChatRoomName(otherUser)
         
         // setup chat bubbles
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         outgoingBubbleImageView = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
         incomingBubbleImageView = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
         
-        // load messages
-        isLoading = false;
         self.loadMessages()
         
         // We check for new messages every 5 seconds
@@ -75,70 +72,56 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     func loadMessages() {
-        if !isLoading {
-            isLoading = true
-            let message_last = messages.last
-            
-            // query to fetch messages
-            let query = Chat.query()!
-            query.whereKey(Constants.chatRoom, equalTo: chatroom)
-            // time based pagination
-            if message_last != nil {
-                query.whereKey(Constants.createdAt, greaterThan: message_last!.date)
-            }
-            // we need this so we can get the sender's objectId for simplicity
-            query.includeKey(Constants.sender)
-            // show messages in order sent
-            query.orderByAscending(Constants.createdAt)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) in
-                if error == nil {
-                    for object in objects! {
-                        // Go through each Chat message and create a
-                        // JSQMessage for display on this screen
-                        let chat = object as! Chat
-                        let message = JSQMessage(senderId: chat.sender.objectId, senderDisplayName: chat.sender.fullName, date: chat.createdAt, text: chat.chatText)
-                        
-                        self.messages.append(message)
-                        
-                        // just ensure we cache the user object for later
-                        self.users[chat.sender.objectId!] = chat.sender
-                    }
-                    if !objects!.isEmpty {
-                        self.finishReceivingMessage()
-                    }
-                }
-                self.isLoading = false
-            })
-            
-        }
-        
+        dataStore.loadMessages(messages)
     }
+    
+//    func loadMessages() {
+//        if !isLoading {
+//            isLoading = true
+//            let message_last = messages.last
+//            
+//            // query to fetch messages
+//            let query = Chat.query()!
+//            query.whereKey(Constants.chatRoom, equalTo: chatroom)
+//            // time based pagination
+//            if message_last != nil {
+//                query.whereKey(Constants.createdAt, greaterThan: message_last!.date)
+//            }
+//            // we need this so we can get the sender's objectId for simplicity
+//            query.includeKey(Constants.sender)
+//            // show messages in order sent
+//            query.orderByAscending(Constants.createdAt)
+//            query.findObjectsInBackgroundWithBlock({ (objects, error) in
+//                if error == nil {
+//                    for object in objects! {
+//                        // Go through each Chat message and create a
+//                        // JSQMessage for display on this screen
+//                        let chat = object as! Chat
+//                        let message = JSQMessage(senderId: chat.sender.objectId, senderDisplayName: chat.sender.fullName, date: chat.createdAt, text: chat.chatText)
+//                        
+//                        self.messages.append(message)
+//                        
+//                        // just ensure we cache the user object for later
+//                        self.users[chat.sender.objectId!] = chat.sender
+//                    }
+//                    if !objects!.isEmpty {
+//                        self.finishReceivingMessage()
+//                    }
+//                }
+//                self.isLoading = false
+//            })
+//            
+//        }
+//        
+//    }
     
     // Mark - JSQMessagesViewController method overrides
     
     override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
-        
-        // When they hit send. Save their message.
-        let chat = Chat()
-        chat.chatRoom = chatroom
-        chat.sender = User.currentUser()!
-        chat.receiver = otherUser
-        chat.chatText = text
-        chat.readByReceiver = false
-        
-        chat.saveInBackgroundWithBlock { (succeeded, error) in
-            if error == nil {
-                JSQSystemSoundPlayer.jsq_playMessageSentSound()
-                self.loadMessages()
-            }
-        }
-        self.finishSendingMessage()
-        
+        dataStore.sendMessage(text, otherUser: otherUser)
     }
     
     // Mark - JSQMessages CollectionView DataSource
-    
-    
     override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
         // return message for current row
         return messages[indexPath.item]
@@ -164,6 +147,8 @@ class ChatViewController: JSQMessagesViewController {
             let imageView = JSQMessagesAvatarImage(placeholder: UIImage(named: "DrivingGirl"))
             self.avatars[message.senderId] = imageView
             
+            
+            //TODO: abstract this thing to data store, but I am not exactly sure how to at the moment.
             let user = users[message.senderId]!
             user.profileImage!.getDataInBackgroundWithBlock { (data, error) in
                 imageView.avatarImage = JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(data:data!), withDiameter: 30)
