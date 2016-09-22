@@ -584,6 +584,7 @@
 			isa = PBXGroup;
 			children = (
 				9275FB821D7A030600D8131D /* Subviews */,
+				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -650,7 +651,6 @@
 				9275FB811D7A02F900D8131D /* Edit Profile */,
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
-				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 			);
 			name = Profile;
 			sourceTree = "<group>";
