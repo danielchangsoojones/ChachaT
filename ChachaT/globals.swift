@@ -12,18 +12,18 @@ import Parse
 
 //colors
 struct CustomColors {
-    static let JellyTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
-    static let BombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
-    static let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
+    static let JellyTeal = UIColor.rgba(1, green: 195, blue: 167, alpha: 1)
+    static let BombayGrey = UIColor.rgba(212, green: 213, blue: 215, alpha: 1)
+    static let PeriwinkleGray = UIColor.rgba(246, green: 248, blue: 251, alpha: 1)
 }
 
-let ChachaTeal = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 1)
-let facebookBlue = UIColor.rgba(red: 45, green: 68, blue: 133, alpha: 1)
-let ChachaBombayGrey = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 1)
-let placeHolderTextColor = UIColor.rgba(red: 212, green: 213, blue: 215, alpha: 0.5)
-let PeriwinkleGray = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 1)
-let FilteringPageStackViewLinesColor = UIColor.rgba(red: 246, green: 248, blue: 251, alpha: 0.75)
-let BackgroundPageColor = UIColor.rgba(red: 189, green: 239, blue: 232)
+let ChachaTeal = UIColor.rgba(1, green: 195, blue: 167, alpha: 1)
+let facebookBlue = UIColor.rgba(45, green: 68, blue: 133, alpha: 1)
+let ChachaBombayGrey = UIColor.rgba(212, green: 213, blue: 215, alpha: 1)
+let placeHolderTextColor = UIColor.rgba(212, green: 213, blue: 215, alpha: 0.5)
+let PeriwinkleGray = UIColor.rgba(246, green: 248, blue: 251, alpha: 1)
+let FilteringPageStackViewLinesColor = UIColor.rgba(246, green: 248, blue: 251, alpha: 0.75)
+let BackgroundPageColor = UIColor.rgba(189, green: 239, blue: 232)
 
 //Match Constants
 struct Constants {
@@ -85,7 +85,7 @@ func setBottomBlur() -> CAGradientLayer {
     let gradientLayer = CAGradientLayer()
     gradientLayer.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 100, width:  UIScreen.main.bounds.width, height: 100)
     let transparent = UIColor(white: 1, alpha: 0).cgColor
-    let opaque = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 0.5).cgColor
+    let opaque = UIColor.rgba(1, green: 195, blue: 167, alpha: 0.5).cgColor
     gradientLayer.colors = [transparent, opaque]
     gradientLayer.locations = [0.0, 0.8]
     

@@ -12,6 +12,7 @@ import Parse
 import SnapKit
 import ParseFacebookUtilsV4
 import Alamofire
+import SCLAlertView
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
@@ -78,15 +79,16 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         let currentUser = User.current()!
         if let facebookId = currentUser.facebookId {
             let pictureURL = "https://graph.facebook.com/" + facebookId + "/picture?type=square&width=600&height=600"
-            Alamofire.request(.GET, pictureURL).response { (request, response, data, error) -> Void in
-                if error == nil && data != nil {
+            Alamofire.request(pictureURL).responseData(completionHandler: { (response) in
+                if response.result.error == nil {
+                    let data = response.result.value
                     currentUser.profileImage = PFFile(name: Constants.profileImage, data: data!)
                     currentUser.saveInBackground()
                     self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
                 } else {
-                    print("Failed to update profile image from facebook: \(error)")
+                    print("Failed to update profile image from facebook: \(response.result.error)")
                 }
-            }
+            })
         }
     }
     
@@ -196,8 +198,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         currentUser!.password = thePassword.text
         self.view.isUserInteractionEnabled = false
         theSpinner.startAnimating()
-        
-        currentUser!.signUpInBackground { (success, error) -> Void in
+
+        currentUser!.signUpInBackground { (success, error: Error?) -> Void in
             self.view.isUserInteractionEnabled = true
             self.theSpinner.stopAnimating()
             if success {
@@ -208,14 +210,14 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             }
             else {
                 if error != nil {
-                    let code = error!.code
+                    let code = error!._code
                     if code == PFErrorCode.errorInvalidEmailAddress.rawValue {
-                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
+                        _ = SCLAlertView().showError("invalid Email Address", subTitle: "Please enter a valid email address.", closeButtonTitle: "Okay")
+                    } else if code == PFErrorCode.errorUserEmailTaken.rawValue {
+                        _ = SCLAlertView().showError("Problem Signing Up", subTitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay")
+                    } else {
+                        _ = SCLAlertView().showError("Problem Signing Up", subTitle: "error:\(code)", closeButtonTitle: "Okay")
                     }
-                    else if code == PFErrorCode.errorUserEmailTaken.rawValue {
-                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
-                    }
-                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
                 }
             }
         }
@@ -229,17 +231,21 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             self.view.isUserInteractionEnabled=true
             
             if let error = error {
-                let code = error.code
+                let code = error._code
                 if code == PFErrorCode.errorObjectNotFound.rawValue {
-                    let alert = Alert(closeButtonHidden: true)
-                    alert.addButton("Okay", buttonAction: { () -> Void in
-                        alert.closeAlert()
+                    let appearance = SCLAlertView.SCLAppearance(
+                        showCloseButton: false
+                    )
+                    let alertView = SCLAlertView(appearance: appearance)
+                    _ = alertView.addButton("Okay", action: {
+                        let responder: SCLAlertViewResponder = SCLAlertViewResponder(alertview: alertView)
+                        responder.close()
                         self.theEmail.becomeFirstResponder()
                     })
-                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .error)
+                    _ = alertView.showError("Log In Problem", subTitle: "Username or Password is incorrect.")
                 }
                 else {
-                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
+                    _ = SCLAlertView().showError("Failed Login", subTitle: "Login failed at this time.", closeButtonTitle: "Okay")
                 }
                 return;
             }

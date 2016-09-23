@@ -73,7 +73,7 @@ public extension KolodaViewDelegate {
     
 }
 
-public class KolodaView: UIView, DraggableCardDelegate {
+open class KolodaView: UIView, DraggableCardDelegate {
     
     //Opacity values
     public var alphaValueOpaque = defaultAlphaValueOpaque
@@ -104,7 +104,7 @@ public class KolodaView: UIView, DraggableCardDelegate {
     public var countOfVisibleCards = defaultCountOfVisibleCards
     private var visibleCards = [DraggableCardView]()
     
-    override public func layoutSubviews() {
+    override open func layoutSubviews() {
         super.layoutSubviews()
         
         if !animating {
@@ -157,7 +157,7 @@ public class KolodaView: UIView, DraggableCardDelegate {
     }
     
     //MARK: Frames
-    public func frameForCardAtIndex(_ index: UInt) -> CGRect {
+    open func frameForCardAtIndex(_ index: UInt) -> CGRect {
         let bottomOffset:CGFloat = 0
         let topOffset = defaultBackgroundCardsTopMargin * CGFloat(countOfVisibleCards - 1)
         let scalePercent = defaultBackgroundCardsScalePercent
@@ -546,7 +546,7 @@ public class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         if !shouldPassthroughTapsWhenNoVisibleCards {
             return super.point(inside: point, with: event)
         }

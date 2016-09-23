@@ -138,7 +138,7 @@ class AddingTagsDataStore {
                 tag.addUniqueObject(title.lowercased(), forKey: "genericTags")
                 tag.saveInBackground()
             } else if error != nil {
-                let code = error!.code
+                let code = error!._code
                 if code == PFErrorCode.errorObjectNotFound.rawValue {
                     //the user has not created a Tags row yet, so create them a new Tags row
                     let tags = Tags()
@@ -164,7 +164,7 @@ class AddingTagsDataStore {
                         tag[specialtyCategoryTitle.parseColumnName] = specialtyTagTitle.rawValue
                         tag.saveInBackground()
                     } else if error != nil {
-                        let code = error!.code
+                        let code = error!._code
                         if code == PFErrorCode.errorObjectNotFound.rawValue {
                             //the user has not created a Tags row yet, so create them a new Tags row
                             let tags = Tags()
