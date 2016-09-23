@@ -31,7 +31,7 @@ class BulletPointView: UIView {
     func circleViewSetup() {
         theCircleView = CircleView(diameter: BulletPointConstants.bulletPointDiameter, color: BulletPointConstants.bulletPointColor)
         self.addSubview(theCircleView)
-        theCircleView.snp_makeConstraints { (make) in
+        theCircleView.snp.makeConstraints { (make) in
             //TODO: make these offsets based upon something
             make.top.equalTo(self).offset(10)
             make.leading.equalTo(self).offset(BulletPointConstants.circleViewLeadingOffset)
@@ -40,14 +40,14 @@ class BulletPointView: UIView {
     }
     
     func textLabelSetup(_ text: String) {
-        theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.max)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
+        theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.greatestFiniteMagnitude)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
         theTextLabel.text = text
         theTextLabel.numberOfLines = 0 //so the textLabel can grow to multiple lines
         theTextLabel.sizeToFit() //want the label's size to fit, so then we can calculate the intrinsicContentSize
         self.addSubview(theTextLabel)
-        theTextLabel.snp_makeConstraints { (make) in
-            make.firstBaseline.equalTo(theCircleView.snp_bottom)
-            make.leading.equalTo(theCircleView.snp_trailing) //if I add an offset, have to put offset in calculateTextLabelWidth
+        theTextLabel.snp.makeConstraints { (make) in
+            make.firstBaseline.equalTo(theCircleView.snp.bottom)
+            make.leading.equalTo(theCircleView.snp.trailing) //if I add an offset, have to put offset in calculateTextLabelWidth
             make.trailing.equalTo(self)
             make.bottom.equalTo(self) //this makes the superview know its own height based upon how much the label has grown
         }

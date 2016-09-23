@@ -148,7 +148,8 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     func dismissCurrentViewController() {
         //TODO: cache the user array from the previous search, so then we can just reupload that user array because the user hit exit, which means they canceled their search.
         //Right Now, I am just sending empty user array, so it will work. 
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: [])
+        let usersToPass: [User] = []
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: usersToPass as AnyObject?)
     }
     
     func scrollViewSearchViewTapOccurred() {

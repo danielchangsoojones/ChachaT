@@ -240,14 +240,14 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
 //        guard let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)?[0] as? CustomCardView
 //            else { return UIView() }
         
-        cardView.backgroundColor = UIColor.clearColor()
+        cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = userArray[Int(index)]
         
         return cardView
     }
 
     func koloda(_ koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
-        let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)[0] as? CustomOverlayView
+        let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
 //        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as! CustomOverlayView
     }

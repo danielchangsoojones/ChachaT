@@ -118,7 +118,7 @@ extension EditProfileViewController: PhotoEditingDelegate {
         vc.bottomPicturePopUpViewControllerDelegate = self
         vc.profileImageSize = imageSize
         let popup = STPopupController(rootViewController: vc)
-        popup.navigationBar.barTintColor = ChachaTeal
+        popup?.navigationBar.barTintColor = ChachaTeal
         popup?.navigationBar.tintColor = UIColor.white
         popup?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         popup?.style = STPopupStyle.bottomSheet
