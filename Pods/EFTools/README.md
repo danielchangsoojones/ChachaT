@@ -6,6 +6,7 @@ iOS Tools for ElevenFifty
 * [How To Use](#how-to-use-eftools)
 * [Features](#features)	 
   * [Working with a REST Backend](#working-with-a-rest-backend)
+  * [Better Segues](#better-segues)
   * [Easier UIColors](#easier-uicolors)
   * [Quick Spinners](#quick-spinners)
   * [Validation](#validation)
@@ -21,7 +22,7 @@ platform :ios, '8.0'
 use_frameworks!
 xcodeproj 'testapp.xcodeproj'
 
-pod 'EFTools', :git => 'https://github.com/ElevenFifty/EFTools.git', :tag => '1.0'
+pod 'EFTools', :git => 'https://github.com/ElevenFifty/EFTools.git', :tag => '1.0.1'
 ```
 
 **You will use tag 0.1 for any projects still building in Xcode 6.4**
@@ -212,6 +213,46 @@ WebServices.getStuff(otherModelInstance, completion: { (object, error) -> Void i
 }
 ```
 
+####Better Segues
+Error-proof your segues by eliminating using simple strings.  Instead, comply to the SegueHandlerType prototype (a full writeup of this process can be found at https://www.natashatherobot.com/protocol-oriented-segue-identifiers-swift/).
+
+To conform to the protocol, simply make an enum of all your segues:
+
+```
+class ThingsViewController: UIViewController, SegueHandlerType {
+	enum SegueIdentifier: String {
+   		// THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+   		case SegueA
+    	case SegueTwo
+    	case SegueD
+	}
+	
+	// Rest of class goes here
+	
+}
+```
+
+Then, to perform a segue, call:
+
+```
+self.performSegueWithIdentifier(.SegueOne, sender: self)
+```
+
+And, finally, if you need to, in your prepareForSegue function, you can perform a switch on your segues:
+
+```
+override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+        switch segueIdentifierForSegue(segue) {
+        case .SegueA:
+            // Do some things
+        case .SegueTwo:
+            // Do other things
+        case .SegueD:
+            // Do _other_ other things
+        }
+    }
+```
+
 
 ####Easier UIColors
 Gone are the days of having to divide doubles to create your custom UIColors.  Where you used to do this:
@@ -261,20 +302,20 @@ ProgressUtilities.hideSpinner()
 Check to make sure an email address is valid:
 
 ```
-EFUtils.isValidEmail(*emailAddress*) // returns true or false
+EFUtils.isValidEmail(_emailAddress_) // returns true or false
 ```
 
 Validate a password.  By default, the validation function requires 6 characters, and at least one each of the following: uppercase letter, lowercase letter, number, and special character.  You can change these requirements by passing in parameters.  For example, the following will only require upper and lowercase letters, but will have a minmum of 6 characters:
 
 ```
-EFUtils.isValidPassword(*password*, minLength: 10, number: false, specialCharacter: false) // returns true or false
+EFUtils.isValidPassword(_password_, minLength: 10, number: false, specialCharacter: false) // returns true or false
 ```
 
 ####Alert Messages
 To display a quick alert message to the user, call the following:
 
 ```
-EFUtils.showError(title: *title*, message: *message*, useBasic: true)
+EFUtils.showError(title: _title_, message: _message_, useBasic: true)
 ```
 
 All parameters in this function are optional.  By default, the following will happen:
@@ -285,7 +326,7 @@ All parameters in this function are optional.  By default, the following will ha
 To display an alert with a textField, call the following:
 
 ```
-EFUtils.showTextFieldAlert(title: *title*, message: *message*, defaultButton: *defaultButtonText*, cancelButton: *cancelButtonText*) { (text) -> Void in
+EFUtils.showTextFieldAlert(title: _title_, message: _message_, defaultButton: _defaultButtonText_, cancelButton: _cancelButtonText_) { (text) -> Void in
 	// ... do stuff
 }
 ```

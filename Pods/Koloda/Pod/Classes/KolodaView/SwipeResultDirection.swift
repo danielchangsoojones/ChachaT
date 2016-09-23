@@ -22,7 +22,7 @@ public enum SwipeResultDirection: String {
 
 extension SwipeResultDirection {
     
-    fileprivate var swipeDirection: Direction {
+    private var swipeDirection: Direction {
         switch self {
         case .Up: return .Up
         case .Down: return .Down

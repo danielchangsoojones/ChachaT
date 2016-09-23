@@ -13,24 +13,25 @@ extension Date {
         let formatter = DateFormatter()
         formatter.dateFormat = format
         if let date = formatter.date(from: string) {
-            self.init(timeInterval: 0, since: date)
+            self = date
         } else {
-            self.init()
+//            self = Date()
+            return nil
         }
     }
 
     /// EZSE: Initializes NSDate from string returned from an http response, according to several RFCs
     public init? (httpDateString: String) {
         if let rfc1123 = Date(fromString: httpDateString, format: "EEE',' dd' 'MMM' 'yyyy HH':'mm':'ss zzz") {
-            self.init(timeInterval: 0, since: rfc1123)
+            self = rfc1123
             return
         }
         if let rfc850 = Date(fromString: httpDateString, format: "EEEE',' dd'-'MMM'-'yy HH':'mm':'ss z") {
-            self.init(timeInterval: 0, since: rfc850)
+            self = rfc850
             return
         }
         if let asctime =  Date(fromString: httpDateString, format: "EEE MMM d HH':'mm':'ss yyyy") {
-            self.init(timeInterval: 0, since: asctime)
+            self = asctime
             return
         }
         //self.init()
@@ -109,13 +110,4 @@ extension Date {
         }
     }
 
-}
-
- /// EZSE: Returns if one date is smaller than the other
-public func < (lhs: Date, rhs: Date) -> Bool {
-    return lhs.compare(rhs) == .orderedAscending
-}
-
-public func > (lhs: Date, rhs: Date) -> Bool {
-  return lhs.compare(rhs) == .orderedDescending
 }

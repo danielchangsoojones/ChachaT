@@ -134,7 +134,7 @@ public struct ez {
 
         #elseif os(tvOS)
 
-        return UIScreen.mainScreen().bounds.size.width
+        return UIScreen.main.bounds.size.width
 
         #endif
     }
@@ -152,7 +152,7 @@ public struct ez {
 
         #elseif os(tvOS)
 
-            return UIScreen.mainScreen().bounds.size.height
+            return UIScreen.main.bounds.size.height
 
         #endif
     }
@@ -177,7 +177,7 @@ public struct ez {
 
     /// EZSE: Returns the locale country code. An example value might be "ES". //TODO: Add to readme
     public static var currentRegion: String? {
-        return (Locale.current as NSLocale).object(forKey: NSLocale.Key.countryCode) as? String
+        return Locale.current.currencyCode
     }
 
     /// EZSE: Calls action when a screen shot is taken
@@ -189,17 +189,17 @@ public struct ez {
         }
     }
 
-    //TODO: Document this, add tests to this, find a way to remove ++
+    //TODO: Document this, add tests to this
     /// EZSE: Iterates through enum elements, use with (for element in ez.iterateEnum(myEnum))
-    public static func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T>? {
-        print("when converting to swift 3, Daniel Jones had no fucking clue how to fix this function. So, don't use it.")
-//        var i = 0
-//        return AnyIterator {
-//            let next = withUnsafePointer(to: &i) {
-//                UnsafePointer<T>($0).pointee }
-//            return next.hashValue == i++ ? next : nil
-//        }
-        return nil
+    /// http://stackoverflow.com/questions/24007461/how-to-enumerate-an-enum-with-string-type
+    public static func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
+        var i = 0
+        return AnyIterator {
+            let next = withUnsafePointer(to: &i) { $0.withMemoryRebound(to: T.self, capacity: 1) { $0.pointee } }
+            if next.hashValue != i { return nil }
+            i += 1
+            return next
+        }
     }
 
     // MARK: - Dispatch
@@ -229,7 +229,7 @@ public struct ez {
 
     /// EZSE: Runs in Default priority queue
     public static func runThisInBackground(_ block: @escaping () -> ()) {
-        DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: block)
+        DispatchQueue.global(qos: .default).async(execute: block)
     }
 
     /// EZSE: Runs every second, to cancel use: timer.invalidate()
@@ -247,27 +247,27 @@ public struct ez {
 
     /// EZSE: Gobal queue with user interactive priority
     public var globalUserInteractiveQueue: DispatchQueue {
-        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
+        return DispatchQueue.global(qos: .userInteractive)
     }
 
     /// EZSE: Gobal queue with user initiated priority
     public var globalUserInitiatedQueue: DispatchQueue {
-        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
+        return DispatchQueue.global(qos: .userInitiated)
     }
 
     /// EZSE: Gobal queue with utility priority
     public var globalUtilityQueue: DispatchQueue {
-        return DispatchQueue.global(qos: DispatchQoS.QoSClass.utility)
+        return DispatchQueue.global(qos: .utility)
     }
 
     /// EZSE: Gobal queue with background priority
     public var globalBackgroundQueue: DispatchQueue {
-        return DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        return DispatchQueue.global(qos: .background)
     }
 
     /// EZSE: Gobal queue with default priority
     public var globalQueue: DispatchQueue {
-        return DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default)
+        return DispatchQueue.global(qos: .default)
     }
 
     // MARK: - DownloadTask
@@ -282,10 +282,10 @@ public struct ez {
     }
 
     /// EZSE: Downloads JSON from url string
-    public static func requestJSON(_ url: String, success: @escaping ((AnyObject?) -> Void), error: ((NSError) -> Void)?) {
+    public static func requestJSON(_ url: String, success: @escaping ((Any?) -> Void), error: ((Error) -> Void)?) {
         requestURL(url,
             success: { (data) -> Void in
-                let json: AnyObject? = self.dataToJsonDict(data) as AnyObject?
+                let json = self.dataToJsonDict(data)
                 success(json)
             },
             error: { (err) -> Void in
@@ -301,7 +301,7 @@ public struct ez {
             var error: NSError?
             let json: Any?
             do {
-                json = try JSONSerialization.jsonObject (
+                json = try JSONSerialization.jsonObject(
                     with: d,
                     options: JSONSerialization.ReadingOptions.allowFragments)
             } catch let error1 as NSError {
@@ -320,7 +320,7 @@ public struct ez {
     }
 
     /// EZSE:
-    fileprivate static func requestURL(_ url: String, success: @escaping (Data?) -> Void, error: ((NSError) -> Void)? = nil) {
+    fileprivate static func requestURL(_ url: String, success: @escaping (Data?) -> Void, error: ((Error) -> Void)? = nil) {
         guard let requestURL = URL(string: url) else {
             assertionFailure("EZSwiftExtensions Error: Invalid URL")
             return

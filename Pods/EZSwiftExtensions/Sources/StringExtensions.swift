@@ -28,11 +28,9 @@ extension String {
 
     /// EZSE: base64 encoded of string
     var base64: String {
-        get {
-            let plainData = (self as NSString).data(using: String.Encoding.utf8.rawValue)
-            let base64String = plainData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
-            return base64String
-        }
+        let plainData = (self as NSString).data(using: String.Encoding.utf8.rawValue)
+        let base64String = plainData!.base64EncodedString(options: NSData.Base64EncodingOptions(rawValue: 0))
+        return base64String
     }
 
     /// EZSE: Cut string from integerIndex to the end
@@ -46,6 +44,14 @@ extension String {
         let start = characters.index(startIndex, offsetBy: integerRange.lowerBound)
         let end = characters.index(startIndex, offsetBy: integerRange.upperBound)
         let range = start..<end
+        return self[range]
+    }
+    
+    /// EZSE: Cut string from closedrange
+    public subscript(integerClosedRange: ClosedRange<Int>) -> String {
+        let start = characters.index(startIndex, offsetBy: integerClosedRange.lowerBound)
+        let end = characters.index(startIndex, offsetBy: integerClosedRange.upperBound)
+        let range = start...end
         return self[range]
     }
 
@@ -69,7 +75,6 @@ extension String {
     public func capitalizedFirst() -> String {
         guard characters.count > 0 else { return self }
         var result = self
-        
         result.replaceSubrange(startIndex...startIndex, with: String(self[startIndex]).capitalized)
         return result
     }
@@ -77,24 +82,24 @@ extension String {
     /// EZSE: Uppercases first 'count' characters of String
     public mutating func uppercasePrefix(_ count: Int) {
         guard characters.count > 0 && count > 0 else { return }
-        self.replaceSubrange(startIndex..<index(startIndex, offsetBy: min(count, length)),
-                          with: String(self[startIndex..<index(startIndex, offsetBy: min(count, length))]).uppercased())
+        self.replaceSubrange(startIndex..<self.index(startIndex, offsetBy: min(count, length)),
+                             with: String(self[startIndex..<self.index(startIndex, offsetBy: min(count, length))]).uppercased())
     }
     
     /// EZSE: Uppercases first 'count' characters of String, returns a new string
     public func uppercasedPrefix(_ count: Int) -> String {
         guard characters.count > 0 && count > 0 else { return self }
         var result = self
-        result.replaceSubrange(startIndex..<characters.index(startIndex, offsetBy: min(count, length)),
-                            with: String(self[startIndex..<characters.index(startIndex, offsetBy: min(count, length))]).uppercased())
+        result.replaceSubrange(startIndex..<self.index(startIndex, offsetBy: min(count, length)),
+                            with: String(self[startIndex..<self.index(startIndex, offsetBy: min(count, length))]).uppercased())
         return result
     }
     
     /// EZSE: Uppercases last 'count' characters of String
     public mutating func uppercaseSuffix(_ count: Int) {
         guard characters.count > 0 && count > 0 else { return }
-        self.replaceSubrange(index(endIndex, offsetBy: -min(count, length))..<endIndex,
-                          with: String(self[index(endIndex, offsetBy: -min(count, length))..<endIndex]).uppercased())
+        self.replaceSubrange(self.index(endIndex, offsetBy: -min(count, length))..<endIndex,
+                          with: String(self[self.index(endIndex, offsetBy: -min(count, length))..<endIndex]).uppercased())
     }
     
     /// EZSE: Uppercases last 'count' characters of String, returns a new string
@@ -107,15 +112,15 @@ extension String {
     }
     
     /// EZSE: Uppercases string in range 'range' (from range.startIndex to range.endIndex)
-    public mutating func uppercase(range: Range<Int>) {
+    public mutating func uppercase(range: CountableRange<Int>) {
         let from = max(range.lowerBound, 0), to = min(range.upperBound, length)
         guard characters.count > 0 && (0..<length).contains(from) else { return }
-        self.replaceSubrange(index(startIndex, offsetBy: from)..<index(startIndex, offsetBy: to),
-                          with: String(self[index(startIndex, offsetBy: from)..<index.index(startIndex, offsetBy: to)]).uppercased())
+        self.replaceSubrange(self.index(startIndex, offsetBy: from)..<self.index(startIndex, offsetBy: to),
+                             with: String(self[self.index(startIndex, offsetBy: from)..<self.index(startIndex, offsetBy: to)]).uppercased())
     }
     
     /// EZSE: Uppercases string in range 'range' (from range.startIndex to range.endIndex), returns new string
-    public func uppercased(range: Range<Int>) -> String {
+    public func uppercased(range: CountableRange<Int>) -> String {
         let from = max(range.lowerBound, 0), to = min(range.upperBound, length)
         guard characters.count > 0 && (0..<length).contains(from) else { return self }
         var result = self
@@ -141,8 +146,8 @@ extension String {
     /// EZSE: Lowercases first 'count' characters of String
     public mutating func lowercasePrefix(_ count: Int) {
         guard characters.count > 0 && count > 0 else { return }
-        self.replaceSubrange(startIndex..<index(startIndex, offsetBy: min(count, length)),
-                          with: String(self[startIndex..<index(startIndex, offsetBy: min(count, length))]).lowercased())
+        self.replaceSubrange(startIndex..<self.index(startIndex, offsetBy: min(count, length)),
+                          with: String(self[startIndex..<self.index(startIndex, offsetBy: min(count, length))]).lowercased())
     }
     
     /// EZSE: Lowercases first 'count' characters of String, returns a new string
@@ -157,8 +162,8 @@ extension String {
     /// EZSE: Lowercases last 'count' characters of String
     public mutating func lowercaseSuffix(_ count: Int) {
         guard characters.count > 0 && count > 0 else { return }
-        self.replaceSubrange(index(endIndex, offsetBy: -min(count, length))..<endIndex,
-                          with: String(self[index(endIndex, offsetBy: -min(count, length))..<endIndex]).lowercased())
+        self.replaceSubrange(self.index(endIndex, offsetBy: -min(count, length))..<endIndex,
+                          with: String(self[self.index(endIndex, offsetBy: -min(count, length))..<endIndex]).lowercased())
     }
     
     /// EZSE: Lowercases last 'count' characters of String, returns a new string
@@ -171,15 +176,15 @@ extension String {
     }
     
     /// EZSE: Lowercases string in range 'range' (from range.startIndex to range.endIndex)
-    public mutating func lowercase(range: Range<Int>) {
+    public mutating func lowercase(range: CountableRange<Int>) {
         let from = max(range.lowerBound, 0), to = min(range.upperBound, length)
         guard characters.count > 0 && (0..<length).contains(from) else { return }
-        self.replaceSubrange(index(startIndex, offsetBy: from)..<index(startIndex, offsetBy: to),
-                          with: String(self[index(startIndex, offsetBy: from)..<index(startIndex, offsetBy: to)]).lowercased())
+        self.replaceSubrange(self.index(startIndex, offsetBy: from)..<self.index(startIndex, offsetBy: to),
+                          with: String(self[self.index(startIndex, offsetBy: from)..<self.index(startIndex, offsetBy: to)]).lowercased())
     }
     
     /// EZSE: Lowercases string in range 'range' (from range.startIndex to range.endIndex), returns new string
-    public func lowercased(range: Range<Int>) -> String {
+    public func lowercased(range: CountableRange<Int>) -> String {
         let from = max(range.lowerBound, 0), to = min(range.upperBound, length)
         guard characters.count > 0 && (0..<length).contains(from) else { return self }
         var result = self
@@ -211,7 +216,7 @@ extension String {
 
     /// EZSE: Trims white space and new line characters, returns a new string
     public func trimmed() -> String {
-        return self.trimmingCharacters(in: CharacterSet.whitespacesAndNewlines)
+        return self.trimmingCharacters(in: .whitespacesAndNewlines)
     }
 
     /// EZSE: Position of begining character of substing
@@ -219,11 +224,11 @@ extension String {
         if subString.isEmpty {
             return -1
         }
-        var searchOption = fromEnd ? NSString.CompareOptions.anchored : NSString.CompareOptions.backwards
+        var searchOption = fromEnd ? String.CompareOptions.anchored : .backwards
         if caseInsensitive {
-            searchOption.insert(NSString.CompareOptions.caseInsensitive)
+            searchOption.insert(.caseInsensitive)
         }
-        if let range = self.range(of: subString, options: searchOption) , !range.isEmpty {
+        if let range = self.range(of: subString, options: searchOption), !range.isEmpty {
             return self.characters.distance(from: self.startIndex, to: range.lowerBound)
         }
         return -1
@@ -257,8 +262,8 @@ extension String {
     }
 
     internal func rangeFromNSRange(_ nsRange: NSRange) -> Range<String.Index>? {
-        let from16 = utf16.startIndex.advancedBy(nsRange.location, limit: utf16.endIndex)
-        let to16 = from16.advancedBy(nsRange.length, limit: utf16.endIndex)
+        let from16 = utf16.startIndex.advanced(by: nsRange.location)
+        let to16 = from16.advanced(by: nsRange.length)
         if let from = String.Index(from16, within: self),
             let to = String.Index(to16, within: self) {
             return from ..< to
@@ -312,12 +317,13 @@ extension String {
         return urls
     }
 
-    /// EZSE: Checking if String contains input
-    public func contains(_ find: String) -> Bool {
-        return self.range(of: find) != nil
-    }
+//    /// EZSE: Checking if String contains input
+//    public func contains(_ find: String) -> Bool {
+//        return self.range(of: find) != nil
+//    }
 
     /// EZSE: Checking if String contains input with comparing options
+    /// WARNING: tests?
     public func contains(_ find: String, compareOption: NSString.CompareOptions) -> Bool {
         return self.range(of: find, options: compareOption) != nil
     }
@@ -350,10 +356,11 @@ extension String {
     }
 
     /// EZSE: Converts String to Bool
+    /// WARNING: not expected behaviour
     public func toBool() -> Bool? {
-        let trimmed = self.stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceAndNewlineCharacterSet()).lowercased()
-        if trimmed == "true" || trimmed == "false" {
-            return (trimmed as NSString).boolValue
+        let boolString = trimmed().lowercased()
+        if boolString == "true" || boolString == "false" {
+            return (boolString as NSString).boolValue
         }
         return nil
     }
@@ -460,6 +467,22 @@ extension String {
     
     #endif
 
+}
+
+extension String {
+    init(_ value: Float, precision: Int) {
+        let nFormatter = NumberFormatter()
+        nFormatter.numberStyle = .decimal
+        nFormatter.maximumFractionDigits = precision
+        self = nFormatter.string(from: NSNumber(value: value))!
+    }
+
+    init(_ value: Double, precision: Int) {
+        let nFormatter = NumberFormatter()
+        nFormatter.numberStyle = .decimal
+        nFormatter.maximumFractionDigits = precision
+        self = nFormatter.string(from: NSNumber(value: value))!
+    }
 }
 
 /// EZSE: Pattern matching of strings via defined functions

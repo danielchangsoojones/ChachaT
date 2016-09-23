@@ -73,23 +73,23 @@ public extension KolodaViewDelegate {
     
 }
 
-open class KolodaView: UIView, DraggableCardDelegate {
+public class KolodaView: UIView, DraggableCardDelegate {
     
     //Opacity values
-    open var alphaValueOpaque = defaultAlphaValueOpaque
-    open var alphaValueTransparent = defaultAlphaValueTransparent
-    open var alphaValueSemiTransparent = defaultAlphaValueSemiTransparent
-    open var shouldPassthroughTapsWhenNoVisibleCards = false
+    public var alphaValueOpaque = defaultAlphaValueOpaque
+    public var alphaValueTransparent = defaultAlphaValueTransparent
+    public var alphaValueSemiTransparent = defaultAlphaValueSemiTransparent
+    public var shouldPassthroughTapsWhenNoVisibleCards = false
     
-    open weak var dataSource: KolodaViewDataSource? {
+    public weak var dataSource: KolodaViewDataSource? {
         didSet {
             setupDeck()
         }
     }
     
-    open weak var delegate: KolodaViewDelegate?
+    public weak var delegate: KolodaViewDelegate?
     
-    open lazy var animator: KolodaViewAnimator = {
+    public lazy var animator: KolodaViewAnimator = {
         return KolodaViewAnimator(koloda: self)
     }()
     
@@ -99,12 +99,12 @@ open class KolodaView: UIView, DraggableCardDelegate {
         return delegate?.kolodaShouldTransparentizeNextCard(self) ?? true
     }
     
-    fileprivate(set) open var currentCardIndex = 0
-    fileprivate(set) open var countOfCards = 0
-    open var countOfVisibleCards = defaultCountOfVisibleCards
-    fileprivate var visibleCards = [DraggableCardView]()
+    private(set) public var currentCardIndex = 0
+    private(set) public var countOfCards = 0
+    public var countOfVisibleCards = defaultCountOfVisibleCards
+    private var visibleCards = [DraggableCardView]()
     
-    override open func layoutSubviews() {
+    override public func layoutSubviews() {
         super.layoutSubviews()
         
         if !animating {
@@ -114,7 +114,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     //MARK: Configurations
     
-    fileprivate func setupDeck() {
+    private func setupDeck() {
         if let dataSource = dataSource {
             countOfCards = Int(dataSource.kolodaNumberOfCards(self))
             
@@ -138,13 +138,13 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func layoutDeck() {
+    public func layoutDeck() {
         for (index, card) in visibleCards.enumerated() {
             layoutCard(card, atIndex: UInt(index))
         }
     }
     
-    fileprivate func layoutCard(_ card: DraggableCardView, atIndex index: UInt) {
+    private func layoutCard(_ card: DraggableCardView, atIndex index: UInt) {
         if index == 0 {
             card.layer.transform = CATransform3DIdentity
             card.frame = frameForTopCard()
@@ -157,7 +157,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     }
     
     //MARK: Frames
-    open func frameForCardAtIndex(_ index: UInt) -> CGRect {
+    public func frameForCardAtIndex(_ index: UInt) -> CGRect {
         let bottomOffset:CGFloat = 0
         let topOffset = defaultBackgroundCardsTopMargin * CGFloat(countOfVisibleCards - 1)
         let scalePercent = defaultBackgroundCardsScalePercent
@@ -228,7 +228,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     //MARK: Animations
     
-    fileprivate func applyAppearAnimation() {
+    private func applyAppearAnimation() {
         alpha = 0
         isUserInteractionEnabled = false
         animating = true
@@ -239,7 +239,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func applyAppearAnimationIfNeeded() {
+    public func applyAppearAnimationIfNeeded() {
         if let shouldApply = delegate?.kolodaShouldApplyAppearAnimation(self) , shouldApply == true {
             applyAppearAnimation()
         }
@@ -312,7 +312,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     }
     
     //MARK: Private
-    fileprivate func clear() {
+    private func clear() {
         currentCardIndex = 0
         
         for card in visibleCards {
@@ -323,7 +323,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     }
     
     //MARK: Actions
-    fileprivate func swipedAction(_ direction: SwipeResultDirection) {
+    private func swipedAction(_ direction: SwipeResultDirection) {
         animating = true
         visibleCards.removeFirst()
         
@@ -351,7 +351,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    fileprivate func loadNextCard() {
+    private func loadNextCard() {
         guard dataSource != nil else {
             return
         }
@@ -372,7 +372,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         visibleCards.append(lastCard)
     }
     
-    fileprivate func animateCardsAfterLoadingWithCompletion(_ completion: ((Void) -> Void)? = nil) {
+    private func animateCardsAfterLoadingWithCompletion(_ completion: ((Void) -> Void)? = nil) {
         for (index, currentCard) in visibleCards.enumerated() {
             currentCard.removeAnimations()
             
@@ -405,7 +405,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func revertAction() {
+    public func revertAction() {
         if currentCardIndex > 0 && !animating {
             
             if countOfCards - currentCardIndex >= countOfVisibleCards {
@@ -456,7 +456,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    fileprivate func loadMissingCards(_ missingCardsCount: Int) {
+    private func loadMissingCards(_ missingCardsCount: Int) {
         if missingCardsCount > 0 {
             let cardsToAdd = min(missingCardsCount, countOfCards - currentCardIndex)
             let startIndex = visibleCards.count
@@ -469,16 +469,12 @@ open class KolodaView: UIView, DraggableCardDelegate {
                 
                 visibleCards.append(nextCardView)
                 configureCard(nextCardView, atIndex: UInt(currentCardIndex + index))
-                if index > 0 {
-                    insertSubview(nextCardView, belowSubview: visibleCards[index - 1])
-                } else {
-                    insertSubview(nextCardView, at: 0)
-                }
+                insertSubview(nextCardView, belowSubview: visibleCards[index - 1])
             }
         }
     }
     
-    fileprivate func reconfigureCards() {
+    private func reconfigureCards() {
         if dataSource != nil {
             for (index, card) in visibleCards.enumerated() {
                 let actualIndex = UInt(currentCardIndex + index)
@@ -487,13 +483,13 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    fileprivate func missingCardsCount() -> Int {
-        return min(countOfVisibleCards - visibleCards.count, countOfCards - (currentCardIndex + visibleCards.count))
+    private func missingCardsCount() -> Int {
+        return min(countOfVisibleCards - visibleCards.count, countOfCards - (currentCardIndex + 1))
     }
     
     // MARK: Public
     
-    open func reloadData() {
+    public func reloadData() {
         guard let numberOfCards = dataSource?.kolodaNumberOfCards(self) , numberOfCards > 0 else {
             clear()
             return
@@ -518,7 +514,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func swipe(_ direction: SwipeResultDirection) {
+    public func swipe(_ direction: SwipeResultDirection) {
         
         let validDirection = delegate?.koloda(self, allowedDirectionsForIndex: UInt(currentCardIndex)).contains(direction) ?? true
         guard validDirection else { return }
@@ -537,12 +533,12 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func resetCurrentCardIndex() {
+    public func resetCurrentCardIndex() {
         clear()
         reloadData()
     }
     
-    open func viewForCardAtIndex(_ index: Int) -> UIView? {
+    public func viewForCardAtIndex(_ index: Int) -> UIView? {
         if visibleCards.count + currentCardIndex > index && index >= currentCardIndex {
             return visibleCards[index - currentCardIndex].contentView
         } else {
@@ -550,7 +546,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
+    public override func point(inside point: CGPoint, with event: UIEvent?) -> Bool {
         if !shouldPassthroughTapsWhenNoVisibleCards {
             return super.point(inside: point, with: event)
         }
@@ -560,7 +556,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     // MARK: Cards managing - Insertion
     
-    fileprivate func insertVisibleCardsWithIndexes(_ visibleIndexes: [Int]) -> [DraggableCardView] {
+    private func insertVisibleCardsWithIndexes(_ visibleIndexes: [Int]) -> [DraggableCardView] {
         var insertedCards: [DraggableCardView] = []
         visibleIndexes.forEach { insertionIndex in
             let card = createCardAtIndex(UInt(insertionIndex))
@@ -582,14 +578,14 @@ open class KolodaView: UIView, DraggableCardDelegate {
         return insertedCards
     }
     
-    fileprivate func removeCards(_ cards: [DraggableCardView]) {
+    private func removeCards(_ cards: [DraggableCardView]) {
         cards.forEach { card in
             card.delegate = nil
             card.removeFromSuperview()
         }
     }
     
-    fileprivate func removeCards(_ cards: [DraggableCardView], animated: Bool) {
+    private func removeCards(_ cards: [DraggableCardView], animated: Bool) {
         visibleCards.removeLast(cards.count)
         if animated {
             animator.applyRemovalAnimation(
@@ -603,7 +599,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func insertCardAtIndexRange(_ indexRange: Range<Int>, animated: Bool = true) {
+    public func insertCardAtIndexRange(_ indexRange: CountableRange<Int>, animated: Bool = true) {
         guard let dataSource = dataSource else {
             return
         }
@@ -634,7 +630,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     // MARK: Cards managing - Deletion
     
-    fileprivate func proceedDeletionInRange(_ range: Range<Int>) {
+    private func proceedDeletionInRange(_ range: CountableRange<Int>) {
         let deletionIndexes = [Int](range)
         deletionIndexes.sorted { $0 > $1 }.forEach { deletionIndex in
             let visibleCardIndex = deletionIndex - currentCardIndex
@@ -645,7 +641,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
         }
     }
     
-    open func removeCardInIndexRange(_ indexRange: Range<Int>, animated: Bool) {
+    public func removeCardInIndexRange(_ indexRange: CountableRange<Int>, animated: Bool) {
         guard let dataSource = dataSource else {
             return
         }
@@ -653,11 +649,11 @@ open class KolodaView: UIView, DraggableCardDelegate {
         animating = true
         let currentItemsCount = countOfCards
         countOfCards = Int(dataSource.kolodaNumberOfCards(self))
+        
         let visibleIndexes = [Int](indexRange).filter { $0 >= currentCardIndex && $0 < currentCardIndex + countOfVisibleCards }
         if !visibleIndexes.isEmpty {
-            proceedDeletionInRange(visibleIndexes[0]...visibleIndexes[visibleIndexes.count - 1])
+            proceedDeletionInRange(visibleIndexes[0]..<visibleIndexes[visibleIndexes.count - 1])
         }
-        currentCardIndex -= Array(indexRange).filter { $0 < currentCardIndex }.count
         loadMissingCards(missingCardsCount())
         layoutDeck()
         for (index, card) in visibleCards.enumerated() {
@@ -674,7 +670,7 @@ open class KolodaView: UIView, DraggableCardDelegate {
     
     // MARK: Cards managing - Reloading
     
-    open func reloadCardsInIndexRange(_ indexRange: Range<Int>) {
+    public func reloadCardsInIndexRange(_ indexRange: CountableRange<Int>) {
         guard dataSource != nil else {
             return
         }

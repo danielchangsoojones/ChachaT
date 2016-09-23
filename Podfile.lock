@@ -1,5 +1,4 @@
 PODS:
-  - AFDateHelper (3.5.3)
   - Alamofire (4.0.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -7,12 +6,9 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - EFTools/Basic (1.0):
-    - AFDateHelper
+  - EFTools/Basic (3.0):
     - Instabug
     - MBProgressHUD (~> 0.9.2)
-    - SCLAlertView
-    - SnapKit
     - TPKeyboardAvoiding
   - ExpandingMenu (0.3.1)
   - EZSwiftExtensions (1.6)
@@ -24,7 +20,7 @@ PODS:
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
-  - Koloda (3.1.2):
+  - Koloda (3.1.1):
     - pop (~> 1.0)
   - MBAutoGrowingTextView (0.1.0)
   - MBProgressHUD (0.9.2)
@@ -51,36 +47,55 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
-  - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, tag `1.0`)
+  - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, branch `swift-3`)
   - ExpandingMenu (~> 0.1)
-  - EZSwiftExtensions
+  - EZSwiftExtensions (from `https://github.com/goktugyil/EZSwiftExtensions.git`, branch `Swift3`)
   - JSQMessagesViewController
-  - Koloda
+  - Koloda (from `https://github.com/Yalantis/Koloda.git`, branch `swift-3`)
   - MBAutoGrowingTextView (~> 0.1.0)
   - Parse
   - ParseFacebookUtilsV4
   - ParseUI
   - Ripple
   - RKNotificationHub
+  - SCLAlertView
+  - SnapKit
   - STPopup
-  - Timepiece
+  - Timepiece (from `https://github.com/skofgar/Timepiece.git`, branch `swift3`)
   - TTRangeSlider
 
 EXTERNAL SOURCES:
   EFTools:
+    :branch: swift-3
     :git: https://github.com/ElevenFifty/EFTools.git
-    :tag: '1.0'
+  EZSwiftExtensions:
+    :branch: Swift3
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
+  Koloda:
+    :branch: swift-3
+    :git: https://github.com/Yalantis/Koloda.git
+  Timepiece:
+    :branch: swift3
+    :git: https://github.com/skofgar/Timepiece.git
 
 CHECKOUT OPTIONS:
   EFTools:
+    :commit: 0551edbb8b443a93007a8b1eceda87ffef7136e3
     :git: https://github.com/ElevenFifty/EFTools.git
-    :tag: '1.0'
+  EZSwiftExtensions:
+    :commit: 8afb1aac46b1c977ccac69c0ee6e665099b1f65b
+    :git: https://github.com/goktugyil/EZSwiftExtensions.git
+  Koloda:
+    :commit: 6a35f2874ba1f902c5e478bd86d4b270606c6f31
+    :git: https://github.com/Yalantis/Koloda.git
+  Timepiece:
+    :commit: c3b7badbce11f59a7221992076f46dfe437dcf87
+    :git: https://github.com/skofgar/Timepiece.git
 
 SPEC CHECKSUMS:
-  AFDateHelper: e64bcc4a88a07e1d3e62442741b2a164adc02d77
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  EFTools: ef1aeb77630c5c79f2c41a20c41eaa7457b3a6f3
+  EFTools: 36fe88141681c9a052bb5d6d42a4f8940f1b90e5
   ExpandingMenu: 107548f3cb8c04b28a8b6b436983f506849484cc
   EZSwiftExtensions: 6c5e29ae473b3d2edbf5472eab0a3d7bdb20215c
   FBSDKCoreKit: fc7fa53d16b095ee3fd53f0cd59f1df8bcbb634d
@@ -88,7 +103,7 @@ SPEC CHECKSUMS:
   Instabug: 035bf24475ffac1bcb81f8c542774487bc72f528
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
-  Koloda: 5aee353329cd1605540f1215a4c1975481dc7a37
+  Koloda: 782e61549cafec9fd69fc70c4a8b54bce997894d
   MBAutoGrowingTextView: 3955d4513be3d184fe2cb7739999c1f994dcd4d5
   MBProgressHUD: 1569cf7ace17a8bac47aabfbb8580a49690386d1
   Parse: 4335d65f40cb3d43190d723144bbe1afb9c38230
@@ -104,6 +119,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 528352abadb1a03c9c58e9d5141a5c6f33d09e0b
+PODFILE CHECKSUM: 229f09e235a6c2be3383f9a8f3646f8aa61dd3e8
 
 COCOAPODS: 1.0.1

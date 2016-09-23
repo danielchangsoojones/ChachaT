@@ -8,15 +8,15 @@
 
 import UIKit
 
-open class OverlayView: UIView {
+public class OverlayView: UIView {
     
-    open var overlayState: SwipeResultDirection?
+    public var overlayState: SwipeResultDirection?
     
     @available(*, unavailable, message: "Use updateWithProgress(percentage:) instead")
-    open var overlayStrength: CGFloat = 0.0
+    public var overlayStrength: CGFloat = 0.0
     
     @available(*, introduced: 3.1.2)
-    open func updateWithProgress(_ percentage: CGFloat) {
+    public func updateWithProgress(_ percentage: CGFloat) {
         alpha = percentage
     }
 

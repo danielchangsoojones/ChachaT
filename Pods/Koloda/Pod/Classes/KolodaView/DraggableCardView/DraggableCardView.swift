@@ -35,19 +35,19 @@ private let cardResetAnimationSpringSpeed: CGFloat = 20.0
 private let cardResetAnimationKey = "resetPositionAnimation"
 private let cardResetAnimationDuration: TimeInterval = 0.2
 
-open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
+public class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     
     weak var delegate: DraggableCardDelegate?
     
-    fileprivate var overlayView: OverlayView?
-    fileprivate(set) var contentView: UIView?
+    private var overlayView: OverlayView?
+    private(set) var contentView: UIView?
     
-    fileprivate var panGestureRecognizer: UIPanGestureRecognizer!
-    fileprivate var tapGestureRecognizer: UITapGestureRecognizer!
-    fileprivate var animationDirectionY: CGFloat = 1.0
-    fileprivate var dragBegin = false
-    fileprivate var dragDistance = CGPoint.zero
-    fileprivate var swipePercentageMargin: CGFloat = 0.0
+    private var panGestureRecognizer: UIPanGestureRecognizer!
+    private var tapGestureRecognizer: UITapGestureRecognizer!
+    private var animationDirectionY: CGFloat = 1.0
+    private var dragBegin = false
+    private var dragDistance = CGPoint.zero
+    private var swipePercentageMargin: CGFloat = 0.0
     
     //MARK: Lifecycle
     init() {
@@ -65,7 +65,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         setup()
     }
     
-    override open var frame: CGRect {
+    override public var frame: CGRect {
         didSet {
             if let ratio = delegate?.card(cardSwipeThresholdRatioMargin: self) , ratio != 0 {
                 swipePercentageMargin = ratio
@@ -80,7 +80,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         removeGestureRecognizer(tapGestureRecognizer)
     }
     
-    fileprivate func setup() {
+    private func setup() {
         panGestureRecognizer = UIPanGestureRecognizer(target: self, action: #selector(DraggableCardView.panGestureRecognized(_:)))
         addGestureRecognizer(panGestureRecognizer)
         panGestureRecognizer.delegate = self
@@ -108,7 +108,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         configureContentView()
     }
     
-    fileprivate func configureOverlayView() {
+    private func configureOverlayView() {
         if let overlay = self.overlayView {
             overlay.translatesAutoresizingMaskIntoConstraints = false
             
@@ -148,7 +148,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    fileprivate func configureContentView() {
+    private func configureContentView() {
         if let contentView = self.contentView {
             contentView.translatesAutoresizingMaskIntoConstraints = false
             
@@ -242,7 +242,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    open func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
+    public func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldReceive touch: UITouch) -> Bool {
         return delegate?.card(cardShouldDrag: self) ?? true
     }
     
@@ -252,11 +252,11 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     
     //MARK: Private
     
-    fileprivate var directions: [SwipeResultDirection] {
+    private var directions: [SwipeResultDirection] {
         return delegate?.card(cardAllowedDirections: self) ?? [.Left, .Right]
     }
     
-    fileprivate var dragDirection: SwipeResultDirection? {
+    private var dragDirection: SwipeResultDirection? {
         //find closest direction
         let normalizedDragPoint = dragDistance.normalizedDistanceForSize(bounds.size)
         return directions.reduce((distance:CGFloat.infinity, direction:nil)) { closest, direction in
@@ -268,7 +268,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         }.direction
     }
     
-    fileprivate var dragPercentage: CGFloat {
+    private var dragPercentage: CGFloat {
         guard let dragDirection = dragDirection else { return 0 }
         // normalize dragDistance then convert project closesest direction vector
         let normalizedDragPoint = dragDistance.normalizedDistanceForSize(frame.size)
@@ -294,13 +294,13 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
     }
     
     
-    fileprivate func updateOverlayWithFinishPercent(_ percent: CGFloat, direction: SwipeResultDirection?) {
+    private func updateOverlayWithFinishPercent(_ percent: CGFloat, direction: SwipeResultDirection?) {
         overlayView?.overlayState = direction
         let progress = max(min(percent/swipePercentageMargin, 1.0), 0)
         overlayView?.updateWithProgress(progress)
     }
     
-    fileprivate func swipeMadeAction() {
+    private func swipeMadeAction() {
         let shouldSwipe = { direction in
             return self.delegate?.card(self, shouldSwipeInDirection: direction) ?? true
         }
@@ -311,19 +311,19 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         }
     }
     
-    fileprivate func animationPointForDirection(_ direction: SwipeResultDirection) -> CGPoint {
+    private func animationPointForDirection(_ direction: SwipeResultDirection) -> CGPoint {
         let point = direction.point
         let animatePoint = CGPoint(x: point.x * 4, y: point.y * 4) //should be 2
         let retPoint = animatePoint.screenPointForSize(screenSize)
         return retPoint
     }
     
-    fileprivate func animationRotationForDirection(_ direction: SwipeResultDirection) -> CGFloat {
+    private func animationRotationForDirection(_ direction: SwipeResultDirection) -> CGFloat {
         return CGFloat(direction.bearing / 2.0 - M_PI_4)
     }
 
     
-    fileprivate func swipeAction(_ direction: SwipeResultDirection) {
+    private func swipeAction(_ direction: SwipeResultDirection) {
         overlayView?.overlayState = direction
         overlayView?.alpha = 1.0
         delegate?.card(self, wasSwipedInDirection: direction)
@@ -337,7 +337,7 @@ open class DraggableCardView: UIView, UIGestureRecognizerDelegate {
         layer.pop_add(translationAnimation, forKey: "swipeTranslationAnimation")
     }
     
-    fileprivate func resetViewPositionAndTransformations() {
+    private func resetViewPositionAndTransformations() {
         delegate?.card(cardWasReset: self)
         
         removeAnimations()

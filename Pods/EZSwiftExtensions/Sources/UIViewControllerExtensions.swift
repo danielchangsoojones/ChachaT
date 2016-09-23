@@ -216,7 +216,7 @@ extension UIViewController {
 
     /// EZSwiftExtensions
     public func popVC() {
-        navigationController?.popViewController(animated: true)
+        _ = navigationController?.popViewController(animated: true)
     }
 
     /// EZSwiftExtensions

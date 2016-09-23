@@ -11,9 +11,9 @@ import MBProgressHUD
 
 open class ProgressUtilities {
     
-    fileprivate static var hud : MBProgressHUD?
+    fileprivate static var hud: MBProgressHUD?
     
-    open class func showSpinner(_ superView : UIView) {
+    open class func showSpinner(_ superView: UIView) {
         if let thisHud = hud {
             thisHud.hide(false)
             hud = nil
@@ -21,7 +21,7 @@ open class ProgressUtilities {
         hud = MBProgressHUD.showAdded(to: superView, animated: true)
     }
     
-    open class func showSpinner(_ superView : UIView, title : String) {
+    open class func showSpinner(_ superView: UIView, title: String) {
         if let thisHud = hud {
             thisHud.hide(false)
             hud = nil

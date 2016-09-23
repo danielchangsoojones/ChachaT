@@ -9,6 +9,8 @@
 // swiftlint:disable line_length
 // swiftlint:disable trailing_whitespace
 
+
+//import Foundation
 import UIKit
 
 extension URL {
@@ -28,28 +30,28 @@ extension URL {
 
     /// EZSE: Returns remote size of url, don't use it in main thread
     public func remoteSize(_ completionHandler: @escaping ((_ contentLength: Int64) -> Void), timeoutInterval: TimeInterval = 30) {
-        let request = NSMutableURLRequest(url: self, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
+        var request = URLRequest(url: self, cachePolicy: .reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
         request.httpMethod = "HEAD"
         request.setValue("", forHTTPHeaderField: "Accept-Encoding")
-        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (_, response, _) -> Void in
+        URLSession.shared.dataTask(with: request) { (data, response, error) in
             let contentLength: Int64 = response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+            DispatchQueue.global(qos: .default).async(execute: {
                 completionHandler(contentLength)
             })
-        }).resume()
+        }.resume()
     }
 
     /// EZSE: Returns server supports resuming or not, don't use it in main thread
     public func supportsResume(_ completionHandler: @escaping ((_ doesSupport: Bool) -> Void), timeoutInterval: TimeInterval = 30) {
-        let request = NSMutableURLRequest(url: self, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
+        var request = URLRequest(url: self, cachePolicy: URLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
         request.httpMethod = "HEAD"
         request.setValue("bytes=5-10", forHTTPHeaderField: "Range")
-        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (_, response, _) -> Void in
+        URLSession.shared.dataTask(with: request) { (_, response, _) -> Void in
             let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
-            DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
+            DispatchQueue.global(qos: .default).async(execute: {
                 completionHandler(responseCode == 206)
             })
-        }).resume()
+        }.resume()
     }
 
     /// EZSE: Compare two URLs
@@ -129,7 +131,7 @@ extension URL {
 
     /// EZSE: Returns last file access date, nil if file doesn't exist or not yet accessed
     public var fileAccessDate: Date? {
-        URLResourceKey.customIconKey
+        _ = URLResourceKey.customIconKey
         var dateaccessv: AnyObject?
         do {
             try (self as NSURL).getResourceValue(&dateaccessv, forKey: URLResourceKey.contentAccessDateKey)
@@ -233,7 +235,6 @@ extension URL {
     @available(iOS 8.0, *)
     var fileThumbnail1024px: UIImage? {
         get {
-            fileThumbnailsDictionary?["hi"]
             return fileThumbnailsDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey.rawValue]
         }
         set {
@@ -252,11 +253,11 @@ extension URL {
                 if self.fileIsDirectory {
                     let filesList = (try? FileManager.default.contentsOfDirectory(at: self, includingPropertiesForKeys: keys, options: enumOpt)) ?? []
                     for fileURL in filesList {
-                        fileURL.skipBackupAttributeToItemAtURL(skip)
+                        _ = fileURL.skipBackupAttributeToItemAtURL(skip)
                     }
                 }
                 do {
-                    try (self as NSURL).setResourceValue(NSNumber(value: skip! as Bool), forKey: URLResourceKey.isExcludedFromBackupKey)
+                    try (self as NSURL).setResourceValue(NSNumber(value: skip!), forKey: .isExcludedFromBackupKey)
                     return true
                 } catch _ {
                     return false

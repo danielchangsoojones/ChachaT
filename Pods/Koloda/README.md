@@ -28,7 +28,7 @@ KolodaView requires ARC.
 ------------------
 
 ```ruby
-pod 'Koloda', '~> 3.1.2'
+pod 'Koloda', '~> 3.1.1'
 ```
 
 Thread Safety
@@ -60,9 +60,8 @@ To install manually the KolodaView class in an app, just drag the KolodaView, Dr
 ##Usage
 
 1. Import `Koloda` module to your `MyKolodaViewController` class
-
     ```swift
-    import Koloda
+        import Koloda
     ```
 2. Add `KolodaView` to `MyKolodaViewController`, then set dataSource and delegate for it
     ```swift
@@ -75,7 +74,6 @@ To install manually the KolodaView class in an app, just drag the KolodaView, Dr
             kolodaView.dataSource = self
             kolodaView.delegate = self
         }
-    }
     ```
 3. Conform your `MyKolodaViewController` to `KolodaViewDelegate` protocol and override some methods if you need, e.g.
     ```swift
@@ -108,8 +106,6 @@ To install manually the KolodaView class in an app, just drag the KolodaView, Dr
     }
     ```
 5. `KolodaView` works with default implementation. Override it to customize its behavior
-
-Also check out [an example project with carthage](https://github.com/serejahh/Koloda-Carthage-usage).
 
 Properties
 --------------
@@ -158,11 +154,11 @@ func applyAppearAnimation()
 ```
 Applies appear animation.
 ```swift
-func swipe(.Left)
+func swipeLeft()
 ```
 Applies swipe left animation and action, increment currentCardNumber.
 ```swift
-func swipe(.Right)
+func swipeRight()
 ```
 Applies swipe right animation and action, increment currentCardNumber.
 
@@ -176,7 +172,7 @@ Protocols
 
 The KolodaView follows the Apple convention for data-driven views by providing two protocol interfaces, KolodaViewDataSource and KolodaViewDelegate. The KolodaViewDataSource protocol has the following methods:
 ```swift
-func koloda(kolodaNumberOfCards koloda: KolodaView) -> UInt
+func koloda(kolodaNumberOfCards koloda:KolodaView) -> UInt
 ```
 Return the number of items (views) in the KolodaView.
 ```swift

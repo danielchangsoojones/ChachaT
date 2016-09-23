@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Goktug Yilmaz. All rights reserved.
 //
 import UIKit
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func < <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l < r
@@ -17,7 +17,7 @@ fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
   }
 }
 
-fileprivate func >= <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+fileprivate func >= <T: Comparable>(lhs: T?, rhs: T?) -> Bool {
   switch (lhs, rhs) {
   case let (l?, r?):
     return l >= r
@@ -86,14 +86,14 @@ extension Array {
     }
 
     /// EZSE: Iterates on each element of the array.
-    @available(*, deprecated: 1.6)
+    @available(*, deprecated: 1.6, renamed: "forEach")
     public func each(_ call: (Element) -> ()) {
         for item in self {
             call(item)
         }
     }
 
-    /// EZSE: Iterates on each element of the array with its index.
+    /// EZSE: Iterates on each element of the array with its index.  (Index, Element)
     @available(*, deprecated: 1.6, renamed: "forEach")
     public func each(_ call: (Int, Element) -> ()) {
         for (index, item) in self.enumerated() {
@@ -101,7 +101,7 @@ extension Array {
         }
     }
 
-    /// EZSE: Iterates on each element of the array with its index.
+    /// EZSE: Iterates on each element of the array with its index. (Index, Element)
     public func forEach(_ call: (Int, Element) -> ()) {
         for (index, item) in self.enumerated() {
             call(index, item)
@@ -163,7 +163,7 @@ extension Array where Element: Equatable {
 
     /// EZSE: Checks if self contains a list of items.
     public func contains(_ items: Element...) -> Bool {
-        return items.testAll { self.index(of: $0) >= 0 }
+        return items.testAll { (self.index(of: $0) ?? -1) >= 0 }
     }
 
     /// EZSE: Difference of self and the input arrays.

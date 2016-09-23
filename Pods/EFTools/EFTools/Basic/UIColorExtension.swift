@@ -14,7 +14,7 @@ import Foundation
 /// red, green and blue values will range from 0-255
 /// alpha value will range from 0.0 to 1.0
 public extension UIColor {
-    public class func rgba(red: NSInteger, green: NSInteger, blue: NSInteger, alpha: Float = 1.0) -> UIColor {
+    public class func rgba(_ red: NSInteger, green: NSInteger, blue: NSInteger, alpha: Float = 1.0) -> UIColor {
         return UIColor(red: CGFloat(red)/255.0, green: CGFloat(green)/255.0, blue: CGFloat(blue)/255.0, alpha: CGFloat(alpha))
     }
     
