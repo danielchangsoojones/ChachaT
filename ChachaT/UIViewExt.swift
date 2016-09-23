@@ -18,10 +18,10 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The tap gesture.
      */
-    public func tapped(_ callback: (UITapGestureRecognizer) -> ()) -> UITapGestureRecognizer {
+    public func tapped(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UITapGestureRecognizer {
         let tap = UITapGestureRecognizer().any(callback)
         addGestureRecognizer(tap)
-        return tap
+        return tap as! UITapGestureRecognizer
     }
     
     /**
@@ -31,10 +31,10 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The pinch gesture.
      */
-    public func pinched(_ callback: (UIPinchGestureRecognizer) -> ()) -> UIPinchGestureRecognizer {
+    public func pinched(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UIPinchGestureRecognizer {
         let pinch = UIPinchGestureRecognizer().any(callback)
         addGestureRecognizer(pinch)
-        return pinch
+        return pinch as! UIPinchGestureRecognizer
     }
     
     /**
@@ -44,10 +44,10 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The pan gesture.
      */
-    public func panned(_ callback: (UIPanGestureRecognizer) -> ()) -> UIPanGestureRecognizer {
+    public func panned(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UIPanGestureRecognizer {
         let pan = UIPanGestureRecognizer().any(callback)
         addGestureRecognizer(pan)
-        return pan
+        return pan as! UIPanGestureRecognizer
     }
     
     /**
@@ -57,10 +57,10 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The swipe gesture.
      */
-    public func swiped(_ callback: (UISwipeGestureRecognizer) -> ()) -> UISwipeGestureRecognizer {
+    public func swiped(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UISwipeGestureRecognizer {
         let swipe = UISwipeGestureRecognizer().any(callback)
         addGestureRecognizer(swipe)
-        return swipe
+        return swipe as! UISwipeGestureRecognizer
     }
     
     /**
@@ -70,10 +70,10 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The rotation gesture.
      */
-    public func rotated(_ callback: (UIRotationGestureRecognizer) -> ()) -> UIRotationGestureRecognizer {
+    public func rotated(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UIRotationGestureRecognizer {
         let rotation = UIRotationGestureRecognizer().any(callback)
         addGestureRecognizer(rotation)
-        return rotation
+        return rotation as! UIRotationGestureRecognizer
     }
     
     /**
@@ -83,9 +83,9 @@ public extension UIView {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The long-press gesture.
      */
-    public func longPressed(_ callback: (UILongPressGestureRecognizer) -> ()) -> UILongPressGestureRecognizer {
+    public func longPressed(_ callback: @escaping (UIGestureRecognizer) -> ()) -> UILongPressGestureRecognizer {
         let longPress = UILongPressGestureRecognizer().any(callback)
         addGestureRecognizer(longPress)
-        return longPress
+        return longPress as! UILongPressGestureRecognizer
     }
 }

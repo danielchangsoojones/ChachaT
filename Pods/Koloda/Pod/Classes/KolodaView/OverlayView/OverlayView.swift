@@ -8,7 +8,7 @@
 
 import UIKit
 
-public class OverlayView: UIView {
+open class OverlayView: UIView {
     
     public var overlayState: SwipeResultDirection?
     
