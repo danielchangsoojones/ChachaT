@@ -10,11 +10,11 @@ import Foundation
 
 class Message {
     var sender: User
-    var dateSent: NSDate
+    var dateSent: Date
     var body: String
     var hasBeenRead: Bool
     
-    init(sender: User, body: String, hasBeenRead: Bool, dateSent: NSDate) {
+    init(sender: User, body: String, hasBeenRead: Bool, dateSent: Date) {
         self.sender = sender
         self.dateSent = dateSent
         self.body = body

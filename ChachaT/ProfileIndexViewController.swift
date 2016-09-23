@@ -10,7 +10,7 @@ import UIKit
 import EFTools
 
 class ProfileIndexViewController: UIViewController {
-    private struct ProfileIndexConstants {
+    fileprivate struct ProfileIndexConstants {
         static let buttonImageInset: CGFloat = 20
         static let settingsTitle = "Settings"
     }
@@ -21,7 +21,7 @@ class ProfileIndexViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. 
-        self.navigationController?.navigationBarHidden = false
+        self.navigationController?.isNavigationBarHidden = false
         settingsButtonSetup()
         profileButtonSetup()
     }
@@ -31,20 +31,20 @@ class ProfileIndexViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    func editButtonPressed(sender: UITapGestureRecognizer) {
+    func editButtonPressed(_ sender: UITapGestureRecognizer) {
         performSegueWithIdentifier(.ProfileIndexToEditProfileSegue, sender: nil)
     }
     
-    func profileButtonPressed(sender: UITapGestureRecognizer) {
+    func profileButtonPressed(_ sender: UITapGestureRecognizer) {
         performSegueWithIdentifier(.ProfileIndexToCardDetailPageSegue, sender: nil)
     }
     
-    func settingsButtonPressed(sender: UITapGestureRecognizer) {
+    func settingsButtonPressed(_ sender: UITapGestureRecognizer) {
         performSegueWithIdentifier(.ProfileIndexToSettingsPage, sender: nil)
     }
     
     func profileButtonSetup() {
-        let profileBubble = CircularImageView(file: User.currentUser()?.profileImage, diameter: 150)
+        let profileBubble = CircularImageView(file: User.current()?.profileImage, diameter: 150)
         profileBubble.addTapGesture(target: self, action: #selector(ProfileIndexViewController.profileButtonPressed(_:)))
         theUpperBackgroundView.addSubview(profileBubble)
         profileBubble.snp_makeConstraints { (make) in
@@ -53,8 +53,8 @@ class ProfileIndexViewController: UIViewController {
         editProfileButtonSetup(profileBubble)
     }
     
-    func editProfileButtonSetup(profileBubble: UIView) {
-        let editButton = CircleView(diameter: 50, color: UIColor.whiteColor())
+    func editProfileButtonSetup(_ profileBubble: UIView) {
+        let editButton = CircleView(diameter: 50, color: UIColor.white)
         editButton.addTapGesture(target: self, action: #selector(ProfileIndexViewController.editButtonPressed(_:)))
         theUpperBackgroundView.addSubview(editButton)
         editButton.snp_makeConstraints { (make) in
@@ -93,18 +93,18 @@ class ProfileIndexViewController: UIViewController {
         theButtonStackView.addArrangedSubview(buttonView)
     }
     
-    private func createButtonView() -> UIView {
+    fileprivate func createButtonView() -> UIView {
         let theView = UIView()
         return theView
     }
     
-    private func createButtonLabel(text: String) -> UILabel {
+    fileprivate func createButtonLabel(_ text: String) -> UILabel {
         let label = UILabel()
         label.text = text
         return label
     }
     
-    private func createButtonCircle(image: UIImage) -> UIView {
+    fileprivate func createButtonCircle(_ image: UIImage) -> UIView {
         //TODO: make the constant mean something
         let circleView = CircleView(diameter: 100, color: CustomColors.JellyTeal)
         let imageView = UIImageView(image: image)
@@ -127,12 +127,12 @@ extension ProfileIndexViewController: SegueHandlerType {
         case ProfileIndexToSettingsPage
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
         case .ProfileIndexToCardDetailPageSegue:
             //TODO: make the nav bar disappear, and they can just hit the back button on the image.
-            let cardDetailVC = segue.destinationViewController as! CardDetailViewController
-            cardDetailVC.userOfTheCard = User.currentUser()
+            let cardDetailVC = segue.destination as! CardDetailViewController
+            cardDetailVC.userOfTheCard = User.current()
         default:
             break
         }

@@ -10,7 +10,7 @@ import Foundation
 import UIKit
 import SnapKit
 
-public class SpecialtyTagView: TagView {
+open class SpecialtyTagView: TagView {
     struct AnnotationImages {
         static let dropDownMenu = ImageNames.DownArrow
         static let isPrivate = "SettingsGear"
@@ -19,7 +19,7 @@ public class SpecialtyTagView: TagView {
     
     //when the specialtyTagView is initialized, the properties have not been set yet. So, we need to override all these variables when set.
    //The specialtyTagView thinks its intrinsicContentSize is based upon the defualt paddingY, intsead of the manually set PaddingY, so, we say that when the paddintY is set, we want to add the annotationView, so then the annotationView height will be the same as the specialtyTagView's manually set PaddingY.
-    @IBInspectable override public var paddingY: CGFloat {
+    @IBInspectable override open var paddingY: CGFloat {
         didSet {
             updateAnnotationView()
         }
@@ -32,13 +32,13 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    public override var cornerRadius: CGFloat {
+    open override var cornerRadius: CGFloat {
         didSet {
             fakeBorder.layer.cornerRadius = cornerRadius
         }
     }
     
-    public override var borderWidth: CGFloat {
+    open override var borderWidth: CGFloat {
         didSet {
             //get rid of the actual border, so we can show the fake border
             //The fake border doesn't overlap other views, it goes beneath
@@ -47,19 +47,19 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    public override var borderColor: UIColor? {
+    open override var borderColor: UIColor? {
         didSet {
-            fakeBorder.layer.borderColor = borderColor?.CGColor
+            fakeBorder.layer.borderColor = borderColor?.cgColor
         }
     }
 
-    public override var paddingX: CGFloat {
+    open override var paddingX: CGFloat {
         didSet {
             updateAnnotationView()
         }
     }
     
-    var tagAttribute : TagAttributes = .Generic
+    var tagAttribute : TagAttributes = .generic
     
     var annotationView: AnnotationView!
     var fakeBorder: UIView!
@@ -81,7 +81,7 @@ public class SpecialtyTagView: TagView {
     func createFakeBorder() {
         fakeBorder = UIView(frame: self.frame)
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
-        fakeBorder.userInteractionEnabled = false
+        fakeBorder.isUserInteractionEnabled = false
         self.addSubview(fakeBorder)
         fakeBorder.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
@@ -91,7 +91,7 @@ public class SpecialtyTagView: TagView {
     func addAnnotationSubview() {
         annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
-        annotationView.userInteractionEnabled = false
+        annotationView.isUserInteractionEnabled = false
         self.addSubview(annotationView)
         annotationView.snp_makeConstraints { (make) in
             make.leading.equalTo(self)
@@ -99,9 +99,9 @@ public class SpecialtyTagView: TagView {
         }
     }
     
-    func setAnnotationImage(tagAttribute: TagAttributes) -> String {
+    func setAnnotationImage(_ tagAttribute: TagAttributes) -> String {
         switch tagAttribute {
-        case .DropDownMenu:
+        case .dropDownMenu:
             return AnnotationImages.dropDownMenu
         default:
             return ""
@@ -115,7 +115,7 @@ public class SpecialtyTagView: TagView {
         titleEdgeInsets.left = annotationViewDiameter
     }
     
-    public override func intrinsicContentSize() -> CGSize {
+    open override var intrinsicContentSize : CGSize {
         let height = super.intrinsicContentSize().height //height is still calculated like a normal tagView
         let annotationViewDiameter = height
         let width = super.intrinsicContentSize().width + annotationViewDiameter

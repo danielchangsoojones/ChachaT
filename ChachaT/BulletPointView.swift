@@ -9,7 +9,7 @@
 import UIKit
 
 class BulletPointView: UIView {
-    private struct BulletPointConstants {
+    fileprivate struct BulletPointConstants {
         static let bulletPointColor : UIColor = CustomColors.JellyTeal
         static let bulletPointDiameter : CGFloat = 10
         static let circleViewLeadingOffset : CGFloat = 20
@@ -39,7 +39,7 @@ class BulletPointView: UIView {
         }
     }
     
-    func textLabelSetup(text: String) {
+    func textLabelSetup(_ text: String) {
         theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.max)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
         theTextLabel.text = text
         theTextLabel.numberOfLines = 0 //so the textLabel can grow to multiple lines
@@ -54,7 +54,7 @@ class BulletPointView: UIView {
     }
     
     //StackViews calculate .FillProportionally based upon intrinsicContentSize, and normally, UIViews don't have intrinsicContentSize, but we override that.
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         //TODO: technically, the textLable height is offset a little bit from the top, so we need to factor that into the total height, although, stackViews do a proportional calculation to calculate how things stretch, so maybe not necessary, since theTextLabelHeight is the only changing variable
         let textLabelHeight = theTextLabel.frame.height
         return CGSize(width: 0, height: textLabelHeight)

@@ -13,9 +13,9 @@ import STPopup
 import EFTools
 
 public enum QuestionDetailState {
-    case EditingMode
-    case ProfileViewOnlyMode
-    case OtherUserProfileViewOnlyMode
+    case editingMode
+    case profileViewOnlyMode
+    case otherUserProfileViewOnlyMode
 }
 
 class CardDetailViewController: UIViewController {
@@ -31,19 +31,19 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theUserOfCardTagListView: TagListView!
     
-    var userOfTheCard: User? = User.currentUser()
+    var userOfTheCard: User? = User.current()
     
-    @IBAction func backButtonPressed(sender: AnyObject) {
-        self.dismissViewControllerAnimated(false, completion: nil)
+    @IBAction func backButtonPressed(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: nil)
     }
     
     
-    @IBAction func reportAbuseButtonPressed(sender: AnyObject) {
+    @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
         let alert = Alert(closeButtonHidden: false)
         alert.addButton("Block User") { 
             alert.closeAlert()
         }
-       alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .Error)
+       alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .error)
     }
     
     
@@ -80,23 +80,23 @@ class CardDetailViewController: UIViewController {
             self.profileImage.loadInBackground()
         } else {
             profileImage.backgroundColor = ChachaBombayGrey
-            theProfileImageButtonOverlay.setTitle("No Picture", forState: .Normal)
-            theProfileImageButtonOverlay.titleLabel?.textAlignment = .Center
+            theProfileImageButtonOverlay.setTitle("No Picture", for: UIControlState())
+            theProfileImageButtonOverlay.titleLabel?.textAlignment = .center
         }
     }
     
-    func bulletPointSetup(text: String, width: CGFloat) {
+    func bulletPointSetup(_ text: String, width: CGFloat) {
         let bulletPointView = BulletPointView(text: text, width: width)
         theBulletPointsStackView.addArrangedSubview(bulletPointView)
     }
     
-    private func setupTapHandler() {
+    fileprivate func setupTapHandler() {
         theProfileImageButtonOverlay.tapped { _ in
-            self.dismissViewControllerAnimated(false, completion: nil)
+            self.dismiss(animated: false, completion: nil)
         }
     }
     
-    override func prefersStatusBarHidden() -> Bool {
+    override var prefersStatusBarHidden : Bool {
         return true
     }
 
@@ -108,7 +108,7 @@ extension CardDetailViewController: MagicMoveable {
         return true
     }
     
-    var duration: NSTimeInterval {
+    var duration: TimeInterval {
         return 1.0
     }
     

@@ -7,18 +7,17 @@
 //
 
 import Foundation
-import SCLAlertView
 
 class BackgroundAnimationDataStore {
-    func likePerson(user : User) {
-        matchUser(User.currentUser()!, user2: user, isMatch: true)
+    func likePerson(_ user : User) {
+        matchUser(User.current()!, user2: user, isMatch: true)
     }
     
-    func nopePerson(user : User) {
-        matchUser(User.currentUser()!, user2: user, isMatch: false)
+    func nopePerson(_ user : User) {
+        matchUser(User.current()!, user2: user, isMatch: false)
     }
     
-    private func matchUser(user1 : User, user2 : User, isMatch : Bool) {
+    fileprivate func matchUser(_ user1 : User, user2 : User, isMatch : Bool) {
         let match = Match()
         match.currentUser = user1
         match.targetUser = user2
@@ -27,14 +26,14 @@ class BackgroundAnimationDataStore {
         checkMatch(match)
     }
     
-    private func checkMatch(theMatch : Match) {
+    fileprivate func checkMatch(_ theMatch : Match) {
         if theMatch.isMatch {
             let matchQuery = Match.query()!
             matchQuery.whereKey(Constants.currentUser, equalTo: theMatch.targetUser)
             matchQuery.whereKey(Constants.targetUser, equalTo: theMatch.currentUser)
             matchQuery.whereKey(Constants.isMatch, equalTo: true)
             
-            matchQuery.getFirstObjectInBackgroundWithBlock({ (match, error) -> Void in
+            matchQuery.getFirstObjectInBackground(block: { (match, error) -> Void in
                 var mutualMatch = false
                 if let foundMatch = match as? Match {
                     self.createMatchAlert(theMatch.targetUser.fullName)
@@ -51,7 +50,7 @@ class BackgroundAnimationDataStore {
         }
     }
     
-    private func updateOrInsertMatch(theMatch : Match, mutualMatch : Bool) {
+    fileprivate func updateOrInsertMatch(_ theMatch : Match, mutualMatch : Bool) {
         // Create a query on Match
         let query = Match.query()!
         // The query has two clauses - currentUser is the current user,
@@ -63,7 +62,7 @@ class BackgroundAnimationDataStore {
         // that record with the proper isMatch and mutualMatch values and save it.
         // If a match is not found, update the mutualMatch value of the
         // theMatch parameter and save that.
-        query.getFirstObjectInBackgroundWithBlock { (match, error) -> Void in
+        query.getFirstObjectInBackground { (match, error) -> Void in
             if let foundMatch = match as? Match {
                 foundMatch.isMatch = theMatch.isMatch
                 foundMatch.mutualMatch = mutualMatch
@@ -75,11 +74,11 @@ class BackgroundAnimationDataStore {
         }
     }
     
-    private func createMatchAlert(targetUserName: String?) {
+    fileprivate func createMatchAlert(_ targetUserName: String?) {
         if let targetUserName = targetUserName {
-            SCLAlertView().showInfo("Match!", subTitle: "You matched with \(targetUserName)")
+            SCLAlertView.showInfo("Match!", subTitle: "You matched with \(targetUserName)")
         } else {
-            SCLAlertView().showInfo("Match!", subTitle: "You have a match!")
+            SCLAlertView.showInfo("Match!", subTitle: "You have a match!")
         }
     }
 }

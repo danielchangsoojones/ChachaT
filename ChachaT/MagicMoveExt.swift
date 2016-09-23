@@ -9,11 +9,11 @@
 import Foundation
 
 enum Storyboards {
-    case Main
+    case main
     
     var storyboard: String {
         switch self {
-        case .Main: return "Main"
+        case .main: return "Main"
         }
     }
 }

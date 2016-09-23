@@ -9,7 +9,7 @@
 import UIKit
 
 protocol BottomPicturePopUpViewControllerDelegate {
-    func passImage(image: UIImage)
+    func passImage(_ image: UIImage)
 }
 
 class BottomPicturePopUpViewController: UIViewController {
@@ -21,18 +21,18 @@ class BottomPicturePopUpViewController: UIViewController {
     
     var bottomPicturePopUpViewControllerDelegate : BottomPicturePopUpViewControllerDelegate?
     
-    @IBAction func thePhotoLibraryButtonPressed(sender: AnyObject) {
-        setImagePickerDelegate(UIImagePickerControllerSourceType.PhotoLibrary)
+    @IBAction func thePhotoLibraryButtonPressed(_ sender: AnyObject) {
+        setImagePickerDelegate(UIImagePickerControllerSourceType.photoLibrary)
     }
 
-    @IBAction func theCameraButtonPressed(sender: AnyObject) {
-        setImagePickerDelegate(UIImagePickerControllerSourceType.Camera)
+    @IBAction func theCameraButtonPressed(_ sender: AnyObject) {
+        setImagePickerDelegate(UIImagePickerControllerSourceType.camera)
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         let extraHeight : CGFloat = 45
-        contentSizeInPopup = CGSizeMake(self.view.bounds.width, thePhotoLibraryButton.frame.height + theCameraButton.frame.height + extraHeight)
+        contentSizeInPopup = CGSize(width: self.view.bounds.width, height: thePhotoLibraryButton.frame.height + theCameraButton.frame.height + extraHeight)
         
         // Do any additional setup after loading the view.
     }
@@ -45,15 +45,15 @@ class BottomPicturePopUpViewController: UIViewController {
 }
 
 extension BottomPicturePopUpViewController: UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func setImagePickerDelegate(pickerType: UIImagePickerControllerSourceType) {
+    func setImagePickerDelegate(_ pickerType: UIImagePickerControllerSourceType) {
         let imgPicker = UIImagePickerController()
         imgPicker.delegate = self
         imgPicker.sourceType = pickerType;
         imgPicker.allowsEditing = true
-        self.presentViewController(imgPicker, animated: true, completion: nil)
+        self.present(imgPicker, animated: true, completion: nil)
     }
     
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [NSObject : AnyObject]!)
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!)
     {
         if image != nil {
             //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
@@ -61,11 +61,11 @@ extension BottomPicturePopUpViewController: UIImagePickerControllerDelegate, UIN
             bottomPicturePopUpViewControllerDelegate?.passImage(image)
             dismissCurrentViewController()
         }
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func dismissCurrentViewController() {
         //in the imagePickerController, it thought the current view controller was the image picker, so it wasn't dismissing the bottom pop up controller. This fixed that.
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
 }

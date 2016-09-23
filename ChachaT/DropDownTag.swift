@@ -9,9 +9,9 @@
 import Foundation
 
 public enum DropDownAttributes {
-    case TagChoices
-    case SingleSlider
-    case RangeSlider
+    case tagChoices
+    case singleSlider
+    case rangeSlider
 }
 
 class DropDownTag : Tag {
@@ -24,12 +24,12 @@ class DropDownTag : Tag {
     var isPrivate : Bool = false //the user doesn't want anyone searching them on this field.
     var notSetYet : Bool = false //if the tag has not been set by the user, then we want to show a red exclamation point. So, the user knows to click the tag, and set it somehow.
     
-    private init(specialtyCategory: String, dropDownAttribute: DropDownAttributes, isPrivate: Bool, notSetYet: Bool) {
+    fileprivate init(specialtyCategory: String, dropDownAttribute: DropDownAttributes, isPrivate: Bool, notSetYet: Bool) {
         self.specialtyCategory = specialtyCategory
         self.dropDownAttribute = dropDownAttribute
         self.isPrivate = isPrivate
         self.notSetYet = notSetYet
-        super.init(title: specialtyCategory, attribute: .DropDownMenu)
+        super.init(title: specialtyCategory, attribute: .dropDownMenu)
     }
     
     //for creating a tagChoices Drop Down

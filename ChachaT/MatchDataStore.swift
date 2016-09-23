@@ -10,7 +10,7 @@ import UIKit
 
 class MatchDataStore: NSObject {
     var delegate: MatchDataStoreDelegate?
-    let currentUser = User.currentUser()!
+    let currentUser = User.current()!
     
     override init() {
         super.init()
@@ -24,11 +24,11 @@ class MatchDataStore: NSObject {
     func findMatchedUsers() {
         var connections : [Connection] = []
         let query = Match.query()!
-        query.whereKey(Constants.currentUser, equalTo: User.currentUser()!)
+        query.whereKey(Constants.currentUser, equalTo: User.current()!)
         query.whereKey(Constants.mutualMatch, equalTo: true)
         query.includeKey(Constants.targetUser)
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let matches = objects as? [Match] where error == nil {
+        query.findObjectsInBackground { (objects, error) in
+            if let matches = objects as? [Match] , error == nil {
                 for match in matches {
                     let connection = Connection(targetUser: match.targetUser)
                     connections.append(connection)
@@ -49,15 +49,15 @@ class MatchDataStore: NSObject {
         var alreadyContainedChats: [String] = []
         let query = Chat.query()!
         query.includeKey("sender")
-        query.whereKey("chatRoom", containsString: currentUser.objectId!)
+        query.whereKey("chatRoom", contains: currentUser.objectId!)
         query.addDescendingOrder("createdAt") //we want the newest message for the preview message
-        query.findObjectsInBackgroundWithBlock { (objects, error) in
-            if let chats = objects as? [Chat] where error == nil {
+        query.findObjectsInBackground { (objects, error) in
+            if let chats = objects as? [Chat] , error == nil {
                 for chat in chats {
                     if !alreadyContainedChats.contains(chat.chatRoom) {
                         alreadyContainedChats.append(chat.chatRoom)
                         //TODO: make the message have an actual date for the date sent
-                        let message = Message(sender: chat.sender, body: chat.chatText, hasBeenRead: chat.readByReceiver, dateSent: NSDate())
+                        let message = Message(sender: chat.sender, body: chat.chatText, hasBeenRead: chat.readByReceiver, dateSent: Date())
                         let chatRoom = ChatRoom(users: [chat.sender, chat.receiver], messages: [message])
                         chatRooms.append(chatRoom)
                     }
@@ -69,24 +69,24 @@ class MatchDataStore: NSObject {
         }
     }
     
-    func messagesHaveBeenRead(chatRoom: ChatRoom) {
+    func messagesHaveBeenRead(_ chatRoom: ChatRoom) {
         //TODO: make the chatroom say that all messages have been read
         
     }
 }
 
 protocol MatchDataStoreDelegate {
-    func passMatches(matches: [Connection])
-    func passChatRooms(rooms: [ChatRoom])
+    func passMatches(_ matches: [Connection])
+    func passChatRooms(_ rooms: [ChatRoom])
 }
 
 extension MatchesViewController: MatchDataStoreDelegate {
-    func passMatches(matches: [Connection]) {
+    func passMatches(_ matches: [Connection]) {
         self.matches = matches
         theTableView.reloadData()
     }
     
-    func passChatRooms(rooms: [ChatRoom]) {
+    func passChatRooms(_ rooms: [ChatRoom]) {
         self.chatRooms = rooms
         theTableView.reloadData()
     }

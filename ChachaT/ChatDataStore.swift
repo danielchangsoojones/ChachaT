@@ -9,28 +9,48 @@
 import Foundation
 import JSQMessagesViewController
 import Parse
+fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l < r
+  case (nil, _?):
+    return true
+  default:
+    return false
+  }
+}
+
+fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+  switch (lhs, rhs) {
+  case let (l?, r?):
+    return l > r
+  default:
+    return rhs < lhs
+  }
+}
+
 
 class ChatDataStore {
     
     var isLoading = false
     var chatRoomName = ""
     
-    private var delegate: ChatDataStoreDelegate?
+    fileprivate var delegate: ChatDataStoreDelegate?
     
     init(delegate: ChatDataStoreDelegate) {
         self.delegate = delegate
     }
     
     func getsenderID() -> String {
-        return User.currentUser()!.objectId!
+        return User.current()!.objectId!
     }
     
     func getSenderDisplayName() -> String {
-        return User.currentUser()!.fullName!
+        return User.current()!.fullName!
     }
     
-    func getChatRoomName(otherUser: User) -> String {
-        let currentUser = User.currentUser()!
+    func getChatRoomName(_ otherUser: User) -> String {
+        let currentUser = User.current()!
         // We create a chatroom for each user pair. it needs to be the same for both
         // so we always put smaller user id first
         let name = currentUser.objectId > otherUser.objectId ?
@@ -39,7 +59,7 @@ class ChatDataStore {
         return name
     }
     
-    func loadMessages(messages: [JSQMessage]) {
+    func loadMessages(_ messages: [JSQMessage]) {
         if !isLoading {
             var messagesCopy : [JSQMessage] = messages
             isLoading = true
@@ -55,8 +75,8 @@ class ChatDataStore {
             // we need this so we can get the sender's objectId for simplicity
             query.includeKey(Constants.sender)
             // show messages in order sent
-            query.orderByAscending(Constants.createdAt)
-            query.findObjectsInBackgroundWithBlock({ (objects, error) in
+            query.order(byAscending: Constants.createdAt)
+            query.findObjectsInBackground(block: { (objects, error) in
                 if error == nil {
                     for object in objects! {
                         // Go through each Chat message and create a
@@ -64,7 +84,7 @@ class ChatDataStore {
                         let chat = object as! Chat
                         let message = JSQMessage(senderId: chat.sender.objectId, senderDisplayName: chat.sender.fullName, date: chat.createdAt, text: chat.chatText)
                         
-                        messagesCopy.append(message)
+                        messagesCopy.append(message!)
                         
                         // just ensure we cache the user object for later
                         self.delegate?.cacheUserObject(chat.sender, objectID: chat.sender.objectId!)
@@ -80,16 +100,16 @@ class ChatDataStore {
         }
     }
     
-    func sendMessage(text: String, otherUser: User) {
+    func sendMessage(_ text: String, otherUser: User) {
         // When they hit send. Save their message.
         let chat = Chat()
         chat.chatRoom = self.chatRoomName
-        chat.sender = User.currentUser()!
+        chat.sender = User.current()!
         chat.receiver = otherUser
         chat.chatText = text
         chat.readByReceiver = false
         
-        chat.saveInBackgroundWithBlock { (succeeded, error) in
+        chat.saveInBackground { (succeeded, error) in
             if error == nil {
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
                 self.delegate?.loadMessages()
@@ -103,10 +123,10 @@ class ChatDataStore {
 protocol ChatDataStoreDelegate {
     func finishReceivingMessage()
     func finishSendingMessage()
-    func passMessages(messages: [JSQMessage])
-    func cacheUserObject(user: User, objectID: String)
+    func passMessages(_ messages: [JSQMessage])
+    func cacheUserObject(_ user: User, objectID: String)
     func loadMessages()
-    func loadAvatarImage(data: NSData)
+    func loadAvatarImage(_ data: Data)
 }
 
 extension ChatViewController: ChatDataStoreDelegate {
@@ -114,15 +134,15 @@ extension ChatViewController: ChatDataStoreDelegate {
         self.finishReceivingMessage()
     }
     
-    func passMessages(messages: [JSQMessage]) {
+    func passMessages(_ messages: [JSQMessage]) {
         self.messages = messages
     }
     
-    func cacheUserObject(user: User, objectID: String) {
+    func cacheUserObject(_ user: User, objectID: String) {
         self.users[objectID] = user
     }
     
-    func loadAvatarImage(data: NSData) {
+    func loadAvatarImage(_ data: Data) {
         
     }
 }

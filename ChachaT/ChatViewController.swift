@@ -12,7 +12,7 @@ import JSQMessagesViewController
 class ChatViewController: JSQMessagesViewController {
     
     // to check for new messages
-    var timer : NSTimer!
+    var timer : Timer!
     // to prevent stomping on our own feet and double loading
     var isLoading = false
     
@@ -48,24 +48,24 @@ class ChatViewController: JSQMessagesViewController {
         
         // setup chat bubbles
         let bubbleFactory = JSQMessagesBubbleImageFactory()
-        outgoingBubbleImageView = bubbleFactory.outgoingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleLightGrayColor())
-        incomingBubbleImageView = bubbleFactory.incomingMessagesBubbleImageWithColor(UIColor.jsq_messageBubbleBlueColor())
+        outgoingBubbleImageView = bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
+        incomingBubbleImageView = bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
         
         self.loadMessages()
         
         // We check for new messages every 5 seconds
         //Terrance Kunstek said this is a memory leak because when viewcontroller is dropped, the timer keeps going. He has code to fix this. 
-        timer = NSTimer.scheduledTimerWithTimeInterval(5.0, target: self, selector: #selector(ChatViewController.loadMessages), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(ChatViewController.loadMessages), userInfo: nil, repeats: true)
         
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
         self.collectionView!.collectionViewLayout.springinessEnabled = true
     }
     
-    override func viewWillDisappear(animated: Bool) {
+    override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // when they leave this screen, stop checking for messages
         timer.invalidate()
@@ -117,17 +117,17 @@ class ChatViewController: JSQMessagesViewController {
     
     // Mark - JSQMessagesViewController method overrides
     
-    override func didPressSendButton(button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: NSDate!) {
+    override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         dataStore.sendMessage(text, otherUser: otherUser)
     }
     
     // Mark - JSQMessages CollectionView DataSource
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageData! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageDataForItemAt indexPath: IndexPath!) -> JSQMessageData! {
         // return message for current row
         return messages[indexPath.item]
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageBubbleImageDataSource! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, messageBubbleImageDataForItemAt indexPath: IndexPath!) -> JSQMessageBubbleImageDataSource! {
         
         let message = messages[indexPath.item]
         
@@ -139,7 +139,7 @@ class ChatViewController: JSQMessagesViewController {
         
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAtIndexPath indexPath: NSIndexPath!) -> JSQMessageAvatarImageDataSource! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, avatarImageDataForItemAt indexPath: IndexPath!) -> JSQMessageAvatarImageDataSource! {
         // show correct avatar for message sent
         
         let message = messages[indexPath.item]
@@ -150,8 +150,8 @@ class ChatViewController: JSQMessagesViewController {
             
             //TODO: abstract this thing to data store, but I am not exactly sure how to at the moment.
             let user = users[message.senderId]!
-            user.profileImage!.getDataInBackgroundWithBlock { (data, error) in
-                imageView.avatarImage = JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(data:data!), withDiameter: 30)
+            user.profileImage!.getDataInBackground { (data, error) in
+                imageView?.avatarImage = JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(data:data!), withDiameter: 30)
                 // Hack: For reload entire table now that avatar is downloaded
                 self.collectionView!.reloadData()
             }
@@ -161,19 +161,19 @@ class ChatViewController: JSQMessagesViewController {
         
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         
         // show date stamp every 3 records.
         if indexPath.item % 3 == 0
         {
             let message = messages[indexPath.item]
-            return JSQMessagesTimestampFormatter.sharedFormatter().attributedTimestampForDate(message.date)
+            return JSQMessagesTimestampFormatter.shared().attributedTimestamp(for: message.date)
         }
         return nil;
     }
     
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         
         // Show the name every once and a while
         let message = messages[indexPath.item]
@@ -196,36 +196,36 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> NSAttributedString! {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForCellBottomLabelAt indexPath: IndexPath!) -> NSAttributedString! {
         return nil
     }
     
     // Mark - UICollectionView DataSource
     
-    override func collectionView(collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return messages.count
     }
     
-    override func collectionView(collectionView: UICollectionView, cellForItemAtIndexPath indexPath: NSIndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         // Grab cell we are about to show
-        let cell = super.collectionView(collectionView, cellForItemAtIndexPath: indexPath) as! JSQMessagesCollectionViewCell
+        let cell = super.collectionView(collectionView, cellForItemAt: indexPath) as! JSQMessagesCollectionViewCell
         
         // Customize it some
-        let message = messages[indexPath.item]
+        let message = messages[(indexPath as NSIndexPath).item]
         if message.senderId == self.senderId
         {
-            cell.textView!.textColor = UIColor.blackColor()
+            cell.textView!.textColor = UIColor.black
         }
         else
         {
-            cell.textView!.textColor = UIColor.whiteColor()
+            cell.textView!.textColor = UIColor.white
         }
         
         return cell;
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellTopLabelAt indexPath: IndexPath!) -> CGFloat {
         
         // if we are going to show the date/time, give it some height
         if indexPath.item % 3 == 0
@@ -235,7 +235,7 @@ class ChatViewController: JSQMessagesViewController {
         return 0.0;
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForMessageBubbleTopLabelAt indexPath: IndexPath!) -> CGFloat {
         
         // more height logic
         let message = messages[indexPath.item]
@@ -255,13 +255,13 @@ class ChatViewController: JSQMessagesViewController {
         return kJSQMessagesCollectionViewCellLabelHeightDefault
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAtIndexPath indexPath: NSIndexPath!) -> CGFloat {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, layout collectionViewLayout: JSQMessagesCollectionViewFlowLayout!, heightForCellBottomLabelAt indexPath: IndexPath!) -> CGFloat {
         
         // more height logic
         return 0.0
     }
     
-    override func collectionView(collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
+    override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
         print("tapped load earlier messages - need implementation")
     }
 }

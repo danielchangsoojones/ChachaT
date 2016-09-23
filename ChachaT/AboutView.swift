@@ -10,16 +10,16 @@ import UIKit
 import MBAutoGrowingTextView
 
 class AboutView: UIView {
-    private struct AboutViewConstants {
+    fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
         static let maxTextFieldCharacterCount : Int = 30
     }
     
     enum AboutViewType {
-        case GrowingTextView
-        case NormalTextField
-        case TappableCell
-        case SegueCell
+        case growingTextView
+        case normalTextField
+        case tappableCell
+        case segueCell
     }
     
     // Our custom view from the XIB file. We basically have to have our view on top of a normal view, since it is a nib file.
@@ -36,10 +36,10 @@ class AboutView: UIView {
     var theBulletPointNumber : Int?
     var thePlaceholderText : String = ""
     var wasEdited : Bool = false
-    var theType : AboutViewType = .GrowingTextView
+    var theType : AboutViewType = .growingTextView
     
     init(title: String, placeHolder: String, type: AboutViewType) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         xibSetup()
         self.thePlaceholderText = placeHolder
         self.theTitleLabel.text = title
@@ -54,10 +54,10 @@ class AboutView: UIView {
     }
     
     //for intializing the tappable cells
-    convenience init(title: String, placeHolder: String, innerText: String?, action: (sender: AboutView) -> (), type: AboutViewType) {
+    convenience init(title: String, placeHolder: String, innerText: String?, action: @escaping (_ sender: AboutView) -> (), type: AboutViewType) {
         self.init(title: title, placeHolder: placeHolder, type: type)
         tappableCellSetup(innerText, action: action)
-        if type == .SegueCell {
+        if type == .segueCell {
             segueIndicatorSetup()
         }
     }
@@ -69,29 +69,29 @@ class AboutView: UIView {
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
     func xibSetup() {
-        NSBundle.mainBundle().loadNibNamed("AboutView", owner: self, options: nil)[0] as! UIView
+        Bundle.main.loadNibNamed("AboutView", owner: self, options: nil)?[0] as! UIView
         //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
         self.addSubview(view)
         view.frame = self.bounds
     }
     
-    func GUISetup(type: AboutViewType) {
+    func GUISetup(_ type: AboutViewType) {
         hideBulletPointComponents(true) //want the autoGrowingTextView to not be shown, unless it is supposed to be
         switch type {
-        case .GrowingTextView:
+        case .growingTextView:
             initialCharacterCountSetup()
             autoGrowingTextViewSetup()
             hideBulletPointComponents(false) //it is supposed to be shown
-        case .NormalTextField:
+        case .normalTextField:
             textFieldSetup()
         default:
             break
         }
     }
     
-    func hideBulletPointComponents(hide: Bool) {
-        theAutoGrowingTextView.hidden = hide
-        theCharacterCount.hidden = hide
+    func hideBulletPointComponents(_ hide: Bool) {
+        theAutoGrowingTextView.isHidden = hide
+        theCharacterCount.isHidden = hide
     }
     
     func initialCharacterCountSetup() {
@@ -103,8 +103,8 @@ class AboutView: UIView {
     }
     
     func getCurrentText() -> String? {
-        if theAutoGrowingTextView.hidden {
-            if let textField = theTextField where textField.text != nil {
+        if theAutoGrowingTextView.isHidden {
+            if let textField = theTextField , textField.text != nil {
                 return textField.text!
             }
         } else {
@@ -114,8 +114,8 @@ class AboutView: UIView {
     }
     
     //Purpose: sees which textfield, textview, or label to change, based upon which ones are not nil/hidden
-    func setCurrentText(text: String) {
-        if theAutoGrowingTextView.hidden {
+    func setCurrentText(_ text: String) {
+        if theAutoGrowingTextView.isHidden {
             if let textField = theTextField {
                 textField.text = text
             } else if theInnerLabel != nil {
@@ -146,21 +146,21 @@ extension AboutView: UITextViewDelegate {
         return nil
     }
     
-    func applyPlaceholderStyle(aTextview: UITextView, placeholderText: String)
+    func applyPlaceholderStyle(_ aTextview: UITextView, placeholderText: String)
     {
         // make it look (initially) like a placeholder
-        aTextview.textColor = UIColor.lightGrayColor()
+        aTextview.textColor = UIColor.lightGray
         aTextview.text = placeholderText
     }
     
-    func applyNonPlaceholderStyle(aTextview: UITextView)
+    func applyNonPlaceholderStyle(_ aTextview: UITextView)
     {
         // make it look like normal text instead of a placeholder
-        aTextview.textColor = UIColor.darkTextColor()
+        aTextview.textColor = UIColor.darkText
         aTextview.alpha = 1.0
     }
     
-    func textViewShouldBeginEditing(aTextView: UITextView) -> Bool
+    func textViewShouldBeginEditing(_ aTextView: UITextView) -> Bool
     {
         if aTextView == theAutoGrowingTextView && aTextView.text == thePlaceholderText
         {
@@ -170,14 +170,14 @@ extension AboutView: UITextViewDelegate {
         return true
     }
     
-    func moveCursorToStart(aTextView: UITextView)
+    func moveCursorToStart(_ aTextView: UITextView)
     {
-        dispatch_async(dispatch_get_main_queue(), {
+        DispatchQueue.main.async(execute: {
             aTextView.selectedRange = NSMakeRange(0, 0);
         })
     }
     
-    func textView(textView: UITextView, shouldChangeTextInRange range: NSRange, replacementText text: String) -> Bool {
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         // remove the placeholder text when they start typing
         // first, see if the field is empty
         // if it's not empty, then the text should be black and not italic
@@ -211,13 +211,13 @@ extension AboutView: UITextViewDelegate {
         }
     }
     
-    func textViewDidChange(textView: UITextView) {
+    func textViewDidChange(_ textView: UITextView) {
         let characterCount = textView.text.characters.count
         let charactersLeft = AboutViewConstants.maxCharacterCount - characterCount
         theCharacterCount.text = "\(charactersLeft)"
     }
     
-    func textViewDidBeginEditing(textView: UITextView) {
+    func textViewDidBeginEditing(_ textView: UITextView) {
         wasEdited = true
     }
 }
@@ -234,11 +234,11 @@ extension AboutView : UITextFieldDelegate {
         }
     }
     
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         wasEdited = true
     }
     
-    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         guard let text = textField.text else { return true }
         
         let newLength = text.characters.count + string.characters.count - range.length
@@ -248,7 +248,7 @@ extension AboutView : UITextFieldDelegate {
 
 //tappable/segue cell extension
 extension AboutView {
-    func tappableCellSetup(innerText: String?, action: (sender: AboutView) -> ()) {
+    func tappableCellSetup(_ innerText: String?, action: @escaping (_ sender: AboutView) -> ()) {
         theInnerLabel = UILabel()
         theInnerLabel!.text = innerText ?? thePlaceholderText
         theInputContentView.addSubview(theInnerLabel!)
@@ -274,7 +274,7 @@ extension AboutView {
         })
     }
     
-    func setInnerTitle(text: String) {
+    func setInnerTitle(_ text: String) {
         theInnerLabel?.text = text
     }
 }

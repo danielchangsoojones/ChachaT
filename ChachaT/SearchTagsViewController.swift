@@ -40,12 +40,12 @@ class SearchTagsViewController: SuperTagViewController {
         }
     }
     
-    func setChosenTagView(scrollViewSearchView: ScrollViewSearchView) {
+    func setChosenTagView(_ scrollViewSearchView: ScrollViewSearchView) {
         tagChosenView = scrollViewSearchView.theTagChosenListView
         tagChosenView.delegate = self
     }
     
-    func addSearchScrollView(holderView: UIView) -> ScrollViewSearchView {
+    func addSearchScrollView(_ holderView: UIView) -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
         scrollViewSearchView.searchBox.delegate = self
@@ -57,11 +57,11 @@ class SearchTagsViewController: SuperTagViewController {
         return scrollViewSearchView
     }
     
-    override func dropDownActions(dropDownTag: DropDownTag) {
+    override func dropDownActions(_ dropDownTag: DropDownTag) {
         super.dropDownActions(dropDownTag)
         switch dropDownTag.dropDownAttribute {
-        case .RangeSlider, .SingleSlider:
-            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .RangeSlider, sliderDelegate: self)
+        case .rangeSlider, .singleSlider:
+            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, sliderDelegate: self)
         default:
             break
         }
@@ -77,9 +77,9 @@ class SearchTagsViewController: SuperTagViewController {
 //extension for tag actions
 extension SearchTagsViewController {
     //TODO: for sliders, there needs to be the valueSuffix in the tag enum file.
-    func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
+    func specialtyTagPressed(_ title: String, tagView: SpecialtyTagView, sender: TagListView) {
         switch tagView.tagAttribute {
-        case .DropDownMenu:
+        case .dropDownMenu:
             let dropDownTagView = tagView as! DropDownTagView
             if let dropDownTag = findDropDownTag(dropDownTagView.specialtyCategoryTitle, array: tagChoicesDataArray) {
                 dropDownActions(dropDownTag)
@@ -89,7 +89,7 @@ extension SearchTagsViewController {
         }
     }
     
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
             addTagToChosenTagListView(title)
@@ -97,7 +97,7 @@ extension SearchTagsViewController {
         }
     }
     
-    func tagRemoveButtonPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
@@ -105,15 +105,15 @@ extension SearchTagsViewController {
             if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
                 theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = nil
             } else {
-                if let index = theGenericChosenTagArray.indexOf(title) {
-                    theGenericChosenTagArray.removeAtIndex(index)
+                if let index = theGenericChosenTagArray.index(of: title) {
+                    theGenericChosenTagArray.remove(at: index)
                 }
             }
         }
     }
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
-    func addTagToChosenTagListView(title: String) {
+    func addTagToChosenTagListView(_ title: String) {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
@@ -157,12 +157,12 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
 }
 
 extension SearchTagsViewController: SliderViewDelegate {
-    func sliderValueChanged(text: String, suffix: String) {
+    func sliderValueChanged(_ text: String, suffix: String) {
         scrollViewSearchView.hideScrollSearchView(false)
         if let tagView = findTagViewWithSuffix(suffix) {
             //the tagView has already been created
             //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
-            tagView.setTitle(text, forState: .Normal)
+            tagView.setTitle(text, for: UIControlState())
         } else {
             //tagView has never been created
             let tagView = tagChosenView.addTag(text)
@@ -171,10 +171,10 @@ extension SearchTagsViewController: SliderViewDelegate {
     }
     
     //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
-    func findTagViewWithSuffix(suffix: String) -> TagView? {
+    func findTagViewWithSuffix(_ suffix: String) -> TagView? {
         for tagView in tagChosenView.tagViews {
             //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
-            if let currentTitle = tagView.currentTitle where currentTitle.hasSuffix(suffix) {
+            if let currentTitle = tagView.currentTitle , currentTitle.hasSuffix(suffix) {
                 return tagView
             }
         }
@@ -184,7 +184,7 @@ extension SearchTagsViewController: SliderViewDelegate {
 
 //search extension
 extension SearchTagsViewController : UISearchBarDelegate {
-   func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
+   func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         tagChoicesView.removeAllTags()
         if searchText.isEmpty {
@@ -196,25 +196,25 @@ extension SearchTagsViewController : UISearchBarDelegate {
         } else {
             //there is text, and we have a match, soa the tagChoicesView changes accordingly
             searchActive = true
-            for (index, tagTitle) in filtered.enumerate() {
+            for (index, tagTitle) in filtered.enumerated() {
                 let tagView = tagChoicesView.addTag(tagTitle)
                 if index == 0 {
                     //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
-                    tagView.selected = true
+                    tagView.isSelected = true
                 }
             }
         }
     }
     
-    func searchBarTextDidBeginEditing(searchBar: UISearchBar) {
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
         searchActive = true
     }
     
-    func searchBarTextDidEndEditing(searchBar: UISearchBar) {
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
         searchActive = false
     }
     
-    func searchBarCancelButtonClicked(searchBar: UISearchBar) {
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false
         resetTagChoicesViewList()
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
@@ -226,7 +226,7 @@ extension SearchTagsViewController : UISearchBarDelegate {
         }
     }
     
-    func searchBarSearchButtonClicked(searchBar: UISearchBar) {
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false
         for tagView in tagChoicesView.selectedTags() {
             if let currentTitle = tagView.currentTitle {
@@ -242,14 +242,14 @@ extension SearchTagsViewController: SegueHandlerType {
         case SearchPageToTinderMainPageSegue
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
             case .SearchPageToTinderMainPageSegue:
                 //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
                 if let userArray = sender as? [User] {
                     //the sender parameter is passed the user array
                     //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
-                    let navigationVC = segue.destinationViewController as! ChachaNavigationViewController
+                    let navigationVC = segue.destination as! ChachaNavigationViewController
                     let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
                     rootVC.userArray = userArray
                 }

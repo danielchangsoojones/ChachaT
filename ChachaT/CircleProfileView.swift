@@ -20,7 +20,7 @@ class CircleProfileView: UIView {
         nameLabelSetup(name)
     }
     
-    func circleViewSetup(diameter: CGFloat, file: AnyObject) {
+    func circleViewSetup(_ diameter: CGFloat, file: AnyObject) {
         circleView = CircularImageView(file: file, diameter: diameter)
         self.addSubview(circleView)
         circleView.snp_makeConstraints { (make) in
@@ -29,9 +29,9 @@ class CircleProfileView: UIView {
     }
     
     //TODO: make the name label resize so it doesn't go over the screen
-    func nameLabelSetup(name: String) {
+    func nameLabelSetup(_ name: String) {
         theNameLabel.text = name
-        theNameLabel.lineBreakMode = .ByClipping
+        theNameLabel.lineBreakMode = .byClipping
         self.addSubview(theNameLabel)
         theNameLabel.snp_makeConstraints { (make) in
             //TODO: put these constants in a struct
@@ -49,7 +49,7 @@ class CircleProfileView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    override func intrinsicContentSize() -> CGSize {
+    override var intrinsicContentSize : CGSize {
         //need to override because usually UIViews have no intrinsic content size.
         //But, we want the stackViews to size the view according to their frames, so we need to actually make the intrinsicContentSize = the frame of the View
         //.FillProportionatly of stackview sizes things based upon their intrinsicContentSize.

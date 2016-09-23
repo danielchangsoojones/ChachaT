@@ -12,7 +12,7 @@ class CircularImageView: CircleView {
     var theImageView = UIImageView()
     
     init(file: AnyObject?, diameter: CGFloat) {
-        let noVisibleImageColor : UIColor = UIColor.grayColor()
+        let noVisibleImageColor : UIColor = UIColor.gray
         super.init(diameter: diameter, color: noVisibleImageColor)
         imageViewSetup(diameter)
         theImageView.loadFromFile(file)
@@ -22,7 +22,7 @@ class CircularImageView: CircleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func imageViewSetup(diameter: CGFloat) {
+    func imageViewSetup(_ diameter: CGFloat) {
         self.addSubview(theImageView)
         theImageView.snp_makeConstraints { (make) in
             make.center.equalTo(self)

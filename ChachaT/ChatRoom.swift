@@ -23,21 +23,21 @@ class ChatRoom: NSObject {
         self.mainImage = chatAttributes.mainImage
     }
     
-    func setChatAttributes(users: [User], name: String, mainImage: AnyObject?) -> (name: String, mainImage: AnyObject) {
+    func setChatAttributes(_ users: [User], name: String, mainImage: AnyObject?) -> (name: String, mainImage: AnyObject) {
         if let otherUser = getOtherUser() {
             //this is a one-on-one chat
-            if let fullName = otherUser.fullName, profileImage = otherUser.profileImage {
+            if let fullName = otherUser.fullName, let profileImage = otherUser.profileImage {
                 return (fullName,profileImage)
             }
         }
         //this is a group chat
-        return (name, mainImage ?? "")
+        return (name, mainImage ?? "" as AnyObject)
     }
     
     func getOtherUser() -> User? {
         if users.count == 2{
             //this is a one-on-one chat
-            for user in users where user != User.currentUser() {
+            for user in users where user != User.current() {
                 return user
             }
         }

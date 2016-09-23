@@ -34,30 +34,30 @@ class ScrollViewSearchView: UIView {
     
     var firstAppearance = true
     
-    @IBAction func searchButtonTapped(sender: UIButton) {
+    @IBAction func searchButtonTapped(_ sender: UIButton) {
         hideScrollSearchView(true)
     }
     
-    @IBAction func goButtonTapped(sender: UIButton) {
+    @IBAction func goButtonTapped(_ sender: UIButton) {
         scrollViewSearchViewDelegate?.dismissPageAndPassUserArray()
     }
     
-    @IBAction func exitButtonTapped(sender: UIButton) {
+    @IBAction func exitButtonTapped(_ sender: UIButton) {
         scrollViewSearchViewDelegate?.dismissCurrentViewController()
     }
     
-    func hideScrollSearchView(hide: Bool) {
+    func hideScrollSearchView(_ hide: Bool) {
         if firstAppearance {
             firstAppearance = false
         } else {
             //this is not the first time the searchBar is being shown
             toggleFirstResponder(hide)
         }
-        theScrollView.hidden = hide
-        searchBox.hidden = !hide
+        theScrollView.isHidden = hide
+        searchBox.isHidden = !hide
     }
     
-    func toggleFirstResponder(becomeResponder: Bool) {
+    func toggleFirstResponder(_ becomeResponder: Bool) {
         if becomeResponder {
             searchBox.becomeFirstResponder()
         } else {
@@ -67,13 +67,13 @@ class ScrollViewSearchView: UIView {
     }
     
     override func awakeFromNib() {
-        self.backgroundColor = UIColor.clearColor() // for some reason, the background color was defaulting to white, and we want transparency
+        self.backgroundColor = UIColor.clear // for some reason, the background color was defaulting to white, and we want transparency
         setButtonBorders()
         searchBox = showSearchBox(self)
         hideScrollSearchView(true)
     }
     
-    func showSearchBox(searchBoxHolder: UIView) -> CustomTagsSearchBar {
+    func showSearchBox(_ searchBoxHolder: UIView) -> CustomTagsSearchBar {
         let searchBox = CustomTagsSearchBar(placeHolderText: "Search Tags")
         searchBoxHolder.addSubview(searchBox)
         searchBox.snp_makeConstraints { (make) in
@@ -86,15 +86,15 @@ class ScrollViewSearchView: UIView {
         let buttonArray = [theSearchButton, theGoButton, theExitButton]
         self.theGoButtonHeightConstraint.constant = TagView.getTagViewHeight(TagViewProperties.paddingY)
         for button in buttonArray {
-            button.layer.cornerRadius = self.theGoButtonHeightConstraint.constant / 2
-            button.layer.borderWidth = TagViewProperties.borderWidth
-            button.layer.borderColor = TagViewProperties.borderColor.CGColor
+            button?.layer.cornerRadius = self.theGoButtonHeightConstraint.constant / 2
+            button?.layer.borderWidth = TagViewProperties.borderWidth
+            button?.layer.borderColor = TagViewProperties.borderColor.cgColor
         }
     }
     
     //Purpose: I want to be able to have a scroll view that grows/shrinks as tags are added to it.
     //TODO: I probably need to update the tagview to have remove button enabled.
-    func rearrangeSearchArea(tagView: TagView, extend: Bool) {
+    func rearrangeSearchArea(_ tagView: TagView, extend: Bool) {
         let tagWidth = tagView.intrinsicContentSize().width
         let tagPadding : CGFloat = self.theTagChosenListView.marginX
         //TODO: Not having the X remove button is not accounted for in the framework, so that was why the extension was not working because it was not including the X button.
@@ -114,19 +114,19 @@ class ScrollViewSearchView: UIView {
             //Therefore, I want to have contentOffset start at the end of the area that has been pushed off screen.
             let screenWidth = self.frame.size.width
             let chosenTagHolderViewWidth = theTagChosenHolderView.frame.size.width
-            theScrollView.setContentOffset(CGPointMake(chosenTagHolderViewWidth - screenWidth, 0), animated: true)
+            theScrollView.setContentOffset(CGPoint(x: chosenTagHolderViewWidth - screenWidth, y: 0), animated: true)
         }
     }
     
     //Purpose: we need to override this, to tell whenever a hit occured on the view. When it does, we still let the tap pass through to the subview, but, we let the delegate know that somewhere on the view, it was hit.
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
         scrollViewSearchViewDelegate?.scrollViewSearchViewTapOccurred()
-        return super.hitTest(point, withEvent: event)
+        return super.hitTest(point, with: event)
     }
     
     class func instanceFromNib() -> ScrollViewSearchView {
         // the nibName has to match your class file and your xib file
-        return UINib(nibName: "ScrollViewSearchView", bundle: nil).instantiateWithOwner(nil, options: nil)[0] as! ScrollViewSearchView
+        return UINib(nibName: "ScrollViewSearchView", bundle: nil).instantiate(withOwner: nil, options: nil)[0] as! ScrollViewSearchView
     }
 }
 

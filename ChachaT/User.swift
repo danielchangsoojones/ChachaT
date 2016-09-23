@@ -15,7 +15,7 @@ class User: PFUser {
     @NSManaged var fullName: String?
     @NSManaged var lowercaseFullName: String?
     @NSManaged var lowercaseUsername: String?
-    @NSManaged var birthDate: NSDate?
+    @NSManaged var birthDate: Date?
     @NSManaged var profileImage: PFFile?
     @NSManaged var profileImage2: PFFile?
     @NSManaged var profileImage3: PFFile?
@@ -29,12 +29,12 @@ class User: PFUser {
     @NSManaged var facebookId : String?
     @NSManaged var location: PFGeoPoint
     var age : Int? {
-        let calendar : NSCalendar = NSCalendar.currentCalendar()
-        let now = NSDate()
+        let calendar : Calendar = Calendar.current
+        let now = Date()
         if let birthDate = birthDate {
-            let ageComponents = calendar.components(.Year,
-                                                    fromDate: birthDate,
-                                                    toDate: now,
+            let ageComponents = (calendar as NSCalendar).components(.year,
+                                                    from: birthDate,
+                                                    to: now,
                                                     options: [])
             return ageComponents.year
         }

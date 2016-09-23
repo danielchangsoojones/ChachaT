@@ -9,14 +9,14 @@
 import UIKit
 
 class CustomTagsSearchBar: UISearchBar {
-    private struct SearchBarConstants {
+    fileprivate struct SearchBarConstants {
         static let borderColor: UIColor = TagViewProperties.borderColor
         static let borderWidth: CGFloat = TagViewProperties.borderWidth
         static let borderRadius: CGFloat = TagViewProperties.cornerRadius
     }
     
     init(placeHolderText: String) {
-        super.init(frame: CGRectZero) //will get set via snapkit constraints
+        super.init(frame: CGRect.zero) //will get set via snapkit constraints
         placeholder = placeHolderText
         tintColor = SearchBarConstants.borderColor //makes the cancel button of search bar and keyboard cursor a certain color
         showsCancelButton = true
@@ -29,10 +29,10 @@ class CustomTagsSearchBar: UISearchBar {
     
     func setSearchIcon() {
         let image: UIImage = UIImage(named: "SearchIconWhite")!
-        setImage(image, forSearchBarIcon: UISearchBarIcon.Search, state: UIControlState.Normal)
+        setImage(image, for: UISearchBarIcon.search, state: UIControlState())
     }
     
-    override func drawRect(rect: CGRect) {
+    override func draw(_ rect: CGRect) {
         let searchBarView = subviews[0]
         // Find the index of the search field in the search bar subviews.
         if let index = indexOfSearchFieldInSubviews() {
@@ -40,15 +40,15 @@ class CustomTagsSearchBar: UISearchBar {
             let searchField: UITextField = (searchBarView).subviews[index] as! UITextField
             
             searchField.layer.cornerRadius = SearchBarConstants.borderRadius
-            searchField.layer.borderColor = SearchBarConstants.borderColor.CGColor
+            searchField.layer.borderColor = SearchBarConstants.borderColor.cgColor
             searchField.layer.borderWidth = SearchBarConstants.borderWidth
             var bounds : CGRect = searchField.frame //saving frame, so we can set bounds after setting height
             bounds.size.height = TagView.getTagViewHeight(TagViewProperties.paddingY) //height of tagViews should = height of search text field
             searchField.bounds = bounds
-            searchField.backgroundColor = UIColor.clearColor()
+            searchField.backgroundColor = UIColor.clear
             
             if let magnifyglassIconView = searchField.leftView as? UIImageView {
-                magnifyglassIconView.image = magnifyglassIconView.image?.imageWithRenderingMode(UIImageRenderingMode.AlwaysTemplate)
+                magnifyglassIconView.image = magnifyglassIconView.image?.withRenderingMode(UIImageRenderingMode.alwaysTemplate)
                 magnifyglassIconView.tintColor = SearchBarConstants.borderColor
             }
         }
@@ -66,7 +66,7 @@ class CustomTagsSearchBar: UISearchBar {
             enableCancelButton(cancelButton)
         }
         
-        super.drawRect(rect)
+        super.draw(rect)
     }
     
     //Purpose: returns the index for the textFieldView of the searchBar
@@ -75,7 +75,7 @@ class CustomTagsSearchBar: UISearchBar {
         let searchBarView = subviews[0]
         
         for i in 0 ..< searchBarView.subviews.count {
-            if searchBarView.subviews[i].isKindOfClass(UITextField) {
+            if searchBarView.subviews[i].isKind(of: UITextField.self) {
                 index = i
                 break
             }
@@ -90,7 +90,7 @@ class CustomTagsSearchBar: UISearchBar {
         let searchBarView = subviews[0]
         
         for i in 0 ..< searchBarView.subviews.count {
-            if searchBarView.subviews[i].isKindOfClass(UIView) {
+            if searchBarView.subviews[i].isKind(of: UIView.self) {
                 //this should find the background view, but if apple changes UISearchBar class, then this code could break
                 index = i
                 break
@@ -106,7 +106,7 @@ class CustomTagsSearchBar: UISearchBar {
         let searchBarView = subviews[0]
         
         for i in 0 ..< searchBarView.subviews.count {
-            if searchBarView.subviews[i].isKindOfClass(UIButton) {
+            if searchBarView.subviews[i].isKind(of: UIButton.self) {
                 //this should find the cancel button, but if apple changes UISearchBar class, then this code could break
                 index = i
                 break
@@ -116,10 +116,10 @@ class CustomTagsSearchBar: UISearchBar {
     }
     
     //This is a hacky way to do things. But, by defualt, a UISearchBar only lets the cancelButton be clickable when the firstResponder is active. But, we want the cancel button to be a way for the user to exit the page. So, when the user was coming to the search page at first, and if they tried to click cancel, it wasn't responding. The user had to hit the searchBar TextField, which would bring up the first responder, and then they could hit cancel. This function fixes things and lets the cancel button be pushed the first time.
-    func enableCancelButton(cancelButton: UIButton) {
-        cancelButton.setTitleColor(SearchBarConstants.borderColor, forState: .Normal)
-        cancelButton.enabled = true
-        cancelButton.userInteractionEnabled = true
+    func enableCancelButton(_ cancelButton: UIButton) {
+        cancelButton.setTitleColor(SearchBarConstants.borderColor, for: UIControlState())
+        cancelButton.isEnabled = true
+        cancelButton.isUserInteractionEnabled = true
     }
     
 }

@@ -10,13 +10,13 @@ import Foundation
 import SnapKit
 
 protocol ChachaDropDownMenuDelegate {
-    func moveChoicesTagListViewDown(moveDown: Bool, animationDuration: NSTimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat)
+    func moveChoicesTagListViewDown(_ moveDown: Bool, animationDuration: TimeInterval, springWithDamping: CGFloat, initialSpringVelocity: CGFloat, downDistance: CGFloat)
 }
 
 //I used code from the BTNavigationDropdownMenu framework to help me figure this out
 class ChachaDropDownMenu: UIView {
-    private struct DropDownConstants {
-        static let dropDownBackgroundColor: UIColor = UIColor.whiteColor()
+    fileprivate struct DropDownConstants {
+        static let dropDownBackgroundColor: UIColor = UIColor.white
     }
     
     let springWithDamping : CGFloat = 0.7
@@ -25,7 +25,7 @@ class ChachaDropDownMenu: UIView {
     var delegate: ChachaDropDownMenuDelegate?
     
     // The animation duration of showing/hiding menu. Default is 0.3
-    var animationDuration: NSTimeInterval! {
+    var animationDuration: TimeInterval! {
         get {
             return self.configuration.animationDuration
         }
@@ -56,49 +56,49 @@ class ChachaDropDownMenu: UIView {
     
     var isShown: Bool!
     
-    private var configuration = DropDownConfiguration()
-    private var backgroundView: UIView!
-    private var menuWrapper: UIView!
+    fileprivate var configuration = DropDownConfiguration()
+    fileprivate var backgroundView: UIView!
+    fileprivate var menuWrapper: UIView!
     var dropDownView: UIView!
-    private var dropDownOriginY : CGFloat = 0
+    fileprivate var dropDownOriginY : CGFloat = 0
     var innerView: UIView?
     var arrowImage : UIImageView!
-    let screenSizeWidth = UIScreen.mainScreen().bounds.width
+    let screenSizeWidth = UIScreen.main.bounds.width
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-    init(containerView: UIView = UIApplication.sharedApplication().keyWindow!, popDownOriginY: CGFloat, delegate: ChachaDropDownMenuDelegate) {
+    init(containerView: UIView = UIApplication.shared.keyWindow!, popDownOriginY: CGFloat, delegate: ChachaDropDownMenuDelegate) {
         //need to super init, but do not have the height yet, so just passing a size zero frame
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         
         self.delegate = delegate
         self.dropDownOriginY = popDownOriginY
         self.isShown = false
         
         //getting the top view controllers bounds
-        let window = UIScreen.mainScreen()
+        let window = UIScreen.main
         let menuWrapperBounds = window.bounds
         
         // Set up DropdownMenu
-        self.menuWrapper = UIView(frame: CGRectMake(menuWrapperBounds.origin.x, 0, menuWrapperBounds.width, menuWrapperBounds.height))
+        self.menuWrapper = UIView(frame: CGRect(x: menuWrapperBounds.origin.x, y: 0, width: menuWrapperBounds.width, height: menuWrapperBounds.height))
         self.menuWrapper.clipsToBounds = true
-        self.menuWrapper.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
+        self.menuWrapper.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
         
         let swipeUpRecognizer = UISwipeGestureRecognizer(target: self, action: #selector(ChachaDropDownMenu.hideMenu))
-        swipeUpRecognizer.direction = .Up
+        swipeUpRecognizer.direction = .up
         menuWrapper.addGestureRecognizer(swipeUpRecognizer)
         
         // Init background view (under top view)
         self.backgroundView = UIView(frame: menuWrapperBounds)
         self.backgroundView.backgroundColor = self.configuration.maskBackgroundColor
-        self.backgroundView.autoresizingMask = [ .FlexibleWidth, .FlexibleHeight ]
+        self.backgroundView.autoresizingMask = [ .flexibleWidth, .flexibleHeight ]
         
         let backgroundTapRecognizer = UITapGestureRecognizer(target: self, action: #selector(ChachaDropDownMenu.hideMenu));
         self.backgroundView.addGestureRecognizer(backgroundTapRecognizer)
         
-        dropDownView = UIView(frame: CGRectMake(0, 0, menuWrapper.frame.width, 0))
+        dropDownView = UIView(frame: CGRect(x: 0, y: 0, width: menuWrapper.frame.width, height: 0))
         dropDownView.backgroundColor = DropDownConstants.dropDownBackgroundColor
         self.arrowImage = setArrowImageToView(dropDownView)
         
@@ -110,7 +110,7 @@ class ChachaDropDownMenu: UIView {
         containerView.addSubview(self.menuWrapper)
         
         // By default, hide menu view
-        self.menuWrapper.hidden = true
+        self.menuWrapper.isHidden = true
     }
     
     func hide() {
@@ -133,14 +133,14 @@ class ChachaDropDownMenu: UIView {
         }
     }
     
-    private func showMenu() {
+    fileprivate func showMenu() {
         self.menuWrapper.frame.origin.y = dropDownOriginY
         
         self.isShown = true
         resignFirstResponder() //don't want a keyboard up when the menu gets shown.
         
         // Visible menu view
-        self.menuWrapper.hidden = false
+        self.menuWrapper.isHidden = false
         
         // Change background alpha
         self.backgroundView.alpha = 0
@@ -148,25 +148,25 @@ class ChachaDropDownMenu: UIView {
         // Animation
         self.dropDownView.frame.origin.y = 0
         
-        self.menuWrapper.superview?.bringSubviewToFront(self.menuWrapper)
-        self.arrowImage.bringSubviewToFront(self.dropDownView)
+        self.menuWrapper.superview?.bringSubview(toFront: self.menuWrapper)
+        self.arrowImage.bringSubview(toFront: self.dropDownView)
         
         delegate?.moveChoicesTagListViewDown(true, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
-        UIView.animateWithDuration(
-            self.configuration.animationDuration * 1.5,
+        UIView.animate(
+            withDuration: self.configuration.animationDuration * 1.5,
             delay: 0,
             usingSpringWithDamping: springWithDamping,
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, self.screenSizeWidth, self.getDropDownViewHeight())
+                self.dropDownView.frame = CGRect(x: self.dropDownView.frame.origin.x, y: self.dropDownView.frame.origin.y, width: self.screenSizeWidth, height: self.getDropDownViewHeight())
                 self.backgroundView.alpha = self.configuration.maskBackgroundOpacity
             }, completion: nil
         )
     }
     
-    @objc private func hideMenu() {
+    @objc fileprivate func hideMenu() {
         self.isShown = false
         
         // Change background alpha
@@ -175,33 +175,33 @@ class ChachaDropDownMenu: UIView {
         
         delegate?.moveChoicesTagListViewDown(false, animationDuration: configuration.animationDuration * 1.5, springWithDamping:  springWithDamping, initialSpringVelocity: initialSpringVelocity, downDistance: getDropDownViewHeight())
         
-        UIView.animateWithDuration(
-            self.configuration.animationDuration * 1.5,
+        UIView.animate(
+            withDuration: self.configuration.animationDuration * 1.5,
             delay: 0,
             usingSpringWithDamping: springWithDamping,
             initialSpringVelocity: initialSpringVelocity,
             options: [],
             animations: {
-                self.dropDownView.frame = CGRectMake(self.dropDownView.frame.origin.x, self.dropDownView.frame.origin.y, self.screenSizeWidth, 0)
+                self.dropDownView.frame = CGRect(x: self.dropDownView.frame.origin.x, y: self.dropDownView.frame.origin.y, width: self.screenSizeWidth, height: 0)
             }, completion: nil
         )
         
         // Animation
-        UIView.animateWithDuration(
-            self.configuration.animationDuration,
+        UIView.animate(
+            withDuration: self.configuration.animationDuration,
             delay: 0,
-            options: UIViewAnimationOptions.TransitionNone,
+            options: UIViewAnimationOptions(),
             animations: {
                 self.backgroundView.alpha = 0
             }, completion: { _ in
-                self.menuWrapper.hidden = true
+                self.menuWrapper.isHidden = true
         })
     }
     
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
     
-    func addInnerView(sideOffset: CGFloat = 0) {
+    func addInnerView(_ sideOffset: CGFloat = 0) {
         dropDownView.addSubview(innerView!)
         //the view will grow to whatever size is necessary to fit its innerView
         innerView!.snp_makeConstraints { (make) in
@@ -212,12 +212,12 @@ class ChachaDropDownMenu: UIView {
         }
     }
     
-    func setArrowImageToView(superView: UIView) -> UIImageView {
+    func setArrowImageToView(_ superView: UIView) -> UIImageView {
         let arrowImage = UIImageView(image: UIImage(named: ImageNames.dropDownUpArrow))
-        arrowImage.contentMode = .ScaleAspectFit
+        arrowImage.contentMode = .scaleAspectFit
         let tap = UITapGestureRecognizer(target: self, action: #selector(arrowImagePressed(_:)))
         arrowImage.addGestureRecognizer(tap)
-        arrowImage.userInteractionEnabled = true
+        arrowImage.isUserInteractionEnabled = true
         superView.addSubview(arrowImage)
         arrowImage.snp_makeConstraints { (make) in
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
@@ -229,18 +229,18 @@ class ChachaDropDownMenu: UIView {
         return arrowImage
     }
     
-    func arrowImagePressed(sender: UIImageView!) {
+    func arrowImagePressed(_ sender: UIImageView!) {
         hide()
     }
     
     func getDropDownViewHeight() -> CGFloat {
-        let arrowImageHeight = arrowImage.intrinsicContentSize().height
+        let arrowImageHeight = arrowImage.intrinsicContentSize.height
         let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
-        return innerView!.intrinsicContentSize().height + arrowImageHeightAndInsets
+        return innerView!.intrinsicContentSize.height + arrowImageHeightAndInsets
     }
     
     class DropDownConfiguration {
-        var animationDuration: NSTimeInterval!
+        var animationDuration: TimeInterval!
         var maskBackgroundColor: UIColor!
         var maskBackgroundOpacity: CGFloat!
         
@@ -250,7 +250,7 @@ class ChachaDropDownMenu: UIView {
         
         func defaultValue() {
             self.animationDuration = 0.5
-            self.maskBackgroundColor = UIColor.blackColor()
+            self.maskBackgroundColor = UIColor.black
             self.maskBackgroundOpacity = 0.6
         }
     }

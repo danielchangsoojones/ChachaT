@@ -9,34 +9,34 @@
 import Foundation
 import MBProgressHUD
 
-public class ProgressUtilities {
+open class ProgressUtilities {
     
-    private static var hud : MBProgressHUD?
+    fileprivate static var hud : MBProgressHUD?
     
-    public class func showSpinner(superView : UIView) {
+    open class func showSpinner(_ superView : UIView) {
         if let thisHud = hud {
             thisHud.hide(false)
             hud = nil
         }
-        hud = MBProgressHUD.showHUDAddedTo(superView, animated: true)
+        hud = MBProgressHUD.showAdded(to: superView, animated: true)
     }
     
-    public class func showSpinner(superView : UIView, title : String) {
+    open class func showSpinner(_ superView : UIView, title : String) {
         if let thisHud = hud {
             thisHud.hide(false)
             hud = nil
         }
-        hud = MBProgressHUD.showHUDAddedTo(superView, animated: true)
+        hud = MBProgressHUD.showAdded(to: superView, animated: true)
         hud!.labelText = title
     }
     
-    public class func hideSpinner() {
+    open class func hideSpinner() {
         if let thisHud = hud {
             thisHud.hide(true)
         }
     }
     
-    public class func getHud() -> MBProgressHUD? {
+    open class func getHud() -> MBProgressHUD? {
         return hud
     }
 }

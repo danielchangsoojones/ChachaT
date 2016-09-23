@@ -10,8 +10,8 @@ import Foundation
 
 //This extension is for when the menu needs to show a TagListView
 extension ChachaDropDownMenu {
-    func addTagListView(tagTitles: [String], specialtyCategory: String, tagListViewDelegate: TagListViewDelegate) {
-        let tagListView = ChachaChoicesTagListView(frame: CGRectMake(0, 0, screenSizeWidth, 0))
+    func addTagListView(_ tagTitles: [String], specialtyCategory: String, tagListViewDelegate: TagListViewDelegate) {
+        let tagListView = ChachaChoicesTagListView(frame: CGRect(x: 0, y: 0, width: screenSizeWidth, height: 0))
         tagListView.delegate = tagListViewDelegate
         tagListView.tag = 3 //need to set this, so I can know which tagView (i.e. tagChosenView = 2, tagChoicesView = 1, dropDownTagView (this) = 3).
         addTags(tagTitles, tagListView: tagListView)
@@ -20,7 +20,7 @@ extension ChachaDropDownMenu {
         self.show()
     }
     
-    private func addTags(titleArray: [String], tagListView: TagListView) {
+    fileprivate func addTags(_ titleArray: [String], tagListView: TagListView) {
         for title in titleArray {
             tagListView.addTag(title)
         }

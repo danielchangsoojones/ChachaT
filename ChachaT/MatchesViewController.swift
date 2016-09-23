@@ -10,7 +10,7 @@ import UIKit
 import Parse
 
 class MatchesViewController: UIViewController {
-    private struct MatchesConstants {
+    fileprivate struct MatchesConstants {
         static let numberOfSections : Int = 2
         static let heightForSectionHeader : CGFloat = 40
         static let sectionZeroHeadingTitle : String = "Matches"
@@ -25,7 +25,7 @@ class MatchesViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        navigationController?.navigationBarHidden = false
+        navigationController?.isNavigationBarHidden = false
         dataStoreSetup()
     }
     
@@ -43,7 +43,7 @@ class MatchesViewController: UIViewController {
 }
 
 extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
-    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         if section == 0 {
             //the matches area
             return 1
@@ -53,15 +53,15 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return MatchesConstants.numberOfSections
     }
     
-    func tableView(tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
+    func tableView(_ tableView: UITableView, heightForHeaderInSection section: Int) -> CGFloat {
         return MatchesConstants.heightForSectionHeader
     }
     
-    func tableView(tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
+    func tableView(_ tableView: UITableView, viewForHeaderInSection section: Int) -> UIView? {
         if section == 0 {
             //the matches area
             //TODO: make the notification number based upon the number of new matches. Not the total
@@ -78,9 +78,9 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         return nil
     }
     
-    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let currentRow = indexPath.row
-        let currentSection = indexPath.section
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let currentRow = (indexPath as NSIndexPath).row
+        let currentSection = (indexPath as NSIndexPath).section
         if currentSection == 0 {
             //the matches area
             let matchesCell = ScrollingMatchesTableViewCell(matches: matches, delegate: self)
@@ -93,9 +93,9 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
         }
     }
     
-    func tableView(tableView: UITableView, didSelectRowAtIndexPath indexPath: NSIndexPath) {
-        let currentRow = indexPath.row
-        let currentSection = indexPath.section
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let currentRow = (indexPath as NSIndexPath).row
+        let currentSection = (indexPath as NSIndexPath).section
         if currentSection == 1 {
             //the messaging area
             let currentChatRoom = chatRooms[currentRow]
@@ -109,9 +109,9 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
 }
 
 extension MatchesViewController : ScrollingMatchesCellDelegate {
-    func segueToChatVC(otherUser: User) {
+    func segueToChatVC(_ otherUser: User) {
         let chatVC = ChatViewController()
-        chatVC.currentUser = User.currentUser()
+        chatVC.currentUser = User.current()
         chatVC.otherUser = otherUser
         self.navigationController?.pushViewController(chatVC, animated: true)
     }

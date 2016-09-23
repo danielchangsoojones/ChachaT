@@ -58,11 +58,11 @@ public enum SpecialtyCategoryTitles : String {
     
     var associatedDropDownAttribute : DropDownAttributes? {
         if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(self) {
-            return .TagChoices
+            return .tagChoices
         } else if SpecialtyCategoryTitles.specialtySingleSliderCategories.contains(self) {
-            return .SingleSlider
+            return .singleSlider
         } else if SpecialtyCategoryTitles.specialtyRangeSliderCategories.contains(self) {
-            return .RangeSlider
+            return .rangeSlider
         }
         return nil
     }
@@ -71,15 +71,15 @@ public enum SpecialtyCategoryTitles : String {
     var noneValue : SpecialtyTagTitles? {
         switch self {
         case .Gender:
-            return .GenderNone
+            return .genderNone
         case .Ethnicity:
-            return .RaceNone
+            return .raceNone
         case .Sexuality:
-            return .SexualityNone
+            return .sexualityNone
         case .PoliticalGroup:
-            return .PoliticalGroupNone
+            return .politicalGroupNone
         case .HairColor:
-            return .HairColorNone
+            return .hairColorNone
         default:
             return nil
         }
@@ -88,77 +88,77 @@ public enum SpecialtyCategoryTitles : String {
     static let specialtyTagMenuCategories = [Gender, Ethnicity, Sexuality, PoliticalGroup, HairColor]
     static let specialtySingleSliderCategories = [Location]
     static let specialtyRangeSliderCategories = [AgeRange]
-    static let allCategories = [specialtyTagMenuCategories, specialtySingleSliderCategories, specialtyRangeSliderCategories].flatten()
+    static let allCategories = [specialtyTagMenuCategories, specialtySingleSliderCategories, specialtyRangeSliderCategories].joined()
 }
 
 //TODO: make a rawValue for private because if a user has not inputed a tag, then we want to put an exclamation point, but if they have just marked it as private, then we want to show it as private. 
 public enum SpecialtyTagTitles : Int {
     
     //In case I want to add other enums, I am seperating the Int categories by 100
-    case RaceNone = -1
-    case RacePrivate = -2
-    case RaceBlack = 1
-    case RaceWhite = 2
-    case RaceLatino = 3
-    case RaceAsian = 4
-    case HairColorNone = -101
-    case HairColorPrivate = -102
-    case HairColorBrunette = 101
-    case HairColorBlonde = 102
-    case HairColorRedhead = 103
-    case PoliticalGroupNone = -201
-    case PoliticalGroupPrivate = -202
-    case PoliticalGroupDemocrat = 201
-    case PoliticalGroupRepublican = 202
-    case GenderNone = -301
-    case GenderPrivate = -302
-    case GenderMale = 301
-    case GenderFemale = 302
-    case SexualityNone = -401
-    case SexualityPrivate = -402
-    case SexualityStraight = 401
-    case SexualityGay = 402
-    case SexualityBisexual = 403
+    case raceNone = -1
+    case racePrivate = -2
+    case raceBlack = 1
+    case raceWhite = 2
+    case raceLatino = 3
+    case raceAsian = 4
+    case hairColorNone = -101
+    case hairColorPrivate = -102
+    case hairColorBrunette = 101
+    case hairColorBlonde = 102
+    case hairColorRedhead = 103
+    case politicalGroupNone = -201
+    case politicalGroupPrivate = -202
+    case politicalGroupDemocrat = 201
+    case politicalGroupRepublican = 202
+    case genderNone = -301
+    case genderPrivate = -302
+    case genderMale = 301
+    case genderFemale = 302
+    case sexualityNone = -401
+    case sexualityPrivate = -402
+    case sexualityStraight = 401
+    case sexualityGay = 402
+    case sexualityBisexual = 403
     
     //saving the enums as Ints in database to make them changeable on the frontend side, also takes up less memory space on the backend.
     var toString : String {
         switch self {
-        case .RaceBlack:
+        case .raceBlack:
             return "Black"
-        case .RaceWhite:
+        case .raceWhite:
             return "White"
-        case .RaceLatino:
+        case .raceLatino:
             return "Latino"
-        case .RaceAsian:
+        case .raceAsian:
             return "Asian"
-        case .HairColorBrunette:
+        case .hairColorBrunette:
             return "Brunette"
-        case .HairColorBlonde:
+        case .hairColorBlonde:
             return "Blonde"
-        case .HairColorRedhead:
+        case .hairColorRedhead:
             return "Redhead"
-        case .PoliticalGroupDemocrat:
+        case .politicalGroupDemocrat:
             return "Democrat"
-        case .PoliticalGroupRepublican:
+        case .politicalGroupRepublican:
             return "Republican"
-        case .GenderMale:
+        case .genderMale:
             return "Male"
-        case .GenderFemale:
+        case .genderFemale:
             return "Female"
-        case .SexualityStraight:
+        case .sexualityStraight:
             return "Straight"
-        case .SexualityGay:
+        case .sexualityGay:
             return "Gay"
-        case .SexualityBisexual:
+        case .sexualityBisexual:
             return "Bisexual"
-        case .RaceNone, .HairColorNone, .PoliticalGroupNone, .GenderNone, .SexualityNone:
+        case .raceNone, .hairColorNone, .politicalGroupNone, .genderNone, .sexualityNone:
             return "None"
-        case .RacePrivate, .HairColorPrivate, .PoliticalGroupPrivate, .GenderPrivate, .SexualityPrivate:
+        case .racePrivate, .hairColorPrivate, .politicalGroupPrivate, .genderPrivate, .sexualityPrivate:
             return "Private"
         }
     }
     
-    static func stringRawValue(rawValue: String) -> SpecialtyTagTitles? {
+    static func stringRawValue(_ rawValue: String) -> SpecialtyTagTitles? {
         for specialtyTagTitles in allValues where specialtyTagTitles.toString == rawValue  {
             return specialtyTagTitles //found a match
         }
@@ -181,20 +181,20 @@ public enum SpecialtyTagTitles : Int {
     }
     
     //this array lets me iterate over certain sections of the enum
-    static let ethnicityAllValues = [RaceBlack , RaceWhite , RaceLatino , RaceAsian , RaceNone ]
-    static let hairColorAllValues = [HairColorBrunette , HairColorBlonde , HairColorRedhead , HairColorNone ]
-    static let genderAllValues = [GenderMale , GenderFemale , GenderNone ]
-    static let sexualityAllValues = [SexualityStraight , SexualityGay , SexualityBisexual , SexualityNone ]
-    static let politicalGroupAllValues = [PoliticalGroupDemocrat , PoliticalGroupRepublican , PoliticalGroupNone ]
-    static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].flatten()
+    static let ethnicityAllValues = [raceBlack , raceWhite , raceLatino , raceAsian , raceNone ]
+    static let hairColorAllValues = [hairColorBrunette , hairColorBlonde , hairColorRedhead , hairColorNone ]
+    static let genderAllValues = [genderMale , genderFemale , genderNone ]
+    static let sexualityAllValues = [sexualityStraight , sexualityGay , sexualityBisexual , sexualityNone ]
+    static let politicalGroupAllValues = [politicalGroupDemocrat , politicalGroupRepublican , politicalGroupNone ]
+    static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].joined()
 }
 
 public enum TagAttributes {
-    case Generic
-    case DropDownMenu
+    case generic
+    case dropDownMenu
 }
 
-func tagTitleIsSpecial(tagTitle: String) -> Bool {
+func tagTitleIsSpecial(_ tagTitle: String) -> Bool {
     if SpecialtyTagTitles.stringRawValue(tagTitle) != nil {
         //there is a specialtyTag associated with this title
         return true

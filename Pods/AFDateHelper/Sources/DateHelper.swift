@@ -52,20 +52,20 @@ public enum TimeZone {
 public extension Date {
     
     // MARK: Intervals In Seconds
-    private static func minuteInSeconds() -> Double { return 60 }
-    private static func hourInSeconds() -> Double { return 3600 }
-    private static func dayInSeconds() -> Double { return 86400 }
-    private static func weekInSeconds() -> Double { return 604800 }
-    private static func yearInSeconds() -> Double { return 31556926 }
+    fileprivate static func minuteInSeconds() -> Double { return 60 }
+    fileprivate static func hourInSeconds() -> Double { return 3600 }
+    fileprivate static func dayInSeconds() -> Double { return 86400 }
+    fileprivate static func weekInSeconds() -> Double { return 604800 }
+    fileprivate static func yearInSeconds() -> Double { return 31556926 }
     
     // MARK: Components
-    private static func componentFlags() -> Set<Calendar.Component> { return [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekOfYear, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal, Calendar.Component.weekOfYear] }
+    fileprivate static func componentFlags() -> Set<Calendar.Component> { return [Calendar.Component.year, Calendar.Component.month, Calendar.Component.day, Calendar.Component.weekOfYear, Calendar.Component.hour, Calendar.Component.minute, Calendar.Component.second, Calendar.Component.weekday, Calendar.Component.weekdayOrdinal, Calendar.Component.weekOfYear] }
     
-    private static func components(_ fromDate: Date) -> DateComponents! {
+    fileprivate static func components(_ fromDate: Date) -> DateComponents! {
         return Calendar.current.dateComponents(Date.componentFlags(), from: fromDate)
     }
     
-    private func components() -> DateComponents  {
+    fileprivate func components() -> DateComponents  {
         return Date.components(self)!
     }
     
@@ -995,7 +995,7 @@ public extension Date {
     /**
     Returns a cached static array of NSDateFormatters so that thy are only created once.
     */
-    private static func sharedDateFormatters() -> [String: DateFormatter] {
+    fileprivate static func sharedDateFormatters() -> [String: DateFormatter] {
         struct Static {
             static var formatters: [String: DateFormatter]? = [String: DateFormatter]()
         }
@@ -1010,7 +1010,7 @@ public extension Date {
     - Parameter locale: The locale to use, defaults to the current locale
     - Returns The date formatter.
     */
-    private static func formatter(_ format:String = DefaultFormat, timeZone: Foundation.TimeZone = Foundation.TimeZone.current, locale: Locale = Locale.current) -> DateFormatter {
+    fileprivate static func formatter(_ format:String = DefaultFormat, timeZone: Foundation.TimeZone = Foundation.TimeZone.current, locale: Locale = Locale.current) -> DateFormatter {
         let hashKey = "\(format.hashValue)\(timeZone.hashValue)\(locale.hashValue)"
         var formatters = Date.sharedDateFormatters()
         if let cachedDateFormatter = formatters[hashKey] {
@@ -1035,7 +1035,7 @@ public extension Date {
     - Parameter locale: The locale to use.
     - Returns The date formatter.
     */
-    private static func formatter(_ dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style, doesRelativeDateFormatting: Bool, timeZone: Foundation.TimeZone = Foundation.NSTimeZone.local, locale: Locale = Locale.current) -> DateFormatter {
+    fileprivate static func formatter(_ dateStyle: DateFormatter.Style, timeStyle: DateFormatter.Style, doesRelativeDateFormatting: Bool, timeZone: Foundation.TimeZone = Foundation.NSTimeZone.local, locale: Locale = Locale.current) -> DateFormatter {
         var formatters = Date.sharedDateFormatters()
         let hashKey = "\(dateStyle.hashValue)\(timeStyle.hashValue)\(doesRelativeDateFormatting.hashValue)\(timeZone.hashValue)\(locale.hashValue)"
         if let cachedDateFormatter = formatters[hashKey] {

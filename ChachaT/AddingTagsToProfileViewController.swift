@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-import SCLAlertView
+
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -25,11 +25,11 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         setTapGestureToCloseKeyboard()
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         //the alertview, the first time I clicked a tag, was not loading quickly. But, subsequent alerts were loading
         //quickly, so I added this to already load a SCLAlertView, so then when a tag is hit, it loads quickly
         //this actually seems to make it work. But, maybe it is just an illusion to me...
-        let _ = SCLAlertView()
+        let _ = SCLAlertView
     }
     
     func setDataFromDataStore() {
@@ -41,14 +41,14 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     func createCreationTagView() {
         let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
         //TODO: move this the CreationTagView class
-        tagView.borderColor = UIColor.blackColor()
+        tagView.borderColor = UIColor.black
         tagChoicesView.addTagView(tagView)
     }
     
     //Purpose: the user should be able to tap, when keyboard is showing, anywhere to dismiss the keyboard
     //IF YOU EVER HAVE WEIRD GESTURES NOT BEING RECOGNIZED, THIS GESTURE RECOGNIZER IS PROBABLY THE PROBLEM
     func setTapGestureToCloseKeyboard() {
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: UIKeyboardWillShowNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissTheKeyboard))
         view.addGestureRecognizer(tap)
         //gesture recognizers usually fucks with tableView SelectAtIndexRow, but setting this property to false allows the tap to pass through to the tableView
@@ -64,10 +64,10 @@ class AddingTagsToProfileViewController: SuperTagViewController {
 //tag methods extension
 extension AddingTagsToProfileViewController {
     //TagListView tags: (tagChoicesView = 1, tagChosenView = 2, dropDownTagView = 3)
-    func tagPressed(title: String, tagView: TagView, sender: TagListView) {
+    func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 1 {
             //tagChoicesView pressed
-            let alertView = SCLAlertView()
+            let alertView = SCLAlertView
             alertView.addButton("Delete") {
                 print("Deleted Tag")
                 self.dataStore.deleteTag(title)
@@ -82,9 +82,9 @@ extension AddingTagsToProfileViewController {
         }
     }
     
-    func specialtyTagPressed(title: String, tagView: SpecialtyTagView, sender: TagListView) {
+    func specialtyTagPressed(_ title: String, tagView: SpecialtyTagView, sender: TagListView) {
         switch tagView.tagAttribute {
-        case .DropDownMenu:
+        case .dropDownMenu:
             tappedDropDownTagView = tagView as? DropDownTagView
             if let dropDownTag = findDropDownTag(tappedDropDownTagView!.specialtyCategoryTitle, array: tagChoicesDataArray) {
                 dropDownActions(dropDownTag)
@@ -95,17 +95,17 @@ extension AddingTagsToProfileViewController {
 }
 
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
-    func textFieldDidChange(searchText: String) {
+    func textFieldDidChange(_ searchText: String) {
         let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
         creationMenuView.removeAllTags()
         //we already check if the text is empty over in the CreationTagView class
         if filtered.isEmpty {
             //there is text, but it has no matches in the database
-            creationMenuView.toggleMenuType(.Table, newTagTitle: searchText, tagTitles: nil)
+            creationMenuView.toggleMenuType(.table, newTagTitle: searchText, tagTitles: nil)
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
-            creationMenuView.toggleMenuType(.Tags, newTagTitle: nil, tagTitles: filtered)
+            creationMenuView.toggleMenuType(.tags, newTagTitle: nil, tagTitles: filtered)
         }
     }
     
@@ -121,9 +121,9 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
 
 //textField Delegate Extension for the CreationTagView textField
 extension AddingTagsToProfileViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(textField: UITextField) {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
         //TODO: hide all tagViews that aren't the CreationTagView, meaning clear the screen.
-        creationMenuView?.hidden = false
+        creationMenuView?.isHidden = false
     }
     
     //Calls this function when the tap is recognized anywhere on the screen that is not a tappable object.
@@ -132,14 +132,14 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         view.endEditing(true)
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
-        creationMenuView?.hidden = true
+    func textFieldDidEndEditing(_ textField: UITextField) {
+        creationMenuView?.isHidden = true
     }
     
-    func keyboardWillShow(notification:NSNotification) {
-        let userInfo:NSDictionary = notification.userInfo!
-        let keyboardFrame:NSValue = userInfo.valueForKey(UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.CGRectValue()
+    func keyboardWillShow(_ notification:Notification) {
+        let userInfo:NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
+        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
+        let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
         //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
         //But, we can only get the keyboard height through this notification.
@@ -147,7 +147,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         createTagMenuView(keyboardHeight)
     }
     
-    func createTagMenuView(keyboardHeight: CGFloat) {
+    func createTagMenuView(_ keyboardHeight: CGFloat) {
         if creationMenuView == nil {
             creationMenuView = CreationMenuView.instanceFromNib(self)
         }
@@ -164,7 +164,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
 }
 
 extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(title: String, tagView: TagView?) {
+    func addNewTagToTagChoiceView(_ title: String, tagView: TagView?) {
         //also passing the TagView because I get the feeling that I might need it in the future.
         tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
         if let addingTagView = findCreationTagView() {

@@ -11,11 +11,11 @@ import UIKit
 // MARK: - MagicMoveable Protocol
 @objc protocol MagicMoveable {
     
-    var duration: NSTimeInterval  { get }
+    var duration: TimeInterval  { get }
     
     var magicViews: [UIView] { get }
     
-    optional var spring: CGFloat { get }
+    @objc optional var spring: CGFloat { get }
 }
 
 //go to MagicMove/patrickReynolds to get more info on how magic Move works. Magic move is for animating between pages. 
@@ -23,7 +23,7 @@ import UIKit
 class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     // MARK: Delegate Properties
-    let duration: NSTimeInterval
+    let duration: TimeInterval
     let spring: CGFloat
     
     let from: MagicMoveable
@@ -38,7 +38,7 @@ class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     // MARK: Initializer(s)
-    init(from: MagicMoveable, to: MagicMoveable, duration: NSTimeInterval, spring: CGFloat) {
+    init(from: MagicMoveable, to: MagicMoveable, duration: TimeInterval, spring: CGFloat) {
         self.from = from
         self.to = to
         self.duration = duration
@@ -46,34 +46,34 @@ class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     // MARK: Delegate Methods
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let fromVC = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        let toVC = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
-        let containerView = transitionContext.containerView()!
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
+        let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
+        let containerView = transitionContext.containerView!
         
         magicAnimationFromViewController(fromVC, toViewController: toVC, containerView: containerView, duration: duration, transitionContext: transitionContext)
     }
     
-    private func magicAnimationFromViewController(fromViewController: UIViewController, toViewController: UIViewController, containerView: UIView, duration: NSTimeInterval, transitionContext: UIViewControllerContextTransitioning) {
+    fileprivate func magicAnimationFromViewController(_ fromViewController: UIViewController, toViewController: UIViewController, containerView: UIView, duration: TimeInterval, transitionContext: UIViewControllerContextTransitioning) {
         
         assert(self.fromViews.count == self.toViews.count, "The count of fromviews and toviews musts be the same!")
         
         for toView in self.toViews {
-            toView.hidden = true
+            toView.isHidden = true
         }
         
         let snapshots: [UIImageView] = self.fromViews.map {
             let snapshot = UIImageView(image: getImageFromView($0))
-            snapshot.frame = containerView.convertRect($0.frame, fromView: $0.superview)
-            $0.hidden = true
+            snapshot.frame = containerView.convert($0.frame, from: $0.superview)
+            $0.isHidden = true
             return snapshot
         }
         
-        toViewController.view.frame = transitionContext.finalFrameForViewController(toViewController)
+        toViewController.view.frame = transitionContext.finalFrame(for: toViewController)
         toViewController.view.alpha = 0
         containerView.addSubview(toViewController.view)
         
@@ -83,30 +83,30 @@ class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
         
         containerView.layoutIfNeeded()
         
-        UIView.animateWithDuration(duration, delay: 0.0, usingSpringWithDamping: spring, initialSpringVelocity: 1.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: duration, delay: 0.0, usingSpringWithDamping: spring, initialSpringVelocity: 1.0, options: UIViewAnimationOptions(), animations: {
             toViewController.view.alpha = 1.0
-            for (index, toView) in self.toViews.enumerate() {
-                snapshots[index].frame = containerView.convertRect(toView.frame, fromView: toView.superview)
+            for (index, toView) in self.toViews.enumerated() {
+                snapshots[index].frame = containerView.convert(toView.frame, from: toView.superview)
             }
             }, completion: { _ in
-                for (index, toView) in self.toViews.enumerate() {
-                    toView.hidden = false
-                    self.fromViews[index].hidden = false
+                for (index, toView) in self.toViews.enumerated() {
+                    toView.isHidden = false
+                    self.fromViews[index].isHidden = false
                     
                     snapshots[index].removeFromSuperview()
                 }
                 
-                transitionContext.completeTransition(!transitionContext.transitionWasCancelled())
+                transitionContext.completeTransition(!transitionContext.transitionWasCancelled)
         })
     }
     
     // Private Helpers
-    private func getImageFromView(view: UIView) -> UIImage {
+    fileprivate func getImageFromView(_ view: UIView) -> UIImage {
         UIGraphicsBeginImageContextWithOptions(view.bounds.size, false, 0.0)
-        view.layer.renderInContext(UIGraphicsGetCurrentContext()!)
+        view.layer.render(in: UIGraphicsGetCurrentContext()!)
         let image = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
-        return image
+        return image!
     }
 }
 
@@ -118,11 +118,11 @@ class CustomTransitioningDelegate: NSObject, UIViewControllerTransitioningDelega
         self.transition = transition
     }
     
-    func animationControllerForPresentedController(presented: UIViewController, presentingController presenting: UIViewController, sourceController source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forPresented presented: UIViewController, presenting: UIViewController, source: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return transition
     }
     
-    func animationControllerForDismissedController(dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
+    func animationController(forDismissed dismissed: UIViewController) -> UIViewControllerAnimatedTransitioning? {
         return nil
     }
 }
@@ -154,15 +154,15 @@ extension UIViewController {
 }
 
 extension UIViewController {
-    func presentViewControllerCustomTrasition(to: UIViewController, transition: UIViewControllerAnimatedTransitioning, animated: Bool, completed: (() -> ())? = nil) {
+    func presentViewControllerCustomTrasition(_ to: UIViewController, transition: UIViewControllerAnimatedTransitioning, animated: Bool, completed: (() -> ())? = nil) {
         to.customTransitioningDelegate = CustomTransitioningDelegate(transition: transition)
-        presentViewController(to, animated: animated, completion: completed)
+        present(to, animated: animated, completion: completed)
     }
 }
 
 
 extension UIViewController {
-    func presentViewControllerMagically<F: UIViewController, T: UIViewController where F: MagicMoveable, T: MagicMoveable>(from: F, to: T, animated: Bool, duration: NSTimeInterval = 0.3, spring: CGFloat = 1.0, completed: (() -> ())? = nil) {
+    func presentViewControllerMagically<F: UIViewController, T: UIViewController>(_ from: F, to: T, animated: Bool, duration: TimeInterval = 0.3, spring: CGFloat = 1.0, completed: (() -> ())? = nil) where F: MagicMoveable, T: MagicMoveable {
         let transition = MagicMoveTransition(from: from, to: to, duration: duration, spring: spring)
         from.presentViewControllerCustomTrasition(to, transition: transition, animated: animated, completed: completed)
     }

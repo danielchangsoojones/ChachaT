@@ -19,9 +19,8 @@ class FadeTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView()!
-        let toView =
-        transitionContext.viewForKey(UITransitionContextToViewKey)!
+//        let containerView = transitionContext.containerView
+//        let toView = transitionContext.view(forKey: UITransitionContextViewKey)
         
         containerView.addSubview(toView)
         toView.alpha = 0.0
@@ -59,9 +58,9 @@ class SpinTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-        let containerView = transitionContext.containerView()!
-        let fromView = transitionContext.viewForKey(UITransitionContextFromViewKey)!
-        let toView = transitionContext.viewForKey(UITransitionContextToViewKey)!
+//        let containerView = transitionContext.containerView
+//        let fromView = transitionContext.view(forKey: UITransitionContextViewKey)
+//        let toView = transitionContext.view(forKey: UITransitionContextViewKey)
         
         toView.alpha = 0.0
         

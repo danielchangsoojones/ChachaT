@@ -30,7 +30,7 @@ class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
 //        }
 //    }
     
-    func setUpSearchNavigationBar(viewController: UIViewController) {
+    func setUpSearchNavigationBar(_ viewController: UIViewController) {
         if let chachaNavigationVC = viewController.navigationController as? ChachaNavigationViewController {
             viewController.navigationItem.hidesBackButton = true
 //            chachaNavigationVC.navigationBarLogo.hidden = true
@@ -39,15 +39,15 @@ class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
     
     override func perform() {
         //we don't want to alter these global variables, so we set them in holder variables
-        let sourceVC = self.sourceViewController as! BackgroundAnimationViewController
-        let destinationVC = self.destinationViewController as! SearchTagsViewController
+        let sourceVC = self.source as! BackgroundAnimationViewController
+        let destinationVC = self.destination as! SearchTagsViewController
         
-        UIView.animateWithDuration(0.5, delay: 0.0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: UIViewAnimationOptions(), animations: {
             }) { (finished) in
                 
-                let time = dispatch_time(DISPATCH_TIME_NOW, Int64(0.001 * Double(NSEC_PER_SEC)))
+                let time = DispatchTime.now() + Double(Int64(0.001 * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)
                 
-                dispatch_after(time, dispatch_get_main_queue()) {
+                DispatchQueue.main.asyncAfter(deadline: time) {
                     //need to set tiny timer, because if I add and remove a view at the same time, then I will get an unbalanced call error.
                     //this is a hacky way of fixing that by just offsetting the time of adding it by .001 seconds
                     

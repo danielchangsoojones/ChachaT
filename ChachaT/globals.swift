@@ -57,9 +57,9 @@ struct ImageNames {
 }
 
 struct ImportantDimensions {
-    static let BarButtonItemSize : CGSize = CGSizeMake(22, 22) //as per the Apple Human Interface Guidelines
+    static let BarButtonItemSize : CGSize = CGSize(width: 22, height: 22) //as per the Apple Human Interface Guidelines
     static let BarButtonInset : CGFloat = 22
-    static let StatusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+    static let StatusBarHeight = UIApplication.shared.statusBarFrame.size.height
 }
 
 //storyboard identifiers
@@ -72,7 +72,7 @@ public enum StoryboardIdentifiers : String {
 
 //helper functions
 func isIphone3by2AR() -> Bool {
-    let screenSize: CGRect = UIScreen.mainScreen().bounds
+    let screenSize: CGRect = UIScreen.main.bounds
     let screenWidth = screenSize.width
     let screenHeight = screenSize.height
     if screenHeight / screenWidth == 1.5 {
@@ -83,9 +83,9 @@ func isIphone3by2AR() -> Bool {
 
 func setBottomBlur() -> CAGradientLayer {
     let gradientLayer = CAGradientLayer()
-    gradientLayer.frame = CGRect(x: 0, y: UIScreen.mainScreen().bounds.height - 100, width:  UIScreen.mainScreen().bounds.width, height: 100)
-    let transparent = UIColor(white: 1, alpha: 0).CGColor
-    let opaque = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 0.5).CGColor
+    gradientLayer.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 100, width:  UIScreen.main.bounds.width, height: 100)
+    let transparent = UIColor(white: 1, alpha: 0).cgColor
+    let opaque = UIColor.rgba(red: 1, green: 195, blue: 167, alpha: 0.5).cgColor
     gradientLayer.colors = [transparent, opaque]
     gradientLayer.locations = [0.0, 0.8]
     
@@ -93,21 +93,21 @@ func setBottomBlur() -> CAGradientLayer {
 }
 
 //Text View methods
-func editingBeginsTextView(textView: UITextView) {
+func editingBeginsTextView(_ textView: UITextView) {
     if textView.textColor == placeHolderTextColor {
         textView.text = nil
         textView.textColor = ChachaBombayGrey
     }
 }
 
-func editingEndedTextView(textView: UITextView, placeHolderText: String) {
+func editingEndedTextView(_ textView: UITextView, placeHolderText: String) {
     if textView.text.isEmpty {
         textView.text = placeHolderText
         textView.textColor = placeHolderTextColor
     }
 }
 
-func resetTextView(textView: UITextView, placeHolderText: String) {
+func resetTextView(_ textView: UITextView, placeHolderText: String) {
     textView.text = placeHolderText
     textView.textColor = placeHolderTextColor
 }

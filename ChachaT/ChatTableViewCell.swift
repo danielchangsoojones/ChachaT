@@ -22,12 +22,12 @@ class ChatTableViewCell: UITableViewCell {
     var newestMessage: Message!
     
     init(chatRoom: ChatRoom) {
-        super.init(style: .Default, reuseIdentifier: "chatTableViewCell")
+        super.init(style: .default, reuseIdentifier: "chatTableViewCell")
         self.user = chatRoom.getOtherUser()
         self.chatRoom = chatRoom
         profileCircleSetup()
         newestMessage = chatRoom.messages[0]
-        timeStampSetup(newestMessage.dateSent)
+        timeStampSetup(newestMessage.dateSent as Date)
         if let name = user!.fullName {
             nameLabelSetup(name)
         }
@@ -53,7 +53,7 @@ class ChatTableViewCell: UITableViewCell {
         }
     }
     
-    func nameLabelSetup(name: String) {
+    func nameLabelSetup(_ name: String) {
         theNameLabel.text = name
         self.addSubview(theNameLabel)
         theNameLabel.snp_makeConstraints { (make) in
@@ -65,7 +65,7 @@ class ChatTableViewCell: UITableViewCell {
     }
     
     //TODO: set the timestamp to a real time
-    func timeStampSetup(dateCreated: NSDate) {
+    func timeStampSetup(_ dateCreated: Date) {
         theTimeStamp.text = formatTimeStamp(dateCreated)
         self.addSubview(theTimeStamp)
         theTimeStamp.snp_makeConstraints { (make) in
@@ -76,24 +76,24 @@ class ChatTableViewCell: UITableViewCell {
         }
     }
     
-    func formatTimeStamp(date: NSDate) -> String {
-        let formatter = NSDateFormatter()
+    func formatTimeStamp(_ date: Date) -> String {
+        let formatter = DateFormatter()
         let lessThan24Hours : Bool = date >= 1.day.ago
         if lessThan24Hours {
             formatter.dateFormat = "h:mm a"
-            formatter.AMSymbol = "AM"
-            formatter.PMSymbol = "PM"
-            let dateString = formatter.stringFromDate(date) //ex: "10:15 AM"
+            formatter.amSymbol = "AM"
+            formatter.pmSymbol = "PM"
+            let dateString = formatter.string(from: date) //ex: "10:15 AM"
             return dateString
         } else {
-            formatter.dateStyle = .MediumStyle
-            formatter.timeStyle = .NoStyle
-            let dateString = formatter.stringFromDate(date) //ex: "Sep 10, 2015"
+            formatter.dateStyle = .medium
+            formatter.timeStyle = .none
+            let dateString = formatter.string(from: date) //ex: "Sep 10, 2015"
             return dateString
         }
     }
     
-    func messagePreviewLabelSetup(message: String) {
+    func messagePreviewLabelSetup(_ message: String) {
         theMessagePreviewLabel.text = message
         self.addSubview(theMessagePreviewLabel)
         theMessagePreviewLabel.snp_makeConstraints { (make) in
@@ -111,6 +111,6 @@ class ChatTableViewCell: UITableViewCell {
             make.top.equalTo(theTimeStamp.snp_bottom)
             make.trailing.equalTo(self)
         }
-        theUnreadNotificationBubble.hidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble
+        theUnreadNotificationBubble.isHidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble
     }
 }

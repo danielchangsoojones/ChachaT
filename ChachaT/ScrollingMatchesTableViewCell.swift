@@ -9,11 +9,11 @@
 import UIKit
 
 protocol ScrollingMatchesCellDelegate {
-    func segueToChatVC(otherUser: User)
+    func segueToChatVC(_ otherUser: User)
 }
 
 class ScrollingMatchesTableViewCell: UITableViewCell {
-    private struct ScrollingMatchesConstants {
+    fileprivate struct ScrollingMatchesConstants {
         static let circleRatioToCell : CGFloat = 0.2
     }
     
@@ -24,7 +24,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     
     //TODO: make there be some sort of spinner or loading view to show that we are waiting for the server to pulls matches down
     init(matches: [Connection], delegate: ScrollingMatchesCellDelegate) {
-        super.init(style: .Default, reuseIdentifier: "scrollingMatchesTableViewCell")
+        super.init(style: .default, reuseIdentifier: "scrollingMatchesTableViewCell")
         self.matches = matches
         self.delegate = delegate
         matchesScrollViewSetup()
@@ -42,10 +42,10 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         }
     }
     
-    func addProfileCircles(matches: [Connection]) {
+    func addProfileCircles(_ matches: [Connection]) {
         let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
         for match in matches {
-            if let fullName = match.targetUser.fullName, profileImage = match.targetUser.profileImage {
+            if let fullName = match.targetUser.fullName, let profileImage = match.targetUser.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
                 circleProfileView.tapped { (tapped) in
                     self.delegate?.segueToChatVC(match.targetUser)

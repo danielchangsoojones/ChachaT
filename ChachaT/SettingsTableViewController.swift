@@ -28,7 +28,7 @@ extension SettingsTableViewController: SegueHandlerType {
         case OnboardingPageSegue
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
         case .OnboardingPageSegue:
             User.logOut()

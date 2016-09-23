@@ -13,7 +13,7 @@ class HeadingView: UIView {
     var theCircleView : CircleView!
     
     init(text: String, notificationNumber: Int) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         titleLabelSetup(text)
         circleViewSetup(notificationNumber)
     }
@@ -22,7 +22,7 @@ class HeadingView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func titleLabelSetup(text: String) {
+    func titleLabelSetup(_ text: String) {
         theTitleLabel.text = text
         self.addSubview(theTitleLabel)
         theTitleLabel.snp_makeConstraints { (make) in
@@ -32,7 +32,7 @@ class HeadingView: UIView {
     }
     
     //TODO: make the diameter of the circle equal to how big the number width. But, the height needs to be the same as the titleLabel. So probably won't be a circle anymore.
-    func circleViewSetup(num: Int) {
+    func circleViewSetup(_ num: Int) {
         let diameter : CGFloat = 20
         theCircleView = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
         self.addSubview(theCircleView)
@@ -43,7 +43,7 @@ class HeadingView: UIView {
         addNumberToCircle(num)
     }
     
-    func addNumberToCircle(num: Int) {
+    func addNumberToCircle(_ num: Int) {
         let numLabel = UILabel()
         numLabel.text = num.toString
         theCircleView.addSubview(numLabel)

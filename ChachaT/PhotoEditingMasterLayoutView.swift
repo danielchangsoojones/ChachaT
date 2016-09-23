@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PhotoEditingDelegate {
-    func photoPressed(photoNumber: Int, imageSize: CGSize)
+    func photoPressed(_ photoNumber: Int, imageSize: CGSize)
 }
 
 struct PhotoEditingViewConstants {
@@ -29,7 +29,7 @@ class PhotoEditingMasterLayoutView: UIView {
     var photoNumber : Int = 0
     
     init() {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         setLayout()
     }
     
@@ -41,8 +41,8 @@ class PhotoEditingMasterLayoutView: UIView {
     func setLayout() {
         let largePhotoEditingView = createPhotoEditingView(CGRect(x: 0, y: 0, w: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension, h: PhotoEditingViewConstants.mainPhotoEditingViewSideDimension)) //the main photo that is surrounded by the siding
         let sidingStackViews = createSidingStackViews()
-        let innerHorizontalStackView = createStackView(.Horizontal, distribution: .FillProportionally, views: [largePhotoEditingView, sidingStackViews.verticalSiding])
-        masterStackView = createStackView(.Vertical, distribution: .FillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
+        let innerHorizontalStackView = createStackView(.horizontal, distribution: .fillProportionally, views: [largePhotoEditingView, sidingStackViews.verticalSiding])
+        masterStackView = createStackView(.vertical, distribution: .fillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
         self.addSubview(masterStackView)
         masterStackView.snp_makeConstraints { (make) in
             make.edges.equalTo(self)
@@ -51,13 +51,13 @@ class PhotoEditingMasterLayoutView: UIView {
     
     //a sidingStackView is one of the rows, surrounding the large PhotoEditingView, on the outside of the square that holds the mini PhotoEditingViews.
     func createSidingStackViews() -> (verticalSiding: UIStackView, horizontalSiding: UIStackView) {
-        let distribution : UIStackViewDistribution = .FillEqually
-        let verticalSiding = createStackView(.Vertical, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInVerticalSiding))
-        let horizontalSiding = createStackView(.Horizontal, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInHorizontalSiding))
+        let distribution : UIStackViewDistribution = .fillEqually
+        let verticalSiding = createStackView(.vertical, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInVerticalSiding))
+        let horizontalSiding = createStackView(.horizontal, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInHorizontalSiding))
         return (verticalSiding, horizontalSiding)
     }
     
-    func createStackView(axis: UILayoutConstraintAxis, distribution: UIStackViewDistribution, views: [UIView]) -> UIStackView {
+    func createStackView(_ axis: UILayoutConstraintAxis, distribution: UIStackViewDistribution, views: [UIView]) -> UIStackView {
         let stackView = PhotoEditingStackView(arrangedSubviews: views)
         stackView.distribution = distribution
         stackView.spacing = PhotoEditingViewConstants.stackViewSpacing
@@ -65,7 +65,7 @@ class PhotoEditingMasterLayoutView: UIView {
         return stackView
     }
     
-    func createMultiplePhotoEditingViews(number: Int) -> [PhotoEditingView] {
+    func createMultiplePhotoEditingViews(_ number: Int) -> [PhotoEditingView] {
         var viewArray : [PhotoEditingView] = []
         let sideDimension : CGFloat = PhotoEditingViewConstants.mainPhotoEditingViewSideDimension * PhotoEditingViewConstants.miniViewtoMainViewRatio
         let frame = CGRect(x: 0, y: 0, w: sideDimension, h: sideDimension)
@@ -76,7 +76,7 @@ class PhotoEditingMasterLayoutView: UIView {
     }
     
     //a PhotoEditingView is the pictures that are clickable on the editingProfile Page, where you can add new photos to your profile.
-    func createPhotoEditingView(frame: CGRect) -> PhotoEditingView {
+    func createPhotoEditingView(_ frame: CGRect) -> PhotoEditingView {
         photoNumber = photoNumber + 1
         let photoEditingView = PhotoEditingView(frame: frame, number: photoNumber)
         photoEditingView.tag = photoNumber
@@ -84,20 +84,20 @@ class PhotoEditingMasterLayoutView: UIView {
         return photoEditingView
     }
     
-    func photoTapped(sender: UIGestureRecognizer) {
+    func photoTapped(_ sender: UIGestureRecognizer) {
         if let photoEditingView = sender.view as? PhotoEditingView {
             delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size)
         }
     }
     
-    func setNewImage(image: UIImage, photoNumber: Int) {
+    func setNewImage(_ image: UIImage, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
             subview.theImageView.image = image //should be only one photoEditingView that has any given tag
         }
     }
     
-    func setNewImageFromFile(file: AnyObject, photoNumber: Int) {
+    func setNewImageFromFile(_ file: AnyObject, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
             subview.theImageView.loadFromFile(file)
@@ -105,7 +105,7 @@ class PhotoEditingMasterLayoutView: UIView {
     }
     
     //Purpose: recursively find all subviews, including subviews of subviews, that are in a view.
-    func getSubviewsOfView(view:UIView) -> [PhotoEditingView] {
+    func getSubviewsOfView(_ view:UIView) -> [PhotoEditingView] {
         var photoEditingSubviewArray : [PhotoEditingView] = []
         
         for subview in view.subviews {

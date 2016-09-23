@@ -20,7 +20,7 @@ class FakeNavigationBarView : UIView {
     var delegate: FakeNavigationBarDelegate?
     
     init(navigationBarHeight: CGFloat, delegate: FakeNavigationBarDelegate) {
-        super.init(frame: CGRectZero)
+        super.init(frame: CGRect.zero)
         self.delegate = delegate
         self.navigationBarHeight = navigationBarHeight
         setNavigationBarItems()
@@ -38,8 +38,8 @@ class FakeNavigationBarView : UIView {
     
     func createLogo() {
         let logoImageView = UIImageView(image: UIImage(named: ImageNames.ChachaTealLogo))
-        logoImageView.contentMode = .ScaleAspectFit
-        logoImageView.backgroundColor = UIColor.redColor()
+        logoImageView.contentMode = .scaleAspectFit
+        logoImageView.backgroundColor = UIColor.red
         self.addSubview(logoImageView)
         logoImageView.snp_makeConstraints { (make) in
             make.centerX.equalTo(self)
@@ -50,17 +50,17 @@ class FakeNavigationBarView : UIView {
     }
     
     func createRightBarButton() {
-        let rightButton = UIButton(frame: CGRectMake(0, 0, ImportantDimensions.BarButtonItemSize.width, ImportantDimensions.BarButtonItemSize.height))
-        rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), forControlEvents: .TouchUpInside)
+        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
+        rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
         self.addSubview(rightButton)
         rightButton.snp_makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
-        rightButton.setImage(UIImage(named: ImageNames.SearchIcon), forState: .Normal)
+        rightButton.setImage(UIImage(named: ImageNames.SearchIcon), for: UIControlState())
     }
     
-    func rightBarButtonPressed(sender: UIButton!) {
+    func rightBarButtonPressed(_ sender: UIButton!) {
         delegate?.rightBarButtonPressed(sender)
     }
     
@@ -68,13 +68,13 @@ class FakeNavigationBarView : UIView {
     func createExpandingMenuButton() {
         let menuButtonSize: CGSize = CGSize(width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height) //Can't set snapkit constraints on this because it won't let the drop down menu be created once I add constraints to it.
         //we want the button to be at halfway point in the fake navigation bar. So, we have the midpoint of the superview's frame, but if we just used that, then the origin of the button would start at the midY. So, the origin has to be half of the subview higher.
-        let origin : CGPoint = CGPointMake(ImportantDimensions.BarButtonInset, ImportantDimensions.StatusBarHeight + (navigationBarHeight / 2) - (menuButtonSize.height / 2))
+        let origin : CGPoint = CGPoint(x: ImportantDimensions.BarButtonInset, y: ImportantDimensions.StatusBarHeight + (navigationBarHeight / 2) - (menuButtonSize.height / 2))
         expandingMenuButton = ExpandingMenuButton(frame: CGRect(origin: origin, size: menuButtonSize), centerImage: UIImage(named: "Notification Tab Icon")!, centerHighlightedImage: UIImage(named: "Notification Tab Icon")!)
         self.addSubview(expandingMenuButton)
         configureExpandingMenuButton()
     }
     
-    private func configureExpandingMenuButton() {
+    fileprivate func configureExpandingMenuButton() {
         
         let item1 = ExpandingMenuItem(size: nil, title: "Profile", image: UIImage(named: "Notification Tab Icon")!, highlightedImage: UIImage(named: "Notification Tab Icon")!, backgroundImage: nil, backgroundHighlightedImage: nil) { () -> Void in
             self.delegate?.segueToEditProfilePage()
@@ -89,35 +89,35 @@ class FakeNavigationBarView : UIView {
             self.delegate?.logOut()
         }
         
-        expandingMenuButton.expandingDirection = .Bottom
-        expandingMenuButton.menuTitleDirection = .Right
+        expandingMenuButton.expandingDirection = .bottom
+        expandingMenuButton.menuTitleDirection = .right
         expandingMenuButton.addMenuItems([item1, item2, item3, item4])
     }
     
-    func incrementNotifications(amount: Int) {
+    func incrementNotifications(_ amount: Int) {
         if hub == nil {
             //the hub does not exist yet
             hub = RKNotificationHub(view: expandingMenuButton)
-            hub?.setCircleColor(CustomColors.JellyTeal, labelColor: UIColor.whiteColor())
-            hub?.scaleCircleSizeBy(0.75)
-            hub?.moveCircleByX(5, y: -5)
+            hub?.setCircleColor(CustomColors.JellyTeal, label: UIColor.white)
+            hub?.scaleCircleSize(by: 0.75)
+            hub?.moveCircleBy(x: 5, y: -5)
         }
-        hub?.incrementBy(Int32(amount))
+        hub?.increment(by: Int32(amount))
         hub?.pop()
     }
     
-    func decrementNotifications(amount: Int) {
-        hub?.decrementBy(Int32(amount))
+    func decrementNotifications(_ amount: Int) {
+        hub?.decrement(by: Int32(amount))
         hub?.pop()
     }
     
     //Purpose: overriding this method allows us to click the Expanding menu items outside of the view. When this was not overridden, the buttons were showing up, but not capable of being pushed.
-    override func hitTest(point: CGPoint, withEvent event: UIEvent?) -> UIView? {
-        if(!self.clipsToBounds && !self.hidden && self.alpha > 0.0){
-            let subviews = self.subviews.reverse()
+    override func hitTest(_ point: CGPoint, with event: UIEvent?) -> UIView? {
+        if(!self.clipsToBounds && !self.isHidden && self.alpha > 0.0){
+            let subviews = self.subviews.reversed()
             for member in subviews {
-                let subPoint = member.convertPoint(point, fromView: self)
-                if let result:UIView = member.hitTest(subPoint, withEvent:event) {
+                let subPoint = member.convert(point, from: self)
+                if let result:UIView = member.hitTest(subPoint, with:event) {
                     return result;
                 }
             }
@@ -127,7 +127,7 @@ class FakeNavigationBarView : UIView {
 }
 
 protocol FakeNavigationBarDelegate {
-    func rightBarButtonPressed(sender: UIButton!)
+    func rightBarButtonPressed(_ sender: UIButton!)
     func segueToAddingTagsPage()
     func segueToEditProfilePage()
     func segueToMatchesPage()
@@ -135,12 +135,12 @@ protocol FakeNavigationBarDelegate {
 }
 
 extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
-    func rightBarButtonPressed(sender: UIButton!) {
-        performSegueWithIdentifier(SegueIdentifier.CustomBackgroundAnimationToSearchSegue, sender: self)
+    func rightBarButtonPressed(_ sender: UIButton!) {
+        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: self)
     }
     
     func segueToAddingTagsPage() {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue.rawValue, sender: nil)
     }
     
     func segueToMatchesPage() {
@@ -148,7 +148,7 @@ extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     }
     
     func segueToEditProfilePage() {
-        performSegueWithIdentifier(SegueIdentifier.BackgroundAnimationToProfileIndexSegue, sender: nil)
+        performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToProfileIndexSegue.rawValue, sender: nil)
     }
     
     func logOut() {

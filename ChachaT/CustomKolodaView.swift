@@ -26,14 +26,14 @@ class CustomKolodaView: KolodaView {
     
     var customKolodaViewDelegate: CustomKolodaViewDelegate?
     
-    override func frameForCardAtIndex(index: UInt) -> CGRect {
+    override func frameForCardAtIndex(_ index: UInt) -> CGRect {
         let measurmentTuple = customKolodaViewDelegate?.calculateKolodaViewCardHeight()
         let cardHeight = measurmentTuple?.cardHeight
         let navigationAreaHeight = measurmentTuple?.navigationAreaHeight
         if index == 0 {
             let topOffset:CGFloat = navigationAreaHeight! + defaultTopOffset
             let xOffset:CGFloat = defaultHorizontalOffset
-            let width = UIScreen.mainScreen().bounds.width - 2 * defaultHorizontalOffset
+            let width = UIScreen.main.bounds.width - 2 * defaultHorizontalOffset
             var height = cardHeight! - defaultTopOffset //if we move the card down, then we need to make it that much shorter, so it doesn't go over buttons
             if isIphone3by2AR() {
                 height = height * 0.72
@@ -51,6 +51,6 @@ class CustomKolodaView: KolodaView {
             }
             return CGRect(x: horizontalMargin, y: 0, width: width, height: height)
         }
-        return CGRectZero
+        return CGRect.zero
     }
 }

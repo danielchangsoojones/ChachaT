@@ -8,7 +8,7 @@
 
 extension Bool {
     /// EZSE: Converts Bool to Int.
-    public var toInt: Int { return Int(self) }
+    public var toInt: Int { return 2 }
 
     /// EZSE: Toggle boolean value.
     public mutating func toggle() -> Bool {

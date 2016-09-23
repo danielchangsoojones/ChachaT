@@ -11,11 +11,11 @@ import UIKit
 // MARK: - Evented Protocol
 public protocol Evented {
     
-    func any(callback: Self -> ()) -> Self
+    func any(_ callback: (Self) -> ()) -> Self
     
-    func on(state: UIGestureRecognizerState, _ callback: Self -> ()) -> Self
+    func on(_ state: UIGestureRecognizerState, _ callback: (Self) -> ()) -> Self
     
-    func on(states: [UIGestureRecognizerState], _ callback: Self -> ()) -> Self
+    func on(_ states: [UIGestureRecognizerState], _ callback: (Self) -> ()) -> Self
     
 }
 
@@ -29,7 +29,7 @@ extension UITapGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UITapGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UITapGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -41,7 +41,7 @@ extension UITapGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UITapGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UITapGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -53,7 +53,7 @@ extension UITapGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UITapGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UITapGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { tap in
             if let tap = tap as? UITapGestureRecognizer {
@@ -75,7 +75,7 @@ extension UIPinchGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UIPinchGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UIPinchGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -87,7 +87,7 @@ extension UIPinchGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UIPinchGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UIPinchGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -99,7 +99,7 @@ extension UIPinchGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UIPinchGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UIPinchGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { pinch in
             if let pinch = pinch as? UIPinchGestureRecognizer {
@@ -121,7 +121,7 @@ extension UIPanGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UIPanGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UIPanGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -133,7 +133,7 @@ extension UIPanGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UIPanGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UIPanGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -145,7 +145,7 @@ extension UIPanGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UIPanGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UIPanGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { pan in
             if let pan = pan as? UIPanGestureRecognizer {
@@ -167,7 +167,7 @@ extension UISwipeGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UISwipeGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UISwipeGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -179,7 +179,7 @@ extension UISwipeGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UISwipeGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UISwipeGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -191,7 +191,7 @@ extension UISwipeGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UISwipeGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UISwipeGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { swipe in
             if let swipe = swipe as? UISwipeGestureRecognizer {
@@ -213,7 +213,7 @@ extension UIRotationGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UIRotationGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UIRotationGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -225,7 +225,7 @@ extension UIRotationGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UIRotationGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UIRotationGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -237,7 +237,7 @@ extension UIRotationGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UIRotationGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UIRotationGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { rotation in
             if let rotation = rotation as? UIRotationGestureRecognizer {
@@ -259,7 +259,7 @@ extension UILongPressGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func any(callback: UILongPressGestureRecognizer -> ()) -> Self {
+    public func any(_ callback: (UILongPressGestureRecognizer) -> ()) -> Self {
         return on(Any, callback)
     }
     
@@ -271,7 +271,7 @@ extension UILongPressGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(state: UIGestureRecognizerState, _ callback: UILongPressGestureRecognizer -> ()) -> Self {
+    public func on(_ state: UIGestureRecognizerState, _ callback: @escaping (UILongPressGestureRecognizer) -> ()) -> Self {
         return on([state], callback)
     }
     
@@ -283,7 +283,7 @@ extension UILongPressGestureRecognizer: Evented {
      * - parameter callback: Invoked whenever the gesture's state changes.
      * - returns: The gesture itself (self).
      */
-    public func on(states: [UIGestureRecognizerState], _ callback: UILongPressGestureRecognizer -> ()) -> Self {
+    public func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UILongPressGestureRecognizer) -> ()) -> Self {
         let responder = Responder(gesture: self)
         responder.on(states) { longpress in
             if let longpress = longpress as? UILongPressGestureRecognizer {
@@ -295,19 +295,19 @@ extension UILongPressGestureRecognizer: Evented {
     
 }
 
-private let Any: [UIGestureRecognizerState] = [.Possible, .Began, .Cancelled, .Changed, .Ended, .Failed]
+private let `Any`: [UIGestureRecognizerState] = [.possible, .began, .cancelled, .changed, .ended, .failed]
 
-private let responders = NSMapTable.weakToStrongObjectsMapTable()
+private let responders = NSMapTable.weakToStrongObjects()
 
 class Responder: NSObject, UIGestureRecognizerDelegate {
     
-    var callbacks: [UIGestureRecognizerState: [UIGestureRecognizer -> ()]] = [
-        .Possible: [],
-        .Began: [],
-        .Cancelled: [],
-        .Changed: [],
-        .Ended: [],
-        .Failed: []
+    var callbacks: [UIGestureRecognizerState: [(UIGestureRecognizer) -> ()]] = [
+        .possible: [],
+        .began: [],
+        .cancelled: [],
+        .changed: [],
+        .ended: [],
+        .failed: []
     ]
     
     init(gesture: UIGestureRecognizer) {
@@ -317,13 +317,13 @@ class Responder: NSObject, UIGestureRecognizerDelegate {
         gesture.delegate = self
     }
     
-    func on(states: [UIGestureRecognizerState], _ callback: UIGestureRecognizer -> ()) {
+    func on(_ states: [UIGestureRecognizerState], _ callback: @escaping (UIGestureRecognizer) -> ()) {
         for state in states {
             callbacks[state]?.append(callback)
         }
     }
     
-    @objc func recognized(gesture: UIGestureRecognizer) {
+    @objc func recognized(_ gesture: UIGestureRecognizer) {
         for callback in callbacks[gesture.state]! {
             callback(gesture)
         }

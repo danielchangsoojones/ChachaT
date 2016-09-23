@@ -10,9 +10,9 @@ import Foundation
 import SystemConfiguration
 
 public enum IJReachabilityType {
-    case WWAN,
-    WiFi,
-    NotConnected
+    case wwan,
+    wiFi,
+    notConnected
 }
 
 
@@ -27,18 +27,18 @@ struct NetworkStatusConstants  {
 /// With thanks to http://stackoverflow.com/questions/25623272/how-to-use-scnetworkreachability-in-swift/25623647#25623647
 
 
-public class IJReachability {
+open class IJReachability {
     
     /**
      :see: Original post - http://www.chrisdanielson.com/2009/07/22/iphone-network-connectivity-test-example/
      */
-    public class func isConnectedToNetwork() -> Bool {
+    open class func isConnectedToNetwork() -> Bool {
         
         var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
         
-        guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
             SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }) else {
             return false
@@ -50,48 +50,48 @@ public class IJReachability {
             return false
         }
         
-        let isReachable = flags.contains(.Reachable)
-        let needsConnection = flags.contains(.ConnectionRequired)
+        let isReachable = flags.contains(.reachable)
+        let needsConnection = flags.contains(.connectionRequired)
         
         return isReachable && !needsConnection
     }
     
-    public class func isConnectedToNetworkOfType() -> IJReachabilityType {
+    open class func isConnectedToNetworkOfType() -> IJReachabilityType {
         
         
         //MARK: - TODO Check this when I have an actual iOS 9 device.
         if !self.isConnectedToNetwork() {
-            return .NotConnected
+            return .notConnected
         }
         
         var zeroAddress = sockaddr_in()
-        zeroAddress.sin_len = UInt8(sizeofValue(zeroAddress))
+        zeroAddress.sin_len = UInt8(MemoryLayout.size(ofValue: zeroAddress))
         zeroAddress.sin_family = sa_family_t(AF_INET)
         
-        guard let defaultRouteReachability = withUnsafePointer(&zeroAddress, {
+        guard let defaultRouteReachability = withUnsafePointer(to: &zeroAddress, {
             SCNetworkReachabilityCreateWithAddress(nil, UnsafePointer($0))
         }) else {
-            return .NotConnected
+            return .notConnected
         }
         
         var flags : SCNetworkReachabilityFlags = []
         
         if SCNetworkReachabilityGetFlags(defaultRouteReachability, &flags) == false {
-            return .NotConnected
+            return .notConnected
         }
         
-        let isReachable = flags.contains(.Reachable)
-        let isWWAN = flags.contains(.IsWWAN)
+        let isReachable = flags.contains(.reachable)
+        let isWWAN = flags.contains(.isWWAN)
         
         if isReachable && isWWAN {
-            return .WWAN
+            return .wwan
         }
         
         if isReachable && !isWWAN {
-            return .WiFi
+            return .wiFi
         }
         
-        return .NotConnected
+        return .notConnected
     }
     
     
@@ -129,18 +129,18 @@ public class IJReachability {
             
             let status:String?
             
-            if !flags.contains(SCNetworkReachabilityFlags.ConnectionRequired) && flags.contains(SCNetworkReachabilityFlags.Reachable) {
+            if !flags.contains(SCNetworkReachabilityFlags.connectionRequired) && flags.contains(SCNetworkReachabilityFlags.reachable) {
                 status = NetworkStatusConstants.Online
             } else {
                 status =  NetworkStatusConstants.Offline
             }
             
-            NSNotificationCenter.defaultCenter().postNotificationName(NetworkStatusConstants.kNetworkAvailabilityStatusChangeNotification,
+            NotificationCenter.default.post(name: Notification.Name(rawValue: NetworkStatusConstants.kNetworkAvailabilityStatusChangeNotification),
                 object: nil,
                 userInfo: [NetworkStatusConstants.Status: status!])
             
             }, &context)
         
-        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), kCFRunLoopCommonModes)
+        SCNetworkReachabilityScheduleWithRunLoop(reachability, CFRunLoopGetMain(), CFRunLoopMode.commonModes as! CFString)
     }
 }

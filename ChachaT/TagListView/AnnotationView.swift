@@ -9,11 +9,11 @@
 import Foundation
 
 class AnnotationView: CircleView {
-    private struct AnnotationConstants {
+    fileprivate struct AnnotationConstants {
         static let imageToCircleRatio : CGFloat = 0.75
     }
     
-    private var theImageView: UIImageView!
+    fileprivate var theImageView: UIImageView!
     
     init(diameter: CGFloat, color: UIColor, imageName: String) {
         super.init(diameter: diameter, color: color)
@@ -24,9 +24,9 @@ class AnnotationView: CircleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func imageViewSetup(imageName: String) {
+    func imageViewSetup(_ imageName: String) {
         theImageView = UIImageView(image: UIImage(named: imageName))
-        theImageView.contentMode = .ScaleAspectFit
+        theImageView.contentMode = .scaleAspectFit
         self.addSubview(theImageView)
         theImageView.snp_makeConstraints { (make) in
             make.center.equalTo(self)
@@ -34,7 +34,7 @@ class AnnotationView: CircleView {
         }
     }
     
-    func updateImage(imageName: String) {
+    func updateImage(_ imageName: String) {
         theImageView.image = UIImage(named: imageName)
     }
 }

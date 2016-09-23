@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SCLAlertView
 
 class Alert {
     
@@ -40,45 +39,45 @@ class Alert {
         
         alertViewResponder = SCLAlertViewResponder(alertview: alert)
         switch type {
-        case .Success :
+        case .success :
             alertViewResponder = alert.showSuccess(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Error :
+        case .error :
             alertViewResponder = alert.showError(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Notice :
+        case .notice :
             alertViewResponder = alert.showNotice(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Warning :
+        case .warning :
             alertViewResponder = alert.showWarning(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Info :
+        case .info :
             alertViewResponder = alert.showInfo(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Edit :
+        case .edit :
             alertViewResponder = alert.showEdit(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Wait :
+        case .wait :
             alertViewResponder = alert.showWait(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
         }
     }
     
-    func createAlert(title: String, subtitle: String, closeButtonTitle: String, type: SCLAlertViewStyle) {
+    func createAlert(_ title: String, subtitle: String, closeButtonTitle: String, type: SCLAlertViewStyle) {
         switch type {
-        case .Success :
+        case .success :
             alertViewResponder = alert.showSuccess(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Error :
+        case .error :
             alertViewResponder = alert.showError(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Notice :
+        case .notice :
             alertViewResponder = alert.showNotice(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Warning :
+        case .warning :
             alertViewResponder = alert.showWarning(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Info :
+        case .info :
             alertViewResponder = alert.showInfo(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Edit :
+        case .edit :
             alertViewResponder = alert.showEdit(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
-        case .Wait :
+        case .wait :
             alertViewResponder = alert.showWait(title, subTitle: subtitle, closeButtonTitle: closeButtonTitle , duration: 15, colorStyle: 0xFF4C5E, colorTextButton: 0xFFFFFF)
         }
     }
     
     
     
-    func addButton(buttonTitle: String, buttonAction: () -> Void) {
+    func addButton(_ buttonTitle: String, buttonAction: () -> Void) {
         alert.addButton(buttonTitle, action: buttonAction)
     }
     

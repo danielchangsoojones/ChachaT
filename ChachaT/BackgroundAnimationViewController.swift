@@ -21,7 +21,7 @@ private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
 private let kolodaCountOfVisibleCards = 2
 private let kolodaAlphaValueSemiTransparent:CGFloat = 0
-var wooshSound = NSURL(fileURLWithPath: NSBundle.mainBundle().pathForResource("woosh", ofType: "wav")!)
+var wooshSound = URL(fileURLWithPath: Bundle.main.path(forResource: "woosh", ofType: "wav")!)
 var audioPlayerWoosh = AVAudioPlayer()
 private let numberOfCards : UInt = 5
 
@@ -43,14 +43,14 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var userArray = [User]()
-    private var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
+    fileprivate var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var rippleHasNotBeenStarted = true
     
-    @IBAction func skipCard(sender: AnyObject) {
+    @IBAction func skipCard(_ sender: AnyObject) {
         kolodaView.swipe(.Left)
     }
     
-    @IBAction func approveCard(sender: UIButton) {
+    @IBAction func approveCard(_ sender: UIButton) {
         kolodaView.swipe(.Right)
     }
     
@@ -95,17 +95,17 @@ class BackgroundAnimationViewController: UIViewController {
 
     }
     
-    override func viewWillAppear(animated: Bool) {
+    override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        self.navigationController?.navigationBarHidden = true //created a fake nav bar, so want to hide the real nav bar whenever I come on the screen
-        self.theMagicMovePlaceholderImage.hidden = true
+        self.navigationController?.isNavigationBarHidden = true //created a fake nav bar, so want to hide the real nav bar whenever I come on the screen
+        self.theMagicMovePlaceholderImage.isHidden = true
     }
     
-    override func viewDidAppear(animated: Bool) {
+    override func viewDidAppear(_ animated: Bool) {
         if rippleHasNotBeenStarted {
             //only want to have ripple appear once, if we leave th page via pageviewcontroller, the view appears again and would think to start a second ripple.
             //this makes it only appear the first run time.
-            ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.colorWithAlphaComponent(0.5))
+            ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
     }
@@ -114,20 +114,20 @@ class BackgroundAnimationViewController: UIViewController {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = self.view.bounds
         
-        let color1 = UIColor.whiteColor().CGColor as CGColorRef
-        let color2 = CustomColors.PeriwinkleGray.CGColor as CGColorRef
+        let color1 = UIColor.white.cgColor as CGColor
+        let color2 = CustomColors.PeriwinkleGray.cgColor as CGColor
         
         gradientLayer.colors = [color1, color2]
         
         gradientLayer.locations = [0.5, 0.75]
-        self.view.layer.insertSublayer(gradientLayer, atIndex: 0)
+        self.view.layer.insertSublayer(gradientLayer, at: 0)
 
     }
     
-    func playSoundInBG(theAudioPlayer:AVAudioPlayer) {
-        let qualityOfServiceClass = QOS_CLASS_BACKGROUND
-        let backgroundQueue = dispatch_get_global_queue(qualityOfServiceClass, 0)
-        dispatch_async(backgroundQueue, {
+    func playSoundInBG(_ theAudioPlayer:AVAudioPlayer) {
+        let qualityOfServiceClass = DispatchQoS.QoSClass.background
+        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
+        backgroundQueue.async(execute: {
             theAudioPlayer.play()
         })
     }
@@ -150,10 +150,10 @@ extension BackgroundAnimationViewController {
     func createUserArray() {
             //normal creating of the stack.
             let query = User.query()
-            if let objectId = User.currentUser()?.objectId {
+            if let objectId = User.current()?.objectId {
                 query?.whereKey("objectId", notEqualTo: objectId)
             }
-            query?.findObjectsInBackgroundWithBlock({ (objects, error) -> Void in
+            query?.findObjectsInBackground(block: { (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.userArray = users
                     self.kolodaView.reloadData()
@@ -173,18 +173,18 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         kolodaView.customKolodaViewDelegate = self
         kolodaView.dataSource = self
         do {
-            audioPlayerWoosh = try AVAudioPlayer(contentsOfURL: wooshSound)
+            audioPlayerWoosh = try AVAudioPlayer(contentsOf: wooshSound)
         }
         catch { }
         audioPlayerWoosh.prepareToPlay()
-        self.modalTransitionStyle = UIModalTransitionStyle.FlipHorizontal //not exactly sure how important this line is, but came with the Koloda code
+        self.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal //not exactly sure how important this line is, but came with the Koloda code
     }
     
-    func kolodaDidRunOutOfCards(koloda: KolodaView) {
+    func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
         kolodaView.resetCurrentCardIndex()
     }
     
-    func koloda(koloda: KolodaView, didSelectCardAtIndex index: UInt) {
+    func koloda(_ koloda: KolodaView, didSelectCardAtIndex index: UInt) {
         self.buttonTappedHandler(index)
     }
     
@@ -202,12 +202,12 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     
     func koloda(kolodaBackgroundCardAnimation koloda: KolodaView) -> POPPropertyAnimation? {
         let animation = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-        animation.springBounciness = frameAnimationSpringBounciness
-        animation.springSpeed = frameAnimationSpringSpeed
+        animation?.springBounciness = frameAnimationSpringBounciness
+        animation?.springSpeed = frameAnimationSpringSpeed
         return animation
     }
     
-    func koloda(koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+    func koloda(_ koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
         let targetUser = userArray[Int(index)]
         if direction == .Right {
             dataStore.likePerson(targetUser)
@@ -220,7 +220,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         let bottomAreaHeight = theStackViewBottomConstraint.constant + theBottomButtonStackView.frame.height
         let cardOffsetFromBottomButtons : CGFloat = 0
         let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height
-        let statusBarHeight = UIApplication.sharedApplication().statusBarFrame.size.height
+        let statusBarHeight = UIApplication.shared.statusBarFrame.size.height
         let frameHeight = self.view.frame.height
         let cardHeight = frameHeight - (bottomAreaHeight + cardOffsetFromBottomButtons) - (navigationBarHeight! + statusBarHeight)
         return (cardHeight, navigationBarHeight! + statusBarHeight)
@@ -231,12 +231,14 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
 //MARK: KolodaViewDataSource
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
-    func kolodaNumberOfCards(koloda: KolodaView) -> UInt {
+    func kolodaNumberOfCards(_ koloda: KolodaView) -> UInt {
         return UInt(userArray.count)
     }
 
-    func koloda(koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
-        guard let cardView = NSBundle.mainBundle().loadNibNamed("CustomCardView", owner: self, options: nil)[0] as? CustomCardView else { return UIView() }
+    func koloda(_ koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
+        let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
+//        guard let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)?[0] as? CustomCardView
+//            else { return UIView() }
         
         cardView.backgroundColor = UIColor.clearColor()
         cardView.userOfTheCard = userArray[Int(index)]
@@ -244,9 +246,10 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         return cardView
     }
 
-    func koloda(koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
-        return NSBundle.mainBundle().loadNibNamed("CustomOverlayView",
-                                                  owner: self, options: nil)[0] as? OverlayView
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
+        let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)[0] as? CustomOverlayView
+        return overlayView
+//        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as! CustomOverlayView
     }
 }
 
@@ -256,7 +259,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
         return true
     }
     
-    var duration: NSTimeInterval {
+    var duration: TimeInterval {
         return 0.5
     }
     
@@ -264,8 +267,8 @@ extension BackgroundAnimationViewController: MagicMoveable {
         return 0.7
     }
     
-    private func buttonTappedHandler(index: UInt) {
-        let cardDetailVC = UIStoryboard(name: Storyboards.Main.storyboard, bundle: nil).instantiateViewControllerWithIdentifier(String(CardDetailViewController)) as! CardDetailViewController
+    fileprivate func buttonTappedHandler(_ index: UInt) {
+        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: String(CardDetailViewController)) as! CardDetailViewController
 
         cardDetailVC.userOfTheCard = userArray[Int(index)]
         if let image = userArray[Int(index)].profileImage{
@@ -276,7 +279,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
         }
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
-        theMagicMovePlaceholderImage.hidden = false
+        theMagicMovePlaceholderImage.isHidden = false
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     

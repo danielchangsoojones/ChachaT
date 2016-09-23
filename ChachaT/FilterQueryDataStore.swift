@@ -8,7 +8,6 @@
 
 import Foundation
 import Parse
-import SCLAlertView
 
 class SearchTagsDataStore {
     var searchDataArray : [Tag] = [] //tags that will be available for searching
@@ -29,14 +28,14 @@ class SearchTagsDataStore {
         addSpecialtyTagsToSearchDataArray()
         var alreadyContainsTagArray: [String] = []
         let query = Tags.query()
-        query!.findObjectsInBackgroundWithBlock { (objects, error) -> Void in
+        query!.findObjectsInBackground { (objects, error) -> Void in
             if let tags = objects as? [Tags] {
                 for tag in tags {
                     for tagTitle in tag.genericTags {
                         if !alreadyContainsTagArray.contains(tagTitle) {
                             //our string array does not already contain the tag title, so we can add it to our searchable array
                             alreadyContainsTagArray.append(tagTitle)
-                            let tag = Tag(title: tagTitle, attribute: .Generic)
+                            let tag = Tag(title: tagTitle, attribute: .generic)
                             self.searchDataArray.append(tag)
                         }
                     }
@@ -49,7 +48,7 @@ class SearchTagsDataStore {
     //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
     func addSpecialtyTagsToSearchDataArray() {
         for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            let tag = Tag(title: specialtyTagTitle.toString, attribute: .Generic)
+            let tag = Tag(title: specialtyTagTitle.toString, attribute: .generic)
             searchDataArray.append(tag)
         }
     }
@@ -70,20 +69,20 @@ class SearchTagsDataStore {
         delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
     }
     
-    func findUserArray(genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
+    func findUserArray(_ genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
         let genericTagQuery = Tags.query()!
         if !genericTagTitleArray.isEmpty {
-            genericTagQuery.whereKey("genericTags", containsAllObjectsInArray:genericTagTitleArray)
+            genericTagQuery.whereKey("genericTags", containsAllObjectsIn:genericTagTitleArray)
         }
         let finalQuery = querySpecialtyTags(specialtyTagDictionary, query: genericTagQuery)
-        finalQuery.whereKey("createdBy", notEqualTo: User.currentUser()!)
+        finalQuery.whereKey("createdBy", notEqualTo: User.current()!)
         finalQuery.includeKey("createdBy")
         finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
-        finalQuery.findObjectsInBackgroundWithBlock({ (objects, error) in
-            if let objects = objects where error == nil {
+        finalQuery.findObjectsInBackground(block: { (objects, error) in
+            if let objects = objects , error == nil {
                 if objects.isEmpty {
                     print(objects)
-                    SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
+                    SCLAlertView.showInfo("No Users Found", subTitle: "No user has those tags")
                 } else {
                     var userArray : [User] = []
                     for tag in objects as! [Tags] {
@@ -97,24 +96,24 @@ class SearchTagsDataStore {
         })
     }
     
-    func querySpecialtyTags(specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?], query: PFQuery) -> PFQuery {
+    func querySpecialtyTags(_ specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?], query: PFQuery<PFObject>) -> PFQuery<PFObject> {
         for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
             if let tagViewTitle = tagView?.currentTitle {
                 //the tagView is not nil and the title exists
                 if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
                     switch tagAttribute {
-                    case .TagChoices:
+                    case .tagChoices:
                         //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
                         query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
-                    case .SingleSlider:
+                    case .singleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
-                            query.whereKey("location", nearGeoPoint: User.currentUser()!.location, withinMiles: value)
+                            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: value)
                         }
-                    case .RangeSlider:
+                    case .rangeSlider:
                         let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-                        let minAge : NSDate = maxAndMinTuple.minValue.years.ago
-                        let maxAge : NSDate = maxAndMinTuple.maxValue.years.ago
+                        let minAge : Date = maxAndMinTuple.minValue.years.ago
+                        let maxAge : Date = maxAndMinTuple.maxValue.years.ago
                         query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
                         query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
                     }
@@ -127,10 +126,10 @@ class SearchTagsDataStore {
     
     
     //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
-    func getSingleSliderValue(string: String) -> Double? {
+    func getSingleSliderValue(_ string: String) -> Double? {
         let spaceString : Character = " "
-        if let index = string.characters.indexOf(spaceString) {
-            let substring = string.substringToIndex(index)
+        if let index = string.characters.index(of: spaceString) {
+            let substring = string.substring(to: index)
             if let value = Double(substring) {
                 return value
             }
@@ -138,12 +137,12 @@ class SearchTagsDataStore {
         return nil
     }
     
-    func getRangeSliderValue(string: String) -> (minValue: Int, maxValue: Int) {
+    func getRangeSliderValue(_ string: String) -> (minValue: Int, maxValue: Int) {
         let spaceString : Character = "-"
-        if let index = string.characters.indexOf(spaceString) {
+        if let index = string.characters.index(of: spaceString) {
             //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
-            let minValueSubstring = string.substringToIndex(index).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet())
-            let maxValueSubstring = string.substringFromIndex(index.advancedBy(1)).stringByTrimmingCharactersInSet(NSCharacterSet.whitespaceCharacterSet()) //FromSubstring includes the index, so add 1
+            let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
+            let maxValueSubstring = string.substring(from: <#T##String.CharacterView corresponding to `index`##String.CharacterView#>.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
             if let minValue = Int(minValueSubstring) {
                 if let maxValue = Int(maxValueSubstring) {
                     return (minValue, maxValue)
@@ -155,11 +154,11 @@ class SearchTagsDataStore {
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
-    func passUserArrayToMainPage(userArray: [User])
+    func passUserArrayToMainPage(_ userArray: [User])
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
-    func passUserArrayToMainPage(userArray: [User]) {
+    func passUserArrayToMainPage(_ userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
     }
 }

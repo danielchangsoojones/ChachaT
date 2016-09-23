@@ -12,7 +12,7 @@ class DropDownTagView: SpecialtyTagView {
     var specialtyCategoryTitle : String = ""
     
     init(tagTitle: String, specialtyCategoryTitle: String) {
-        super.init(tagTitle: tagTitle, tagAttribute: .DropDownMenu)
+        super.init(tagTitle: tagTitle, tagAttribute: .dropDownMenu)
         self.specialtyCategoryTitle = specialtyCategoryTitle
     }
     

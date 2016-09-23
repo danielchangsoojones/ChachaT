@@ -18,7 +18,7 @@ class ChachaNavigationViewController: UINavigationController {
         //hacky way of getting the navigation bar to look like Tinder's and have no background bar, just the buttons.
 //        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
 //        self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.barTintColor = UIColor.whiteColor()
+        self.navigationBar.barTintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {

@@ -10,13 +10,13 @@ import Foundation
 import Parse
 
 protocol EditProfileDataStoreDelegate {
-    func loadBulletPoint(text: String, num: Int)
-    func loadProfileImage(file: AnyObject,num: Int)
-    func loadText(text: String, title: String)
+    func loadBulletPoint(_ text: String, num: Int)
+    func loadProfileImage(_ file: AnyObject,num: Int)
+    func loadText(_ text: String, title: String)
 }
 
 class EditProfileDataStore {
-    let currentUser = User.currentUser()!
+    let currentUser = User.current()!
     var delegate: EditProfileDataStoreDelegate?
     
     init(delegate: EditProfileDataStoreDelegate) {
@@ -24,7 +24,7 @@ class EditProfileDataStore {
     }
     
     func saveEverything() {
-        currentUser.saveInBackgroundWithBlock { (success, error) in
+        currentUser.saveInBackground { (success, error) in
             if success && error == nil {
                 print("successfully saved user")
             } else {
@@ -33,7 +33,7 @@ class EditProfileDataStore {
         }
     }
     
-    func saveProfileImage(image: UIImage, photoNumber: Int) {
+    func saveProfileImage(_ image: UIImage, photoNumber: Int) {
         let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(image, 0.6)!)
         let prefix = "profileImage"
         let parseColumnName = getProfileImageParseColumnName(prefix, imageNumber: photoNumber)
@@ -41,7 +41,7 @@ class EditProfileDataStore {
         currentUser[parseColumnName] = file
     }
     
-    func getProfileImageParseColumnName(prefix: String, imageNumber: Int) -> String {
+    func getProfileImageParseColumnName(_ prefix: String, imageNumber: Int) -> String {
         if imageNumber == 1 {
             //the first profileImage is just saved in parse as:
             return "profileImage"
@@ -50,7 +50,7 @@ class EditProfileDataStore {
         }
     }
     
-    func textFieldWasEdited(text: String, title: String) {
+    func textFieldWasEdited(_ text: String, title: String) {
         switch title {
         case EditProfileConstants.fullNameTitle:
             currentUser.fullName = text
@@ -61,20 +61,20 @@ class EditProfileDataStore {
         }
     }
     
-    func bulletPointWasEdited(text: String, bulletPointNumber: Int) {
+    func bulletPointWasEdited(_ text: String, bulletPointNumber: Int) {
         let prefix = "bulletPoint"
         let parseColumnName = getParseColumnName(prefix, num: bulletPointNumber)
         //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
         currentUser[parseColumnName] = text
     }
     
-    func getParseColumnName(prefix: String, num: Int) -> String {
+    func getParseColumnName(_ prefix: String, num: Int) -> String {
         let suffix = num.toString
         let parseColumnName = prefix + suffix
         return parseColumnName
     }
     
-    func saveAge(birthday: NSDate) {
+    func saveAge(_ birthday: Date) {
         currentUser.birthDate = birthday
         //saving birthdate in two places in database because it will make querying easier with tags.
         let tag = Tags()
@@ -97,7 +97,7 @@ extension EditProfileDataStore {
             //TODO: make the string profileImage be relative to something real
             let parseColumnName = getProfileImageParseColumnName("profileImage", imageNumber: index)
             if let file = currentUser[parseColumnName] {
-                delegate?.loadProfileImage(file, num: index)
+                delegate?.loadProfileImage(file as AnyObject, num: index)
             }
         }
     }
@@ -106,7 +106,7 @@ extension EditProfileDataStore {
         for index in 1...EditProfileConstants.numberOfBulletPoints {
             //TODO: make the string bulletPoint be relative to something real
             let parseColumnName = getParseColumnName("bulletPoint", num: index)
-            if let description = currentUser[parseColumnName] as? String where !description.isEmpty {
+            if let description = currentUser[parseColumnName] as? String , !description.isEmpty {
                 delegate?.loadBulletPoint(description, num: index)
             }
         }

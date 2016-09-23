@@ -34,8 +34,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     var signUpState = true
     
     //TODO: make logOut work for facebook
-    @IBAction func facebookButtonPressed(sender: UIButton) {
-        PFFacebookUtils.logInInBackgroundWithReadPermissions(["public_profile", "email"]) { (user, error) in
+    @IBAction func facebookButtonPressed(_ sender: UIButton) {
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { (user, error) in
             if let currentUser = user as? User {
                 if currentUser.isNew {
                     print("this is a new user that just signed up")
@@ -53,12 +53,12 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     //the API request to facebook will look something like this: graph.facebook.com/me?fields=name,email,picture
     //me is a special endpoint that somehow figures out the user's id or token, and then it can access the currentusers info like name, email and picture.
     //look into Facebook Graph API to learn more
-    func updateProfileFromFacebook(isNew : Bool) {
-        if FBSDKAccessToken.currentAccessToken() != nil {
-            FBSDKGraphRequest(graphPath: "me?fields=name", parameters: nil).startWithCompletionHandler({ (connection, result, error) -> Void in
+    func updateProfileFromFacebook(_ isNew : Bool) {
+        if FBSDKAccessToken.current() != nil {
+            FBSDKGraphRequest(graphPath: "me?fields=name", parameters: nil).start(completionHandler: { (connection, result, error) -> Void in
                 if error == nil {
                     print("updating profile from facebook")
-                    let currentUser = User.currentUser()!
+                    let currentUser = User.current()!
                     
                     let userData = result as! NSDictionary
                     print(userData)
@@ -75,7 +75,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     func updateFacebookImage() {
-        let currentUser = User.currentUser()!
+        let currentUser = User.current()!
         if let facebookId = currentUser.facebookId {
             let pictureURL = "https://graph.facebook.com/" + facebookId + "/picture?type=square&width=600&height=600"
             Alamofire.request(.GET, pictureURL).response { (request, response, data, error) -> Void in
@@ -91,7 +91,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     
-    @IBAction func signUp(sender: AnyObject) {
+    @IBAction func signUp(_ sender: AnyObject) {
         if allValidates() {
             if signUpState {
                 signUp()
@@ -102,33 +102,33 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    @IBAction func changeToLoginScreen(sender: AnyObject) {
+    @IBAction func changeToLoginScreen(_ sender: AnyObject) {
         signUpState = !signUpState
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             if self.signUpState {
-                self.changeScreenButton.setTitle("Or, Sign In", forState: .Normal)
-                self.theFacebookButton.setTitle("Sign Up With Facebook", forState: .Normal)
-                self.theSignUpButton.setTitle("Sign Up", forState: .Normal)
+                self.changeScreenButton.setTitle("Or, Sign In", for: UIControlState())
+                self.theFacebookButton.setTitle("Sign Up With Facebook", for: UIControlState())
+                self.theSignUpButton.setTitle("Sign Up", for: UIControlState())
                 self.theCreateAccountLabel.alpha = 1
-                self.theTermsOfService.setTitle("Terms Of Service", forState: .Normal)
-                self.theTermsOfService.setTitleColor(facebookBlue, forState: .Normal)
+                self.theTermsOfService.setTitle("Terms Of Service", for: UIControlState())
+                self.theTermsOfService.setTitleColor(facebookBlue, for: UIControlState())
                 self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue-Medium", size: 10)
                 self.view.layoutIfNeeded()
             } else {
-                self.changeScreenButton.setTitle("Or, Sign Up", forState: .Normal)
-                self.theFacebookButton.setTitle("Sign In With Facebook", forState: .Normal)
-                self.theSignUpButton.setTitle("Sign In", forState: .Normal)
+                self.changeScreenButton.setTitle("Or, Sign Up", for: UIControlState())
+                self.theFacebookButton.setTitle("Sign In With Facebook", for: UIControlState())
+                self.theSignUpButton.setTitle("Sign In", for: UIControlState())
                 self.theCreateAccountLabel.alpha = 0
-                self.theTermsOfService.setTitle("Forgot Password?", forState: .Normal)
-                self.theTermsOfService.setTitleColor(UIColor.whiteColor(), forState: .Normal)
+                self.theTermsOfService.setTitle("Forgot Password?", for: UIControlState())
+                self.theTermsOfService.setTitleColor(UIColor.white, for: UIControlState())
                 self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue", size: 12)
                 self.view.layoutIfNeeded()
             }
         })
     }
     
-    @IBAction func termsOfServiceButtonPressed(sender: AnyObject) {
-       UIApplication.sharedApplication().openURL(NSURL(string: "http://about.chacha.com/terms-of-use/")!)
+    @IBAction func termsOfServiceButtonPressed(_ sender: AnyObject) {
+       UIApplication.shared.openURL(URL(string: "http://about.chacha.com/terms-of-use/")!)
     }
     
     
@@ -137,8 +137,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
 
         // Do any additional setup after loading the view.
         setGUI()
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillShow), name:UIKeyboardWillShowNotification, object: nil)
-        NSNotificationCenter.defaultCenter().addObserver(self, selector: #selector(keyboardWillHide), name:UIKeyboardWillHideNotification, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         //hide keyboard when tap anywhere on screen
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignUpLogInViewController.dismissTheKeyboard))
@@ -162,15 +162,15 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         applyShadow(theTextfieldsView)
     }
     
-    func applyShadow(view:UIView) {
+    func applyShadow(_ view:UIView) {
         view.layer.shadowRadius = 2.5
-        view.layer.shadowOffset = CGSizeMake(0, 1)
-        view.layer.shadowColor = UIColor.grayColor().CGColor
+        view.layer.shadowOffset = CGSize(width: 0, height: 1)
+        view.layer.shadowColor = UIColor.gray.cgColor
         view.layer.shadowOpacity = 2.0
     }
     
-    func hideOrUnhideFacebook(hidden: Bool) {
-            UIView.animateWithDuration(0.3, animations: { () -> Void in
+    func hideOrUnhideFacebook(_ hidden: Bool) {
+            UIView.animate(withDuration: 0.3, animations: { () -> Void in
                 if hidden {
                     self.theFacebookButton.alpha = 0
                     self.orLine.alpha = 0
@@ -191,63 +191,63 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp()
     {
-        let currentUser = User.currentUser()
+        let currentUser = User.current()
         currentUser!.username = theEmail.text
         currentUser!.password = thePassword.text
-        self.view.userInteractionEnabled = false
+        self.view.isUserInteractionEnabled = false
         theSpinner.startAnimating()
         
-        currentUser!.signUpInBackgroundWithBlock { (success, error) -> Void in
-            self.view.userInteractionEnabled = true
+        currentUser!.signUpInBackground { (success, error) -> Void in
+            self.view.isUserInteractionEnabled = true
             self.theSpinner.stopAnimating()
             if success {
                 self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.currentInstallation()
-                installation!["user"] = PFUser.currentUser()
+                let installation = PFInstallation.current()
+                installation!["user"] = PFUser.current()
                 installation!.saveInBackground()
             }
             else {
                 if error != nil {
                     let code = error!.code
-                    if code == PFErrorCode.ErrorInvalidEmailAddress.rawValue {
-                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
+                    if code == PFErrorCode.errorInvalidEmailAddress.rawValue {
+                        _ = Alert(title: "Invalid Email Address", subtitle: "Please enter a valid email address.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
                     }
-                    else if code == PFErrorCode.ErrorUserEmailTaken.rawValue {
-                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
+                    else if code == PFErrorCode.errorUserEmailTaken.rawValue {
+                        _ = Alert(title: "Problem Signing Up", subtitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
                     }
-                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
+                    _ = Alert(title: "Problem Signing Up", subtitle: "error:\(error!.code)", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
                 }
             }
         }
     }
     
     func logIn() {
-        view.userInteractionEnabled=false
+        view.isUserInteractionEnabled=false
         theSpinner.startAnimating()
-        User.logInWithUsernameInBackground(theEmail.text!.lowercaseString, password: thePassword.text!) { (user, error) -> Void in
+        User.logInWithUsername(inBackground: theEmail.text!.lowercased(), password: thePassword.text!) { (user, error) -> Void in
             self.theSpinner.stopAnimating()
-            self.view.userInteractionEnabled=true
+            self.view.isUserInteractionEnabled=true
             
             if let error = error {
                 let code = error.code
-                if code == PFErrorCode.ErrorObjectNotFound.rawValue {
+                if code == PFErrorCode.errorObjectNotFound.rawValue {
                     let alert = Alert(closeButtonHidden: true)
                     alert.addButton("Okay", buttonAction: { () -> Void in
                         alert.closeAlert()
                         self.theEmail.becomeFirstResponder()
                     })
-                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .Error)
+                    alert.createAlert("Log In Problem", subtitle: "Username or Password is incorrect.", closeButtonTitle: "", type: .error)
                 }
                 else {
-                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .Error)
+                    _ = Alert(title: "Failed Login", subtitle: "Login failed at this time.", closeButtonTitle: "Okay", closeButtonHidden: false, type: .error)
                 }
                 return;
             }
             
             if user != nil {
                 self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.currentInstallation()
-                installation!["user"] = PFUser.currentUser()
+                let installation = PFInstallation.current()
+                installation!["user"] = PFUser.current()
                 installation!.saveEventually(nil)
             }
         }
@@ -261,7 +261,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
             })
-            alert.createAlert("Email is Required", subtitle: "Please enter an email address.", closeButtonTitle: "", type: .Error)
+            alert.createAlert("Email is Required", subtitle: "Please enter an email address.", closeButtonTitle: "", type: .error)
             return false
         }
         else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
@@ -270,7 +270,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 alert.closeAlert()
                 self.theEmail.becomeFirstResponder()
             })
-            alert.createAlert("Invalid Email", subtitle: "Please enter a valid email address", closeButtonTitle: "", type: .Error)
+            alert.createAlert("Invalid Email", subtitle: "Please enter a valid email address", closeButtonTitle: "", type: .error)
             return false
         }
         else if thePassword.text!.isEmpty {
@@ -279,7 +279,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 alert.closeAlert()
                 self.thePassword.becomeFirstResponder()
             })
-            alert.createAlert("Password is Required", subtitle: "Please enter a password.", closeButtonTitle: "", type: .Error)
+            alert.createAlert("Password is Required", subtitle: "Please enter a password.", closeButtonTitle: "", type: .error)
             return false
         }
         else {
@@ -287,7 +287,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         }
     }
     
-    func textFieldShouldReturn(textField: UITextField) -> Bool {
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
         if textField===self.theEmail
         {
             self.thePassword.becomeFirstResponder()
@@ -299,26 +299,26 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
 
 //keyboard notification
 extension SignUpLogInViewController {
-    func keyboardWillShow(notification: NSNotification) {
+    func keyboardWillShow(_ notification: Notification) {
         guard let bottomConstraint = changeScreenButtonBottomConstraint else { return }
-        if let userInfo = notification.userInfo {
-            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.CGRectValue() {
+        if let userInfo = (notification as NSNotification).userInfo {
+            if let keyboardSize = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue {
                 //tab bar height is default by Apple at 49
                 let originalHeight = CGFloat(20)
                 bottomConstraint.constant = keyboardSize.height + originalHeight
                 self.hideOrUnhideFacebook(true)
-                UIView.animateWithDuration(0.3, animations: { () -> Void in
+                UIView.animate(withDuration: 0.3, animations: { () -> Void in
                     self.view.layoutIfNeeded()
                 })
             }
         }
     }
     
-    func keyboardWillHide(notification: NSNotification) {
+    func keyboardWillHide(_ notification: Notification) {
         guard let bottomConstraint = changeScreenButtonBottomConstraint else { return }
         bottomConstraint.constant = 20
         self.hideOrUnhideFacebook(false)
-        UIView.animateWithDuration(0.3, animations: { () -> Void in
+        UIView.animate(withDuration: 0.3, animations: { () -> Void in
             self.view.layoutIfNeeded()
         })
     }
@@ -331,7 +331,7 @@ extension SignUpLogInViewController: SegueHandlerType {
         case SignUpToQuestionOnboardingSegue
     }
     
-    override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
     }
 }
