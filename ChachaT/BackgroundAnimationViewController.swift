@@ -268,7 +268,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     }
     
     fileprivate func buttonTappedHandler(_ index: UInt) {
-        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: String(CardDetailViewController)) as! CardDetailViewController
+        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: String(describing: CardDetailViewController())) as! CardDetailViewController
 
         cardDetailVC.userOfTheCard = userArray[Int(index)]
         if let image = userArray[Int(index)].profileImage{

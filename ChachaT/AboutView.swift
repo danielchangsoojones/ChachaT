@@ -69,7 +69,7 @@ class AboutView: UIView {
     
     //In storyboard we make sure the File Owner, NOT THE VIEW CLASS TYPE, is set to type PhotoEditingView. If that is not happening, then it creates a recursion loop that crashes the application. Talk to Daniel Jones if this doesn't make sense.
     func xibSetup() {
-        Bundle.main.loadNibNamed("AboutView", owner: self, options: nil)?[0] as! UIView
+        self.view = Bundle.main.loadNibNamed("AboutView", owner: self, options: nil)?[0] as! UIView
         //basically just setting the customView I built on top of a normal view. It's weird, but that's how you load a xib via storyboard
         self.addSubview(view)
         view.frame = self.bounds

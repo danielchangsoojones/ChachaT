@@ -68,7 +68,13 @@ extension UIImage {
         }
         
         bitmap?.scaleBy(x: yFlip, y: -1.0)
-        bitmap.draw(CGImage, in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
+        
+        //convert self, which is a UIImage, to a CGImage
+        let ciImage = CIImage(image: self)
+        let context = CIContext(options: nil)
+        let cgImage = context.createCGImage(ciImage!, from: ciImage!.extent)
+        
+        bitmap?.draw(cgImage!, in: CGRect(x: -size.width / 2, y: -size.height / 2, width: size.width, height: size.height))
         
         let newImage = UIGraphicsGetImageFromCurrentImageContext()
         UIGraphicsEndImageContext()
