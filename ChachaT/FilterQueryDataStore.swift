@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import SCLAlertView
 
 class SearchTagsDataStore {
     var searchDataArray : [Tag] = [] //tags that will be available for searching
@@ -82,7 +83,7 @@ class SearchTagsDataStore {
             if let objects = objects , error == nil {
                 if objects.isEmpty {
                     print(objects)
-                    SCLAlertView.showInfo("No Users Found", subTitle: "No user has those tags")
+                    _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
                 } else {
                     var userArray : [User] = []
                     for tag in objects as! [Tags] {
@@ -160,6 +161,6 @@ protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User]) {
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray) //passing userArray to the segue
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray as AnyObject?) //passing userArray to the segue
     }
 }

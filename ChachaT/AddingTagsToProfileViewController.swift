@@ -8,7 +8,7 @@
 
 import UIKit
 import Parse
-
+import SCLAlertView
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -29,7 +29,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         //the alertview, the first time I clicked a tag, was not loading quickly. But, subsequent alerts were loading
         //quickly, so I added this to already load a SCLAlertView, so then when a tag is hit, it loads quickly
         //this actually seems to make it work. But, maybe it is just an illusion to me...
-        let _ = SCLAlertView
+        let _ = SCLAlertView()
     }
     
     func setDataFromDataStore() {
@@ -67,12 +67,12 @@ extension AddingTagsToProfileViewController {
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 1 {
             //tagChoicesView pressed
-            let alertView = SCLAlertView
-            alertView.addButton("Delete") {
+            let alertView = SCLAlertView()
+            _ = alertView.addButton("Delete") {
                 print("Deleted Tag")
                 self.dataStore.deleteTag(title)
             }
-            alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
+            _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
             if let dropDownTagView = tappedDropDownTagView {

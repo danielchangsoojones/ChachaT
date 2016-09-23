@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import SCLAlertView
 
 class BackgroundAnimationDataStore {
     func likePerson(_ user : User) {
@@ -76,9 +77,9 @@ class BackgroundAnimationDataStore {
     
     fileprivate func createMatchAlert(_ targetUserName: String?) {
         if let targetUserName = targetUserName {
-            SCLAlertView.showInfo("Match!", subTitle: "You matched with \(targetUserName)")
+            _ = SCLAlertView().showInfo("Match!", subTitle: "You matched with \(targetUserName)")
         } else {
-            SCLAlertView.showInfo("Match!", subTitle: "You have a match!")
+            _ = SCLAlertView().showInfo("Match!", subTitle: "You have a match!")
         }
     }
 }

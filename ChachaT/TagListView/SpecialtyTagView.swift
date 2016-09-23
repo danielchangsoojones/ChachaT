@@ -89,7 +89,7 @@ open class SpecialtyTagView: TagView {
     }
     
     func addAnnotationSubview() {
-        annotationView = AnnotationView(diameter: self.intrinsicContentSize().height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
+        annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.isUserInteractionEnabled = false
         self.addSubview(annotationView)
@@ -109,16 +109,16 @@ open class SpecialtyTagView: TagView {
     }
     
     func updateAnnotationView() {
-        let annotationViewDiameter = self.intrinsicContentSize().height
+        let annotationViewDiameter = self.intrinsicContentSize.height
         annotationView.updateDiameter(annotationViewDiameter)
         //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
         titleEdgeInsets.left = annotationViewDiameter
     }
     
     open override var intrinsicContentSize : CGSize {
-        let height = super.intrinsicContentSize().height //height is still calculated like a normal tagView
+        let height = super.intrinsicContentSize.height //height is still calculated like a normal tagView
         let annotationViewDiameter = height
-        let width = super.intrinsicContentSize().width + annotationViewDiameter
+        let width = super.intrinsicContentSize.width + annotationViewDiameter
         return CGSize(width: width, height: height)
     }
     

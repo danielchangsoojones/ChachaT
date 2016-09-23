@@ -53,7 +53,7 @@ class MagicMoveTransition: NSObject, UIViewControllerAnimatedTransitioning {
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let fromVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.from)!
         let toVC = transitionContext.viewController(forKey: UITransitionContextViewControllerKey.to)!
-        let containerView = transitionContext.containerView!
+        let containerView = transitionContext.containerView
         
         magicAnimationFromViewController(fromVC, toViewController: toVC, containerView: containerView, duration: duration, transitionContext: transitionContext)
     }

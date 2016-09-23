@@ -11,6 +11,7 @@ import Parse
 import ParseUI
 import STPopup
 import EFTools
+import SCLAlertView
 
 public enum QuestionDetailState {
     case editingMode
@@ -39,11 +40,12 @@ class CardDetailViewController: UIViewController {
     
     
     @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
-        let alert = Alert(closeButtonHidden: false)
-        alert.addButton("Block User") { 
-            alert.closeAlert()
-        }
-       alert.createAlert("Report Abuse", subtitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Okay", type: .error)
+        let alertView = SCLAlertView()
+        _ = alertView.addButton("Block User", action: {
+            let responder = SCLAlertViewResponder(alertview: alertView)
+            responder.close()
+        })
+        _ = alertView.showError("Report Abuse", subTitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Cancel")
     }
     
     
