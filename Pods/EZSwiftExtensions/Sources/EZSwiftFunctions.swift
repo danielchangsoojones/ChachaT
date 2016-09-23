@@ -191,12 +191,15 @@ public struct ez {
 
     //TODO: Document this, add tests to this, find a way to remove ++
     /// EZSE: Iterates through enum elements, use with (for element in ez.iterateEnum(myEnum))
-    public static func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T> {
-        var i = 0
-        return AnyIterator {
-            let next = withUnsafePointer(to: &i) { UnsafePointer<T>($0).pointee }
-            return next.hashValue == i++ ? next : nil
-        }
+    public static func iterateEnum<T: Hashable>(_: T.Type) -> AnyIterator<T>? {
+        print("when converting to swift 3, Daniel Jones had no fucking clue how to fix this function. So, don't use it.")
+//        var i = 0
+//        return AnyIterator {
+//            let next = withUnsafePointer(to: &i) {
+//                UnsafePointer<T>($0).pointee }
+//            return next.hashValue == i++ ? next : nil
+//        }
+        return nil
     }
 
     // MARK: - Dispatch
@@ -230,11 +233,11 @@ public struct ez {
     }
 
     /// EZSE: Runs every second, to cancel use: timer.invalidate()
-    public static func runThisEvery(seconds: TimeInterval, startAfterSeconds: TimeInterval, handler: @escaping (Timer!) -> Void) -> Timer {
+    public static func runThisEvery(seconds: TimeInterval, startAfterSeconds: TimeInterval, handler: @escaping (CFRunLoopTimer?) -> Void) -> Timer {
         let fireDate = startAfterSeconds + CFAbsoluteTimeGetCurrent()
         let timer = CFRunLoopTimerCreateWithHandler(kCFAllocatorDefault, fireDate, seconds, 0, 0, handler)
         CFRunLoopAddTimer(CFRunLoopGetCurrent(), timer, CFRunLoopMode.commonModes)
-        return timer
+        return timer!
     }
 
     /// EZSE: Gobal main queue
@@ -244,22 +247,22 @@ public struct ez {
 
     /// EZSE: Gobal queue with user interactive priority
     public var globalUserInteractiveQueue: DispatchQueue {
-        return DispatchQueue.global(priority: Int(DispatchQoS.QoSClass.userInteractive.rawValue))
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInteractive)
     }
 
     /// EZSE: Gobal queue with user initiated priority
     public var globalUserInitiatedQueue: DispatchQueue {
-        return DispatchQueue.global(priority: Int(DispatchQoS.QoSClass.userInitiated.rawValue))
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.userInitiated)
     }
 
     /// EZSE: Gobal queue with utility priority
     public var globalUtilityQueue: DispatchQueue {
-        return DispatchQueue.global(priority: Int(DispatchQoS.QoSClass.utility.rawValue))
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.utility)
     }
 
     /// EZSE: Gobal queue with background priority
     public var globalBackgroundQueue: DispatchQueue {
-        return DispatchQueue.global(priority: Int(DispatchQoS.QoSClass.background.rawValue))
+        return DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
     }
 
     /// EZSE: Gobal queue with default priority
@@ -282,7 +285,7 @@ public struct ez {
     public static func requestJSON(_ url: String, success: @escaping ((AnyObject?) -> Void), error: ((NSError) -> Void)?) {
         requestURL(url,
             success: { (data) -> Void in
-                let json: AnyObject? = self.dataToJsonDict(data)
+                let json: AnyObject? = self.dataToJsonDict(data) as AnyObject?
                 success(json)
             },
             error: { (err) -> Void in
@@ -293,12 +296,12 @@ public struct ez {
     }
 
     /// EZSE: converts NSData to JSON dictionary
-    fileprivate static func dataToJsonDict(_ data: Data?) -> AnyObject? {
+    fileprivate static func dataToJsonDict(_ data: Data?) -> Any? {
         if let d = data {
             var error: NSError?
-            let json: AnyObject?
+            let json: Any?
             do {
-                json = try JSONSerialization.jsonObject(
+                json = try JSONSerialization.jsonObject (
                     with: d,
                     options: JSONSerialization.ReadingOptions.allowFragments)
             } catch let error1 as NSError {
