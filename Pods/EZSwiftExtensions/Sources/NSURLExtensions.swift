@@ -31,10 +31,10 @@ extension URL {
         let request = NSMutableURLRequest(url: self, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
         request.httpMethod = "HEAD"
         request.setValue("", forHTTPHeaderField: "Accept-Encoding")
-        URLSession.shared.dataTask(with: request, completionHandler: { (_, response, _) -> Void in
+        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (_, response, _) -> Void in
             let contentLength: Int64 = response?.expectedContentLength ?? NSURLSessionTransferSizeUnknown
             DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
-                completionHandler(contentLength: contentLength)
+                completionHandler(contentLength)
             })
         }).resume()
     }
@@ -44,10 +44,10 @@ extension URL {
         let request = NSMutableURLRequest(url: self, cachePolicy: NSURLRequest.CachePolicy.reloadIgnoringLocalAndRemoteCacheData, timeoutInterval: timeoutInterval)
         request.httpMethod = "HEAD"
         request.setValue("bytes=5-10", forHTTPHeaderField: "Range")
-        URLSession.shared.dataTask(with: request, completionHandler: { (_, response, _) -> Void in
+        URLSession.shared.dataTask(with: request as URLRequest, completionHandler: { (_, response, _) -> Void in
             let responseCode = (response as? HTTPURLResponse)?.statusCode ?? -1
             DispatchQueue.global(priority: DispatchQueue.GlobalQueuePriority.default).async(execute: {
-                completionHandler(doesSupport: responseCode == 206)
+                completionHandler(responseCode == 206)
             })
         }).resume()
     }
@@ -233,11 +233,12 @@ extension URL {
     @available(iOS 8.0, *)
     var fileThumbnail1024px: UIImage? {
         get {
-            return fileThumbnailsDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey]
+            fileThumbnailsDictionary?["hi"]
+            return fileThumbnailsDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey.rawValue]
         }
         set {
             assert(newValue == nil || (newValue?.size.height == 1024 && newValue?.size.width == 1024), "Image size set in fileThumbnail1024px is not 1024x1024")
-            fileThumbnailsDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey] = newValue
+            fileThumbnailsDictionary?[URLThumbnailDictionaryItem.NSThumbnail1024x1024SizeKey.rawValue] = newValue
         }
     }
     #endif
