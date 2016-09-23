@@ -64,7 +64,6 @@
 		9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261084A1CE50816009F3E86 /* CardDetailViewController.swift */; };
 		926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926108541CEA0EA6009F3E86 /* Onboarding.storyboard */; };
 		926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */; };
-		926108591CEA11B9009F3E86 /* Alert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108581CEA11B9009F3E86 /* Alert.swift */; };
 		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */; };
@@ -174,7 +173,6 @@
 		9261084A1CE50816009F3E86 /* CardDetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailViewController.swift; sourceTree = "<group>"; };
 		926108541CEA0EA6009F3E86 /* Onboarding.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Onboarding.storyboard; sourceTree = "<group>"; };
 		926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpLogInViewController.swift; sourceTree = "<group>"; };
-		926108581CEA11B9009F3E86 /* Alert.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Alert.swift; sourceTree = "<group>"; };
 		9261085B1CEA196C009F3E86 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
@@ -528,7 +526,6 @@
 			children = (
 				92BCEB601D847F3A00E05C05 /* Circle Views */,
 				92BCEB5F1D847C4000E05C05 /* Scroll Views */,
-				926108581CEA11B9009F3E86 /* Alert.swift */,
 				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 				929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */,
@@ -921,7 +918,6 @@
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,
-				926108591CEA11B9009F3E86 /* Alert.swift in Sources */,
 				92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */,
 				923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,

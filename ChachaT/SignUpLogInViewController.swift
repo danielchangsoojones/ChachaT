@@ -233,16 +233,9 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             if let error = error {
                 let code = error._code
                 if code == PFErrorCode.errorObjectNotFound.rawValue {
-                    let appearance = SCLAlertView.SCLAppearance(
-                        showCloseButton: false
-                    )
-                    let alertView = SCLAlertView(appearance: appearance)
-                    _ = alertView.addButton("Okay", action: {
-                        let responder: SCLAlertViewResponder = SCLAlertViewResponder(alertview: alertView)
-                        responder.close()
+                    self.alertAndBecomeResponder(title: "Log In Problem", subtitle: "Username or Password is incorrect.", action: { 
                         self.theEmail.becomeFirstResponder()
                     })
-                    _ = alertView.showError("Log In Problem", subTitle: "Username or Password is incorrect.")
                 }
                 else {
                     _ = SCLAlertView().showError("Failed Login", subTitle: "Login failed at this time.", closeButtonTitle: "Okay")
@@ -262,35 +255,37 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     func allValidates() -> Bool
     {
         if theEmail.text!.isEmpty {
-            let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", buttonAction: { () -> Void in
-                alert.closeAlert()
+            alertAndBecomeResponder(title: "Email is Required", subtitle: "Please enter an email address.", action: { 
                 self.theEmail.becomeFirstResponder()
             })
-            alert.createAlert("Email is Required", subtitle: "Please enter an email address.", closeButtonTitle: "", type: .error)
             return false
-        }
-        else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
-            let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", buttonAction: { () -> Void in
-                alert.closeAlert()
+        } else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
+            alertAndBecomeResponder(title: "Invalid Email", subtitle: "Please enter a valid email address", action: {
                 self.theEmail.becomeFirstResponder()
             })
-            alert.createAlert("Invalid Email", subtitle: "Please enter a valid email address", closeButtonTitle: "", type: .error)
             return false
-        }
-        else if thePassword.text!.isEmpty {
-            let alert = Alert(closeButtonHidden: true)
-            alert.addButton("Okay", buttonAction: { () -> Void in
-                alert.closeAlert()
+        } else if let password = thePassword.text, password.isEmpty {
+            alertAndBecomeResponder(title: "Password is Required", subtitle: "Please enter a password.", action: {
                 self.thePassword.becomeFirstResponder()
             })
-            alert.createAlert("Password is Required", subtitle: "Please enter a password.", closeButtonTitle: "", type: .error)
             return false
         }
         else {
             return true
         }
+    }
+    
+    func alertAndBecomeResponder(title: String, subtitle: String, action: @escaping () -> ()) {
+        let appearance = SCLAlertView.SCLAppearance(
+            showCloseButton: false
+        )
+        let alertView = SCLAlertView(appearance: appearance)
+        _ = alertView.addButton("Okay", action: {
+            let responder: SCLAlertViewResponder = SCLAlertViewResponder(alertview: alertView)
+            responder.close()
+            action()
+        })
+        _ = alertView.showError(title, subTitle: subtitle)
     }
     
     func textFieldShouldReturn(_ textField: UITextField) -> Bool {

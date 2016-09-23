@@ -50,7 +50,7 @@ class SearchTagsViewController: SuperTagViewController {
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()
         scrollViewSearchView.searchBox.delegate = self
         self.navigationController?.navigationBar.addSubview(scrollViewSearchView)
-        scrollViewSearchView.snp_makeConstraints { (make) in
+        scrollViewSearchView.snp.makeConstraints { (make) in
             make.edges.equalTo((self.navigationController?.navigationBar)!)
         }
         setChosenTagView(scrollViewSearchView)
