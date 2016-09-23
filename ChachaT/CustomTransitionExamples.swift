@@ -20,11 +20,11 @@ class FadeTransition: NSObject, UIViewControllerAnimatedTransitioning {
     
     func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
         let containerView = transitionContext.containerView
-        let toView = transitionContext.view(forKey: UITransitionContextViewKey)
+        let toView: UIView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         
         containerView.addSubview(toView)
         toView.alpha = 0.0
-        UIView.animateWithDuration(duration, animations: {
+        UIView.animate(withDuration: duration, animations: {
             toView.alpha = 1.0
             }, completion: { _ in
                 transitionContext.completeTransition(true)
@@ -53,23 +53,23 @@ class SpinTransition: NSObject, UIViewControllerAnimatedTransitioning {
     let originFrame = CGRect.zero
     let rotations = 1.0
     
-    func transitionDuration(transitionContext: UIViewControllerContextTransitioning?) -> NSTimeInterval {
+    func transitionDuration(using transitionContext: UIViewControllerContextTransitioning?) -> TimeInterval {
         return duration
     }
     
-    func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-//        let containerView = transitionContext.containerView
-//        let fromView = transitionContext.view(forKey: UITransitionContextViewKey)
-//        let toView = transitionContext.view(forKey: UITransitionContextViewKey)
+    func animateTransition(using transitionContext: UIViewControllerContextTransitioning) {
+        let containerView = transitionContext.containerView
+        let fromView = transitionContext.view(forKey: UITransitionContextViewKey.from)!
+        let toView = transitionContext.view(forKey: UITransitionContextViewKey.to)!
         
         toView.alpha = 0.0
         
         containerView.addSubview(fromView)
         containerView.addSubview(toView)
         
-        spinView(fromView, duration: duration, rotations: rotations)
+        spinView(view: fromView, duration: duration, rotations: rotations)
         
-        UIView.animateWithDuration(duration, delay: 0, options: .CurveEaseInOut, animations: {
+        UIView.animate(withDuration: duration, delay: 0, options: .curveEaseInOut, animations: {
             fromView.alpha = 0.0
             toView.alpha = 1.0
             }, completion: { _ in
@@ -78,12 +78,12 @@ class SpinTransition: NSObject, UIViewControllerAnimatedTransitioning {
     }
     
     // Private Helpers
-    private func spinView(view: UIView, duration: NSTimeInterval, rotations: Double) {
+    private func spinView(view: UIView, duration: TimeInterval, rotations: Double) {
         let rotationAnimation = CABasicAnimation(keyPath: SpinTransitionConstants.BasicAnimationKeyPath.value)
         rotationAnimation.toValue = Double(M_PI) * rotations * 2.0
         rotationAnimation.duration = duration
-        rotationAnimation.cumulative = true
+        rotationAnimation.isCumulative = true
         
-        view.layer.addAnimation(rotationAnimation, forKey: SpinTransitionConstants.RotationAnimationKey.value)
+        view.layer.add(rotationAnimation, forKey: SpinTransitionConstants.RotationAnimationKey.value)
     }
 }
