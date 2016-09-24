@@ -45,7 +45,7 @@ class CreationTagView: TagView {
         searchTextField.clearButtonMode = .always
         self.addSubview(searchTextField)
         searchTextField.placeholder = searchBarPlaceHolderText
-        searchTextField.snp_makeConstraints { (make) in
+        searchTextField.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }

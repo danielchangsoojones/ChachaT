@@ -28,7 +28,7 @@ class AnnotationView: CircleView {
         theImageView = UIImageView(image: UIImage(named: imageName))
         theImageView.contentMode = .scaleAspectFit
         self.addSubview(theImageView)
-        theImageView.snp_makeConstraints { (make) in
+        theImageView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
             make.height.width.equalTo(self).multipliedBy(AnnotationConstants.imageToCircleRatio)
         }

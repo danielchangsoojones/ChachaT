@@ -48,7 +48,7 @@ class SliderView: UIView {
     func createSliderLabel() {
         self.addSubview(theSliderLabel)
         theSliderLabel.textColor = SliderViewConstants.sliderLabelTextColor
-        theSliderLabel.snp_makeConstraints { (make) in
+        theSliderLabel.snp.makeConstraints { (make) in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
         }
@@ -64,10 +64,10 @@ class SliderView: UIView {
             sliderText = setSingleSliderLabelText(self.maxValue)
         }
         self.addSubview(theSlider)
-        theSlider.snp_makeConstraints { (make) in
+        theSlider.snp.makeConstraints { (make) in
             make.trailing.leading.equalTo(self)
             make.bottom.equalTo(self)
-            make.top.equalTo(theSliderLabel.snp_bottom).offset(SliderViewConstants.sliderOffsetFromLabel)
+            make.top.equalTo(theSliderLabel.snp.bottom).offset(SliderViewConstants.sliderOffsetFromLabel)
         }
         delegate?.sliderValueChanged(sliderText, suffix: suffix)
     }

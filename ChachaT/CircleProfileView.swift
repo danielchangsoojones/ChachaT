@@ -23,7 +23,7 @@ class CircleProfileView: UIView {
     func circleViewSetup(_ diameter: CGFloat, file: AnyObject) {
         circleView = CircularImageView(file: file, diameter: diameter)
         self.addSubview(circleView)
-        circleView.snp_makeConstraints { (make) in
+        circleView.snp.makeConstraints { (make) in
             make.center.equalTo(self)
         }
     }
@@ -33,9 +33,9 @@ class CircleProfileView: UIView {
         theNameLabel.text = name
         theNameLabel.lineBreakMode = .byClipping
         self.addSubview(theNameLabel)
-        theNameLabel.snp_makeConstraints { (make) in
+        theNameLabel.snp.makeConstraints { (make) in
             //TODO: put these constants in a struct
-            make.top.equalTo(circleView.snp_bottom)
+            make.top.equalTo(circleView.snp.bottom)
             make.centerX.equalTo(self)
             make.width.lessThanOrEqualTo(circleView)
         }

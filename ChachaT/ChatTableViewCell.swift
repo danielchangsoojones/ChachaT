@@ -44,7 +44,7 @@ class ChatTableViewCell: UITableViewCell {
         let diameter : CGFloat = self.frame.width * 0.2
         theCircleImageView = CircularImageView(file: user!.profileImage, diameter: diameter)
         self.addSubview(theCircleImageView)
-        theCircleImageView.snp_makeConstraints { (make) in
+        theCircleImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             //TODO: make this offset make it line up with the other matches scroll view bubbles
             make.leading.equalTo(self).offset(10)
@@ -56,11 +56,11 @@ class ChatTableViewCell: UITableViewCell {
     func nameLabelSetup(_ name: String) {
         theNameLabel.text = name
         self.addSubview(theNameLabel)
-        theNameLabel.snp_makeConstraints { (make) in
+        theNameLabel.snp.makeConstraints { (make) in
             //TODO: line up the top of timestamp and the top of the nameLabel
             make.top.equalTo(theCircleImageView).offset(10)
-            make.leading.equalTo(theCircleImageView.snp_trailing)
-            make.trailing.equalTo(theTimeStamp.snp_leading)
+            make.leading.equalTo(theCircleImageView.snp.trailing)
+            make.trailing.equalTo(theTimeStamp.snp.leading)
         }
     }
     
@@ -68,7 +68,7 @@ class ChatTableViewCell: UITableViewCell {
     func timeStampSetup(_ dateCreated: Date) {
         theTimeStamp.text = formatTimeStamp(dateCreated)
         self.addSubview(theTimeStamp)
-        theTimeStamp.snp_makeConstraints { (make) in
+        theTimeStamp.snp.makeConstraints { (make) in
             make.trailing.equalTo(self)
             make.top.equalTo(self)
             //TODO: make the width have a high priority for growing or whatever
@@ -96,9 +96,9 @@ class ChatTableViewCell: UITableViewCell {
     func messagePreviewLabelSetup(_ message: String) {
         theMessagePreviewLabel.text = message
         self.addSubview(theMessagePreviewLabel)
-        theMessagePreviewLabel.snp_makeConstraints { (make) in
+        theMessagePreviewLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(theNameLabel)
-            make.top.equalTo(theNameLabel.snp_bottom)
+            make.top.equalTo(theNameLabel.snp.bottom)
             make.trailing.equalTo(theUnreadNotificationBubble)
         }
     }
@@ -107,8 +107,8 @@ class ChatTableViewCell: UITableViewCell {
         let diameter : CGFloat = 10
         theUnreadNotificationBubble = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
         self.addSubview(theUnreadNotificationBubble)
-        theUnreadNotificationBubble.snp_makeConstraints { (make) in
-            make.top.equalTo(theTimeStamp.snp_bottom)
+        theUnreadNotificationBubble.snp.makeConstraints { (make) in
+            make.top.equalTo(theTimeStamp.snp.bottom)
             make.trailing.equalTo(self)
         }
         theUnreadNotificationBubble.isHidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble

@@ -23,7 +23,7 @@ class AutoGrowingHorizontalScrollView: UIView {
         self.addSubview(theScrollView)
         theScrollView.backgroundColor = UIColor.blue
         contentViewSetup()
-        theScrollView.snp_makeConstraints { (make) in
+        theScrollView.snp.makeConstraints { (make) in
             //the scroll view is snapped to the edges of the view because we want the whole view to be scrollable
             //so, it is just like normal autolayout, where we constrain it to the edges
             make.edges.equalTo(self)
@@ -35,7 +35,7 @@ class AutoGrowingHorizontalScrollView: UIView {
         theScrollView.addSubview(theContentView)
         theContentView.backgroundColor = UIColor.red
         stackViewSetup()
-        theContentView.snp_makeConstraints { (make) in
+        theContentView.snp.makeConstraints { (make) in
             //Tricky area: when the edges of theContentView are pinned to the scrollView. It is not like usual autolayout where theContentView grows to the size of theScrollView. It is telling theScrollView what theScrollView's content size should be.
             //So, it's not telling the ContentView to be the same frame size as the displayed ScrollView frame, it's rather telling Scrollview that the ContentView is its content and so if contentview is larger than the ScrollView frame then you get scrolling. This is the key to having a scrollView that grows with its contentSize. Ask Daniel Jones if more clarification needed.
             make.edges.equalTo(theScrollView)
@@ -47,7 +47,7 @@ class AutoGrowingHorizontalScrollView: UIView {
     //We add a stackView to the contentView because StackViews are great for automatically resizing. Everytime we add an arranged subview to the stack view, it will make the stackView grow and space in a proportional way.
     fileprivate func stackViewSetup() {
         theContentView.addSubview(theStackView)
-        theStackView.snp_makeConstraints { (make) in
+        theStackView.snp.makeConstraints { (make) in
             //we set the edges of the Stack View to the contentView because it tells the Stack View to cover whatever area the contentView covers.
             //Additionally, by setting the edges of the Stack View to contentView, the content view is able to caclulate its own size because the constraint basically tell it how big the subviews are inside of theContentView.
             //So, when we add an arranged subview to the stack view, it makes the stack view grow to fit the new arranged subview, then the content view calculates the new size of the stack view, which allows the ContentView to know what size it should be. And then, the scrollView can calculate its size based upon theContentView size.

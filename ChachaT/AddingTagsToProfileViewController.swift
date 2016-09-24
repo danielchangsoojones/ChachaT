@@ -42,7 +42,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
         //TODO: move this the CreationTagView class
         tagView.borderColor = UIColor.black
-        tagChoicesView.addTagView(tagView)
+        _ = tagChoicesView.addTagView(tagView)
     }
     
     //Purpose: the user should be able to tap, when keyboard is showing, anywhere to dismiss the keyboard
@@ -153,11 +153,11 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         }
         self.view.addSubview(creationMenuView)
         //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
-        creationMenuView.snp_remakeConstraints { (make) in
+        creationMenuView.snp.remakeConstraints { (make) in
             make.leading.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view).inset(keyboardHeight)
             if let addingTagView = findCreationTagView() {
-                make.top.equalTo(addingTagView.snp_bottom)
+                make.top.equalTo(addingTagView.snp.bottom)
             }
         }
     }

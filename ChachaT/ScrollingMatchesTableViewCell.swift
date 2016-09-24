@@ -37,7 +37,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     
     func matchesScrollViewSetup() {
         self.addSubview(matchesScrollView)
-        matchesScrollView.snp_makeConstraints { (make) in
+        matchesScrollView.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }
@@ -47,7 +47,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         for match in matches {
             if let fullName = match.targetUser.fullName, let profileImage = match.targetUser.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
-                circleProfileView.tapped { (tapped) in
+                _ = circleProfileView.tapped { (tapped) in
                     self.delegate?.segueToChatVC(match.targetUser)
                 }
                 matchesScrollView.addView(circleProfileView)

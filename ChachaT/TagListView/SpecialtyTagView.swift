@@ -83,7 +83,7 @@ open class SpecialtyTagView: TagView {
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         fakeBorder.isUserInteractionEnabled = false
         self.addSubview(fakeBorder)
-        fakeBorder.snp_makeConstraints { (make) in
+        fakeBorder.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }
@@ -93,7 +93,7 @@ open class SpecialtyTagView: TagView {
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.isUserInteractionEnabled = false
         self.addSubview(annotationView)
-        annotationView.snp_makeConstraints { (make) in
+        annotationView.snp.makeConstraints { (make) in
             make.leading.equalTo(self)
             make.centerY.equalTo(self)
         }

@@ -136,7 +136,7 @@ class BackgroundAnimationViewController: UIViewController {
     func setFakeNavigationBarView() {
         let fakeNavigationBarView = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height, delegate: self)
         self.view.addSubview(fakeNavigationBarView)
-        fakeNavigationBarView.snp_makeConstraints { (make) in
+        fakeNavigationBarView.snp.makeConstraints { (make) in
             make.trailing.leading.equalTo(self.view)
             make.top.equalTo(self.view)
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)

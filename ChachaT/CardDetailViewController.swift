@@ -93,7 +93,7 @@ class CardDetailViewController: UIViewController {
     }
     
     fileprivate func setupTapHandler() {
-        theProfileImageButtonOverlay.tapped { _ in
+        _ = theProfileImageButtonOverlay.tapped { _ in
             self.dismiss(animated: false, completion: nil)
         }
     }

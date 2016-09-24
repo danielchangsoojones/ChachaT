@@ -229,7 +229,7 @@ extension AboutView : UITextFieldDelegate {
         theTextField!.delegate = self
         theTextField!.placeholder = thePlaceholderText
         theInputContentView.addSubview(theTextField!)
-        theTextField!.snp_makeConstraints { (make) in
+        theTextField!.snp.makeConstraints { (make) in
             make.edges.equalTo(theInputContentView)
         }
     }
@@ -252,7 +252,7 @@ extension AboutView {
         theInnerLabel = UILabel()
         theInnerLabel!.text = innerText ?? thePlaceholderText
         theInputContentView.addSubview(theInnerLabel!)
-        theInnerLabel!.snp_makeConstraints({ (make) in
+        theInnerLabel!.snp.makeConstraints({ (make) in
             //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
             make.leading.equalTo(theInputContentView).offset(10)
             make.centerY.equalTo(theInputContentView)
@@ -267,7 +267,7 @@ extension AboutView {
         let rotatedImage = image?.imageRotatedByDegrees(90, flip: false)
         let imageView = UIImageView(image: rotatedImage)
         theInputContentView.addSubview(imageView)
-        imageView.snp_makeConstraints({ (make) in
+        imageView.snp.makeConstraints({ (make) in
             //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
             make.trailing.equalTo(theInputContentView).inset(10)
             make.centerY.equalTo(theInputContentView)

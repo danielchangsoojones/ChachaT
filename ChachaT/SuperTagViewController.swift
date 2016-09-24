@@ -44,7 +44,7 @@ class SuperTagViewController: UIViewController {
                     tagView.makePrivate()
                 }
             case .generic:
-                tagChoicesView.addTag(tag.title)
+                _ = tagChoicesView.addTag(tag.title)
             }
         }
     }

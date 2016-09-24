@@ -204,11 +204,11 @@ class ChachaDropDownMenu: UIView {
     func addInnerView(_ sideOffset: CGFloat = 0) {
         dropDownView.addSubview(innerView!)
         //the view will grow to whatever size is necessary to fit its innerView
-        innerView!.snp_makeConstraints { (make) in
+        innerView!.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(sideOffset)
             make.trailing.equalToSuperview().inset(sideOffset)
             make.top.equalToSuperview()
-            make.bottom.equalTo(arrowImage.snp_top).offset(-arrowImageInset) //not sure why inset() does not work, but it doesn't
+            make.bottom.equalTo(arrowImage.snp.top).offset(-arrowImageInset) //not sure why inset() does not work, but it doesn't
         }
     }
     
@@ -219,11 +219,11 @@ class ChachaDropDownMenu: UIView {
         arrowImage.addGestureRecognizer(tap)
         arrowImage.isUserInteractionEnabled = true
         superView.addSubview(arrowImage)
-        arrowImage.snp_makeConstraints { (make) in
+        arrowImage.snp.makeConstraints { (make) in
             //using low priority because the compiler needs to know which constraints to break when the dropDownHeight is 0
-            make.bottom.equalTo(superView).inset(arrowImageInset / arrowImageBottomInsetDivision).priorityLow()
-            make.height.equalTo(10).priorityLow()
-            make.width.equalTo(20).priorityLow()
+            make.bottom.equalTo(superView).inset(arrowImageInset / arrowImageBottomInsetDivision).priority(250)
+            make.height.equalTo(10).priority(250)
+            make.width.equalTo(20).priority(250)
             make.centerX.equalTo(superView)
         }
         return arrowImage

@@ -88,7 +88,7 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
         tableView!.delegate = self
         tableView!.dataSource = self
         self.addSubview(tableView!)
-        tableView!.snp_makeConstraints { (make) in
+        tableView!.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }

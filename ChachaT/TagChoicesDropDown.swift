@@ -22,7 +22,7 @@ extension ChachaDropDownMenu {
     
     fileprivate func addTags(_ titleArray: [String], tagListView: TagListView) {
         for title in titleArray {
-            tagListView.addTag(title)
+            _ = tagListView.addTag(title)
         }
     }
 }

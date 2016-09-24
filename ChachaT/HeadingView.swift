@@ -25,7 +25,7 @@ class HeadingView: UIView {
     func titleLabelSetup(_ text: String) {
         theTitleLabel.text = text
         self.addSubview(theTitleLabel)
-        theTitleLabel.snp_makeConstraints { (make) in
+        theTitleLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(self)
             make.centerY.equalTo(self)
         }
@@ -36,8 +36,8 @@ class HeadingView: UIView {
         let diameter : CGFloat = 20
         theCircleView = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
         self.addSubview(theCircleView)
-        theCircleView.snp_makeConstraints { (make) in
-            make.leading.equalTo(theTitleLabel.snp_trailing)
+        theCircleView.snp.makeConstraints { (make) in
+            make.leading.equalTo(theTitleLabel.snp.trailing)
             make.centerY.equalTo(self)
         }
         addNumberToCircle(num)
@@ -47,7 +47,7 @@ class HeadingView: UIView {
         let numLabel = UILabel()
         numLabel.text = num.toString
         theCircleView.addSubview(numLabel)
-        numLabel.snp_makeConstraints { (make) in
+        numLabel.snp.makeConstraints { (make) in
             make.center.equalTo(theCircleView)
         }
     }

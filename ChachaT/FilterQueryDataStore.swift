@@ -143,7 +143,6 @@ class SearchTagsDataStore {
         if let index = string.characters.index(of: spaceString) {
             //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
             let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
-            let maxValueSusbtring = string.substring(from: index)
             let maxValueSubstring = string.substring(from: string.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
             if let minValue = Int(minValueSubstring) {
                 if let maxValue = Int(maxValueSubstring) {

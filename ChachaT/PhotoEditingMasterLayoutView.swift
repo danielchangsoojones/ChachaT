@@ -44,7 +44,7 @@ class PhotoEditingMasterLayoutView: UIView {
         let innerHorizontalStackView = createStackView(.horizontal, distribution: .fillProportionally, views: [largePhotoEditingView, sidingStackViews.verticalSiding])
         masterStackView = createStackView(.vertical, distribution: .fillProportionally, views: [innerHorizontalStackView, sidingStackViews.horizontalSiding])
         self.addSubview(masterStackView)
-        masterStackView.snp_makeConstraints { (make) in
+        masterStackView.snp.makeConstraints { (make) in
             make.edges.equalTo(self)
         }
     }

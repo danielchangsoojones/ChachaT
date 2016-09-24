@@ -76,7 +76,7 @@ class ScrollViewSearchView: UIView {
     func showSearchBox(_ searchBoxHolder: UIView) -> CustomTagsSearchBar {
         let searchBox = CustomTagsSearchBar(placeHolderText: "Search Tags")
         searchBoxHolder.addSubview(searchBox)
-        searchBox.snp_makeConstraints { (make) in
+        searchBox.snp.makeConstraints { (make) in
             make.edges.equalTo(searchBoxHolder)
         }
         return searchBox

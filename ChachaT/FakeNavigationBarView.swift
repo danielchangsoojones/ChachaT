@@ -41,7 +41,7 @@ class FakeNavigationBarView : UIView {
         logoImageView.contentMode = .scaleAspectFit
         logoImageView.backgroundColor = UIColor.red
         self.addSubview(logoImageView)
-        logoImageView.snp_makeConstraints { (make) in
+        logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
             make.height.equalTo(30)
@@ -53,7 +53,7 @@ class FakeNavigationBarView : UIView {
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
         rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
         self.addSubview(rightButton)
-        rightButton.snp_makeConstraints { (make) in
+        rightButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }

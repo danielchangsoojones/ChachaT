@@ -47,7 +47,7 @@ class ProfileIndexViewController: UIViewController {
         let profileBubble = CircularImageView(file: User.current()?.profileImage, diameter: 150)
         profileBubble.addTapGesture(target: self, action: #selector(ProfileIndexViewController.profileButtonPressed(_:)))
         theUpperBackgroundView.addSubview(profileBubble)
-        profileBubble.snp_makeConstraints { (make) in
+        profileBubble.snp.makeConstraints { (make) in
             make.center.equalTo(theUpperBackgroundView)
         }
         editProfileButtonSetup(profileBubble)
@@ -57,13 +57,13 @@ class ProfileIndexViewController: UIViewController {
         let editButton = CircleView(diameter: 50, color: UIColor.white)
         editButton.addTapGesture(target: self, action: #selector(ProfileIndexViewController.editButtonPressed(_:)))
         theUpperBackgroundView.addSubview(editButton)
-        editButton.snp_makeConstraints { (make) in
+        editButton.snp.makeConstraints { (make) in
             make.bottom.equalTo(profileBubble)
             make.trailing.equalTo(profileBubble)
         }
         let imageView = UIImageView(image: UIImage(named: "EditingPencil"))
         editButton.addSubview(imageView)
-        imageView.snp_makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.center.equalTo(editButton)
             make.height.width.equalTo(editButton.frame.height - ProfileIndexConstants.buttonImageInset)
         }
@@ -77,16 +77,16 @@ class ProfileIndexViewController: UIViewController {
         //TODO: put image name in struct above
         let circleButton = createButtonCircle(UIImage(named: "SettingsGear")!)
         buttonView.addSubview(circleButton)
-        circleButton.snp_makeConstraints { (make) in
+        circleButton.snp.makeConstraints { (make) in
             make.top.equalTo(buttonView)
             make.leading.trailing.equalTo(buttonView)
         }
         
         let label = createButtonLabel(ProfileIndexConstants.settingsTitle)
         buttonView.addSubview(label)
-        label.snp_makeConstraints { (make) in
+        label.snp.makeConstraints { (make) in
             make.bottom.equalTo(buttonView)
-            make.top.equalTo(circleButton.snp_bottom)
+            make.top.equalTo(circleButton.snp.bottom)
             make.centerX.equalTo(buttonView)
         }
         
@@ -109,7 +109,7 @@ class ProfileIndexViewController: UIViewController {
         let circleView = CircleView(diameter: 100, color: CustomColors.JellyTeal)
         let imageView = UIImageView(image: image)
         circleView.addSubview(imageView)
-        imageView.snp_makeConstraints { (make) in
+        imageView.snp.makeConstraints { (make) in
             make.center.equalTo(circleView)
             //TODO: make the constant mean something
             make.height.width.equalTo(circleView.frame.height - 20)
