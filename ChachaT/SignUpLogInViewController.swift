@@ -10,8 +10,6 @@ import UIKit
 import EFTools
 import Parse
 import SnapKit
-import ParseFacebookUtilsV4
-import Alamofire
 import SCLAlertView
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
@@ -33,63 +31,14 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     
     var signUpState = true
+    var dataNegotiator: WelcomeDataNegotiator!
     
     //TODO: make logOut work for facebook
     @IBAction func facebookButtonPressed(_ sender: UIButton) {
-        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { (user, error) in
-            if let currentUser = user as? User {
-                if currentUser.isNew {
-                    print("this is a new user that just signed up")
-                    self.updateProfileFromFacebook(true)
-                } else {
-                    //let the facebook user sign-in
-                    self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: nil)
-                }
-            } else {
-                print("there was an error logging in/signing up")
-            }
-        }
-    }
-    
-    //the API request to facebook will look something like this: graph.facebook.com/me?fields=name,email,picture
-    //me is a special endpoint that somehow figures out the user's id or token, and then it can access the currentusers info like name, email and picture.
-    //look into Facebook Graph API to learn more
-    func updateProfileFromFacebook(_ isNew : Bool) {
-        if FBSDKAccessToken.current() != nil {
-            FBSDKGraphRequest(graphPath: "me?fields=name", parameters: nil).start(completionHandler: { (connection, result, error) -> Void in
-                if error == nil {
-                    print("updating profile from facebook")
-                    let currentUser = User.current()!
-                    
-                    let userData = result as! NSDictionary
-                    print(userData)
-                    currentUser.fullName = userData[Constants.name] as? String
-                    currentUser.facebookId = userData[Constants.id] as? String
-                    currentUser.saveInBackground()
-                    
-                    self.updateFacebookImage()
-                } else {
-                    print(error)
-                }
-            })
-        }
-    }
-    
-    func updateFacebookImage() {
-        let currentUser = User.current()!
-        if let facebookId = currentUser.facebookId {
-            let pictureURL = "https://graph.facebook.com/" + facebookId + "/picture?type=square&width=600&height=600"
-            Alamofire.request(pictureURL).responseData(completionHandler: { (response) in
-                if response.result.error == nil {
-                    let data = response.result.value
-                    currentUser.profileImage = PFFile(name: Constants.profileImage, data: data!)
-                    currentUser.saveInBackground()
-                    self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                } else {
-                    print("Failed to update profile image from facebook: \(response.result.error)")
-                }
-            })
-        }
+        
+        
+        
+        dataNegotiator.accessFaceBook()
     }
     
     
@@ -138,14 +87,17 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
+        dataNegotiator = WelcomeDataNegotiator(delegate: self)
         setGUI()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
-        
-        //hide keyboard when tap anywhere on screen
+        setupTapAwayFromKeyboard()
+    }
+    
+    //When the user taps away from the keyboard dismiss the keyboard
+    func setupTapAwayFromKeyboard() {
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(SignUpLogInViewController.dismissTheKeyboard))
         view.addGestureRecognizer(tap)
-        
     }
     
     func dismissTheKeyboard() {
@@ -159,8 +111,6 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func setGUI() {
         self.view.backgroundColor = ChachaTeal
-//        applyShadow(theSignUpButton)
-//        applyShadow(theFacebookButton)
         applyShadow(theTextfieldsView)
     }
     
@@ -191,64 +141,19 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
             })
     }
     
-    func signUp()
-    {
-        let currentUser = User.current()
-        currentUser!.username = theEmail.text
-        currentUser!.password = thePassword.text
-        self.view.isUserInteractionEnabled = false
-        theSpinner.startAnimating()
-
-        currentUser!.signUpInBackground { (success, error: Error?) -> Void in
-            self.view.isUserInteractionEnabled = true
-            self.theSpinner.stopAnimating()
-            if success {
-                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.current()
-                installation!["user"] = PFUser.current()
-                installation!.saveInBackground()
-            }
-            else {
-                if error != nil {
-                    let code = error!._code
-                    if code == PFErrorCode.errorInvalidEmailAddress.rawValue {
-                        _ = SCLAlertView().showError("invalid Email Address", subTitle: "Please enter a valid email address.", closeButtonTitle: "Okay")
-                    } else if code == PFErrorCode.errorUserEmailTaken.rawValue {
-                        _ = SCLAlertView().showError("Problem Signing Up", subTitle: "Email already being used by another user, please use a differnet one.", closeButtonTitle: "Okay")
-                    } else {
-                        _ = SCLAlertView().showError("Problem Signing Up", subTitle: "error:\(code)", closeButtonTitle: "Okay")
-                    }
-                }
-            }
+    func signUp() {
+        if let email = theEmail.text, let password = thePassword.text {
+            dataNegotiator.signUp(email: email, password: password)
+        } else {
+            _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
     }
     
     func logIn() {
-        view.isUserInteractionEnabled=false
-        theSpinner.startAnimating()
-        User.logInWithUsername(inBackground: theEmail.text!.lowercased(), password: thePassword.text!) { (user, error) -> Void in
-            self.theSpinner.stopAnimating()
-            self.view.isUserInteractionEnabled=true
-            
-            if let error = error {
-                let code = error._code
-                if code == PFErrorCode.errorObjectNotFound.rawValue {
-                    self.alertAndBecomeResponder(title: "Log In Problem", subtitle: "Username or Password is incorrect.", action: { 
-                        self.theEmail.becomeFirstResponder()
-                    })
-                }
-                else {
-                    _ = SCLAlertView().showError("Failed Login", subTitle: "Login failed at this time.", closeButtonTitle: "Okay")
-                }
-                return;
-            }
-            
-            if user != nil {
-                self.performSegueWithIdentifier(.SignUpSuccessSegue, sender: self)
-                let installation = PFInstallation.current()
-                installation!["user"] = PFUser.current()
-                installation!.saveEventually(nil)
-            }
+        if let email = theEmail.text, let password = thePassword.text {
+            dataNegotiator.logIn(email: email, password: password)
+        } else {
+            _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
     }
     
@@ -330,9 +235,5 @@ extension SignUpLogInViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case SignUpSuccessSegue
         case SignUpToQuestionOnboardingSegue
-    }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        
     }
 }
