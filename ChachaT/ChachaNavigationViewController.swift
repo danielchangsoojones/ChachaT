@@ -24,7 +24,7 @@ class ChachaNavigationViewController: UINavigationController {
         //This allows us to have the same backButton throughout the app
         let pushingVC = viewControllers[viewControllers.count - 1]
         let backItem = UIBarButtonItem()
-        backItem.title = ""
+        backItem.title = "" //get rid of the title, we just want the back arrow: <
         pushingVC.navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
         super.pushViewController(viewController, animated: animated)
     }
