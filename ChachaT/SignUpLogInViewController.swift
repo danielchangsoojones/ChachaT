@@ -31,7 +31,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     
     var signUpState = true
-    var dataNegotiator: WelcomeDataNegotiator!
+    var dataNegotiator: WelcomeDataStore!
     
     //TODO: make logOut work for facebook
     @IBAction func facebookButtonPressed(_ sender: UIButton) {
@@ -87,7 +87,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        dataNegotiator = WelcomeDataNegotiator(delegate: self)
+        dataNegotiator = WelcomeDataStore(delegate: self)
         setGUI()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)

@@ -1,5 +1,5 @@
 //
-//  WelcomeDataNegotiator.swift
+//  WelcomeDataStore.swift
 //  ChachaT
 //
 //  Created by Daniel Jones on 9/26/16.
@@ -11,16 +11,16 @@ import ParseFacebookUtilsV4
 import Alamofire
 import SCLAlertView
 
-class WelcomeDataNegotiator {
-    var delegate: WelcomeDataNegotiatorDelegate?
+class WelcomeDataStore {
+    var delegate: WelcomeDataStoreDelegate?
     
-    init(delegate: WelcomeDataNegotiatorDelegate) {
+    init(delegate: WelcomeDataStoreDelegate) {
         self.delegate = delegate
     }
 }
 
 //for signing up
-extension WelcomeDataNegotiator {
+extension WelcomeDataStore {
     func signUp(email: String, password: String) {
         let currentUser = User.current()
         currentUser!.username = email
@@ -52,7 +52,7 @@ extension WelcomeDataNegotiator {
 }
 
 //for logging in
-extension WelcomeDataNegotiator {
+extension WelcomeDataStore {
     func logIn(email: String, password: String) {
         let lowerCaseEmail = email.lowercased()
         let lowerCasePassword = password.lowercased()
@@ -80,7 +80,7 @@ extension WelcomeDataNegotiator {
 }
 
 //Facebook Extension
-extension WelcomeDataNegotiator {
+extension WelcomeDataStore {
     //Facebook log in is not currently working at the moment, and I am not totally sure why...
     func accessFaceBook() {
         PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { (user, error) in
@@ -140,13 +140,13 @@ extension WelcomeDataNegotiator {
     }
 }
 
-protocol WelcomeDataNegotiatorDelegate {
+protocol WelcomeDataStoreDelegate {
     func performSegueIntoApp()
     func toggleSpinner(hide: Bool)
     func userNotFound()
 }
 
-extension SignUpLogInViewController: WelcomeDataNegotiatorDelegate {
+extension SignUpLogInViewController: WelcomeDataStoreDelegate {
     func performSegueIntoApp() {
         performSegueWithIdentifier(.SignUpSuccessSegue, sender: nil)
     }
