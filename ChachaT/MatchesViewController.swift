@@ -27,12 +27,25 @@ class MatchesViewController: UIViewController {
         // Do any additional setup after loading the view.
         navigationController?.isNavigationBarHidden = false
         dataStoreSetup()
+        setNavigationLogoImage()
     }
     
     func dataStoreSetup() {
         dataStore = MatchDataStore(delegate: self)
         dataStore.findMatchedUsers()
         dataStore.findChatRooms()
+    }
+    
+    func setNavigationLogoImage() {
+        let logo = #imageLiteral(resourceName: "messageIcon")
+        let imageView = UIImageView(image:logo)
+        imageView.contentMode = .scaleAspectFit
+        self.navigationItem.titleView = imageView
+        self.navigationItem.titleView!.snp.makeConstraints { (make) in
+            //TODO: probably should make these constants based upon something
+            make.height.equalTo(40)
+            make.width.equalTo(40)
+        }
     }
 
     override func didReceiveMemoryWarning() {
