@@ -81,6 +81,7 @@ extension WelcomeDataNegotiator {
 
 //Facebook Extension
 extension WelcomeDataNegotiator {
+    //Facebook log in is not currently working at the moment, and I am not totally sure why...
     func accessFaceBook() {
         PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { (user, error) in
             if let currentUser = user as? User {
