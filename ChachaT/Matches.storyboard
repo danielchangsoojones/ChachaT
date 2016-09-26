@@ -20,13 +20,6 @@
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="95" sectionHeaderHeight="18" sectionFooterHeight="1" translatesAutoresizingMaskIntoConstraints="NO" id="KKP-gJ-Nuu">
                                 <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
-                                <navigationBar key="tableFooterView" contentMode="scaleToFill" id="T3s-JA-ksZ">
-                                    <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                    <items>
-                                        <navigationItem title="Title" id="adW-ej-aHp"/>
-                                    </items>
-                                </navigationBar>
                                 <connections>
                                     <outlet property="dataSource" destination="2aZ-bn-jtV" id="2Q2-EH-BCb"/>
                                     <outlet property="delegate" destination="2aZ-bn-jtV" id="ayn-bt-32a"/>
@@ -47,7 +40,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5gK-eJ-XNM" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="559" y="641"/>
+            <point key="canvasLocation" x="550" y="656"/>
         </scene>
     </scenes>
 </document>

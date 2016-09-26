@@ -10,36 +10,28 @@ import UIKit
 import SnapKit
 
 class ChachaNavigationViewController: UINavigationController {
-    
-    var navigationBarLogo: UIImageView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //hacky way of getting the navigation bar to look like Tinder's and have no background bar, just the buttons.
-//        self.navigationBar.setBackgroundImage(UIImage(), forBarMetrics: UIBarMetrics.Default)
-//        self.navigationBar.shadowImage = UIImage()
-        self.navigationBar.barTintColor = UIColor.white
+
+        self.navigationBar.barTintColor = UIColor.white //makes the background of the navbar a certain color
+        navigationBar.tintColor = CustomColors.JellyTeal //makes the back button a certain color
+    }
+    
+    override func pushViewController(_ viewController: UIViewController, animated: Bool) {
+        //when we push a new view controller, we want to have a a custom back button. 
+        //To set the back item for a View Controller, you need to set the back item in the previous ViewController, hence why I am setting it here. YOu can't set it in the destinationVC or it is too late
+        //This allows us to have the same backButton throughout the app
+        let pushingVC = viewControllers[viewControllers.count - 1]
+        let backItem = UIBarButtonItem()
+        backItem.title = ""
+        pushingVC.navigationItem.backBarButtonItem = backItem // This will show in the next view controller being pushed
+        super.pushViewController(viewController, animated: animated)
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    
-//    func setNavigationLogo() -> UIImageView {
-//        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 38, height: 38))
-//        imageView.contentMode = .ScaleAspectFit
-//        let logo = UIImage(named: "Chacha-Teal-Logo")
-//        imageView.image = logo
-//        imageView.alpha = 0.5
-//        self.navigationBar.addSubview(imageView)
-//        imageView.snp_makeConstraints { (make) in
-//            make.center.equalTo(self.navigationBar)
-//            make.width.equalTo(100)
-//            make.height.equalTo(100)
-//        }
-//        return imageView
-//    }
 
 }
