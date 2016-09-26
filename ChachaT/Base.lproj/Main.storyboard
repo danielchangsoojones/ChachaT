@@ -325,8 +325,8 @@
                                         <variation key="default">
                                             <mask key="constraints">
                                                 <exclude reference="4Es-KN-xkx"/>
-                                                <exclude reference="VCW-xe-Mzj"/>
                                                 <exclude reference="PyY-G5-Lvp"/>
+                                                <exclude reference="VCW-xe-Mzj"/>
                                             </mask>
                                         </variation>
                                     </view>
@@ -386,7 +386,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

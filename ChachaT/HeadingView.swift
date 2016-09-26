@@ -9,6 +9,13 @@
 import UIKit
 
 class HeadingView: UIView {
+    fileprivate struct HeadingViewConstants {
+        static let textColor: UIColor = CustomColors.JellyTeal
+        static let textFont: UIFont = UIFont.boldSystemFont(ofSize: 20)
+        static let numberLabelColor: UIColor = UIColor.white
+        static let labelLeadingOffset: CGFloat = 7
+    }
+    
     var theTitleLabel : UILabel = UILabel()
     var theCircleView : CircleView!
     
@@ -24,9 +31,11 @@ class HeadingView: UIView {
     
     func titleLabelSetup(_ text: String) {
         theTitleLabel.text = text
+        theTitleLabel.font = HeadingViewConstants.textFont
+        theTitleLabel.textColor = HeadingViewConstants.textColor
         self.addSubview(theTitleLabel)
         theTitleLabel.snp.makeConstraints { (make) in
-            make.leading.equalTo(self)
+            make.leading.equalTo(self).offset(HeadingViewConstants.labelLeadingOffset)
             make.centerY.equalTo(self)
         }
     }
@@ -34,10 +43,10 @@ class HeadingView: UIView {
     //TODO: make the diameter of the circle equal to how big the number width. But, the height needs to be the same as the titleLabel. So probably won't be a circle anymore.
     func circleViewSetup(_ num: Int) {
         let diameter : CGFloat = 20
-        theCircleView = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
+        theCircleView = CircleView(diameter: diameter, color: HeadingViewConstants.textColor)
         self.addSubview(theCircleView)
         theCircleView.snp.makeConstraints { (make) in
-            make.leading.equalTo(theTitleLabel.snp.trailing)
+            make.leading.equalTo(theTitleLabel.snp.trailing).offset(HeadingViewConstants.labelLeadingOffset)
             make.centerY.equalTo(self)
         }
         addNumberToCircle(num)
@@ -46,6 +55,7 @@ class HeadingView: UIView {
     func addNumberToCircle(_ num: Int) {
         let numLabel = UILabel()
         numLabel.text = num.toString
+        numLabel.textColor = HeadingViewConstants.numberLabelColor
         theCircleView.addSubview(numLabel)
         numLabel.snp.makeConstraints { (make) in
             make.center.equalTo(theCircleView)
