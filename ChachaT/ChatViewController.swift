@@ -75,46 +75,6 @@ class ChatViewController: JSQMessagesViewController {
         dataStore.loadMessages(messages)
     }
     
-//    func loadMessages() {
-//        if !isLoading {
-//            isLoading = true
-//            let message_last = messages.last
-//            
-//            // query to fetch messages
-//            let query = Chat.query()!
-//            query.whereKey(Constants.chatRoom, equalTo: chatroom)
-//            // time based pagination
-//            if message_last != nil {
-//                query.whereKey(Constants.createdAt, greaterThan: message_last!.date)
-//            }
-//            // we need this so we can get the sender's objectId for simplicity
-//            query.includeKey(Constants.sender)
-//            // show messages in order sent
-//            query.orderByAscending(Constants.createdAt)
-//            query.findObjectsInBackgroundWithBlock({ (objects, error) in
-//                if error == nil {
-//                    for object in objects! {
-//                        // Go through each Chat message and create a
-//                        // JSQMessage for display on this screen
-//                        let chat = object as! Chat
-//                        let message = JSQMessage(senderId: chat.sender.objectId, senderDisplayName: chat.sender.fullName, date: chat.createdAt, text: chat.chatText)
-//                        
-//                        self.messages.append(message)
-//                        
-//                        // just ensure we cache the user object for later
-//                        self.users[chat.sender.objectId!] = chat.sender
-//                    }
-//                    if !objects!.isEmpty {
-//                        self.finishReceivingMessage()
-//                    }
-//                }
-//                self.isLoading = false
-//            })
-//            
-//        }
-//        
-//    }
-    
     // Mark - JSQMessagesViewController method overrides
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
