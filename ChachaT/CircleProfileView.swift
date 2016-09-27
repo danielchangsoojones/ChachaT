@@ -9,6 +9,10 @@
 import Foundation
 
 class CircleProfileView: UIView {
+    fileprivate struct ProfileViewConstants {
+        static let circleViewCenterOffset: CGFloat = -10
+    }
+    
     let theNameLabel = UILabel()
     var circleView: CircleView!
     
@@ -20,18 +24,20 @@ class CircleProfileView: UIView {
         nameLabelSetup(name)
     }
     
+    //TODO: right now, I am ust using a constant to make an offset to show the name label, but I could probably be more exact about things.
     func circleViewSetup(_ diameter: CGFloat, file: AnyObject) {
         circleView = CircularImageView(file: file, diameter: diameter)
         self.addSubview(circleView)
         circleView.snp.makeConstraints { (make) in
-            make.center.equalTo(self)
+            make.centerX.equalTo(self)
+            make.centerY.equalTo(self).offset(ProfileViewConstants.circleViewCenterOffset)
         }
     }
     
-    //TODO: make the name label resize so it doesn't go over the screen
     func nameLabelSetup(_ name: String) {
         theNameLabel.text = name
         theNameLabel.lineBreakMode = .byClipping
+        theNameLabel.font = ChatCellConstants.nameLabelFont
         self.addSubview(theNameLabel)
         theNameLabel.snp.makeConstraints { (make) in
             //TODO: put these constants in a struct
@@ -43,6 +49,10 @@ class CircleProfileView: UIView {
     
     func getLabelTitle() -> String? {
         return theNameLabel.text
+    }
+    
+    func setLabelColor(color: UIColor) {
+        theNameLabel.textColor = color
     }
     
     required init?(coder aDecoder: NSCoder) {

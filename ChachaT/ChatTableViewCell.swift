@@ -9,6 +9,16 @@
 import UIKit
 import Timepiece
 
+struct ChatCellConstants {
+    static let infoLeadingOffsetFromProfilePhoto: CGFloat = 10
+    static let nameLabelFont: UIFont = UIFont.boldSystemFont(ofSize: 17)
+    static let profileImageLeadingOffset: CGFloat = 10
+    static let fontColor: UIColor = CustomColors.SilverChaliceGrey
+    static let lineAlpha: CGFloat = 0.3
+    static let lineColor: UIColor = CustomColors.BombayGrey
+    static let lineHeight: CGFloat = 1
+}
+
 class ChatTableViewCell: UITableViewCell {
     
     var theNameLabel : UILabel = UILabel()
@@ -33,6 +43,7 @@ class ChatTableViewCell: UITableViewCell {
         }
         unreadNotificationBubbleSetup()
         messagePreviewLabelSetup(newestMessage.body)
+        lineSetup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -47,7 +58,7 @@ class ChatTableViewCell: UITableViewCell {
         theCircleImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
             //TODO: make this offset make it line up with the other matches scroll view bubbles
-            make.leading.equalTo(self).offset(10)
+            make.leading.equalTo(self).offset(ChatCellConstants.profileImageLeadingOffset)
             //need to explicitly set height
             make.width.height.equalTo(diameter)
         }
@@ -55,11 +66,14 @@ class ChatTableViewCell: UITableViewCell {
     
     func nameLabelSetup(_ name: String) {
         theNameLabel.text = name
+        //TODO: make this number mean something
+        theNameLabel.font = ChatCellConstants.nameLabelFont
+        theNameLabel.textColor = ChatCellConstants.fontColor
         self.addSubview(theNameLabel)
         theNameLabel.snp.makeConstraints { (make) in
             //TODO: line up the top of timestamp and the top of the nameLabel
             make.top.equalTo(theCircleImageView).offset(10)
-            make.leading.equalTo(theCircleImageView.snp.trailing)
+            make.leading.equalTo(theCircleImageView.snp.trailing).offset(ChatCellConstants.infoLeadingOffsetFromProfilePhoto)
             make.trailing.equalTo(theTimeStamp.snp.leading)
         }
     }
@@ -67,12 +81,17 @@ class ChatTableViewCell: UITableViewCell {
     //TODO: set the timestamp to a real time
     func timeStampSetup(_ dateCreated: Date) {
         theTimeStamp.text = formatTimeStamp(dateCreated)
+        theTimeStamp.font = UIFont.systemFont(ofSize: 10)
+        theTimeStamp.textColor = ChatCellConstants.fontColor
+        //We want the timeStamp to not grow, nor shrink in regards to the size of theNameLabel. theNameLabel, if too long, should be the one to shrink.
+        theTimeStamp.sizeToFit()
+        theTimeStamp.setContentHuggingPriority(1000, for: .horizontal)
+        theTimeStamp.setContentCompressionResistancePriority(1000, for: .horizontal)
         self.addSubview(theTimeStamp)
         theTimeStamp.snp.makeConstraints { (make) in
             make.trailing.equalTo(self)
-            make.top.equalTo(self)
-            //TODO: make the width have a high priority for growing or whatever
-            make.width.equalTo(100)
+            //TODO: I want this line up with the Sarah Schwuman center, but can't figure out how to do that.
+            make.top.equalTo(theCircleImageView).offset(13)
         }
     }
     
@@ -95,6 +114,7 @@ class ChatTableViewCell: UITableViewCell {
     
     func messagePreviewLabelSetup(_ message: String) {
         theMessagePreviewLabel.text = message
+        theMessagePreviewLabel.textColor = ChatCellConstants.fontColor
         self.addSubview(theMessagePreviewLabel)
         theMessagePreviewLabel.snp.makeConstraints { (make) in
             make.leading.equalTo(theNameLabel)
@@ -112,5 +132,17 @@ class ChatTableViewCell: UITableViewCell {
             make.trailing.equalTo(self)
         }
         theUnreadNotificationBubble.isHidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble
+    }
+    
+    func lineSetup() {
+        let line = UIView()
+        line.backgroundColor = ChatCellConstants.lineColor
+        line.alpha = ChatCellConstants.lineAlpha
+        self.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.leading.equalTo(theCircleImageView.snp.centerX)
+            make.trailing.bottom.equalTo(self)
+            make.height.equalTo(ChatCellConstants.lineHeight)
+        }
     }
 }

@@ -15,6 +15,7 @@ protocol ScrollingMatchesCellDelegate {
 class ScrollingMatchesTableViewCell: UITableViewCell {
     fileprivate struct ScrollingMatchesConstants {
         static let circleRatioToCell : CGFloat = 0.2
+        static let fontColor: UIColor = ChatCellConstants.fontColor
     }
     
     var delegate: ScrollingMatchesCellDelegate?
@@ -29,6 +30,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         self.delegate = delegate
         matchesScrollViewSetup()
         addProfileCircles(matches)
+        lineSetup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -38,7 +40,8 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     func matchesScrollViewSetup() {
         self.addSubview(matchesScrollView)
         matchesScrollView.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
+            make.trailing.bottom.top.equalTo(self)
+            make.leading.equalTo(self).offset(ChatCellConstants.profileImageLeadingOffset)
         }
     }
     
@@ -47,11 +50,23 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
         for match in matches {
             if let fullName = match.targetUser.fullName, let profileImage = match.targetUser.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
+                circleProfileView.setLabelColor(color: ScrollingMatchesConstants.fontColor)
                 _ = circleProfileView.tapped { (tapped) in
                     self.delegate?.segueToChatVC(match.targetUser)
                 }
                 matchesScrollView.addView(circleProfileView)
             }
+        }
+    }
+    
+    func lineSetup() {
+        let line = UIView()
+        line.backgroundColor = ChatCellConstants.lineColor
+        line.alpha = ChatCellConstants.lineAlpha
+        self.addSubview(line)
+        line.snp.makeConstraints { (make) in
+            make.trailing.bottom.leading.equalTo(self)
+            make.height.equalTo(ChatCellConstants.lineHeight)
         }
     }
 

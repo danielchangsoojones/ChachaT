@@ -21,7 +21,6 @@ class AutoGrowingHorizontalScrollView: UIView {
     
     fileprivate func scrollViewSetup() {
         self.addSubview(theScrollView)
-        theScrollView.backgroundColor = UIColor.blue
         contentViewSetup()
         theScrollView.snp.makeConstraints { (make) in
             //the scroll view is snapped to the edges of the view because we want the whole view to be scrollable
@@ -33,7 +32,6 @@ class AutoGrowingHorizontalScrollView: UIView {
     //The scroll view needs a content view because the scrollview calculates its size based upon its content. But, a scrollview can only pay attention to one subview(as in you can not have two views in a scroll view and expect it to calculate the correct size). So, to circumvent this problem. There is a single content view, where we can then put multiple subviews. The scrollview only sees this single content view, and is able to calculate its size correctly. In the content view, we use autolayout constraints like we normally would, and just make sure that the content view calculates its size from its inner subviews.
     fileprivate func contentViewSetup() {
         theScrollView.addSubview(theContentView)
-        theContentView.backgroundColor = UIColor.red
         stackViewSetup()
         theContentView.snp.makeConstraints { (make) in
             //Tricky area: when the edges of theContentView are pinned to the scrollView. It is not like usual autolayout where theContentView grows to the size of theScrollView. It is telling theScrollView what theScrollView's content size should be.

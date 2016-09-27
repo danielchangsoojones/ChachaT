@@ -12,7 +12,7 @@ import Parse
 class MatchesViewController: UIViewController {
     fileprivate struct MatchesConstants {
         static let numberOfSections : Int = 2
-        static let heightForSectionHeader : CGFloat = 40
+        static let heightForSectionHeader : CGFloat = 25
         static let sectionZeroHeadingTitle : String = "Matches"
         static let sectionOneHeadingTitle : String = "Messages"
     }
@@ -28,6 +28,7 @@ class MatchesViewController: UIViewController {
         navigationController?.isNavigationBarHidden = false
         dataStoreSetup()
         setNavigationLogoImage()
+        theTableView.separatorStyle = .none
     }
     
     func dataStoreSetup() {

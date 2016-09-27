@@ -15,6 +15,7 @@ struct CustomColors {
     static let JellyTeal = UIColor.rgba(1, green: 195, blue: 167, alpha: 1)
     static let BombayGrey = UIColor.rgba(212, green: 213, blue: 215, alpha: 1)
     static let PeriwinkleGray = UIColor.rgba(246, green: 248, blue: 251, alpha: 1)
+    static let SilverChaliceGrey = UIColor.rgba(178, green: 178, blue: 178)
 }
 
 let ChachaTeal = UIColor.rgba(1, green: 195, blue: 167, alpha: 1)
