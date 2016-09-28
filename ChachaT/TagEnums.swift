@@ -56,6 +56,17 @@ public enum SpecialtyCategoryTitles : String {
         }
     }
     
+    var sliderComponents: (min: Int, max: Int, suffix: String)? {
+        switch self {
+        case .Location:
+            return (0, 50, "mi")
+        case .AgeRange:
+            return (18, 65, "yrs")
+        default:
+            return nil
+        }
+    }
+    
     var associatedDropDownAttribute : DropDownAttributes? {
         if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(self) {
             return .tagChoices
