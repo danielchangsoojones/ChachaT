@@ -19,7 +19,7 @@ extension ChachaDropDownMenu {
             sliderView = SliderView(maxValue: maxValue, suffix: suffix, isRangeSlider: false, delegate: sliderDelegate)
         }
         self.innerView = sliderView
-        addInnerView()
+        addInnerView(sideOffset: 10)
         self.show()
     }
 }

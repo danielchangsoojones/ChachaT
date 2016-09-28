@@ -15,7 +15,7 @@ public enum SpecialtyCategoryTitles : String {
     case PoliticalGroup = "Political Group"
     case HairColor = "Hair Color"
     //single slider
-    case Location = "Location"
+    case Location = "Distance"
     //range slider
     case AgeRange = "Age Range"
     
