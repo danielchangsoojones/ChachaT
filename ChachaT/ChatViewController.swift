@@ -8,6 +8,8 @@
 
 import UIKit
 import JSQMessagesViewController
+import MobileCoreServices
+import Parse
 
 class ChatViewController: JSQMessagesViewController {
     
@@ -79,6 +81,35 @@ class ChatViewController: JSQMessagesViewController {
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
         dataStore.sendMessage(text, otherUser: otherUser)
+    }
+    
+    override func didPressAccessoryButton(_ sender: UIButton!) {
+        self.inputToolbar?.contentView?.textView?.resignFirstResponder()
+        
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartCamera(target: self, canEdit: false, frontFacing: true)
+        }
+        
+        let photoAction = UIAlertAction(title: "Choose existing Photo", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
+        }
+        
+        let videoAction = UIAlertAction(title: "Choose existing Video", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartVideoLibrary(target: self, canEdit: true)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alertAction: UIAlertAction) in
+            
+        }
+        
+        alert.addAction(cameraAction)
+        alert.addAction(photoAction)
+        alert.addAction(videoAction)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
     
     // Mark - JSQMessages CollectionView DataSource
@@ -173,14 +204,17 @@ class ChatViewController: JSQMessagesViewController {
         
         // Customize it some
         let message = messages[(indexPath as NSIndexPath).item]
-        if message.senderId == self.senderId
-        {
-            cell.textView!.textColor = UIColor.black
+        if let textView = cell.textView {
+            textView.textColor = message.senderId == self.senderId ? UIColor.black : UIColor.white
         }
-        else
-        {
-            cell.textView!.textColor = UIColor.white
-        }
+//        if message.senderId == self.senderId
+//        {
+//            cell.textView!.textColor = UIColor.black
+//        }
+//        else
+//        {
+//            cell.textView!.textColor = UIColor.white
+//        }
         
         return cell;
     }
@@ -223,5 +257,62 @@ class ChatViewController: JSQMessagesViewController {
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
         print("tapped load earlier messages - need implementation")
+    }
+}
+
+// MARK: - UIImagePickerControllerDelegate
+extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func sendMessage(text: String, video: NSURL?, picture: UIImage?) {
+        var videoFile: PFFile!
+        var pictureFile: PFFile!
+        var videoThumbnailFile: PFFile!
+        
+        if let video = video {
+            videoFile = PFFile(name: "video.mp4", data: FileManager.default.contents(atPath: video.path!)!)
+            let asset:AVAsset = AVAsset(url:video as URL)
+            let imageGenerator:AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
+            imageGenerator.appliesPreferredTrackTransform = true
+            let time:CMTime = CMTimeMake(1, 1)
+            let imageRef:CGImage = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
+            let videoThumbnail:UIImage? = UIImage(cgImage: imageRef)
+            if let image = videoThumbnail {
+                videoThumbnailFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6)!)
+            }
+        }
+        
+        if let picture = picture {
+            pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(picture, 0.6)!)
+            pictureFile.saveInBackground(block: { (suceeded, error) -> Void in
+                if error != nil {
+                    print(error)
+                }
+            })
+        }
+        //This is where we actually send the message in parse to make it save
+        dataStore.sendMessage(text: text, videoFile: videoFile, pictureFile: pictureFile, videoThumbnailFile: videoThumbnailFile)
+        
+    }
+    
+    func didSelectPhotoMessage(image:UIImage) {
+        self.sendMessage(text: "", video: nil, picture: image)
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
+        let mediaType = info[UIImagePickerControllerMediaType] as! String
+        if mediaType == kUTTypeMovie as String {
+            let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
+            self.sendMessage(text: "", video: videoURL, picture: nil)
+            picker.dismiss(animated: true, completion: {
+            })
+        }
+        else {
+            var picture = info[UIImagePickerControllerOriginalImage] as? UIImage
+            if picture == nil {
+                picture = info[UIImagePickerControllerEditedImage] as? UIImage
+            } else {
+                self.didSelectPhotoMessage(image: picture!)
+            }
+            picker.dismiss(animated: true, completion: nil)
+        }
     }
 }

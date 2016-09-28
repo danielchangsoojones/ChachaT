@@ -117,6 +117,66 @@ class ChatDataStore {
         }
         self.delegate?.finishSendingMessage()
     }
+    
+    func sendMessage(text: String,
+                           videoFile: PFFile!,
+                           pictureFile: PFFile!,
+                           videoThumbnailFile: PFFile!) {
+        
+        var text = text
+        
+        let chat = Chat()
+        
+        chat.sender = PFUser.current() as! User
+        //TODO: I only need to set this groupId once for the data store when the data store is initialized
+        chat.chatRoom = "placeholderName"
+        
+        if let videoFile = videoFile {
+            text = "[Video message]"
+            chat.video = videoFile
+            chat.videoThumbnail = videoThumbnailFile
+        }
+        if let pictureFile = pictureFile {
+            text = "[Picture message]"
+            chat.picture = pictureFile
+        }
+        chat.chatText = text
+        chat.saveInBackground { (succeeded, error) -> Void in
+            if succeeded {
+                JSQSystemSoundPlayer.jsq_playMessageSentSound()
+                self.addMessage(chat: chat)
+                self.delegate?.finishSendingMessage()
+            }else{
+                print(error)
+            }
+        }
+        
+    }
+    
+    func addMessage(chat: Chat) {
+        var message: JSQMessage!
+        
+        let user = chat.sender
+        
+        if let chatPicture = chat.picture {
+            
+            let mediaItem = JSQPhotoMediaItem(image: nil)
+            //TODO: as a parameter, I need to take in the senderID so I can compare these
+//            mediaItem?.appliesMediaViewMaskAsOutgoing = (user.objectId == self.getsenderID)
+            mediaItem?.appliesMediaViewMaskAsOutgoing = true
+            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt, media: mediaItem)
+            
+            chatPicture.getDataInBackground(block: { (imageData, error) -> Void in
+                if error == nil {
+                    mediaItem?.image = UIImage(data: imageData!)
+                    self.delegate?.reloadCollectionView()
+                }
+            })
+        }else{
+            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt, text: chat.chatText)
+        }
+        delegate?.appendMessage(message: message)
+    }
 
 }
 
@@ -127,6 +187,8 @@ protocol ChatDataStoreDelegate {
     func cacheUserObject(_ user: User, objectID: String)
     func loadMessages()
     func loadAvatarImage(_ data: Data)
+    func reloadCollectionView()
+    func appendMessage(message: JSQMessage)
 }
 
 extension ChatViewController: ChatDataStoreDelegate {
@@ -144,5 +206,13 @@ extension ChatViewController: ChatDataStoreDelegate {
     
     func loadAvatarImage(_ data: Data) {
         
+    }
+    
+    func reloadCollectionView() {
+        self.collectionView.reloadData()
+    }
+    
+    func appendMessage(message: JSQMessage) {
+        self.messages.append(message)
     }
 }
