@@ -1140,7 +1140,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b6b88b4e-20a9-4917-888b-2c44593bc24f";
+				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
 				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -1162,7 +1162,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "b6b88b4e-20a9-4917-888b-2c44593bc24f";
+				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
 				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
