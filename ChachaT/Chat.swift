@@ -19,4 +19,9 @@ class Chat: PFObject, PFSubclassing {
     @NSManaged var receiver : User //not sure if having user receiver is scalable for group chats
     @NSManaged var readByReceiver : Bool
     @NSManaged var chatText : String
+    
+    @NSManaged var picture: PFFile!
+    
+    @NSManaged var video: PFFile!
+    @NSManaged var videoThumbnail: PFFile!
 }

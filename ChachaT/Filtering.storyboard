@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="I1A-ko-WaS">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I1A-ko-WaS">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--SearchTagsViewController-->
@@ -14,14 +15,14 @@
                         <viewControllerLayoutGuide type="bottom" id="8zR-1V-GnX"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="SST-8Z-EKe">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
-                                <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
+                                <frame key="frameInset" width="600" height="600"/>
                                 <subviews>
-                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="ChachaT">
-                                        <rect key="frame" x="0.0" y="30" width="600" height="570"/>
+                                    <view tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="ChachaT">
+                                        <frame key="frameInset" minY="30" width="600" height="570"/>
                                     </view>
                                 </subviews>
                                 <constraints>
@@ -30,11 +31,11 @@
                                     <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="r1U-4A-4XX"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
-                                <rect key="frame" x="290" y="290" width="20" height="20"/>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
+                                <frame key="frameInset" minX="290" minY="290" width="20" height="20"/>
                             </activityIndicatorView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" constant="44" id="7oF-yd-eQx"/>
                             <constraint firstItem="VSR-xX-ycl" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="Q8F-76-7kr"/>

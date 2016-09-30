@@ -33,7 +33,7 @@ class FakeNavigationBarView : UIView {
     func setNavigationBarItems() {
         createExpandingMenuButton() //creates the left Menu Button that creates a drop down menu
         createRightBarButton()
-        createLogo()
+//        createLogo()
     }
     
     func createLogo() {

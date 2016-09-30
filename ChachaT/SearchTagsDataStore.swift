@@ -58,13 +58,26 @@ class SearchTagsDataStore {
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            //TODO: .TagChoices should not be the dropDownAttribute every time. This is just for testing.
             if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
-                let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
-                    $0.toString
+                switch dropDownAttribute {
+                case .tagChoices:
+                    let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
+                        $0.toString
+                    }
+                    let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
+                    tagChoicesDataArray.append(dropDownTag)
+                case .singleSlider, .rangeSlider:
+                    let minValue = specialtyCategory.sliderComponents?.min
+                    let maxValue = specialtyCategory.sliderComponents?.max
+                    let suffix = specialtyCategory.sliderComponents?.suffix
+                    var dropDownTag: DropDownTag!
+                    if dropDownAttribute == .singleSlider {
+                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
+                    } else if dropDownAttribute == .rangeSlider {
+                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, minValue: minValue!, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
+                    }
+                    tagChoicesDataArray.append(dropDownTag)
                 }
-                let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
-                tagChoicesDataArray.append(dropDownTag)
             }
         }
         delegate?.setChoicesViewTagsArray(tagChoicesDataArray)

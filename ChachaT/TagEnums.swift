@@ -15,7 +15,7 @@ public enum SpecialtyCategoryTitles : String {
     case PoliticalGroup = "Political Group"
     case HairColor = "Hair Color"
     //single slider
-    case Location = "Location"
+    case Location = "Distance"
     //range slider
     case AgeRange = "Age Range"
     
@@ -53,6 +53,17 @@ public enum SpecialtyCategoryTitles : String {
             return SpecialtyTagTitles.hairColorAllValues
         default:
             return []
+        }
+    }
+    
+    var sliderComponents: (min: Int, max: Int, suffix: String)? {
+        switch self {
+        case .Location:
+            return (0, 50, "mi")
+        case .AgeRange:
+            return (18, 65, "yrs")
+        default:
+            return nil
         }
     }
     

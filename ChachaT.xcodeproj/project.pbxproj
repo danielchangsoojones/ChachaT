@@ -84,6 +84,7 @@
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
+		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
 		92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */; };
@@ -195,6 +196,7 @@
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
 		92B8DF2A1CE9356700AFA518 /* CFNetwork.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CFNetwork.framework; path = System/Library/Frameworks/CFNetwork.framework; sourceTree = SDKROOT; };
@@ -310,6 +312,7 @@
 			children = (
 				923C7EDE1D94223D0033A8A2 /* Data Models */,
 				920BF8381D4334DF00104842 /* ChatViewController.swift */,
+				92A7F7DE1D9C6908005D22AA /* Camera.swift */,
 			);
 			name = Messaging;
 			sourceTree = "<group>";
@@ -820,8 +823,9 @@
 				TargetAttributes = {
 					926108121CDBCA32009F3E86 = {
 						CreatedOnToolsVersion = 7.3.1;
-						DevelopmentTeam = K385R9QJ5N;
+						DevelopmentTeam = KNK3WJA66N;
 						LastSwiftMigration = 0800;
+						ProvisioningStyle = Manual;
 					};
 				};
 			};
@@ -995,6 +999,7 @@
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
+				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,
@@ -1051,6 +1056,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
@@ -1098,6 +1104,7 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
@@ -1126,13 +1133,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = KNK3WJA66N;
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.ChachaT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "85e8d001-a57b-4a19-b3b9-2131d73042aa";
+				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
+				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
@@ -1146,13 +1155,15 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = KNK3WJA66N;
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.ChachaT;
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "";
+				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
+				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 			};

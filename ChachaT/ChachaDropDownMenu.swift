@@ -201,7 +201,7 @@ class ChachaDropDownMenu: UIView {
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
     
-    func addInnerView(_ sideOffset: CGFloat = 0) {
+    func addInnerView(sideOffset: CGFloat = 0) {
         dropDownView.addSubview(innerView!)
         //the view will grow to whatever size is necessary to fit its innerView
         innerView!.snp.makeConstraints { (make) in
