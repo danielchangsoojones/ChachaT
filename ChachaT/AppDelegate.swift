@@ -46,14 +46,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
-                    self.window = UIWindow(frame: UIScreen.main.bounds)
-        
-                    let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
-        
-                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "AddingTagsViewController") as! AddingTagsToProfileViewController
-        
-                    self.window?.rootViewController = initialViewController
-                    self.window?.makeKeyAndVisible()
+//                    self.window = UIWindow(frame: UIScreen.main.bounds)
+//        
+//                    let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
+//        
+//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "AddingTagsViewController") as! AddingTagsToProfileViewController
+//        
+//                    self.window?.rootViewController = initialViewController
+//                    self.window?.makeKeyAndVisible()
         return true
     }
     

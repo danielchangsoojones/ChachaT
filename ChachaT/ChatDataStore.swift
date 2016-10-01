@@ -9,25 +9,26 @@
 import Foundation
 import JSQMessagesViewController
 import Parse
-fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l < r
-  case (nil, _?):
-    return true
-  default:
-    return false
-  }
-}
 
-fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
-  switch (lhs, rhs) {
-  case let (l?, r?):
-    return l > r
-  default:
-    return rhs < lhs
-  }
-}
+//fileprivate func < <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l < r
+//  case (nil, _?):
+//    return true
+//  default:
+//    return false
+//  }
+//}
+//
+//fileprivate func > <T : Comparable>(lhs: T?, rhs: T?) -> Bool {
+//  switch (lhs, rhs) {
+//  case let (l?, r?):
+//    return l > r
+//  default:
+//    return rhs < lhs
+//  }
+//}
 
 
 class ChatDataStore {
@@ -37,7 +38,11 @@ class ChatDataStore {
     
     fileprivate var delegate: ChatDataStoreDelegate?
     
-    init(delegate: ChatDataStoreDelegate) {
+    init(chatUsers: [User], delegate: ChatDataStoreDelegate) {
+        for user in chatUsers where user != User.current() {
+            //there should just be one other user who is not the current user. When group chats get implemented, this code will break.
+            chatRoomName = getChatRoomName(user)
+        }
         self.delegate = delegate
     }
     
@@ -52,10 +57,10 @@ class ChatDataStore {
     func getChatRoomName(_ otherUser: User) -> String {
         let currentUser = User.current()!
         // We create a chatroom for each user pair. it needs to be the same for both
-        // so we always put smaller user id first
-        let name = currentUser.objectId > otherUser.objectId ?
-            "\(currentUser.objectId)-\(otherUser.objectId)" :
-            "\(otherUser.objectId)-\(currentUser.objectId)"
+        // so we always put smaller (as in alphabetically) user id first
+        let name = currentUser.objectId! < otherUser.objectId! ?
+            "\(currentUser.objectId!)-\(otherUser.objectId!)" :
+            "\(otherUser.objectId!)-\(currentUser.objectId!)"
         return name
     }
     
