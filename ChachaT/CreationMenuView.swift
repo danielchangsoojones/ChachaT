@@ -16,8 +16,6 @@ protocol AddingTagMenuDelegate {
 class CreationMenuView: UIView {
     
     @IBOutlet weak var choicesTagListView: ChachaChoicesTagListView!
-    @IBOutlet weak var backgroundView: UIView!
-    var newTagTitle: String = ""
     
     var delegate: AddingTagMenuDelegate?
     
@@ -53,6 +51,7 @@ extension CreationMenuView {
             case .existingTags:
                 addTagsToTagListView(tagTitles)
             case .newTag:
+                //Right now, I am just adding a newTag into the tagListView. So technically, the differentiation between existingTags, and newTag shouldn't matter. But, eventually, Daniel Jones wants to do some special stuff when a new tag comes up, just haven't figured out what that will be. 
                 if let newTagTitle = newTagTitle {
                     addTagsToTagListView([newTagTitle])
                 }

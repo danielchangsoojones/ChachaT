@@ -78,7 +78,6 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="backgroundView" destination="el5-B6-7Nm" id="YBb-wx-JDA"/>
                 <outlet property="choicesTagListView" destination="VYd-5v-P7S" id="DwM-Gf-COo"/>
             </connections>
             <point key="canvasLocation" x="528" y="285"/>
