@@ -46,6 +46,8 @@ class BackgroundAnimationViewController: UIViewController {
     fileprivate var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var rippleHasNotBeenStarted = true
     
+    let locationManager = CLLocationManager()
+    
     @IBAction func skipCard(_ sender: AnyObject) {
         kolodaView.swipe(.Left)
     }
@@ -83,6 +85,7 @@ class BackgroundAnimationViewController: UIViewController {
         //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this.
         kolodaView.dataSource = self
         kolodaView.reloadData()
+        getUserLocation()
     }
     
     func backgroundGradientSetup() {
@@ -117,7 +120,27 @@ class BackgroundAnimationViewController: UIViewController {
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
         }
     }
+}
+
+extension BackgroundAnimationViewController: CLLocationManagerDelegate {
+    func getUserLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
+        locationManager.requestLocation() //requests the location just once, no sense in constantly updating their location and draining their battery, when they are most likely in the same place. In the future, we will probably want to be updating there location.
+    }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.last {
+            dataStore.saveCurrentUserLocation(location: currentLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
 
 //queries

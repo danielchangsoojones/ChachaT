@@ -8,6 +8,8 @@
 
 import Foundation
 import SCLAlertView
+import CoreLocation
+import Parse
 
 class BackgroundAnimationDataStore {
     func likePerson(_ user : User) {
@@ -81,5 +83,36 @@ class BackgroundAnimationDataStore {
         } else {
             _ = SCLAlertView().showInfo("Match!", subTitle: "You have a match!")
         }
+    }
+}
+
+extension BackgroundAnimationDataStore {
+    func saveCurrentUserLocation(location: CLLocation) {
+        User.current()!.location = PFGeoPoint(location: location)
+        User.current()!.saveInBackground()
+        //saving the location to both the user tag and user because when it comes time to query the Tags while searching. Querying is much easier with having all the queriable stuff in the same place.
+        saveLocationToUserTag(location: location)
+    }
+    
+    private func saveLocationToUserTag(location: CLLocation) {
+        let query = Tags.query()
+        query?.whereKey("createdBy", equalTo: User.current()!)
+        query?.getFirstObjectInBackground(block: { (object, error) in
+            if let tag = object as? Tags, error == nil {
+                tag.location = PFGeoPoint(location: location)
+                tag.saveInBackground()
+            } else {
+                let code = error!._code
+                if code == PFErrorCode.errorObjectNotFound.rawValue{
+                    //the tag doesn't exist yet for this user, so create it.
+                    let newTag = Tags()
+                    newTag.location = PFGeoPoint(location: location)
+                    newTag.createdBy = User.current()!
+                    newTag.saveInBackground()
+                } else {
+                    print(error)
+                }
+            }
+        })
     }
 }
