@@ -117,8 +117,10 @@ class SearchTagsDataStore {
                 if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
                     switch tagAttribute {
                     case .tagChoices:
-                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
+                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int.
+                        //For example: the query would end up being something like this query.whereKey("sexuality, equalTo: 401)
+                        let titleRawValue: Int = SpecialtyTagTitles.stringRawValue(tagViewTitle)!.rawValue
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: titleRawValue)
                     case .singleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
                             query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: value)
