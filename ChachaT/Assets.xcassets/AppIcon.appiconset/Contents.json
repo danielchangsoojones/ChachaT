@@ -1,50 +1,64 @@
 {
   "images" : [
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "ShuffleIconNotification-1.png",
       "scale" : "2x"
     },
     {
-      "idiom" : "iphone",
       "size" : "20x20",
+      "idiom" : "iphone",
+      "filename" : "ShuffleIconNotification@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iconFiftyEight.png",
+      "filename" : "ShuffleIcon29Point.png",
       "scale" : "2x"
     },
     {
       "size" : "29x29",
       "idiom" : "iphone",
-      "filename" : "iconEightySeven.png",
+      "filename" : "ShuffleIcon29Point@3x.png",
       "scale" : "3x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iconEightyPoint.png",
+      "filename" : "ShuffleIcon80Point.png",
       "scale" : "2x"
     },
     {
       "size" : "40x40",
       "idiom" : "iphone",
-      "filename" : "iconEightyPoint@3x.png",
+      "filename" : "ShuffleIcon120Point-1.png",
       "scale" : "3x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iconSixtyPoint.png",
+      "filename" : "ShuffleIcon120Point.png",
       "scale" : "2x"
     },
     {
       "size" : "60x60",
       "idiom" : "iphone",
-      "filename" : "iconSixtyPoint@3x.png",
+      "filename" : "ShuffleIcon180Point.png",
       "scale" : "3x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "ShuffleIconNotification.png",
+      "scale" : "1x"
+    },
+    {
+      "size" : "40x40",
+      "idiom" : "ipad",
+      "filename" : "ShuffleIcon80Point-1.png",
+      "scale" : "2x"
     }
   ],
   "info" : {
