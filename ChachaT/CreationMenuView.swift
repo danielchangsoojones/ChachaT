@@ -17,7 +17,6 @@ class CreationMenuView: UIView {
     
     @IBOutlet weak var choicesTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var backgroundView: UIView!
-    var tableView : UITableView?
     var newTagTitle: String = ""
     
     var delegate: AddingTagMenuDelegate?
@@ -29,7 +28,6 @@ class CreationMenuView: UIView {
     
     func reset() {
         removeAllTags()
-        tableView?.isHidden = true
     }
     
     func removeAllTags() {
@@ -44,28 +42,19 @@ class CreationMenuView: UIView {
     }
 }
 
-extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
+extension CreationMenuView {
     enum MenuType {
-        case tags
-        case table
+        case existingTags
+        case newTag
     }
     
     func toggleMenuType(_ menuType: MenuType, newTagTitle: String?, tagTitles: [String]?) {
-        //if the menu is supposed to be tags, then we want it hidden
-        tableView?.isHidden = menuType == .tags
         switch menuType {
-            case .tags:
+            case .existingTags:
                 addTagsToTagListView(tagTitles)
-            case .table:
+            case .newTag:
                 if let newTagTitle = newTagTitle {
-                    if let tableView = self.tableView {
-                        //tableView already exists, update the data according to the newTagTitle
-                        self.newTagTitle = newTagTitle
-                        tableView.reloadData()
-                    } else {
-                        //create a whole tableview, since it has not been created yet.
-                        createNewTableView(newTagTitle)
-                    }
+                    addTagsToTagListView([newTagTitle])
                 }
         }
     }
@@ -79,39 +68,6 @@ extension CreationMenuView: UITableViewDelegate, UITableViewDataSource {
                     tagView.isSelected = true
                 }
             }
-        }
-    }
-    
-    fileprivate func createNewTableView(_ newTagTitle: String) {
-        self.newTagTitle = newTagTitle
-        tableView = UITableView()
-        tableView!.delegate = self
-        tableView!.dataSource = self
-        self.addSubview(tableView!)
-        tableView!.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
-        }
-    }
-    
-    //TODO: have the tableView only be the height the cells that show, as in don't have extra useless cells.
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 1
-    }
-    
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = UITableViewCell()
-        if (indexPath as NSIndexPath).row == 0 {
-            //the first row should be create new tag
-            cell.textLabel?.text = "Create new tag: \(newTagTitle)"
-        }
-        return cell
-    }
-    
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if (indexPath as NSIndexPath).row == 0 {
-            delegate?.addNewTagToTagChoiceView(newTagTitle, tagView: nil)
-            reset()
-            self.isHidden = true
         }
     }
 }
