@@ -65,34 +65,6 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the userArray was passed from the search page, so don't load new users
             createUserArray()
         }
-        
-//        let tags = Tags()
-//        tags.createdBy = User.currentUser()!
-//        tags.genericTags = ["banana", "apple", "pear"]
-//        tags.gender = 302
-//        tags.ethnicity = 2
-//        tags.sexuality = 402
-//        tags.politicalGroup = -201
-//        tags.hairColor = -101
-//        tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
-//        tags.saveInBackground()
-        
-//        PFGeoPoint.geoPointForCurrentLocationInBackground { (geoPoint, error) in
-//            if error == nil {
-//                let tags = Tags()
-//                tags.createdBy = User.currentUser()!
-//                tags.genericTags = ["banana", "apple", "pear"]
-//                tags.gender = 302
-//                tags.ethnicity = 2
-//                tags.sexuality = 402
-//                tags.politicalGroup = -201
-//                tags.hairColor = -101
-//                tags.location = geoPoint!
-//                tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
-//                tags.saveInBackground()
-//            }
-//        }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +80,8 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
+        kolodaView.dataSource = self
+        kolodaView.reloadData()
     }
     
     func backgroundGradientSetup() {
@@ -171,7 +145,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         kolodaView.delegate = self
         //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
         kolodaView.customKolodaViewDelegate = self
-        kolodaView.dataSource = self
+//        kolodaView.dataSource = self
         do {
             audioPlayerWoosh = try AVAudioPlayer(contentsOf: wooshSound)
         }
