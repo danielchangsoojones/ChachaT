@@ -80,6 +80,7 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
+        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this.
         kolodaView.dataSource = self
         kolodaView.reloadData()
     }
@@ -121,6 +122,7 @@ class BackgroundAnimationViewController: UIViewController {
 
 //queries
 extension BackgroundAnimationViewController {
+    //TODO: move this into the data store
     func createUserArray() {
             //normal creating of the stack.
             let query = User.query()
@@ -130,6 +132,7 @@ extension BackgroundAnimationViewController {
             query?.findObjectsInBackground(block: { (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.userArray = users
+                    self.kolodaView.dataSource = self
                     self.kolodaView.reloadData()
                 }
             })
@@ -137,7 +140,6 @@ extension BackgroundAnimationViewController {
 }
 
 //MARK: KolodaViewDelegate
-//BEWARE if the function is not being run, it is because some of the delegate names have been changed. Go to the delegate page and make sure they match up exactly
 extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
     func setKolodaAttributes() {
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
@@ -145,7 +147,6 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         kolodaView.delegate = self
         //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
         kolodaView.customKolodaViewDelegate = self
-//        kolodaView.dataSource = self
         do {
             audioPlayerWoosh = try AVAudioPlayer(contentsOf: wooshSound)
         }
@@ -211,8 +212,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
 
     func koloda(_ koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
-//        guard let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)?[0] as? CustomCardView
-//            else { return UIView() }
         
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = userArray[Int(index)]
@@ -223,7 +222,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
-//        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as! CustomOverlayView
     }
 }
 
