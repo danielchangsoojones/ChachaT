@@ -33,19 +33,18 @@ class FakeNavigationBarView : UIView {
     func setNavigationBarItems() {
         createExpandingMenuButton() //creates the left Menu Button that creates a drop down menu
         createRightBarButton()
-//        createLogo()
+        createLogo()
     }
     
     func createLogo() {
-        let logoImageView = UIImageView(image: UIImage(named: ImageNames.ChachaTealLogo))
+        let logoImageView = UIImageView(image: #imageLiteral(resourceName: "Logo"))
         logoImageView.contentMode = .scaleAspectFit
-        logoImageView.backgroundColor = UIColor.red
         self.addSubview(logoImageView)
         logoImageView.snp.makeConstraints { (make) in
             make.centerX.equalTo(self)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
-            make.height.equalTo(30)
-            make.width.equalTo(30)
+            make.height.equalTo(40)
+            make.width.equalTo(40)
         }
     }
     

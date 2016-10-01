@@ -2,15 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "KinoIcons-2.png",
+      "filename" : "ShuffleLogo.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ShuffleLogo-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
+      "filename" : "ShuffleLogo-2.png",
       "scale" : "3x"
     }
   ],
