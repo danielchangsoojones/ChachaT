@@ -67,6 +67,16 @@ public enum SpecialtyCategoryTitles : String {
         }
     }
     
+    //Purpose: if we have a suffix from a sliderView, this allows us to find out what specialtyCategory it is attached to.
+    static func suffixRawValue(suffix: String) -> SpecialtyCategoryTitles? {
+        for specialtyCategory in allCategories where specialtyCategory.sliderComponents?.suffix == suffix {
+            if let sliderComponents = specialtyCategory.sliderComponents, sliderComponents.suffix == suffix {
+                return specialtyCategory
+            }
+        }
+        return nil
+    }
+    
     var associatedDropDownAttribute : DropDownAttributes? {
         if SpecialtyCategoryTitles.specialtyTagMenuCategories.contains(self) {
             return .tagChoices

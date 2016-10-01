@@ -13,6 +13,7 @@ import Parse
 class SearchTagsViewController: SuperTagViewController {
     var tagChosenView : ChachaChosenTagListView!
     var scrollViewSearchView : ScrollViewSearchView!
+    //TODO: this dictionary should really be in the dataStore. We want to keep our API dependency seperate from the actual class.
     var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
     var theGenericChosenTagArray : [String] = []
     
@@ -164,10 +165,16 @@ extension SearchTagsViewController: SliderViewDelegate {
             //the tagView has already been created
             //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
             tagView.setTitle(text, for: UIControlState())
+            if let specialtyCategoryTitle = SpecialtyCategoryTitles.suffixRawValue(suffix: suffix) {
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+            }
         } else {
             //tagView has never been created
             let tagView = tagChosenView.addTag(text)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
+            if let specialtyCategoryTitle = SpecialtyCategoryTitles.suffixRawValue(suffix: suffix) {
+                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+            }
         }
     }
     

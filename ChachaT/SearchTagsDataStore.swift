@@ -159,13 +159,21 @@ class SearchTagsDataStore {
             //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
             let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
             let maxValueSubstring = string.substring(from: string.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
-            if let minValue = Int(minValueSubstring) {
-                if let maxValue = Int(maxValueSubstring) {
-                    return (minValue, maxValue)
-                }
+            if let minValue = convertStringToNumber(str: minValueSubstring), let maxValue = convertStringToNumber(str: maxValueSubstring) {
+                return (minValue, maxValue)
             }
         }
-        return (0,0) //shouldn't reach this point
+        return (0,0) //couldn't convert the slider string to min/max values
+    }
+    
+    private func convertStringToNumber(str: String) -> Int? {
+        //get rid of anything in the string that is not a number
+        let stringArray = str.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+        let newString = stringArray.joined(separator: "")
+        if let num = Int(newString) {
+            return num
+        }
+        return nil //couldn't be converted into a number
     }
 }
 
