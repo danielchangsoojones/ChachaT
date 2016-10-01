@@ -146,13 +146,6 @@ class SearchTagsDataStore {
         if let num = convertStringToNumber(str: string) {
             return Double(num)
         }
-//        let spaceString : Character = " "
-//        if let index = string.characters.index(of: spaceString) {
-//            let substring = string.substring(to: index)
-//            if let value = Double(substring) {
-//                return value
-//            }
-//        }
         return nil
     }
     
