@@ -74,7 +74,7 @@
 		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
-		928762021D997096000EAED6 /* WelcomeDataNegotiator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928762011D997096000EAED6 /* WelcomeDataNegotiator.swift */; };
+		928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928762011D997096000EAED6 /* WelcomeDataStore.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
@@ -186,7 +186,8 @@
 		9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDataStore.swift; sourceTree = "<group>"; };
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
-		928762011D997096000EAED6 /* WelcomeDataNegotiator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeDataNegotiator.swift; sourceTree = "<group>"; };
+		92857DCB1DA0427D001DB92C /* ChachaT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChachaT.entitlements; sourceTree = "<group>"; };
+		928762011D997096000EAED6 /* WelcomeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeDataStore.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -445,8 +446,8 @@
 		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */,
 				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
+				925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */,
 				925D0FDD1D760EE000DE20F9 /* CreationMenuView.xib */,
 			);
 			name = Subviews;
@@ -474,6 +475,7 @@
 		926108151CDBCA32009F3E86 /* ChachaT */ = {
 			isa = PBXGroup;
 			children = (
+				92857DCB1DA0427D001DB92C /* ChachaT.entitlements */,
 				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				926108531CEA0E95009F3E86 /* Welcome */,
@@ -641,7 +643,7 @@
 		928761FF1D997027000EAED6 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				928762011D997096000EAED6 /* WelcomeDataNegotiator.swift */,
+				928762011D997096000EAED6 /* WelcomeDataStore.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -826,6 +828,11 @@
 						DevelopmentTeam = KNK3WJA66N;
 						LastSwiftMigration = 0800;
 						ProvisioningStyle = Manual;
+						SystemCapabilities = {
+							com.apple.Keychain = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -948,7 +955,7 @@
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
-				928762021D997096000EAED6 /* WelcomeDataNegotiator.swift in Sources */,
+				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
@@ -1133,6 +1140,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = KNK3WJA66N;
@@ -1155,6 +1163,7 @@
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
 				DEVELOPMENT_TEAM = KNK3WJA66N;

@@ -49,6 +49,7 @@ class MatchDataStore: NSObject {
         var alreadyContainedChats: [String] = []
         let query = Chat.query()!
         query.includeKey("sender")
+        query.includeKey("receiver")
         query.whereKey("chatRoom", contains: currentUser.objectId!)
         query.addDescendingOrder("createdAt") //we want the newest message for the preview message
         query.findObjectsInBackground { (objects, error) in

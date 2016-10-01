@@ -97,15 +97,18 @@ extension AddingTagsToProfileViewController {
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(_ searchText: String) {
         let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
-        //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
+        if creationMenuView == nil {
+            //when we use the mac simulator, sometimes, the keyboard is not toggled. And, the creationMenuView uses the height of the keyboard to calculate its height. Hence, if the keyboard doesn't show, then the creationMenuView would be nil. By just having a nil check here, we stop the mac simulator from crashing, even though a real device would not need this code/wouldn't crash.
+            createTagMenuView(0)
+        }
         creationMenuView.removeAllTags()
         //we already check if the text is empty over in the CreationTagView class
         if filtered.isEmpty {
             //there is text, but it has no matches in the database
-            creationMenuView.toggleMenuType(.table, newTagTitle: searchText, tagTitles: nil)
+            creationMenuView.toggleMenuType(.newTag, newTagTitle: searchText, tagTitles: nil)
         } else {
             //there is text, and we have a match, so the tagChoicesView changes accordingly
-            creationMenuView.toggleMenuType(.tags, newTagTitle: nil, tagTitles: filtered)
+            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: filtered)
         }
     }
     
@@ -133,7 +136,20 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
     }
     
     func textFieldDidEndEditing(_ textField: UITextField) {
-        creationMenuView?.isHidden = true
+        resetTextField()
+    }
+    
+    func textFieldShouldClear(_ textField: UITextField) -> Bool {
+        textFieldDidEndEditing(textField)
+        return false //for some reason, I have to return false in order for the textField to resignTheFirst responder propoerly
+    }
+    
+    func resetTextField() {
+        if let addingTagView = findCreationTagView() {
+            addingTagView.searchTextField.text = ""
+            dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
+            creationMenuView.isHidden = true
+        }
     }
     
     func keyboardWillShow(_ notification:Notification) {
@@ -143,7 +159,6 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         let keyboardHeight = keyboardRectangle.height
         //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
         //But, we can only get the keyboard height through this notification.
-        //IF THE CREATIONMENUVIEW IS CRASHING ON MAC SIMULATOR, TOGGLE THE KEYBOARD ON THE SIMULATOR, IT WILL CRASH WHEN THE SIMULATOR ISN'T SHOWING BECAUSE FUNCTION KEYBOARDWILLSHOW IS NEVER CALLED. BUT, SHOULD WORK WHEN KEYBOARD IS SHOWN.
         createTagMenuView(keyboardHeight)
     }
     
@@ -151,6 +166,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         if creationMenuView == nil {
             creationMenuView = CreationMenuView.instanceFromNib(self)
         }
+        //TODO: should this add subview be up in the nil check area? we don't want to add this multiple times to the view
         self.view.addSubview(creationMenuView)
         //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
         creationMenuView.snp.remakeConstraints { (make) in
@@ -167,10 +183,7 @@ extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
     func addNewTagToTagChoiceView(_ title: String, tagView: TagView?) {
         //also passing the TagView because I get the feeling that I might need it in the future.
         tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
-        if let addingTagView = findCreationTagView() {
-            addingTagView.searchTextField.text = ""
-            resignFirstResponder() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
-        }
+        resetTextField()
         dataStore.saveNewTag(title)
     }
     

@@ -51,9 +51,9 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
             if let fullName = match.targetUser.fullName, let profileImage = match.targetUser.profileImage {
                 let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
                 circleProfileView.setLabelColor(color: ScrollingMatchesConstants.fontColor)
-                _ = circleProfileView.tapped { (tapped) in
+                circleProfileView.addTapGesture(action: { (tapped) in
                     self.delegate?.segueToChatVC(match.targetUser)
-                }
+                })
                 matchesScrollView.addView(circleProfileView)
             }
         }

@@ -117,19 +117,21 @@ class SearchTagsDataStore {
                 if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
                     switch tagAttribute {
                     case .tagChoices:
-                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: tagViewTitle)
+                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int.
+                        //For example: the query would end up being something like this query.whereKey("sexuality, equalTo: 401)
+                        let titleRawValue: Int = SpecialtyTagTitles.stringRawValue(tagViewTitle)!.rawValue
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: titleRawValue)
                     case .singleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
-                            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: value)
+                            query.whereKey(specialtyCategoryTitle.parseColumnName, nearGeoPoint: User.current()!.location, withinMiles: value)
                         }
                     case .rangeSlider:
                         let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
                         let minAge : Date = maxAndMinTuple.minValue.years.ago
                         let maxAge : Date = maxAndMinTuple.maxValue.years.ago
-                        query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-                        query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, greaterThanOrEqualTo: maxAge)
                     }
                 }
             }
@@ -141,12 +143,8 @@ class SearchTagsDataStore {
     
     //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
     func getSingleSliderValue(_ string: String) -> Double? {
-        let spaceString : Character = " "
-        if let index = string.characters.index(of: spaceString) {
-            let substring = string.substring(to: index)
-            if let value = Double(substring) {
-                return value
-            }
+        if let num = convertStringToNumber(str: string) {
+            return Double(num)
         }
         return nil
     }
@@ -157,13 +155,21 @@ class SearchTagsDataStore {
             //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
             let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
             let maxValueSubstring = string.substring(from: string.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
-            if let minValue = Int(minValueSubstring) {
-                if let maxValue = Int(maxValueSubstring) {
-                    return (minValue, maxValue)
-                }
+            if let minValue = convertStringToNumber(str: minValueSubstring), let maxValue = convertStringToNumber(str: maxValueSubstring) {
+                return (minValue, maxValue)
             }
         }
-        return (0,0) //shouldn't reach this point
+        return (0,0) //couldn't convert the slider string to min/max values
+    }
+    
+    private func convertStringToNumber(str: String) -> Int? {
+        //get rid of anything in the string that is not a number
+        let stringArray = str.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
+        let newString = stringArray.joined(separator: "")
+        if let num = Int(newString) {
+            return num
+        }
+        return nil //couldn't be converted into a number
     }
 }
 

@@ -55,11 +55,8 @@ class AddingTagsDataStore {
                             $0.toString
                         }
                         dropDownTag = DropDownTag(tagTitle: specialtyTagTitle.toString, specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
-                    case .singleSlider:
-                        //TODO: I only have one slider for Location, so I am just setting it to a constant...
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, maxValue: 50, suffix: "mi", dropDownAttribute: .singleSlider)
-                    case .rangeSlider:
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, minValue: 18, maxValue: 65, suffix: "yrs", dropDownAttribute: .rangeSlider)
+                    default:
+                        break
                     }
                     tagChoicesDataArray.append(dropDownTag)
                 }

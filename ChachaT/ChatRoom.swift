@@ -37,7 +37,7 @@ class ChatRoom: NSObject {
     func getOtherUser() -> User? {
         if users.count == 2{
             //this is a one-on-one chat
-            for user in users where user != User.current() {
+            for user in users where user.objectId != User.current()!.objectId {
                 return user
             }
         }

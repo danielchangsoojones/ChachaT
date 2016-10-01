@@ -46,6 +46,8 @@ class BackgroundAnimationViewController: UIViewController {
     fileprivate var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var rippleHasNotBeenStarted = true
     
+    let locationManager = CLLocationManager()
+    
     @IBAction func skipCard(_ sender: AnyObject) {
         kolodaView.swipe(.Left)
     }
@@ -65,34 +67,6 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the userArray was passed from the search page, so don't load new users
             createUserArray()
         }
-        
-//        let tags = Tags()
-//        tags.createdBy = User.currentUser()!
-//        tags.genericTags = ["banana", "apple", "pear"]
-//        tags.gender = 302
-//        tags.ethnicity = 2
-//        tags.sexuality = 402
-//        tags.politicalGroup = -201
-//        tags.hairColor = -101
-//        tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
-//        tags.saveInBackground()
-        
-//        PFGeoPoint.geoPointForCurrentLocationInBackground { (geoPoint, error) in
-//            if error == nil {
-//                let tags = Tags()
-//                tags.createdBy = User.currentUser()!
-//                tags.genericTags = ["banana", "apple", "pear"]
-//                tags.gender = 302
-//                tags.ethnicity = 2
-//                tags.sexuality = 402
-//                tags.politicalGroup = -201
-//                tags.hairColor = -101
-//                tags.location = geoPoint!
-//                tags.birthDate = NSDate.date(year: 1996, month: 4, day: 6)
-//                tags.saveInBackground()
-//            }
-//        }
-
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -108,6 +82,10 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
+        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this.
+        kolodaView.dataSource = self
+        kolodaView.reloadData()
+        getUserLocation()
     }
     
     func backgroundGradientSetup() {
@@ -142,11 +120,32 @@ class BackgroundAnimationViewController: UIViewController {
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
         }
     }
+}
+
+extension BackgroundAnimationViewController: CLLocationManagerDelegate {
+    func getUserLocation() {
+        locationManager.requestWhenInUseAuthorization()
+        if CLLocationManager.locationServicesEnabled() {
+            locationManager.delegate = self
+            locationManager.desiredAccuracy = kCLLocationAccuracyNearestTenMeters
+        }
+        locationManager.requestLocation() //requests the location just once, no sense in constantly updating their location and draining their battery, when they are most likely in the same place. In the future, we will probably want to be updating there location.
+    }
     
+    func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
+        if let currentLocation = locations.last {
+            dataStore.saveCurrentUserLocation(location: currentLocation)
+        }
+    }
+    
+    func locationManager(_ manager: CLLocationManager, didFailWithError error: Error) {
+        print(error)
+    }
 }
 
 //queries
 extension BackgroundAnimationViewController {
+    //TODO: move this into the data store
     func createUserArray() {
             //normal creating of the stack.
             let query = User.query()
@@ -156,6 +155,7 @@ extension BackgroundAnimationViewController {
             query?.findObjectsInBackground(block: { (objects, error) -> Void in
                 if let users = objects as? [User] {
                     self.userArray = users
+                    self.kolodaView.dataSource = self
                     self.kolodaView.reloadData()
                 }
             })
@@ -163,7 +163,6 @@ extension BackgroundAnimationViewController {
 }
 
 //MARK: KolodaViewDelegate
-//BEWARE if the function is not being run, it is because some of the delegate names have been changed. Go to the delegate page and make sure they match up exactly
 extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
     func setKolodaAttributes() {
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
@@ -171,7 +170,6 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         kolodaView.delegate = self
         //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
         kolodaView.customKolodaViewDelegate = self
-        kolodaView.dataSource = self
         do {
             audioPlayerWoosh = try AVAudioPlayer(contentsOf: wooshSound)
         }
@@ -237,8 +235,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
 
     func koloda(_ koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
-//        guard let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)?[0] as? CustomCardView
-//            else { return UIView() }
         
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = userArray[Int(index)]
@@ -249,7 +245,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
-//        return Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as! CustomOverlayView
     }
 }
 

@@ -1,8 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
@@ -12,17 +13,13 @@
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="el5-B6-7Nm">
-                    <rect key="frame" x="0.0" y="0.0" width="580" height="90"/>
                     <subviews>
                         <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="3MP-Mt-rWi">
-                            <rect key="frame" x="0.0" y="0.0" width="580" height="90"/>
                             <subviews>
                                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="kpD-0y-Fro" userLabel="Content View">
-                                    <rect key="frame" x="0.0" y="0.0" width="580" height="51"/>
                                     <subviews>
                                         <view contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="32" translatesAutoresizingMaskIntoConstraints="NO" id="VYd-5v-P7S" customClass="ChachaChoicesTagListView" customModule="ChachaT" customModuleProvider="target">
-                                            <rect key="frame" x="0.0" y="0.0" width="580" height="32"/>
-                                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             <constraints>
                                                 <constraint firstAttribute="height" constant="32" id="aDX-sg-3J4"/>
                                             </constraints>
@@ -33,7 +30,7 @@
                                             </variation>
                                         </view>
                                     </subviews>
-                                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstItem="VYd-5v-P7S" firstAttribute="top" secondItem="kpD-0y-Fro" secondAttribute="top" id="0Yo-7D-u1S"/>
                                         <constraint firstItem="VYd-5v-P7S" firstAttribute="leading" secondItem="kpD-0y-Fro" secondAttribute="leading" id="CdE-DK-Fuz"/>
@@ -62,7 +59,7 @@
                             </constraints>
                         </scrollView>
                     </subviews>
-                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
                         <constraint firstAttribute="trailing" secondItem="3MP-Mt-rWi" secondAttribute="trailing" id="2A0-gM-iCH"/>
                         <constraint firstItem="3MP-Mt-rWi" firstAttribute="top" secondItem="el5-B6-7Nm" secondAttribute="top" id="SXh-MW-4KE"/>
@@ -72,7 +69,7 @@
                     </constraints>
                 </view>
             </subviews>
-            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="el5-B6-7Nm" secondAttribute="trailing" id="Azf-E0-SVR"/>
                 <constraint firstItem="el5-B6-7Nm" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="C98-w3-G4f"/>
@@ -81,7 +78,6 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
-                <outlet property="backgroundView" destination="el5-B6-7Nm" id="YBb-wx-JDA"/>
                 <outlet property="choicesTagListView" destination="VYd-5v-P7S" id="DwM-Gf-COo"/>
             </connections>
             <point key="canvasLocation" x="528" y="285"/>

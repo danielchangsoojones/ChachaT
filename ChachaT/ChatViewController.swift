@@ -40,7 +40,7 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataStore = ChatDataStore(delegate: self)
+        dataStore = ChatDataStore(chatUsers: [currentUser, otherUser] ,delegate: self)
         
         self.title = "Chat"
         
