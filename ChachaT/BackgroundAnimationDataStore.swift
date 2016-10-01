@@ -97,6 +97,7 @@ extension BackgroundAnimationDataStore {
     private func saveLocationToUserTag(location: CLLocation) {
         let query = Tags.query()
         query?.whereKey("createdBy", equalTo: User.current()!)
+        //there should only be one object in the background anyway. 
         query?.getFirstObjectInBackground(block: { (object, error) in
             if let tag = object as? Tags, error == nil {
                 tag.location = PFGeoPoint(location: location)

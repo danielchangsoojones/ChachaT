@@ -123,15 +123,15 @@ class SearchTagsDataStore {
                         query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: titleRawValue)
                     case .singleSlider:
                         if let value = getSingleSliderValue(tagViewTitle) {
-                            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: value)
+                            query.whereKey(specialtyCategoryTitle.parseColumnName, nearGeoPoint: User.current()!.location, withinMiles: value)
                         }
                     case .rangeSlider:
                         let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
                         //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
                         let minAge : Date = maxAndMinTuple.minValue.years.ago
                         let maxAge : Date = maxAndMinTuple.maxValue.years.ago
-                        query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-                        query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+                        query.whereKey(specialtyCategoryTitle.parseColumnName, greaterThanOrEqualTo: maxAge)
                     }
                 }
             }
@@ -143,13 +143,16 @@ class SearchTagsDataStore {
     
     //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
     func getSingleSliderValue(_ string: String) -> Double? {
-        let spaceString : Character = " "
-        if let index = string.characters.index(of: spaceString) {
-            let substring = string.substring(to: index)
-            if let value = Double(substring) {
-                return value
-            }
+        if let num = convertStringToNumber(str: string) {
+            return Double(num)
         }
+//        let spaceString : Character = " "
+//        if let index = string.characters.index(of: spaceString) {
+//            let substring = string.substring(to: index)
+//            if let value = Double(substring) {
+//                return value
+//            }
+//        }
         return nil
     }
     
