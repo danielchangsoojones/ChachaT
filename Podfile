@@ -24,6 +24,7 @@ pod 'MBAutoGrowingTextView', '~> 0.1.0'
 pod 'RKNotificationHub'
 pod 'SCLAlertView'
 pod 'SnapKit'
+pod 'AFBlurSegue', '~> 1.2.1'
 
 post_install do |installer|
     `find Pods -regex 'Pods/pop.*\\.h' -print0 | xargs -0 sed -i '' 's/\\(<\\)pop\\/\\(.*\\)\\(>\\)/\\"\\2\\"/'`

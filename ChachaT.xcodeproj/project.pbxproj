@@ -74,6 +74,7 @@
 		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
+		92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92857DCC1DA1C264001DB92C /* MatchNotificationViewController.swift */; };
 		928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928762011D997096000EAED6 /* WelcomeDataStore.swift */; };
 		928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819351D18E78B000A8E04 /* SuperTagViewController.swift */; };
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
@@ -187,6 +188,7 @@
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
 		92857DCB1DA0427D001DB92C /* ChachaT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChachaT.entitlements; sourceTree = "<group>"; };
+		92857DCC1DA1C264001DB92C /* MatchNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchNotificationViewController.swift; sourceTree = "<group>"; };
 		928762011D997096000EAED6 /* WelcomeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = WelcomeDataStore.swift; sourceTree = "<group>"; };
 		928819351D18E78B000A8E04 /* SuperTagViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagViewController.swift; sourceTree = "<group>"; };
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
@@ -304,6 +306,7 @@
 				92BCEB511D8366C800E05C05 /* Subviews */,
 				92BCEB4F1D83510E00E05C05 /* Matches.storyboard */,
 				920BF8331D432E2500104842 /* MatchesViewController.swift */,
+				92857DCC1DA1C264001DB92C /* MatchNotificationViewController.swift */,
 			);
 			name = Matching;
 			sourceTree = "<group>";
@@ -970,6 +973,7 @@
 				92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
+				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				920BF82B1D43167000104842 /* Match.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,

@@ -1,4 +1,5 @@
 PODS:
+  - AFBlurSegue (1.2.1)
   - Alamofire (4.0.0)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
@@ -46,6 +47,7 @@ PODS:
   - TTRangeSlider (1.0.4)
 
 DEPENDENCIES:
+  - AFBlurSegue (~> 1.2.1)
   - Alamofire
   - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, branch `swift-3`)
   - ExpandingMenu (~> 0.1)
@@ -93,6 +95,7 @@ CHECKOUT OPTIONS:
     :git: https://github.com/skofgar/Timepiece.git
 
 SPEC CHECKSUMS:
+  AFBlurSegue: 27e55f015360f4e11117d2c3a959dbb5316eef78
   Alamofire: fef59f00388f267e52d9b432aa5d93dc97190f14
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   EFTools: 36fe88141681c9a052bb5d6d42a4f8940f1b90e5
@@ -119,6 +122,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 229f09e235a6c2be3383f9a8f3646f8aa61dd3e8
+PODFILE CHECKSUM: ad40e23e76d2f5dce8271c97ffbb88503de9bcb3
 
 COCOAPODS: 1.0.1

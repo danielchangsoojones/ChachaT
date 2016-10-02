@@ -136,6 +136,7 @@
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
                         <segue destination="Z8r-2V-bSE" kind="show" identifier="BackgroundAnimationToProfileIndexSegue" id="8X3-g7-6o4"/>
+                        <segue destination="viG-b0-461" kind="custom" identifier="BackgroundAnimationToMatchNotificationSegue" customClass="AFBlurSegue" id="gZN-BK-KB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
@@ -148,7 +149,7 @@
                 <viewControllerPlaceholder storyboardName="Profile" referencedIdentifier="ProfileIndexViewController" id="Z8r-2V-bSE" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="rnd-cT-l9a" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="883.5" y="803"/>
+            <point key="canvasLocation" x="764" y="770"/>
         </scene>
         <!--MatchesViewController-->
         <scene sceneID="brk-a0-jbM">
@@ -156,7 +157,15 @@
                 <viewControllerPlaceholder storyboardIdentifier="MatchesViewController" storyboardName="Matches" referencedIdentifier="MatchesViewController" id="xAM-nQ-U75" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="bGC-M3-gpR" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1029" y="907"/>
+            <point key="canvasLocation" x="802" y="904"/>
+        </scene>
+        <!--MatchNotificationViewController-->
+        <scene sceneID="Ud2-Q0-lfg">
+            <objects>
+                <viewControllerPlaceholder storyboardName="Matches" referencedIdentifier="MatchNotificationViewController" id="viG-b0-461" sceneMemberID="viewController"/>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Rf-Bt-KPO" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1151" y="976"/>
         </scene>
         <!--AddingTagsViewController-->
         <scene sceneID="lMl-sD-RRf">
@@ -164,7 +173,7 @@
                 <viewControllerPlaceholder storyboardName="AddingTags" referencedIdentifier="AddingTagsViewController" id="UlM-dd-WqK" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="8YR-PJ-1zN" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1250" y="907"/>
+            <point key="canvasLocation" x="1451" y="911"/>
         </scene>
         <!--Filtering-->
         <scene sceneID="hOT-6i-yVN">
@@ -172,7 +181,7 @@
                 <viewControllerPlaceholder storyboardName="Filtering" id="daK-C5-wmi" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0aa-uD-aZd" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1390.5" y="833"/>
+            <point key="canvasLocation" x="1452" y="777"/>
         </scene>
         <!--Card Detail View Controller-->
         <scene sceneID="Tui-ct-3pW">
@@ -386,7 +395,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ufg-UD-wCR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

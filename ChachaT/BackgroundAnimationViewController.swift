@@ -16,6 +16,7 @@ import ParseUI
 import Ripple
 import SnapKit
 import Timepiece
+import AFBlurSegue
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -50,6 +51,7 @@ class BackgroundAnimationViewController: UIViewController {
     
     @IBAction func skipCard(_ sender: AnyObject) {
         kolodaView.swipe(.Left)
+        performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToMatchNotificationSegue.rawValue, sender: nil)
     }
     
     @IBAction func approveCard(_ sender: UIButton) {
@@ -291,6 +293,21 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case BackgroundAnimationPageToAddingTagsPageSegue
         case BackgroundAnimationToMatchesSegue
         case BackgroundAnimationToProfileIndexSegue
+        case BackgroundAnimationToMatchNotificationSegue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifierForSegue(segue) {
+        case .BackgroundAnimationToMatchNotificationSegue:
+            let destinationVC = segue.destination
+            destinationVC.modalTransitionStyle = .crossDissolve
+            
+            let blurSegue = segue as! AFBlurSegue
+            blurSegue.tintColor = UIColor.black.withAlphaComponent(0.1)
+            blurSegue.blurEffectStyle = .dark
+        default:
+            break
+        }
     }
 }
 
