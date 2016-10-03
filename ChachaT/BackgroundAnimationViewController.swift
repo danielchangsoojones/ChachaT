@@ -296,15 +296,17 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case BackgroundAnimationToMatchNotificationSegue
     }
     
+    @IBAction func unwindToSwipingPage(segue: UIStoryboardSegue) {}
+    
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
         case .BackgroundAnimationToMatchNotificationSegue:
             let destinationVC = segue.destination
+            //Creates a transparent overlay of this page, with the matches information.
+            destinationVC.modalPresentationStyle = .custom
+            destinationVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
+            destinationVC.view.isOpaque = false
             destinationVC.modalTransitionStyle = .crossDissolve
-            
-            let blurSegue = segue as! AFBlurSegue
-            blurSegue.tintColor = UIColor.black.withAlphaComponent(0.1)
-            blurSegue.blurEffectStyle = .dark
         default:
             break
         }

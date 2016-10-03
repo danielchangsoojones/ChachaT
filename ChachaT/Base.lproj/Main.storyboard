@@ -136,7 +136,7 @@
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
                         <segue destination="Z8r-2V-bSE" kind="show" identifier="BackgroundAnimationToProfileIndexSegue" id="8X3-g7-6o4"/>
-                        <segue destination="viG-b0-461" kind="custom" identifier="BackgroundAnimationToMatchNotificationSegue" customClass="AFBlurSegue" id="gZN-BK-KB9"/>
+                        <segue destination="viG-b0-461" kind="presentation" identifier="BackgroundAnimationToMatchNotificationSegue" modalPresentationStyle="currentContext" id="gZN-BK-KB9"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

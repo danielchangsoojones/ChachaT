@@ -17,7 +17,7 @@ class CircleProfileView: UIView {
     var circleView: CircleView!
     
     //TODO: set the intrinsic content size to calculate correctly
-    init(frame: CGRect, name: String, imageFile: AnyObject) {
+    init(frame: CGRect, name: String, imageFile: AnyObject?) {
         super.init(frame: frame)
         let diameter = frame.size.width
         circleViewSetup(diameter, file: imageFile)
@@ -25,7 +25,7 @@ class CircleProfileView: UIView {
     }
     
     //TODO: right now, I am ust using a constant to make an offset to show the name label, but I could probably be more exact about things.
-    func circleViewSetup(_ diameter: CGFloat, file: AnyObject) {
+    func circleViewSetup(_ diameter: CGFloat, file: AnyObject?) {
         circleView = CircularImageView(file: file, diameter: diameter)
         self.addSubview(circleView)
         circleView.snp.makeConstraints { (make) in
