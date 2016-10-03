@@ -260,6 +260,7 @@ extension SearchTagsViewController: SegueHandlerType {
                     let navigationVC = segue.destination as! ChachaNavigationViewController
                     let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
                     rootVC.userArray = userArray
+                    rootVC.prePassedUserArray = true
                 }
         }
     }
