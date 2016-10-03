@@ -16,7 +16,6 @@ import ParseUI
 import Ripple
 import SnapKit
 import Timepiece
-import AFBlurSegue
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -306,7 +305,6 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             destinationVC.modalPresentationStyle = .custom
             destinationVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.8)
             destinationVC.view.isOpaque = false
-            destinationVC.modalTransitionStyle = .crossDissolve
         default:
             break
         }
