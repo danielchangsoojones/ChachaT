@@ -41,6 +41,7 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataStore = ChatDataStore(chatUsers: [currentUser, otherUser] ,delegate: self)
+        self.navigationController?.isNavigationBarHidden = false
         
         self.title = "Chat"
         

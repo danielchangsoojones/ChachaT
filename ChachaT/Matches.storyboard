@@ -109,11 +109,9 @@
                     <connections>
                         <outlet property="theButtonStackView" destination="uMz-e9-rbf" id="baj-9g-8Is"/>
                         <outlet property="theUsersStackView" destination="CdC-lQ-P7s" id="mLV-06-x7Y"/>
-                        <segue destination="gaj-jv-PNF" kind="unwind" identifier="unwindToSwipingPage" unwindAction="unwindToSwipingPageWithSegue:" id="teq-s5-URX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="3Ai-SB-Nbc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <exit id="gaj-jv-PNF" userLabel="Exit" sceneMemberID="exit"/>
             </objects>
             <point key="canvasLocation" x="1388" y="654.42278860569718"/>
         </scene>

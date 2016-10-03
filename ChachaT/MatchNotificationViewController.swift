@@ -35,13 +35,21 @@ class MatchNotificationViewController: UIViewController {
 extension MatchNotificationViewController {
     //button actions
     func returnToSwiping(_ button: UIButton) {
-        performSegue(withIdentifier: SegueIdentifier.unwindToSwipingPage.rawValue, sender: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     func startAMessage(_ button: UIButton) {
-        print("You should segue to the messaging page now")
+        //need to hold the navigationVC outside of the dismiss completion, because by the time the dimsiss begins, the navigationVC is nil.
+        let chachaNavigationVC = self.presentingViewController as! ChachaNavigationViewController
+        self.dismiss(animated: false) {
+            //after we dismiss this VC, we want to go straight to the messaging page, but when we go back from the messaging page. This matches notification page will have been deleted, and it will just take us right back to the swiping page!
+            let chatVC = ChatViewController()
+            chatVC.currentUser = User.current()
+            chatVC.otherUser = User.current()!
+            chachaNavigationVC.pushViewController(chatVC, animated: false)
+        }
     }
-
+    
     func buttonStackViewSetup() {
         makeButton(title: "Message", action: #selector(MatchNotificationViewController.startAMessage(_:)))
         makeButton(title: "Keep Shuffling", action: #selector(MatchNotificationViewController.returnToSwiping(_:)))
@@ -70,6 +78,7 @@ extension MatchNotificationViewController {
     
     func userCircleSetup(name: String, imageFile: AnyObject?, stackViewIndex: Int) {
         let profileView = CircleProfileView(frame: CGRect(x: 0, y: 0, w: ez.screenWidth * 0.33, h: 150), name: name, imageFile: imageFile)
+        profileView.setLabelColor(color: UIColor.white)
         theUsersStackView.insertArrangedSubview(profileView, at: stackViewIndex)
     }
 }

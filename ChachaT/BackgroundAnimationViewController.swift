@@ -45,6 +45,7 @@ class BackgroundAnimationViewController: UIViewController {
     var userArray = [User]()
     fileprivate var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var rippleHasNotBeenStarted = true
+    var prePassedUserArray = false
     
     let locationManager = CLLocationManager()
     
@@ -83,9 +84,11 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
-        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this.
-        kolodaView.dataSource = self
-        kolodaView.reloadData()
+        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks search page). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this. We have to wait until ViewDidAppear, instead of ViewDidLoad to implement this because in viewDidLoad and ViewWillAppear, the koloda cards aren't sized correctly yet, so they show up in weird forms/positions until we get to ViewDidAppear. This is kind of a hacky fix, until the Koloda cocoapod deals with this.
+        if prePassedUserArray {
+            kolodaView.dataSource = self
+            kolodaView.reloadData()
+        }
         getUserLocation()
     }
     
@@ -294,8 +297,6 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case BackgroundAnimationToProfileIndexSegue
         case BackgroundAnimationToMatchNotificationSegue
     }
-    
-    @IBAction func unwindToSwipingPage(segue: UIStoryboardSegue) {}
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
