@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import EFTools
 import EZSwiftExtensions
 
 class MatchNotificationViewController: UIViewController {
@@ -19,8 +18,6 @@ class MatchNotificationViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: the pther user should be set from dependency injection
-        otherUser = User.current()!
         buttonStackViewSetup()
         userAreaSetup()
     }
@@ -80,12 +77,5 @@ extension MatchNotificationViewController {
         let profileView = CircleProfileView(frame: CGRect(x: 0, y: 0, w: ez.screenWidth * 0.33, h: 150), name: name, imageFile: imageFile)
         profileView.setLabelColor(color: UIColor.white)
         theUsersStackView.insertArrangedSubview(profileView, at: stackViewIndex)
-    }
-}
-
-extension MatchNotificationViewController: SegueHandlerType {
-    enum SegueIdentifier: String {
-        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case unwindToSwipingPage
     }
 }
