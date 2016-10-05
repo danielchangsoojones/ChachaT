@@ -14,6 +14,7 @@ import Parse
 class BackgroundAnimationDataStore {
     
     var parseSwipes: [ParseSwipe] = []
+    var alreadyUsedSwipes: [Swipe] = []
     
     var delegate: BackgroundAnimationDataStoreDelegate?
     
@@ -37,9 +38,11 @@ class BackgroundAnimationDataStore {
         }
     }
     
-    //TODO: have to put something useful into this function.
     func getMoreSwipes() {
-        let _ = SCLAlertView().showNotice("No more users", subTitle: "There are currently no users that you haven't seen yet", closeButtonTitle: "Okay")
+        let alreadyUsedUserIDs: [String] = alreadyUsedSwipes.map { (swipe: Swipe) -> String in
+            return swipe.otherUser.objectId!
+        }
+        getNewUserSwipes(alreadyUsedUserIDs: alreadyUsedUserIDs)
     }
     
 }
@@ -67,6 +70,7 @@ extension BackgroundAnimationDataStore {
                     let currentUserHasSwiped = parseSwipe.currentUserHasSwiped
                     let otherUser = parseSwipe.otherUser
                     let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+                    self.alreadyUsedSwipes.append(swipe)
                     
                     if !currentUserHasSwiped {
                         //we only want to add to the swipe array if the user has not swiped them yet.
@@ -80,7 +84,6 @@ extension BackgroundAnimationDataStore {
                 print(error)
             }
             //This is outside the parseSwipes area, because if the user has no swipes yet, then it won't run the for loop, so we would want to find any suers in the database. We want to find newUserSwipes regardless of whether the user has matches.
-            swipeUserObjectIDs.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
             self.getNewUserSwipes(alreadyUsedUserIDs: swipeUserObjectIDs)
         }
     }
@@ -88,21 +91,33 @@ extension BackgroundAnimationDataStore {
     func getNewUserSwipes(alreadyUsedUserIDs: [String]) {
         //Now, we want to find all the new Users that the current user has never interacted with, or else how would the user meet new people? So, we need to find all the users who haven't been swiped yet. Kind of stinks, because we have to do two API calls (one for swipes and one for new users who weren't in swipes), but cloud code could fix that double call. Plus, we just add this to the data array, and then when the user gets to a place to reload the data (as in they hit the end of the stack, then we load more via the new user stack).
         let newUserQuery = User.query()!
-        newUserQuery.whereKey("objectId", notContainedIn: alreadyUsedUserIDs)
+        var alreadyUsedIdsCopy = alreadyUsedUserIDs
+        alreadyUsedIdsCopy.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
+        newUserQuery.whereKey("objectId", notContainedIn: alreadyUsedIdsCopy)
         newUserQuery.limit = 50 //arbitrary limit, so we don't do a full table scan when there are thousands of users
         newUserQuery.findObjectsInBackground(block: { (objects, error) in
             if let users = objects as? [User] {
-                var swipes: [Swipe] = [] //start the array over, so we can load in the new users
-                for user in users {
-                    //the swipe obviously has not been approved yet by the other user, because neither user has ever made a swipe on each other.
-                    let swipe = Swipe(otherUser: user, otherUserApproval: false)
-                    swipes.append(swipe)
+                if users.isEmpty {
+                    self.reuseSwipes()
+                } else {
+                    var swipes: [Swipe] = [] //start the array over, so we can load in the new users
+                    for user in users {
+                        //the swipe obviously has not been approved yet by the other user, because neither user has ever made a swipe on each other.
+                        let swipe = Swipe(otherUser: user, otherUserApproval: false)
+                        self.alreadyUsedSwipes.append(swipe)
+                        swipes.append(swipe)
+                    }
+                    self.delegate?.passNewUserSwipes(swipes: swipes)
                 }
-                self.delegate?.passNewUserSwipes(swipes: swipes)
             } else if error != nil {
                 print(error)
             }
         })
+    }
+    
+    fileprivate func reuseSwipes() {
+        //If we can't find anymore users, then we are just going to regurgitate the same users that have already been swiped. When the app doesn't have many users, it's possible for a user to swipe through all the users in the database. When, there are 1000s of users, then this function would just go grab more users. But, at least a user can keep swiping with this implementation.
+        self.delegate?.passNewUserSwipes(swipes: alreadyUsedSwipes)
     }
 }
 
