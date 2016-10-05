@@ -15,7 +15,11 @@ class CircularImageView: CircleView {
         let noVisibleImageColor : UIColor = UIColor.gray
         super.init(diameter: diameter, color: noVisibleImageColor)
         imageViewSetup(diameter)
-        theImageView.loadFromFile(file)
+        if let image = file as? UIImage {
+            theImageView.image = image
+        } else {
+            theImageView.loadFromFile(file)
+        }
     }
     
     required init?(coder aDecoder: NSCoder) {

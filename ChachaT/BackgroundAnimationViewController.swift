@@ -42,9 +42,10 @@ class BackgroundAnimationViewController: UIViewController {
     //constraint outlets
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
-    var userArray = [User]()
-    fileprivate var dataStore : BackgroundAnimationDataStore = BackgroundAnimationDataStore()
+    var swipeArray = [Swipe]()
+    fileprivate var dataStore : BackgroundAnimationDataStore!
     var rippleHasNotBeenStarted = true
+    var prePassedSwipeArray = false
     
     let locationManager = CLLocationManager()
     
@@ -59,13 +60,14 @@ class BackgroundAnimationViewController: UIViewController {
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataStoreSetup()
         backgroundGradientSetup()
         setKolodaAttributes()
         setFakeNavigationBarView()
-        if userArray.isEmpty {
-            //if user array is empty, then that means we should load users
-            //if it is not empty, that means the userArray was passed from the search page, so don't load new users
-            createUserArray()
+        if swipeArray.isEmpty {
+            //if swipe array is empty, then that means we should load swipes
+            //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
+            dataStore.loadSwipeArray()
         }
     }
     
@@ -82,10 +84,16 @@ class BackgroundAnimationViewController: UIViewController {
             ripple(theChachaLoadingImage.center, view: theBackgroundColorView, color: CustomColors.JellyTeal.withAlphaComponent(0.5))
             rippleHasNotBeenStarted = false
         }
-        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this.
-        kolodaView.dataSource = self
-        kolodaView.reloadData()
+        //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks search page). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this. We have to wait until ViewDidAppear, instead of ViewDidLoad to implement this because in viewDidLoad and ViewWillAppear, the koloda cards aren't sized correctly yet, so they show up in weird forms/positions until we get to ViewDidAppear. This is kind of a hacky fix, until the Koloda cocoapod deals with this.
+        if prePassedSwipeArray {
+            kolodaView.dataSource = self
+            kolodaView.reloadData()
+        }
         getUserLocation()
+    }
+    
+    func dataStoreSetup() {
+        self.dataStore = BackgroundAnimationDataStore(delegate: self)
     }
     
     func backgroundGradientSetup() {
@@ -143,25 +151,6 @@ extension BackgroundAnimationViewController: CLLocationManagerDelegate {
     }
 }
 
-//queries
-extension BackgroundAnimationViewController {
-    //TODO: move this into the data store
-    func createUserArray() {
-            //normal creating of the stack.
-            let query = User.query()
-            if let objectId = User.current()?.objectId {
-                query?.whereKey("objectId", notEqualTo: objectId)
-            }
-            query?.findObjectsInBackground(block: { (objects, error) -> Void in
-                if let users = objects as? [User] {
-                    self.userArray = users
-                    self.kolodaView.dataSource = self
-                    self.kolodaView.reloadData()
-                }
-            })
-    }
-}
-
 //MARK: KolodaViewDelegate
 extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
     func setKolodaAttributes() {
@@ -179,7 +168,12 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        for _ in 0...koloda.currentCardIndex - 1 {
+            //we want to remove any swipes that we have just swiped because we don't want the user swiping the same users. We do currentCardIndex - 1, because the currentCardIndex is one ahead because we just did a swipe. We don't want to just empty the array either because sometimes we load the data while the user is swiping, so some swipes in the stack have not been interacted with yet.
+            swipeArray.removeFirst()
+        }
         kolodaView.resetCurrentCardIndex()
+        dataStore.getMoreSwipes()
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAtIndex index: UInt) {
@@ -206,11 +200,16 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     }
     
     func koloda(_ koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
-        let targetUser = userArray[Int(index)]
+        let currentSwipe = swipeArray[Int(index)]
         if direction == .Right {
-            dataStore.likePerson(targetUser)
+            currentSwipe.approve()
+            dataStore.swipe(swipe: currentSwipe)
+            if currentSwipe.isMatch {
+                performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToMatchNotificationSegue.rawValue, sender: nil)
+            }
         } else if direction == .Left {
-            dataStore.nopePerson(targetUser)
+            currentSwipe.nope()
+            dataStore.swipe(swipe: currentSwipe)
         }
     }
     
@@ -230,14 +229,14 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
 extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func kolodaNumberOfCards(_ koloda: KolodaView) -> UInt {
-        return UInt(userArray.count)
+        return UInt(swipeArray.count)
     }
 
     func koloda(_ koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
         
         cardView.backgroundColor = UIColor.clear
-        cardView.userOfTheCard = userArray[Int(index)]
+        cardView.userOfTheCard = swipeArray[Int(index)].otherUser
         
         return cardView
     }
@@ -265,8 +264,8 @@ extension BackgroundAnimationViewController: MagicMoveable {
     fileprivate func buttonTappedHandler(_ index: UInt) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
 
-        cardDetailVC.userOfTheCard = userArray[Int(index)]
-        if let image = userArray[Int(index)].profileImage{
+        cardDetailVC.userOfTheCard = swipeArray[Int(index)].otherUser
+        if let image = swipeArray[Int(index)].otherUser.profileImage{
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {
@@ -291,6 +290,21 @@ extension BackgroundAnimationViewController: SegueHandlerType {
         case BackgroundAnimationPageToAddingTagsPageSegue
         case BackgroundAnimationToMatchesSegue
         case BackgroundAnimationToProfileIndexSegue
+        case BackgroundAnimationToMatchNotificationSegue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifierForSegue(segue) {
+        case .BackgroundAnimationToMatchNotificationSegue:
+            let destinationVC = segue.destination as! MatchNotificationViewController
+            //Creates a transparent overlay of this page, with the matches information.
+            destinationVC.otherUser = swipeArray[kolodaView.currentCardIndex - 1].otherUser //go back one index because we just swiped the user to match
+            destinationVC.modalPresentationStyle = .custom
+            destinationVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.85)
+            destinationVC.view.isOpaque = false
+        default:
+            break
+        }
     }
 }
 

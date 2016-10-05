@@ -259,7 +259,14 @@ extension SearchTagsViewController: SegueHandlerType {
                     //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
                     let navigationVC = segue.destination as! ChachaNavigationViewController
                     let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
-                    rootVC.userArray = userArray
+                    var swipeArray: [Swipe] = []
+                    for user in userArray {
+                        //TODO: all the users won't technically be falsely approved
+                        let swipe = Swipe(otherUser: user, otherUserApproval: false)
+                        swipeArray.append(swipe)
+                    }
+                    rootVC.swipeArray = swipeArray
+                    rootVC.prePassedSwipeArray = true
                 }
         }
     }
