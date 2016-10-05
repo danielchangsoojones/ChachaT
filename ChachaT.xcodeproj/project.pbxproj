@@ -15,7 +15,6 @@
 		920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */; };
 		920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8261D415FC000104842 /* SearchTagsViewController.swift */; };
 		920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8281D41DF9400104842 /* EditProfileViewController.swift */; };
-		920BF82B1D43167000104842 /* Match.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF82A1D43167000104842 /* Match.swift */; };
 		920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8311D431CD000104842 /* MatchDataStore.swift */; };
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
@@ -127,7 +126,6 @@
 		920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpecialtyTagView.swift; sourceTree = "<group>"; };
 		920BF8261D415FC000104842 /* SearchTagsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		920BF8281D41DF9400104842 /* EditProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileViewController.swift; sourceTree = "<group>"; };
-		920BF82A1D43167000104842 /* Match.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Match.swift; sourceTree = "<group>"; };
 		920BF8311D431CD000104842 /* MatchDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchDataStore.swift; sourceTree = "<group>"; };
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
@@ -401,7 +399,6 @@
 				920BF8361D43346B00104842 /* Chat.swift */,
 				9261085B1CEA196C009F3E86 /* User.swift */,
 				9288194B1D2BDCFC000A8E04 /* Tags.swift */,
-				920BF82A1D43167000104842 /* Match.swift */,
 				92857DD01DA310CB001DB92C /* ParseSwipe.swift */,
 			);
 			name = "Parse Models";
@@ -981,7 +978,6 @@
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
-				920BF82B1D43167000104842 /* Match.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */,

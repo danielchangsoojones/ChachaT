@@ -19,7 +19,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //register parse subclasses
         User.registerSubclass()
         Tags.registerSubclass()
-        Match.registerSubclass()
         Chat.registerSubclass()
         ParseSwipe.registerSubclass()
         

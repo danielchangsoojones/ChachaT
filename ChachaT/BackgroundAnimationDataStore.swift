@@ -25,14 +25,8 @@ class BackgroundAnimationDataStore {
         //TODO: do a check that this swipe actually exists or we need to make a new one.
         var hasFoundParseSwipe = false
         for parseSwipe in parseSwipes where parseSwipe.matchesUsers(otherUser: swipe.otherUser) {
-            let userNumber = parseSwipe.whichUserIsCurrentUser()
-            if userNumber == 1 {
-                parseSwipe.hasUserOneSwiped = true
-                parseSwipe.userOneApproval = swipe.currentUserApproval
-            } else if userNumber == 2 {
-                parseSwipe.hasUserTwoSwiped = true
-                parseSwipe.userTwoApproval = swipe.currentUserApproval
-            }
+            parseSwipe.currentUserHasSwiped = true
+            parseSwipe.currentUserApproval = swipe.currentUserApproval
             parseSwipe.saveInBackground()
             hasFoundParseSwipe = true
         }
@@ -70,11 +64,9 @@ extension BackgroundAnimationDataStore {
                 var swipes: [Swipe] = []
                 self.parseSwipes = parseSwipes
                 for parseSwipe in parseSwipes {
-                    let swipeTuple = self.convertParseSwipe(parseSwipe: parseSwipe)
-                    let swipe = swipeTuple.swipe
-                    let currentUserHasSwiped = swipeTuple.currentUserHasSwiped
-                    //TODO: can just call the method parseSwipe.otherUser
-                    let otherUser = swipeTuple.otherUser
+                    let currentUserHasSwiped = parseSwipe.currentUserHasSwiped
+                    let otherUser = parseSwipe.otherUser
+                    let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
                     
                     if !currentUserHasSwiped {
                         //we only want to add to the swipe array if the user has not swiped them yet.
@@ -91,27 +83,6 @@ extension BackgroundAnimationDataStore {
             swipeUserObjectIDs.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
             self.getNewUserSwipes(alreadyUsedUserIDs: swipeUserObjectIDs)
         }
-    }
-    
-    func convertParseSwipe(parseSwipe: ParseSwipe) -> (swipe: Swipe, currentUserHasSwiped: Bool, otherUser: User) {
-        //just setting defaults
-        var currentUserHasSwiped: Bool = false
-        var otherUser: User = User()
-        var otherUserApproval: Bool = false
-        
-        let currentUserNumber = parseSwipe.whichUserIsCurrentUser()
-        if currentUserNumber == 1 {
-            otherUser = parseSwipe.userTwo
-            otherUserApproval = parseSwipe.userTwoApproval
-            currentUserHasSwiped = parseSwipe.hasUserOneSwiped
-        } else if currentUserNumber == 2 {
-            otherUser = parseSwipe.userOne
-            otherUserApproval = parseSwipe.userOneApproval
-            currentUserHasSwiped = parseSwipe.hasUserTwoSwiped
-        }
-        
-        let swipe = Swipe(otherUser: otherUser, otherUserApproval: otherUserApproval)
-        return (swipe, currentUserHasSwiped, otherUser)
     }
     
     func getNewUserSwipes(alreadyUsedUserIDs: [String]) {

@@ -26,10 +26,52 @@ class ParseSwipe: PFObject, PFSubclassing {
             let userNumber = whichUserIsCurrentUser()
             if userNumber == 1 {
                 return userTwo
-            } else if userNumber == 2 {
-                return userOne
+            } 
+            return userOne
+        }
+    }
+    var otherUserApproval: Bool {
+        get {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                return userTwoApproval
             }
-            return userOne //shouldn't reach this point
+            return userOneApproval
+        }
+    }
+    var currentUserApproval: Bool {
+        get {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                return userOneApproval
+            }
+            return userTwoApproval
+        }
+        set (hasApproved) {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                userOneApproval = hasApproved
+            } else if userNumber == 2 {
+                userTwoApproval = hasApproved
+            }
+        }
+    }
+    var currentUserHasSwiped: Bool {
+        get {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                return hasUserOneSwiped
+            } 
+            return hasUserTwoSwiped
+        }
+        set (hasSwiped) {
+            //when we set the currentUserHasSwiped, we want to find what user is the currentuser and then set the appropriate hasSwiped
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                hasUserOneSwiped = hasSwiped
+            } else if userNumber == 2 {
+                hasUserTwoSwiped = hasSwiped
+            }
         }
     }
     
@@ -66,9 +108,5 @@ class ParseSwipe: PFObject, PFSubclassing {
         let currentUserMatch = User.current()!.objectId! == userOne.objectId! || User.current()!.objectId! == userTwo.objectId!
         let otherUserMatch = otherUser.objectId! == userOne.objectId! || otherUser.objectId! == userTwo.objectId!
         return currentUserMatch && otherUserMatch
-    }
-    
-    func getOtherUser() {
-        
     }
 }
