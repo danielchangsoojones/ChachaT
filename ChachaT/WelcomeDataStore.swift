@@ -22,12 +22,12 @@ class WelcomeDataStore {
 //for signing up
 extension WelcomeDataStore {
     func signUp(email: String, password: String) {
-        let currentUser = User.current()
-        currentUser!.username = email
-        currentUser!.password = password
+        let newUser = User()
+        newUser.username = email
+        newUser.password = password
         delegate?.toggleSpinner(hide: false)
         
-        currentUser!.signUpInBackground { (success, error: Error?) -> Void in
+        newUser.signUpInBackground { (success, error: Error?) -> Void in
             self.delegate?.toggleSpinner(hide: true)
             if success {
                 let installation = PFInstallation.current()

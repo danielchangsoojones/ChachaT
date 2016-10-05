@@ -31,14 +31,11 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     
     var signUpState = true
-    var dataNegotiator: WelcomeDataStore!
+    var dataStore: WelcomeDataStore!
     
     //TODO: make logOut work for facebook
     @IBAction func facebookButtonPressed(_ sender: UIButton) {
-        
-        
-        
-        dataNegotiator.accessFaceBook()
+        dataStore.accessFaceBook()
     }
     
     
@@ -87,7 +84,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         super.viewDidLoad()
 
         // Do any additional setup after loading the view.
-        dataNegotiator = WelcomeDataStore(delegate: self)
+        dataStore = WelcomeDataStore(delegate: self)
         setGUI()
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
@@ -143,7 +140,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func signUp() {
         if let email = theEmail.text, let password = thePassword.text {
-            dataNegotiator.signUp(email: email, password: password)
+            dataStore.signUp(email: email, password: password)
         } else {
             _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
@@ -151,7 +148,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     
     func logIn() {
         if let email = theEmail.text, let password = thePassword.text {
-            dataNegotiator.logIn(email: email, password: password)
+            dataStore.logIn(email: email, password: password)
         } else {
             _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
