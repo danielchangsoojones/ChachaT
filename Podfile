@@ -3,7 +3,7 @@
 # Uncomment this line if you're using Swift
 # use_frameworks!
 
-target 'ChachaT' do
+target 'Shuffles' do
 
 use_frameworks!
 

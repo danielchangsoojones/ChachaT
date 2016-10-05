@@ -9,7 +9,7 @@
         <!--SearchTagsViewController-->
         <scene sceneID="q9H-Kk-l2v">
             <objects>
-                <viewController storyboardIdentifier="SearchTagsViewController" title="SearchTagsViewController" id="I1A-ko-WaS" customClass="SearchTagsViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchTagsViewController" title="SearchTagsViewController" id="I1A-ko-WaS" customClass="SearchTagsViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HPb-BY-jXc"/>
                         <viewControllerLayoutGuide type="bottom" id="8zR-1V-GnX"/>
@@ -18,12 +18,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
-                                <frame key="frameInset" width="600" height="600"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
                                 <subviews>
-                                    <view tag="1" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="ChachaT">
-                                        <frame key="frameInset" minY="30" width="600" height="570"/>
-                                    </view>
+                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target"/>
                                 </subviews>
                                 <constraints>
                                     <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="VSR-xX-ycl" secondAttribute="leading" id="kRI-uO-DCd"/>
@@ -31,9 +28,7 @@
                                     <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="r1U-4A-4XX"/>
                                 </constraints>
                             </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" misplaced="YES" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
-                                <frame key="frameInset" minX="290" minY="290" width="20" height="20"/>
-                            </activityIndicatorView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -70,7 +65,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="BackgroundAnimationNavigationViewController" id="Dth-C6-7C9" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="e6P-J2-aHh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1721.5" y="378"/>
+            <point key="canvasLocation" x="1950" y="363"/>
         </scene>
     </scenes>
 </document>

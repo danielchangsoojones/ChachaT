@@ -84,7 +84,7 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>Pods-ChachaT.xcscheme</key>
+		<key>Pods-Shuffles.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -137,12 +137,17 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F622107D8A0411E0B9B46CBC2309208</key>
+		<key>150F41355384632AC49ACAFD22539233</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>1ED4DFAAD25E1999D0244868457A351E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>23717E39B7FCE470425C33271A6C7B0B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -153,11 +158,6 @@
 			<true/>
 		</dict>
 		<key>2692A60CA9509B2E2A543556E170DCB4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2C6215E2CE44A7FF9ED0D93815F80507</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -177,12 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3259BC38D4D1FE2F749D5DB627573876</key>
+		<key>386C01B2FBC28FCA746F6178E22F6916</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>3A3FFBFE3DAAA9220450494F53E64F14</key>
+		<key>4E2B0DFE0C70DA036E3323078F10F219</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -197,7 +197,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>6501A997A4B16AA68CA27DADA30779B1</key>
+		<key>6750CF230DA48586B68C5CBACB0FC4EE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -207,7 +207,22 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6D96923145333E8975FE0FD4892B3743</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6EDC37F3FA92533C6AC3562458AA91F1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>742AD052D18D9B76B74588404D465BA4</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>765D53D9F1E54F83994A701D94057AED</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -242,22 +257,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>BD24EFBBFE47CDFAB77DE2AA3E82DAC4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>C45290004E0078130C91A71711094467</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>C950845D733237D62032BB679530F4C7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>D6A5A855C40060781B1FB43DCF2667B9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
