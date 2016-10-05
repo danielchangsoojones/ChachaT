@@ -173,6 +173,7 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
             swipeArray.removeFirst()
         }
         kolodaView.resetCurrentCardIndex()
+        dataStore.getMoreSwipes()
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAtIndex index: UInt) {

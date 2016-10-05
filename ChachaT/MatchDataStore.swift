@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Parse
 
 class MatchDataStore: NSObject {
     var delegate: MatchDataStoreDelegate?
@@ -22,22 +23,32 @@ class MatchDataStore: NSObject {
     }
     
     func findMatchedUsers() {
-        var connections : [Connection] = []
-        let query = Match.query()!
-        query.whereKey(Constants.currentUser, equalTo: User.current()!)
-        query.whereKey(Constants.mutualMatch, equalTo: true)
-        query.includeKey(Constants.targetUser)
-        query.findObjectsInBackground { (objects, error) in
-            if let matches = objects as? [Match] , error == nil {
-                for match in matches {
-                    let connection = Connection(targetUser: match.targetUser)
+        let currentUserIsUserOneQuery = createInnerQuery(user: "userOne")
+        let currentUserIsUserTwoQuery = createInnerQuery(user: "userTwo")
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
+        orQuery.includeKey("userOne")
+        orQuery.includeKey("userTwo")
+        orQuery.findObjectsInBackground { (objects, error) in
+            if let parseSwipes = objects as? [ParseSwipe] {
+                var connections : [Connection] = []
+                for parseSwipe in parseSwipes {
+                    let connection = Connection(targetUser: parseSwipe.otherUser)
                     connections.append(connection)
                 }
                 self.delegate?.passMatches(connections)
-            } else {
+            } else if error != nil {
                 print(error)
             }
         }
+    }
+    
+    func createInnerQuery(user: String) -> PFQuery<PFObject> {
+        let query = ParseSwipe.query()!
+        query.whereKey(user, equalTo: User.current()!)
+        query.whereKey("userOneApproval", equalTo: true)
+        query.whereKey("userTwoApproval", equalTo: true)
+        return query
     }
     
     //TODO: figure out which chats have not been read yet, and how to group chats of the same name to the same message cell, as in we don't need two cells for a message sent from the same person.

@@ -20,6 +20,18 @@ class ParseSwipe: PFObject, PFSubclassing {
     @NSManaged var userTwoApproval: Bool
     @NSManaged var hasUserOneSwiped: Bool
     @NSManaged var hasUserTwoSwiped: Bool
+    //returns the user in the match that is not the currentUser
+    var otherUser: User {
+        get {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                return userTwo
+            } else if userNumber == 2 {
+                return userOne
+            }
+            return userOne //shouldn't reach this point
+        }
+    }
     
     override init() {
         //have to override init, or else Parse gets mad. 
@@ -54,5 +66,9 @@ class ParseSwipe: PFObject, PFSubclassing {
         let currentUserMatch = User.current()!.objectId! == userOne.objectId! || User.current()!.objectId! == userTwo.objectId!
         let otherUserMatch = otherUser.objectId! == userOne.objectId! || otherUser.objectId! == userTwo.objectId!
         return currentUserMatch && otherUserMatch
+    }
+    
+    func getOtherUser() {
+        
     }
 }
