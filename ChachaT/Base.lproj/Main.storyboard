@@ -17,7 +17,7 @@
         <!--Background Animation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
-                <viewController storyboardIdentifier="BackgroundAnimationViewController" id="BYZ-38-t0r" customClass="BackgroundAnimationViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BackgroundAnimationViewController" id="BYZ-38-t0r" customClass="BackgroundAnimationViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="y3c-jy-aDJ"/>
                         <viewControllerLayoutGuide type="bottom" id="wfy-db-euE"/>
@@ -28,7 +28,7 @@
                         <subviews>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dsh-Hh-R5l" userLabel="Background Color View">
                                 <subviews>
-                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="ChachaLoadingButton" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
+                                    <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadingCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="Qim-2a-oEF"/>
                                             <constraint firstAttribute="height" constant="78" id="SsN-CR-kKR"/>
@@ -40,7 +40,7 @@
                                     <constraint firstItem="Uj8-Kh-nVl" firstAttribute="centerY" secondItem="dsh-Hh-R5l" secondAttribute="centerY" id="hUl-Ru-V7W"/>
                                 </constraints>
                             </view>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="ChachaT">
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="Shuffles" customModuleProvider="target">
                                 <subviews>
                                     <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
                                         <constraints>
@@ -131,7 +131,7 @@
                         <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
                         <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
-                        <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="ChachaT" customModuleProvider="target" id="2hX-Ts-O6M"/>
+                        <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="Shuffles" customModuleProvider="target" id="2hX-Ts-O6M"/>
                         <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
@@ -186,7 +186,7 @@
         <!--Card Detail View Controller-->
         <scene sceneID="Tui-ct-3pW">
             <objects>
-                <viewController storyboardIdentifier="CardDetailViewController" id="7Sy-Jm-ZWb" customClass="CardDetailViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="CardDetailViewController" id="7Sy-Jm-ZWb" customClass="CardDetailViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fRp-pc-gE5"/>
                         <viewControllerLayoutGuide type="bottom" id="6ML-sB-9wT"/>
@@ -296,7 +296,7 @@
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="TagListView" customModule="ChachaT" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="TagListView" customModule="Shuffles" customModuleProvider="target">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="312" id="qYw-rF-hQs"/>
                                                 </constraints>
@@ -393,7 +393,7 @@
         <!--Chacha Navigation View Controller-->
         <scene sceneID="NJs-ik-5Gj">
             <objects>
-                <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -411,7 +411,7 @@
     </scenes>
     <resources>
         <image name="Approve Button" width="81" height="81"/>
-        <image name="ChachaLoadingButton" width="78" height="78"/>
+        <image name="LoadingCircle" width="78" height="78"/>
         <image name="Report User Button" width="5" height="20"/>
         <image name="Skip Button" width="81" height="81"/>
         <image name="Top Line" width="375" height="1"/>

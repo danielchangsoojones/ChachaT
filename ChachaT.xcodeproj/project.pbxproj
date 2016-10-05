@@ -154,7 +154,7 @@
 		925D0FD81D75E61300DE20F9 /* CreationTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; name = CreationTagView.swift; path = TagListView/CreationTagView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CreationMenuView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		925D0FDD1D760EE000DE20F9 /* CreationMenuView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CreationMenuView.xib; sourceTree = "<group>"; };
-		926108131CDBCA32009F3E86 /* ChachaT.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ChachaT.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		926108131CDBCA32009F3E86 /* Shuffles.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Shuffles.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		926108161CDBCA32009F3E86 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		9261081B1CDBCA32009F3E86 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		9261081D1CDBCA32009F3E86 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; name = Assets.xcassets; path = ChachaT/Assets.xcassets; sourceTree = "<group>"; };
@@ -473,7 +473,7 @@
 		926108141CDBCA32009F3E86 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				926108131CDBCA32009F3E86 /* ChachaT.app */,
+				926108131CDBCA32009F3E86 /* Shuffles.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -799,9 +799,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		926108121CDBCA32009F3E86 /* ChachaT */ = {
+		926108121CDBCA32009F3E86 /* Shuffles */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "ChachaT" */;
+			buildConfigurationList = 926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "Shuffles" */;
 			buildPhases = (
 				3EC3AA9E6CFF964C9E2D1DDE /* [CP] Check Pods Manifest.lock */,
 				9261080F1CDBCA32009F3E86 /* Sources */,
@@ -814,9 +814,9 @@
 			);
 			dependencies = (
 			);
-			name = ChachaT;
+			name = Shuffles;
 			productName = ChachaT;
-			productReference = 926108131CDBCA32009F3E86 /* ChachaT.app */;
+			productReference = 926108131CDBCA32009F3E86 /* Shuffles.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -855,7 +855,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				926108121CDBCA32009F3E86 /* ChachaT */,
+				926108121CDBCA32009F3E86 /* Shuffles */,
 			);
 		};
 /* End PBXProject section */
@@ -1198,7 +1198,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "ChachaT" */ = {
+		926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "Shuffles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				926108261CDBCA32009F3E86 /* Debug */,
