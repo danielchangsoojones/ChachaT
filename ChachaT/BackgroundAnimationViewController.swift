@@ -168,6 +168,10 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
+        for _ in 0...koloda.currentCardIndex - 1 {
+            //we want to remove any swipes that we have just swiped because we don't want the user swiping the same users. We do currentCardIndex - 1, because the currentCardIndex is one ahead because we just did a swipe. We don't want to just empty the array either because sometimes we load the data while the user is swiping, so some swipes in the stack have not been interacted with yet.
+            swipeArray.removeFirst()
+        }
         kolodaView.resetCurrentCardIndex()
     }
     
