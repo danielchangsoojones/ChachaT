@@ -16,8 +16,7 @@
                     <subviews>
                         <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="9NQ-uw-kwB">
                             <subviews>
-                                <view tag="2" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="Shuffles" customModuleProvider="target">
-                                    <frame key="frameInset" minX="8" minY="-40" height="154"/>
+                                <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="Shuffles" customModuleProvider="target">
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" id="Scz-8p-IDp"/>

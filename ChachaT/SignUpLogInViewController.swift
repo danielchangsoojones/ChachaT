@@ -25,6 +25,8 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var theCreateAccountLabel: UILabel!
     @IBOutlet weak var theTermsOfService: UIButton!
     @IBOutlet weak var changeScreenButton: UIButton!
+    @IBOutlet weak var theAndLabel: UILabel!
+    @IBOutlet weak var thePrivacyPolicyButton: UIButton!
     
     //constraint outlets
     @IBOutlet weak var changeScreenButtonBottomConstraint: NSLayoutConstraint!
@@ -53,6 +55,9 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     @IBAction func changeToLoginScreen(_ sender: AnyObject) {
         signUpState = !signUpState
         UIView.animate(withDuration: 0.3, animations: { () -> Void in
+            //TODO: I could write this stuff with much less code.
+            self.thePrivacyPolicyButton.isHidden = !self.signUpState
+            self.theAndLabel.isHidden = !self.signUpState
             if self.signUpState {
                 self.changeScreenButton.setTitle("Or, Sign In", for: UIControlState())
                 self.theFacebookButton.setTitle("Sign Up With Facebook", for: UIControlState())
@@ -76,9 +81,12 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func termsOfServiceButtonPressed(_ sender: AnyObject) {
-       UIApplication.shared.openURL(URL(string: "http://about.chacha.com/terms-of-use/")!)
+       UIApplication.shared.openURL(URL(string: "https://shufflesprivacy.wordpress.com/shuffles-terms-of-service/")!)
     }
     
+    @IBAction func privacyPolicyButtonPressed(_ sender: UIButton) {
+        UIApplication.shared.openURL(URL(string: "https://shufflesprivacy.wordpress.com/shuffles-privacy-policy")!)
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
