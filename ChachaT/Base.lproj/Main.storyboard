@@ -42,9 +42,9 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="Shuffles" customModuleProvider="target">
                                 <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
+                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
                                         <constraints>
-                                            <constraint firstAttribute="height" constant="264" id="OaJ-DG-2fy"/>
+                                            <constraint firstAttribute="height" constant="350" id="OaJ-DG-2fy"/>
                                         </constraints>
                                     </imageView>
                                 </subviews>
@@ -199,9 +199,9 @@
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
+                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="264" id="vHd-oq-IIN"/>
+                                                    <constraint firstAttribute="height" constant="350" id="vHd-oq-IIN"/>
                                                 </constraints>
                                             </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-vq-aso" userLabel="Name and Title View">
@@ -214,7 +214,7 @@
                                                     </imageView>
                                                     <label opaque="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=", Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="iG2-2N-iPj">
                                                         <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                                                        <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                                        <color key="textColor" red="0.63921568627450975" green="0.63921568627450975" blue="0.63921568627450975" alpha="1" colorSpace="calibratedRGB"/>
                                                         <nil key="highlightedColor"/>
                                                     </label>
                                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="IkV-io-nnJ">
@@ -296,7 +296,7 @@
                                             <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
                                                 <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                             </activityIndicatorView>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="TagListView" customModule="Shuffles" customModuleProvider="target">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="312" id="qYw-rF-hQs"/>
                                                 </constraints>
@@ -317,7 +317,7 @@
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstItem="zLF-DG-mmb" firstAttribute="centerX" secondItem="v5S-4V-jao" secondAttribute="centerX" id="SVb-Sy-7Pv"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
-                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="100" id="Ty8-td-QWW"/>
+                                            <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="30" id="Ty8-td-QWW"/>
                                             <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
@@ -379,11 +379,11 @@
                         <outlet property="theAgeLabel" destination="iG2-2N-iPj" id="TJR-gZ-ehy"/>
                         <outlet property="theBackButton" destination="i23-FF-3md" id="bs8-r8-Hh2"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
+                        <outlet property="theCardUserTagListView" destination="dCe-w4-3mH" id="8wC-ZM-3yy"/>
                         <outlet property="theFullNameLabel" destination="dI7-Qj-h3R" id="jDQ-RN-H4a"/>
                         <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
                         <outlet property="theSavingSpinner" destination="zLF-DG-mmb" id="DeZ-s9-0nd"/>
                         <outlet property="theTitleLabel" destination="IkV-io-nnJ" id="iXe-VS-NWP"/>
-                        <outlet property="theUserOfCardTagListView" destination="dCe-w4-3mH" id="cLf-Xf-cmv"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
