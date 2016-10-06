@@ -6,14 +6,6 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
-        <!--Onboarding-->
-        <scene sceneID="4f1-Gx-aDr">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Onboarding" id="fEb-nV-m3f" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="aNf-HX-Mif" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="1100.5" y="-157"/>
-        </scene>
         <!--Background Animation View Controller-->
         <scene sceneID="tne-QT-ifu">
             <objects>
@@ -132,7 +124,6 @@
                         <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
                         <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
                         <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="Shuffles" customModuleProvider="target" id="2hX-Ts-O6M"/>
-                        <segue destination="fEb-nV-m3f" kind="presentation" identifier="OnboardingPageSegue" id="BBN-rh-MvJ"/>
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
                         <segue destination="Z8r-2V-bSE" kind="show" identifier="BackgroundAnimationToProfileIndexSegue" id="8X3-g7-6o4"/>
