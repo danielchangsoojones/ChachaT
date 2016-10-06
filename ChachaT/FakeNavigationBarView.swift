@@ -31,8 +31,8 @@ class FakeNavigationBarView : UIView {
     }
     
     func setNavigationBarItems() {
-        createExpandingMenuButton() //creates the left Menu Button that creates a drop down menu
         createRightBarButton()
+        createLeftBarButton()
         createLogo()
     }
     
@@ -61,6 +61,21 @@ class FakeNavigationBarView : UIView {
     
     func rightBarButtonPressed(_ sender: UIButton!) {
         delegate?.rightBarButtonPressed(sender)
+    }
+    
+    func createLeftBarButton() {
+        let leftButtom = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
+        leftButtom.addTarget(self, action: #selector(FakeNavigationBarView.leftBarButtonPressed(_:)), for: .touchUpInside)
+        self.addSubview(leftButtom)
+        leftButtom.snp.makeConstraints { (make) in
+            make.leading.equalTo(self).offset(ImportantDimensions.BarButtonInset)
+            make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
+        }
+        leftButtom.setImage(#imageLiteral(resourceName: "Notification Tab Icon"), for: UIControlState())
+    }
+    
+    func leftBarButtonPressed(_ sender: UIButton!) {
+        delegate?.leftBarButtonPressed()
     }
     
     //This button is the Left Bar Button item
@@ -127,6 +142,7 @@ class FakeNavigationBarView : UIView {
 
 protocol FakeNavigationBarDelegate {
     func rightBarButtonPressed(_ sender: UIButton!)
+    func leftBarButtonPressed()
     func segueToAddingTagsPage()
     func segueToEditProfilePage()
     func segueToMatchesPage()
@@ -135,10 +151,14 @@ protocol FakeNavigationBarDelegate {
 
 extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     func rightBarButtonPressed(_ sender: UIButton!) {
+        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: self)
+    }
+    
+    func leftBarButtonPressed() {
         let frostedSideBar = FrostedSidebar(itemImages: [#imageLiteral(resourceName: "WhiteMessageIcon"), #imageLiteral(resourceName: "MyTagIcon"), #imageLiteral(resourceName: "ProfileIcon")], colors: [CustomColors.JellyTeal, CustomColors.JellyTeal, CustomColors.JellyTeal], selectionStyle: .all)
         frostedSideBar.selectionStyle = .all
+        frostedSideBar.delegate = self
         frostedSideBar.showInViewController(self, animated: true)
-//        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: self)
     }
     
     func segueToAddingTagsPage() {

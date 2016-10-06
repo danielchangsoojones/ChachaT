@@ -247,6 +247,26 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     }
 }
 
+extension BackgroundAnimationViewController: FrostedSidebarDelegate {
+    func sidebar(_ sidebar: FrostedSidebar, didTapItemAtIndex index: Int) {
+        switch index {
+        case 0:
+            performSegueWithIdentifier(.BackgroundAnimationToMatchesSegue, sender: nil)
+        case 1:
+            performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationPageToAddingTagsPageSegue.rawValue, sender: nil)
+        case 2:
+            performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToProfileIndexSegue.rawValue, sender: nil)
+        default:
+            break
+        }
+    }
+    
+    func sidebar(_ sidebar: FrostedSidebar, didShowOnScreenAnimated animated: Bool) {}
+    func sidebar(_ sidebar: FrostedSidebar, willShowOnScreenAnimated animated: Bool) {}
+    func sidebar(_ sidebar: FrostedSidebar, didEnable itemEnabled: Bool, itemAtIndex index: Int) {}
+    func sidebar(_ sidebar: FrostedSidebar, didDismissFromScreenAnimated animated: Bool) {}
+    func sidebar(_ sidebar: FrostedSidebar, willDismissFromScreenAnimated animated: Bool) {}
+}
 
 extension BackgroundAnimationViewController: MagicMoveable {
     var isMagic: Bool {
