@@ -67,7 +67,7 @@ class CardDetailViewController: UIViewController {
     
     func setNormalGUI() {
         dataStore.loadTags(user: userOfTheCard!)
-        self.view.layer.addSublayer(setBottomBlur())
+        self.view.layer.addSublayer(setBottomBlur(blurHeight: 100, color: CustomColors.JellyTeal))
         theBackButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName

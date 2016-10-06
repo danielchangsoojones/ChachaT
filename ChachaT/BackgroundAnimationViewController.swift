@@ -16,6 +16,7 @@ import ParseUI
 import Ripple
 import SnapKit
 import Timepiece
+import EZSwiftExtensions
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -61,6 +62,7 @@ class BackgroundAnimationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataStoreSetup()
+        bottomBlurAreaSetup()
         backgroundGradientSetup()
         setKolodaAttributes()
         setFakeNavigationBarView()
@@ -127,6 +129,11 @@ class BackgroundAnimationViewController: UIViewController {
             make.top.equalTo(self.view)
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
         }
+    }
+    
+    func bottomBlurAreaSetup() {
+        let blur = setBottomBlur(blurHeight: ez.screenHeight * 0.33, color: CustomColors.JellyTeal)
+        self.view.layer.insertSublayer(blur, at: 0)
     }
 }
 
