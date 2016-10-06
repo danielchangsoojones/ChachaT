@@ -84,6 +84,7 @@ public enum SidebarItemSelectionStyle{
 /**
  Animated Sidebar.
 */
+//Daniel Jones: there is a cocoapod for this, but it is not updated to swift 3, plus, I want to be able to add labels to the side bar maybe, which the cocoapod currently doesn't do.
 open class FrostedSidebar: UIViewController {
     
     //MARK: Public Properties

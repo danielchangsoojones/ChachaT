@@ -135,7 +135,10 @@ protocol FakeNavigationBarDelegate {
 
 extension BackgroundAnimationViewController: FakeNavigationBarDelegate {
     func rightBarButtonPressed(_ sender: UIButton!) {
-        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: self)
+        let frostedSideBar = FrostedSidebar(itemImages: [#imageLiteral(resourceName: "WhiteMessageIcon"), #imageLiteral(resourceName: "MyTagIcon"), #imageLiteral(resourceName: "ProfileIcon")], colors: [CustomColors.JellyTeal, CustomColors.JellyTeal, CustomColors.JellyTeal], selectionStyle: .all)
+        frostedSideBar.selectionStyle = .all
+        frostedSideBar.showInViewController(self, animated: true)
+//        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: self)
     }
     
     func segueToAddingTagsPage() {
