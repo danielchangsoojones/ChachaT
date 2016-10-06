@@ -88,7 +88,7 @@ func setBottomBlur(blurHeight: CGFloat, color: UIColor) -> CAGradientLayer {
     let transparent = UIColor(white: 1, alpha: 0).cgColor
     let opaque = color.withAlphaComponent(0.5).cgColor
     gradientLayer.colors = [transparent, opaque]
-    gradientLayer.locations = [0.0, 0.8]
+    gradientLayer.locations = [0.0, 1.0]
     
     return gradientLayer
 }
