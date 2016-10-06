@@ -30,9 +30,10 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theBackButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
-    @IBOutlet weak var theUserOfCardTagListView: TagListView!
+    @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
     
-    var userOfTheCard: User? = User.current()
+    var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
+    var dataStore: CardDetailDataStore!
     
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         self.dismiss(animated: false, completion: nil)
@@ -51,8 +52,13 @@ class CardDetailViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        dataStoreSetup()
         setNormalGUI()
         setupTapHandler()
+    }
+    
+    func dataStoreSetup() {
+        dataStore = CardDetailDataStore(delegate: self)
     }
     
     override var prefersStatusBarHidden: Bool {
@@ -60,6 +66,7 @@ class CardDetailViewController: UIViewController {
     }
     
     func setNormalGUI() {
+        dataStore.loadTags(user: userOfTheCard!)
         self.view.layer.addSublayer(setBottomBlur())
         theBackButton.layer.cornerRadius = 10
         if let fullName = userOfTheCard?.fullName {
