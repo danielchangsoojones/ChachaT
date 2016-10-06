@@ -82,13 +82,13 @@ func isIphone3by2AR() -> Bool {
     return false
 }
 
-func setBottomBlur() -> CAGradientLayer {
+func setBottomBlur(blurHeight: CGFloat, color: UIColor) -> CAGradientLayer {
     let gradientLayer = CAGradientLayer()
-    gradientLayer.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - 100, width:  UIScreen.main.bounds.width, height: 100)
+    gradientLayer.frame = CGRect(x: 0, y: UIScreen.main.bounds.height - blurHeight, width:  UIScreen.main.bounds.width, height: blurHeight)
     let transparent = UIColor(white: 1, alpha: 0).cgColor
-    let opaque = UIColor.rgba(1, green: 195, blue: 167, alpha: 0.5).cgColor
+    let opaque = color.withAlphaComponent(0.5).cgColor
     gradientLayer.colors = [transparent, opaque]
-    gradientLayer.locations = [0.0, 0.8]
+    gradientLayer.locations = [0.0, 1.0]
     
     return gradientLayer
 }

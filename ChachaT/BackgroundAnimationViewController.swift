@@ -16,6 +16,7 @@ import ParseUI
 import Ripple
 import SnapKit
 import Timepiece
+import EZSwiftExtensions
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -61,7 +62,7 @@ class BackgroundAnimationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataStoreSetup()
-        backgroundGradientSetup()
+        bottomBlurAreaSetup()
         setKolodaAttributes()
         setFakeNavigationBarView()
         if swipeArray.isEmpty {
@@ -96,20 +97,6 @@ class BackgroundAnimationViewController: UIViewController {
         self.dataStore = BackgroundAnimationDataStore(delegate: self)
     }
     
-    func backgroundGradientSetup() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        
-        let color1 = UIColor.white.cgColor as CGColor
-        let color2 = CustomColors.PeriwinkleGray.cgColor as CGColor
-        
-        gradientLayer.colors = [color1, color2]
-        
-        gradientLayer.locations = [0.5, 0.75]
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
-
-    }
-    
     func playSoundInBG(_ theAudioPlayer:AVAudioPlayer) {
         let qualityOfServiceClass = DispatchQoS.QoSClass.background
         let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
@@ -127,6 +114,11 @@ class BackgroundAnimationViewController: UIViewController {
             make.top.equalTo(self.view)
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)
         }
+    }
+    
+    func bottomBlurAreaSetup() {
+        let blur = setBottomBlur(blurHeight: ez.screenHeight * 0.33, color: CustomColors.JellyTeal)
+        self.view.layer.insertSublayer(blur, at: 0)
     }
 }
 
