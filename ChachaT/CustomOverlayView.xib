@@ -1,39 +1,45 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
-        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomOverlayView" customModule="ChachaT" customModuleProvider="target">
-            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB" customClass="CustomOverlayView" customModule="Shuffles" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <view alpha="0.29999999999999999" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lw-xX-y0V">
-                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
-                    <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                </view>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Skip" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="G5P-hZ-ESw">
-                    <rect key="frame" x="183" y="253" width="235" height="94"/>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Approve Button" translatesAutoresizingMaskIntoConstraints="NO" id="KMN-1v-ucH">
                     <constraints>
-                        <constraint firstAttribute="height" constant="94" id="c0s-Ex-Zd6"/>
-                        <constraint firstAttribute="width" constant="235" id="x7U-zK-bas"/>
+                        <constraint firstAttribute="width" constant="63" id="8ap-w9-mEB"/>
+                        <constraint firstAttribute="height" constant="63" id="eyN-zA-3Tx"/>
                     </constraints>
-                    <fontDescription key="fontDescription" type="system" pointSize="51"/>
-                    <color key="textColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                </imageView>
+                <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Skip Button" translatesAutoresizingMaskIntoConstraints="NO" id="8GO-Bk-UHJ">
+                    <constraints>
+                        <constraint firstAttribute="width" constant="63" id="1ZF-hl-QJS"/>
+                        <constraint firstAttribute="height" constant="63" id="dU1-VK-cUG"/>
+                    </constraints>
+                </imageView>
             </subviews>
             <constraints>
-                <constraint firstItem="G5P-hZ-ESw" firstAttribute="centerX" secondItem="iN0-l3-epB" secondAttribute="centerX" id="2MC-J7-s0W"/>
-                <constraint firstItem="6lw-xX-y0V" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="4I9-3o-V4f"/>
-                <constraint firstAttribute="trailing" secondItem="6lw-xX-y0V" secondAttribute="trailing" id="5co-RM-29x"/>
-                <constraint firstItem="G5P-hZ-ESw" firstAttribute="centerY" secondItem="iN0-l3-epB" secondAttribute="centerY" id="eWp-AU-LS6"/>
-                <constraint firstItem="6lw-xX-y0V" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="ovc-vc-tSA"/>
-                <constraint firstAttribute="bottom" secondItem="6lw-xX-y0V" secondAttribute="bottom" id="str-SQ-LDe"/>
+                <constraint firstItem="KMN-1v-ucH" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="20" id="e47-Sf-5zh"/>
+                <constraint firstItem="8GO-Bk-UHJ" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="fcb-9B-m2a"/>
+                <constraint firstAttribute="trailing" secondItem="8GO-Bk-UHJ" secondAttribute="trailing" constant="20" id="wq6-hT-4rf"/>
+                <constraint firstItem="KMN-1v-ucH" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="20" id="yoT-pG-2N1"/>
             </constraints>
+            <connections>
+                <outlet property="theApproveImage" destination="KMN-1v-ucH" id="Ly7-Z2-FSa"/>
+                <outlet property="theSkipImage" destination="8GO-Bk-UHJ" id="vQe-zZ-FpF"/>
+            </connections>
+            <point key="canvasLocation" x="35.5" y="53.5"/>
         </view>
     </objects>
+    <resources>
+        <image name="Approve Button" width="63" height="63"/>
+        <image name="Skip Button" width="63" height="63"/>
+    </resources>
 </document>
