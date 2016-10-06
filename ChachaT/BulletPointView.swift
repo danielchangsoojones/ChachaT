@@ -42,6 +42,7 @@ class BulletPointView: UIView {
     func textLabelSetup(_ text: String) {
         theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.greatestFiniteMagnitude)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
         theTextLabel.text = text
+        theTextLabel.textColor = CustomColors.SilverChaliceGrey
         theTextLabel.numberOfLines = 0 //so the textLabel can grow to multiple lines
         theTextLabel.sizeToFit() //want the label's size to fit, so then we can calculate the intrinsicContentSize
         self.addSubview(theTextLabel)

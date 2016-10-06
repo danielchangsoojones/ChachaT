@@ -55,6 +55,10 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
+    override var prefersStatusBarHidden: Bool {
+        return true
+    }
+    
     func setNormalGUI() {
         self.view.layer.addSublayer(setBottomBlur())
         theBackButton.layer.cornerRadius = 10
@@ -96,10 +100,6 @@ class CardDetailViewController: UIViewController {
         _ = theProfileImageButtonOverlay.tapped { _ in
             self.dismiss(animated: false, completion: nil)
         }
-    }
-    
-    override var prefersStatusBarHidden : Bool {
-        return true
     }
 
 }
