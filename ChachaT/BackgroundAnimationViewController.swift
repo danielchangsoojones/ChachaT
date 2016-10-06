@@ -305,7 +305,6 @@ extension BackgroundAnimationViewController: MagicMoveable {
 extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case OnboardingPageSegue
         case CustomBackgroundAnimationToSearchSegue
         case BackgroundAnimationPageToAddingTagsPageSegue
         case BackgroundAnimationToMatchesSegue
