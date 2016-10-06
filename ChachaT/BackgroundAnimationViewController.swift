@@ -63,7 +63,6 @@ class BackgroundAnimationViewController: UIViewController {
         super.viewDidLoad()
         dataStoreSetup()
         bottomBlurAreaSetup()
-        backgroundGradientSetup()
         setKolodaAttributes()
         setFakeNavigationBarView()
         if swipeArray.isEmpty {
@@ -96,20 +95,6 @@ class BackgroundAnimationViewController: UIViewController {
     
     func dataStoreSetup() {
         self.dataStore = BackgroundAnimationDataStore(delegate: self)
-    }
-    
-    func backgroundGradientSetup() {
-        let gradientLayer = CAGradientLayer()
-        gradientLayer.frame = self.view.bounds
-        
-        let color1 = UIColor.white.cgColor as CGColor
-        let color2 = CustomColors.PeriwinkleGray.cgColor as CGColor
-        
-        gradientLayer.colors = [color1, color2]
-        
-        gradientLayer.locations = [0.5, 0.75]
-        self.view.layer.insertSublayer(gradientLayer, at: 0)
-
     }
     
     func playSoundInBG(_ theAudioPlayer:AVAudioPlayer) {

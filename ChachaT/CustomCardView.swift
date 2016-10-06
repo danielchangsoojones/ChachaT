@@ -48,9 +48,6 @@ class CustomCardView: OverlayView {
         //Rounded corners
         self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
-        //TODO: I just want the border to go around thePersonalInfoHolderView, but right now, it is going around the whole card because I coluld not figure out how to do that. 
-        self.layer.borderColor = CustomColors.BombayGrey.cgColor
-        self.layer.borderWidth = 0.5
     }
 }
 
