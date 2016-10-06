@@ -8,7 +8,6 @@
 
 /* Begin PBXBuildFile section */
 		6B35B017D7C7AC2EB65946EF /* Pods_Shuffles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471CA7B841A92D5EF573B32C /* Pods_Shuffles.framework */; };
-		7F4BEEA9CB050A432DA2F72E /* Pods_ChachaT.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */; };
 		920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81B1D3FF5E300104842 /* CloseButton.swift */; };
 		920BF8211D3FF5E300104842 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920BF81C1D3FF5E300104842 /* Info.plist */; };
 		920BF8221D3FF5E300104842 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81E1D3FF5E300104842 /* TagListView.swift */; };
@@ -250,7 +249,6 @@
 				92B8DF2D1CE9356E00AFA518 /* CoreGraphics.framework in Frameworks */,
 				92B8DF2B1CE9356700AFA518 /* CFNetwork.framework in Frameworks */,
 				92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */,
-				7F4BEEA9CB050A432DA2F72E /* Pods_ChachaT.framework in Frameworks */,
 				6B35B017D7C7AC2EB65946EF /* Pods_Shuffles.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

@@ -24,17 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         //MARK: Development Database Pointer
-        let configuration = ParseClientConfiguration {
-            $0.applicationId = "djflkajsdlfjienrj3457698"
-            $0.server = "https://chachatinder.herokuapp.com/parse"
-        }
+//        let configuration = ParseClientConfiguration {
+//            $0.applicationId = "djflkajsdlfjienrj3457698"
+//            $0.server = "https://chachatinder.herokuapp.com/parse"
+//        }
         
         //MARK: Production Database Pointer
-//        let configuration = ParseClientConfiguration {
-//            $0.applicationId = "shuffle12890432EJLDIFJEKhdhd"
-//            $0.server = "http://shuffles-production.herokuapp.com/parse"
-//        }
-//        Parse.initialize(with: configuration)
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "shuffle12890432EJLDIFJEKhdhd"
+            $0.server = "http://shuffles-production.herokuapp.com/parse"
+        }
         
         
         Parse.initialize(with: configuration)
