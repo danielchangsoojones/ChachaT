@@ -88,15 +88,15 @@
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" spacing="10" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="28x-9I-4UJ"/>
                                             <constraint firstAttribute="bottom" secondItem="gwk-8T-bhR" secondAttribute="bottom" constant="67" id="JS4-zR-K33"/>
                                             <constraint firstAttribute="width" constant="240" id="RJ5-KR-8fD"/>
-                                            <constraint firstItem="gwk-8T-bhR" firstAttribute="leading" secondItem="155-yz-ccQ" secondAttribute="leading" constant="10" id="RR0-kC-H8U"/>
-                                            <constraint firstAttribute="trailing" secondItem="gwk-8T-bhR" secondAttribute="trailing" constant="10" id="V8A-eb-sZk"/>
+                                            <constraint firstItem="gwk-8T-bhR" firstAttribute="leading" secondItem="155-yz-ccQ" secondAttribute="leading" id="RR0-kC-H8U"/>
+                                            <constraint firstAttribute="trailing" secondItem="gwk-8T-bhR" secondAttribute="trailing" id="V8A-eb-sZk"/>
                                             <constraint firstAttribute="trailing" secondItem="ggM-LL-fqe" secondAttribute="trailing" constant="8" id="bVr-f2-njx"/>
                                             <constraint firstItem="ggM-LL-fqe" firstAttribute="leading" secondItem="155-yz-ccQ" secondAttribute="leading" constant="8" id="cfB-gR-WCw"/>
                                             <constraint firstItem="gwk-8T-bhR" firstAttribute="top" secondItem="ggM-LL-fqe" secondAttribute="bottom" constant="10" id="msl-hx-M8j"/>
@@ -158,6 +158,7 @@
                     <size key="freeformSize" width="600" height="830"/>
                     <connections>
                         <outlet property="photoLayoutView" destination="ggM-LL-fqe" id="Oyl-gv-X6X"/>
+                        <outlet property="theBottomConstraintToScrollView" destination="JS4-zR-K33" id="jCQ-yf-j3Q"/>
                         <outlet property="theStackView" destination="gwk-8T-bhR" id="Xid-jN-aBy"/>
                         <segue destination="Dim-SF-KDG" kind="show" identifier="EditProfileToAddingTagsSegue" id="ToD-It-t0K"/>
                     </connections>
