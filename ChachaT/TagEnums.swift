@@ -202,11 +202,11 @@ public enum SpecialtyTagTitles : Int {
     }
     
     //this array lets me iterate over certain sections of the enum
-    static let ethnicityAllValues = [raceBlack , raceWhite , raceLatino , raceAsian , raceNone ]
-    static let hairColorAllValues = [hairColorBrunette , hairColorBlonde , hairColorRedhead , hairColorNone ]
-    static let genderAllValues = [genderMale , genderFemale , genderNone ]
-    static let sexualityAllValues = [sexualityStraight , sexualityGay , sexualityBisexual , sexualityNone ]
-    static let politicalGroupAllValues = [politicalGroupDemocrat , politicalGroupRepublican , politicalGroupNone ]
+    static let ethnicityAllValues = [raceBlack , raceWhite , raceLatino , raceAsian]
+    static let hairColorAllValues = [hairColorBrunette , hairColorBlonde , hairColorRedhead ]
+    static let genderAllValues = [genderMale , genderFemale ]
+    static let sexualityAllValues = [sexualityStraight , sexualityGay , sexualityBisexual ]
+    static let politicalGroupAllValues = [politicalGroupDemocrat , politicalGroupRepublican ]
     static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].joined()
 }
 

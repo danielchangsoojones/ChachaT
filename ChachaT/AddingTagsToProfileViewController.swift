@@ -93,6 +93,7 @@ extension AddingTagsToProfileViewController {
             if tagView.tagAttribute == .isPrivate, let dropDownTagView = tappedDropDownTagView {
                 //TODO: do something in the dataStore to actually save a private tag being pressed
                 dropDownTagView.makePrivate()
+                dataStore.savePrivacyTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
         } else {
             switch tagView.tagAttribute {

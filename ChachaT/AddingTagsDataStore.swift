@@ -122,7 +122,7 @@ class AddingTagsDataStore {
         }
     }
     
-    //TODO: if the user has no tag yet, then we need to create a new one for them.
+    //TODO: if the user has no tag yet, then we need to create a new one for them. And, we need to implement this for all tag saving
     //TODO: save all the tags at once, instead of saving them one at a time.
     //TODO: rename to save generic tag
     func saveNewTag(_ title: String) {
@@ -174,6 +174,21 @@ class AddingTagsDataStore {
                     }
                 })
             }
+        }
+    }
+    
+    func savePrivacyTag(specialtyCategory: String) {
+        if let specialtyCategory = SpecialtyCategoryTitles(rawValue: specialtyCategory) {
+            let query = Tags.query()!
+            query.whereKey("createdBy", equalTo: User.current()!)
+            query.getFirstObjectInBackground(block: { (object, error) in
+                if let tag = object as? Tags, let noneValue = specialtyCategory.noneValue {
+                    tag[specialtyCategory.parseColumnName] = noneValue.rawValue
+                    tag.saveInBackground()
+                } else if error != nil {
+                    print(error)
+                }
+            })
         }
     }
     
