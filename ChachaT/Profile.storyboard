@@ -1,32 +1,33 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="yJw-Sh-Q3J">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yJw-Sh-Q3J">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Profile-->
         <scene sceneID="8Ge-7n-FwY">
             <objects>
-                <viewController storyboardIdentifier="ProfileIndexViewController" id="FWd-U8-Jgx" customClass="ProfileIndexViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="ProfileIndexViewController" id="FWd-U8-Jgx" customClass="ProfileIndexViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="iab-pd-kb6"/>
                         <viewControllerLayoutGuide type="bottom" id="9PT-2X-tXc"/>
                     </layoutGuides>
                     <view key="view" contentMode="scaleToFill" id="iEg-Es-KxU">
-                        <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.55000000000000004" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
-                                <rect key="frame" x="0.0" y="64" width="600" height="200"/>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                            <view alpha="0.55000000000000004" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
+                                <frame key="frameInset" minY="64" width="600" height="200"/>
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA">
-                                <rect key="frame" x="20" y="274" width="560" height="316"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA">
+                                <frame key="frameInset" minX="20" minY="274" width="560" height="316"/>
                             </stackView>
                         </subviews>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="6rx-WT-UoA" firstAttribute="top" secondItem="UPa-l3-a2J" secondAttribute="bottom" constant="10" id="4Be-Bc-32H"/>
                             <constraint firstItem="6rx-WT-UoA" firstAttribute="leading" secondItem="iEg-Es-KxU" secondAttribute="leading" constant="20" id="67H-Vs-sET"/>
@@ -56,7 +57,7 @@
                 <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CardDetailViewController" id="DnT-3j-PZJ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpp-eA-MBc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1862.5" y="401"/>
+            <point key="canvasLocation" x="2129" y="391"/>
         </scene>
         <!--SettingsTableViewController-->
         <scene sceneID="ADV-BG-RR9">
@@ -64,12 +65,12 @@
                 <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsTableViewController" id="pl2-TI-YyZ" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Anb-AL-Nwm" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1851.5" y="595"/>
+            <point key="canvasLocation" x="2066" y="606"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Dhh-ST-gQG">
             <objects>
-                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="Si2-TA-hhX" customClass="EditProfileViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="EditProfileViewController" automaticallyAdjustsScrollViewInsets="NO" id="Si2-TA-hhX" customClass="EditProfileViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="D5t-g4-nOf"/>
                         <viewControllerLayoutGuide type="bottom" id="zdl-Zf-LL4"/>
@@ -79,22 +80,17 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="u1t-Ch-jFt">
-                                <rect key="frame" x="0.0" y="64" width="600" height="766"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="155-yz-ccQ" userLabel="ContentView">
-                                        <rect key="frame" x="0.0" y="0.0" width="600" height="510"/>
                                         <subviews>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="ChachaT" customModuleProvider="target">
-                                                <rect key="frame" x="8" y="8" width="584" height="297"/>
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="Shuffles" customModuleProvider="target">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR">
-                                                <rect key="frame" x="10" y="315" width="580" height="128"/>
-                                            </stackView>
+                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.95686274510000002" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="calibratedRGB"/>
+                                        <color key="backgroundColor" red="0.95686274510000002" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="height" constant="128" id="28x-9I-4UJ"/>
                                             <constraint firstAttribute="bottom" secondItem="gwk-8T-bhR" secondAttribute="bottom" constant="67" id="JS4-zR-K33"/>
@@ -114,6 +110,7 @@
                                         </variation>
                                     </view>
                                 </subviews>
+                                <color key="backgroundColor" red="0.94509803921568625" green="0.95294117647058818" blue="0.97647058823529409" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="trailing" secondItem="155-yz-ccQ" secondAttribute="trailing" id="7KK-0y-uti"/>
                                     <constraint firstItem="155-yz-ccQ" firstAttribute="top" secondItem="u1t-Ch-jFt" secondAttribute="top" id="7hg-Xk-kbd"/>
@@ -167,7 +164,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="9sO-nf-LbW" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1364" y="1388"/>
+            <point key="canvasLocation" x="1358" y="1388"/>
         </scene>
         <!--AddingTagsViewController-->
         <scene sceneID="i0z-1y-9bf">
@@ -175,7 +172,7 @@
                 <viewControllerPlaceholder storyboardName="AddingTags" referencedIdentifier="AddingTagsViewController" id="Dim-SF-KDG" sceneMemberID="viewController"/>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="VVr-Qj-o86" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1903.5" y="1334"/>
+            <point key="canvasLocation" x="2270" y="1334"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="ZoA-oy-tlM">
