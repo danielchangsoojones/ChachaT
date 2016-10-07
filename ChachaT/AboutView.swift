@@ -13,6 +13,8 @@ class AboutView: UIView {
     fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
         static let maxTextFieldCharacterCount : Int = 30
+        static let textColor: UIColor = CustomColors.SilverChaliceGrey
+        static let placeHolderTextColor: UIColor = CustomColors.JellyTeal.withAlphaComponent(0.5)
     }
     
     enum AboutViewType {
@@ -149,14 +151,14 @@ extension AboutView: UITextViewDelegate {
     func applyPlaceholderStyle(_ aTextview: UITextView, placeholderText: String)
     {
         // make it look (initially) like a placeholder
-        aTextview.textColor = UIColor.lightGray
+        aTextview.textColor = AboutViewConstants.placeHolderTextColor
         aTextview.text = placeholderText
     }
     
     func applyNonPlaceholderStyle(_ aTextview: UITextView)
     {
         // make it look like normal text instead of a placeholder
-        aTextview.textColor = UIColor.darkText
+        aTextview.textColor = AboutViewConstants.textColor
         aTextview.alpha = 1.0
     }
     
@@ -227,7 +229,8 @@ extension AboutView : UITextFieldDelegate {
     func textFieldSetup() {
         theTextField = UITextField()
         theTextField!.delegate = self
-        theTextField!.placeholder = thePlaceholderText
+        theTextField?.attributedPlaceholder = NSAttributedString(string: thePlaceholderText, attributes: [NSForegroundColorAttributeName: AboutViewConstants.placeHolderTextColor])
+        theTextField?.textColor = AboutViewConstants.textColor
         theInputContentView.addSubview(theTextField!)
         theTextField!.snp.makeConstraints { (make) in
             make.edges.equalTo(theInputContentView)
@@ -251,6 +254,7 @@ extension AboutView {
     func tappableCellSetup(_ innerText: String?, action: @escaping (_ sender: AboutView) -> ()) {
         theInnerLabel = UILabel()
         theInnerLabel!.text = innerText ?? thePlaceholderText
+        theInnerLabel?.textColor = innerText != nil ? AboutViewConstants.textColor : AboutViewConstants.placeHolderTextColor
         theInputContentView.addSubview(theInnerLabel!)
         theInnerLabel!.snp.makeConstraints({ (make) in
             //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
@@ -276,6 +280,7 @@ extension AboutView {
     
     func setInnerTitle(_ text: String) {
         theInnerLabel?.text = text
+        theInnerLabel?.textColor = AboutViewConstants.textColor
     }
 }
 

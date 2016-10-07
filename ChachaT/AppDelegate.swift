@@ -24,16 +24,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Override point for customization after application launch.
         //MARK: Development Database Pointer
-//        let configuration = ParseClientConfiguration {
-//            $0.applicationId = "djflkajsdlfjienrj3457698"
-//            $0.server = "https://chachatinder.herokuapp.com/parse"
-//        }
+        let configuration = ParseClientConfiguration {
+            $0.applicationId = "djflkajsdlfjienrj3457698"
+            $0.server = "https://chachatinder.herokuapp.com/parse"
+        }
         
         //MARK: Production Database Pointer
-        let configuration = ParseClientConfiguration {
-            $0.applicationId = "shuffle12890432EJLDIFJEKhdhd"
-            $0.server = "http://shuffles-production.herokuapp.com/parse"
-        }
+//        let configuration = ParseClientConfiguration {
+//            $0.applicationId = "shuffle12890432EJLDIFJEKhdhd"
+//            $0.server = "http://shuffles-production.herokuapp.com/parse"
+//        }
         
         
         Parse.initialize(with: configuration)
@@ -57,7 +57,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
 //        
-//                    let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
+//                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 //        
 //                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "AddingTagsViewController") as! AddingTagsToProfileViewController
 //        

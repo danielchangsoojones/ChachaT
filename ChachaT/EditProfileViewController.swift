@@ -34,6 +34,9 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var theBulletPointTwoView: AboutView!
     @IBOutlet weak var theBulletPointThreeView: AboutView!
     
+    @IBOutlet weak var theBottomConstraintToScrollView: NSLayoutConstraint!
+    
+    
     var thePhotoNumberToChange: Int!
     var theEditedTextFieldArray : [UIView] = []
     //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
@@ -49,6 +52,12 @@ class EditProfileViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        NotificationCenter.default.addObserver(self,
+                                                    selector: #selector(self.keyboardNotification(notification:)),
+                                                    name: NSNotification.Name.UIKeyboardWillChangeFrame,
+                                                    object: nil)
+        
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
         photoLayoutView.delegate = self
         bulletPointsSetup()
@@ -57,6 +66,10 @@ class EditProfileViewController: UIViewController {
         ageViewSetup()
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     func dataStoreSetup() {
@@ -206,6 +219,30 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
                     }
                 }
             }
+        }
+    }
+}
+
+//the keyboard extension
+extension EditProfileViewController {
+    func keyboardNotification(notification: NSNotification) {
+        if let userInfo = notification.userInfo {
+            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
+            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
+            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
+            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
+            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
+            let keyboardHeight: CGFloat = endFrame?.size.height ?? 0.0
+            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
+                self.theBottomConstraintToScrollView.constant -= keyboardHeight
+            } else {
+                self.theBottomConstraintToScrollView.constant += keyboardHeight
+            }
+            UIView.animate(withDuration: duration,
+                                       delay: TimeInterval(0),
+                                       options: animationCurve,
+                                       animations: { self.view.layoutIfNeeded() },
+                                       completion: nil)
         }
     }
 }
