@@ -187,15 +187,15 @@ public enum SpecialtyTagTitles : Int {
     }
     
     var associatedSpecialtyCategoryTitle : SpecialtyCategoryTitles? {
-        if SpecialtyTagTitles.genderAllValues.contains(self) {
+        if SpecialtyTagTitles.genderAllValues.contains(self) || self == .genderNone {
             return .Gender
-        } else if SpecialtyTagTitles.hairColorAllValues.contains(self) {
+        } else if SpecialtyTagTitles.hairColorAllValues.contains(self) || self == .hairColorNone {
             return .HairColor
-        } else if  SpecialtyTagTitles.sexualityAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.sexualityAllValues.contains(self) || self == .sexualityNone {
             return .Sexuality
-        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(self) || self == .politicalGroupNone {
             return .PoliticalGroup
-        } else if  SpecialtyTagTitles.ethnicityAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.ethnicityAllValues.contains(self) || self == .raceNone {
             return .Ethnicity
         }
         return nil

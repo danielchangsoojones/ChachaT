@@ -54,7 +54,11 @@ class AddingTagsDataStore {
                         let innerTagTitles : [String] = specialtyTagTitle.associatedSpecialtyCategoryTitle!.specialtyTagTitles.map {
                             $0.toString
                         }
-                        dropDownTag = DropDownTag(tagTitle: specialtyTagTitle.toString, specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
+                        dropDownTag = DropDownTag(tagTitle: specialtyTagTitle.toString,
+                                                  specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue,
+                                                  innerTagTitles: innerTagTitles,
+                                                  isPrivate: specialtyTagTitle.associatedSpecialtyCategoryTitle?.noneValue == specialtyTagTitle,
+                                                  dropDownAttribute: .tagChoices)
                     default:
                         break
                     }
