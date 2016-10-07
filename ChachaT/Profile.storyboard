@@ -19,9 +19,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view alpha="0.55000000000000004" contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
-                                <frame key="frameInset" minY="64" width="600" height="200"/>
-                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
+                                <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA">
                                 <frame key="frameInset" minX="20" minY="274" width="560" height="316"/>
