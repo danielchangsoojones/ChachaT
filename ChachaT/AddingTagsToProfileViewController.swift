@@ -55,6 +55,11 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         tap.cancelsTouchesInView = false
     }
     
+    override func setDropDownMenu() {
+        super.setDropDownMenu()
+        dropDownMenu.shouldAddPrivacyOption = true
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.

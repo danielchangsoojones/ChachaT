@@ -45,6 +45,8 @@ class SuperTagViewController: UIViewController {
                 }
             case .generic:
                 _ = tagChoicesView.addTag(tag.title)
+            default:
+                break
             }
         }
     }

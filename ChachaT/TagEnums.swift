@@ -213,6 +213,7 @@ public enum SpecialtyTagTitles : Int {
 public enum TagAttributes {
     case generic
     case dropDownMenu
+    case isPrivate
 }
 
 func tagTitleIsSpecial(_ tagTitle: String) -> Bool {
