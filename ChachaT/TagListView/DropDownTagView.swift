@@ -18,6 +18,22 @@ class DropDownTagView: SpecialtyTagView {
     
     func makePrivate() {
         annotationView.updateImage(AnnotationImages.isPrivate)
+        if let tagListView = findSuperTagListView() {
+            //We have to set the title in the tagListView, because we want to have the tag update and the tags around it update according to its size
+            tagListView.setTagViewTitle(self, title: specialtyCategoryTitle)
+        }
+    }
+    
+    //Purpose: goes through the superviews of the tagView to find the TagListView
+    func findSuperTagListView() -> TagListView? {
+        var view: UIView? = self
+        while (view?.superview != nil) {
+            if let tagListView = view?.superview as? TagListView {
+                return tagListView
+            }
+            view = view?.superview
+        }
+        return nil
     }
     
     required internal init?(coder aDecoder: NSCoder) {

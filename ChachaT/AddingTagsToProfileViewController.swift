@@ -88,13 +88,21 @@ extension AddingTagsToProfileViewController {
     }
     
     func specialtyTagPressed(_ title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        switch tagView.tagAttribute {
-        case .dropDownMenu:
-            tappedDropDownTagView = tagView as? DropDownTagView
-            if let dropDownTag = findDropDownTag(tappedDropDownTagView!.specialtyCategoryTitle, array: tagChoicesDataArray) {
-                dropDownActions(dropDownTag)
+        if sender.tag == 3 {
+            //ChachaDropDownTagView pressed
+            if tagView.tagAttribute == .isPrivate, let dropDownTagView = tappedDropDownTagView {
+                //TODO: do something in the dataStore to actually save a private tag being pressed
+                dropDownTagView.makePrivate()
             }
-        default: break
+        } else {
+            switch tagView.tagAttribute {
+            case .dropDownMenu:
+                tappedDropDownTagView = tagView as? DropDownTagView
+                if let dropDownTag = findDropDownTag(tappedDropDownTagView!.specialtyCategoryTitle, array: tagChoicesDataArray) {
+                    dropDownActions(dropDownTag)
+                }
+            default: break
+            }
         }
     }
 }
