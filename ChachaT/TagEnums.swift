@@ -187,32 +187,33 @@ public enum SpecialtyTagTitles : Int {
     }
     
     var associatedSpecialtyCategoryTitle : SpecialtyCategoryTitles? {
-        if SpecialtyTagTitles.genderAllValues.contains(self) {
+        if SpecialtyTagTitles.genderAllValues.contains(self) || self == .genderNone {
             return .Gender
-        } else if SpecialtyTagTitles.hairColorAllValues.contains(self) {
+        } else if SpecialtyTagTitles.hairColorAllValues.contains(self) || self == .hairColorNone {
             return .HairColor
-        } else if  SpecialtyTagTitles.sexualityAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.sexualityAllValues.contains(self) || self == .sexualityNone {
             return .Sexuality
-        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.politicalGroupAllValues.contains(self) || self == .politicalGroupNone {
             return .PoliticalGroup
-        } else if  SpecialtyTagTitles.ethnicityAllValues.contains(self) {
+        } else if  SpecialtyTagTitles.ethnicityAllValues.contains(self) || self == .raceNone {
             return .Ethnicity
         }
         return nil
     }
     
     //this array lets me iterate over certain sections of the enum
-    static let ethnicityAllValues = [raceBlack , raceWhite , raceLatino , raceAsian , raceNone ]
-    static let hairColorAllValues = [hairColorBrunette , hairColorBlonde , hairColorRedhead , hairColorNone ]
-    static let genderAllValues = [genderMale , genderFemale , genderNone ]
-    static let sexualityAllValues = [sexualityStraight , sexualityGay , sexualityBisexual , sexualityNone ]
-    static let politicalGroupAllValues = [politicalGroupDemocrat , politicalGroupRepublican , politicalGroupNone ]
+    static let ethnicityAllValues = [raceBlack , raceWhite , raceLatino , raceAsian]
+    static let hairColorAllValues = [hairColorBrunette , hairColorBlonde , hairColorRedhead ]
+    static let genderAllValues = [genderMale , genderFemale ]
+    static let sexualityAllValues = [sexualityStraight , sexualityGay , sexualityBisexual ]
+    static let politicalGroupAllValues = [politicalGroupDemocrat , politicalGroupRepublican ]
     static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].joined()
 }
 
 public enum TagAttributes {
     case generic
     case dropDownMenu
+    case isPrivate
 }
 
 func tagTitleIsSpecial(_ tagTitle: String) -> Bool {
