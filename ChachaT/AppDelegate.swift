@@ -21,6 +21,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         Tags.registerSubclass()
         Chat.registerSubclass()
         ParseSwipe.registerSubclass()
+        ParseTag.registerSubclass()
+        DropDownCategory.registerSubclass()
         
         // Override point for customization after application launch.
         //MARK: Development Database Pointer
