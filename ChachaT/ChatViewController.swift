@@ -65,7 +65,7 @@ class ChatViewController: JSQMessagesViewController {
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        self.collectionView!.collectionViewLayout.springinessEnabled = true
+        self.collectionView!.collectionViewLayout.springinessEnabled = false
     }
     
     override func viewWillDisappear(_ animated: Bool) {
@@ -291,7 +291,6 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
         }
         //This is where we actually send the message in parse to make it save
         dataStore.sendMessage(text: text, videoFile: videoFile, pictureFile: pictureFile, videoThumbnailFile: videoThumbnailFile)
-        
     }
     
     func didSelectPhotoMessage(image:UIImage) {
