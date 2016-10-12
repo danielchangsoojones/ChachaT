@@ -83,93 +83,51 @@ class SearchTagsDataStore {
         delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
     }
     
-    func findUserArray(_ genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
-        let genericTagQuery = Tags.query()!
-        if !genericTagTitleArray.isEmpty {
-            genericTagQuery.whereKey("genericTags", containsAllObjectsIn:genericTagTitleArray)
+    func findUserArray(chosenTags: [Tag]) {
+        var query = User.query()!
+        var tagTitleArray: [String] = []
+        for tag in chosenTags {
+            if let dropDownTag = tag as? DropDownTag {
+                query = addSliderQueryComponents(dropDownTag: dropDownTag, query: query)
+            } else {
+                tagTitleArray.append(tag.title)
+            }
         }
-        let finalQuery = querySpecialtyTags(specialtyTagDictionary, query: genericTagQuery)
-        finalQuery.whereKey("createdBy", notEqualTo: User.current()!)
-        finalQuery.includeKey("createdBy")
-        finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
-        finalQuery.findObjectsInBackground(block: { (objects, error) in
-            if let objects = objects , error == nil {
-                if objects.isEmpty {
-                    print(objects)
+        if !tagTitleArray.isEmpty {
+            //query any tags with the title
+            let innerQuery = ParseTag.query()!
+            innerQuery.whereKey("title", containedIn: ["flounder"])
+            query.whereKey("tags", matchesQuery: innerQuery)
+        }
+
+        query.findObjectsInBackground { (objects, error) in
+            if let users = objects as? [User] {
+                if users.isEmpty {
                     _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
                 } else {
-                    var userArray : [User] = []
-                    for tag in objects as! [Tags] {
-                        userArray.append(tag.createdBy)
-                    }
-                    self.delegate?.passUserArrayToMainPage(userArray)
+                    self.delegate?.passUserArrayToMainPage(users)
                 }
-            } else {
+            } else if error != nil {
                 print(error)
             }
-        })
+        }
     }
     
-    func querySpecialtyTags(_ specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?], query: PFQuery<PFObject>) -> PFQuery<PFObject> {
-        for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
-            if let tagViewTitle = tagView?.currentTitle {
-                //the tagView is not nil and the title exists
-                if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
-                    switch tagAttribute {
-                    case .tagChoices:
-                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int.
-                        //For example: the query would end up being something like this query.whereKey("sexuality, equalTo: 401)
-                        let titleRawValue: Int = SpecialtyTagTitles.stringRawValue(tagViewTitle)!.rawValue
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: titleRawValue)
-                    case .singleSlider:
-                        if let value = getSingleSliderValue(tagViewTitle) {
-                            query.whereKey(specialtyCategoryTitle.parseColumnName, nearGeoPoint: User.current()!.location, withinMiles: value)
-                        }
-                    case .rangeSlider:
-                        let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
-                        //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-                        let minAge : Date = maxAndMinTuple.minValue.years.ago
-                        let maxAge : Date = maxAndMinTuple.maxValue.years.ago
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, greaterThanOrEqualTo: maxAge)
-                    }
-                }
-            }
+    func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
+        switch dropDownTag.specialtyCategory {
+            //TODO: these cases should be based upon the parse column name
+        case "Distance":
+            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+        case "Age Range":
+            //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
+            let minAge : Date = dropDownTag.minValue.years.ago
+            let maxAge : Date = dropDownTag.maxValue.years.ago
+            query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+        default:
+            break
         }
-        //return the same query after we have added the specialty criteria
         return query
-    }
-    
-    
-    //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
-    func getSingleSliderValue(_ string: String) -> Double? {
-        if let num = convertStringToNumber(str: string) {
-            return Double(num)
-        }
-        return nil
-    }
-    
-    func getRangeSliderValue(_ string: String) -> (minValue: Int, maxValue: Int) {
-        let spaceString : Character = "-"
-        if let index = string.characters.index(of: spaceString) {
-            //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
-            let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
-            let maxValueSubstring = string.substring(from: string.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
-            if let minValue = convertStringToNumber(str: minValueSubstring), let maxValue = convertStringToNumber(str: maxValueSubstring) {
-                return (minValue, maxValue)
-            }
-        }
-        return (0,0) //couldn't convert the slider string to min/max values
-    }
-    
-    private func convertStringToNumber(str: String) -> Int? {
-        //get rid of anything in the string that is not a number
-        let stringArray = str.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
-        let newString = stringArray.joined(separator: "")
-        if let num = Int(newString) {
-            return num
-        }
-        return nil //couldn't be converted into a number
     }
 }
 

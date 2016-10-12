@@ -16,6 +16,7 @@ class DropDownCategory: PFObject, PFSubclassing {
     
     @NSManaged var name: String
     @NSManaged var type: String //i.e. range slider, single slider, tag menu. The type is what happens when the dropDownMenu appears.
+    @NSManaged var parseColumnName: String?
     //For Tag Menu:
     @NSManaged var innerTitles: [String]?
     //For Sliders:

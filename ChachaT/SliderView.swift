@@ -10,7 +10,7 @@ import UIKit
 import TTRangeSlider
 
 protocol SliderViewDelegate {
-    func sliderValueChanged(_ text: String, suffix: String)
+    func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String)
 }
 
 class SliderView: UIView {
@@ -69,7 +69,7 @@ class SliderView: UIView {
             make.bottom.equalTo(self)
             make.top.equalTo(theSliderLabel.snp.bottom).offset(SliderViewConstants.sliderOffsetFromLabel)
         }
-        delegate?.sliderValueChanged(sliderText, suffix: suffix)
+        delegate?.sliderValueChanged(text: sliderText, minValue: minValue, maxValue: maxValue, suffix: suffix)
     }
     
     override var intrinsicContentSize : CGSize {
@@ -96,7 +96,7 @@ extension SliderView {
     func valueChanged(_ sender: UISlider) {
         let sliderValue = round(sender.value)
         let text = setSingleSliderLabelText(Int(sliderValue))
-        delegate?.sliderValueChanged(text, suffix: suffix)
+        delegate?.sliderValueChanged(text: text, minValue: minValue, maxValue: Int(sliderValue), suffix: suffix)
     }
     
     func setSingleSliderLabelText(_ num: Int) -> String {
@@ -149,6 +149,6 @@ extension SliderView : TTRangeSliderDelegate {
     
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
         let text = setRangeSliderLabelText(Int(selectedMinimum), maxValue: Int(selectedMaximum))
-        delegate?.sliderValueChanged(text, suffix: suffix)
+        delegate?.sliderValueChanged(text: text, minValue: Int(selectedMinimum), maxValue: Int(selectedMaximum), suffix: suffix)
     }
 }

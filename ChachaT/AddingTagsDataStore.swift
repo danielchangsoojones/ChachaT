@@ -13,6 +13,8 @@ class AddingTagsDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     var searchDataArray : [Tag] = [] //tags that will be available for searching
     
+    var currentUserParseTags: [ParseTag] = []
+    
     var delegate: AddingTagsDataStoreDelegate?
     
     init(delegate: AddingTagsDataStoreDelegate) {
@@ -126,76 +128,84 @@ class AddingTagsDataStore {
         }
     }
     
-    //TODO: if the user has no tag yet, then we need to create a new one for them. And, we need to implement this for all tag saving
-    //TODO: save all the tags at once, instead of saving them one at a time.
-    //TODO: rename to save generic tag
-    func saveNewTag(_ title: String) {
-        let query = Tags.query()
-        query?.whereKey("createdBy", equalTo: User.current()!)
-        //only did first object because the user should only have one tag row, so it should be the first and only object found.
-        query?.getFirstObjectInBackground(block: { (object, error) in
-            if let tag = object as? Tags , error == nil {
-                //I could just do addObject, which add anything. Technically, there should be only one anyway, but this makes sure only one will ever be added, so I guess if duplicates somehow got into the database. This would kind of self-clean it.
-                tag.addUniqueObject(title.lowercased(), forKey: "genericTags")
-                tag.saveInBackground()
-            } else if error != nil {
-                let code = error!._code
-                if code == PFErrorCode.errorObjectNotFound.rawValue {
-                    //the user has not created a Tags row yet, so create them a new Tags row
-                    let tags = Tags()
-                    tags.createdBy = User.current()!
-                    tags.genericTags = [title]
-                    tags.saveInBackground()
+    func saveNewTag(title: String) {
+        let query = ParseTag.query()!
+        query.whereKey("title", equalTo: title)
+        
+        query.getFirstObjectInBackground { (object, error) in
+            if let parseTag = object as? ParseTag {
+                //add this already existing tag to the User's tags
+                let relation = User.current()!.relation(forKey: "tags")
+                relation.add(parseTag)
+
+                User.current()!.saveInBackground()
+            } else if let error = error {
+                let errorCode = error._code
+                if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
+                    //tag doesn't exist yet, so make a new tag, and then add it to the current User's tags
+                    let parseTag = ParseTag()
+                    parseTag.title = title
+                    parseTag.attribute = "Generic"
+                    parseTag.isPrivate = false
+                    
+                    parseTag.saveInBackground(block: { (success, error) in
+                        if success {
+                            let relation = User.current()!.relation(forKey: "tags")
+                            relation.add(parseTag)
+                            User.current()!.saveInBackground()
+                        } else if let error = error {
+                            print(error)
+                        }
+                    })
                 } else {
                     print(error)
                 }
             }
-        })
+        }
     }
     
-    func saveSpecialtyTag(_ title: String) {
-        if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(title) {
-            if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
-                let query = Tags.query()
-                query?.whereKey("createdBy", equalTo: User.current()!)
-                //only did first object because the user should only have one tag row, so it should be the first and only object found.
-                query?.getFirstObjectInBackground(block: { (object, error) in
-                    if let tag = object as? Tags , error == nil {
-                        //I could just do addObject, which add anything. Technically, there should be only one anyway, but this makes sure only one will ever be added, so I guess if duplicates somehow got into the database. This would kind of self-clean it.
-                        tag[specialtyCategoryTitle.parseColumnName] = specialtyTagTitle.rawValue
-                        tag.saveInBackground()
-                    } else if error != nil {
-                        let code = error!._code
-                        if code == PFErrorCode.errorObjectNotFound.rawValue {
-                            //the user has not created a Tags row yet, so create them a new Tags row
-                            let tags = Tags()
-                            tags.createdBy = User.current()!
-                            tags.genericTags = [title]
-                            tags.saveInBackground()
-                        } else {
-                            print(error)
-                        }
-                    }
-                })
+    func saveSpecialtyTag(title: String, specialtyCategory: String) {
+        removeSpecialtyTag(specialtyCategory: specialtyCategory)
+        
+        let query = ParseTag.query()!
+        query.whereKey("title", equalTo: title)
+        query.getFirstObjectInBackground { (object, error) in
+            if let parseTag = object as? ParseTag {
+                //add the new tag chosen tag to the User's tags
+                User.current()!.tags.add(parseTag)
+                User.current()!.saveInBackground()
+            } else if let error = error {
+                print(error)
             }
         }
     }
     
     func savePrivacyTag(specialtyCategory: String) {
-        if let specialtyCategory = SpecialtyCategoryTitles(rawValue: specialtyCategory) {
-            let query = Tags.query()!
-            query.whereKey("createdBy", equalTo: User.current()!)
-            query.getFirstObjectInBackground(block: { (object, error) in
-                if let tag = object as? Tags, let noneValue = specialtyCategory.noneValue {
-                    tag[specialtyCategory.parseColumnName] = noneValue.rawValue
-                    tag.saveInBackground()
-                } else if error != nil {
-                    print(error)
-                }
-            })
+        removeSpecialtyTag(specialtyCategory: specialtyCategory)
+    
+        let query = ParseTag.query()!
+        query.whereKey("isPrivate", equalTo: true)
+        let innerQuery = DropDownCategory.query()!
+        innerQuery.whereKey("name", equalTo: specialtyCategory)
+        query.whereKey("dropDownCategory", matchesQuery: innerQuery)
+        
+        query.getFirstObjectInBackground { (object, error) in
+            if let parseTag = object as? ParseTag {
+                User.current()!.tags.add(parseTag)
+                User.current()?.saveInBackground()
+            } else if let error = error {
+                print(error)
+            }
         }
     }
     
+    //Purpose: remove the specialty tag from the current User's tags
+    fileprivate func removeSpecialtyTag(specialtyCategory: String) {
+        for parseTag in currentUserParseTags where parseTag.dropDownCategory.name == specialtyCategory {
+            //remove the previous tag that was correlated to the specific category
+            User.current()!.tags.remove(parseTag)
+        }
+    }
 }
 
 protocol AddingTagsDataStoreDelegate : TagDataStoreDelegate {

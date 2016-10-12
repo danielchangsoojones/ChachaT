@@ -97,6 +97,15 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         setupTapAwayFromKeyboard()
+        let array : [NSObject] = ["Bobo" as NSObject]
+        
+        PFCloud.callFunction(inBackground: "hobo", withParameters: ["bool": "False"]) { (response, error) in
+            if let parseSwipes = response as? [ParseSwipe] {
+                for parseSwipe in parseSwipes {
+                    print(parseSwipe)
+                }
+            }
+        }
     }
     
     //When the user taps away from the keyboard dismiss the keyboard

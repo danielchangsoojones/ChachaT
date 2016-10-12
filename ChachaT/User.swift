@@ -28,6 +28,7 @@ class User: PFUser {
     @NSManaged var bulletPoint3: String?
     @NSManaged var facebookId : String?
     @NSManaged var location: PFGeoPoint
+    @NSManaged var tags: PFRelation<ParseTag>
     var age : Int? {
         let calendar : Calendar = Calendar.current
         let now = Date()
