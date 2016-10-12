@@ -70,21 +70,6 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
             dataStore.loadSwipeArray()
         }
-        
-        for specialtyCategoryTitle in SpecialtyCategoryTitles.specialtyTagMenuCategories {
-            let dropDownCategory = DropDownCategory()
-            dropDownCategory.name = specialtyCategoryTitle.rawValue
-            dropDownCategory.innerTagTitles = specialtyCategoryTitle.specialtyTagTitles.map({ (s: SpecialtyTagTitles) -> String in
-                return s.toString
-            })
-            dropDownCategory.type = DropDownAttributes.tagChoices.rawValue
-            dropDownCategory.parseColumnName = ""
-            dropDownCategory.max = -100
-            dropDownCategory.min = -100
-            dropDownCategory.suffix = ""
-            dropDownCategory.saveInBackground()
-        }
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {

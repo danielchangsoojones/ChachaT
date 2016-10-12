@@ -32,30 +32,30 @@ class SearchTagsDataStore {
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
-        for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
-                switch dropDownAttribute {
-                case .tagChoices:
-                    let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
-                        $0.toString
+        let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
+        query.findObjectsInBackground { (categories, error) in
+            if let categories = categories {
+                for dropDownCategory in categories {
+                    var dropDownTag: DropDownTag?
+                    switch dropDownCategory.type {
+                    case DropDownAttributes.tagChoices.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles!, dropDownAttribute: DropDownAttributes.tagChoices)
+                    case DropDownAttributes.singleSlider.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, maxValue: dropDownCategory.max, suffix: dropDownCategory.suffix, dropDownAttribute: DropDownAttributes.singleSlider)
+                    case DropDownAttributes.rangeSlider.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, minValue: dropDownCategory.min, maxValue: dropDownCategory.max, suffix: dropDownCategory.suffix, dropDownAttribute: DropDownAttributes.rangeSlider)
+                    default:
+                        break
                     }
-                    let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
-                    tagChoicesDataArray.append(dropDownTag)
-                case .singleSlider, .rangeSlider:
-                    let minValue = specialtyCategory.sliderComponents?.min
-                    let maxValue = specialtyCategory.sliderComponents?.max
-                    let suffix = specialtyCategory.sliderComponents?.suffix
-                    var dropDownTag: DropDownTag!
-                    if dropDownAttribute == .singleSlider {
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
-                    } else if dropDownAttribute == .rangeSlider {
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, minValue: minValue!, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
+                    if let dropDownTag = dropDownTag {
+                        self.tagChoicesDataArray.append(dropDownTag)
                     }
-                    tagChoicesDataArray.append(dropDownTag)
                 }
+                self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
+            } else if let error = error {
+                print(error)
             }
         }
-        delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
     }
     
     func findUserArray(chosenTags: [Tag]) {
