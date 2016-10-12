@@ -210,12 +210,6 @@ public enum SpecialtyTagTitles : Int {
     static let allValues = [politicalGroupAllValues, ethnicityAllValues, hairColorAllValues, genderAllValues, sexualityAllValues].joined()
 }
 
-public enum TagAttributes {
-    case generic
-    case dropDownMenu
-    case isPrivate
-}
-
 func tagTitleIsSpecial(_ tagTitle: String) -> Bool {
     if SpecialtyTagTitles.stringRawValue(tagTitle) != nil {
         //there is a specialtyTag associated with this title

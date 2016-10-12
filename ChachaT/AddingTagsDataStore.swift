@@ -23,109 +23,16 @@ class AddingTagsDataStore {
         setSearchDataArray()
     }
     
-    //TODO: if nothing exists, then it will print error because the user doesn't have a tags row. Should create one when the user signs up.
-    func loadCurrentUserTags() {
-        let query = Tags.query()!
-        query.whereKey("createdBy", equalTo: User.current()!)
-        //can use FirstObject because there really should only be one result returned anyway.
-        query.getFirstObjectInBackground { (object, error) in
-            if let tag = object as? Tags , error == nil {
-                for tagTitle in tag.genericTags {
-                    let newTag = Tag(title: tagTitle, attribute: .generic)
-                    self.tagChoicesDataArray.append(newTag)
-                }
-                self.loadCurrentUserSpecialtyTags(tag)
-            } else {
-                print(error)
-            }
-            //this should load the tagViews even if there is error, so at least the user can see the CreationTagView
-            self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
-        }
-    }
-    
-    //TODO: I have to manually add every new specialty category, somehow it should be able to use the Parse names from the Tag enum, and just get all of them
-    fileprivate func loadCurrentUserSpecialtyTags(_ tag: Tags) {
-        //Doing an awkward mass nil check, but necessary and couldn't think of better way.
-        let specialtyTagTitlesIntegers : [Int] = [tag.ethnicity, tag.hairColor, tag.gender, tag.politicalGroup, tag.sexuality]
-        for rawValue in specialtyTagTitlesIntegers {
-            if let specialtyTagTitle = SpecialtyTagTitles(rawValue: rawValue) {
-                if let tagAttribute = specialtyTagTitle.associatedSpecialtyCategoryTitle?.associatedDropDownAttribute {
-                    var dropDownTag : DropDownTag!
-                    switch tagAttribute {
-                    case .tagChoices:
-                        let innerTagTitles : [String] = specialtyTagTitle.associatedSpecialtyCategoryTitle!.specialtyTagTitles.map {
-                            $0.toString
-                        }
-                        dropDownTag = DropDownTag(tagTitle: specialtyTagTitle.toString,
-                                                  specialtyCategory: specialtyTagTitle.associatedSpecialtyCategoryTitle!.rawValue,
-                                                  innerTagTitles: innerTagTitles,
-                                                  isPrivate: specialtyTagTitle.associatedSpecialtyCategoryTitle?.noneValue == specialtyTagTitle,
-                                                  dropDownAttribute: .tagChoices)
-                    default:
-                        break
-                    }
-                    tagChoicesDataArray.append(dropDownTag)
-                }
-            }
-        }
-        setAnyNilSpecialtyTags()
-    }
-    
-    //Purpose: in the database, the user might not have set something like Gender yet, so we just want to show the specialty drop down tag "Gender"
-    func setAnyNilSpecialtyTags() {
-        var alreadyDisplayedSpecialtyCategoryTitles: [SpecialtyCategoryTitles] = []
-        for tag in tagChoicesDataArray {
-            if let dropDownTag = tag as? DropDownTag {
-                if let specialtyCategoryTitle = SpecialtyCategoryTitles(rawValue: dropDownTag.specialtyCategory) {
-                    alreadyDisplayedSpecialtyCategoryTitles.append(specialtyCategoryTitle)
-                }
-            }
-        }
-        for specialtyCategoryTitle in SpecialtyCategoryTitles.specialtyTagMenuCategories where !alreadyDisplayedSpecialtyCategoryTitles.contains(specialtyCategoryTitle) {
-            let innerTagTitles : [String] = specialtyCategoryTitle.specialtyTagTitles.map {
-                $0.toString
-            }
-            let dropDownTag = DropDownTag(specialtyCategory: specialtyCategoryTitle.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
-            tagChoicesDataArray.append(dropDownTag)
-        }
-    }
-    
-    //TODO: Doing 2 API calls to delete this tag. Plus, it has an API call for every tag deleted, should delete all at once. so it is probably best to figure out how to optimize this..
     //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
     func deleteTag(_ title: String) {
-        let query = Tags.query()!
-        query.whereKey("createdBy", equalTo: User.current()!)
-        //can use FirstObject because there really should only be one result returned anyway.
-        query.getFirstObjectInBackground { (object, error) in
-            if let tag = object as? Tags , error == nil {
-                //I could just do removeObject, which would only remove the first object found. Technically, there should be only one anyway, but this removes any occurence, so I guess if duplicates somehow got into the database. This would kind of self-clean it
-                tag.removeObjects(in: [title], forKey: "genericTags")
-                tag.saveInBackground()
-                self.delegate?.deleteTagView(title)
-            } else {
-                print(error)
-            }
+        for parseTag in currentUserParseTags where parseTag.title == title {
+            User.current()!.tags.remove(parseTag)
+            User.current()!.saveInBackground()
         }
     }
     
     func setSearchDataArray() {
-        var alreadyContainsTagArray: [String] = []
-        let query = Tags.query()
-        query!.findObjectsInBackground { (objects, error) -> Void in
-            if let tags = objects as? [Tags] {
-                for tag in tags {
-                    for tagTitle in tag.genericTags {
-                        if !alreadyContainsTagArray.contains(tagTitle) {
-                            //our string array does not already contain the tag title, so we can add it to our searchable array
-                            alreadyContainsTagArray.append(tagTitle)
-                            let tag = Tag(title: tagTitle, attribute: .generic)
-                            self.searchDataArray.append(tag)
-                        }
-                    }
-                    self.delegate?.setSearchDataArray(self.searchDataArray)
-                }
-            }
-        }
+        //TODO: figure out how to properly set the search array when they search
     }
     
     func saveNewTag(title: String) {
@@ -201,9 +108,72 @@ class AddingTagsDataStore {
     
     //Purpose: remove the specialty tag from the current User's tags
     fileprivate func removeSpecialtyTag(specialtyCategory: String) {
-        for parseTag in currentUserParseTags where parseTag.dropDownCategory.name == specialtyCategory {
+        for parseTag in currentUserParseTags where parseTag.dropDownCategory?.name == specialtyCategory {
             //remove the previous tag that was correlated to the specific category
             User.current()!.tags.remove(parseTag)
+        }
+    }
+}
+
+//for loading the tags
+extension AddingTagsDataStore {
+    //TODO: if nothing exists, then it will print error because the user doesn't have a tags row. Should create one when the user signs up.
+    func loadCurrentUserTags() {
+        let query = User.current()!.tags.query()
+        query.includeKey("dropDownCategory")
+        query.findObjectsInBackground { (parseTags, error) in
+            if let parseTags = parseTags {
+                for parseTag in parseTags {
+                    if let dropDownCategory = parseTag.dropDownCategory {
+                        //a tag that is a member of the dropDownCategory
+                        let innerTagTitles = dropDownCategory.innerTagTitles ?? []
+                        let newDropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
+                        newDropDownTag.displayName = parseTag.title
+                        self.tagChoicesDataArray.append(newDropDownTag)
+                    } else {
+                        //just a generic tag
+                        let newTag = Tag(title: parseTag.title, attribute: .generic)
+                        self.tagChoicesDataArray.append(newTag)
+                    }
+                    self.currentUserParseTags.append(parseTag)
+                }
+            } else if let error = error {
+                print(error)
+            }
+            self.loadDropDownTags()
+        }
+    }
+    
+    func loadDropDownTags() {
+        let query = DropDownCategory.query() as! PFQuery<DropDownCategory>
+        query.whereKey("type", equalTo: DropDownAttributes.tagChoices.rawValue) //we only need tagChoices for the adding tags page, no sliders necessary
+        
+        //we don't need to set the dropDownTags for tags that the user has already set. For example, if the user set the Gender Category to male, then we will show Male for the dropDownCategory
+        let alreadySetDropDownCategories: [String] = tagChoicesDataArray.filter { (tag: Tag) -> Bool in
+            return tag is DropDownTag
+        }.map { (tag: Tag) -> String in
+            let dropDownTag = tag as! DropDownTag
+            return dropDownTag.specialtyCategory
+        }
+        query.whereKey("name", notContainedIn: alreadySetDropDownCategories)
+        
+        query.findObjectsInBackground { (categories, error) in
+            if let categories = categories {
+                for dropDownCategory in categories {
+                    var dropDownTag : DropDownTag!
+                    switch dropDownCategory.type {
+                    case DropDownAttributes.tagChoices.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles ?? [], dropDownAttribute: .tagChoices)
+                    default:
+                        break
+                    }
+                    self.tagChoicesDataArray.append(dropDownTag)
+                }
+            } else if let error = error {
+                print(error)
+            }
+            //this should load the dropDownTagViews even if there is error.
+            self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
         }
     }
 }

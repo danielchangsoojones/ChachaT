@@ -16,22 +16,7 @@ class CardDetailDataStore {
     }
     
     func loadTags(user: User) {
-        let query = Tags.query()!
-        query.whereKey("createdBy", equalTo: user)
-        query.findObjectsInBackground { (objects, error) in
-            if let tags = objects as? [Tags] {
-                for parseTag in tags {
-                    var tagArray: [Tag] = []
-                    for tagTitle in parseTag.genericTags {
-                        let tag = Tag(title: tagTitle, attribute: .generic)
-                        tagArray.append(tag)
-                    }
-                    self.delegate?.passTags(tagArray: tagArray)
-                }
-            } else if error != nil {
-                print(error)
-            }
-        }
+        //TODO: load the users tags
     }
 }
 

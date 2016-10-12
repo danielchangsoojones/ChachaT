@@ -130,26 +130,8 @@ extension BackgroundAnimationDataStore {
     }
     
     private func saveLocationToUserTag(location: CLLocation) {
-        let query = Tags.query()
-        query?.whereKey("createdBy", equalTo: User.current()!)
-        //there should only be one object in the background anyway. 
-        query?.getFirstObjectInBackground(block: { (object, error) in
-            if let tag = object as? Tags, error == nil {
-                tag.location = PFGeoPoint(location: location)
-                tag.saveInBackground()
-            } else {
-                let code = error!._code
-                if code == PFErrorCode.errorObjectNotFound.rawValue{
-                    //the tag doesn't exist yet for this user, so create it.
-                    let newTag = Tags()
-                    newTag.location = PFGeoPoint(location: location)
-                    newTag.createdBy = User.current()!
-                    newTag.saveInBackground()
-                } else {
-                    print(error)
-                }
-            }
-        })
+        User.current()!.location = PFGeoPoint(location: location)
+        User.current()!.saveInBackground()
     }
 }
 

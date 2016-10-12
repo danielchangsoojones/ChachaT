@@ -18,7 +18,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         //register parse subclasses
         User.registerSubclass()
-        Tags.registerSubclass()
         Chat.registerSubclass()
         ParseSwipe.registerSubclass()
         ParseTag.registerSubclass()

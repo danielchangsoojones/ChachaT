@@ -17,6 +17,6 @@ class ParseTag: PFObject, PFSubclassing {
     //TODO: make enums to hold these
     @NSManaged var title: String
     @NSManaged var attribute: String //i.e. DropDownTag, Generic, etc.
-    @NSManaged var dropDownCategory: DropDownCategory //stores the data for what happens if the tag needs to have an action for the dropDownMenu (slider, tag menu, etc.)
+    @NSManaged var dropDownCategory: DropDownCategory? //stores the data for what happens if the tag needs to have an action for the dropDownMenu (slider, tag menu, etc.)
     @NSManaged var isPrivate: Bool
 }

@@ -26,32 +26,7 @@ class SearchTagsDataStore {
     //very ineffecient, and in future, I will have to do server side cloud code.
     //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
     func setSearchDataArray() {
-        addSpecialtyTagsToSearchDataArray()
-        var alreadyContainsTagArray: [String] = []
-        let query = Tags.query()
-        query!.findObjectsInBackground { (objects, error) -> Void in
-            if let tags = objects as? [Tags] {
-                for tag in tags {
-                    for tagTitle in tag.genericTags {
-                        if !alreadyContainsTagArray.contains(tagTitle) {
-                            //our string array does not already contain the tag title, so we can add it to our searchable array
-                            alreadyContainsTagArray.append(tagTitle)
-                            let tag = Tag(title: tagTitle, attribute: .generic)
-                            self.searchDataArray.append(tag)
-                        }
-                    }
-                    self.delegate?.setSearchDataArray(self.searchDataArray)
-                }
-            }
-        }
-    }
-    
-    //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
-    func addSpecialtyTagsToSearchDataArray() {
-        for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            let tag = Tag(title: specialtyTagTitle.toString, attribute: .generic)
-            searchDataArray.append(tag)
-        }
+        //TODO: figure out how to do the search array in a reasonable fashion
     }
     
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
