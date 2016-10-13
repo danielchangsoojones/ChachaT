@@ -18,15 +18,7 @@ class SearchTagsDataStore {
     
     init(delegate: SearchTagsDataStoreDelegate) {
         self.delegate = delegate
-        setSearchDataArray()
         setSpecialtyTagsIntoDefaultView()
-    }
-    
-    //TODO; right now, my search is pulling down the entire tag table and then doing search,
-    //very ineffecient, and in future, I will have to do server side cloud code.
-    //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
-    func setSearchDataArray() {
-        //TODO: figure out how to do the search array in a reasonable fashion
     }
     
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
@@ -60,23 +52,9 @@ class SearchTagsDataStore {
     }
     
     func findUserArray(chosenTags: [Tag]) {
-        var query = User.query()!
-        var tagTitleArray: [String] = []
-        for tag in chosenTags {
-            if let dropDownTag = tag as? DropDownTag {
-                query = addSliderQueryComponents(dropDownTag: dropDownTag, query: query)
-            } else {
-                tagTitleArray.append(tag.title)
-            }
-        }
-        if !tagTitleArray.isEmpty {
-            //query any tags with the title
-            let innerQuery = ParseTag.query()!
-            innerQuery.whereKey("title", containedIn: ["flounder"])
-            query.whereKey("tags", matchesQuery: innerQuery)
-        }
+        let tuple = createFindUserQuery(chosenTags: chosenTags)
 
-        query.findObjectsInBackground { (objects, error) in
+        tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
                 if users.isEmpty {
                     _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
@@ -107,12 +85,93 @@ class SearchTagsDataStore {
     }
 }
 
+//MARK: for searching
+extension SearchTagsDataStore {
+    func searchForTags(searchText: String) {
+        let query = ParseTag.query()! as! PFQuery<ParseTag>
+        query.whereKey("title", contains: searchText.lowercased())
+        query.findObjectsInBackground { (parseTags, error) in
+            if let parseTags = parseTags {
+                //TODO: what if the user is typing super fast. We don't want to be constantly trying to catch their last letter, just the newest letter after we have completed a query.
+                self.searchDataArray.removeAll()
+                let newSearchResults: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
+                    let tag = Tag(title: parseTag.title, attribute: TagAttributes.generic)
+                    return tag
+                })
+                self.searchDataArray.append(contentsOf: newSearchResults)
+            } else if let error = error {
+                print(error)
+            }
+            self.delegate?.passSearchResults(searchTags: self.searchDataArray)
+        }
+    }
+    
+
+}
+
+//Mark: After a tag is tapped, show successive tags/find users
+extension SearchTagsDataStore {
+    func retrieveSuccessiveTags(chosenTags: [Tag]) {
+        let tuple = createFindUserQuery(chosenTags: chosenTags)
+        
+        tuple.query.findObjectsInBackground { (objects, error) in
+            if let users = objects as? [User] {
+                for user in users {
+                    
+                    
+                    let query = user.tags.query()
+                    query.whereKey("title", notEqualTo: tuple.chosenTitleArray)
+                    query.findObjectsInBackground(block: { (<#[ParseTag]?#>, <#Error?#>) in
+                        <#code#>
+                    })
+                }
+            }
+        }
+    }
+    
+    fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {
+        var query = User.query()!
+        var tagTitleArray: [String] = []
+        for tag in chosenTags {
+            if let dropDownTag = tag as? DropDownTag {
+                query = addSliderQueryComponents(dropDownTag: dropDownTag, query: query)
+            } else {
+                tagTitleArray.append(tag.title)
+            }
+        }
+        if !tagTitleArray.isEmpty {
+            //query any tags with the title
+            let innerQuery = ParseTag.query()!
+            innerQuery.whereKey("title", containedIn: ["flounder"])
+            query.whereKey("tags", matchesQuery: innerQuery)
+        }
+        return (query, tagTitleArray)
+    }
+}
+
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User])
+    func passSearchResults(searchTags: [Tag])
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray as AnyObject?) //passing userArray to the segue
+    }
+    
+    func passSearchResults(searchTags: [Tag]) {
+        tagChoicesView.removeAllTags()
+        if searchTags.isEmpty {
+            //TODO: there were no results from the search
+            //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
+        } else {
+            for (index, tag) in searchTags.enumerated() {
+                let tagView = tagChoicesView.addTag(tag.title)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.isSelected = true
+                }
+            }
+        }
     }
 }

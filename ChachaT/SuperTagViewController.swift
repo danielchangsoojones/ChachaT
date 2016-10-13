@@ -137,8 +137,6 @@ extension SuperTagViewController {
             $0.title
         }
         filtered = searchDataTitleArray.filter({ (tagTitle) -> Bool in
-            //finds the tagTitle, but if nil, then uses the specialtyTagTitle
-            //TODO: have to make sure if the specialtyTagTitle is nil, then it goes the specialtyCategoryTitel
             let tmp: NSString = tagTitle as NSString
             let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
             return range.location != NSNotFound

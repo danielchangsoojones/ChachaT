@@ -101,7 +101,12 @@ extension SearchTagsViewController {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        resetTagChoicesViewList()
+        showSuccessiveTags()
+    }
+    
+    fileprivate func showSuccessiveTags() {
+        tagChoicesView.removeAllTags()
+        
     }
 }
 
@@ -193,25 +198,14 @@ extension SearchTagsViewController: SliderViewDelegate {
 
 //search extension
 extension SearchTagsViewController : UISearchBarDelegate {
+    //TODO: can probably get rid of all these searchActive stuff, because I am not actually using them for anything
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
-        tagChoicesView.removeAllTags()
         if searchText.isEmpty {
             //no text, so we want to stay on the tagChoicesView
             searchActive = false
             resetTagChoicesViewList()
-        } else if(filtered.count == 0){
-            //there is text, but it has no matches in the database
         } else {
-            //there is text, and we have a match, soa the tagChoicesView changes accordingly
-            searchActive = true
-            for (index, tagTitle) in filtered.enumerated() {
-                let tagView = tagChoicesView.addTag(tagTitle)
-                if index == 0 {
-                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
-                    tagView.isSelected = true
-                }
-            }
+            dataStore.searchForTags(searchText: searchText)
         }
     }
     
