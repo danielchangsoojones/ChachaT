@@ -8,12 +8,6 @@
 
 import Foundation
 
-public enum TagAttributes {
-    case generic
-    case dropDownMenu
-    case isPrivate
-}
-
 class Tag {
     var title : String
     var attribute : TagAttributes

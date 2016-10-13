@@ -121,12 +121,13 @@ extension AddingTagsDataStore {
     func loadCurrentUserTags() {
         let query = User.current()!.tags.query()
         query.includeKey("dropDownCategory")
+        query.includeKey("dropDownCategory.innerTags")
         query.findObjectsInBackground { (parseTags, error) in
             if let parseTags = parseTags {
                 for parseTag in parseTags {
                     if let dropDownCategory = parseTag.dropDownCategory {
                         //a tag that is a member of the dropDownCategory
-                        let innerTagTitles = dropDownCategory.innerTagTitles ?? []
+                        let innerTagTitles = dropDownCategory.innerTagTitles
                         let newDropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
                         newDropDownTag.displayName = parseTag.title
                         self.tagChoicesDataArray.append(newDropDownTag)
@@ -147,6 +148,7 @@ extension AddingTagsDataStore {
     func loadDropDownTags() {
         let query = DropDownCategory.query() as! PFQuery<DropDownCategory>
         query.whereKey("type", equalTo: DropDownAttributes.tagChoices.rawValue) //we only need tagChoices for the adding tags page, no sliders necessary
+        query.includeKey("innerTags")
         
         //we don't need to set the dropDownTags for tags that the user has already set. For example, if the user set the Gender Category to male, then we will show Male for the dropDownCategory
         let alreadySetDropDownCategories: [String] = tagChoicesDataArray.filter { (tag: Tag) -> Bool in
@@ -163,7 +165,7 @@ extension AddingTagsDataStore {
                     var dropDownTag : DropDownTag!
                     switch dropDownCategory.type {
                     case DropDownAttributes.tagChoices.rawValue:
-                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles ?? [], dropDownAttribute: .tagChoices)
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles, dropDownAttribute: .tagChoices)
                     default:
                         break
                     }

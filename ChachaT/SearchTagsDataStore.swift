@@ -33,13 +33,14 @@ class SearchTagsDataStore {
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
         let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
+        query.includeKey("innerTags")
         query.findObjectsInBackground { (categories, error) in
             if let categories = categories {
                 for dropDownCategory in categories {
                     var dropDownTag: DropDownTag?
                     switch dropDownCategory.type {
                     case DropDownAttributes.tagChoices.rawValue:
-                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles!, dropDownAttribute: DropDownAttributes.tagChoices)
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles, dropDownAttribute: DropDownAttributes.tagChoices)
                     case DropDownAttributes.singleSlider.rawValue:
                         dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, maxValue: dropDownCategory.max, suffix: dropDownCategory.suffix, dropDownAttribute: DropDownAttributes.singleSlider)
                     case DropDownAttributes.rangeSlider.rawValue:
