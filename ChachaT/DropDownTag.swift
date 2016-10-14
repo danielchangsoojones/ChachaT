@@ -8,13 +8,16 @@
 
 import Foundation
 
-public enum DropDownAttributes {
-    case tagChoices
-    case singleSlider
-    case rangeSlider
+public enum DropDownAttributes: String {
+    //the raw values are what will be saved as the type to the API
+    case tagChoices = "Tag Menu"
+    case singleSlider = "Single Slider"
+    case rangeSlider = "Range Slider"
 }
 
+//TODO: I can subclass this even farther into tagChoices and sliderTags
 class DropDownTag : Tag {
+    var displayName: String = "" //when adding tags, we want the properties of something like gender, but have it show Male
     var specialtyCategory: String
     var dropDownAttribute: DropDownAttributes
     var innerTagTitles : [String] = []

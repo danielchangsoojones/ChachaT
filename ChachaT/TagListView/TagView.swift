@@ -216,19 +216,6 @@ open class TagView: UIButton {
 
 //Daniel Jones made this custom extension
 extension TagView {
-    func isFromSpecialtyCategory() -> SpecialtyCategoryTitles? {
-        if let currentTitle = self.currentTitle {
-            if let specialtyTagTitle = SpecialtyTagTitles.stringRawValue(currentTitle) {
-                //the tagView is part of a specialtyCategory (like Democrat, Blonde, ect.)
-                if let specialtyCategoryTitle = specialtyTagTitle.associatedSpecialtyCategoryTitle {
-                    return specialtyCategoryTitle
-                }
-            }
-        }
-        //the tag is just a random generic tag, with no specialty tag
-        return nil
-    }
-    
     //Purpose: the search bar text field needs to calculate height to the same height as the tagViews. Like in 8tracks
     static func getTagViewHeight(_ paddingY: CGFloat) -> CGFloat {
         //TODO: this textFont is not based upon the actual textSize just a constant, unsafe programming because what if someone updates the textFont, this wouldn't be updated.

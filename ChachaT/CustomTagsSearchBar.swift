@@ -20,6 +20,7 @@ class CustomTagsSearchBar: UISearchBar {
         placeholder = placeHolderText
         tintColor = SearchBarConstants.borderColor //makes the cancel button of search bar and keyboard cursor a certain color
         showsCancelButton = true
+        self.autocapitalizationType = .none
         setSearchIcon()
     }
     

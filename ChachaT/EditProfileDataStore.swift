@@ -76,10 +76,6 @@ class EditProfileDataStore {
     
     func saveAge(_ birthday: Date) {
         currentUser.birthDate = birthday
-        //saving birthdate in two places in database because it will make querying easier with tags.
-        let tag = Tags()
-        tag.birthDate = birthday
-        tag.saveInBackground()
     }
 }
 

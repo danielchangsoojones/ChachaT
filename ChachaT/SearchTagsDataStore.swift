@@ -18,167 +18,160 @@ class SearchTagsDataStore {
     
     init(delegate: SearchTagsDataStoreDelegate) {
         self.delegate = delegate
-        setSearchDataArray()
         setSpecialtyTagsIntoDefaultView()
-    }
-    
-    //TODO; right now, my search is pulling down the entire tag table and then doing search,
-    //very ineffecient, and in future, I will have to do server side cloud code.
-    //Also, it is pulling down duplicate tag titles, Example: Two Users might have a blonde tag, but for searching purposes, I only need to have one blonde tag. Right now pulling down all tags, which again is ineffecient
-    func setSearchDataArray() {
-        addSpecialtyTagsToSearchDataArray()
-        var alreadyContainsTagArray: [String] = []
-        let query = Tags.query()
-        query!.findObjectsInBackground { (objects, error) -> Void in
-            if let tags = objects as? [Tags] {
-                for tag in tags {
-                    for tagTitle in tag.genericTags {
-                        if !alreadyContainsTagArray.contains(tagTitle) {
-                            //our string array does not already contain the tag title, so we can add it to our searchable array
-                            alreadyContainsTagArray.append(tagTitle)
-                            let tag = Tag(title: tagTitle, attribute: .generic)
-                            self.searchDataArray.append(tag)
-                        }
-                    }
-                    self.delegate?.setSearchDataArray(self.searchDataArray)
-                }
-            }
-        }
-    }
-    
-    //Purpose: we only want to pull down generic tags from database to search. The special tags are added on our frontend side.
-    func addSpecialtyTagsToSearchDataArray() {
-        for specialtyTagTitle in SpecialtyTagTitles.allValues {
-            let tag = Tag(title: specialtyTagTitle.toString, attribute: .generic)
-            searchDataArray.append(tag)
-        }
     }
     
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     func setSpecialtyTagsIntoDefaultView() {
-        for specialtyCategory in SpecialtyCategoryTitles.allCategories {
-            if let dropDownAttribute = specialtyCategory.associatedDropDownAttribute {
-                switch dropDownAttribute {
-                case .tagChoices:
-                    let innerTagTitles : [String] = specialtyCategory.specialtyTagTitles.map{
-                        $0.toString
+        let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
+        query.includeKey("innerTags")
+        query.findObjectsInBackground { (categories, error) in
+            if let categories = categories {
+                for dropDownCategory in categories {
+                    var dropDownTag: DropDownTag?
+                    switch dropDownCategory.type {
+                    case DropDownAttributes.tagChoices.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles, dropDownAttribute: DropDownAttributes.tagChoices)
+                    case DropDownAttributes.singleSlider.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, maxValue: dropDownCategory.max, suffix: dropDownCategory.suffix, dropDownAttribute: DropDownAttributes.singleSlider)
+                    case DropDownAttributes.rangeSlider.rawValue:
+                        dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, minValue: dropDownCategory.min, maxValue: dropDownCategory.max, suffix: dropDownCategory.suffix, dropDownAttribute: DropDownAttributes.rangeSlider)
+                    default:
+                        break
                     }
-                    let dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, innerTagTitles: innerTagTitles, dropDownAttribute: dropDownAttribute)
-                    tagChoicesDataArray.append(dropDownTag)
-                case .singleSlider, .rangeSlider:
-                    let minValue = specialtyCategory.sliderComponents?.min
-                    let maxValue = specialtyCategory.sliderComponents?.max
-                    let suffix = specialtyCategory.sliderComponents?.suffix
-                    var dropDownTag: DropDownTag!
-                    if dropDownAttribute == .singleSlider {
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
-                    } else if dropDownAttribute == .rangeSlider {
-                        dropDownTag = DropDownTag(specialtyCategory: specialtyCategory.rawValue, minValue: minValue!, maxValue: maxValue!, suffix: suffix!, dropDownAttribute: dropDownAttribute)
+                    if let dropDownTag = dropDownTag {
+                        self.tagChoicesDataArray.append(dropDownTag)
                     }
-                    tagChoicesDataArray.append(dropDownTag)
                 }
-            }
-        }
-        delegate?.setChoicesViewTagsArray(tagChoicesDataArray)
-    }
-    
-    func findUserArray(_ genericTagTitleArray: [String], specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?]) {
-        let genericTagQuery = Tags.query()!
-        if !genericTagTitleArray.isEmpty {
-            genericTagQuery.whereKey("genericTags", containsAllObjectsIn:genericTagTitleArray)
-        }
-        let finalQuery = querySpecialtyTags(specialtyTagDictionary, query: genericTagQuery)
-        finalQuery.whereKey("createdBy", notEqualTo: User.current()!)
-        finalQuery.includeKey("createdBy")
-        finalQuery.selectKeys(["createdBy"]) //we really only need to know the users
-        finalQuery.findObjectsInBackground(block: { (objects, error) in
-            if let objects = objects , error == nil {
-                if objects.isEmpty {
-                    print(objects)
-                    _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
-                } else {
-                    var userArray : [User] = []
-                    for tag in objects as! [Tags] {
-                        userArray.append(tag.createdBy)
-                    }
-                    self.delegate?.passUserArrayToMainPage(userArray)
-                }
-            } else {
+                self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
+            } else if let error = error {
                 print(error)
             }
-        })
+        }
     }
     
-    func querySpecialtyTags(_ specialtyTagDictionary: [SpecialtyCategoryTitles : TagView?], query: PFQuery<PFObject>) -> PFQuery<PFObject> {
-        for (specialtyCategoryTitle, tagView) in specialtyTagDictionary {
-            if let tagViewTitle = tagView?.currentTitle {
-                //the tagView is not nil and the title exists
-                if let tagAttribute = specialtyCategoryTitle.associatedDropDownAttribute {
-                    switch tagAttribute {
-                    case .tagChoices:
-                        //does a query on the correct column name and also the SpecialtyTagTitle rawValue, which is an int.
-                        //For example: the query would end up being something like this query.whereKey("sexuality, equalTo: 401)
-                        let titleRawValue: Int = SpecialtyTagTitles.stringRawValue(tagViewTitle)!.rawValue
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, equalTo: titleRawValue)
-                    case .singleSlider:
-                        if let value = getSingleSliderValue(tagViewTitle) {
-                            query.whereKey(specialtyCategoryTitle.parseColumnName, nearGeoPoint: User.current()!.location, withinMiles: value)
-                        }
-                    case .rangeSlider:
-                        let maxAndMinTuple = getRangeSliderValue(tagViewTitle)
-                        //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-                        let minAge : Date = maxAndMinTuple.minValue.years.ago
-                        let maxAge : Date = maxAndMinTuple.maxValue.years.ago
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-                        query.whereKey(specialtyCategoryTitle.parseColumnName, greaterThanOrEqualTo: maxAge)
-                    }
+    func findUserArray(chosenTags: [Tag]) {
+        let tuple = createFindUserQuery(chosenTags: chosenTags)
+
+        tuple.query.findObjectsInBackground { (objects, error) in
+            if let users = objects as? [User] {
+                if users.isEmpty {
+                    _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
+                } else {
+                    self.delegate?.passUserArrayToMainPage(users)
+                }
+            } else if error != nil {
+                print(error)
+            }
+        }
+    }
+    
+    func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
+        switch dropDownTag.specialtyCategory {
+            //TODO: these cases should be based upon the parse column name
+        case "Distance":
+            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+        case "Age Range":
+            //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
+            let minAge : Date = dropDownTag.minValue.years.ago
+            let maxAge : Date = dropDownTag.maxValue.years.ago
+            query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+        default:
+            break
+        }
+        return query
+    }
+}
+
+//MARK: for searching
+extension SearchTagsDataStore {
+    func searchForTags(searchText: String) {
+        let query = ParseTag.query()! as! PFQuery<ParseTag>
+        query.whereKey("title", contains: searchText.lowercased())
+        query.findObjectsInBackground { (parseTags, error) in
+            if let parseTags = parseTags {
+                //TODO: what if the user is typing super fast. We don't want to be constantly trying to catch their last letter, just the newest letter after we have completed a query.
+                self.searchDataArray.removeAll()
+                let newSearchResults: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
+                    let tag = Tag(title: parseTag.title, attribute: TagAttributes.generic)
+                    return tag
+                })
+                self.searchDataArray.append(contentsOf: newSearchResults)
+            } else if let error = error {
+                print(error)
+            }
+            self.delegate?.passSearchResults(searchTags: self.searchDataArray)
+        }
+    }
+    
+
+}
+
+//Mark: After a tag is tapped, show successive tags/find users
+extension SearchTagsDataStore {
+    func retrieveSuccessiveTags(chosenTags: [Tag]) {
+        let tuple = createFindUserQuery(chosenTags: chosenTags)
+        
+        tuple.query.findObjectsInBackground { (objects, error) in
+            if let users = objects as? [User] {
+                for user in users {
+                    
+                    
+                    let query = user.tags.query()
+                    query.whereKey("title", notEqualTo: tuple.chosenTitleArray)
+                    query.findObjectsInBackground(block: { (<#[ParseTag]?#>, <#Error?#>) in
+                        <#code#>
+                    })
                 }
             }
         }
-        //return the same query after we have added the specialty criteria
-        return query
     }
     
-    
-    //Purpose: just pull out the integers in a substring for the single sliders (instead of "50 mi", we just want 50)
-    func getSingleSliderValue(_ string: String) -> Double? {
-        if let num = convertStringToNumber(str: string) {
-            return Double(num)
-        }
-        return nil
-    }
-    
-    func getRangeSliderValue(_ string: String) -> (minValue: Int, maxValue: Int) {
-        let spaceString : Character = "-"
-        if let index = string.characters.index(of: spaceString) {
-            //the trimming function removes all leading and trailing spaces, so it gets rid of the spaces in " - "
-            let minValueSubstring = string.substring(to: index).trimmingCharacters(in: CharacterSet.whitespaces)
-            let maxValueSubstring = string.substring(from: string.index(index, offsetBy: 1)).trimmingCharacters(in: CharacterSet.whitespaces) //FromSubstring includes the index, so add 1
-            if let minValue = convertStringToNumber(str: minValueSubstring), let maxValue = convertStringToNumber(str: maxValueSubstring) {
-                return (minValue, maxValue)
+    fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {
+        var query = User.query()!
+        var tagTitleArray: [String] = []
+        for tag in chosenTags {
+            if let dropDownTag = tag as? DropDownTag {
+                query = addSliderQueryComponents(dropDownTag: dropDownTag, query: query)
+            } else {
+                tagTitleArray.append(tag.title)
             }
         }
-        return (0,0) //couldn't convert the slider string to min/max values
-    }
-    
-    private func convertStringToNumber(str: String) -> Int? {
-        //get rid of anything in the string that is not a number
-        let stringArray = str.components(separatedBy: NSCharacterSet.decimalDigits.inverted)
-        let newString = stringArray.joined(separator: "")
-        if let num = Int(newString) {
-            return num
+        if !tagTitleArray.isEmpty {
+            //query any tags with the title
+            let innerQuery = ParseTag.query()!
+            innerQuery.whereKey("title", containedIn: ["flounder"])
+            query.whereKey("tags", matchesQuery: innerQuery)
         }
-        return nil //couldn't be converted into a number
+        return (query, tagTitleArray)
     }
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User])
+    func passSearchResults(searchTags: [Tag])
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray as AnyObject?) //passing userArray to the segue
+    }
+    
+    func passSearchResults(searchTags: [Tag]) {
+        tagChoicesView.removeAllTags()
+        if searchTags.isEmpty {
+            //TODO: there were no results from the search
+            //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
+        } else {
+            for (index, tag) in searchTags.enumerated() {
+                let tagView = tagChoicesView.addTag(tag.title)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.isSelected = true
+                }
+            }
+        }
     }
 }

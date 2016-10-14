@@ -13,9 +13,7 @@ import Parse
 class SearchTagsViewController: SuperTagViewController {
     var tagChosenView : ChachaChosenTagListView!
     var scrollViewSearchView : ScrollViewSearchView!
-    //TODO: this dictionary should really be in the dataStore. We want to keep our API dependency seperate from the actual class.
-    var theSpecialtyChosenTagDictionary : [SpecialtyCategoryTitles : TagView?] = [ : ] //holds the specialty tagviews, because they have specialty querying characteristics
-    var theGenericChosenTagArray : [String] = []
+    var chosenTags: [Tag] = []
     
     var dataStore : SearchTagsDataStore!
     
@@ -23,22 +21,12 @@ class SearchTagsViewController: SuperTagViewController {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         setDataFromDataStore()
-        setSpecialtyTagViewDictionary()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
     }
     
     func setDataFromDataStore() {
         dataStore = SearchTagsDataStore(delegate: self) //sets the data for the tag arrays
-    }
-    
-    //You're probably thinking "Why not just set the variable in the global variable?" Well, it for some fucking reason, it has to be set like it is in this function, or else the nil is not being recognized by the == nil operator
-    //no idea why, but this made it work.
-    func setSpecialtyTagViewDictionary() {
-        for category in SpecialtyCategoryTitles.allCategories {
-            //seeding the dictionary with all the specialty category titles, and setting value to nil.
-            theSpecialtyChosenTagDictionary[category] = nil
-        }
     }
     
     func setChosenTagView(_ scrollViewSearchView: ScrollViewSearchView) {
@@ -82,6 +70,7 @@ extension SearchTagsViewController {
         switch tagView.tagAttribute {
         case .dropDownMenu:
             let dropDownTagView = tagView as! DropDownTagView
+            tappedDropDownTagView = dropDownTagView
             if let dropDownTag = findDropDownTag(dropDownTagView.specialtyCategoryTitle, array: tagChoicesDataArray) {
                 dropDownActions(dropDownTag)
             }
@@ -103,13 +92,7 @@ extension SearchTagsViewController {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
-            if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
-                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = nil
-            } else {
-                if let index = theGenericChosenTagArray.index(of: title) {
-                    theGenericChosenTagArray.remove(at: index)
-                }
-            }
+            //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
         }
     }
     
@@ -118,32 +101,25 @@ extension SearchTagsViewController {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        resetTagChoicesViewList()
-        if let specialtyCategoryTitle = tagView.isFromSpecialtyCategory() {
-            //the tagView pressed was a tag that is part of a specialtyCategory (like Democrat, Blonde, ect.)
-            theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
-        } else {
-            //just a generic tag pressed
-            theGenericChosenTagArray.append(title)
-        }
+        showSuccessiveTags()
+    }
+    
+    fileprivate func showSuccessiveTags() {
+        tagChoicesView.removeAllTags()
+        
     }
 }
 
 extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
-        var chosenTagArrayTitles : [String] = []
-        if let scrollViewSearchView = scrollViewSearchView {
-            for tagView in scrollViewSearchView.theTagChosenListView.tagViews {
-                if let titleLabel = tagView.titleLabel {
-                    if let title = titleLabel.text {
-                        //need to get title array because I want to do contained in query, which requires strings
-                        chosenTagArrayTitles.append(title)
-                    }
-                }
+        for tagView in tagChosenView.tagViews {
+            if let tagTitle = tagView.currentTitle {
+                let tag = Tag(title: tagTitle, attribute: .generic)
+                chosenTags.append(tag)
             }
         }
-        dataStore.findUserArray(theGenericChosenTagArray, specialtyTagDictionary: theSpecialtyChosenTagDictionary)
+        dataStore.findUserArray(chosenTags: chosenTags)
     }
     
     func dismissCurrentViewController() {
@@ -159,23 +135,53 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
 }
 
 extension SearchTagsViewController: SliderViewDelegate {
-    func sliderValueChanged(_ text: String, suffix: String) {
+    func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String) {
         scrollViewSearchView.hideScrollSearchView(false)
         if let tagView = findTagViewWithSuffix(suffix) {
             //the tagView has already been created
             //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
             tagView.setTitle(text, for: UIControlState())
-            if let specialtyCategoryTitle = SpecialtyCategoryTitles.suffixRawValue(suffix: suffix) {
-                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+            if let index = findIndexOfDropDownTag(suffix: suffix) {
+                //replace the index of the dropDownTag with our updated dropDownTag
+                let dropDownTag = chosenTags[index] as! DropDownTag
+                dropDownTag.minValue = minValue
+                dropDownTag.maxValue = maxValue
+                dropDownTag.title = text
+                dropDownTag.suffix = suffix
+                chosenTags[index] = dropDownTag
             }
         } else {
             //tagView has never been created
             let tagView = tagChosenView.addTag(text)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
-            if let specialtyCategoryTitle = SpecialtyCategoryTitles.suffixRawValue(suffix: suffix) {
-                theSpecialtyChosenTagDictionary[specialtyCategoryTitle] = tagView
+            if let dropDownTagView = tappedDropDownTagView {
+                //It doesn't really matter what dropDownAttribute we pass
+                let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
+                tag.title = text
+                chosenTags.append(tag)
             }
         }
+    }
+    
+    func findIndexOfDropDownTag(suffix: String) -> Int? {
+        if let index = chosenTags.index(where: { (tag: Tag) -> Bool in
+            if let dropDownTag = tag as? DropDownTag, dropDownTag.suffix == suffix {
+                return true
+            }
+            return false
+        }) {
+            return index
+        }
+        return nil
+    }
+    
+    func findDropDownTag(suffix: String, array: [Tag]) -> DropDownTag? {
+        for tag in array {
+            if let dropDownTag = tag as? DropDownTag , dropDownTag.suffix == suffix {
+                return dropDownTag
+            }
+        }
+        return nil
     }
     
     //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
@@ -192,25 +198,14 @@ extension SearchTagsViewController: SliderViewDelegate {
 
 //search extension
 extension SearchTagsViewController : UISearchBarDelegate {
+    //TODO: can probably get rid of all these searchActive stuff, because I am not actually using them for anything
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
-        tagChoicesView.removeAllTags()
         if searchText.isEmpty {
             //no text, so we want to stay on the tagChoicesView
             searchActive = false
             resetTagChoicesViewList()
-        } else if(filtered.count == 0){
-            //there is text, but it has no matches in the database
         } else {
-            //there is text, and we have a match, soa the tagChoicesView changes accordingly
-            searchActive = true
-            for (index, tagTitle) in filtered.enumerated() {
-                let tagView = tagChoicesView.addTag(tagTitle)
-                if index == 0 {
-                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
-                    tagView.isSelected = true
-                }
-            }
+            dataStore.searchForTags(searchText: searchText)
         }
     }
     

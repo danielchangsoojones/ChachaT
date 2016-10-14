@@ -15,7 +15,6 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     var creationMenuView: CreationMenuView!
     
     var dataStore : AddingTagsDataStore!
-    var tappedDropDownTagView : DropDownTagView? //a global variable to hold the dropDownTag that was tapped to pull down a ChachaDropDownMenu
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -83,7 +82,7 @@ extension AddingTagsToProfileViewController {
             if let dropDownTagView = tappedDropDownTagView {
                 tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
                 dropDownTagView.makeNonPrivate()
-                dataStore.saveSpecialtyTag(title)
+                dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
         }
     }
@@ -92,7 +91,6 @@ extension AddingTagsToProfileViewController {
         if sender.tag == 3 {
             //ChachaDropDownTagView pressed
             if tagView.tagAttribute == .isPrivate, let dropDownTagView = tappedDropDownTagView {
-                //TODO: do something in the dataStore to actually save a private tag being pressed
                 dropDownTagView.makePrivate()
                 dataStore.savePrivacyTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
@@ -199,7 +197,7 @@ extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
         //also passing the TagView because I get the feeling that I might need it in the future.
         tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
         resetTextField()
-        dataStore.saveNewTag(title)
+        dataStore.saveNewTag(title: title)
     }
     
 }
