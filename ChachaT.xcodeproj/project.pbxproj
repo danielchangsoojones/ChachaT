@@ -116,6 +116,7 @@
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
 		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */; };
+		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
 /* End PBXBuildFile section */
 
@@ -237,6 +238,7 @@
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
 		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JointParseTagToUser.swift; sourceTree = "<group>"; };
+		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
 		95775F81069424F8C55B7B25 /* Pods-Shuffles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.release.xcconfig"; sourceTree = "<group>"; };
 		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -809,6 +811,7 @@
 			isa = PBXGroup;
 			children = (
 				92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */,
+				92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -1039,6 +1042,7 @@
 				925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */,
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
+				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,

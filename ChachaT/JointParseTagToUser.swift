@@ -7,13 +7,15 @@
 //
 
 import Foundation
+import Parse
 
-class JointParseTagToUser {
+class JointParseTagToUser: PFObject, PFSubclassing {
     class func parseClassName() -> String {
         return "JointParseTagToUser"
     }
     
     //TODO: make enums to hold these
     @NSManaged var tagTitle: String // we will use this as an index to query on.
-    @NSManaged
+    @NSManaged var parseTag: ParseTag
+    @NSManaged var user: User
 }

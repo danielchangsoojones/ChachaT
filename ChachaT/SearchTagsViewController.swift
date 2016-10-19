@@ -55,6 +55,22 @@ class SearchTagsViewController: SuperTagViewController {
             break
         }
     }
+    
+    override func passSearchResults(searchTags: [Tag]) {
+        tagChoicesView.removeAllTags()
+        if searchTags.isEmpty {
+            //TODO: there were no results from the search
+            //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
+        } else {
+            for (index, tag) in searchTags.enumerated() {
+                let tagView = tagChoicesView.addTag(tag.title)
+                if index == 0 {
+                    //we want the first TagView in search area to be selected, so then you click search, and it adds to search bar. like 8tracks.
+                    tagView.isSelected = true
+                }
+            }
+        }
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -106,20 +122,26 @@ extension SearchTagsViewController {
     
     fileprivate func showSuccessiveTags() {
         tagChoicesView.removeAllTags()
-        
+        addChosenTagsToArray()
+        dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
     }
 }
 
 extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
+        addChosenTagsToArray()
+        dataStore.findUserArray(chosenTags: chosenTags)
+    }
+    
+    //Purpose: we want to save the chosen tagViews into the chosenTag array, so then we can query on it.
+    fileprivate func addChosenTagsToArray() {
         for tagView in tagChosenView.tagViews {
             if let tagTitle = tagView.currentTitle {
                 let tag = Tag(title: tagTitle, attribute: .generic)
                 chosenTags.append(tag)
             }
         }
-        dataStore.findUserArray(chosenTags: chosenTags)
     }
     
     func dismissCurrentViewController() {

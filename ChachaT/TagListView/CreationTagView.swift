@@ -43,6 +43,7 @@ class CreationTagView: TagView {
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
         searchTextField.delegate = textFieldDelegate
         searchTextField.clearButtonMode = .always
+        searchTextField.autocapitalizationType = .none
         self.addSubview(searchTextField)
         searchTextField.placeholder = searchBarPlaceHolderText
         searchTextField.snp.makeConstraints { (make) in

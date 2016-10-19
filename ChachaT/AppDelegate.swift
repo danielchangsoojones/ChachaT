@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseSwipe.registerSubclass()
         ParseTag.registerSubclass()
         DropDownCategory.registerSubclass()
+        JointParseTagToUser.registerSubclass()
         
         // Override point for customization after application launch.
         //MARK: Development Database Pointer

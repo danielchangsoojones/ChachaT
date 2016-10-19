@@ -73,6 +73,10 @@ class SuperTagViewController: UIViewController {
             break
         }
     }
+    
+    func passSearchResults(searchTags: [Tag]) {
+        fatalError("Subclasses need to implement the `passSearchResults` method.")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -126,42 +130,6 @@ extension SuperTagViewController : ChachaDropDownMenuDelegate {
                     self.tagChoicesView.shouldRearrangeViews = true
             })
         }
-    }
-}
-
-//search functionality
-extension SuperTagViewController {
-    func filterArray(_ searchText: String, searchDataArray: [Tag]) -> [String] {
-        var filtered:[String] = []
-        let searchDataTitleArray: [String] = searchDataArray.map {
-            $0.title
-        }
-        filtered = searchDataTitleArray.filter({ (tagTitle) -> Bool in
-            let tmp: NSString = tagTitle as NSString
-            let range = tmp.range(of: searchText, options: NSString.CompareOptions.caseInsensitive)
-            return range.location != NSNotFound
-        })
-        return filtered
-    }
-}
-
-protocol TagDataStoreDelegate {
-    func setSearchDataArray(_ searchDataArray: [Tag])
-    func setChoicesViewTagsArray(_ tagChoicesDataArray: [Tag])
-}
-
-extension SuperTagViewController : TagDataStoreDelegate {
-    func setSearchDataArray(_ searchDataArray: [Tag]) {
-        self.searchDataArray = searchDataArray
-    }
-    
-    func setChoicesViewTagsArray(_ tagChoicesDataArray: [Tag]) {
-        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
-        //The archiving of the array is being weird with the sort
-        //let alphabeticallySortedArray = tagChoicesDataArray.sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == ComparisonResult.orderedAscending }
-//        self.tagChoicesDataArray = alphabeticallySortedArray
-        self.tagChoicesDataArray = tagChoicesDataArray
-        loadChoicesViewTags()
     }
 }
 

@@ -9,18 +9,17 @@
 import Foundation
 import Parse
 
-class AddingTagsDataStore {
+class AddingTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
-    var searchDataArray : [Tag] = [] //tags that will be available for searching
     
     var currentUserParseTags: [ParseTag] = []
     
     var delegate: AddingTagsDataStoreDelegate?
     
     init(delegate: AddingTagsDataStoreDelegate) {
+        super.init(superTagDelegate: delegate)
         self.delegate = delegate
         loadCurrentUserTags()
-        setSearchDataArray()
     }
     
     //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
@@ -28,17 +27,16 @@ class AddingTagsDataStore {
         for parseTag in currentUserParseTags where parseTag.title == title {
             User.current()!.tags.remove(parseTag)
             User.current()!.saveInBackground()
+            deleteJointParseTagToUser(tagTitle: title)
         }
     }
     
-    func setSearchDataArray() {
-        //TODO: figure out how to properly set the search array when they search
-    }
     
     func saveNewTag(title: String) {
         let query = ParseTag.query()!
         query.whereKey("title", equalTo: title)
         
+        //TODO: Technically, any tag that reaches this point would mean that no other tag exists yet, so we don't need to find the first tag in the background. Because the only way you can create a new tag is to have searched through the database already.
         query.getFirstObjectInBackground { (object, error) in
             if let parseTag = object as? ParseTag {
                 //add this already existing tag to the User's tags
@@ -52,14 +50,16 @@ class AddingTagsDataStore {
                     //tag doesn't exist yet, so make a new tag, and then add it to the current User's tags
                     let parseTag = ParseTag()
                     parseTag.title = title
-                    parseTag.attribute = "Generic"
+                    parseTag.attribute = TagAttributes.generic.rawValue
                     parseTag.isPrivate = false
                     
                     parseTag.saveInBackground(block: { (success, error) in
                         if success {
                             let relation = User.current()!.relation(forKey: "tags")
                             relation.add(parseTag)
-                            User.current()!.saveInBackground()
+                            
+                            let jointParseTagToUser = self.createJointParseTagToUser(parseTag: parseTag, user: User.current()!)
+                            PFObject.saveAll(inBackground: [User.current()!, jointParseTagToUser])
                         } else if let error = error {
                             print(error)
                         }
@@ -67,6 +67,28 @@ class AddingTagsDataStore {
                 } else {
                     print(error)
                 }
+            }
+        }
+    }
+    
+    //Purpose: when we want to query the tags later, we need a scalable way to retrieve tags. Using a join table is the best solution, when using Parse.
+    fileprivate func createJointParseTagToUser(parseTag: ParseTag, user: User) -> JointParseTagToUser {
+        let joint = JointParseTagToUser()
+        joint.tagTitle = parseTag.title
+        joint.parseTag = parseTag
+        joint.user = user
+        return joint
+    }
+    
+    fileprivate func deleteJointParseTagToUser(tagTitle: String) {
+        let query = JointParseTagToUser.query() as! PFQuery<JointParseTagToUser>
+        query.whereKey("tagTitle", equalTo: tagTitle)
+        query.whereKey("user", equalTo: User.current()!)
+        query.getFirstObjectInBackground { (joint, error) in
+            if let joint = joint {
+                joint.deleteInBackground()
+            } else if let error = error {
+                print(error)
             }
         }
     }

@@ -59,6 +59,21 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         dropDownMenu.shouldAddPrivacyOption = true
     }
     
+    override func passSearchResults(searchTags: [Tag]) {
+        if searchTags.isEmpty {
+            //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
+            if let addingTagView = findCreationTagView() {
+                creationMenuView.toggleMenuType(.newTag, newTagTitle: addingTagView.searchTextField.text, tagTitles: nil)
+            }
+        } else {
+            //search results exist
+            let tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
+                return tag.title
+            })
+            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -109,20 +124,13 @@ extension AddingTagsToProfileViewController {
 
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(_ searchText: String) {
-        let filtered : [String] = filterArray(searchText, searchDataArray: searchDataArray)
         if creationMenuView == nil {
             //when we use the mac simulator, sometimes, the keyboard is not toggled. And, the creationMenuView uses the height of the keyboard to calculate its height. Hence, if the keyboard doesn't show, then the creationMenuView would be nil. By just having a nil check here, we stop the mac simulator from crashing, even though a real device would not need this code/wouldn't crash.
             createTagMenuView(0)
         }
         creationMenuView.removeAllTags()
         //we already check if the text is empty over in the CreationTagView class
-        if filtered.isEmpty {
-            //there is text, but it has no matches in the database
-            creationMenuView.toggleMenuType(.newTag, newTagTitle: searchText, tagTitles: nil)
-        } else {
-            //there is text, and we have a match, so the tagChoicesView changes accordingly
-            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: filtered)
-        }
+        dataStore.searchForTags(searchText: searchText)
     }
     
     //TODO: could probably be a better way to get CreationTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
