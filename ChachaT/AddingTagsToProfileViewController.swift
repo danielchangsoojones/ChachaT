@@ -129,6 +129,7 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
             createTagMenuView(0)
         }
         creationMenuView.removeAllTags()
+        creationMenuView.isHidden = false
         //we already check if the text is empty over in the CreationTagView class
         dataStore.searchForTags(searchText: searchText)
     }
@@ -169,7 +170,7 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         if let addingTagView = findCreationTagView() {
             addingTagView.searchTextField.text = ""
             dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
-            creationMenuView.isHidden = true
+            creationMenuView?.isHidden = true
         }
     }
     
@@ -194,7 +195,8 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
             make.leading.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view).inset(keyboardHeight)
             if let addingTagView = findCreationTagView() {
-                make.top.equalTo(addingTagView.snp.bottom)
+                //We can't just snp the top to addingTagView.snp.bottom, becuase when we rearrange the tagViews, the constraints get messed up. So, we snp it to the bottom of the addingTagView but make sure that the offset is a constant. 
+                make.top.equalTo(tagChoicesView.snp.top).offset(addingTagView.frame.height)
             }
         }
     }

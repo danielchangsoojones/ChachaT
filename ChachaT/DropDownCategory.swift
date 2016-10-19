@@ -28,7 +28,7 @@ class DropDownCategory: PFObject, PFSubclassing {
             var titleArray: [String] = []
             if let innerTags = innerTags {
                 titleArray = innerTags.map({ (parseTag: ParseTag) -> String in
-                    return parseTag.title
+                    return parseTag.tagTitle
                 })
             }
             return titleArray
@@ -40,7 +40,7 @@ class DropDownCategory: PFObject, PFSubclassing {
         self.name = name
         self.innerTags = innerTagTitles.map({ (title: String) -> ParseTag in
             let parseTag = ParseTag()
-            parseTag.title = title
+            parseTag.tagTitle = title
             parseTag.attribute = TagAttributes.dropDownMenu.rawValue
             parseTag.isPrivate = false
             parseTag.dropDownCategory = self

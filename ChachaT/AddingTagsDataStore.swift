@@ -24,7 +24,7 @@ class AddingTagsDataStore: SuperTagDataStore {
     
     //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
     func deleteTag(_ title: String) {
-        for parseTag in currentUserParseTags where parseTag.title == title {
+        for parseTag in currentUserParseTags where parseTag.tagTitle == title {
             User.current()!.tags.remove(parseTag)
             User.current()!.saveInBackground()
             deleteJointParseTagToUser(tagTitle: title)
@@ -49,7 +49,7 @@ class AddingTagsDataStore: SuperTagDataStore {
                 if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
                     //tag doesn't exist yet, so make a new tag, and then add it to the current User's tags
                     let parseTag = ParseTag()
-                    parseTag.title = title
+                    parseTag.tagTitle = title
                     parseTag.attribute = TagAttributes.generic.rawValue
                     parseTag.isPrivate = false
                     
@@ -74,7 +74,7 @@ class AddingTagsDataStore: SuperTagDataStore {
     //Purpose: when we want to query the tags later, we need a scalable way to retrieve tags. Using a join table is the best solution, when using Parse.
     fileprivate func createJointParseTagToUser(parseTag: ParseTag, user: User) -> JointParseTagToUser {
         let joint = JointParseTagToUser()
-        joint.tagTitle = parseTag.title
+        joint.lowercaseTagTitle = parseTag.tagTitle
         joint.parseTag = parseTag
         joint.user = user
         return joint
@@ -151,11 +151,11 @@ extension AddingTagsDataStore {
                         //a tag that is a member of the dropDownCategory
                         let innerTagTitles = dropDownCategory.innerTagTitles
                         let newDropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
-                        newDropDownTag.displayName = parseTag.title
+                        newDropDownTag.displayName = parseTag.tagTitle
                         self.tagChoicesDataArray.append(newDropDownTag)
                     } else {
                         //just a generic tag
-                        let newTag = Tag(title: parseTag.title, attribute: .generic)
+                        let newTag = Tag(title: parseTag.tagTitle, attribute: .generic)
                         self.tagChoicesDataArray.append(newTag)
                     }
                     self.currentUserParseTags.append(parseTag)

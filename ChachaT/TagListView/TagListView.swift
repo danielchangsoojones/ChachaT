@@ -421,7 +421,6 @@ extension TagListView {
     }
     
     func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
-        //refactor this because I want to keep all attributes, but this is being used 3 times in code.
         let tagView = tagView ?? TagView(title: title)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
         

@@ -25,7 +25,7 @@ class SuperTagDataStore {
             if let parseTags = parseTags {
                 //TODO: what if the user is typing super fast. We don't want to be constantly trying to catch their last letter, just the newest letter after we have completed a query.
                 let newSearchResults: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
-                    let tag = Tag(title: parseTag.title, attribute: TagAttributes.generic)
+                    let tag = Tag(title: parseTag.tagTitle, attribute: TagAttributes.generic)
                     return tag
                 })
                 searchDataArray.append(contentsOf: newSearchResults)

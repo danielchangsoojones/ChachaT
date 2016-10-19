@@ -22,8 +22,17 @@ class ParseTag: PFObject, PFSubclassing {
     }
     
     //TODO: make enums to hold these
-    @NSManaged var title: String
+    @NSManaged private var title: String
     @NSManaged var attribute: String //i.e. DropDownTag, Generic, etc. We get thses from our Tag Attribute enum raw value.
     @NSManaged var dropDownCategory: DropDownCategory? //stores the data for what happens if the tag needs to have an action for the dropDownMenu (slider, tag menu, etc.)
     @NSManaged var isPrivate: Bool
+    //We want to save all tagTitles as lowercase values, so it will be quick and easy to query over them. But, when using an NSManaged variable, we can't use a setter/getter. So, we made tagTitle a public property that sets the private title variable.
+    var tagTitle: String {
+        get {
+            return title
+        }
+        set (newStr) {
+            title = newStr.lowercased()
+        }
+    }
 }

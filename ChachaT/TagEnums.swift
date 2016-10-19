@@ -19,7 +19,7 @@ class holder {
                 for dropDownCategory in categories {
                     for tagTitle in dropDownCategory.innerTagTitles {
                         let parseTag = ParseTag()
-                        parseTag.title = tagTitle
+                        parseTag.tagTitle = tagTitle
                         parseTag.attribute = TagAttributes.dropDownMenu.rawValue
                         parseTag.isPrivate = false
                         parseTag.dropDownCategory = dropDownCategory

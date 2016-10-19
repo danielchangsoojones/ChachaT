@@ -100,7 +100,7 @@ extension SearchTagsDataStore {
                 query.findObjectsInBackground(block: { (joints, error) in
                     if let joints = joints {
                         let successiveTags: [Tag] = joints.map({ (joint: JointParseTagToUser) -> Tag in
-                            let tag = Tag(title: joint.parseTag.title, attribute: .generic)
+                            let tag = Tag(title: joint.parseTag.tagTitle, attribute: .generic)
                             return tag
                         })
                         self.delegate?.setChoicesViewTagsArray(successiveTags)

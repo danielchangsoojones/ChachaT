@@ -15,7 +15,15 @@ class JointParseTagToUser: PFObject, PFSubclassing {
     }
     
     //TODO: make enums to hold these
-    @NSManaged var tagTitle: String // we will use this as an index to query on.
+    @NSManaged private var tagTitle: String // we will use this as an index to query on.
     @NSManaged var parseTag: ParseTag
     @NSManaged var user: User
+    var lowercaseTagTitle: String {
+        get {
+            return tagTitle
+        }
+        set (newStr) {
+            tagTitle = newStr.lowercased()
+        }
+    }
 }
