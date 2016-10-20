@@ -16,6 +16,7 @@ class User: PFUser {
     @NSManaged var lowercaseFullName: String?
     @NSManaged var lowercaseUsername: String?
     @NSManaged var birthDate: Date?
+    @NSManaged var height: Int
     @NSManaged var profileImage: PFFile?
     @NSManaged var profileImage2: PFFile?
     @NSManaged var profileImage3: PFFile?

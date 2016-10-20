@@ -83,6 +83,7 @@
 		928819461D286CA8000A8E04 /* Profile.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 928819451D286CA8000A8E04 /* Profile.storyboard */; };
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
+		928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
@@ -205,6 +206,7 @@
 		928819451D286CA8000A8E04 /* Profile.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Profile.storyboard; sourceTree = "<group>"; };
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
+		928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightPickerViewController.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
@@ -622,6 +624,7 @@
 			children = (
 				9275FB821D7A030600D8131D /* Subviews */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
+				928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -1052,6 +1055,7 @@
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,
+				928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

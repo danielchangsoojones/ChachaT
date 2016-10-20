@@ -22,6 +22,8 @@ struct EditProfileConstants {
     static let schoolOrJobPlaceholder = "Enter Your School or Job"
     static let ageTitle = "Age"
     static let agePlaceholder = "Tap to enter your birthday..."
+    static let heightTitle = "Height"
+    static let heightPlaceholder = "Tap to enter your height..."
     static let tagSegueTitle = "Tags"
     static let tagSeguePlaceholder = "See your tags..."
 }
@@ -64,6 +66,7 @@ class EditProfileViewController: UIViewController {
         fullNameViewSetup()
         schoolOrJobViewSetup()
         ageViewSetup()
+        heightViewSetup()
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
@@ -98,11 +101,17 @@ class EditProfileViewController: UIViewController {
     }
     
     func ageViewSetup() {
-        //TODO: make
         let ageView = AboutView(title: EditProfileConstants.ageTitle, placeHolder: EditProfileConstants.agePlaceholder, innerText: nil, action: { (sender) in
             self.ageCellTapped(sender)
             }, type: .tappableCell)
         theStackView.addArrangedSubview(ageView)
+    }
+    
+    func heightViewSetup() {
+        let heightView = AboutView(title: EditProfileConstants.heightTitle, placeHolder: EditProfileConstants.heightPlaceholder, innerText: nil, action: { (sender) in
+            self.performSegue(withIdentifier: SegueIdentifier.EditProfileToHeightPickerSegue.rawValue, sender: nil)
+            }, type: .tappableCell)
+        theStackView.addArrangedSubview(heightView)
     }
     
     func tagPageSegueViewSetup() {
@@ -110,6 +119,15 @@ class EditProfileViewController: UIViewController {
             self.performSegueWithIdentifier(.EditProfileToAddingTagsSegue, sender: nil)
             }, type: .segueCell)
         theStackView.addArrangedSubview(tagSegueView)
+    }
+    
+    func findAboutView(title: String) -> AboutView? {
+        for subview in theStackView.arrangedSubviews {
+            if let aboutView = subview as? AboutView, aboutView.getTitle() == title {
+                return aboutView
+            }
+        }
+        return nil
     }
 
     override func didReceiveMemoryWarning() {
@@ -169,11 +187,32 @@ extension EditProfileViewController {
     }
 }
 
+extension EditProfileViewController: HeightPickerDelegate {
+    func passHeight(height: String, totalInches: Int) {
+        if let heightView = findAboutView(EditProfileConstants.heightTitle) {
+            heightView.setInnerTitle(height)
+            dataStore.saveHeight(height: totalInches)
+        }
+    }
+}
+
 extension EditProfileViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case EditProfileToAddingTagsSegue
+        case EditProfileToHeightPickerSegue
     }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifierForSegue(segue) {
+        case .EditProfileToHeightPickerSegue:
+            let destinationVC = segue.destination as! HeightPickerViewController
+            destinationVC.delegate = self
+        default:
+            break
+        }
+    }
+    
 }
 
 extension EditProfileViewController : EditProfileDataStoreDelegate {

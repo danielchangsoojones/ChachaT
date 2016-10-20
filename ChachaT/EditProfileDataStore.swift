@@ -77,6 +77,10 @@ class EditProfileDataStore {
     func saveAge(_ birthday: Date) {
         currentUser.birthDate = birthday
     }
+    
+    func saveHeight(height: Int) {
+        currentUser.height = height
+    }
 }
 
 //loading values extension
