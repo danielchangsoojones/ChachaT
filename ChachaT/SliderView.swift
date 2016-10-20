@@ -28,15 +28,19 @@ class SliderView: UIView {
     var suffix : String = ""
     var maxValue : Int = 0
     var minValue : Int = SliderViewConstants.minValue
+    var isHeightSlider: Bool = false
     
     var delegate: SliderViewDelegate?
     
-    init(maxValue: Int, minValue : Int = SliderViewConstants.minValue, suffix: String, isRangeSlider: Bool, delegate: SliderViewDelegate) {
+    init(maxValue: Int, minValue : Int = SliderViewConstants.minValue, suffix: String, isRangeSlider: Bool, isHeightSlider: Bool = false, delegate: SliderViewDelegate) {
         super.init(frame: CGRect.zero)
         self.delegate = delegate
         self.suffix = suffix
         self.maxValue = maxValue
         self.minValue = minValue
+        if isHeightSlider {
+            setAsHeightSlider()
+        }
         createSliderLabel()
         addSliderToView(isRangeSlider)
     }
@@ -119,6 +123,9 @@ extension SliderView {
 extension SliderView : TTRangeSliderDelegate {
     func createRangeSlider(_ minValue: Int, maxValue: Int) -> TTRangeSlider {
         let rangeSlider = TTRangeSlider()
+        if isHeightSlider {
+             rangeSlider.numberFormatterOverride = HeightFormatter()
+        }
         rangeSlider.delegate = self
         rangeSlider.maxValue = maxValue.toFloat
         rangeSlider.minValue = minValue.toFloat
@@ -136,12 +143,19 @@ extension SliderView : TTRangeSliderDelegate {
     
     func setRangeSliderLabelText(_ minValue: Int, maxValue: Int) -> String {
         var text = ""
-        let minValueText = addSuffix(minValue.toString, suffix: suffix)
-        text += minValueText + " - "
-        if maxValue >= self.maxValue {
-            text += addSuffix("\(maxValue)+", suffix: suffix) //creates something like 100+ mi, when you are at the max value
+        if isHeightSlider {
+            //creating the height text requires some specialty logic, because we want to show something like 4'10" - 6'5"
+            if let minValueText = HeightFormatter().string(from: NSNumber(value: minValue)), let maxValueText = HeightFormatter().string(from: NSNumber(value: maxValue)) {
+                text = minValueText + " - " + maxValueText
+            }
         } else {
-            text += addSuffix(maxValue.toString, suffix: suffix)
+            let minValueText = addSuffix(minValue.toString, suffix: suffix)
+            text += minValueText + " - "
+            if maxValue >= self.maxValue {
+                text += addSuffix("\(maxValue)+", suffix: suffix) //creates something like 100+ mi, when you are at the max value
+            } else {
+                text += addSuffix(maxValue.toString, suffix: suffix)
+            }
         }
         theSliderLabel.text = text
         return text
@@ -150,5 +164,25 @@ extension SliderView : TTRangeSliderDelegate {
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
         let text = setRangeSliderLabelText(Int(selectedMinimum), maxValue: Int(selectedMaximum))
         delegate?.sliderValueChanged(text: text, minValue: Int(selectedMinimum), maxValue: Int(selectedMaximum), suffix: suffix)
+    }
+    
+    func setAsHeightSlider() {
+        isHeightSlider = true
+    }
+}
+
+fileprivate class HeightFormatter: NumberFormatter {
+    override public func string(from number: NSNumber) -> String? {
+        let num = CGFloat(number)
+        return convertToMeasurement(num: num)
+    }
+    
+    //Purpose: change number of inches to something like 6'5"
+    fileprivate func convertToMeasurement(num: CGFloat) -> String {
+        let feetSuffix = "'"
+        let inchSuffix = "\""
+        let feet = Int(num / 12)
+        let remainingInches = Int(num) % 12
+        return feet.toString + feetSuffix + remainingInches.toString + inchSuffix
     }
 }

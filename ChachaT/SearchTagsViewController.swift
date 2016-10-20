@@ -50,7 +50,13 @@ class SearchTagsViewController: SuperTagViewController {
         super.dropDownActions(dropDownTag)
         switch dropDownTag.dropDownAttribute {
         case .rangeSlider, .singleSlider:
-            dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, sliderDelegate: self)
+            //TODO: use the parse column name or something for the height value, so when we change the height value, we don't have to worry about this breaking
+            if dropDownTag.specialtyCategory == "Height" {
+                //The height slider needs to show something like: 4'10" - 6'5", so it needs some special logic to do that. 
+                dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, isHeightSlider: true, sliderDelegate: self)
+            } else {
+                dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, sliderDelegate: self)
+            }
         default:
             break
         }
@@ -58,9 +64,6 @@ class SearchTagsViewController: SuperTagViewController {
     
     override func passSearchResults(searchTags: [Tag]) {
         tagChoicesView.removeAllTags()
-        
-        
-        
         if searchTags.isEmpty {
             //TODO: there were no results from the search
             //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing

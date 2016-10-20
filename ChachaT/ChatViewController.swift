@@ -36,6 +36,7 @@ class ChatViewController: JSQMessagesViewController {
     var outgoingBubbleImageView : JSQMessagesBubbleImage!
     var incomingBubbleImageView : JSQMessagesBubbleImage!
     
+    
     var dataStore: ChatDataStore!
     
     override func viewDidLoad() {

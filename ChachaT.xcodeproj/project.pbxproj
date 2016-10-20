@@ -810,8 +810,8 @@
 		92C1B1DD1D51A7A200F4A815 /* Data Models */ = {
 			isa = PBXGroup;
 			children = (
-				92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */,
 				92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */,
+				92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
