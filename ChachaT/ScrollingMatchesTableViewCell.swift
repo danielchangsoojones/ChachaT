@@ -39,6 +39,7 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     
     func matchesScrollViewSetup() {
         self.addSubview(matchesScrollView)
+        matchesScrollView.setStackViewSpacing(spacing: 10)
         matchesScrollView.snp.makeConstraints { (make) in
             make.trailing.bottom.top.equalTo(self)
             make.leading.equalTo(self).offset(ChatCellConstants.profileImageLeadingOffset)
@@ -48,8 +49,8 @@ class ScrollingMatchesTableViewCell: UITableViewCell {
     func addProfileCircles(_ matches: [Connection]) {
         let circleProfileViewFrame = CGRect(x: 0, y: 0, w: self.frame.width * ScrollingMatchesConstants.circleRatioToCell, h: self.frame.height)
         for match in matches {
-            if let fullName = match.targetUser.fullName, let profileImage = match.targetUser.profileImage {
-                let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: fullName, imageFile: profileImage)
+            if let firstName = match.targetUser.firstName, let profileImage = match.targetUser.profileImage {
+                let circleProfileView = CircleProfileView(frame: circleProfileViewFrame, name: firstName, imageFile: profileImage)
                 circleProfileView.setLabelColor(color: ScrollingMatchesConstants.fontColor)
                 circleProfileView.addTapGesture(action: { (tapped) in
                     self.delegate?.segueToChatVC(match.targetUser)

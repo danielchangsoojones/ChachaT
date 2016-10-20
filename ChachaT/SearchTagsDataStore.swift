@@ -24,6 +24,7 @@ class SearchTagsDataStore: SuperTagDataStore {
     //Purpose: I want when you first come onto search page, that you see a group of tags already there that you can instantly press
     //I want mostly special tags like "Age Range", "Location", ect. to be there.
     //TODO: I probably shouldn't be using a global variable for the tag array. 
+    //TODO: cache this on the first time, so we can keep going back to it.
     func setSpecialtyTagsIntoDefaultView() {
         let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
         query.includeKey("innerTags")
@@ -98,18 +99,27 @@ extension SearchTagsDataStore {
                 query.whereKey("tagTitle", notContainedIn: tuple.chosenTitleArray) //don't include any tags that have already been chosen
                 query.includeKey("parseTag")
                 query.findObjectsInBackground(block: { (joints, error) in
+                    self.resetDefaultTags()
                     if let joints = joints {
                         let successiveTags: [Tag] = joints.map({ (joint: JointParseTagToUser) -> Tag in
-                            let tag = Tag(title: joint.parseTag.tagTitle, attribute: .generic)
+                            let tag = Tag(title: joint.lowercaseTagTitle, attribute: .generic)
                             return tag
                         })
-                        self.delegate?.setChoicesViewTagsArray(successiveTags)
+                        self.tagChoicesDataArray.append(contentsOf: successiveTags)
                     } else if let error = error {
                         print(error)
                     }
+                    self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
                 })
             }
         }
+    }
+    
+    fileprivate func resetDefaultTags() {
+        tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
+            //we only want to have the dropDownTags in the defualt tag
+            return tag is DropDownTag
+        })
     }
     
     fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {

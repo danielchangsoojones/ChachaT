@@ -123,13 +123,14 @@ class ChatTableViewCell: UITableViewCell {
         }
     }
     
+    //TODO: make it so the messaging has a number to show the number of unread messages
     func unreadNotificationBubbleSetup() {
-        let diameter : CGFloat = 10
+        let diameter : CGFloat = 15
         theUnreadNotificationBubble = CircleView(diameter: diameter, color: CustomColors.JellyTeal)
         self.addSubview(theUnreadNotificationBubble)
         theUnreadNotificationBubble.snp.makeConstraints { (make) in
-            make.top.equalTo(theTimeStamp.snp.bottom)
-            make.trailing.equalTo(self)
+            make.top.equalTo(theTimeStamp.snp.bottom).offset(10)
+            make.trailing.equalTo(self).inset(10)
         }
         theUnreadNotificationBubble.isHidden = newestMessage.hasBeenRead //if the user has already read this message, then don't show the unread bubble
     }

@@ -59,6 +59,10 @@ class AutoGrowingHorizontalScrollView: UIView {
         theStackView.addArrangedSubview(view)
     }
     
+    func setStackViewSpacing(spacing: CGFloat) {
+        theStackView.spacing = spacing
+    }
+    
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }

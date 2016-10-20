@@ -41,6 +41,15 @@ class User: PFUser {
         }
         return nil
     }
+    var firstName: String? {
+        //TODO: Technically, there is no gaurantee that the first space in a user's full name would be their first name, but good enough for now. 
+        if let fullName = fullName {
+            let delimiter = " "
+            var token = fullName.components(separatedBy: delimiter)
+            return token[0]
+        }
+        return nil
+    }
     
 }
 

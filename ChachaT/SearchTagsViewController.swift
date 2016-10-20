@@ -58,6 +58,9 @@ class SearchTagsViewController: SuperTagViewController {
     
     override func passSearchResults(searchTags: [Tag]) {
         tagChoicesView.removeAllTags()
+        
+        
+        
         if searchTags.isEmpty {
             //TODO: there were no results from the search
             //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
