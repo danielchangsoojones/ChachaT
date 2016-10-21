@@ -144,8 +144,13 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     fileprivate func addChosenTagsToArray() {
         for tagView in tagChosenView.tagViews {
             if let tagTitle = tagView.currentTitle {
-                let tag = Tag(title: tagTitle, attribute: .generic)
-                chosenTags.append(tag)
+                let arrayAlreadyContains: Bool = chosenTags.testAll({ (tag: Tag) -> Bool in
+                    return tag.title == tagTitle
+                })
+                if !arrayAlreadyContains {
+                    let tag = Tag(title: tagTitle, attribute: .generic)
+                    chosenTags.append(tag)
+                }
             }
         }
     }

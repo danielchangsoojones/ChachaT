@@ -80,6 +80,9 @@ class SearchTagsDataStore: SuperTagDataStore {
             let maxAge : Date = dropDownTag.maxValue.years.ago
             query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
             query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+        case "Height":
+            query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
         default:
             break
         }
