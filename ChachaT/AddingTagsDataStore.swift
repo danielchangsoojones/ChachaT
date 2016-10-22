@@ -101,7 +101,8 @@ class AddingTagsDataStore: SuperTagDataStore {
         query.getFirstObjectInBackground { (object, error) in
             if let parseTag = object as? ParseTag {
                 //add the new tag chosen tag to the User's tags
-                User.current()!.tags.add(parseTag)
+                let relation = User.current()!.relation(forKey: "likes")
+                relation.add(parseTag)
                 User.current()!.saveInBackground()
             } else if let error = error {
                 print(error)
