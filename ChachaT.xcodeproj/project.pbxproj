@@ -66,6 +66,7 @@
 		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
 		92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */; };
 		92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */; };
+		9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */; };
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */; };
 		9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB831D7A037D00D8131D /* PhotoEditingView.xib */; };
@@ -84,6 +85,8 @@
 		928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */; };
 		9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */; };
 		928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */; };
+		928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D771DBA588700D6B6D3 /* Enviroment.swift */; };
+		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
@@ -115,7 +118,6 @@
 		92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */; };
 		92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */; };
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
-		92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CEC1111D37F8DE005BD321 /* TagEnums.swift */; };
 		92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */; };
 		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
 		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
@@ -124,6 +126,7 @@
 /* Begin PBXFileReference section */
 		2E31E5895EC075FA44071C62 /* Pods-Shuffles.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug.xcconfig"; sourceTree = "<group>"; };
 		471CA7B841A92D5EF573B32C /* Pods_Shuffles.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Shuffles.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		49472BCE7514485EBE58CA66 /* Pods-Shuffles.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(production).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(production).xcconfig"; sourceTree = "<group>"; };
 		7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 		7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
 		920BF81B1D3FF5E300104842 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
@@ -188,6 +191,7 @@
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
 		92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailDataStore.swift; sourceTree = "<group>"; };
 		92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
+		9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateDropDownCategories.swift; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		9275FB831D7A037D00D8131D /* PhotoEditingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditingView.xib; sourceTree = "<group>"; };
@@ -207,6 +211,8 @@
 		928819471D2874D8000A8E04 /* AddingTagsToProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsToProfileViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileIndexViewController.swift; sourceTree = "<group>"; };
 		928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightPickerViewController.swift; sourceTree = "<group>"; };
+		928B8D771DBA588700D6B6D3 /* Enviroment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
+		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
@@ -238,12 +244,12 @@
 		92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTag.swift; sourceTree = "<group>"; };
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
-		92CEC1111D37F8DE005BD321 /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = TagEnums.swift; path = ../TagEnums.swift; sourceTree = "<group>"; };
 		92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JointParseTagToUser.swift; sourceTree = "<group>"; };
 		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
 		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
 		95775F81069424F8C55B7B25 /* Pods-Shuffles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.release.xcconfig"; sourceTree = "<group>"; };
 		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		E010027B7167FAA9E4AC828B /* Pods-Shuffles.debug(staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(staging).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(staging).xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -275,6 +281,8 @@
 				7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */,
 				2E31E5895EC075FA44071C62 /* Pods-Shuffles.debug.xcconfig */,
 				95775F81069424F8C55B7B25 /* Pods-Shuffles.release.xcconfig */,
+				E010027B7167FAA9E4AC828B /* Pods-Shuffles.debug(staging).xcconfig */,
+				49472BCE7514485EBE58CA66 /* Pods-Shuffles.debug(production).xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -314,7 +322,6 @@
 				922C899D1D4D934700DE1373 /* TagViews */,
 				922C899C1D4D933300DE1373 /* TagListViews */,
 				920BF81C1D3FF5E300104842 /* Info.plist */,
-				92CEC1111D37F8DE005BD321 /* TagEnums.swift */,
 			);
 			path = TagListView;
 			sourceTree = "<group>";
@@ -563,6 +570,8 @@
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 				929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */,
 				9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */,
+				928B8D761DBA585000D6B6D3 /* Configurations */,
+				9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */,
 			);
 			name = "Globals/Helper Files";
 			sourceTree = "<group>";
@@ -710,6 +719,15 @@
 				92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */,
 			);
 			name = Navigation;
+			sourceTree = "<group>";
+		};
+		928B8D761DBA585000D6B6D3 /* Configurations */ = {
+			isa = PBXGroup;
+			children = (
+				928B8D771DBA588700D6B6D3 /* Enviroment.swift */,
+				928B8D791DBA58B700D6B6D3 /* Configuration.swift */,
+			);
+			name = Configurations;
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
@@ -989,8 +1007,8 @@
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
-				92CEC1121D37F8DE005BD321 /* TagEnums.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
+				9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
@@ -1034,6 +1052,7 @@
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
+				928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */,
 				923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
@@ -1047,6 +1066,7 @@
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
+				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
@@ -1089,7 +1109,7 @@
 /* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
-		926108231CDBCA32009F3E86 /* Debug */ = {
+		926108231CDBCA32009F3E86 /* Debug(Staging) */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
@@ -1135,7 +1155,7 @@
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
-			name = Debug;
+			name = "Debug(Staging)";
 		};
 		926108241CDBCA32009F3E86 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1179,9 +1199,9 @@
 			};
 			name = Release;
 		};
-		926108261CDBCA32009F3E86 /* Debug */ = {
+		926108261CDBCA32009F3E86 /* Debug(Staging) */ = {
 			isa = XCBuildConfiguration;
-			baseConfigurationReference = 2E31E5895EC075FA44071C62 /* Pods-Shuffles.debug.xcconfig */;
+			baseConfigurationReference = E010027B7167FAA9E4AC828B /* Pods-Shuffles.debug(staging).xcconfig */;
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
@@ -1200,7 +1220,7 @@
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 			};
-			name = Debug;
+			name = "Debug(Staging)";
 		};
 		926108271CDBCA32009F3E86 /* Release */ = {
 			isa = XCBuildConfiguration;
@@ -1224,13 +1244,85 @@
 			};
 			name = Release;
 		};
+		928B8D741DBA559500D6B6D3 /* Debug(Production) */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = "Debug(Production)";
+		};
+		928B8D751DBA559500D6B6D3 /* Debug(Production) */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 49472BCE7514485EBE58CA66 /* Pods-Shuffles.debug(production).xcconfig */;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				DEVELOPMENT_TEAM = KNK3WJA66N;
+				INFOPLIST_FILE = ChachaT/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
+				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
+				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				SWIFT_VERSION = 3.0;
+			};
+			name = "Debug(Production)";
+		};
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
 		9261080E1CDBCA32009F3E86 /* Build configuration list for PBXProject "ChachaT" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				926108231CDBCA32009F3E86 /* Debug */,
+				926108231CDBCA32009F3E86 /* Debug(Staging) */,
+				928B8D741DBA559500D6B6D3 /* Debug(Production) */,
 				926108241CDBCA32009F3E86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
@@ -1239,7 +1331,8 @@
 		926108251CDBCA32009F3E86 /* Build configuration list for PBXNativeTarget "Shuffles" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
-				926108261CDBCA32009F3E86 /* Debug */,
+				926108261CDBCA32009F3E86 /* Debug(Staging) */,
+				928B8D751DBA559500D6B6D3 /* Debug(Production) */,
 				926108271CDBCA32009F3E86 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;

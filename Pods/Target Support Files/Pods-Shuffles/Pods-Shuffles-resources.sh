@@ -79,7 +79,10 @@ EOM
       ;;
   esac
 }
-if [[ "$CONFIGURATION" == "Debug" ]]; then
+if [[ "$CONFIGURATION" == "Debug(Staging)" ]]; then
+  install_resource "Instabug/Instabug.bundle"
+fi
+if [[ "$CONFIGURATION" == "Debug(Production)" ]]; then
   install_resource "Instabug/Instabug.bundle"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then

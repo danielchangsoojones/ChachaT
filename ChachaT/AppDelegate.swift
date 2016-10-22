@@ -24,12 +24,20 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         DropDownCategory.registerSubclass()
         JointParseTagToUser.registerSubclass()
         
-        // Override point for customization after application launch.
-        //MARK: Development Database Pointer
+        var appConfiguration = Configuration()
         let configuration = ParseClientConfiguration {
-            $0.applicationId = "djflkajsdlfjienrj3457698"
-            $0.server = "https://chachatinder.herokuapp.com/parse"
+            $0.applicationId = appConfiguration.environment.applicationId
+            $0.server = appConfiguration.environment.server
         }
+        
+        print(appConfiguration.environment.applicationId)
+        print(appConfiguration.environment.server)
+        
+        //MARK: Development Database Pointer
+//        let configuration = ParseClientConfiguration {
+//            $0.applicationId = "djflkajsdlfjienrj3457698"
+//            $0.server = "https://chachatinder.herokuapp.com/parse"
+//        }
         
         //MARK: Production Database Pointer
 //        let configuration = ParseClientConfiguration {
