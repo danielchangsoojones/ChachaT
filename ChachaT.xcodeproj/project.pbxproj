@@ -1208,14 +1208,14 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				DEVELOPMENT_TEAM = KNK3WJA66N;
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
-				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
+				PROVISIONING_PROFILE = "980575bb-6b68-4c63-9bdf-19b17c71f53c";
+				PROVISIONING_PROFILE_SPECIFIER = ShuffleDevelopmentProvisioningProfile;
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
