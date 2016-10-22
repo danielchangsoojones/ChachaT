@@ -34,34 +34,4 @@ class DropDownCategory: PFObject, PFSubclassing {
             return titleArray
         }
     }
-    
-    //Purpose: for creating a new DropDownCategory in the database. This should probably go with unit tests or something because we don't need it in the actual code, just makes things easier.
-    func createNewTagMenuCategory(name: String, innerTagTitles: [String]) {
-        self.name = name
-        self.innerTags = innerTagTitles.map({ (title: String) -> ParseTag in
-            let parseTag = ParseTag()
-            parseTag.tagTitle = title
-            parseTag.attribute = TagAttributes.dropDownMenu.rawValue
-            parseTag.isPrivate = false
-            parseTag.dropDownCategory = self
-            return parseTag
-        })
-        self.type = DropDownAttributes.tagChoices.rawValue
-        self.parseColumnName = ""
-        self.max = -100
-        self.min = -100
-        self.suffix = ""
-        self.saveInBackground()
-    }
-    
-    func createNewSliderCategory(name:String, parseColumnName: String, min: Int, max: Int, suffix: String, isSingleSlider: Bool) {
-        self.name = name
-        self.innerTags = nil
-        self.type = isSingleSlider ? DropDownAttributes.singleSlider.rawValue : DropDownAttributes.rangeSlider.rawValue
-        self.parseColumnName = parseColumnName
-        self.max = max
-        self.min = min
-        self.suffix = suffix
-        self.saveInBackground()
-    }
 }
