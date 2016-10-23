@@ -98,17 +98,10 @@ class ChatViewController: JSQMessagesViewController {
             _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
         }
         
-        let videoAction = UIAlertAction(title: "Choose existing Video", style: .default) { (alertAction: UIAlertAction) in
-            _ = Camera.shouldStartVideoLibrary(target: self, canEdit: true)
-        }
-        
-        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { (alertAction: UIAlertAction) in
-            
-        }
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
         
         alert.addAction(cameraAction)
         alert.addAction(photoAction)
-        alert.addAction(videoAction)
         alert.addAction(cancelAction)
         
         present(alert, animated: true, completion: nil)
@@ -264,24 +257,9 @@ class ChatViewController: JSQMessagesViewController {
 
 // MARK: - UIImagePickerControllerDelegate
 extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
-    func sendMessage(text: String, video: NSURL?, picture: UIImage?) {
-        var videoFile: PFFile!
+    func sendMessage(text: String, picture: UIImage?) {
         var pictureFile: PFFile!
-        var videoThumbnailFile: PFFile!
-        
-        if let video = video {
-            videoFile = PFFile(name: "video.mp4", data: FileManager.default.contents(atPath: video.path!)!)
-            let asset:AVAsset = AVAsset(url:video as URL)
-            let imageGenerator:AVAssetImageGenerator = AVAssetImageGenerator(asset: asset)
-            imageGenerator.appliesPreferredTrackTransform = true
-            let time:CMTime = CMTimeMake(1, 1)
-            let imageRef:CGImage = try! imageGenerator.copyCGImage(at: time, actualTime: nil)
-            let videoThumbnail:UIImage? = UIImage(cgImage: imageRef)
-            if let image = videoThumbnail {
-                videoThumbnailFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(image, 0.6)!)
-            }
-        }
-        
+
         if let picture = picture {
             pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(picture, 0.6)!)
             pictureFile.saveInBackground(block: { (suceeded, error) -> Void in
@@ -291,29 +269,20 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
             })
         }
         //This is where we actually send the message in parse to make it save
-        dataStore.sendMessage(text: text, videoFile: videoFile, pictureFile: pictureFile, videoThumbnailFile: videoThumbnailFile)
+        dataStore.sendMessage(text: text, pictureFile: pictureFile)
     }
     
     func didSelectPhotoMessage(image:UIImage) {
-        self.sendMessage(text: "", video: nil, picture: image)
+        self.sendMessage(text: "", picture: image)
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
-        let mediaType = info[UIImagePickerControllerMediaType] as! String
-        if mediaType == kUTTypeMovie as String {
-            let videoURL = info[UIImagePickerControllerMediaURL] as! NSURL
-            self.sendMessage(text: "", video: videoURL, picture: nil)
-            picker.dismiss(animated: true, completion: {
-            })
+        var picture = info[UIImagePickerControllerOriginalImage] as? UIImage
+        if picture == nil {
+            picture = info[UIImagePickerControllerEditedImage] as? UIImage
+        } else {
+            self.didSelectPhotoMessage(image: picture!)
         }
-        else {
-            var picture = info[UIImagePickerControllerOriginalImage] as? UIImage
-            if picture == nil {
-                picture = info[UIImagePickerControllerEditedImage] as? UIImage
-            } else {
-                self.didSelectPhotoMessage(image: picture!)
-            }
-            picker.dismiss(animated: true, completion: nil)
-        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }

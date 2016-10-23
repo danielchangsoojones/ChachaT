@@ -103,9 +103,7 @@ class ChatDataStore {
     }
     
     func sendMessage(text: String,
-                           videoFile: PFFile!,
-                           pictureFile: PFFile!,
-                           videoThumbnailFile: PFFile!) {
+                           pictureFile: PFFile!) {
         
         var text = text
         
@@ -115,11 +113,6 @@ class ChatDataStore {
         //TODO: I only need to set this groupId once for the data store when the data store is initialized
         chat.chatRoom = "placeholderName"
         
-        if let videoFile = videoFile {
-            text = "[Video message]"
-            chat.video = videoFile
-            chat.videoThumbnail = videoThumbnailFile
-        }
         if let pictureFile = pictureFile {
             text = "[Picture message]"
             chat.picture = pictureFile
@@ -134,7 +127,6 @@ class ChatDataStore {
                 print(error)
             }
         }
-        
     }
     
     func addMessage(chat: Chat) {

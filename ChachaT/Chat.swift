@@ -21,7 +21,4 @@ class Chat: PFObject, PFSubclassing {
     @NSManaged var chatText : String
     
     @NSManaged var picture: PFFile!
-    
-    @NSManaged var video: PFFile!
-    @NSManaged var videoThumbnail: PFFile!
 }
