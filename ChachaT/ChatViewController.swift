@@ -82,7 +82,7 @@ class ChatViewController: JSQMessagesViewController {
     // Mark - JSQMessagesViewController method overrides
     
     override func didPressSend(_ button: UIButton!, withMessageText text: String!, senderId: String!, senderDisplayName: String!, date: Date!) {
-        dataStore.sendMessage(text, otherUser: otherUser)
+        dataStore.sendMessage(text)
     }
     
     override func didPressAccessoryButton(_ sender: UIButton!) {
@@ -269,7 +269,7 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
             })
         }
         //This is where we actually send the message in parse to make it save
-        dataStore.sendMessage(text: text, pictureFile: pictureFile)
+        dataStore.sendPhotoMessage(text: text, pictureFile: pictureFile)
     }
     
     func didSelectPhotoMessage(image:UIImage) {

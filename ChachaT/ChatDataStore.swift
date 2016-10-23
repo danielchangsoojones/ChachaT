@@ -25,6 +25,9 @@ class ChatDataStore {
             chatRoomName = getChatRoomName(user)
         }
         self.delegate = delegate
+        // just ensure we cache the user object for later
+        self.delegate?.cacheUserObject(otherUser, objectID: otherUser.objectId!)
+        self.delegate?.cacheUserObject(User.current()!, objectID: User.current()!.objectId!)
     }
     
     func getsenderID() -> String {
@@ -47,16 +50,15 @@ class ChatDataStore {
     
     func loadMessages(_ messages: [JSQMessage]) {
         if !isLoading {
-            var messagesCopy : [JSQMessage] = messages
             isLoading = true
-            let message_last = messagesCopy.last
+            let message_last = messages.last
             
             // query to fetch messages
             let query = Chat.query()!
             query.whereKey(Constants.chatRoom, equalTo: chatRoomName)
             // time based pagination
-            if message_last != nil {
-                query.whereKey(Constants.createdAt, greaterThan: message_last!.date)
+            if let message_last = message_last, let messageDate = message_last.date {
+                query.whereKey(Constants.createdAt, greaterThan: messageDate)
             }
             // we need this so we can get the sender's objectId for simplicity
             query.includeKey(Constants.sender)
@@ -65,68 +67,41 @@ class ChatDataStore {
             query.findObjectsInBackground(block: { (objects, error) in
                 if error == nil {
                     for object in objects! {
-                        // Go through each Chat message and create a
-                        // JSQMessage for display on this screen
                         let chat = object as! Chat
-                        let user = chat.sender
-                        
-                        var message: JSQMessage!
-                        if let chatPicture = chat.picture {
-                            let mediaItem = JSQPhotoMediaItem(image: nil)
-                            //TODO: as a parameter, I need to take in the senderID so I can compare these
-                            mediaItem?.appliesMediaViewMaskAsOutgoing = user.objectId! == User.current()!.objectId!
-                            message = JSQMessage(senderId: user.objectId!, senderDisplayName: user.fullName ?? "", date: chat.createdAt, media: mediaItem)
-                            
-                            chatPicture.getDataInBackground(block: { (imageData, error) -> Void in
-                                if error == nil {
-                                    mediaItem?.image = UIImage(data: imageData!)
-                                    self.delegate?.reloadCollectionView()
-                                }
-                            })
-                        }else{
-                            message = JSQMessage(senderId: user.objectId!, senderDisplayName: user.fullName ?? "", date: chat.createdAt, text: chat.chatText)
-                        }
-                        
-                        messagesCopy.append(message!)
-                        
-                        // just ensure we cache the user object for later
-                        self.delegate?.cacheUserObject(chat.sender, objectID: chat.sender.objectId!)
+                        self.addMessage(chat: chat)
                     }
-                    self.delegate?.passMessages(messagesCopy)
                     if !objects!.isEmpty {
                         self.delegate?.finishReceivingMessage()
                     }
+                } else if let error = error {
+                    print(error)
                 }
                 self.isLoading = false
             })
         }
     }
     
-    func sendMessage(_ text: String, otherUser: User) {
+    func sendMessage(_ text: String) {
         // When they hit send. Save their message.
         let chat = createChat(chatText: text)
-        
-        chat.saveInBackground { (succeeded, error) in
-            if error == nil {
-                JSQSystemSoundPlayer.jsq_playMessageSentSound()
-                self.delegate?.loadMessages()
-            }
-        }
-        self.delegate?.finishSendingMessage()
+        saveChat(chat: chat)
     }
     
-    func sendMessage(text: String, pictureFile: PFFile!) {
+    func sendPhotoMessage(text: String, pictureFile: PFFile!) {
         let chat = createChat(chatText: text)
         if let pictureFile = pictureFile {
             chat.chatText = "[Picture message]"
             chat.picture = pictureFile
         }
-
+        saveChat(chat: chat)
+    }
+    
+    fileprivate func saveChat(chat: Chat) {
+        addMessage(chat: chat)
+        delegate?.finishSendingMessage()
         chat.saveInBackground { (succeeded, error) -> Void in
             if succeeded {
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
-                self.addMessage(chat: chat)
-                self.delegate?.finishSendingMessage()
             }else{
                 print(error)
             }
@@ -143,7 +118,7 @@ class ChatDataStore {
         return chat
     }
     
-    func addMessage(chat: Chat) {
+    fileprivate func addMessage(chat: Chat) {
         var message: JSQMessage!
         
         let user = chat.sender
@@ -151,10 +126,8 @@ class ChatDataStore {
         if let chatPicture = chat.picture {
             
             let mediaItem = JSQPhotoMediaItem(image: nil)
-            //TODO: as a parameter, I need to take in the senderID so I can compare these
-//            mediaItem?.appliesMediaViewMaskAsOutgoing = (user.objectId == self.getsenderID)
-            mediaItem?.appliesMediaViewMaskAsOutgoing = true
-            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt, media: mediaItem)
+            mediaItem?.appliesMediaViewMaskAsOutgoing = user.objectId! == User.current()!.objectId!
+            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt ?? Date(), media: mediaItem)
             
             chatPicture.getDataInBackground(block: { (imageData, error) -> Void in
                 if error == nil {
@@ -162,8 +135,8 @@ class ChatDataStore {
                     self.delegate?.reloadCollectionView()
                 }
             })
-        }else{
-            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt, text: chat.chatText)
+        }else {
+            message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt ?? Date(), text: chat.chatText)
         }
         delegate?.appendMessage(message: message)
     }
@@ -173,29 +146,14 @@ class ChatDataStore {
 protocol ChatDataStoreDelegate {
     func finishReceivingMessage()
     func finishSendingMessage()
-    func passMessages(_ messages: [JSQMessage])
     func cacheUserObject(_ user: User, objectID: String)
-    func loadMessages()
-    func loadAvatarImage(_ data: Data)
     func reloadCollectionView()
     func appendMessage(message: JSQMessage)
 }
 
 extension ChatViewController: ChatDataStoreDelegate {
-    func finishMessages() {
-        self.finishReceivingMessage()
-    }
-    
-    func passMessages(_ messages: [JSQMessage]) {
-        self.messages = messages
-    }
-    
     func cacheUserObject(_ user: User, objectID: String) {
         self.users[objectID] = user
-    }
-    
-    func loadAvatarImage(_ data: Data) {
-        
     }
     
     func reloadCollectionView() {
