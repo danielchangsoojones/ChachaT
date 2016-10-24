@@ -9,12 +9,17 @@
 import Foundation
 import JSQMessagesViewController
 import Parse
+import ParseLiveQuery
+
+let liveQueryClient = ParseLiveQuery.Client()
 
 class ChatDataStore {
     
     var isLoading = false
     var chatRoomName = ""
     var otherUser: User!
+    
+    fileprivate var subscription: Subscription<Chat>?
     
     fileprivate var delegate: ChatDataStoreDelegate?
     
@@ -28,6 +33,24 @@ class ChatDataStore {
         // just ensure we cache the user object for later
         self.delegate?.cacheUserObject(otherUser, objectID: otherUser.objectId!)
         self.delegate?.cacheUserObject(User.current()!, objectID: User.current()!.objectId!)
+        
+        //TODO: also unsubscribe from the live messaging
+        subscribeToLiveMessaging()
+    }
+    
+    fileprivate func subscribeToLiveMessaging() {
+        //TODO: also unsubscribe from messages
+        
+        let query = Chat.query()! as! PFQuery<Chat>
+        query.whereKey("chatText", equalTo: "hi")
+//        query.whereKey("chatRoomName", equalTo: chatRoomName)
+//        query.whereKey("sender", notEqualTo: User.current()!)
+        
+        //The subscription variable has to be held in a global variable, if not, then when the current function finishes running, then it will deallocate the subscription, and the event will NEVER get handled.
+        subscription = liveQueryClient.subscribe(query).handle(Event.created) { (_, chat: Chat) in
+            print("helllllo")
+            print(chat)
+        }
     }
     
     func getsenderID() -> String {
@@ -135,7 +158,7 @@ class ChatDataStore {
                     self.delegate?.reloadCollectionView()
                 }
             })
-        }else {
+        } else {
             message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt ?? Date(), text: chat.chatText)
         }
         delegate?.appendMessage(message: message)

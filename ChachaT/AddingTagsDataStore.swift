@@ -25,7 +25,8 @@ class AddingTagsDataStore: SuperTagDataStore {
     //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
     func deleteTag(_ title: String) {
         for parseTag in currentUserParseTags where parseTag.tagTitle == title {
-            User.current()!.tags.remove(parseTag)
+            let relation = User.current()!.relation(forKey: "tags")
+            relation.remove(parseTag)
             User.current()!.saveInBackground()
             deleteJointParseTagToUser(tagTitle: title)
         }
@@ -101,7 +102,7 @@ class AddingTagsDataStore: SuperTagDataStore {
         query.getFirstObjectInBackground { (object, error) in
             if let parseTag = object as? ParseTag {
                 //add the new tag chosen tag to the User's tags
-                let relation = User.current()!.relation(forKey: "likes")
+                let relation = User.current()!.relation(forKey: "tags")
                 relation.add(parseTag)
                 User.current()!.saveInBackground()
             } else if let error = error {
@@ -121,7 +122,8 @@ class AddingTagsDataStore: SuperTagDataStore {
         
         query.getFirstObjectInBackground { (object, error) in
             if let parseTag = object as? ParseTag {
-                User.current()!.tags.add(parseTag)
+                let relation = User.current()!.relation(forKey: "tags")
+                relation.add(parseTag)
                 User.current()?.saveInBackground()
             } else if let error = error {
                 print(error)
@@ -133,7 +135,8 @@ class AddingTagsDataStore: SuperTagDataStore {
     fileprivate func removeSpecialtyTag(specialtyCategory: String) {
         for parseTag in currentUserParseTags where parseTag.dropDownCategory?.name == specialtyCategory {
             //remove the previous tag that was correlated to the specific category
-            User.current()!.tags.remove(parseTag)
+            let relation = User.current()!.relation(forKey: "tags")
+            relation.remove(parseTag)
         }
     }
 }
