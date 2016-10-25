@@ -274,7 +274,8 @@ extension AboutView : UITextFieldDelegate {
     }
     
     fileprivate func getPositionToJumpTo() -> CGFloat {
-        return self.frame.origin.y
+        //TODO: this should account for the scrollviewinset/constraint because if we change spacing on things, then this could break and not be in the exact right position. But works for now.
+        return self.frame.origin.y + self.frame.height
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
