@@ -25,7 +25,7 @@
                     <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bullet Point #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyx-1d-1wd">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="241" text="Bullet Point #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyx-1d-1wd">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -52,14 +52,14 @@
             <constraints>
                 <constraint firstItem="Lzg-4X-TrX" firstAttribute="leading" secondItem="Lyx-1d-1wd" secondAttribute="leading" constant="-2" id="9gF-Zx-7EW"/>
                 <constraint firstItem="Xnn-Sc-MjG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H64-Qo-TRC"/>
-                <constraint firstItem="wTI-Br-uFX" firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" id="Orn-mz-ZIU"/>
                 <constraint firstAttribute="bottom" secondItem="wTI-Br-uFX" secondAttribute="bottom" constant="-1" id="dyx-d8-S0L"/>
+                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gtX-nA-JSF"/>
                 <constraint firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="15" id="kDU-dP-TgL"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="omr-QF-Sv2"/>
                 <constraint firstItem="wTI-Br-uFX" firstAttribute="top" secondItem="Lyx-1d-1wd" secondAttribute="bottom" id="ov1-3L-ltX"/>
                 <constraint firstItem="Lzg-4X-TrX" firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="2" id="ow6-Lw-kGF"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="vnR-Rd-HgT"/>
-                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="Lyx-1d-1wd" secondAttribute="leading" id="wyL-9Q-Hb0"/>
+                <constraint firstAttribute="trailing" secondItem="wTI-Br-uFX" secondAttribute="trailing" id="zx4-8h-5pC"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
