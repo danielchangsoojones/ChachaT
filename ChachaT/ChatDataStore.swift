@@ -9,12 +9,22 @@
 import Foundation
 import JSQMessagesViewController
 import Parse
+import ParseLiveQuery
+
+let liveQueryClient = ParseLiveQuery.Client()
 
 class ChatDataStore {
+    private struct ChatDataStoreConstants {
+        static let pictureMessageText = "[Picture message]"
+    }
     
     var isLoading = false
     var chatRoomName = ""
     var otherUser: User!
+    
+    fileprivate var subscription: Subscription<Chat>?
+    fileprivate var liveQuery: PFQuery<Chat> = Chat.query()! as! PFQuery<Chat>
+    fileprivate var connected: Bool = false
     
     fileprivate var delegate: ChatDataStoreDelegate?
     
@@ -28,6 +38,39 @@ class ChatDataStore {
         // just ensure we cache the user object for later
         self.delegate?.cacheUserObject(otherUser, objectID: otherUser.objectId!)
         self.delegate?.cacheUserObject(User.current()!, objectID: User.current()!.objectId!)
+        
+        subscribeToLiveMessaging()
+    }
+    
+    fileprivate func subscribeToLiveMessaging() {
+        if connected {
+            unsubscribeToLiveMessaging()
+        }
+        
+        liveQuery.whereKey("chatRoom", equalTo: chatRoomName)
+        liveQuery.whereKey("senderObjectId", notEqualTo: User.current()!.objectId!)
+        
+        //The subscription variable has to be held in a global variable, if not, then when the current function finishes running, then it will deallocate the subscription, and the event will NEVER get handled.
+        subscription = liveQueryClient.subscribe(liveQuery).handle(Event.created) { (query: PFQuery<Chat>, chat: Chat) in
+            self.connected = true
+            //ParseLiveQuery is not well made right now, and whenever we try to access chat.picture, the app crashes because for some reason parseLiveQuery doesn't include it. And, you can't run fetchIfNeeded on a PFFIle
+            //So, until that gets fixed, we are just having the liveQuery tell us when something has changed, and then we run the query again to actually retrieve. It's ineffecient, but the only way to do it until ParseLveQuery starts working better
+            query.includeKey("sender")
+            query.whereKey("objectId", equalTo: chat.objectId!)
+            query.getFirstObjectInBackground(block: { (chat, error) in
+                if let chat = chat {
+                    self.addMessage(chat: chat)
+                    self.delegate?.finishReceivingMessage()
+                } else if let error = error {
+                    print(error)
+                }
+            })
+        }
+    }
+    
+    func unsubscribeToLiveMessaging() {
+        liveQueryClient.unsubscribe(liveQuery, handler: subscription!)
+        connected = false
     }
     
     func getsenderID() -> String {
@@ -90,7 +133,7 @@ class ChatDataStore {
     func sendPhotoMessage(text: String, pictureFile: PFFile!) {
         let chat = createChat(chatText: text)
         if let pictureFile = pictureFile {
-            chat.chatText = "[Picture message]"
+            chat.chatText = ChatDataStoreConstants.pictureMessageText
             chat.picture = pictureFile
         }
         saveChat(chat: chat)
@@ -112,6 +155,7 @@ class ChatDataStore {
         let chat = Chat()
         chat.chatRoom = self.chatRoomName
         chat.sender = User.current()!
+        chat.senderObjectId = User.current()!.objectId! //for parseLiveQuery, we can't query pointer columns, because they haven't updated to this, so need to query the objectId
         chat.receiver = self.otherUser
         chat.chatText = chatText
         chat.readByReceiver = false
@@ -135,7 +179,7 @@ class ChatDataStore {
                     self.delegate?.reloadCollectionView()
                 }
             })
-        }else {
+        } else {
             message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt ?? Date(), text: chat.chatText)
         }
         delegate?.appendMessage(message: message)

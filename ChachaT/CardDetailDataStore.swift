@@ -7,6 +7,7 @@
 //
 
 import Foundation
+import Parse
 
 class CardDetailDataStore {
     var delegate: CardDetailDataStoreDelegate?
@@ -16,7 +17,17 @@ class CardDetailDataStore {
     }
     
     func loadTags(user: User) {
-        //TODO: load the users tags
+        let query = user.tags.query() 
+        query.findObjectsInBackground { (parseTags, error) in
+            if let parseTags = parseTags {
+                let tags: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
+                    return Tag(title: parseTag.tagTitle, attribute: .generic)
+                })
+                self.delegate?.passTags(tagArray: tags)
+            } else if let error = error {
+                print(error)
+            }
+        }
     }
 }
 

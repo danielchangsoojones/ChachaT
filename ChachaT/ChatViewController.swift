@@ -12,9 +12,6 @@ import MobileCoreServices
 import Parse
 
 class ChatViewController: JSQMessagesViewController {
-    
-    // to check for new messages
-    var timer : Timer!
     // to prevent stomping on our own feet and double loading
     var isLoading = false
     
@@ -57,10 +54,6 @@ class ChatViewController: JSQMessagesViewController {
         
         self.loadMessages()
         
-        // We check for new messages every 5 seconds
-        //Terrance Kunstek said this is a memory leak because when viewcontroller is dropped, the timer keeps going. He has code to fix this. 
-        timer = Timer.scheduledTimer(timeInterval: 5.0, target: self, selector: #selector(ChatViewController.loadMessages), userInfo: nil, repeats: true)
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -72,7 +65,7 @@ class ChatViewController: JSQMessagesViewController {
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
         // when they leave this screen, stop checking for messages
-        timer.invalidate()
+        dataStore.unsubscribeToLiveMessaging()
     }
     
     func loadMessages() {

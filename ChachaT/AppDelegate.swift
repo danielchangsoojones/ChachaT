@@ -30,9 +30,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             $0.server = appConfiguration.environment.server
         }
         
-        print(appConfiguration.environment.applicationId)
-        print(appConfiguration.environment.server)
-        
         //MARK: Development Database Pointer
 //        let configuration = ParseClientConfiguration {
 //            $0.applicationId = "djflkajsdlfjienrj3457698"
