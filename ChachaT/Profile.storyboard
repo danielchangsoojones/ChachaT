@@ -86,7 +86,7 @@
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
                                                 </constraints>
                                             </view>
-                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>
+                                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>
                                         </subviews>
                                         <color key="backgroundColor" red="0.95686274510000002" green="0.96470588239999999" blue="0.98039215690000003" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
