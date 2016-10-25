@@ -18,8 +18,9 @@ class AboutView: UIView {
     fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
         static let maxTextFieldCharacterCount : Int = 30
-        static let textColor: UIColor = CustomColors.SilverChaliceGrey
-        static let placeHolderTextColor: UIColor = CustomColors.JellyTeal.withAlphaComponent(0.5)
+        static let textColor: UIColor = UIColor.black
+        static let placeHolderTextColor: UIColor = CustomColors.SilverChaliceGrey.withAlphaComponent(0.5)
+        static let font: UIFont = UIFont.systemFont(ofSize: 15)
     }
     
     enum AboutViewType {
@@ -38,6 +39,12 @@ class AboutView: UIView {
     //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
     var autoGrowingTextViewHeight: CGFloat = 0
+    
+    //constraints
+    //we want to align the textFieldText to the titleLable
+    @IBOutlet weak var theTitleLabelLeadingConstraint: NSLayoutConstraint!
+    
+    
     var theTextField: UITextField?
     var theInnerLabel: UILabel?
     
@@ -146,6 +153,7 @@ class AboutView: UIView {
 extension AboutView: UITextViewDelegate {
     func autoGrowingTextViewSetup() {
         theAutoGrowingTextView.delegate = self
+        theAutoGrowingTextView.font = AboutViewConstants.font
         applyPlaceholderStyle(theAutoGrowingTextView, placeholderText: thePlaceholderText)
     }
     
@@ -250,11 +258,13 @@ extension AboutView : UITextFieldDelegate {
     func textFieldSetup() {
         theTextField = UITextField()
         theTextField!.delegate = self
+        theTextField?.font = AboutViewConstants.font
         theTextField?.attributedPlaceholder = NSAttributedString(string: thePlaceholderText, attributes: [NSForegroundColorAttributeName: AboutViewConstants.placeHolderTextColor])
         theTextField?.textColor = AboutViewConstants.textColor
         theInputContentView.addSubview(theTextField!)
         theTextField!.snp.makeConstraints { (make) in
-            make.edges.equalTo(theInputContentView)
+            make.leading.trailing.equalTo(theInputContentView).inset(theTitleLabelLeadingConstraint.constant)
+            make.top.bottom.equalTo(theInputContentView)
         }
     }
     
@@ -280,11 +290,11 @@ extension AboutView {
     func tappableCellSetup(_ innerText: String?, action: @escaping (_ sender: AboutView) -> ()) {
         theInnerLabel = UILabel()
         theInnerLabel!.text = innerText ?? thePlaceholderText
+        theInnerLabel?.font = AboutViewConstants.font
         theInnerLabel?.textColor = innerText != nil ? AboutViewConstants.textColor : AboutViewConstants.placeHolderTextColor
         theInputContentView.addSubview(theInnerLabel!)
         theInnerLabel!.snp.makeConstraints({ (make) in
-            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
-            make.leading.equalTo(theInputContentView).offset(10)
+            make.leading.equalTo(theInputContentView).offset(theTitleLabelLeadingConstraint.constant)
             make.centerY.equalTo(theInputContentView)
         })
         theInputContentView.addTapGesture { (tapped) in
@@ -298,8 +308,7 @@ extension AboutView {
         let imageView = UIImageView(image: rotatedImage)
         theInputContentView.addSubview(imageView)
         imageView.snp.makeConstraints({ (make) in
-            //TODO: make these constants mean something. They should be aligned with the textview placeholders/start
-            make.trailing.equalTo(theInputContentView).inset(10)
+            make.trailing.equalTo(theInputContentView).inset(theTitleLabelLeadingConstraint.constant)
             make.centerY.equalTo(theInputContentView)
         })
     }

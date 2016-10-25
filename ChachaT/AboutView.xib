@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,6 +11,7 @@
                 <outlet property="theCharacterCount" destination="Xnn-Sc-MjG" id="JNe-hZ-8vd"/>
                 <outlet property="theInputContentView" destination="wTI-Br-uFX" id="Qzh-9S-raS"/>
                 <outlet property="theTitleLabel" destination="Lyx-1d-1wd" id="3jl-Ci-zui"/>
+                <outlet property="theTitleLabelLeadingConstraint" destination="vnR-Rd-HgT" id="ItV-yv-q0B"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fg8-Af-F9Z"/>
             </connections>
         </placeholder>
@@ -44,22 +44,22 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Lzg-4X-TrX" secondAttribute="trailing" id="1JM-gz-XlZ"/>
-                        <constraint firstItem="Lzg-4X-TrX" firstAttribute="leading" secondItem="wTI-Br-uFX" secondAttribute="leading" id="hDD-LT-jeN"/>
                         <constraint firstItem="Lzg-4X-TrX" firstAttribute="top" secondItem="wTI-Br-uFX" secondAttribute="top" id="sya-Q5-VrU"/>
                         <constraint firstAttribute="bottom" secondItem="Lzg-4X-TrX" secondAttribute="bottom" id="yjK-Qi-Raw"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
+                <constraint firstItem="Lzg-4X-TrX" firstAttribute="leading" secondItem="Lyx-1d-1wd" secondAttribute="leading" constant="-2" id="9gF-Zx-7EW"/>
                 <constraint firstItem="Xnn-Sc-MjG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H64-Qo-TRC"/>
-                <constraint firstAttribute="trailing" secondItem="wTI-Br-uFX" secondAttribute="trailing" id="VqE-9r-o0s"/>
-                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZkK-aD-Geh"/>
+                <constraint firstItem="wTI-Br-uFX" firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" id="Orn-mz-ZIU"/>
                 <constraint firstAttribute="bottom" secondItem="wTI-Br-uFX" secondAttribute="bottom" constant="-1" id="dyx-d8-S0L"/>
                 <constraint firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="15" id="kDU-dP-TgL"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="omr-QF-Sv2"/>
                 <constraint firstItem="wTI-Br-uFX" firstAttribute="top" secondItem="Lyx-1d-1wd" secondAttribute="bottom" id="ov1-3L-ltX"/>
+                <constraint firstItem="Lzg-4X-TrX" firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="2" id="ow6-Lw-kGF"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="vnR-Rd-HgT"/>
+                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="Lyx-1d-1wd" secondAttribute="leading" id="wyL-9Q-Hb0"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
