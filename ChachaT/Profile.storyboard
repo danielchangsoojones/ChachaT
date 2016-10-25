@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="yJw-Sh-Q3J">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -158,6 +157,7 @@
                     <connections>
                         <outlet property="photoLayoutView" destination="ggM-LL-fqe" id="Oyl-gv-X6X"/>
                         <outlet property="theBottomConstraintToScrollView" destination="JS4-zR-K33" id="jCQ-yf-j3Q"/>
+                        <outlet property="theScrollView" destination="u1t-Ch-jFt" id="uD5-Ko-fVp"/>
                         <outlet property="theStackView" destination="gwk-8T-bhR" id="Xid-jN-aBy"/>
                         <segue destination="Dim-SF-KDG" kind="show" identifier="EditProfileToAddingTagsSegue" id="ToD-It-t0K"/>
                         <segue destination="k9a-3Y-UNa" kind="show" identifier="EditProfileToHeightPickerSegue" id="H5y-GO-sby"/>

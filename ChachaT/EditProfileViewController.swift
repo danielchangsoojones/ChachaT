@@ -31,6 +31,7 @@ struct EditProfileConstants {
 class EditProfileViewController: UIViewController {
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
+    @IBOutlet weak var theScrollView: UIScrollView!
     
     @IBOutlet weak var theBulletPointOneView: AboutView!
     @IBOutlet weak var theBulletPointTwoView: AboutView!
@@ -45,6 +46,7 @@ class EditProfileViewController: UIViewController {
     var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
     var dataStore : EditProfileDataStore!
     let currentUser = User.current()
+    var theKeyboardIsShowing: Bool = false
     
     @IBAction func theSaveButtonPressed(_ sender: UIBarButtonItem) {
         saveTextIfEdited()
@@ -55,10 +57,8 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self,
-                                                    selector: #selector(self.keyboardNotification(notification:)),
-                                                    name: NSNotification.Name.UIKeyboardWillChangeFrame,
-                                                    object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
         photoLayoutView.delegate = self
@@ -85,6 +85,7 @@ class EditProfileViewController: UIViewController {
         for index in 1...EditProfileConstants.numberOfBulletPoints {
             let title = titlePrefix + "\(index)"
             let bulletPointView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .growingTextView)
+            bulletPointView.delegate = self
             theStackView.addArrangedSubview(bulletPointView)
             theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
         }
@@ -92,11 +93,13 @@ class EditProfileViewController: UIViewController {
     
     func fullNameViewSetup() {
         let fullNameView = AboutView(title: EditProfileConstants.fullNameTitle, placeHolder: EditProfileConstants.fullNamePlaceholder, type: .normalTextField)
+        fullNameView.delegate = self
         theStackView.addArrangedSubview(fullNameView)
     }
     
     func schoolOrJobViewSetup() {
         let schoolOrJobView = AboutView(title: EditProfileConstants.schoolOrJobTitle, placeHolder: EditProfileConstants.schoolOrJobPlaceholder, type: .normalTextField)
+        schoolOrJobView.delegate = self
         theStackView.addArrangedSubview(schoolOrJobView)
     }
     
@@ -129,12 +132,19 @@ class EditProfileViewController: UIViewController {
         }
         return nil
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
 
+}
+
+extension EditProfileViewController: AboutViewDelegate {
+    func jumpToScrollViewPosition(yPosition: CGFloat) {
+        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition), animated: true)
+    }
 }
 
 extension EditProfileViewController: PhotoEditingDelegate {
@@ -189,7 +199,7 @@ extension EditProfileViewController {
 
 extension EditProfileViewController: HeightPickerDelegate {
     func passHeight(height: String, totalInches: Int) {
-        if let heightView = findAboutView(EditProfileConstants.heightTitle) {
+        if let heightView = findAboutView(title: EditProfileConstants.heightTitle) {
             heightView.setInnerTitle(height)
             dataStore.saveHeight(height: totalInches)
         }
@@ -228,17 +238,8 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
     }
     
     func loadText(_ text: String, title: String) {
-        let aboutView = findAboutView(title)
+        let aboutView = findAboutView(title: title)
         aboutView?.setCurrentText(text)
-    }
-    
-    func findAboutView(_ title: String) -> AboutView? {
-        for subview in theStackView.arrangedSubviews {
-            if let aboutView = subview as? AboutView , aboutView.getTitle() == title {
-                return aboutView
-            }
-        }
-        return nil //didn't find a matching aboutView
     }
     
     func saveTextIfEdited() {
@@ -264,24 +265,19 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
 
 //the keyboard extension
 extension EditProfileViewController {
-    func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-            let keyboardHeight: CGFloat = endFrame?.size.height ?? 0.0
-            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                self.theBottomConstraintToScrollView.constant -= keyboardHeight
-            } else {
-                self.theBottomConstraintToScrollView.constant += keyboardHeight
-            }
-            UIView.animate(withDuration: duration,
-                                       delay: TimeInterval(0),
-                                       options: animationCurve,
-                                       animations: { self.view.layoutIfNeeded() },
-                                       completion: nil)
-        }
+    func keyboardWillShow(notification:NSNotification){
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.theScrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.theScrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        self.theScrollView.contentInset = contentInset
     }
 }

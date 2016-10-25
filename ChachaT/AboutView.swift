@@ -9,6 +9,10 @@
 import UIKit
 import MBAutoGrowingTextView
 
+protocol AboutViewDelegate {
+    func jumpToScrollViewPosition(yPosition: CGFloat)
+}
+
 class AboutView: UIView {
     fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
@@ -39,6 +43,8 @@ class AboutView: UIView {
     var thePlaceholderText : String = ""
     var wasEdited : Bool = false
     var theType : AboutViewType = .growingTextView
+    
+    var delegate: AboutViewDelegate?
     
     init(title: String, placeHolder: String, type: AboutViewType) {
         super.init(frame: CGRect.zero)
@@ -221,6 +227,7 @@ extension AboutView: UITextViewDelegate {
     
     func textViewDidBeginEditing(_ textView: UITextView) {
         wasEdited = true
+        delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
     }
 }
 
@@ -239,6 +246,11 @@ extension AboutView : UITextFieldDelegate {
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         wasEdited = true
+        delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
+    }
+    
+    fileprivate func getPositionToJumpTo() -> CGFloat {
+        return self.frame.origin.y
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
