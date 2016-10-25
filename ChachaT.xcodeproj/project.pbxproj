@@ -641,7 +641,7 @@
 		9275FB821D7A030600D8131D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */,
+				9275FB901D7C690B00D8131D /* AboutView */,
 				9275FB8B1D7B571200D8131D /* PhotoEditing */,
 			);
 			name = Subviews;
@@ -675,13 +675,13 @@
 			name = BottomMenuPopUp;
 			sourceTree = "<group>";
 		};
-		9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */ = {
+		9275FB901D7C690B00D8131D /* AboutView */ = {
 			isa = PBXGroup;
 			children = (
 				9275FB911D7C6A4900D8131D /* AboutView.xib */,
 				9275FB931D7C715800D8131D /* AboutView.swift */,
 			);
-			name = "Bio (Bullet Point) Entry";
+			name = AboutView;
 			sourceTree = "<group>";
 		};
 		928761FF1D997027000EAED6 /* Data Models */ = {

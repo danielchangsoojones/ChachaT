@@ -11,6 +11,7 @@ import MBAutoGrowingTextView
 
 protocol AboutViewDelegate {
     func jumpToScrollViewPosition(yPosition: CGFloat)
+    func incrementScrollViewYPosition(by heightChange: CGFloat)
 }
 
 class AboutView: UIView {
@@ -36,6 +37,7 @@ class AboutView: UIView {
     @IBOutlet weak var theInputContentView: UIView!
     //TODO: figure out how to make this not in xib file, but in the code. I couldn't figure out how to set the constraints in code, and MBAutoGrowingTextView requires special autolayout constraints if you look at docs.
     @IBOutlet weak var theAutoGrowingTextView: MBAutoGrowingTextView!
+    var autoGrowingTextViewHeight: CGFloat = 0
     var theTextField: UITextField?
     var theInnerLabel: UILabel?
     
@@ -223,6 +225,18 @@ extension AboutView: UITextViewDelegate {
         let characterCount = textView.text.characters.count
         let charactersLeft = AboutViewConstants.maxCharacterCount - characterCount
         theCharacterCount.text = "\(charactersLeft)"
+        textViewHeightChanged(height: theAutoGrowingTextView.size.height)
+    }
+    
+    //Purpose: if the the textViewHeight changes, we want to make the scroll view grow to accomodate this. 
+    fileprivate func textViewHeightChanged(height: CGFloat) {
+        if autoGrowingTextViewHeight == 0 {
+            autoGrowingTextViewHeight = theAutoGrowingTextView.size.height
+        } else if height > autoGrowingTextViewHeight {
+            let heightChange = height - autoGrowingTextViewHeight
+            delegate?.incrementScrollViewYPosition(by: heightChange)
+            autoGrowingTextViewHeight = height
+        }
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {

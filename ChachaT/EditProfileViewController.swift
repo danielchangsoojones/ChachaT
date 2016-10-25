@@ -145,6 +145,11 @@ extension EditProfileViewController: AboutViewDelegate {
     func jumpToScrollViewPosition(yPosition: CGFloat) {
         theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition), animated: true)
     }
+    
+    func incrementScrollViewYPosition(by heightChange: CGFloat) {
+        let contentYOffset = theScrollView.contentOffset.y + heightChange
+        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: contentYOffset), animated: true)
+    }
 }
 
 extension EditProfileViewController: PhotoEditingDelegate {
