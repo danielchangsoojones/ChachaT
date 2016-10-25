@@ -16,6 +16,7 @@ class Chat: PFObject, PFSubclassing {
     
     @NSManaged var chatRoom : String
     @NSManaged var sender : User
+    @NSManaged var senderObjectId : String //for parseLiveQuery, for some stupid reason, you can't get query on pointer columns, so I need to create a senderObjectId, to at least make sure
     @NSManaged var receiver : User //not sure if having user receiver is scalable for group chats
     @NSManaged var readByReceiver : Bool
     @NSManaged var chatText : String
