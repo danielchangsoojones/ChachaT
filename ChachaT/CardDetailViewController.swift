@@ -20,6 +20,9 @@ public enum QuestionDetailState {
 }
 
 class CardDetailViewController: UIViewController {
+    fileprivate struct CardDetailConstants {
+        static let backButtonCornerRadius: CGFloat = 10
+    }
     
     
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
@@ -41,17 +44,20 @@ class CardDetailViewController: UIViewController {
     var isViewingOwnProfile: Bool = false {
         didSet {
             createEditProfileButton()
+            self.navigationController?.isNavigationBarHidden = true
         }
     }
     
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         self.dismiss(animated: false, completion: nil)
-        
+        _ = self.navigationController?.popViewController(animated: true)
     }
     
     fileprivate func createEditProfileButton() {
         let editProfileButton = UIButton()
         editProfileButton.setTitle("Edit Profile", for: .normal)
+        editProfileButton.backgroundColor = theBackButton.backgroundColor
+        editProfileButton.setCornerRadius = CardDetailConstants.backButtonCornerRadius
         self.view.addSubview(editProfileButton)
         editProfileButton.snp.makeConstraints { (make) in
             make.top.bottom.equalTo(theBackButton)
@@ -88,7 +94,7 @@ class CardDetailViewController: UIViewController {
     func setNormalGUI() {
         dataStore.loadTags(user: userOfTheCard!)
         self.view.layer.addSublayer(setBottomBlur(blurHeight: 100, color: CustomColors.JellyTeal))
-        theBackButton.layer.cornerRadius = 10
+        theBackButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }
