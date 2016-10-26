@@ -132,6 +132,7 @@ extension ProfileIndexViewController: SegueHandlerType {
         case .ProfileIndexToCardDetailPageSegue:
             //TODO: make the nav bar disappear, and they can just hit the back button on the image.
             let cardDetailVC = segue.destination as! CardDetailViewController
+            cardDetailVC.isViewingOwnProfile = true
             cardDetailVC.userOfTheCard = User.current()
         default:
             break

@@ -32,11 +32,31 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
     
+    //Constraints
+    @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
+    
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
     var dataStore: CardDetailDataStore!
     
+    var isViewingOwnProfile: Bool = false {
+        didSet {
+            createEditProfileButton()
+        }
+    }
+    
     @IBAction func backButtonPressed(_ sender: AnyObject) {
         self.dismiss(animated: false, completion: nil)
+        
+    }
+    
+    fileprivate func createEditProfileButton() {
+        let editProfileButton = UIButton()
+        editProfileButton.setTitle("Edit Profile", for: .normal)
+        self.view.addSubview(editProfileButton)
+        editProfileButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(theBackButton)
+            make.trailing.equalTo(self.view).inset(theBackButtonLeadingConstraint.constant)
+        }
     }
     
     
