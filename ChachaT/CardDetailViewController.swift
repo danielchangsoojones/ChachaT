@@ -22,8 +22,9 @@ public enum QuestionDetailState {
 class CardDetailViewController: UIViewController {
     fileprivate struct CardDetailConstants {
         static let backButtonCornerRadius: CGFloat = 10
+        static let backButtonBackgroundColor: UIColor = UIColor.black
+        static let backButtonAlpha: CGFloat = 0.5
     }
-    
     
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var profileImage: PFImageView!
@@ -44,7 +45,6 @@ class CardDetailViewController: UIViewController {
     var isViewingOwnProfile: Bool = false {
         didSet {
             createEditProfileButton()
-            self.navigationController?.isNavigationBarHidden = true
         }
     }
     
@@ -52,19 +52,6 @@ class CardDetailViewController: UIViewController {
         self.dismiss(animated: false, completion: nil)
         _ = self.navigationController?.popViewController(animated: true)
     }
-    
-    fileprivate func createEditProfileButton() {
-        let editProfileButton = UIButton()
-        editProfileButton.setTitle("Edit Profile", for: .normal)
-        editProfileButton.backgroundColor = theBackButton.backgroundColor
-        editProfileButton.setCornerRadius = CardDetailConstants.backButtonCornerRadius
-        self.view.addSubview(editProfileButton)
-        editProfileButton.snp.makeConstraints { (make) in
-            make.top.bottom.equalTo(theBackButton)
-            make.trailing.equalTo(self.view).inset(theBackButtonLeadingConstraint.constant)
-        }
-    }
-    
     
     @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
         let alertView = SCLAlertView()
@@ -81,6 +68,18 @@ class CardDetailViewController: UIViewController {
         dataStoreSetup()
         setNormalGUI()
         setupTapHandler()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        if isViewingOwnProfile {
+            self.navigationController?.isNavigationBarHidden = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if isViewingOwnProfile {
+            self.navigationController?.isNavigationBarHidden = false
+        }
     }
     
     func dataStoreSetup() {
@@ -135,6 +134,29 @@ class CardDetailViewController: UIViewController {
         }
     }
 
+}
+
+//Edit Profile Extension
+extension CardDetailViewController {
+    fileprivate func createEditProfileButton() {
+        let editProfileButton = UIButton()
+        editProfileButton.setTitle("Edit Profile", for: .normal)
+        editProfileButton.addTarget(self, action: #selector(editProfileButtonPressed(sender:)), for: .touchUpInside)
+        editProfileButton.backgroundColor = CardDetailConstants.backButtonBackgroundColor
+        editProfileButton.alpha = CardDetailConstants.backButtonAlpha
+        editProfileButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
+        self.view.addSubview(editProfileButton)
+        editProfileButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(theBackButton)
+            make.trailing.equalTo(self.view).inset(theBackButtonLeadingConstraint.constant)
+        }
+    }
+    
+    func editProfileButtonPressed(sender: UIButton!) {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let editProfileVC = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        navigationController?.pushViewController(editProfileVC, animated: true)
+    }
 }
 
 extension CardDetailViewController: MagicMoveable {

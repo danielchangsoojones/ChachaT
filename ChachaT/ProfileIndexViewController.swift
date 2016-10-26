@@ -20,7 +20,7 @@ class ProfileIndexViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. 
+        //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. In the background Animation Controller, in viewDidDismiss, I should turn the navBarHidden = false and then it would fix.
         self.navigationController?.isNavigationBarHidden = false
         settingsButtonSetup()
         profileButtonSetup()
