@@ -17,7 +17,11 @@ public enum DropDownAttributes: String {
 
 //TODO: I can subclass this even farther into tagChoices and sliderTags
 class DropDownTag : Tag {
-    var displayName: String = "" //when adding tags, we want the properties of something like gender, but have it show Male
+    var displayName: String = "" {
+        didSet {
+            self.title = displayName
+        }
+    } //when adding tags, we want the properties of something like gender, but have it show Male
     var specialtyCategory: String
     var dropDownAttribute: DropDownAttributes
     var innerTagTitles : [String] = []
