@@ -21,9 +21,7 @@
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="UPa-l3-a2J">
                                 <color key="backgroundColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="0.55000000000000004" colorSpace="custom" customColorSpace="sRGB"/>
                             </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" misplaced="YES" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA">
-                                <frame key="frameInset" minX="20" minY="274" width="560" height="316"/>
-                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="560" placeholderIntrinsicHeight="316" axis="vertical" distribution="equalCentering" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="6rx-WT-UoA"/>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -84,6 +82,7 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="Shuffles" customModuleProvider="target">
                                                 <constraints>
                                                     <constraint firstAttribute="height" constant="297" id="H9E-bc-TbU"/>
+                                                    <constraint firstAttribute="width" priority="250" constant="584" id="Wg1-GU-a1H"/>
                                                 </constraints>
                                             </view>
                                             <stackView opaque="NO" contentMode="scaleToFill" placeholderIntrinsicWidth="580" placeholderIntrinsicHeight="128" axis="vertical" spacing="20" translatesAutoresizingMaskIntoConstraints="NO" id="gwk-8T-bhR"/>

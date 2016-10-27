@@ -650,11 +650,10 @@
 		9275FB8B1D7B571200D8131D /* PhotoEditing */ = {
 			isa = PBXGroup;
 			children = (
+				929428DC1DC2816F0019617C /* Single Photo Editing  View */,
 				9275FB8D1D7B785400D8131D /* BottomMenuPopUp */,
 				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
 				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
-				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
-				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 			);
 			name = PhotoEditing;
 			sourceTree = "<group>";
@@ -728,6 +727,15 @@
 				928B8D791DBA58B700D6B6D3 /* Configuration.swift */,
 			);
 			name = Configurations;
+			sourceTree = "<group>";
+		};
+		929428DC1DC2816F0019617C /* Single Photo Editing  View */ = {
+			isa = PBXGroup;
+			children = (
+				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
+				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
+			);
+			name = "Single Photo Editing  View";
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {

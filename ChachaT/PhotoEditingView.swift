@@ -13,19 +13,22 @@ class PhotoEditingView: UIView {
     @IBOutlet var theView: UIView!
     @IBOutlet weak var theImageView: UIImageView!
     @IBOutlet weak var theNumberLabel: UILabel!
+    @IBOutlet weak var theCircleBackground: UIView!
     
-    
+    //Constraints
+    @IBOutlet weak var theCircleBackgroundWidthConstraint: NSLayoutConstraint!
     //Called when the view is created programmatically
+    
     init(frame: CGRect, number: Int) {
         super.init(frame: frame)
         xibSetup()
+        theCircleBackground.setCornerRadius(radius: theCircleBackgroundWidthConstraint.constant / 2)
+        self.setCornerRadius(radius: 10)
         theNumberLabel.text = number.toString
     }
     
-    //Called when the view is created via storyboard
     required init?(coder aDecoder: NSCoder) {
-        super.init(coder: aDecoder)
-        xibSetup()
+        fatalError("init(coder:) has not been implemented")
     }
     
     override var intrinsicContentSize : CGSize {
