@@ -221,12 +221,14 @@ extension AddingTagsDataStore {
     fileprivate func loadCustomDropDownTags(category: String, parseColumnName: String) -> DropDownTag? {
         var dropDownTag: DropDownTag?
         switch parseColumnName {
+            //TODO: make an init for dropDownTag that doesn't need all the extra attributes that don't matter for this page.
         case CustomDropDownParseColumnNames.height:
             //the attributes on this dropDownTag don't matter that much, we just need to initialize it. Because, we really just want the title to be set, so we can do a custom action on it.
             dropDownTag = DropDownTag(specialtyCategory: category, maxValue: 0, suffix: "", dropDownAttribute: .rangeSlider)
             dropDownTag?.title = "Height" //setting a custom title
         case CustomDropDownParseColumnNames.age:
-            break
+            dropDownTag = DropDownTag(specialtyCategory: category, maxValue: 0, suffix: "", dropDownAttribute: .rangeSlider)
+            dropDownTag?.title = "Age"
         default:
             break
         }

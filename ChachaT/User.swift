@@ -31,14 +31,8 @@ class User: PFUser {
     @NSManaged var location: PFGeoPoint
     @NSManaged var tags: PFRelation<ParseTag>
     var age : Int? {
-        let calendar : Calendar = Calendar.current
-        let now = Date()
         if let birthDate = birthDate {
-            let ageComponents = (calendar as NSCalendar).components(.year,
-                                                    from: birthDate,
-                                                    to: now,
-                                                    options: [])
-            return ageComponents.year
+            return calculateAge(birthday: birthDate)
         }
         return nil
     }
@@ -55,6 +49,16 @@ class User: PFUser {
         let feet = height / 12
         let inches = height % 12
         return feet.toString + "'" + inches.toString + "\""
+    }
+    
+    func calculateAge(birthday: Date) -> Int {
+        let calendar : Calendar = Calendar.current
+        let now = Date()
+        let ageComponents = (calendar as NSCalendar).components(.year,
+                                                                from: birthday,
+                                                                to: now,
+                                                                options: [])
+        return ageComponents.year!
     }
     
 }

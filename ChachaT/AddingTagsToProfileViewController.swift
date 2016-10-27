@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SCLAlertView
+import Timepiece
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -139,24 +140,56 @@ extension AddingTagsToProfileViewController {
         switch dropDownTag.databaseColumnName {
         case CustomDropDownParseColumnNames.height:
             performHeightTagAction(dropDownTag: dropDownTag)
+        case CustomDropDownParseColumnNames.age:
+            performAgeTagAction(dropDownTag: dropDownTag)
         default:
             break
         }
     }
     
-    func performHeightTagAction(dropDownTag: DropDownTag) {
-        let tagView = tagChoicesView.addSpecialtyTag("Height", tagAttribute: .innerText, innerAnnotationText: User.current()!.heightConvertedToString)
-        tagView.onTap = { (tagView: TagView) in
-            //TODO: need to move this vc to the addingTags Storyboard
-            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+    fileprivate func performHeightTagAction(dropDownTag: DropDownTag) {
+//        let tagView = tagChoicesView.addSpecialtyTag(dropDownTag.title, tagAttribute: .innerText, innerAnnotationText: User.current()!.heightConvertedToString)
+//        tagView.onTap = { (tagView: TagView) in
+//            let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
+//            let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
+//            heightPickerVC.passHeight = { (height: String, totalInches: Int) in
+//                if let specialtyTagView = tagView as? SpecialtyTagView {
+//                    specialtyTagView.annotationView.updateText(text: height)
+//                    self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
+//                }
+//            }
+//            self.navigationController?.pushViewController(heightPickerVC, animated: true)
+//        }
+        addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: User.current()!.heightConvertedToString) { (specialtyTagView: SpecialtyTagView) in
+            let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
             let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
             heightPickerVC.passHeight = { (height: String, totalInches: Int) in
-                if let specialtyTagView = tagView as? SpecialtyTagView {
-                    specialtyTagView.annotationView.updateText(text: height)
-                    self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
-                }
+                specialtyTagView.annotationView.updateText(text: height)
+                self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
             }
             self.navigationController?.pushViewController(heightPickerVC, animated: true)
+        }
+    }
+    
+    fileprivate func performAgeTagAction(dropDownTag: DropDownTag) {
+        let currentAge: Int = User.current()!.age ?? 0
+        addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
+            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+                (birthday) -> Void in
+                //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
+                let age = User.current()!.calculateAge(birthday: birthday)
+                specialtyTagView.annotationView.updateText(text: "\(age)")
+                self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
+            }
+        }
+    }
+    
+    fileprivate func addCustomTagViews(dropDownTag: DropDownTag, innerAnnotationText: String, onTap: @escaping (SpecialtyTagView) -> ()) {
+        let tagView = tagChoicesView.addSpecialtyTag(dropDownTag.title, tagAttribute: .innerText, innerAnnotationText: innerAnnotationText)
+        tagView.onTap = { (tagView: TagView) in
+            if let specialtyTagView = tagView as? SpecialtyTagView {
+                onTap(specialtyTagView)
+            }
         }
     }
 }

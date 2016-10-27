@@ -22,8 +22,6 @@ struct EditProfileConstants {
     static let schoolOrJobPlaceholder = "Enter Your School or Job"
     static let ageTitle = "Age"
     static let agePlaceholder = "Tap to enter your birthday..."
-    static let heightTitle = "Height"
-    static let heightPlaceholder = "Tap to enter your height..."
     static let tagSegueTitle = "Tags"
     static let tagSeguePlaceholder = "See your tags..."
 }
@@ -66,7 +64,6 @@ class EditProfileViewController: UIViewController {
         fullNameViewSetup()
         schoolOrJobViewSetup()
         ageViewSetup()
-        heightViewSetup()
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
@@ -108,13 +105,6 @@ class EditProfileViewController: UIViewController {
             self.ageCellTapped(sender)
             }, type: .tappableCell)
         theStackView.addArrangedSubview(ageView)
-    }
-    
-    func heightViewSetup() {
-        let heightView = AboutView(title: EditProfileConstants.heightTitle, placeHolder: EditProfileConstants.heightPlaceholder, innerText: nil, action: { (sender) in
-            self.performSegue(withIdentifier: SegueIdentifier.EditProfileToHeightPickerSegue.rawValue, sender: nil)
-            }, type: .tappableCell)
-        theStackView.addArrangedSubview(heightView)
     }
     
     func tagPageSegueViewSetup() {
@@ -184,29 +174,9 @@ extension EditProfileViewController {
     func ageCellTapped(_ sender: AboutView) {
         DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
             (birthday) -> Void in
-            let actualBirthday : Date = birthday - 1.day //for some reason, the birthday passed is one day ahead, even though it is entered correctly, so we need to subtract one
-            let age = self.calculateAge(actualBirthday)
+            let age = User.current()!.calculateAge(birthday: birthday)
             sender.setInnerTitle("\(age)")
-            self.dataStore.saveAge(actualBirthday)
-        }
-    }
-    
-    func calculateAge(_ birthday: Date) -> Int {
-        let calendar : Calendar = Calendar.current
-        let now = Date()
-        let ageComponents = (calendar as NSCalendar).components(.year,
-                                                from: birthday,
-                                                to: now,
-                                                options: [])
-        return ageComponents.year!
-    }
-}
-
-extension EditProfileViewController: HeightPickerDelegate {
-    func passHeight(height: String, totalInches: Int) {
-        if let heightView = findAboutView(title: EditProfileConstants.heightTitle) {
-            heightView.setInnerTitle(height)
-            dataStore.saveHeight(height: totalInches)
+            self.dataStore.saveAge(birthday)
         }
     }
 }
@@ -215,19 +185,7 @@ extension EditProfileViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case EditProfileToAddingTagsSegue
-        case EditProfileToHeightPickerSegue
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifierForSegue(segue) {
-        case .EditProfileToHeightPickerSegue:
-            let destinationVC = segue.destination as! HeightPickerViewController
-            destinationVC.delegate = self
-        default:
-            break
-        }
-    }
-    
 }
 
 extension EditProfileViewController : EditProfileDataStoreDelegate {

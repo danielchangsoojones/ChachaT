@@ -8,13 +8,8 @@
 
 import UIKit
 
-protocol HeightPickerDelegate {
-    func passHeight(height: String, totalInches: Int)
-}
-
 class HeightPickerViewController: UIViewController {
     let feetArray: [Int] = [4,5,6]
-    var delegate: HeightPickerDelegate?
     //Dependency injection for passing the height back to the viewController that needs it
     var passHeight: ((_ height: String, _ totalInches: Int) -> Void)?
     
@@ -31,7 +26,6 @@ class HeightPickerViewController: UIViewController {
             let inches = theHeightPicker.selectedRow(inComponent: 1) - 1
             let height = feet.toString + "'" + inches.toString + "\""
             let totalInches = feet * 12 + inches
-            self.delegate?.passHeight(height: height, totalInches: totalInches)
             if let passHeight = passHeight {
                 passHeight(height, totalInches)
             }

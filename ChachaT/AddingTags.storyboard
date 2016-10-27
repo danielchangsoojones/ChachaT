@@ -1,8 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mYP-fS-yh2">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="mYP-fS-yh2">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -43,6 +43,63 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fZx-kU-P0C" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2143" y="513"/>
+        </scene>
+        <!--Height Picker View Controller-->
+        <scene sceneID="IGI-aZ-aLa">
+            <objects>
+                <viewController storyboardIdentifier="HeightPickerViewController" id="QeM-1A-Zn7" customClass="HeightPickerViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="b8o-hQ-MYt"/>
+                        <viewControllerLayoutGuide type="bottom" id="2Mf-Rf-qYq"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="2F7-8G-x1v">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dGN-g1-Tjh">
+                                <connections>
+                                    <outlet property="dataSource" destination="QeM-1A-Zn7" id="vlb-7a-XjK"/>
+                                    <outlet property="delegate" destination="QeM-1A-Zn7" id="I8c-lo-ohz"/>
+                                </connections>
+                            </pickerView>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalCentering" spacing="49" translatesAutoresizingMaskIntoConstraints="NO" id="YoZ-GA-MNK">
+                                <subviews>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ehy-tp-Gf3">
+                                        <state key="normal" title="Cancel">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="cancelPressed:" destination="QeM-1A-Zn7" eventType="touchUpInside" id="M1r-le-keX"/>
+                                        </connections>
+                                    </button>
+                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="u7q-c7-ZCo">
+                                        <state key="normal" title="Done">
+                                            <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                        </state>
+                                        <connections>
+                                            <action selector="donePressed:" destination="QeM-1A-Zn7" eventType="touchUpInside" id="M2M-Nn-nJM"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                            </stackView>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="YoZ-GA-MNK" firstAttribute="centerX" secondItem="2F7-8G-x1v" secondAttribute="centerX" id="80h-sw-8mN"/>
+                            <constraint firstItem="dGN-g1-Tjh" firstAttribute="leading" secondItem="2F7-8G-x1v" secondAttribute="leading" id="BnX-L8-O2Z"/>
+                            <constraint firstItem="YoZ-GA-MNK" firstAttribute="top" secondItem="dGN-g1-Tjh" secondAttribute="bottom" constant="10" id="IrE-69-9BF"/>
+                            <constraint firstItem="dGN-g1-Tjh" firstAttribute="centerY" secondItem="2F7-8G-x1v" secondAttribute="centerY" id="knG-O5-CTV"/>
+                            <constraint firstItem="dGN-g1-Tjh" firstAttribute="height" secondItem="2F7-8G-x1v" secondAttribute="height" multiplier="1/3" id="oqu-io-4xw"/>
+                            <constraint firstAttribute="trailing" secondItem="dGN-g1-Tjh" secondAttribute="trailing" id="p5C-Mz-SJo"/>
+                        </constraints>
+                    </view>
+                    <connections>
+                        <outlet property="theHeightPicker" destination="dGN-g1-Tjh" id="Kry-gn-PR8"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="0l1-sl-lYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="2881" y="512"/>
         </scene>
     </scenes>
 </document>
