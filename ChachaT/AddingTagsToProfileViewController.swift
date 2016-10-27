@@ -148,18 +148,6 @@ extension AddingTagsToProfileViewController {
     }
     
     fileprivate func performHeightTagAction(dropDownTag: DropDownTag) {
-//        let tagView = tagChoicesView.addSpecialtyTag(dropDownTag.title, tagAttribute: .innerText, innerAnnotationText: User.current()!.heightConvertedToString)
-//        tagView.onTap = { (tagView: TagView) in
-//            let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
-//            let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
-//            heightPickerVC.passHeight = { (height: String, totalInches: Int) in
-//                if let specialtyTagView = tagView as? SpecialtyTagView {
-//                    specialtyTagView.annotationView.updateText(text: height)
-//                    self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
-//                }
-//            }
-//            self.navigationController?.pushViewController(heightPickerVC, animated: true)
-//        }
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: User.current()!.heightConvertedToString) { (specialtyTagView: SpecialtyTagView) in
             let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
             let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
