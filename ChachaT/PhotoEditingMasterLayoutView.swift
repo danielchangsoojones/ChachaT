@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PhotoEditingDelegate {
-    func photoPressed(_ photoNumber: Int, imageSize: CGSize)
+    func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool)
 }
 
 struct PhotoEditingViewConstants {
@@ -87,7 +87,7 @@ class PhotoEditingMasterLayoutView: UIView {
     
     func photoTapped(_ sender: UIGestureRecognizer) {
         if let photoEditingView = sender.view as? PhotoEditingView {
-            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size)
+            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size, isPhotoWithImage: photoEditingView.theNoPictureLabel.isHidden)
         }
     }
     
@@ -102,6 +102,13 @@ class PhotoEditingMasterLayoutView: UIView {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
             subview.setImage(file: file)
+        }
+    }
+    
+    func deleteImage(photoNumber: Int) {
+        let photoEditingSubviews = getSubviewsOfView(masterStackView)
+        for subview in photoEditingSubviews where subview.tag == photoNumber {
+            subview.deleteImage() //should be only one photoEditingView that has any given tag
         }
     }
     

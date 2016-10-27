@@ -1,14 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" initialViewController="Qen-f5-BQ5">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="Qen-f5-BQ5">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Bottom Picture Pop Up View Controller-->
         <scene sceneID="z8Y-OC-yVY">
             <objects>
-                <viewController storyboardIdentifier="BottomPicturePopUpViewController" id="Qen-f5-BQ5" customClass="BottomPicturePopUpViewController" customModule="ChachaT" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="BottomPicturePopUpViewController" id="Qen-f5-BQ5" customClass="BottomPicturePopUpViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rLc-co-tMD"/>
                         <viewControllerLayoutGuide type="bottom" id="rdI-KA-omB"/>
@@ -18,14 +18,13 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jiF-Zf-LoP">
-                                <rect key="frame" x="20" y="30" width="335" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="60" id="C54-Re-SkH"/>
                                     <constraint firstAttribute="height" constant="45" id="JDk-XM-RLI"/>
                                     <constraint firstAttribute="width" constant="330" id="bC8-w9-7Zq"/>
                                 </constraints>
                                 <state key="normal" title="Photo Library">
-                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -38,14 +37,13 @@
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="0Hg-H3-BQ2">
-                                <rect key="frame" x="20" y="89" width="335" height="45"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="45" id="W4o-Tf-GWP"/>
                                     <constraint firstAttribute="height" constant="60" id="iOm-t7-k29"/>
                                     <constraint firstAttribute="width" constant="330" id="tyY-iN-bI6"/>
                                 </constraints>
                                 <state key="normal" title="Camera">
-                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
+                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <variation key="default">
                                     <mask key="constraints">
@@ -58,7 +56,7 @@
                                 </connections>
                             </button>
                         </subviews>
-                        <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
+                        <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="jiF-Zf-LoP" firstAttribute="leading" secondItem="OuQ-0V-dsi" secondAttribute="leading" constant="20" id="3gH-tH-UIB"/>
                             <constraint firstItem="0Hg-H3-BQ2" firstAttribute="top" secondItem="jiF-Zf-LoP" secondAttribute="bottom" constant="14" id="80j-jQ-HLe"/>
@@ -68,7 +66,6 @@
                             <constraint firstItem="0Hg-H3-BQ2" firstAttribute="leading" secondItem="jiF-Zf-LoP" secondAttribute="leading" id="slD-Jn-CLS"/>
                         </constraints>
                     </view>
-                    <simulatedScreenMetrics key="simulatedDestinationMetrics" type="retina47"/>
                     <connections>
                         <outlet property="theCameraButton" destination="0Hg-H3-BQ2" id="l2c-UI-GQW"/>
                         <outlet property="thePhotoLibraryButton" destination="jiF-Zf-LoP" id="PwA-0B-ROw"/>

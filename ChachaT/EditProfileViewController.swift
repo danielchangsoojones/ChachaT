@@ -142,30 +142,66 @@ extension EditProfileViewController: AboutViewDelegate {
     }
 }
 
-extension EditProfileViewController: PhotoEditingDelegate {
-    func photoPressed(_ photoNumber: Int, imageSize: CGSize) {
+extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool) {
         thePhotoNumberToChange = photoNumber
-        createBottomPicturePopUp(imageSize)
+        showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
     }
     
-    func createBottomPicturePopUp(_ imageSize: CGSize) {
-        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
-        vc.bottomPicturePopUpViewControllerDelegate = self
-        vc.profileImageSize = imageSize
-        let popup = STPopupController(rootViewController: vc)
-        popup?.navigationBar.barTintColor = ChachaTeal
-        popup?.navigationBar.tintColor = UIColor.white
-        popup?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        popup?.style = STPopupStyle.bottomSheet
-        popup?.present(in: self)
+    fileprivate func showPhotoChoices(isReplacingPhoto: Bool) {
+        resignFirstResponder()
+        var alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if isReplacingPhoto {
+            alert = showReplacePhotoChoices(alert: alert)
+        } else {
+            //clicked on a photo box that has never been edited
+            alert = showNewPhotoChoices(alert: alert)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
     }
-}
 
-extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
-    func passImage(_ image: UIImage) {
-        photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
-        dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+    fileprivate func showReplacePhotoChoices(alert: UIAlertController) -> UIAlertController {
+        let replaceAction = UIAlertAction(title: "Replace Photo", style: .default) { (alertAction: UIAlertAction) in
+            self.showPhotoChoices(isReplacingPhoto: false)
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete Photo", style: .default) { (alertAction: UIAlertAction) in
+            self.photoLayoutView.deleteImage(photoNumber: self.thePhotoNumberToChange)
+        }
+        
+        alert.addAction(replaceAction)
+        alert.addAction(deleteAction)
+        return alert
+    }
+    
+    fileprivate func showNewPhotoChoices(alert: UIAlertController) -> UIAlertController {
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartCamera(target: self, canEdit: false, frontFacing: true)
+        }
+        
+        alert.addAction(photoLibraryAction)
+        alert.addAction(cameraAction)
+
+        return alert
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
+        if image != nil {
+            //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
+            //            let resizedImage = image.resizeImage(profileImageSize!)
+            photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
+            dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 

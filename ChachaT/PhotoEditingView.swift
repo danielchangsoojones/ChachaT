@@ -69,4 +69,9 @@ class PhotoEditingView: UIView {
         theImageView.loadFromFile(file)
         theNoPictureLabel.isHidden = true
     }
+    
+    func deleteImage() {
+        theImageView.image = nil
+        theNoPictureLabel.isHidden = false
+    }
 }
