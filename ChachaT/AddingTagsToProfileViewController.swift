@@ -74,6 +74,17 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         }
     }
     
+    override func addDropDownTag(tag: Tag) {
+        if let dropDownTag = tag as? DropDownTag {
+            switch dropDownTag.dropDownAttribute {
+            case .tagChoices:
+                super.addDropDownTag(tag: tag)
+            case .singleSlider, .rangeSlider:
+                createCustomTags(dropDownTag: dropDownTag)
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -118,6 +129,34 @@ extension AddingTagsToProfileViewController {
                 }
             default: break
             }
+        }
+    }
+}
+
+//Extension for adding some custom tags like "Age". "Height"
+extension AddingTagsToProfileViewController {
+    fileprivate func createCustomTags(dropDownTag: DropDownTag) {
+        switch dropDownTag.databaseColumnName {
+        case CustomDropDownParseColumnNames.height:
+            performHeightTagAction(dropDownTag: dropDownTag)
+        default:
+            break
+        }
+    }
+    
+    func performHeightTagAction(dropDownTag: DropDownTag) {
+        let tagView = tagChoicesView.addSpecialtyTag("Height", tagAttribute: .innerText, innerAnnotationText: User.current()!.heightConvertedToString)
+        tagView.onTap = { (tagView: TagView) in
+            //TODO: need to move this vc to the addingTags Storyboard
+            let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+            let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
+            heightPickerVC.passHeight = { (height: String, totalInches: Int) in
+                if let specialtyTagView = tagView as? SpecialtyTagView {
+                    specialtyTagView.annotationView.updateText(text: height)
+                    self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
+                }
+            }
+            self.navigationController?.pushViewController(heightPickerVC, animated: true)
         }
     }
 }

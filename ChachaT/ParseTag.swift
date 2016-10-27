@@ -14,6 +14,7 @@ public enum TagAttributes: String {
     case generic = "generic"
     case dropDownMenu = "dropDownMenu"
     case isPrivate = "isPrivate"
+    case innerText
 }
 
 class ParseTag: PFObject, PFSubclassing {

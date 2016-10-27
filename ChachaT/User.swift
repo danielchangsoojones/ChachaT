@@ -51,6 +51,11 @@ class User: PFUser {
         }
         return nil
     }
+    var heightConvertedToString: String {
+        let feet = height / 12
+        let inches = height % 12
+        return feet.toString + "'" + inches.toString + "\""
+    }
     
 }
 

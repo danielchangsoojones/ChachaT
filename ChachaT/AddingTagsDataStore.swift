@@ -9,6 +9,11 @@
 import Foundation
 import Parse
 
+struct CustomDropDownParseColumnNames {
+    static let height = "height"
+    static let age = "birthDate"
+}
+
 class AddingTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
@@ -131,6 +136,11 @@ class AddingTagsDataStore: SuperTagDataStore {
         }
     }
     
+    func saveCustomActionTag(databaseColumnName: String, itemToSave: Any) {
+        User.current()![databaseColumnName] = itemToSave
+        User.current()!.saveInBackground()
+    }
+    
     //Purpose: remove the specialty tag from the current User's tags
     fileprivate func removeSpecialtyTag(specialtyCategory: String) {
         for parseTag in currentUserParseTags where parseTag.dropDownCategory?.name == specialtyCategory {
@@ -173,7 +183,6 @@ extension AddingTagsDataStore {
     
     func loadDropDownTags() {
         let query = DropDownCategory.query() as! PFQuery<DropDownCategory>
-        query.whereKey("type", equalTo: DropDownAttributes.tagChoices.rawValue) //we only need tagChoices for the adding tags page, no sliders necessary
         query.includeKey("innerTags")
         
         //we don't need to set the dropDownTags for tags that the user has already set. For example, if the user set the Gender Category to male, then we will show Male for the dropDownCategory
@@ -188,14 +197,18 @@ extension AddingTagsDataStore {
         query.findObjectsInBackground { (categories, error) in
             if let categories = categories {
                 for dropDownCategory in categories {
-                    var dropDownTag : DropDownTag!
+                    var dropDownTag : DropDownTag?
                     switch dropDownCategory.type {
                     case DropDownAttributes.tagChoices.rawValue:
                         dropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: dropDownCategory.innerTagTitles, dropDownAttribute: .tagChoices)
+                    case DropDownAttributes.singleSlider.rawValue, DropDownAttributes.rangeSlider.rawValue:
+                        dropDownTag = self.loadCustomDropDownTags(category: dropDownCategory.type, parseColumnName: dropDownCategory.parseColumnName ?? "")
                     default:
                         break
                     }
-                    self.tagChoicesDataArray.append(dropDownTag)
+                    if let dropDownTag = dropDownTag {
+                        self.tagChoicesDataArray.append(dropDownTag)
+                    }
                 }
             } else if let error = error {
                 print(error)
@@ -203,6 +216,22 @@ extension AddingTagsDataStore {
             //this should load the dropDownTagViews even if there is error.
             self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
         }
+    }
+    
+    fileprivate func loadCustomDropDownTags(category: String, parseColumnName: String) -> DropDownTag? {
+        var dropDownTag: DropDownTag?
+        switch parseColumnName {
+        case CustomDropDownParseColumnNames.height:
+            //the attributes on this dropDownTag don't matter that much, we just need to initialize it. Because, we really just want the title to be set, so we can do a custom action on it.
+            dropDownTag = DropDownTag(specialtyCategory: category, maxValue: 0, suffix: "", dropDownAttribute: .rangeSlider)
+            dropDownTag?.title = "Height" //setting a custom title
+        case CustomDropDownParseColumnNames.age:
+            break
+        default:
+            break
+        }
+        dropDownTag?.databaseColumnName = parseColumnName
+        return dropDownTag
     }
 }
 

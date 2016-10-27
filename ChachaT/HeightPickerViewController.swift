@@ -15,6 +15,9 @@ protocol HeightPickerDelegate {
 class HeightPickerViewController: UIViewController {
     let feetArray: [Int] = [4,5,6]
     var delegate: HeightPickerDelegate?
+    //Dependency injection for passing the height back to the viewController that needs it
+    var passHeight: ((_ height: String, _ totalInches: Int) -> Void)?
+    
     @IBOutlet weak var theHeightPicker: UIPickerView!
     
     @IBAction func cancelPressed(_ sender: AnyObject) {
@@ -27,7 +30,11 @@ class HeightPickerViewController: UIViewController {
             let feet = feetArray[theHeightPicker.selectedRow(inComponent: 0) - 1]
             let inches = theHeightPicker.selectedRow(inComponent: 1) - 1
             let height = feet.toString + "'" + inches.toString + "\""
-            self.delegate?.passHeight(height: height, totalInches: feet * 12 + inches)
+            let totalInches = feet * 12 + inches
+            self.delegate?.passHeight(height: height, totalInches: totalInches)
+            if let passHeight = passHeight {
+                passHeight(height, totalInches)
+            }
         }
         _ = self.navigationController?.popViewController(animated: true)
     }

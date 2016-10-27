@@ -30,6 +30,7 @@ class DropDownTag : Tag {
     var suffix : String = "" //the suffix is the thing that goes on the end of a number, e.g. "50 mi". "mi" would be the suffix
     var isPrivate : Bool = false //the user doesn't want anyone searching them on this field.
     var notSetYet : Bool = false //if the tag has not been set by the user, then we want to show a red exclamation point. So, the user knows to click the tag, and set it somehow.
+    var databaseColumnName: String = ""
     
     fileprivate init(specialtyCategory: String, dropDownAttribute: DropDownAttributes, isPrivate: Bool, notSetYet: Bool) {
         self.specialtyCategory = specialtyCategory
