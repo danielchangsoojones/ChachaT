@@ -94,14 +94,14 @@ class PhotoEditingMasterLayoutView: UIView {
     func setNewImage(_ image: UIImage, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
-            subview.theImageView.image = image //should be only one photoEditingView that has any given tag
+            subview.setImage(image: image) //should be only one photoEditingView that has any given tag
         }
     }
     
     func setNewImageFromFile(_ file: AnyObject, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
-            subview.theImageView.loadFromFile(file)
+            subview.setImage(file: file)
         }
     }
     

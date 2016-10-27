@@ -38,25 +38,10 @@ class PhotoEditingStackView: UIStackView {
         }
         
         return CGSize(width: intrinsicWidth, height: intrinsicHeight)
-        
-        
-        
-//        var maxSize : CGSize = CGSize.zero
-//        for subview in arrangedSubviews {
-//            if subview.intrinsicContentSize.height > maxSize.height && subview.intrinsicContentSize.height > maxSize.height {
-//                //the size is greatest in both dimensions(height and width). Technically, all views passed to this stack view should have equal heights/widths, so not technically necessary to check both.
-//                maxSize = subview.intrinsicContentSize
-//            }
-//        }
-//        
-//        return maxSize
     }
     
     fileprivate func addSpacing() -> CGFloat {
         let numberOfSpaces = arrangedSubviews.count - 1
         return CGFloat(numberOfSpaces) * spacing
     }
-
-    
-    
 }

@@ -14,6 +14,7 @@ class PhotoEditingView: UIView {
     @IBOutlet weak var theImageView: UIImageView!
     @IBOutlet weak var theNumberLabel: UILabel!
     @IBOutlet weak var theCircleBackground: UIView!
+    var theNoPictureLabel = UILabel()
     
     //Constraints
     @IBOutlet weak var theCircleBackgroundWidthConstraint: NSLayoutConstraint!
@@ -22,6 +23,7 @@ class PhotoEditingView: UIView {
     init(frame: CGRect, number: Int) {
         super.init(frame: frame)
         xibSetup()
+        theNoPictureLabelSetup()
         theCircleBackground.setCornerRadius(radius: theCircleBackgroundWidthConstraint.constant / 2)
         self.setCornerRadius(radius: 10)
         theNumberLabel.text = number.toString
@@ -46,4 +48,25 @@ class PhotoEditingView: UIView {
         theView.frame = self.bounds
     }
     
+    fileprivate func theNoPictureLabelSetup() {
+        theNoPictureLabel.text = "Add \nPhoto"
+        theNoPictureLabel.textColor = UIColor.white
+        theNoPictureLabel.textAlignment = .center
+        theNoPictureLabel.font = UIFont.systemFont(ofSize: 10)
+        theNoPictureLabel.numberOfLines = 2
+        theImageView.addSubview(theNoPictureLabel)
+        theNoPictureLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+    }
+    
+    func setImage(image: UIImage) {
+        theImageView.image = image
+        theNoPictureLabel.isHidden = true
+    }
+    
+    func setImage(file: AnyObject) {
+        theImageView.loadFromFile(file)
+        theNoPictureLabel.isHidden = true
+    }
 }
