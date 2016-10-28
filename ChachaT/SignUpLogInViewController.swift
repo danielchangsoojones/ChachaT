@@ -149,34 +149,31 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     func signUp() {
         if let email = theEmail.text, let password = thePassword.text {
             dataStore.signUp(email: email, password: password)
-        } else {
-            _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
     }
     
     func logIn() {
         if let email = theEmail.text, let password = thePassword.text {
             dataStore.logIn(email: email, password: password)
-        } else {
-            _ = SCLAlertView().showError("Invalid Email/Password", subTitle: "Please enter an email/password", closeButtonTitle: "Okay")
         }
     }
     
     func allValidates() -> Bool
     {
         if theEmail.text!.isEmpty {
-            alertAndBecomeResponder(title: "Email is Required", subtitle: "Please enter an email address.", action: { 
-                self.theEmail.becomeFirstResponder()
+            alertAndBecomeResponder(title: "Email is Required", subtitle: "Please enter an email address.", action: {
+                //For some reason, becoming the first responder is crashing the SCLAlertView, when tested on a device. So, I (Daniel Jones) am not going to fuck with it for now. 
+//                self.theEmail.becomeFirstResponder()
             })
             return false
         } else if EFUtils.isValidEmail(theEmail.text!) == false && signUpState {
             alertAndBecomeResponder(title: "Invalid Email", subtitle: "Please enter a valid email address", action: {
-                self.theEmail.becomeFirstResponder()
+//                self.theEmail.becomeFirstResponder()
             })
             return false
         } else if let password = thePassword.text, password.isEmpty {
             alertAndBecomeResponder(title: "Password is Required", subtitle: "Please enter a password.", action: {
-                self.thePassword.becomeFirstResponder()
+//                self.thePassword.becomeFirstResponder()
             })
             return false
         }
