@@ -641,7 +641,7 @@
 		9275FB821D7A030600D8131D /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */,
+				9275FB901D7C690B00D8131D /* AboutView */,
 				9275FB8B1D7B571200D8131D /* PhotoEditing */,
 			);
 			name = Subviews;
@@ -650,11 +650,9 @@
 		9275FB8B1D7B571200D8131D /* PhotoEditing */ = {
 			isa = PBXGroup;
 			children = (
-				9275FB8D1D7B785400D8131D /* BottomMenuPopUp */,
+				929428DC1DC2816F0019617C /* Single Photo Editing  View */,
 				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
 				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
-				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
-				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 			);
 			name = PhotoEditing;
 			sourceTree = "<group>";
@@ -667,21 +665,13 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
-		9275FB8D1D7B785400D8131D /* BottomMenuPopUp */ = {
-			isa = PBXGroup;
-			children = (
-				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
-			);
-			name = BottomMenuPopUp;
-			sourceTree = "<group>";
-		};
-		9275FB901D7C690B00D8131D /* Bio (Bullet Point) Entry */ = {
+		9275FB901D7C690B00D8131D /* AboutView */ = {
 			isa = PBXGroup;
 			children = (
 				9275FB911D7C6A4900D8131D /* AboutView.xib */,
 				9275FB931D7C715800D8131D /* AboutView.swift */,
 			);
-			name = "Bio (Bullet Point) Entry";
+			name = AboutView;
 			sourceTree = "<group>";
 		};
 		928761FF1D997027000EAED6 /* Data Models */ = {
@@ -728,6 +718,15 @@
 				928B8D791DBA58B700D6B6D3 /* Configuration.swift */,
 			);
 			name = Configurations;
+			sourceTree = "<group>";
+		};
+		929428DC1DC2816F0019617C /* Single Photo Editing  View */ = {
+			isa = PBXGroup;
+			children = (
+				9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */,
+				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
+			);
+			name = "Single Photo Editing  View";
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
@@ -840,6 +839,7 @@
 		92E59B051CF677FD00B0B1A4 /* Pop Ups */ = {
 			isa = PBXGroup;
 			children = (
+				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
 				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
 				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
 			);

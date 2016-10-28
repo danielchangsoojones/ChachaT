@@ -9,7 +9,7 @@
 import Foundation
 
 protocol PhotoEditingDelegate {
-    func photoPressed(_ photoNumber: Int, imageSize: CGSize)
+    func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool)
 }
 
 struct PhotoEditingViewConstants {
@@ -19,7 +19,8 @@ struct PhotoEditingViewConstants {
     static let miniViewtoMainViewRatio : CGFloat = 1 / 2
     //TODO: for some reason, when I make this variable < 50, it messes with the sizes of the mini views, not sure why because any number should theoretically work.
     static let mainPhotoEditingViewSideDimension : CGFloat = 100 //the real frame gets set by how wide the stackView gets snapkitted(constraints), this sets the intrinsicContentSize for things to calculate off of.
-    static let stackViewSpacing : CGFloat = 5
+    //Since I have stackviews within stackViews, I was getting a broken autolayout warning. This was because the stackView didn't know it's horizontal size when this was loaded, so the horizontal stack view spacing (with an Apple-given 1000 priority) was causing ambigious constraints. So, in the Profile storyboard, I had to give the PhotoEditingMasterLayoutView a given width (with a low 250 priority), just so the compiler knew, upon load, that the width wasn't 0. Ask Daniel Jones if you run into the problem of a autolayout problem from this view.
+    static let stackViewSpacing : CGFloat = 10
     static let numberOfPhotoViews : Int = 6
 }
 
@@ -86,21 +87,28 @@ class PhotoEditingMasterLayoutView: UIView {
     
     func photoTapped(_ sender: UIGestureRecognizer) {
         if let photoEditingView = sender.view as? PhotoEditingView {
-            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size)
+            delegate?.photoPressed(photoEditingView.tag, imageSize: photoEditingView.theImageView.frame.size, isPhotoWithImage: photoEditingView.theNoPictureLabel.isHidden)
         }
     }
     
     func setNewImage(_ image: UIImage, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
-            subview.theImageView.image = image //should be only one photoEditingView that has any given tag
+            subview.setImage(image: image) //should be only one photoEditingView that has any given tag
         }
     }
     
     func setNewImageFromFile(_ file: AnyObject, photoNumber: Int) {
         let photoEditingSubviews = getSubviewsOfView(masterStackView)
         for subview in photoEditingSubviews where subview.tag == photoNumber {
-            subview.theImageView.loadFromFile(file)
+            subview.setImage(file: file)
+        }
+    }
+    
+    func deleteImage(photoNumber: Int) {
+        let photoEditingSubviews = getSubviewsOfView(masterStackView)
+        for subview in photoEditingSubviews where subview.tag == photoNumber {
+            subview.deleteImage() //should be only one photoEditingView that has any given tag
         }
     }
     

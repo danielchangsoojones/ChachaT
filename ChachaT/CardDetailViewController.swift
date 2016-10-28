@@ -20,7 +20,11 @@ public enum QuestionDetailState {
 }
 
 class CardDetailViewController: UIViewController {
-    
+    fileprivate struct CardDetailConstants {
+        static let backButtonCornerRadius: CGFloat = 10
+        static let backButtonBackgroundColor: UIColor = UIColor.black
+        static let backButtonAlpha: CGFloat = 0.5
+    }
     
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var profileImage: PFImageView!
@@ -32,13 +36,22 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
     
+    //Constraints
+    @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
+    
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
     var dataStore: CardDetailDataStore!
     
-    @IBAction func backButtonPressed(_ sender: AnyObject) {
-        self.dismiss(animated: false, completion: nil)
+    var isViewingOwnProfile: Bool = false {
+        didSet {
+            createEditProfileButton()
+        }
     }
     
+    @IBAction func backButtonPressed(_ sender: AnyObject) {
+        self.dismiss(animated: false, completion: nil)
+        _ = self.navigationController?.popViewController(animated: true)
+    }
     
     @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
         let alertView = SCLAlertView()
@@ -57,6 +70,18 @@ class CardDetailViewController: UIViewController {
         setupTapHandler()
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        if isViewingOwnProfile {
+            self.navigationController?.isNavigationBarHidden = true
+        }
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        if isViewingOwnProfile {
+            self.navigationController?.isNavigationBarHidden = false
+        }
+    }
+    
     func dataStoreSetup() {
         dataStore = CardDetailDataStore(delegate: self)
     }
@@ -68,7 +93,7 @@ class CardDetailViewController: UIViewController {
     func setNormalGUI() {
         dataStore.loadTags(user: userOfTheCard!)
         self.view.layer.addSublayer(setBottomBlur(blurHeight: 100, color: CustomColors.JellyTeal))
-        theBackButton.layer.cornerRadius = 10
+        theBackButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
         if let fullName = userOfTheCard?.fullName {
             theFullNameLabel.text = fullName
         }
@@ -109,6 +134,29 @@ class CardDetailViewController: UIViewController {
         }
     }
 
+}
+
+//Edit Profile Extension
+extension CardDetailViewController {
+    fileprivate func createEditProfileButton() {
+        let editProfileButton = UIButton()
+        editProfileButton.setTitle("Edit Profile", for: .normal)
+        editProfileButton.addTarget(self, action: #selector(editProfileButtonPressed(sender:)), for: .touchUpInside)
+        editProfileButton.backgroundColor = CardDetailConstants.backButtonBackgroundColor
+        editProfileButton.alpha = CardDetailConstants.backButtonAlpha
+        editProfileButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
+        self.view.addSubview(editProfileButton)
+        editProfileButton.snp.makeConstraints { (make) in
+            make.top.bottom.equalTo(theBackButton)
+            make.trailing.equalTo(self.view).inset(theBackButtonLeadingConstraint.constant)
+        }
+    }
+    
+    func editProfileButtonPressed(sender: UIButton!) {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let editProfileVC = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        navigationController?.pushViewController(editProfileVC, animated: true)
+    }
 }
 
 extension CardDetailViewController: MagicMoveable {

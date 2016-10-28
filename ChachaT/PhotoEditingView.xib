@@ -1,12 +1,14 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="10117" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="10085"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
-        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoEditingView" customModule="ChachaT" customModuleProvider="target">
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="PhotoEditingView" customModule="Shuffles" customModuleProvider="target">
             <connections>
+                <outlet property="theCircleBackground" destination="yE9-FQ-uq4" id="kve-o8-QYo"/>
+                <outlet property="theCircleBackgroundWidthConstraint" destination="gTo-T7-Jxg" id="Sez-Tf-bDx"/>
                 <outlet property="theImageView" destination="j1i-M3-vGg" id="azd-Si-fL9"/>
                 <outlet property="theNumberLabel" destination="INc-Yj-93N" id="Hlc-0F-GBP"/>
                 <outlet property="theView" destination="iN0-l3-epB" id="AXc-cX-w94"/>
@@ -17,24 +19,32 @@
             <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-M3-vGg">
-                    <rect key="frame" x="0.0" y="0.0" width="200" height="200"/>
-                </imageView>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1000" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INc-Yj-93N">
-                    <rect key="frame" x="153" y="171" width="39" height="21"/>
-                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
-                    <nil key="highlightedColor"/>
-                </label>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="j1i-M3-vGg"/>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yE9-FQ-uq4">
+                    <subviews>
+                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="1" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="INc-Yj-93N">
+                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <color key="textColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <nil key="highlightedColor"/>
+                        </label>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="INc-Yj-93N" firstAttribute="centerY" secondItem="yE9-FQ-uq4" secondAttribute="centerY" id="MoS-bq-aPo"/>
+                        <constraint firstAttribute="height" constant="30" id="Xcn-u9-DV5"/>
+                        <constraint firstAttribute="width" constant="30" id="gTo-T7-Jxg"/>
+                        <constraint firstItem="INc-Yj-93N" firstAttribute="centerX" secondItem="yE9-FQ-uq4" secondAttribute="centerX" id="vSd-ax-RWW"/>
+                    </constraints>
+                </view>
             </subviews>
-            <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="calibratedRGB"/>
+            <color key="backgroundColor" red="0.81176470588235294" green="0.81176470588235294" blue="0.81176470588235294" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
             <constraints>
                 <constraint firstAttribute="trailing" secondItem="j1i-M3-vGg" secondAttribute="trailing" id="MpQ-CS-2MO"/>
                 <constraint firstItem="j1i-M3-vGg" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="YRx-wE-pSN"/>
-                <constraint firstAttribute="bottom" secondItem="INc-Yj-93N" secondAttribute="bottom" constant="8" id="c6A-fD-MWo"/>
+                <constraint firstAttribute="bottom" secondItem="yE9-FQ-uq4" secondAttribute="bottom" constant="8" id="dAt-3G-jcZ"/>
                 <constraint firstItem="j1i-M3-vGg" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="efJ-Xs-XR1"/>
                 <constraint firstAttribute="bottom" secondItem="j1i-M3-vGg" secondAttribute="bottom" id="fHx-JP-VdB"/>
-                <constraint firstAttribute="trailing" secondItem="INc-Yj-93N" secondAttribute="trailing" constant="8" id="nhc-V3-dev"/>
+                <constraint firstAttribute="trailing" secondItem="yE9-FQ-uq4" secondAttribute="trailing" constant="8" id="tnh-A7-qql"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>

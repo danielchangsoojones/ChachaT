@@ -66,7 +66,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
 //        
-//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "AddingTagsViewController") as! AddingTagsToProfileViewController
+//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()

@@ -39,16 +39,20 @@ class SuperTagViewController: UIViewController {
         for tag in tagChoicesDataArray {
             switch tag.attribute {
             case .dropDownMenu:
-                let dropDownTag = tag as! DropDownTag
-                let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-                if dropDownTag.isPrivate {
-                    tagView.makePrivate()
-                }
+                addDropDownTag(tag: tag)
             case .generic:
                 _ = tagChoicesView.addTag(tag.title)
             default:
                 break
             }
+        }
+    }
+    
+    func addDropDownTag(tag: Tag) {
+        let dropDownTag = tag as! DropDownTag
+        let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
+        if dropDownTag.isPrivate {
+            tagView.makePrivate()
         }
     }
     

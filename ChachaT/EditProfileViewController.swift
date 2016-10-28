@@ -22,8 +22,6 @@ struct EditProfileConstants {
     static let schoolOrJobPlaceholder = "Enter Your School or Job"
     static let ageTitle = "Age"
     static let agePlaceholder = "Tap to enter your birthday..."
-    static let heightTitle = "Height"
-    static let heightPlaceholder = "Tap to enter your height..."
     static let tagSegueTitle = "Tags"
     static let tagSeguePlaceholder = "See your tags..."
 }
@@ -31,6 +29,7 @@ struct EditProfileConstants {
 class EditProfileViewController: UIViewController {
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
+    @IBOutlet weak var theScrollView: UIScrollView!
     
     @IBOutlet weak var theBulletPointOneView: AboutView!
     @IBOutlet weak var theBulletPointTwoView: AboutView!
@@ -45,6 +44,7 @@ class EditProfileViewController: UIViewController {
     var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
     var dataStore : EditProfileDataStore!
     let currentUser = User.current()
+    var theKeyboardIsShowing: Bool = false
     
     @IBAction func theSaveButtonPressed(_ sender: UIBarButtonItem) {
         saveTextIfEdited()
@@ -55,10 +55,8 @@ class EditProfileViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        NotificationCenter.default.addObserver(self,
-                                                    selector: #selector(self.keyboardNotification(notification:)),
-                                                    name: NSNotification.Name.UIKeyboardWillChangeFrame,
-                                                    object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
         photoLayoutView.delegate = self
@@ -66,7 +64,6 @@ class EditProfileViewController: UIViewController {
         fullNameViewSetup()
         schoolOrJobViewSetup()
         ageViewSetup()
-        heightViewSetup()
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
@@ -85,6 +82,7 @@ class EditProfileViewController: UIViewController {
         for index in 1...EditProfileConstants.numberOfBulletPoints {
             let title = titlePrefix + "\(index)"
             let bulletPointView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .growingTextView)
+            bulletPointView.delegate = self
             theStackView.addArrangedSubview(bulletPointView)
             theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
         }
@@ -92,11 +90,13 @@ class EditProfileViewController: UIViewController {
     
     func fullNameViewSetup() {
         let fullNameView = AboutView(title: EditProfileConstants.fullNameTitle, placeHolder: EditProfileConstants.fullNamePlaceholder, type: .normalTextField)
+        fullNameView.delegate = self
         theStackView.addArrangedSubview(fullNameView)
     }
     
     func schoolOrJobViewSetup() {
         let schoolOrJobView = AboutView(title: EditProfileConstants.schoolOrJobTitle, placeHolder: EditProfileConstants.schoolOrJobPlaceholder, type: .normalTextField)
+        schoolOrJobView.delegate = self
         theStackView.addArrangedSubview(schoolOrJobView)
     }
     
@@ -105,13 +105,6 @@ class EditProfileViewController: UIViewController {
             self.ageCellTapped(sender)
             }, type: .tappableCell)
         theStackView.addArrangedSubview(ageView)
-    }
-    
-    func heightViewSetup() {
-        let heightView = AboutView(title: EditProfileConstants.heightTitle, placeHolder: EditProfileConstants.heightPlaceholder, innerText: nil, action: { (sender) in
-            self.performSegue(withIdentifier: SegueIdentifier.EditProfileToHeightPickerSegue.rawValue, sender: nil)
-            }, type: .tappableCell)
-        theStackView.addArrangedSubview(heightView)
     }
     
     func tagPageSegueViewSetup() {
@@ -129,6 +122,7 @@ class EditProfileViewController: UIViewController {
         }
         return nil
     }
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -137,30 +131,77 @@ class EditProfileViewController: UIViewController {
 
 }
 
-extension EditProfileViewController: PhotoEditingDelegate {
-    func photoPressed(_ photoNumber: Int, imageSize: CGSize) {
-        thePhotoNumberToChange = photoNumber
-        createBottomPicturePopUp(imageSize)
+extension EditProfileViewController: AboutViewDelegate {
+    func jumpToScrollViewPosition(yPosition: CGFloat) {
+        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition), animated: true)
     }
     
-    func createBottomPicturePopUp(_ imageSize: CGSize) {
-        let storyboard = UIStoryboard(name: "PopUp", bundle: nil)
-        let vc = storyboard.instantiateViewController(withIdentifier: StoryboardIdentifiers.BottomPicturePopUpViewController.rawValue) as! BottomPicturePopUpViewController
-        vc.bottomPicturePopUpViewControllerDelegate = self
-        vc.profileImageSize = imageSize
-        let popup = STPopupController(rootViewController: vc)
-        popup?.navigationBar.barTintColor = ChachaTeal
-        popup?.navigationBar.tintColor = UIColor.white
-        popup?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        popup?.style = STPopupStyle.bottomSheet
-        popup?.present(in: self)
+    func incrementScrollViewYPosition(by heightChange: CGFloat) {
+        let contentYOffset = theScrollView.contentOffset.y + heightChange
+        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: contentYOffset), animated: true)
     }
 }
 
-extension EditProfileViewController: BottomPicturePopUpViewControllerDelegate {
-    func passImage(_ image: UIImage) {
-        photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
-        dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+    func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool) {
+        thePhotoNumberToChange = photoNumber
+        showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
+    }
+    
+    fileprivate func showPhotoChoices(isReplacingPhoto: Bool) {
+        resignFirstResponder()
+        var alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
+        
+        if isReplacingPhoto {
+            alert = showReplacePhotoChoices(alert: alert)
+        } else {
+            //clicked on a photo box that has never been edited
+            alert = showNewPhotoChoices(alert: alert)
+        }
+        
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel)
+        alert.addAction(cancelAction)
+        
+        present(alert, animated: true, completion: nil)
+    }
+
+    fileprivate func showReplacePhotoChoices(alert: UIAlertController) -> UIAlertController {
+        let replaceAction = UIAlertAction(title: "Replace Photo", style: .default) { (alertAction: UIAlertAction) in
+            self.showPhotoChoices(isReplacingPhoto: false)
+        }
+        
+        let deleteAction = UIAlertAction(title: "Delete Photo", style: .default) { (alertAction: UIAlertAction) in
+            self.photoLayoutView.deleteImage(photoNumber: self.thePhotoNumberToChange)
+        }
+        
+        alert.addAction(replaceAction)
+        alert.addAction(deleteAction)
+        return alert
+    }
+    
+    fileprivate func showNewPhotoChoices(alert: UIAlertController) -> UIAlertController {
+        let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
+        }
+        
+        let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { (alertAction: UIAlertAction) in
+            _ = Camera.shouldStartCamera(target: self, canEdit: false, frontFacing: true)
+        }
+        
+        alert.addAction(photoLibraryAction)
+        alert.addAction(cameraAction)
+
+        return alert
+    }
+    
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
+        if image != nil {
+            //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
+            //            let resizedImage = image.resizeImage(profileImageSize!)
+            photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
+            dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+        }
+        picker.dismiss(animated: true, completion: nil)
     }
 }
 
@@ -169,29 +210,9 @@ extension EditProfileViewController {
     func ageCellTapped(_ sender: AboutView) {
         DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
             (birthday) -> Void in
-            let actualBirthday : Date = birthday - 1.day //for some reason, the birthday passed is one day ahead, even though it is entered correctly, so we need to subtract one
-            let age = self.calculateAge(actualBirthday)
+            let age = User.current()!.calculateAge(birthday: birthday)
             sender.setInnerTitle("\(age)")
-            self.dataStore.saveAge(actualBirthday)
-        }
-    }
-    
-    func calculateAge(_ birthday: Date) -> Int {
-        let calendar : Calendar = Calendar.current
-        let now = Date()
-        let ageComponents = (calendar as NSCalendar).components(.year,
-                                                from: birthday,
-                                                to: now,
-                                                options: [])
-        return ageComponents.year!
-    }
-}
-
-extension EditProfileViewController: HeightPickerDelegate {
-    func passHeight(height: String, totalInches: Int) {
-        if let heightView = findAboutView(EditProfileConstants.heightTitle) {
-            heightView.setInnerTitle(height)
-            dataStore.saveHeight(height: totalInches)
+            self.dataStore.saveAge(birthday)
         }
     }
 }
@@ -200,19 +221,7 @@ extension EditProfileViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case EditProfileToAddingTagsSegue
-        case EditProfileToHeightPickerSegue
     }
-    
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        switch segueIdentifierForSegue(segue) {
-        case .EditProfileToHeightPickerSegue:
-            let destinationVC = segue.destination as! HeightPickerViewController
-            destinationVC.delegate = self
-        default:
-            break
-        }
-    }
-    
 }
 
 extension EditProfileViewController : EditProfileDataStoreDelegate {
@@ -228,17 +237,8 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
     }
     
     func loadText(_ text: String, title: String) {
-        let aboutView = findAboutView(title)
+        let aboutView = findAboutView(title: title)
         aboutView?.setCurrentText(text)
-    }
-    
-    func findAboutView(_ title: String) -> AboutView? {
-        for subview in theStackView.arrangedSubviews {
-            if let aboutView = subview as? AboutView , aboutView.getTitle() == title {
-                return aboutView
-            }
-        }
-        return nil //didn't find a matching aboutView
     }
     
     func saveTextIfEdited() {
@@ -264,24 +264,19 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
 
 //the keyboard extension
 extension EditProfileViewController {
-    func keyboardNotification(notification: NSNotification) {
-        if let userInfo = notification.userInfo {
-            let endFrame = (userInfo[UIKeyboardFrameEndUserInfoKey] as? NSValue)?.cgRectValue
-            let duration:TimeInterval = (userInfo[UIKeyboardAnimationDurationUserInfoKey] as? NSNumber)?.doubleValue ?? 0
-            let animationCurveRawNSN = userInfo[UIKeyboardAnimationCurveUserInfoKey] as? NSNumber
-            let animationCurveRaw = animationCurveRawNSN?.uintValue ?? UIViewAnimationOptions.curveEaseInOut.rawValue
-            let animationCurve:UIViewAnimationOptions = UIViewAnimationOptions(rawValue: animationCurveRaw)
-            let keyboardHeight: CGFloat = endFrame?.size.height ?? 0.0
-            if (endFrame?.origin.y)! >= UIScreen.main.bounds.size.height {
-                self.theBottomConstraintToScrollView.constant -= keyboardHeight
-            } else {
-                self.theBottomConstraintToScrollView.constant += keyboardHeight
-            }
-            UIView.animate(withDuration: duration,
-                                       delay: TimeInterval(0),
-                                       options: animationCurve,
-                                       animations: { self.view.layoutIfNeeded() },
-                                       completion: nil)
-        }
+    func keyboardWillShow(notification:NSNotification){
+        //give room at the bottom of the scroll view, so it doesn't cover up anything the user needs to tap
+        var userInfo = notification.userInfo!
+        var keyboardFrame:CGRect = (userInfo[UIKeyboardFrameBeginUserInfoKey] as! NSValue).cgRectValue
+        keyboardFrame = self.view.convert(keyboardFrame, from: nil)
+        
+        var contentInset:UIEdgeInsets = self.theScrollView.contentInset
+        contentInset.bottom = keyboardFrame.size.height
+        self.theScrollView.contentInset = contentInset
+    }
+    
+    func keyboardWillHide(notification:NSNotification){
+        let contentInset:UIEdgeInsets = UIEdgeInsets.zero
+        self.theScrollView.contentInset = contentInset
     }
 }

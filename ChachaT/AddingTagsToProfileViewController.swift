@@ -9,6 +9,7 @@
 import UIKit
 import Parse
 import SCLAlertView
+import Timepiece
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
@@ -74,6 +75,17 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         }
     }
     
+    override func addDropDownTag(tag: Tag) {
+        if let dropDownTag = tag as? DropDownTag {
+            switch dropDownTag.dropDownAttribute {
+            case .tagChoices:
+                super.addDropDownTag(tag: tag)
+            case .singleSlider, .rangeSlider:
+                createCustomTags(dropDownTag: dropDownTag)
+            }
+        }
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -117,6 +129,54 @@ extension AddingTagsToProfileViewController {
                     dropDownActions(dropDownTag)
                 }
             default: break
+            }
+        }
+    }
+}
+
+//Extension for adding some custom tags like "Age". "Height"
+extension AddingTagsToProfileViewController {
+    fileprivate func createCustomTags(dropDownTag: DropDownTag) {
+        switch dropDownTag.databaseColumnName {
+        case CustomDropDownParseColumnNames.height:
+            performHeightTagAction(dropDownTag: dropDownTag)
+        case CustomDropDownParseColumnNames.age:
+            performAgeTagAction(dropDownTag: dropDownTag)
+        default:
+            break
+        }
+    }
+    
+    fileprivate func performHeightTagAction(dropDownTag: DropDownTag) {
+        addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: User.current()!.heightConvertedToString) { (specialtyTagView: SpecialtyTagView) in
+            let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
+            let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
+            heightPickerVC.passHeight = { (height: String, totalInches: Int) in
+                specialtyTagView.annotationView.updateText(text: height)
+                self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
+            }
+            self.navigationController?.pushViewController(heightPickerVC, animated: true)
+        }
+    }
+    
+    fileprivate func performAgeTagAction(dropDownTag: DropDownTag) {
+        let currentAge: Int = User.current()!.age ?? 0
+        addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
+            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+                (birthday) -> Void in
+                //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
+                let age = User.current()!.calculateAge(birthday: birthday)
+                specialtyTagView.annotationView.updateText(text: "\(age)")
+                self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
+            }
+        }
+    }
+    
+    fileprivate func addCustomTagViews(dropDownTag: DropDownTag, innerAnnotationText: String, onTap: @escaping (SpecialtyTagView) -> ()) {
+        let tagView = tagChoicesView.addSpecialtyTag(dropDownTag.title, tagAttribute: .innerText, innerAnnotationText: innerAnnotationText)
+        tagView.onTap = { (tagView: TagView) in
+            if let specialtyTagView = tagView as? SpecialtyTagView {
+                onTap(specialtyTagView)
             }
         }
     }

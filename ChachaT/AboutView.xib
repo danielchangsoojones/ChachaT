@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -12,12 +11,13 @@
                 <outlet property="theCharacterCount" destination="Xnn-Sc-MjG" id="JNe-hZ-8vd"/>
                 <outlet property="theInputContentView" destination="wTI-Br-uFX" id="Qzh-9S-raS"/>
                 <outlet property="theTitleLabel" destination="Lyx-1d-1wd" id="3jl-Ci-zui"/>
+                <outlet property="theTitleLabelLeadingConstraint" destination="vnR-Rd-HgT" id="ItV-yv-q0B"/>
                 <outlet property="view" destination="iN0-l3-epB" id="fg8-Af-F9Z"/>
             </connections>
         </placeholder>
         <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
         <view contentMode="scaleToFill" id="iN0-l3-epB">
-            <rect key="frame" x="0.0" y="0.0" width="374" height="50"/>
+            <rect key="frame" x="0.0" y="0.0" width="374" height="55"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Char Count" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Xnn-Sc-MjG">
@@ -25,7 +25,7 @@
                     <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
-                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Bullet Point #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyx-1d-1wd">
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="241" text="Bullet Point #" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Lyx-1d-1wd">
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
                     <color key="textColor" red="0.69411764705882351" green="0.69411764705882351" blue="0.69411764705882351" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
@@ -44,26 +44,27 @@
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstAttribute="trailing" secondItem="Lzg-4X-TrX" secondAttribute="trailing" id="1JM-gz-XlZ"/>
-                        <constraint firstItem="Lzg-4X-TrX" firstAttribute="leading" secondItem="wTI-Br-uFX" secondAttribute="leading" id="hDD-LT-jeN"/>
                         <constraint firstItem="Lzg-4X-TrX" firstAttribute="top" secondItem="wTI-Br-uFX" secondAttribute="top" id="sya-Q5-VrU"/>
                         <constraint firstAttribute="bottom" secondItem="Lzg-4X-TrX" secondAttribute="bottom" id="yjK-Qi-Raw"/>
                     </constraints>
                 </view>
             </subviews>
             <constraints>
-                <constraint firstItem="Xnn-Sc-MjG" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="H64-Qo-TRC"/>
-                <constraint firstAttribute="trailing" secondItem="wTI-Br-uFX" secondAttribute="trailing" id="VqE-9r-o0s"/>
-                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="ZkK-aD-Geh"/>
+                <constraint firstItem="Lzg-4X-TrX" firstAttribute="leading" secondItem="Lyx-1d-1wd" secondAttribute="leading" constant="-2" id="9gF-Zx-7EW"/>
+                <constraint firstItem="Xnn-Sc-MjG" firstAttribute="top" secondItem="Lyx-1d-1wd" secondAttribute="top" id="W0G-rQ-kPE"/>
                 <constraint firstAttribute="bottom" secondItem="wTI-Br-uFX" secondAttribute="bottom" constant="-1" id="dyx-d8-S0L"/>
+                <constraint firstItem="wTI-Br-uFX" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="gtX-nA-JSF"/>
                 <constraint firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="15" id="kDU-dP-TgL"/>
+                <constraint firstItem="Xnn-Sc-MjG" firstAttribute="bottom" secondItem="Lyx-1d-1wd" secondAttribute="bottom" id="okb-LD-ddM"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="omr-QF-Sv2"/>
-                <constraint firstItem="wTI-Br-uFX" firstAttribute="top" secondItem="Lyx-1d-1wd" secondAttribute="bottom" id="ov1-3L-ltX"/>
+                <constraint firstItem="wTI-Br-uFX" firstAttribute="top" secondItem="Lyx-1d-1wd" secondAttribute="bottom" constant="5" id="ov1-3L-ltX"/>
+                <constraint firstItem="Lzg-4X-TrX" firstAttribute="trailing" secondItem="Xnn-Sc-MjG" secondAttribute="trailing" constant="2" id="ow6-Lw-kGF"/>
                 <constraint firstItem="Lyx-1d-1wd" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="15" id="vnR-Rd-HgT"/>
+                <constraint firstAttribute="trailing" secondItem="wTI-Br-uFX" secondAttribute="trailing" id="zx4-8h-5pC"/>
             </constraints>
             <nil key="simulatedStatusBarMetrics"/>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
-            <point key="canvasLocation" x="547" y="280"/>
+            <point key="canvasLocation" x="547" y="279"/>
         </view>
     </objects>
 </document>

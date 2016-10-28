@@ -355,8 +355,13 @@ open class TagListView: UIView {
 
 extension TagListView {
     //Daniel Jones added this method in. It was not originally part of tagListView
-    public func addSpecialtyTag(_ tagTitle: String, tagAttribute: TagAttributes) -> TagView {
-        let tagView = SpecialtyTagView(tagTitle: tagTitle, tagAttribute: tagAttribute)
+    public func addSpecialtyTag(_ tagTitle: String, tagAttribute: TagAttributes, innerAnnotationText: String = "") -> TagView {
+        var tagView: SpecialtyTagView!
+        if tagAttribute == .innerText && innerAnnotationText != "" {
+            tagView = SpecialtyTagView(tagTitle: tagTitle, innerLabelText: innerAnnotationText)
+        } else {
+            tagView = SpecialtyTagView(tagTitle: tagTitle, tagAttribute: tagAttribute)
+        }
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(specialtyTagPressed(_:)))
         
         return addTagView(attributedTagView)

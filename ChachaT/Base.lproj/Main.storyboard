@@ -1,7 +1,6 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hLe-I3-MDq">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hLe-I3-MDq">
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -369,6 +368,7 @@
                         <outlet property="profileImage" destination="8hk-xb-Z8g" id="QQ4-0v-Dow"/>
                         <outlet property="theAgeLabel" destination="iG2-2N-iPj" id="TJR-gZ-ehy"/>
                         <outlet property="theBackButton" destination="i23-FF-3md" id="bs8-r8-Hh2"/>
+                        <outlet property="theBackButtonLeadingConstraint" destination="Skd-VA-TBZ" id="byq-Xb-d1i"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
                         <outlet property="theCardUserTagListView" destination="dCe-w4-3mH" id="8wC-ZM-3yy"/>
                         <outlet property="theFullNameLabel" destination="dI7-Qj-h3R" id="jDQ-RN-H4a"/>
@@ -401,10 +401,10 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Approve Button" width="81" height="81"/>
+        <image name="Approve Button" width="63" height="63"/>
         <image name="LoadingCircle" width="78" height="78"/>
         <image name="Report User Button" width="5" height="20"/>
-        <image name="Skip Button" width="81" height="81"/>
+        <image name="Skip Button" width="63" height="63"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
 </document>

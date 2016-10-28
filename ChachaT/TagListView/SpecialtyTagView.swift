@@ -67,7 +67,14 @@ open class SpecialtyTagView: TagView {
     init(tagTitle: String, tagAttribute: TagAttributes) {
         self.tagAttribute = tagAttribute
         super.init(title: tagTitle)
-        addAnnotationSubview()
+        createAnnotationViewWithImage()
+        createFakeBorder()
+    }
+    
+    init(tagTitle: String, innerLabelText: String) {
+        self.tagAttribute = .innerText
+        super.init(title: tagTitle)
+        createAnnotationViewWithInnerText(text: innerLabelText)
         createFakeBorder()
     }
     
@@ -88,8 +95,18 @@ open class SpecialtyTagView: TagView {
         }
     }
     
-    func addAnnotationSubview() {
+    //For when we want an image like an arrow or lock to be in the middle of the annotation image
+    fileprivate func createAnnotationViewWithImage() {
         annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
+        addAnnotationSubview(annotationView: annotationView)
+    }
+    
+    fileprivate func createAnnotationViewWithInnerText(text: String) {
+        annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)
+        addAnnotationSubview(annotationView: annotationView)
+    }
+    
+    fileprivate func addAnnotationSubview(annotationView: AnnotationView) {
         //false user interaction, so users can click on the actual tag, which is underneath this subview. Without this, if you tapped on the tag special area, then nothing would happen.
         annotationView.isUserInteractionEnabled = false
         self.addSubview(annotationView)
