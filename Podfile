@@ -12,7 +12,6 @@ pod 'EFTools/Basic', :git => 'https://github.com/ElevenFifty/EFTools.git', :bran
 pod 'Parse'
 pod 'ParseUI'
 pod 'ParseLiveQuery', :git=> 'https://github.com/ParsePlatform/ParseLiveQuery-iOS-OSX.git'
-pod 'STPopup'
 pod "TTRangeSlider"
 pod "Timepiece", :git => 'https://github.com/skofgar/Timepiece.git', :branch => 'swift3' #temporary fix. Some random guy converted the swift 3 code, so I am pointing to his for now, until the real timepiece cocoapod converts.
 pod 'Ripple'

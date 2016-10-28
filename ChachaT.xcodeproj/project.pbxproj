@@ -89,8 +89,6 @@
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
 		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
-		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
-		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
@@ -121,7 +119,6 @@
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
 		92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */; };
 		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
-		92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -216,8 +213,6 @@
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
-		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
-		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
@@ -248,7 +243,6 @@
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
 		92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JointParseTagToUser.swift; sourceTree = "<group>"; };
 		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
-		92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopUpSuperViewController.swift; sourceTree = "<group>"; };
 		95775F81069424F8C55B7B25 /* Pods-Shuffles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.release.xcconfig"; sourceTree = "<group>"; };
 		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E010027B7167FAA9E4AC828B /* Pods-Shuffles.debug(staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(staging).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(staging).xcconfig"; sourceTree = "<group>"; };
@@ -523,7 +517,6 @@
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
-				92E59B051CF677FD00B0B1A4 /* Pop Ups */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				9288194D1D2BECC8000A8E04 /* Navigation */,
 				9261085A1CEA1939009F3E86 /* Models */,
@@ -839,16 +832,6 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
-		92E59B051CF677FD00B0B1A4 /* Pop Ups */ = {
-			isa = PBXGroup;
-			children = (
-				929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */,
-				92E59B081CF67DF300B0B1A4 /* PopUpSuperViewController.swift */,
-				929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */,
-			);
-			name = "Pop Ups";
-			sourceTree = "<group>";
-		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -926,7 +909,6 @@
 				92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
-				929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */,
 				9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
@@ -1036,7 +1018,6 @@
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
-				929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
@@ -1047,7 +1028,6 @@
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
-				92E59B091CF67DF300B0B1A4 /* PopUpSuperViewController.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
@@ -1100,14 +1080,6 @@
 				926108201CDBCA32009F3E86 /* Base */,
 			);
 			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-		929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				929FDB801CFA6F0400ACE474 /* Base */,
-			);
-			name = PopUp.storyboard;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */
