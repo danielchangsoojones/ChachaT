@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import STPopup
 import EZSwiftExtensions
 import Timepiece
 import EFTools

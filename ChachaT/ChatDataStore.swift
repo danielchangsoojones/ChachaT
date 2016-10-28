@@ -145,7 +145,7 @@ class ChatDataStore {
         chat.saveInBackground { (succeeded, error) -> Void in
             if succeeded {
                 JSQSystemSoundPlayer.jsq_playMessageSentSound()
-            }else{
+            }else if let error = error {
                 print(error)
             }
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0810"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2F1E7409926198E4BF348B21C013349C"
+               BlueprintIdentifier = "92AAA28DBFCB439ADF276B10BC1CA829"
                BuildableName = "Timepiece.framework"
                BlueprintName = "Timepiece"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2F1E7409926198E4BF348B21C013349C"
+            BlueprintIdentifier = "92AAA28DBFCB439ADF276B10BC1CA829"
             BuildableName = "Timepiece.framework"
             BlueprintName = "Timepiece"
             ReferencedContainer = "container:Pods.xcodeproj">

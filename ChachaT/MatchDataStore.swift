@@ -37,7 +37,7 @@ class MatchDataStore: NSObject {
                     connections.append(connection)
                 }
                 self.delegate?.passMatches(connections)
-            } else if error != nil {
+            } else if let error = error {
                 print(error)
             }
         }

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0800"
+   LastUpgradeVersion = "0810"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "AF712C75C6004503AB238CF1FB1E149F"
+               BlueprintIdentifier = "5F3AFA579E8CC6AE0B7AD373C8DFC3F9"
                BuildableName = "Ripple.framework"
                BlueprintName = "Ripple"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "AF712C75C6004503AB238CF1FB1E149F"
+            BlueprintIdentifier = "5F3AFA579E8CC6AE0B7AD373C8DFC3F9"
             BuildableName = "Ripple.framework"
             BlueprintName = "Ripple"
             ReferencedContainer = "container:Pods.xcodeproj">

@@ -80,7 +80,7 @@ extension BackgroundAnimationDataStore {
                     swipeUserObjectIDs.append(otherUser.objectId!)
                 }
                 self.delegate?.passUnansweredSwipes(swipes: swipes)
-            } else if error != nil {
+            } else if let error = error {
                 print(error)
             }
             //This is outside the parseSwipes area, because if the user has no swipes yet, then it won't run the for loop, so we would want to find any suers in the database. We want to find newUserSwipes regardless of whether the user has matches.
@@ -109,7 +109,7 @@ extension BackgroundAnimationDataStore {
                     }
                     self.delegate?.passNewUserSwipes(swipes: swipes)
                 }
-            } else if error != nil {
+            } else if let error = error {
                 print(error)
             }
         })

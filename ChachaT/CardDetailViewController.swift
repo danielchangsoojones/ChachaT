@@ -9,7 +9,6 @@
 import UIKit
 import Parse
 import ParseUI
-import STPopup
 import EFTools
 import SCLAlertView
 
