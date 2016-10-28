@@ -44,7 +44,6 @@ class PopulateDropDownCategories {
     }
     
     init() {
-        checkIfTagChoicesAlreadyExist()
     }
     
     func checkIfTagChoicesAlreadyExist() {
@@ -134,6 +133,7 @@ class PopulateDropDownCategories {
         }
     }
     
+    //TODO: should make sure to add in the creating of a privacy tag. Not doing that currently.
     fileprivate func createInnerParseTags(dropDownCategory: DropDownCategory) {
         let query = ParseTag.query()! as! PFQuery<ParseTag>
         let innerTagTitles: [String] = TagChoices(rawValue: dropDownCategory.name)!.innerTags
@@ -170,5 +170,49 @@ class PopulateDropDownCategories {
             }
         }
     }
+}
+
+//extension for privacy tags
+extension PopulateDropDownCategories {
+    func createPrivacyTags() {
+        for specialtyCategory in TagChoices.allTitleValues {
+            checkIfPrivacyTagExists(specialtyCategory: specialtyCategory)
+        }
+    }
     
+    fileprivate func checkIfPrivacyTagExists(specialtyCategory: String) {
+        let query = ParseTag.query()!
+        query.whereKey("isPrivate", equalTo: true)
+        let innerQuery = DropDownCategory.query()!
+        innerQuery.whereKey("name", equalTo: specialtyCategory)
+        query.whereKey("dropDownCategory", matchesQuery: innerQuery)
+        
+        query.getFirstObjectInBackground { (object, error) in
+            if let error = error {
+                let code = error._code
+                if code == PFErrorCode.errorObjectNotFound.rawValue {
+                    self.createNewPrivacyTag(specialtyCategory: specialtyCategory)
+                }
+            }
+        }
+    }
+    
+    //We don't actually want to save the privacy tag to the innerTags of a dropDownCategory because then it would show up in the dropDownMenu when a dropDownTag was pressed
+    //We only want users to be able to save to it, nothing more.
+    fileprivate func createNewPrivacyTag(specialtyCategory: String) {
+        let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
+        query.whereKey("name", equalTo: specialtyCategory)
+        query.getFirstObjectInBackground { (category, error) in
+            if let category = category {
+                let parseTag = ParseTag()
+                parseTag.tagTitle = specialtyCategory + "Private"
+                //So we know which specialty choice is actually private
+                parseTag.dropDownCategory = category
+                //This is the important part for making a private tag
+                parseTag.isPrivate = true
+                parseTag.attribute = TagAttributes.dropDownMenu.rawValue
+                parseTag.saveInBackground()
+            }
+        }
+    }
 }

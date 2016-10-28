@@ -87,6 +87,8 @@
 		928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */; };
 		928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D771DBA588700D6B6D3 /* Enviroment.swift */; };
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
+		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
+		929428E01DC37A760019617C /* TagEnums.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DF1DC37A760019617C /* TagEnums.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929FDB811CFA6F0400ACE474 /* PopUp.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 929FDB7F1CFA6F0400ACE474 /* PopUp.storyboard */; };
 		929FDB831CFA705C00ACE474 /* BottomPicturePopUpViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */; };
@@ -213,6 +215,8 @@
 		928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightPickerViewController.swift; sourceTree = "<group>"; };
 		928B8D771DBA588700D6B6D3 /* Enviroment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		929428DF1DC37A760019617C /* TagEnums.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagEnums.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929FDB801CFA6F0400ACE474 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/PopUp.storyboard; sourceTree = "<group>"; };
 		929FDB821CFA705C00ACE474 /* BottomPicturePopUpViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomPicturePopUpViewController.swift; sourceTree = "<group>"; };
@@ -472,6 +476,8 @@
 			isa = PBXGroup;
 			children = (
 				925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */,
+				929428DD1DC37A5E0019617C /* Tags.swift */,
+				929428DF1DC37A760019617C /* TagEnums.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -1026,6 +1032,7 @@
 				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
 				92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */,
+				929428E01DC37A760019617C /* TagEnums.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
@@ -1065,6 +1072,7 @@
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
+				929428DE1DC37A5E0019617C /* Tags.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
