@@ -123,7 +123,7 @@ extension WelcomeDataStore {
                     //let the facebook user sign-in
                     self.delegate?.performSegueIntoApp()
                 }
-            } else {
+            } else if let error = error {
                 print(error)
             }
         }
@@ -146,7 +146,7 @@ extension WelcomeDataStore {
                     currentUser.saveInBackground()
                     
                     self.updateFacebookImage()
-                } else {
+                } else if let error = error {
                     print(error)
                 }
             })

@@ -256,7 +256,7 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
         if let picture = picture {
             pictureFile = PFFile(name: "picture.jpg", data: UIImageJPEGRepresentation(picture, 0.6)!)
             pictureFile.saveInBackground(block: { (suceeded, error) -> Void in
-                if error != nil {
+                if let error = error {
                     print(error)
                 }
             })

@@ -63,7 +63,7 @@ class SearchTagsDataStore: SuperTagDataStore {
                 } else {
                     self.delegate?.passUserArrayToMainPage(users)
                 }
-            } else if error != nil {
+            } else if let error = error {
                 print(error)
             }
         }
