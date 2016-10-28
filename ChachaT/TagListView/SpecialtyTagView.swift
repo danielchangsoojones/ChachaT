@@ -35,6 +35,7 @@ open class SpecialtyTagView: TagView {
     open override var cornerRadius: CGFloat {
         didSet {
             fakeBorder.layer.cornerRadius = cornerRadius
+            elongatedAnnotationView?.setCornerRadius(radius: cornerRadius)
         }
     }
     
@@ -61,7 +62,8 @@ open class SpecialtyTagView: TagView {
     
     var tagAttribute : TagAttributes = .generic
     
-    var annotationView: AnnotationView!
+    var annotationView: AnnotationView?
+    var elongatedAnnotationView: UIView?
     var fakeBorder: UIView!
     
     init(tagTitle: String, tagAttribute: TagAttributes) {
@@ -98,12 +100,7 @@ open class SpecialtyTagView: TagView {
     //For when we want an image like an arrow or lock to be in the middle of the annotation image
     fileprivate func createAnnotationViewWithImage() {
         annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
-        addAnnotationSubview(annotationView: annotationView)
-    }
-    
-    fileprivate func createAnnotationViewWithInnerText(text: String) {
-        annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)
-        addAnnotationSubview(annotationView: annotationView)
+        addAnnotationSubview(annotationView: annotationView!)
     }
     
     fileprivate func addAnnotationSubview(annotationView: AnnotationView) {
@@ -128,17 +125,66 @@ open class SpecialtyTagView: TagView {
     }
     
     func updateAnnotationView() {
-        let annotationViewDiameter = self.intrinsicContentSize.height
-        annotationView.updateDiameter(annotationViewDiameter)
-        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
-        titleEdgeInsets.left = annotationViewDiameter
+        elongatedAnnotationView?.snp.remakeConstraints({ (make) in
+            make.top.bottom.leading.equalToSuperview()
+            make.width.equalTo(getLeftInset())
+        })
+        annotationView?.updateDiameter(self.intrinsicContentSize.height)
+        
+        titleEdgeInsets.left = getLeftInset()
     }
     
     open override var intrinsicContentSize : CGSize {
         let height = super.intrinsicContentSize.height //height is still calculated like a normal tagView
-        let annotationViewDiameter = height
-        let width = super.intrinsicContentSize.width + annotationViewDiameter
+        let width = super.intrinsicContentSize.width + getLeftInset()
         return CGSize(width: width, height: height)
     }
+
+    fileprivate func getLeftInset() -> CGFloat {
+        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView. I truly don't understand why these measurement are acting the way they do. The measurements that would be sense fo r this, aren't producing the right results. Right now, it looks good, but it's not mathematically sound.
+        var leftInset: CGFloat = 0
+        if let _ = annotationView {
+            let annotationViewDiameter = super.intrinsicContentSize.height
+            leftInset = annotationViewDiameter
+        } else if let elongatedAnnotationView = elongatedAnnotationView {
+            leftInset = elongatedAnnotationView.frame.width + paddingX
+        }
+        return leftInset
+    }
+}
+
+//Extension for annotationViews with inner text
+extension SpecialtyTagView {
+    fileprivate func createAnnotationViewWithInnerText(text: String) {
+        if text.characters.count <= 4 {
+            annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)
+            addAnnotationSubview(annotationView: annotationView!)
+        } else {
+            elongatedAnnotationViewWithText(text: text)
+        }
+    }
     
+    fileprivate func elongatedAnnotationViewWithText(text: String) {
+        elongatedAnnotationView = UIView()
+        elongatedAnnotationView!.backgroundColor = TagViewProperties.borderColor
+        elongatedAnnotationView?.isUserInteractionEnabled = false
+        let innerLabel = createInnerLabel(text: text, superview: elongatedAnnotationView!)
+        elongatedAnnotationView?.frame = CGRect(x: 0, y: 0, width: innerLabel.intrinsicContentSize.width, height: 0)
+        self.addSubview(elongatedAnnotationView!)
+        elongatedAnnotationView?.snp.makeConstraints { (make) in
+            make.top.bottom.leading.equalToSuperview()
+            make.width.equalTo(innerLabel.intrinsicContentSize.width + paddingX * 2)
+        }
+    }
+    
+    fileprivate func createInnerLabel(text: String, superview: UIView) -> UILabel {
+        let label = UILabel()
+        label.text = text
+        label.textColor = TagViewProperties.tagInsidesColor
+        superview.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        return label
+    }
 }

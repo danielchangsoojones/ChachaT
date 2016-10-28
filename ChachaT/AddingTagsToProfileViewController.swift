@@ -152,7 +152,7 @@ extension AddingTagsToProfileViewController {
             let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
             let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
             heightPickerVC.passHeight = { (height: String, totalInches: Int) in
-                specialtyTagView.annotationView.updateText(text: height)
+                specialtyTagView.annotationView?.updateText(text: height)
                 self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
             }
             self.navigationController?.pushViewController(heightPickerVC, animated: true)
@@ -166,7 +166,7 @@ extension AddingTagsToProfileViewController {
                 (birthday) -> Void in
                 //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
                 let age = User.current()!.calculateAge(birthday: birthday)
-                specialtyTagView.annotationView.updateText(text: "\(age)")
+                specialtyTagView.annotationView?.updateText(text: "\(age)")
                 self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
             }
         }
