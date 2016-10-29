@@ -50,10 +50,7 @@ class SuperTagViewController: UIViewController {
     
     func addDropDownTag(tag: Tag) {
         let dropDownTag = tag as! DropDownTag
-        let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-        if dropDownTag.isPrivate {
-            tagView.makePrivate()
-        }
+        _ = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
     }
     
     func resetTagChoicesViewList() {

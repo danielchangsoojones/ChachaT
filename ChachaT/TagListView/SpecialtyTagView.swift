@@ -102,7 +102,6 @@ open class SpecialtyTagView: TagView {
     }
     
     fileprivate func createAnnotationViewWithInnerText(text: String) {
-        //I will have to update padddingX when the paddingX gets set
         annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)
         addAnnotationSubview(annotationView: annotationView!)
     }

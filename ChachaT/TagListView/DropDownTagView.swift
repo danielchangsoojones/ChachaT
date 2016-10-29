@@ -16,13 +16,9 @@ class DropDownTagView: SpecialtyTagView {
         self.specialtyCategoryTitle = specialtyCategoryTitle
     }
     
-    func makeNonPrivate() {
-        annotationView?.updateImage(AnnotationImages.dropDownMenu)
-    }
-    
     func makePrivate() {
         annotationView?.updateImage(AnnotationImages.isPrivate)
-        titleEdgeInsets.left = annotationView!.intrinsicContentSize.width + paddingX
+        updateAnnotationView()
         if let tagListView = findSuperTagListView() {
             tagListView.layoutSubviews()
         }

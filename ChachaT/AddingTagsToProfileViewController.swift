@@ -79,7 +79,12 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         if let dropDownTag = tag as? DropDownTag {
             switch dropDownTag.dropDownAttribute {
             case .tagChoices:
-                super.addDropDownTag(tag: tag)
+                let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
+                if dropDownTag.isPrivate {
+                    tagView.makePrivate()
+                } else if let annotationTitle = dropDownTag.annotationTitle {
+                    tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
+                }
             case .singleSlider, .rangeSlider:
                 createCustomTags(dropDownTag: dropDownTag)
             }

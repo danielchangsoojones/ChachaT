@@ -17,12 +17,12 @@ public enum DropDownAttributes: String {
 
 //TODO: I can subclass this even farther into tagChoices and sliderTags
 class DropDownTag : Tag {
-    var displayName: String = "" {
+    var annotationTitle: String?
+    var specialtyCategory: String {
         didSet {
-            self.title = displayName
+            self.title = specialtyCategory
         }
-    } //when adding tags, we want the properties of something like gender, but have it show Male
-    var specialtyCategory: String
+    }
     var dropDownAttribute: DropDownAttributes
     var innerTagTitles : [String] = []
     var maxValue : Int = 0
@@ -44,12 +44,6 @@ class DropDownTag : Tag {
     convenience init(specialtyCategory: String, innerTagTitles: [String], isPrivate: Bool = false, notSetYet: Bool = false, dropDownAttribute: DropDownAttributes) {
         self.init(specialtyCategory: specialtyCategory, dropDownAttribute: dropDownAttribute, isPrivate: isPrivate, notSetYet: notSetYet)
         self.innerTagTitles = innerTagTitles
-    }
-    
-    //initializer for if we want to make a specialtyTag that has a title that is not named the specialty Category. On the adding tags to profile page, we want to show specialty tags, but if they have already set their ethnicity, then we want to set it, not to Ethnicity, but to "Black", "White", etc.
-    convenience init(tagTitle: String, specialtyCategory: String, innerTagTitles: [String], isPrivate: Bool = false, notSetYet: Bool = false, dropDownAttribute: DropDownAttributes) {
-        self.init(specialtyCategory: specialtyCategory, innerTagTitles: innerTagTitles, isPrivate: isPrivate, notSetYet: notSetYet, dropDownAttribute: dropDownAttribute)
-        self.title = tagTitle
     }
     
     //for creating the sliders
