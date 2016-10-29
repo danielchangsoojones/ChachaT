@@ -218,8 +218,24 @@ extension AddingTagsDataStore {
             } else if let error = error {
                 print(error)
             }
-            //this should load the dropDownTagViews even if there is error.
-            self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
+            
+            let sortedArray = self.tagChoicesDataArray.sorted(by: { (currentTag: Tag, nextTag: Tag) -> Bool in
+                return self.sortTags(currentTag: currentTag, nextTag: nextTag)
+            })
+            self.delegate?.setChoicesViewTagsArray(sortedArray)
+        }
+    }
+    
+    fileprivate func sortTags(currentTag: Tag, nextTag: Tag) -> Bool {
+        let isCurrentTagADropDown: Bool = currentTag is DropDownTag
+        let isNextTagADropDown: Bool = nextTag is DropDownTag
+        
+        if isCurrentTagADropDown == isNextTagADropDown {
+            //they are the same type of tag, so alphabetize them
+            return currentTag.title.localizedCaseInsensitiveCompare(nextTag.title) == ComparisonResult.orderedAscending
+        } else {
+            //place any dropDownTags at the end of the array
+            return !(currentTag is DropDownTag)
         }
     }
     
