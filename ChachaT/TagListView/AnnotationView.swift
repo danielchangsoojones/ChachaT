@@ -11,12 +11,11 @@ import Foundation
 class AnnotationView: CircleView {
     fileprivate struct AnnotationConstants {
         static let imageToCircleRatio : CGFloat = 0.75
+        static let minimumWordCountForCircle: Int = 4
     }
     
-    fileprivate var theImageView: UIImageView!
+    fileprivate var theImageView: UIImageView = UIImageView()
     fileprivate var theInnerLabel: UILabel = UILabel()
-    
-    fileprivate var paddingX: CGFloat = 0
     
     init(diameter: CGFloat, color: UIColor, imageName: String) {
         super.init(diameter: diameter, color: color)
@@ -24,9 +23,8 @@ class AnnotationView: CircleView {
     }
     
     //Purpose: if we want the annotation view to have a label inside of it, like for age, we might want "24"
-    init(diameter: CGFloat, color: UIColor, innerText: String, paddingX: CGFloat = 0) {
+    init(diameter: CGFloat, color: UIColor, innerText: String) {
         super.init(diameter: diameter, color: color)
-        self.paddingX = paddingX
         innerLabelSetup(labelText: innerText)
     }
     
@@ -34,20 +32,8 @@ class AnnotationView: CircleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    fileprivate func innerLabelSetup(labelText: String) {
-        updateText(text: labelText)
-        theInnerLabel.textColor = UIColor.white
-        theInnerLabel.textAlignment = .center
-        self.addSubview(theInnerLabel)
-        theInnerLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            //TODO: make this constant based upon something
-            make.width.equalToSuperview().multipliedBy(0.75)
-        }
-    }
-    
     func imageViewSetup(_ imageName: String) {
-        theImageView = UIImageView(image: UIImage(named: imageName))
+        theImageView.image = UIImage(named: imageName)
         theImageView.contentMode = .scaleAspectFit
         self.addSubview(theImageView)
         theImageView.snp.makeConstraints { (make) in
@@ -57,26 +43,49 @@ class AnnotationView: CircleView {
     }
     
     func updateImage(_ imageName: String) {
+        if !theImageView.isDescendant(of: self) {
+            //the innerLabel hasn't been added to the view yet
+            imageViewSetup(imageName)
+        }
+        theInnerLabel.removeFromSuperview()
+        updateDiameter(self.diameter)
         theImageView.image = UIImage(named: imageName)
     }
     
-    func updateText(text: String) {
-        theInnerLabel.text = text
-        if text.characters.count <= 4 {
-            //make the annotationView a cirle with text
-            self.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height)
+    override func updateDiameter(_ diameter: CGFloat) {
+        if let text = theInnerLabel.text, text.characters.count > AnnotationConstants.minimumWordCountForCircle && theInnerLabel.isDescendant(of: self) {
+            //we only want to elongate the frame if the character count is greater than the min, and if theInnerLabel is actually supposed to be shown
+            elongateFrame(text: text)
         } else {
-            self.frame = CGRect(x: 0, y: 0, width: theInnerLabel.intrinsicContentSize.width + paddingX * 2, height: self.frame.height)
+            self.diameter = diameter
+            super.updateDiameter(diameter)
         }
     }
 }
 
-//An extension
+//An extension for text within AnnotationView
 extension AnnotationView {
-    fileprivate func elongate(toWidth width: CGFloat) {
-        //TODO: will I need to update constraints?
-        self.frame = CGRect(x: 0, y: 0, width: width, height: frame.height)
+    fileprivate func innerLabelSetup(labelText: String) {
+        theInnerLabel.textColor = UIColor.white
+        theInnerLabel.textAlignment = .center
+        self.addSubview(theInnerLabel)
+        updateText(text: labelText)
+        theInnerLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
     }
-
     
+    func updateText(text: String) {
+        if !theInnerLabel.isDescendant(of: self) {
+            //the innerLabel hasn't been added to the view yet
+            innerLabelSetup(labelText: text)
+        }
+        theInnerLabel.text = text
+        theImageView.removeFromSuperview()
+        updateDiameter(diameter)
+    }
+    
+    fileprivate func elongateFrame(text: String) {
+        self.frame = CGRect(x: 0, y: 0, width: theInnerLabel.intrinsicContentSize.width + TagViewProperties.paddingX, height: self.frame.height)
+    }
 }

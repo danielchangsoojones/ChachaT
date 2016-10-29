@@ -394,7 +394,7 @@ extension TagListView {
         self.layoutSubviews()
     }
     
-    func setSpecialtyTagView(tagView: SpecialtyTagView, annotationTitle: String) {
+    func setSpecialtyAnnotationTitle(tagView: SpecialtyTagView, annotationTitle: String) {
         tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
         self.layoutSubviews()
     }
