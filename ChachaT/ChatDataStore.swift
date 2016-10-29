@@ -156,6 +156,7 @@ class ChatDataStore {
         chat.chatRoom = self.chatRoomName
         chat.sender = User.current()!
         chat.senderObjectId = User.current()!.objectId! //for parseLiveQuery, we can't query pointer columns, because they haven't updated to this, so need to query the objectId
+        chat.recieverObjectId = otherUser.objectId!
         chat.receiver = self.otherUser
         chat.chatText = chatText
         chat.readByReceiver = false

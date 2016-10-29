@@ -31,6 +31,12 @@ class MatchesViewController: UIViewController {
         theTableView.separatorStyle = .none
     }
     
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        // when they leave this screen, stop checking for messages
+        dataStore.unsubscribeToLiveMessaging()
+    }
+    
     func dataStoreSetup() {
         dataStore = MatchDataStore(delegate: self)
         dataStore.findMatchedUsers()
