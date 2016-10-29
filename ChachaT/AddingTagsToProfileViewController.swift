@@ -107,8 +107,9 @@ extension AddingTagsToProfileViewController {
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
             if let dropDownTagView = tappedDropDownTagView {
-                tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
-                dropDownTagView.makeNonPrivate()
+                tagChoicesView.setSpecialtyTagView(tagView: dropDownTagView, annotationTitle: title)
+//                tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
+//                dropDownTagView.makeNonPrivate()
                 dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
         }

@@ -155,6 +155,19 @@ open class SpecialtyTagView: TagView {
 
 //Extension for annotationViews with inner text
 extension SpecialtyTagView {
+    func convertToInnerTextAnnotationTag(text: String) {
+        if let annotationView = annotationView {
+            annotationView.removeFromSuperview()
+            self.annotationView = nil
+        }
+        if let elongatedAnnotationView = elongatedAnnotationView {
+            //elongated view already exists
+        } else {
+            //the elongatedAnnotationView doesn't exist yet
+            createAnnotationViewWithInnerText(text: text)
+        }
+    }
+    
     fileprivate func createAnnotationViewWithInnerText(text: String) {
         if text.characters.count <= 4 {
             annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)

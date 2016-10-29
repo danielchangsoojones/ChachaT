@@ -16,14 +16,17 @@ class AnnotationView: CircleView {
     fileprivate var theImageView: UIImageView!
     fileprivate var theInnerLabel: UILabel = UILabel()
     
+    fileprivate var paddingX: CGFloat = 0
+    
     init(diameter: CGFloat, color: UIColor, imageName: String) {
         super.init(diameter: diameter, color: color)
         imageViewSetup(imageName)
     }
     
     //Purpose: if we want the annotation view to have a label inside of it, like for age, we might want "24"
-    init(diameter: CGFloat, color: UIColor, innerText: String) {
+    init(diameter: CGFloat, color: UIColor, innerText: String, paddingX: CGFloat = 0) {
         super.init(diameter: diameter, color: color)
+        self.paddingX = paddingX
         innerLabelSetup(labelText: innerText)
     }
     
@@ -31,9 +34,8 @@ class AnnotationView: CircleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func innerLabelSetup(labelText: String) {
-        //TODO: I'll have to figure out how to make the label go size to fit, so it doesn't just show ...
-        theInnerLabel.text = labelText
+    fileprivate func innerLabelSetup(labelText: String) {
+        updateText(text: labelText)
         theInnerLabel.textColor = UIColor.white
         theInnerLabel.textAlignment = .center
         self.addSubview(theInnerLabel)
@@ -60,5 +62,21 @@ class AnnotationView: CircleView {
     
     func updateText(text: String) {
         theInnerLabel.text = text
+        if text.characters.count <= 4 {
+            //make the annotationView a cirle with text
+            self.frame = CGRect(x: 0, y: 0, width: self.frame.height, height: self.frame.height)
+        } else {
+            self.frame = CGRect(x: 0, y: 0, width: theInnerLabel.intrinsicContentSize.width + paddingX * 2, height: self.frame.height)
+        }
     }
+}
+
+//An extension
+extension AnnotationView {
+    fileprivate func elongate(toWidth width: CGFloat) {
+        //TODO: will I need to update constraints?
+        self.frame = CGRect(x: 0, y: 0, width: width, height: frame.height)
+    }
+
+    
 }
