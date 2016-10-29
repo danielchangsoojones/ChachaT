@@ -394,6 +394,11 @@ extension TagListView {
         self.layoutSubviews()
     }
     
+    func setSpecialtyAnnotationTitle(tagView: SpecialtyTagView, annotationTitle: String) {
+        tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
+        self.layoutSubviews()
+    }
+    
     //Purpose: apply all the properties of the TagListView to a tagView
     func setTagViewAttributes(_ tagView: TagView, actionOnTap: Selector) -> TagView {
         tagView.textColor = textColor

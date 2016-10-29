@@ -61,7 +61,7 @@ open class SpecialtyTagView: TagView {
     
     var tagAttribute : TagAttributes = .generic
     
-    var annotationView: AnnotationView!
+    var annotationView: AnnotationView?
     var fakeBorder: UIView!
     
     init(tagTitle: String, tagAttribute: TagAttributes) {
@@ -98,12 +98,12 @@ open class SpecialtyTagView: TagView {
     //For when we want an image like an arrow or lock to be in the middle of the annotation image
     fileprivate func createAnnotationViewWithImage() {
         annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, imageName: setAnnotationImage(tagAttribute))
-        addAnnotationSubview(annotationView: annotationView)
+        addAnnotationSubview(annotationView: annotationView!)
     }
     
     fileprivate func createAnnotationViewWithInnerText(text: String) {
         annotationView = AnnotationView(diameter: self.intrinsicContentSize.height, color: TagViewProperties.borderColor, innerText: text)
-        addAnnotationSubview(annotationView: annotationView)
+        addAnnotationSubview(annotationView: annotationView!)
     }
     
     fileprivate func addAnnotationSubview(annotationView: AnnotationView) {
@@ -128,17 +128,24 @@ open class SpecialtyTagView: TagView {
     }
     
     func updateAnnotationView() {
-        let annotationViewDiameter = self.intrinsicContentSize.height
-        annotationView.updateDiameter(annotationViewDiameter)
-        //TODO: I have no fucking idea why the annotationViewDiameter works to make the tags look okay. It should be annotationViewDiameter + paddingX. But, for some reason, that overpads it. I can't figure it out, but somehow just setting annotationViewDiameter is bigger than the actual annoationView.
-        titleEdgeInsets.left = annotationViewDiameter
+        annotationView?.updateDiameter(self.intrinsicContentSize.height)
+        //TODO: For some reason, the titleEdgeInset is a little far left,I have no idea why. So, I take off a little of the padding, so it looks right. The math should just be paddingX + annotationView.intrinsicContentSize, but this doesn't look correct.
+        titleEdgeInsets.left = annotationView!.intrinsicContentSize.width + paddingX
     }
     
     open override var intrinsicContentSize : CGSize {
         let height = super.intrinsicContentSize.height //height is still calculated like a normal tagView
-        let annotationViewDiameter = height
-        let width = super.intrinsicContentSize.width + annotationViewDiameter
+        let annotationViewWidth: CGFloat = annotationView?.intrinsicContentSize.width ?? 0
+        let width = super.intrinsicContentSize.width + annotationViewWidth
         return CGSize(width: width, height: height)
+    }
+}
+
+//Extension for annotationViews with inner text
+extension SpecialtyTagView {
+    func convertToInnerTextAnnotationTag(text: String) {
+        annotationView?.updateText(text: text)
+        updateAnnotationView()
     }
     
 }

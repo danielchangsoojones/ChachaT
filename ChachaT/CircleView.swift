@@ -9,10 +9,12 @@
 import UIKit
 
 class CircleView: UIView {
+    var diameter: CGFloat = 0
     
     init(diameter: CGFloat, color: UIColor) {
         super.init(frame: CGRect(x: 0, y: 0, w: diameter, h: diameter))
         self.backgroundColor = color
+        self.diameter = diameter
         makeCircular(diameter)
         //we need a high priority on content hugging because usually views have a low contentHuggingPriority. Which is why views can grow to the size of their subviews. But, we want the circleView to only grow to its given diameter, and then subviews are just added to this.
         self.setContentHuggingPriority(UILayoutPriorityDefaultHigh, for: .vertical)

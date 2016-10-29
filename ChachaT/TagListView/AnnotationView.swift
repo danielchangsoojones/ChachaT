@@ -11,9 +11,10 @@ import Foundation
 class AnnotationView: CircleView {
     fileprivate struct AnnotationConstants {
         static let imageToCircleRatio : CGFloat = 0.75
+        static let minimumWordCountForCircle: Int = 4
     }
     
-    fileprivate var theImageView: UIImageView!
+    fileprivate var theImageView: UIImageView = UIImageView()
     fileprivate var theInnerLabel: UILabel = UILabel()
     
     init(diameter: CGFloat, color: UIColor, imageName: String) {
@@ -31,21 +32,8 @@ class AnnotationView: CircleView {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func innerLabelSetup(labelText: String) {
-        //TODO: I'll have to figure out how to make the label go size to fit, so it doesn't just show ...
-        theInnerLabel.text = labelText
-        theInnerLabel.textColor = UIColor.white
-        theInnerLabel.textAlignment = .center
-        self.addSubview(theInnerLabel)
-        theInnerLabel.snp.makeConstraints { (make) in
-            make.center.equalToSuperview()
-            //TODO: make this constant based upon something
-            make.width.equalToSuperview().multipliedBy(0.75)
-        }
-    }
-    
     func imageViewSetup(_ imageName: String) {
-        theImageView = UIImageView(image: UIImage(named: imageName))
+        theImageView.image = UIImage(named: imageName)
         theImageView.contentMode = .scaleAspectFit
         self.addSubview(theImageView)
         theImageView.snp.makeConstraints { (make) in
@@ -55,10 +43,49 @@ class AnnotationView: CircleView {
     }
     
     func updateImage(_ imageName: String) {
+        if !theImageView.isDescendant(of: self) {
+            //the innerLabel hasn't been added to the view yet
+            imageViewSetup(imageName)
+        }
+        theInnerLabel.removeFromSuperview()
+        updateDiameter(self.diameter)
         theImageView.image = UIImage(named: imageName)
     }
     
+    override func updateDiameter(_ diameter: CGFloat) {
+        if let text = theInnerLabel.text, text.characters.count > AnnotationConstants.minimumWordCountForCircle && theInnerLabel.isDescendant(of: self) {
+            //we only want to elongate the frame if the character count is greater than the min, and if theInnerLabel is actually supposed to be shown
+            elongateFrame(text: text)
+        } else {
+            self.diameter = diameter
+            super.updateDiameter(diameter)
+        }
+    }
+}
+
+//An extension for text within AnnotationView
+extension AnnotationView {
+    fileprivate func innerLabelSetup(labelText: String) {
+        theInnerLabel.textColor = UIColor.white
+        theInnerLabel.textAlignment = .center
+        self.addSubview(theInnerLabel)
+        updateText(text: labelText)
+        theInnerLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+    }
+    
     func updateText(text: String) {
+        if !theInnerLabel.isDescendant(of: self) {
+            //the innerLabel hasn't been added to the view yet
+            innerLabelSetup(labelText: text)
+        }
         theInnerLabel.text = text
+        theImageView.removeFromSuperview()
+        updateDiameter(diameter)
+    }
+    
+    fileprivate func elongateFrame(text: String) {
+        self.frame = CGRect(x: 0, y: 0, width: theInnerLabel.intrinsicContentSize.width + TagViewProperties.paddingX, height: self.frame.height)
     }
 }

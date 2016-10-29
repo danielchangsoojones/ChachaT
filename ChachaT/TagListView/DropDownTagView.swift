@@ -16,15 +16,11 @@ class DropDownTagView: SpecialtyTagView {
         self.specialtyCategoryTitle = specialtyCategoryTitle
     }
     
-    func makeNonPrivate() {
-        annotationView.updateImage(AnnotationImages.dropDownMenu)
-    }
-    
     func makePrivate() {
-        annotationView.updateImage(AnnotationImages.isPrivate)
+        annotationView?.updateImage(AnnotationImages.isPrivate)
+        updateAnnotationView()
         if let tagListView = findSuperTagListView() {
-            //We have to set the title in the tagListView, because we want to have the tag update and the tags around it update according to its size
-            tagListView.setTagViewTitle(self, title: specialtyCategoryTitle)
+            tagListView.layoutSubviews()
         }
     }
     

@@ -79,7 +79,12 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         if let dropDownTag = tag as? DropDownTag {
             switch dropDownTag.dropDownAttribute {
             case .tagChoices:
-                super.addDropDownTag(tag: tag)
+                let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
+                if dropDownTag.isPrivate {
+                    tagView.makePrivate()
+                } else if let annotationTitle = dropDownTag.annotationTitle {
+                    tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
+                }
             case .singleSlider, .rangeSlider:
                 createCustomTags(dropDownTag: dropDownTag)
             }
@@ -107,8 +112,7 @@ extension AddingTagsToProfileViewController {
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
             if let dropDownTagView = tappedDropDownTagView {
-                tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
-                dropDownTagView.makeNonPrivate()
+                tagChoicesView.setSpecialtyAnnotationTitle(tagView: dropDownTagView, annotationTitle: title)
                 dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
         }
@@ -152,7 +156,7 @@ extension AddingTagsToProfileViewController {
             let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
             let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
             heightPickerVC.passHeight = { (height: String, totalInches: Int) in
-                specialtyTagView.annotationView.updateText(text: height)
+                specialtyTagView.annotationView?.updateText(text: height)
                 self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: totalInches)
             }
             self.navigationController?.pushViewController(heightPickerVC, animated: true)
@@ -166,7 +170,7 @@ extension AddingTagsToProfileViewController {
                 (birthday) -> Void in
                 //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
                 let age = User.current()!.calculateAge(birthday: birthday)
-                specialtyTagView.annotationView.updateText(text: "\(age)")
+                specialtyTagView.annotationView?.updateText(text: "\(age)")
                 self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
             }
         }

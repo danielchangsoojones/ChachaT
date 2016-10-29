@@ -44,10 +44,6 @@ protocol TagDataStoreDelegate {
 
 extension SuperTagViewController : TagDataStoreDelegate {
     func setChoicesViewTagsArray(_ tagChoicesDataArray: [Tag]) {
-        //TODO: is alphabetizing going to take a long time, should I just be saving them alphabetically?
-        //The archiving of the array is being weird with the sort
-        //let alphabeticallySortedArray = tagChoicesDataArray.sorted { $0.title.localizedCaseInsensitiveCompare($1.title) == ComparisonResult.orderedAscending }
-        //        self.tagChoicesDataArray = alphabeticallySortedArray
         self.tagChoicesDataArray = tagChoicesDataArray
         loadChoicesViewTags()
     }
