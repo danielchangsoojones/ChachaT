@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="DescriptionDetailView" customModule="Shuffles" customModuleProvider="target">
+            <connections>
+                <outlet property="theAgeLabel" destination="MfZ-5x-rxO" id="xRh-Fd-vBb"/>
+                <outlet property="theNameLabel" destination="Vip-2Z-c1c" id="RzR-NV-QYg"/>
+                <outlet property="theTitleLabel" destination="u8x-ty-K7Y" id="SO8-Op-JD8"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="335" height="63"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="u8x-ty-K7Y">
+                    <rect key="frame" x="10" y="41" width="26.5" height="16"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="13"/>
+                    <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=", Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MfZ-5x-rxO">
+                    <rect key="frame" x="100" y="10" width="43.5" height="23"/>
+                    <fontDescription key="fontDescription" type="system" pointSize="19"/>
+                    <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Vip-2Z-c1c">
+                    <rect key="frame" x="10" y="10" width="90" height="23"/>
+                    <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
+                    <color key="textColor" red="0.0039215686269999999" green="0.76470588240000004" blue="0.65490196079999996" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                    <nil key="highlightedColor"/>
+                </label>
+            </subviews>
+            <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+            <constraints>
+                <constraint firstItem="Vip-2Z-c1c" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="10" id="13i-Ep-Dbj"/>
+                <constraint firstItem="u8x-ty-K7Y" firstAttribute="top" secondItem="Vip-2Z-c1c" secondAttribute="bottom" constant="8" id="1Kg-YF-EHq"/>
+                <constraint firstItem="MfZ-5x-rxO" firstAttribute="baseline" secondItem="Vip-2Z-c1c" secondAttribute="baseline" id="4bd-Ib-5ts"/>
+                <constraint firstItem="MfZ-5x-rxO" firstAttribute="leading" secondItem="Vip-2Z-c1c" secondAttribute="trailing" id="6o6-d3-jZZ"/>
+                <constraint firstItem="u8x-ty-K7Y" firstAttribute="leading" secondItem="Vip-2Z-c1c" secondAttribute="leading" id="9F9-H1-1Kh"/>
+                <constraint firstItem="Vip-2Z-c1c" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="10" id="kFm-bC-6rr"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-52" y="-236"/>
+        </view>
+    </objects>
+</document>

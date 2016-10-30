@@ -33,6 +33,8 @@
 		923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */; };
 		924139AA1DC6661A00C8B6AF /* MainPageAnonymousUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */; };
 		924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */; };
+		924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */; };
+		924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
@@ -155,6 +157,8 @@
 		923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataStore.swift; sourceTree = "<group>"; };
 		924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageAnonymousUser.swift; sourceTree = "<group>"; };
 		924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymousDataStore.swift; sourceTree = "<group>"; };
+		924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionDetailView.xib; sourceTree = "<group>"; };
+		924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionDetailView.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
@@ -457,6 +461,15 @@
 			name = "Data Model";
 			sourceTree = "<group>";
 		};
+		924139AD1DC67D9600C8B6AF /* Informational Area View */ = {
+			isa = PBXGroup;
+			children = (
+				924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */,
+				924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */,
+			);
+			name = "Informational Area View";
+			sourceTree = "<group>";
+		};
 		925884AC1D909F35006D7C01 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -566,6 +579,7 @@
 		9261083A1CE4EDC4009F3E86 /* subviews/xibs */ = {
 			isa = PBXGroup;
 			children = (
+				924139AD1DC67D9600C8B6AF /* Informational Area View */,
 				925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */,
 			);
 			name = subviews/xibs;
@@ -939,6 +953,7 @@
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
 				92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
+				924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -1055,6 +1070,7 @@
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
+				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
