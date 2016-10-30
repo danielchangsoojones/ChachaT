@@ -14,6 +14,7 @@ protocol AboutViewDelegate {
     func incrementScrollViewYPosition(by heightChange: CGFloat)
 }
 
+//TODO: this class should really be subclassed or something, it's performing too many functions and getting convoluted
 class AboutView: UIView {
     fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
@@ -44,17 +45,12 @@ class AboutView: UIView {
     //we want to align the textFieldText to the titleLable
     @IBOutlet weak var theTitleLabelLeadingConstraint: NSLayoutConstraint!
     
-    
     var theTextField: UITextField?
     var theInnerLabel: UILabel?
     
     var theBulletPointNumber : Int?
     var thePlaceholderText : String = ""
-    var originalTitle: String = "" {
-        didSet {
-            
-        }
-    }
+    var originalTitle: String = ""
     
     var wasEdited : Bool {
         get {
