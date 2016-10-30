@@ -130,7 +130,7 @@ open class SpecialtyTagView: TagView {
     func updateAnnotationView() {
         annotationView?.updateDiameter(self.intrinsicContentSize.height)
         //TODO: For some reason, the titleEdgeInset is a little far left,I have no idea why. So, I take off a little of the padding, so it looks right. The math should just be paddingX + annotationView.intrinsicContentSize, but this doesn't look correct.
-        titleEdgeInsets.left = annotationView!.intrinsicContentSize.width + paddingX
+        titleEdgeInsets.left = annotationView!.intrinsicContentSize.width + paddingX / 2
     }
     
     open override var intrinsicContentSize : CGSize {

@@ -48,17 +48,21 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Instabug.start(withToken: "c1d90288be3cf98624000127f6139a87", invocationEvent: IBGInvocationEvent.shake)
         
-        //setting the initial storyboard
-        if User.current() == nil {
-            self.window = UIWindow(frame: UIScreen.main.bounds)
+        //If user doesn't exist, then we will do the anonymous User onboarding
+        User.enableAutomaticUser()
+        
+        let anonymousDataStore = AnonymousDataStore()
+        
+        if anonymousDataStore.isUserAnonymous {
+            let navController = ChachaNavigationViewController()
             
-            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+            //set up the rootviewController
+            let storyboard = UIStoryboard(name: "Filtering", bundle: nil)
+            let searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchTagsViewController") as! SearchTagsViewController
+            navController.viewControllers = [searchViewController]
             
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "SignUpLogInViewController") as! SignUpLogInViewController
-            
-            self.window?.rootViewController = initialViewController
+            self.window?.rootViewController = navController
             self.window?.makeKeyAndVisible()
-            
         }
         
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen

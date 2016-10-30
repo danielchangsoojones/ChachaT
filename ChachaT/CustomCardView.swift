@@ -14,23 +14,13 @@ private let overlayRightImageName = "overlay_like"
 private let overlayLeftImageName = "overlay_skip"
 
 class CustomCardView: OverlayView {
-    @IBOutlet weak var theFullNameLabel: UILabel!
-    @IBOutlet weak var theAgeLabel: UILabel!
-    @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theCardMainImage: PFImageView!
     @IBOutlet weak var thePersonalInfoHolderView: UIView!
+    @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
     
     var userOfTheCard : User? {
         didSet {
-            if let title = userOfTheCard?.title {
-                theTitleLabel.text = title
-            }
-            if let fullName = userOfTheCard?.fullName {
-                theFullNameLabel.text = fullName
-            }
-            if let age = userOfTheCard?.age {
-                theAgeLabel.text = ", " + "\(age)"
-            }
+            theDescriptionDetailView.userOfTheCard = userOfTheCard
             if let profileImage = userOfTheCard?.profileImage {
                 self.theCardMainImage.file = profileImage
                 self.theCardMainImage.loadInBackground()

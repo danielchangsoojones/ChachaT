@@ -23,19 +23,35 @@ class BackgroundAnimationDataStore {
     }
     
     func swipe(swipe: Swipe) {
-        //TODO: do a check that this swipe actually exists or we need to make a new one.
-        var hasFoundParseSwipe = false
-        for parseSwipe in parseSwipes where parseSwipe.matchesUsers(otherUser: swipe.otherUser) {
-            parseSwipe.currentUserHasSwiped = true
-            parseSwipe.currentUserApproval = swipe.currentUserApproval
-            parseSwipe.saveInBackground()
-            hasFoundParseSwipe = true
+        //Check if the parseSwipe actually exists and then either update or create a new one. 
+        let queryOne = ParseSwipe.query()!
+        queryOne.whereKey("userOne", equalTo: User.current()!)
+        queryOne.whereKey("userTwo", equalTo: swipe.otherUser)
+        
+        let queryTwo = ParseSwipe.query()!
+        queryTwo.whereKey("userTwo", equalTo: User.current()!)
+        queryTwo.whereKey("userOne", equalTo: swipe.otherUser)
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [queryOne, queryTwo])
+        orQuery.getFirstObjectInBackground { (object, error) in
+            if let parseSwipe = object as? ParseSwipe {
+                self.updateParseSwipe(parseSwipe: parseSwipe, swipe: swipe)
+            } else if let error = error {
+                let errorCode =  error._code
+                if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
+                    let newParseSwipe = ParseSwipe(otherUser: swipe.otherUser, currentUserApproval: swipe.currentUserApproval)
+                    newParseSwipe.saveInBackground()
+                } else {
+                    print(error)
+                }
+            }
         }
-        if !hasFoundParseSwipe {
-            //the parseSwipe didn't exist because this is a new user, so we want to save a totally new parseSwipe
-            let newParseSwipe = ParseSwipe(otherUser: swipe.otherUser, currentUserApproval: swipe.currentUserApproval)
-            newParseSwipe.saveInBackground()
-        }
+    }
+    
+    fileprivate func updateParseSwipe(parseSwipe: ParseSwipe, swipe: Swipe) {
+        parseSwipe.currentUserHasSwiped = true
+        parseSwipe.currentUserApproval = swipe.currentUserApproval
+        parseSwipe.saveInBackground()
     }
     
     func getMoreSwipes() {
@@ -50,12 +66,18 @@ class BackgroundAnimationDataStore {
 //load the swipes
 extension BackgroundAnimationDataStore {
     func loadSwipeArray() {
-        //Find any unfinished swipes for the Current User. Potentially, the user could actually be
+        
+        let innerUserQuery = User.query()!
+        innerUserQuery.whereKey("objectId", equalTo: User.current()!.objectId!)
+        
+        
+        //Find any unfinished swipes for the Current User. Potentially, the user could actually be either userOne or UserTwo
         let currentUserIsUserOneQuery = ParseSwipe.query()!
-        currentUserIsUserOneQuery.whereKey("userOne", equalTo: User.current()!)
+        currentUserIsUserOneQuery.whereKey("userOne", matchesQuery: innerUserQuery)
         
         let currentUserIsUserTwoQuery = ParseSwipe.query()!
-        currentUserIsUserTwoQuery.whereKey("userTwo", equalTo: User.current()!)
+        currentUserIsUserTwoQuery.whereKey("userTwo", matchesQuery: innerUserQuery)
+
 
         let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
         orQuery.includeKey("userOne")
@@ -72,8 +94,8 @@ extension BackgroundAnimationDataStore {
                     let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
                     self.alreadyUsedSwipes.append(swipe)
                     
-                    if !currentUserHasSwiped {
-                        //we only want to add to the swipe array if the user has not swiped them yet.
+                    if !currentUserHasSwiped  && otherUser.profileImage != nil {
+                        //we only want to add to the swipe array if the user has not swiped them yet, and the other user has a profile picture. Yes, I wish I could create a query to see if the user has a profileImage, because their is no point in bringing down users that can't be used. But, this is a weakness of Parse.
                         swipes.append(swipe)
                     }
                     //if the user has swiped already, we still need add to the list of non-swipable users because we don't want the currentUser to see someone they have already swiped. Yes, it is ineffecient to pull down swipes that we never use, but that is a tradeoff of Parse.
@@ -94,6 +116,7 @@ extension BackgroundAnimationDataStore {
         var alreadyUsedIdsCopy = alreadyUsedUserIDs
         alreadyUsedIdsCopy.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
         newUserQuery.whereKey("objectId", notContainedIn: alreadyUsedIdsCopy)
+        newUserQuery.whereKeyExists("profileImage")
         newUserQuery.limit = 50 //arbitrary limit, so we don't do a full table scan when there are thousands of users
         newUserQuery.findObjectsInBackground(block: { (objects, error) in
             if let users = objects as? [User] {

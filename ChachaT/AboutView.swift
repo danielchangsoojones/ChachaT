@@ -14,6 +14,7 @@ protocol AboutViewDelegate {
     func incrementScrollViewYPosition(by heightChange: CGFloat)
 }
 
+//TODO: this class should really be subclassed or something, it's performing too many functions and getting convoluted
 class AboutView: UIView {
     fileprivate struct AboutViewConstants {
         static let maxCharacterCount : Int = 500
@@ -44,13 +45,18 @@ class AboutView: UIView {
     //we want to align the textFieldText to the titleLable
     @IBOutlet weak var theTitleLabelLeadingConstraint: NSLayoutConstraint!
     
-    
     var theTextField: UITextField?
     var theInnerLabel: UILabel?
     
     var theBulletPointNumber : Int?
     var thePlaceholderText : String = ""
-    var wasEdited : Bool = false
+    var originalTitle: String = ""
+    
+    var wasEdited : Bool {
+        get {
+            return checkWasEdited()
+        }
+    }
     var theType : AboutViewType = .growingTextView
     
     var delegate: AboutViewDelegate?
@@ -132,6 +138,7 @@ class AboutView: UIView {
     
     //Purpose: sees which textfield, textview, or label to change, based upon which ones are not nil/hidden
     func setCurrentText(_ text: String) {
+        originalTitle = text
         if theAutoGrowingTextView.isHidden {
             if let textField = theTextField {
                 textField.text = text
@@ -146,6 +153,25 @@ class AboutView: UIView {
     
     func getTitle() -> String {
         return theTitleLabel.text ?? ""
+    }
+    
+    fileprivate func checkWasEdited() -> Bool {
+        if let textField = theTextField {
+            //the textField is shown
+            return seeIfTextChanged(text: textField.text)
+        } else if !theAutoGrowingTextView.isHidden {
+            return seeIfTextChanged(text: theAutoGrowingTextView.text)
+        }
+        return false
+    }
+    
+    fileprivate func seeIfTextChanged(text: String?) -> Bool {
+        if let text = text {
+            //the aboutView is not considered edited, if thePlaceholderText is still there or if there is a blank string
+            return thePlaceholderText != text && text != "" && originalTitle != text
+        }
+        //wasn't edited if the text is still nil
+        return false
     }
 }
 
@@ -248,7 +274,6 @@ extension AboutView: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        wasEdited = true
         delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
     }
 }
@@ -269,7 +294,6 @@ extension AboutView : UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        wasEdited = true
         delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
     }
     

@@ -64,14 +64,14 @@ class FakeNavigationBarView : UIView {
     }
     
     func createLeftBarButton() {
-        let leftButtom = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
-        leftButtom.addTarget(self, action: #selector(FakeNavigationBarView.leftBarButtonPressed(_:)), for: .touchUpInside)
-        self.addSubview(leftButtom)
-        leftButtom.snp.makeConstraints { (make) in
+        leftMenuButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
+        leftMenuButton.addTarget(self, action: #selector(FakeNavigationBarView.leftBarButtonPressed(_:)), for: .touchUpInside)
+        self.addSubview(leftMenuButton)
+        leftMenuButton.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
-        leftButtom.setImage(#imageLiteral(resourceName: "Notification Tab Icon"), for: UIControlState())
+        leftMenuButton.setImage(#imageLiteral(resourceName: "Notification Tab Icon"), for: UIControlState())
     }
     
     func leftBarButtonPressed(_ sender: UIButton!) {
