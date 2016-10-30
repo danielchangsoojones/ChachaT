@@ -38,9 +38,6 @@ class EditProfileViewController: UIViewController {
     
     
     var thePhotoNumberToChange: Int!
-    var theEditedTextFieldArray : [UIView] = []
-    //TODO: could refactor this to a function, so If I ever wanted to just add another bullet point, the code wouldn't need to be changed
-    var theBulletPointWasEditedDictionary : [Int : Bool] = [:]
     var dataStore : EditProfileDataStore!
     let currentUser = User.current()
     var theKeyboardIsShowing: Bool = false
@@ -83,7 +80,6 @@ class EditProfileViewController: UIViewController {
             let bulletPointView = AboutView(title: title, placeHolder: EditProfileConstants.bulletPointPlaceholder, bulletPointNumber: index, type: .growingTextView)
             bulletPointView.delegate = self
             theStackView.addArrangedSubview(bulletPointView)
-            theBulletPointWasEditedDictionary[index] = false //set the values in the bulletPoint dictionary, all should start false because none have been edited yet
         }
     }
     
