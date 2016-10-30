@@ -1,8 +1,10 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -12,34 +14,24 @@
             <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
             <subviews>
-                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qhL-rn-cDC" customClass="PFImageView"/>
+                <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qhL-rn-cDC" customClass="PFImageView">
+                    <rect key="frame" x="0.0" y="0.0" width="375" height="606"/>
+                </imageView>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="aDJ-pE-4t4">
+                    <rect key="frame" x="0.0" y="606" width="375" height="61"/>
                     <subviews>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=", Age" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Js5-bq-7SC">
-                            <fontDescription key="fontDescription" type="system" pointSize="19"/>
-                            <color key="textColor" red="0.69803921568627447" green="0.69803921568627447" blue="0.69803921568627447" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="T6l-F0-VzE">
-                            <fontDescription key="fontDescription" type="system" pointSize="13"/>
-                            <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
-                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Full Name" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="hic-8h-7Bo">
-                            <fontDescription key="fontDescription" type="boldSystem" pointSize="19"/>
-                            <color key="textColor" red="0.0039215686274509803" green="0.76470588235294112" blue="0.65490196078431373" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            <nil key="highlightedColor"/>
-                        </label>
+                        <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Lp7-tn-JN8" customClass="DescriptionDetailView" customModule="Shuffles" customModuleProvider="target">
+                            <rect key="frame" x="0.0" y="0.0" width="375" height="61"/>
+                            <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        </view>
                     </subviews>
                     <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                     <constraints>
-                        <constraint firstItem="hic-8h-7Bo" firstAttribute="top" secondItem="aDJ-pE-4t4" secondAttribute="top" constant="8" id="3dm-ew-8wD"/>
-                        <constraint firstItem="Js5-bq-7SC" firstAttribute="leading" secondItem="hic-8h-7Bo" secondAttribute="trailing" id="8k0-gl-rz2"/>
                         <constraint firstAttribute="height" constant="61" id="Iv7-y2-Ggz"/>
-                        <constraint firstItem="T6l-F0-VzE" firstAttribute="leading" secondItem="hic-8h-7Bo" secondAttribute="leading" id="LU6-ru-5Ct"/>
-                        <constraint firstItem="Js5-bq-7SC" firstAttribute="baseline" secondItem="hic-8h-7Bo" secondAttribute="baseline" id="Zr8-bZ-W9p"/>
-                        <constraint firstItem="hic-8h-7Bo" firstAttribute="leading" secondItem="aDJ-pE-4t4" secondAttribute="leading" constant="8" id="dYW-bn-zlw"/>
-                        <constraint firstItem="T6l-F0-VzE" firstAttribute="top" secondItem="hic-8h-7Bo" secondAttribute="bottom" constant="8" id="s6S-I1-cV1"/>
+                        <constraint firstItem="Lp7-tn-JN8" firstAttribute="leading" secondItem="aDJ-pE-4t4" secondAttribute="leading" id="MQg-dt-ZVb"/>
+                        <constraint firstAttribute="trailing" secondItem="Lp7-tn-JN8" secondAttribute="trailing" id="aW3-Uv-E47"/>
+                        <constraint firstAttribute="bottom" secondItem="Lp7-tn-JN8" secondAttribute="bottom" id="nQk-xD-234"/>
+                        <constraint firstItem="Lp7-tn-JN8" firstAttribute="top" secondItem="aDJ-pE-4t4" secondAttribute="top" id="x3i-22-vga"/>
                     </constraints>
                 </view>
             </subviews>
@@ -54,12 +46,11 @@
                 <constraint firstItem="qhL-rn-cDC" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="uJL-OT-tIq"/>
             </constraints>
             <connections>
-                <outlet property="theAgeLabel" destination="Js5-bq-7SC" id="fbP-PM-dNo"/>
                 <outlet property="theCardMainImage" destination="qhL-rn-cDC" id="CYI-28-X7v"/>
-                <outlet property="theFullNameLabel" destination="hic-8h-7Bo" id="osK-HE-3Sb"/>
+                <outlet property="theDescriptionDetailView" destination="Lp7-tn-JN8" id="PNN-nb-1i5"/>
                 <outlet property="thePersonalInfoHolderView" destination="aDJ-pE-4t4" id="8Ad-JE-d7d"/>
-                <outlet property="theTitleLabel" destination="T6l-F0-VzE" id="1Bs-Ku-RnJ"/>
             </connections>
+            <point key="canvasLocation" x="35.5" y="53.5"/>
         </view>
     </objects>
 </document>

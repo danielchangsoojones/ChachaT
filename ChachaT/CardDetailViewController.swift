@@ -28,12 +28,11 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var profileImage: PFImageView!
     @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
-    @IBOutlet weak var theFullNameLabel: UILabel!
-    @IBOutlet weak var theAgeLabel: UILabel!
-    @IBOutlet weak var theTitleLabel: UILabel!
     @IBOutlet weak var theBackButton: UIButton!
     @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
+    @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
+    
     
     //Constraints
     @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
@@ -93,15 +92,7 @@ class CardDetailViewController: UIViewController {
         dataStore.loadTags(user: userOfTheCard!)
         self.view.layer.addSublayer(setBottomBlur(blurHeight: 100, color: CustomColors.JellyTeal))
         theBackButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
-        if let fullName = userOfTheCard?.fullName {
-            theFullNameLabel.text = fullName
-        }
-        if let title = userOfTheCard?.title {
-            theTitleLabel.text = title
-        }
-        if let age = userOfTheCard?.age {
-            theAgeLabel.text = ", " + "\(age)"
-        }
+        theDescriptionDetailView.userOfTheCard = userOfTheCard
         let bulletPointViewWidth = theBulletPointsStackView.frame.width
         if let factOne = userOfTheCard?.bulletPoint1 {
             bulletPointSetup(factOne, width: bulletPointViewWidth)

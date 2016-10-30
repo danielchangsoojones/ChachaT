@@ -461,13 +461,13 @@
 			name = "Data Model";
 			sourceTree = "<group>";
 		};
-		924139AD1DC67D9600C8B6AF /* Informational Area View */ = {
+		924139AD1DC67D9600C8B6AF /* Description Detail View */ = {
 			isa = PBXGroup;
 			children = (
 				924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */,
 				924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */,
 			);
-			name = "Informational Area View";
+			name = "Description Detail View";
 			sourceTree = "<group>";
 		};
 		925884AC1D909F35006D7C01 /* Extensions */ = {
@@ -579,7 +579,7 @@
 		9261083A1CE4EDC4009F3E86 /* subviews/xibs */ = {
 			isa = PBXGroup;
 			children = (
-				924139AD1DC67D9600C8B6AF /* Informational Area View */,
+				924139AD1DC67D9600C8B6AF /* Description Detail View */,
 				925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */,
 			);
 			name = subviews/xibs;
