@@ -23,19 +23,35 @@ class BackgroundAnimationDataStore {
     }
     
     func swipe(swipe: Swipe) {
-        //TODO: do a check that this swipe actually exists or we need to make a new one.
-        var hasFoundParseSwipe = false
-        for parseSwipe in parseSwipes where parseSwipe.matchesUsers(otherUser: swipe.otherUser) {
-            parseSwipe.currentUserHasSwiped = true
-            parseSwipe.currentUserApproval = swipe.currentUserApproval
-            parseSwipe.saveInBackground()
-            hasFoundParseSwipe = true
+        //Check if the parseSwipe actually exists and then either update or create a new one. 
+        let queryOne = ParseSwipe.query()!
+        queryOne.whereKey("userOne", equalTo: User.current()!)
+        queryOne.whereKey("userTwo", equalTo: swipe.otherUser)
+        
+        let queryTwo = ParseSwipe.query()!
+        queryTwo.whereKey("userTwo", equalTo: User.current()!)
+        queryTwo.whereKey("userOne", equalTo: swipe.otherUser)
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [queryOne, queryTwo])
+        orQuery.getFirstObjectInBackground { (object, error) in
+            if let parseSwipe = object as? ParseSwipe {
+                self.updateParseSwipe(parseSwipe: parseSwipe, swipe: swipe)
+            } else if let error = error {
+                let errorCode =  error._code
+                if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
+                    let newParseSwipe = ParseSwipe(otherUser: swipe.otherUser, currentUserApproval: swipe.currentUserApproval)
+                    newParseSwipe.saveInBackground()
+                } else {
+                    print(error)
+                }
+            }
         }
-        if !hasFoundParseSwipe {
-            //the parseSwipe didn't exist because this is a new user, so we want to save a totally new parseSwipe
-            let newParseSwipe = ParseSwipe(otherUser: swipe.otherUser, currentUserApproval: swipe.currentUserApproval)
-            newParseSwipe.saveInBackground()
-        }
+    }
+    
+    fileprivate func updateParseSwipe(parseSwipe: ParseSwipe, swipe: Swipe) {
+        parseSwipe.currentUserHasSwiped = true
+        parseSwipe.currentUserApproval = swipe.currentUserApproval
+        parseSwipe.saveInBackground()
     }
     
     func getMoreSwipes() {
