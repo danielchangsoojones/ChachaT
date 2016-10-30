@@ -34,11 +34,8 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theApproveButton: UIButton!
     @IBOutlet weak var theSkipButton: UIButton!
-    @IBOutlet weak var theMessageButton: UIButton!
-    @IBOutlet weak var theProfileButton: UIButton!
     @IBOutlet weak var theBottomButtonStackView: UIStackView!
-    var leftNavigationButton: UIBarButtonItem?
-    var rightNavigationButton: UIBarButtonItem?
+    var fakeNavigationBar: FakeNavigationBarView!
     
     //constraint outlets
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
@@ -70,6 +67,7 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
             dataStore.loadSwipeArray()
         }
+        anonymousUserSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -107,9 +105,9 @@ class BackgroundAnimationViewController: UIViewController {
     
     //Purpose: we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
     func setFakeNavigationBarView() {
-        let fakeNavigationBarView = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height, delegate: self)
-        self.view.addSubview(fakeNavigationBarView)
-        fakeNavigationBarView.snp.makeConstraints { (make) in
+        fakeNavigationBar = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height, delegate: self)
+        self.view.addSubview(fakeNavigationBar)
+        fakeNavigationBar.snp.makeConstraints { (make) in
             make.trailing.leading.equalTo(self.view)
             make.top.equalTo(self.view)
             make.height.equalTo(self.navigationController!.navigationBar.frame.height + ImportantDimensions.StatusBarHeight)

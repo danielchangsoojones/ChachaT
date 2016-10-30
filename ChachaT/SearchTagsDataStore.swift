@@ -127,6 +127,8 @@ extension SearchTagsDataStore {
     
     fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {
         var query = User.query()!
+        query.whereKeyExists("profileImage")
+        
         var tagTitleArray: [String] = []
         for tag in chosenTags {
             if let dropDownTag = tag as? DropDownTag {
