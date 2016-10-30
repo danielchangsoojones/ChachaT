@@ -60,6 +60,8 @@ extension BackgroundAnimationDataStore {
         let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
         orQuery.includeKey("userOne")
         orQuery.includeKey("userTwo")
+        orQuery.whereKeyExists("userOne.profileImage")
+        orQuery.whereKeyExists("userTwo.profileImage")
         orQuery.findObjectsInBackground { (objects, error) in
             //TODO: I will probably need to make this already held user thing a global variable, so when the user comes back for more users, I'll have a directory
             var swipeUserObjectIDs: [String] = [] //any user not in this array is a user that the current user has never met
@@ -94,6 +96,7 @@ extension BackgroundAnimationDataStore {
         var alreadyUsedIdsCopy = alreadyUsedUserIDs
         alreadyUsedIdsCopy.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
         newUserQuery.whereKey("objectId", notContainedIn: alreadyUsedIdsCopy)
+        newUserQuery.whereKeyExists("profileImage")
         newUserQuery.limit = 50 //arbitrary limit, so we don't do a full table scan when there are thousands of users
         newUserQuery.findObjectsInBackground(block: { (objects, error) in
             if let users = objects as? [User] {
