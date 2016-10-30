@@ -50,18 +50,22 @@ class BackgroundAnimationDataStore {
 //load the swipes
 extension BackgroundAnimationDataStore {
     func loadSwipeArray() {
-        //Find any unfinished swipes for the Current User. Potentially, the user could actually be
+        
+        let innerUserQuery = User.query()!
+        innerUserQuery.whereKey("objectId", equalTo: User.current()!.objectId!)
+        
+        
+        //Find any unfinished swipes for the Current User. Potentially, the user could actually be either userOne or UserTwo
         let currentUserIsUserOneQuery = ParseSwipe.query()!
-        currentUserIsUserOneQuery.whereKey("userOne", equalTo: User.current()!)
+        currentUserIsUserOneQuery.whereKey("userOne", matchesQuery: innerUserQuery)
         
         let currentUserIsUserTwoQuery = ParseSwipe.query()!
-        currentUserIsUserTwoQuery.whereKey("userTwo", equalTo: User.current()!)
+        currentUserIsUserTwoQuery.whereKey("userTwo", matchesQuery: innerUserQuery)
+
 
         let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
         orQuery.includeKey("userOne")
         orQuery.includeKey("userTwo")
-        orQuery.whereKeyExists("userOne.profileImage")
-        orQuery.whereKeyExists("userTwo.profileImage")
         orQuery.findObjectsInBackground { (objects, error) in
             //TODO: I will probably need to make this already held user thing a global variable, so when the user comes back for more users, I'll have a directory
             var swipeUserObjectIDs: [String] = [] //any user not in this array is a user that the current user has never met
@@ -74,8 +78,8 @@ extension BackgroundAnimationDataStore {
                     let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
                     self.alreadyUsedSwipes.append(swipe)
                     
-                    if !currentUserHasSwiped {
-                        //we only want to add to the swipe array if the user has not swiped them yet.
+                    if !currentUserHasSwiped  && otherUser.profileImage != nil {
+                        //we only want to add to the swipe array if the user has not swiped them yet, and the other user has a profile picture. Yes, I wish I could create a query to see if the user has a profileImage, because their is no point in bringing down users that can't be used. But, this is a weakness of Parse.
                         swipes.append(swipe)
                     }
                     //if the user has swiped already, we still need add to the list of non-swipable users because we don't want the currentUser to see someone they have already swiped. Yes, it is ineffecient to pull down swipes that we never use, but that is a tradeoff of Parse.
