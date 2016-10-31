@@ -26,7 +26,7 @@ class CustomKolodaView: KolodaView {
     
     var customKolodaViewDelegate: CustomKolodaViewDelegate?
     
-    override func frameForCardAtIndex(_ index: UInt) -> CGRect {
+    override func frameForCard(at index: Int) -> CGRect {
         let measurmentTuple = customKolodaViewDelegate?.calculateKolodaViewCardHeight()
         let cardHeight = measurmentTuple?.cardHeight
         let navigationAreaHeight = measurmentTuple?.navigationAreaHeight

@@ -97,7 +97,7 @@ class ChatTableViewCell: UITableViewCell {
     
     func formatTimeStamp(_ date: Date) -> String {
         let formatter = DateFormatter()
-        let lessThan24Hours : Bool = date >= 1.day.ago
+        let lessThan24Hours : Bool = date >= 1.day.ago ?? Date()
         if lessThan24Hours {
             formatter.dateFormat = "h:mm a"
             formatter.amSymbol = "AM"

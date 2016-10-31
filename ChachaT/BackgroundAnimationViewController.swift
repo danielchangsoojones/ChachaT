@@ -48,11 +48,11 @@ class BackgroundAnimationViewController: UIViewController {
     let locationManager = CLLocationManager()
     
     @IBAction func skipCard(_ sender: AnyObject) {
-        kolodaView.swipe(.Left)
+        kolodaView.swipe(.left)
     }
     
     @IBAction func approveCard(_ sender: UIButton) {
-        kolodaView.swipe(.Right)
+        kolodaView.swipe(.right)
     }
     
     //MARK: Lifecycle
@@ -191,13 +191,13 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
     
     func koloda(_ koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
         let currentSwipe = swipeArray[Int(index)]
-        if direction == .Right {
+        if direction == .right {
             currentSwipe.approve()
             dataStore.swipe(swipe: currentSwipe)
             if currentSwipe.isMatch {
                 performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToMatchNotificationSegue.rawValue, sender: nil)
             }
-        } else if direction == .Left {
+        } else if direction == .left {
             currentSwipe.nope()
             dataStore.swipe(swipe: currentSwipe)
         }
@@ -217,12 +217,11 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
 
 //MARK: KolodaViewDataSource
 extension BackgroundAnimationViewController: KolodaViewDataSource {
-    
-    func kolodaNumberOfCards(_ koloda: KolodaView) -> UInt {
-        return UInt(swipeArray.count)
+    public func kolodaNumberOfCards(_ koloda: KolodaView) -> Int {
+        return swipeArray.count
     }
-
-    func koloda(_ koloda: KolodaView, viewForCardAtIndex index: UInt) -> UIView {
+    
+    func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
         
         cardView.backgroundColor = UIColor.clear
@@ -230,8 +229,8 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         
         return cardView
     }
-
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAtIndex index: UInt) -> OverlayView? {
+    
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
     }

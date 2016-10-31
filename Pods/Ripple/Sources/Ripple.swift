@@ -31,24 +31,12 @@ public func ripple(_ center: CGPoint, view: UIView, times: Float = Float.infinit
   timers.append(timer)
 
   guard times != Float.infinity && times > 0 else { return }
-    
-    
-    let now = DispatchTime.now()
-    let num1 = Double(times - 1) * Double(duration)
-    let num2 = num1 / (Double(divider) * Double(NSEC_PER_SEC))
-    let num3 = Int64(num2)
-    let num4 = Double(num3)
-    let denominator = Double(NSEC_PER_SEC)
-    let deadlineTime = now + num4 / denominator
-    
-    DispatchQueue.main.asyncAfter(deadline: deadlineTime) { 
-        timer.invalidate()
-    }
-    
-//  DispatchQueue.main.asyncAfter(
-//    deadline: DispatchTime.now() + Double(Int64(Double(times - 1) * Double(duration) / Double(divider) * Double(NSEC_PER_SEC))) / Double(NSEC_PER_SEC)) {
-//      timer.invalidate()
-//  }
+
+  let denominator = Double(times - 1) * Double(duration) / Double(divider) * Double(NSEC_PER_SEC)
+  let deadline = DispatchTime.now() + denominator
+  DispatchQueue.main.asyncAfter(deadline: deadline) {
+    timer.invalidate()
+  }
 }
 
 /**
@@ -94,7 +82,7 @@ var timers: [Timer] = []
 /**
  The ripple creator
  */
-open class Ripple: NSObject, CAAnimationDelegate {
+open class Ripple: NSObject {
 
   var center: CGPoint
   var view: UIView
@@ -121,7 +109,11 @@ open class Ripple: NSObject, CAAnimationDelegate {
   func activate() {
     let ripple = UIView()
 
-    view.insertSubview(ripple, at: 0)
+    if let subview = view.subviews.first {
+      view.insertSubview(ripple, aboveSubview: subview)
+    } else {
+      view.insertSubview(ripple, at: 0)
+    }
 
     ripple.frame.origin = CGPoint(x: center.x - size.width / 2,
                                   y: center.y - size.height / 2)
@@ -152,6 +144,13 @@ open class Ripple: NSObject, CAAnimationDelegate {
     ripples.append(ripple)
     ripple.layer.add(animationGroup, forKey: "ripple")
   }
+  
+  func timerDidFire() {
+    activate()
+  }
+}
+
+extension Ripple: CAAnimationDelegate {
 
   /**
    The animation delegate method that helps to do better ripples.
@@ -164,9 +163,5 @@ open class Ripple: NSObject, CAAnimationDelegate {
     ripple.layer.removeAnimation(forKey: "ripple")
 
     ripples.removeFirst()
-  }
-  
-  func timerDidFire() {
-    activate()
   }
 }

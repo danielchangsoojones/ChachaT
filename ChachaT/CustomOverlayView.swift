@@ -24,10 +24,10 @@ class CustomOverlayView: OverlayView {
     override var overlayState: SwipeResultDirection?  {
         didSet {
             switch overlayState {
-            case .Left? :
+            case .left? :
                 theSkipImage.isHidden = false
                 theApproveImage.isHidden = true
-            case .Right? :
+            case .right? :
                 theApproveImage.isHidden = false
                 theSkipImage.isHidden = true
             default:
