@@ -10,6 +10,7 @@ import UIKit
 import EZSwiftExtensions
 import Timepiece
 import EFTools
+import GBHFacebookImagePicker
 
 struct EditProfileConstants {
     static let numberOfBulletPoints : Int = 3
@@ -137,10 +138,11 @@ extension EditProfileViewController: AboutViewDelegate {
     }
 }
 
-extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate, GBHFacebookImagePickerDelegate {
     func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool) {
-        thePhotoNumberToChange = photoNumber
-        showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
+//        thePhotoNumberToChange = photoNumber
+//        showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
+        facebookLogIn()
     }
     
     fileprivate func showPhotoChoices(isReplacingPhoto: Bool) {
@@ -187,6 +189,23 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
         alert.addAction(cameraAction)
 
         return alert
+    }
+    
+    fileprivate func facebookLogIn() {
+        let picker = GBHFacebookImagePicker()
+        picker.presentFacebookAlbumImagePicker(from: self, delegate: self)
+    }
+    
+    func facebookImagePicker(imagePicker: UIViewController, didSelectImage image: UIImage?, WithUrl url: String) {
+        print("image was selected")
+    }
+    
+    func facebookImagePicker(imagePicker: UIViewController, didFailWithError error: Error?) {
+        print("error with the picker")
+    }
+    
+    func facebookImagePicker(didCancelled imagePicker: UIViewController) {
+        print("Canceled facebook action")
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
