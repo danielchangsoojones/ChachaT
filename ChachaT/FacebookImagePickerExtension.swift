@@ -17,6 +17,7 @@ extension EditProfileViewController: GBHFacebookImagePickerDelegate {
     }
     
     func facebookImagePicker(imagePicker: UIViewController, didSelectImage image: UIImage?, WithUrl url: String) {
+        //TODO: this image is not that large, so we might need to resend a request to facebook to get a bigger picture that we can expand later.
         imageWasPicked(image: image, picker: imagePicker)
     }
     
