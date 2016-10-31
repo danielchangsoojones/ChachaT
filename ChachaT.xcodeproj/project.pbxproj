@@ -35,6 +35,7 @@
 		924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */; };
 		924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */; };
 		924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */; };
+		924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
@@ -159,6 +160,7 @@
 		924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymousDataStore.swift; sourceTree = "<group>"; };
 		924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionDetailView.xib; sourceTree = "<group>"; };
 		924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionDetailView.swift; sourceTree = "<group>"; };
+		924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookImagePickerExtension.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
@@ -470,6 +472,14 @@
 			name = "Description Detail View";
 			sourceTree = "<group>";
 		};
+		924139B51DC77ED300C8B6AF /* Facebook Image Picking */ = {
+			isa = PBXGroup;
+			children = (
+				924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */,
+			);
+			name = "Facebook Image Picking";
+			sourceTree = "<group>";
+		};
 		925884AC1D909F35006D7C01 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -663,6 +673,7 @@
 		9275FB811D7A02F900D8131D /* Edit Profile */ = {
 			isa = PBXGroup;
 			children = (
+				924139B51DC77ED300C8B6AF /* Facebook Image Picking */,
 				9275FB821D7A030600D8131D /* Subviews */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 				928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */,
@@ -1094,6 +1105,7 @@
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
+				924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */,
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
