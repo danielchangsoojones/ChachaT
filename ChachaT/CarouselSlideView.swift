@@ -15,7 +15,6 @@ class CarouselSlideView: TGLParallaxCarouselItem {
     init(file: AnyObject?, frame: CGRect) {
         super.init(frame: frame)
         imageViewSetup(file: file)
-        self.backgroundColor = UIColor.blue
     }
     
     required init?(coder aDecoder: NSCoder) {

@@ -103,7 +103,7 @@ CHECKOUT OPTIONS:
     :commit: 7b32e74f9735088651631fbb4ee94b6699527953
     :git: https://github.com/ParsePlatform/ParseLiveQuery-iOS-OSX.git
   TGLParallaxCarousel:
-    :commit: '039389a58f7fd083272b94516c96cd60d5209eb0'
+    :commit: 22f32129b8061b6621b24be672f87c37839636e4
     :git: https://github.com/danielchangsoojones/TGLParallaxCarousel.git
 
 SPEC CHECKSUMS:

@@ -51,6 +51,15 @@ class User: PFUser {
         return feet.toString + "'" + inches.toString + "\""
     }
     
+    var nonNilProfileImages: [AnyObject?] {
+        get {
+            let allProfileImages: [AnyObject?] = [profileImage, profileImage2, profileImage3, profileImage4, profileImage5, profileImage6]
+            return allProfileImages.filter { (file) -> Bool in
+                return file != nil
+            }
+        }
+    }
+    
     func calculateAge(birthday: Date) -> Int {
         let calendar : Calendar = Calendar.current
         let now = Date()
@@ -60,6 +69,5 @@ class User: PFUser {
                                                                 options: [])
         return ageComponents.year!
     }
-    
 }
 

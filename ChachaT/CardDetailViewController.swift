@@ -102,14 +102,6 @@ class CardDetailViewController: UIViewController {
         if let factThree = userOfTheCard?.bulletPoint3 {
             bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
-//        if let profileImage = userOfTheCard?.profileImage {
-//            self.profileImage.file = profileImage
-//            self.profileImage.loadInBackground()
-//        } else {
-//            profileImage.backgroundColor = ChachaBombayGrey
-//            theProfileImageButtonOverlay.setTitle("No Picture", for: UIControlState())
-//            theProfileImageButtonOverlay.titleLabel?.textAlignment = .center
-//        }
     }
     
     func bulletPointSetup(_ text: String, width: CGFloat) {
@@ -126,20 +118,19 @@ extension CardDetailViewController: TGLParallaxCarouselDelegate {
             make.edges.equalToSuperview()
         }
         theProfileImageCarouselView.delegate = self
-        theProfileImageCarouselView.type = .normal
         theProfileImageCarouselView.currentPageIndicatorColor = CustomColors.JellyTeal
     }
     
     func numberOfItemsInCarouselView(_ carouselView: TGLParallaxCarousel) -> Int {
-        return 2
+        return userOfTheCard?.nonNilProfileImages.count ?? 0
     }
     
     func carouselView(_ carouselView: TGLParallaxCarousel, itemForRowAtIndex index: Int) -> TGLParallaxCarouselItem {
-        let slideView = CarouselSlideView(file: userOfTheCard?.profileImage, frame: carouselView.frame)
+        let slideView = CarouselSlideView(file: userOfTheCard?.nonNilProfileImages[index], frame: carouselView.frame)
         return slideView
     }
     
-    //TODO: will need to make a tap handler or something because sliding is really hard without tapping
+    //TODO: will need to make a tap handler or something because sliding is really hard without tapping, check how it fairs on a real device, might just suck for the mac simulator
     func carouselView(_ carouselView: TGLParallaxCarousel, didSelectItemAtIndex index: Int) {}
     
     func carouselView(_ carouselView: TGLParallaxCarousel, willDisplayItem item: TGLParallaxCarouselItem, forIndex index: Int) {}

@@ -204,6 +204,10 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-vq-aso" userLabel="Name and Title View">
                                                 <rect key="frame" x="0.0" y="350" width="600" height="61"/>
                                                 <subviews>
+                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0H-yA-KZp" customClass="DescriptionDetailView" customModule="Shuffles" customModuleProvider="target">
+                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="61"/>
+                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                                    </view>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Top Line" translatesAutoresizingMaskIntoConstraints="NO" id="7pK-7V-3MT" userLabel="Top Line">
                                                         <rect key="frame" x="0.0" y="60" width="600" height="1"/>
                                                         <constraints>
@@ -211,12 +215,8 @@
                                                             <constraint firstAttribute="height" constant="1" id="PST-LH-ybZ"/>
                                                         </constraints>
                                                     </imageView>
-                                                    <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="h0H-yA-KZp" customClass="DescriptionDetailView" customModule="Shuffles" customModuleProvider="target">
-                                                        <rect key="frame" x="0.0" y="0.0" width="600" height="61"/>
-                                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                                                    </view>
                                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fUz-Kg-VhW" userLabel="Report Abuse Button">
-                                                        <rect key="frame" x="540" y="8.5" width="59" height="22"/>
+                                                        <rect key="frame" x="540" y="9" width="59" height="22"/>
                                                         <constraints>
                                                             <constraint firstAttribute="width" constant="59" id="Egr-P0-897"/>
                                                             <constraint firstAttribute="height" constant="22" id="qhi-2h-Tmd"/>
