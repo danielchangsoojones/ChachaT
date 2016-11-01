@@ -142,7 +142,8 @@ extension BackgroundAnimationViewController: CLLocationManagerDelegate {
 }
 
 //MARK: KolodaViewDelegate
-extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaViewDelegate {
+extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
+    //WARNING: SOMETIMES THE KOLODAVIEWDELEGATE FUNCTIONS CHANGE NAMES WHEN COCOAPOD IS UPDATED AND IT DOESN'T THROW AN ERROR FOR SOME REASON, SO MAKE SURE FUNCTION NAMES AND PARAMETERS MATCH PERFECTLY IF SOMETHING SEEMS TO BREAK
     func setKolodaAttributes() {
         kolodaView.alphaValueSemiTransparent = kolodaAlphaValueSemiTransparent
         kolodaView.countOfVisibleCards = kolodaCountOfVisibleCards
@@ -166,30 +167,11 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         dataStore.getMoreSwipes()
     }
     
-    func koloda(_ koloda: KolodaView, didSelectCardAtIndex index: UInt) {
+    func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
         self.buttonTappedHandler(index)
     }
     
-    func koloda(kolodaShouldApplyAppearAnimation koloda: KolodaView) -> Bool {
-        return true
-    }
-    
-    func koloda(kolodaShouldMoveBackgroundCard koloda: KolodaView) -> Bool {
-        return false
-    }
-    
-    func koloda(kolodaShouldTransparentizeNextCard koloda: KolodaView) -> Bool {
-        return true
-    }
-    
-    func koloda(kolodaBackgroundCardAnimation koloda: KolodaView) -> POPPropertyAnimation? {
-        let animation = POPSpringAnimation(propertyNamed: kPOPViewFrame)
-        animation?.springBounciness = frameAnimationSpringBounciness
-        animation?.springSpeed = frameAnimationSpringSpeed
-        return animation
-    }
-    
-    func koloda(_ koloda: KolodaView, didSwipeCardAtIndex index: UInt, inDirection direction: SwipeResultDirection) {
+    func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         let currentSwipe = swipeArray[Int(index)]
         if direction == .right {
             currentSwipe.approve()
@@ -212,7 +194,6 @@ extension BackgroundAnimationViewController: KolodaViewDelegate, CustomKolodaVie
         let cardHeight = frameHeight - (bottomAreaHeight + cardOffsetFromBottomButtons) - (navigationBarHeight! + statusBarHeight)
         return (cardHeight, navigationBarHeight! + statusBarHeight)
     }
-    
 }
 
 //MARK: KolodaViewDataSource
@@ -270,11 +251,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
         return 0.7
     }
     
-    fileprivate func buttonTappedHandler(_ index: UInt) {
+    fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
 
-        cardDetailVC.userOfTheCard = swipeArray[Int(index)].otherUser
-        if let image = swipeArray[Int(index)].otherUser.profileImage{
+        cardDetailVC.userOfTheCard = swipeArray[index].otherUser
+        if let image = swipeArray[index].otherUser.profileImage{
             self.theMagicMovePlaceholderImage.file = image
             self.theMagicMovePlaceholderImage.loadInBackground()
         } else {

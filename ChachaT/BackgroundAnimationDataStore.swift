@@ -56,7 +56,7 @@ class BackgroundAnimationDataStore {
     
     func getMoreSwipes() {
         let alreadyUsedUserIDs: [String] = alreadyUsedSwipes.map { (swipe: Swipe) -> String in
-            return swipe.otherUser.objectId!
+            return swipe.otherUser.objectId ?? ""
         }
         getNewUserSwipes(alreadyUsedUserIDs: alreadyUsedUserIDs)
     }
@@ -68,7 +68,7 @@ extension BackgroundAnimationDataStore {
     func loadSwipeArray() {
         
         let innerUserQuery = User.query()!
-        innerUserQuery.whereKey("objectId", equalTo: User.current()!.objectId!)
+        innerUserQuery.whereKey("objectId", equalTo: User.current()!.objectId ?? "")
         
         
         //Find any unfinished swipes for the Current User. Potentially, the user could actually be either userOne or UserTwo
@@ -99,7 +99,7 @@ extension BackgroundAnimationDataStore {
                         swipes.append(swipe)
                     }
                     //if the user has swiped already, we still need add to the list of non-swipable users because we don't want the currentUser to see someone they have already swiped. Yes, it is ineffecient to pull down swipes that we never use, but that is a tradeoff of Parse.
-                    swipeUserObjectIDs.append(otherUser.objectId!)
+                    swipeUserObjectIDs.append(otherUser.objectId ?? "")
                 }
                 self.delegate?.passUnansweredSwipes(swipes: swipes)
             } else if let error = error {
@@ -114,7 +114,7 @@ extension BackgroundAnimationDataStore {
         //Now, we want to find all the new Users that the current user has never interacted with, or else how would the user meet new people? So, we need to find all the users who haven't been swiped yet. Kind of stinks, because we have to do two API calls (one for swipes and one for new users who weren't in swipes), but cloud code could fix that double call. Plus, we just add this to the data array, and then when the user gets to a place to reload the data (as in they hit the end of the stack, then we load more via the new user stack).
         let newUserQuery = User.query()!
         var alreadyUsedIdsCopy = alreadyUsedUserIDs
-        alreadyUsedIdsCopy.append(User.current()!.objectId!) //we don't want the currentUser in their own stack
+        alreadyUsedIdsCopy.append(User.current()!.objectId ?? "") //we don't want the currentUser in their own stack
         newUserQuery.whereKey("objectId", notContainedIn: alreadyUsedIdsCopy)
         newUserQuery.whereKeyExists("profileImage")
         newUserQuery.limit = 50 //arbitrary limit, so we don't do a full table scan when there are thousands of users

@@ -134,6 +134,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>TGLParallaxCarousel.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -157,17 +162,22 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>018D3C3AB08A11B68740A2DC5D2F8B9E</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>09FB0F22853897139AEB6942E857EF09</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>0B4F155A8158C41395797A0B543C08C0</key>
+		<key>180C74C9AD29DA8202520CCB38154CEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>180C74C9AD29DA8202520CCB38154CEB</key>
+		<key>1BB8B66F6CF0CCAFCC3F688E1FF4244A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -222,27 +232,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>80BBEC18336269B0F547ABCA03DAAAD1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>89B94020164F280B4BBD6545EB481CFA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>89C91B93B7EA15FDB99366089D59C6FC</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>93F190B921F5AF5377D2279DE40FE3C1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>993AAD524CF226E314D8A72A61F50094</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>A067A9C3672640C47748FD50B96B9328</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -252,7 +247,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>AFD943C2DFFB31699AA82E641D177DCA</key>
+		<key>A38500FA205F84F50DFFBD3D5363F6AA</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>C0469A314A0D76C92310978C325CF3C1</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -262,12 +262,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5681EAAF8DE13A8931340AE90F6C7CE</key>
+		<key>C63C109B988C882F1B4B9EDBB65B3433</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C63C109B988C882F1B4B9EDBB65B3433</key>
+		<key>CA6995582DA854FCF848BE74054B1407</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -293,6 +293,16 @@
 			<true/>
 		</dict>
 		<key>E4766BE1AB329C9814107D968703360F</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>E977860EFEF5C285A9DC9C0E1DC6E095</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EA37186212382D61644907C529CFB552</key>
 		<dict>
 			<key>primary</key>
 			<true/>

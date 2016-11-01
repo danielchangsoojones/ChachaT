@@ -201,12 +201,6 @@
                                     <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="v5S-4V-jao" userLabel="Content View">
                                         <rect key="frame" x="0.0" y="0.0" width="600" height="856"/>
                                         <subviews>
-                                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="8hk-xb-Z8g" userLabel="Profile Picture" customClass="PFImageView">
-                                                <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="350" id="vHd-oq-IIN"/>
-                                                </constraints>
-                                            </imageView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="q5j-vq-aso" userLabel="Name and Title View">
                                                 <rect key="frame" x="0.0" y="350" width="600" height="61"/>
                                                 <subviews>
@@ -277,13 +271,13 @@
                                                 <color key="textColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <button opaque="NO" alpha="0.69999999999999996" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="g5O-C2-7n0" userLabel="Profile Background Button">
+                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="vGv-4q-uCX">
                                                 <rect key="frame" x="0.0" y="0.0" width="600" height="350"/>
-                                                <color key="tintColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                <state key="normal">
-                                                    <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                                </state>
-                                            </button>
+                                                <color key="backgroundColor" red="0.69411764710000001" green="0.69411764710000001" blue="0.69411764710000001" alpha="1" colorSpace="calibratedRGB"/>
+                                                <constraints>
+                                                    <constraint firstAttribute="height" constant="350" id="zGf-eN-DwQ"/>
+                                                </constraints>
+                                            </view>
                                             <button opaque="NO" alpha="0.5" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="i23-FF-3md">
                                                 <rect key="frame" x="20" y="30" width="34" height="30"/>
                                                 <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -294,10 +288,6 @@
                                                     <action selector="backButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="XKm-I8-rXS"/>
                                                 </connections>
                                             </button>
-                                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="white" translatesAutoresizingMaskIntoConstraints="NO" id="zLF-DG-mmb">
-                                                <rect key="frame" x="290" y="165" width="20" height="20"/>
-                                                <color key="color" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                            </activityIndicatorView>
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target">
                                                 <rect key="frame" x="0.0" y="519" width="600" height="312"/>
                                                 <constraints>
@@ -307,36 +297,28 @@
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                         <constraints>
-                                            <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" constant="-61" id="4Es-KN-xkx"/>
-                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="leading" secondItem="8hk-xb-Z8g" secondAttribute="leading" id="4Pe-Ft-iwW"/>
-                                            <constraint firstItem="8hk-xb-Z8g" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="7US-qG-o0r"/>
+                                            <constraint firstAttribute="trailing" secondItem="vGv-4q-uCX" secondAttribute="trailing" id="1ao-Jx-Fif"/>
+                                            <constraint firstItem="h0H-yA-KZp" firstAttribute="top" secondItem="vGv-4q-uCX" secondAttribute="bottom" id="3Ff-cT-kNV"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="3" id="DjI-9k-vhI"/>
                                             <constraint firstItem="dCe-w4-3mH" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="9" id="E0i-QV-clM"/>
-                                            <constraint firstItem="8hk-xb-Z8g" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="FD2-qx-rfU"/>
-                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="bottom" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="M2A-2h-JId"/>
-                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="M8H-h8-D88"/>
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
-                                            <constraint firstItem="zLF-DG-mmb" firstAttribute="centerX" secondItem="v5S-4V-jao" secondAttribute="centerX" id="SVb-Sy-7Pv"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="30" id="Ty8-td-QWW"/>
-                                            <constraint firstItem="g5O-C2-7n0" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="top" id="UJv-mG-JT8"/>
+                                            <constraint firstItem="vGv-4q-uCX" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="Uz9-bG-MqN"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
-                                            <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="8hk-xb-Z8g" secondAttribute="bottom" id="cEx-7Q-tPb"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="8" id="dLr-Py-L1I"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="m0d-Qv-Dsh"/>
-                                            <constraint firstItem="zLF-DG-mmb" firstAttribute="centerY" secondItem="g5O-C2-7n0" secondAttribute="centerY" id="mId-h5-nF5"/>
                                             <constraint firstAttribute="bottom" secondItem="dCe-w4-3mH" secondAttribute="bottom" constant="25" id="ni6-JD-Kkw"/>
-                                            <constraint firstAttribute="trailing" secondItem="8hk-xb-Z8g" secondAttribute="trailing" id="pYg-FL-5Gk"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" id="t67-ZE-aKb"/>
                                             <constraint firstAttribute="trailing" secondItem="dCe-w4-3mH" secondAttribute="trailing" id="wlj-3e-3iH"/>
                                             <constraint firstItem="dCe-w4-3mH" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="x9g-xW-zhk"/>
+                                            <constraint firstItem="vGv-4q-uCX" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="x9z-ry-S8x"/>
                                             <constraint firstAttribute="trailing" secondItem="dCo-OJ-te4" secondAttribute="trailing" id="xLZ-qp-Z4y"/>
                                         </constraints>
                                         <variation key="default">
                                             <mask key="constraints">
-                                                <exclude reference="4Es-KN-xkx"/>
                                                 <exclude reference="VCW-xe-Mzj"/>
                                                 <exclude reference="PyY-G5-Lvp"/>
                                             </mask>
@@ -378,19 +360,18 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
-                        <outlet property="profileImage" destination="8hk-xb-Z8g" id="QQ4-0v-Dow"/>
                         <outlet property="theBackButton" destination="i23-FF-3md" id="bs8-r8-Hh2"/>
                         <outlet property="theBackButtonLeadingConstraint" destination="Skd-VA-TBZ" id="byq-Xb-d1i"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
                         <outlet property="theCardUserTagListView" destination="dCe-w4-3mH" id="8wC-ZM-3yy"/>
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
-                        <outlet property="theProfileImageButtonOverlay" destination="g5O-C2-7n0" id="K7c-5M-A8C"/>
-                        <outlet property="theSavingSpinner" destination="zLF-DG-mmb" id="DeZ-s9-0nd"/>
+                        <outlet property="theProfileImageCarouselView" destination="vGv-4q-uCX" id="cla-An-9YF"/>
+                        <outlet property="theProfileImageHolderView" destination="vGv-4q-uCX" id="9ri-bf-pWk"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2139" y="424"/>
+            <point key="canvasLocation" x="2137.5999999999999" y="423.68815592203902"/>
         </scene>
         <!--Chacha Navigation View Controller-->
         <scene sceneID="NJs-ik-5Gj">

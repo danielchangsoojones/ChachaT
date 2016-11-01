@@ -11,6 +11,7 @@ import Parse
 import ParseUI
 import EFTools
 import SCLAlertView
+import TGLParallaxCarousel
 
 public enum QuestionDetailState {
     case editingMode
@@ -26,13 +27,11 @@ class CardDetailViewController: UIViewController {
     }
     
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
-    @IBOutlet weak var profileImage: PFImageView!
-    @IBOutlet weak var theProfileImageButtonOverlay: UIButton!
     @IBOutlet weak var theBackButton: UIButton!
-    @IBOutlet weak var theSavingSpinner: UIActivityIndicatorView!
     @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
-    
+    @IBOutlet weak var theProfileImageHolderView: UIView!
+    var theProfileImageCarouselView: TGLParallaxCarousel!
     
     //Constraints
     @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
@@ -65,7 +64,7 @@ class CardDetailViewController: UIViewController {
         super.viewDidLoad()
         dataStoreSetup()
         setNormalGUI()
-        setupTapHandler()
+        profileImageCarouselSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -103,27 +102,47 @@ class CardDetailViewController: UIViewController {
         if let factThree = userOfTheCard?.bulletPoint3 {
             bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
-        if let profileImage = userOfTheCard?.profileImage {
-            self.profileImage.file = profileImage
-            self.profileImage.loadInBackground()
-        } else {
-            profileImage.backgroundColor = ChachaBombayGrey
-            theProfileImageButtonOverlay.setTitle("No Picture", for: UIControlState())
-            theProfileImageButtonOverlay.titleLabel?.textAlignment = .center
-        }
+//        if let profileImage = userOfTheCard?.profileImage {
+//            self.profileImage.file = profileImage
+//            self.profileImage.loadInBackground()
+//        } else {
+//            profileImage.backgroundColor = ChachaBombayGrey
+//            theProfileImageButtonOverlay.setTitle("No Picture", for: UIControlState())
+//            theProfileImageButtonOverlay.titleLabel?.textAlignment = .center
+//        }
     }
     
     func bulletPointSetup(_ text: String, width: CGFloat) {
         let bulletPointView = BulletPointView(text: text, width: width)
         theBulletPointsStackView.addArrangedSubview(bulletPointView)
     }
-    
-    fileprivate func setupTapHandler() {
-        _ = theProfileImageButtonOverlay.tapped { _ in
-            self.dismiss(animated: false, completion: nil)
-        }
-    }
+}
 
+extension CardDetailViewController: TGLParallaxCarouselDelegate {
+    func profileImageCarouselSetup() {
+        theProfileImageCarouselView = TGLParallaxCarousel()
+        theProfileImageHolderView.addSubview(theProfileImageCarouselView)
+        theProfileImageCarouselView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        theProfileImageCarouselView.delegate = self
+        theProfileImageCarouselView.type = .normal
+        theProfileImageCarouselView.currentPageIndicatorColor = CustomColors.JellyTeal
+    }
+    
+    func numberOfItemsInCarouselView(_ carouselView: TGLParallaxCarousel) -> Int {
+        return 2
+    }
+    
+    func carouselView(_ carouselView: TGLParallaxCarousel, itemForRowAtIndex index: Int) -> TGLParallaxCarouselItem {
+        let slideView = CarouselSlideView(file: userOfTheCard?.profileImage, frame: carouselView.frame)
+        return slideView
+    }
+    
+    //TODO: will need to make a tap handler or something because sliding is really hard without tapping
+    func carouselView(_ carouselView: TGLParallaxCarousel, didSelectItemAtIndex index: Int) {}
+    
+    func carouselView(_ carouselView: TGLParallaxCarousel, willDisplayItem item: TGLParallaxCarouselItem, forIndex index: Int) {}
 }
 
 //Edit Profile Extension
@@ -164,6 +183,7 @@ extension CardDetailViewController: MagicMoveable {
     }
     
     var magicViews: [UIView] {
-        return [profileImage]
+        //TODO: not sure how good this animation is looking
+        return [theProfileImageCarouselView]
     }
 }

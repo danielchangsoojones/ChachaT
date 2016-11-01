@@ -17,8 +17,7 @@ let defaultHeightRatio3by2:CGFloat = 1.06
 let backgroundCardHorizontalMarginMultiplier:CGFloat = 0.25
 let backgroundCardScalePercent:CGFloat = 1.5
 
-//TODO: I wish I could just extend the KolodaViewDelegate, but it is not working.
-protocol CustomKolodaViewDelegate  {
+protocol CustomKolodaViewDelegate: KolodaViewDelegate  {
     func calculateKolodaViewCardHeight() -> (cardHeight: CGFloat, navigationAreaHeight: CGFloat)
 }
 
