@@ -135,8 +135,7 @@ extension SearchTagsViewController {
     }
     
     fileprivate func showBottomUserArea() {
-        let view = UIView(frame: CGRect(x: 0, y: 0, width: self.view.frame.width, height: 100))
-        view.backgroundColor = UIColor.blue
+        let view = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: 100))
         self.view.addSubview(view)
         view.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()

@@ -125,6 +125,8 @@
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
 		92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */; };
 		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
+		92EB3CCF1DCA5BCD004E8797 /* BottomUserScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */; };
+		92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -255,6 +257,8 @@
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
 		92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JointParseTagToUser.swift; sourceTree = "<group>"; };
 		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
+		92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomUserScrollView.swift; sourceTree = "<group>"; };
+		92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
 		95775F81069424F8C55B7B25 /* Pods-Shuffles.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.release.xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.release.xcconfig"; sourceTree = "<group>"; };
 		B06754DA7D859F5BF7881282 /* Pods_ChachaT.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ChachaT.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		E010027B7167FAA9E4AC828B /* Pods-Shuffles.debug(staging).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(staging).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(staging).xcconfig"; sourceTree = "<group>"; };
@@ -730,6 +734,7 @@
 		928819391D1AE484000A8E04 /* Subview Files */ = {
 			isa = PBXGroup;
 			children = (
+				92EB3CCD1DCA5BA3004E8797 /* Bottom User Area */,
 				92120D9E1D6BFB1700320822 /* Search Area */,
 				92120D9D1D6BFA4200320822 /* ChachaDropDown */,
 			);
@@ -880,6 +885,23 @@
 				92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */,
 			);
 			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		92EB3CCD1DCA5BA3004E8797 /* Bottom User Area */ = {
+			isa = PBXGroup;
+			children = (
+				92EB3CD01DCA60B5004E8797 /* Cells */,
+				92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */,
+			);
+			name = "Bottom User Area";
+			sourceTree = "<group>";
+		};
+		92EB3CD01DCA60B5004E8797 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -1039,7 +1061,9 @@
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
+				92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */,
 				923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */,
+				92EB3CCF1DCA5BCD004E8797 /* BottomUserScrollView.swift in Sources */,
 				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
