@@ -76,8 +76,8 @@ class SearchTagsDataStore: SuperTagDataStore {
             query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
         case "Age Range":
             //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-            let minAge : Date = dropDownTag.minValue.years.ago
-            let maxAge : Date = dropDownTag.maxValue.years.ago
+            let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
+            let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
             query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
             query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
         case "Height":

@@ -179,20 +179,29 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
             _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
         }
         
+        let facebookAction = UIAlertAction(title: "From Facebook", style: .default) { (alertAction: UIAlertAction) in
+           self.showFacebookImagePicker()
+        }
+        
         let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { (alertAction: UIAlertAction) in
             _ = Camera.shouldStartCamera(target: self, canEdit: false, frontFacing: true)
         }
         
         alert.addAction(photoLibraryAction)
+        alert.addAction(facebookAction)
         alert.addAction(cameraAction)
 
         return alert
     }
     
     func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
-        if image != nil {
-            //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
-            //            let resizedImage = image.resizeImage(profileImageSize!)
+        imageWasPicked(image: image, picker: picker)
+    }
+    
+    func imageWasPicked(image: UIImage?, picker: UIViewController) {
+        //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
+        //            let resizedImage = image.resizeImage(profileImageSize!)
+        if let image = image {
             photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
             dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
         }
