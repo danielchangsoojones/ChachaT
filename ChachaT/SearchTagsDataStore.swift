@@ -97,6 +97,13 @@ extension SearchTagsDataStore {
         
         tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
+                
+                //TODO: once a better backend is implemented, it would be able to see if we have already swiped any of these users and actually pass me the swipes accordingly. For now, I am just making them totally new swipes
+                let newSwipes: [Swipe] = users.map({ (user: User) -> Swipe in
+                    return Swipe(otherUser: user, otherUserApproval: false)
+                })
+                self.delegate?.passdDataToBottomArea(swipes: newSwipes)
+                
                 let query = JointParseTagToUser.query()! as! PFQuery<JointParseTagToUser>
                 query.whereKey("user", containedIn: users) //find any tags related to the chosen users
                 query.whereKey("tagTitle", notContainedIn: tuple.chosenTitleArray) //don't include any tags that have already been chosen
@@ -149,10 +156,29 @@ extension SearchTagsDataStore {
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User])
+    func passdDataToBottomArea(swipes: [Swipe])
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passUserArrayToMainPage(_ userArray: [User]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray as AnyObject?) //passing userArray to the segue
+    }
+    
+    func passdDataToBottomArea(swipes: [Swipe]) {
+        showBottomUserArea()
+        if let bottomUserArea = theBottomUserArea {
+            bottomUserArea.reloadData(newData: swipes)
+        }
+    }
+    
+    func showBottomUserArea() {
+        theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: 100))
+        self.view.addSubview(theBottomUserArea!)
+        theBottomUserArea?.snp.makeConstraints { (make) in
+            make.leading.trailing.equalToSuperview()
+            make.bottom.equalToSuperview()
+            make.height.equalTo(theBottomUserArea!.frame.height)
+        }
+        theTagScrollView.contentInset.bottom = theBottomUserArea!.frame.height
     }
 }

@@ -15,6 +15,7 @@ class SearchTagsViewController: SuperTagViewController {
     var scrollViewSearchView : ScrollViewSearchView!
     var chosenTags: [Tag] = []
     @IBOutlet weak var theTagScrollView: UIScrollView!
+    var theBottomUserArea: BottomUserScrollView?
     
     var dataStore : SearchTagsDataStore!
     
@@ -125,24 +126,12 @@ extension SearchTagsViewController {
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
         showSuccessiveTags()
-        showBottomUserArea()
     }
     
     fileprivate func showSuccessiveTags() {
         tagChoicesView.removeAllTags()
         addChosenTagsToArray()
         dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
-    }
-    
-    fileprivate func showBottomUserArea() {
-        let view = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: 100))
-        self.view.addSubview(view)
-        view.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.height.equalTo(view.frame.height)
-        }
-        theTagScrollView.contentInset.bottom = view.frame.height
     }
 }
 

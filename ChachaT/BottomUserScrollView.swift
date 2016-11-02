@@ -10,6 +10,7 @@ import Foundation
 
 class BottomUserScrollView: UIView {
     var swipes: [Swipe] = []
+    var collectionView: UICollectionView!
     
     init(swipes: [Swipe], frame: CGRect) {
         super.init(frame: frame)
@@ -20,11 +21,16 @@ class BottomUserScrollView: UIView {
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    func reloadData(newData: [Swipe]) {
+        self.swipes = newData
+        collectionView.reloadData()
+    }
 }
 
 extension BottomUserScrollView: UICollectionViewDelegate {
     fileprivate func collectionViewSetup() {
-        let collectionView = UICollectionView(frame: self.frame, collectionViewLayout: createCollectionViewFlowLayout())
+        collectionView = UICollectionView(frame: self.frame, collectionViewLayout: createCollectionViewFlowLayout())
         collectionView.dataSource = self
         collectionView.delegate = self
         collectionView.backgroundColor = UIColor.yellow
@@ -45,13 +51,13 @@ extension BottomUserScrollView: UICollectionViewDelegate {
 
 extension BottomUserScrollView: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 30
+        return swipes.count
     }
     
     // The cell that is returned must be retrieved from a call to -dequeueReusableCellWithReuseIdentifier:forIndexPath:
     public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: UserCollectionViewCell.reuseIdentifier, for: indexPath) as! UserCollectionViewCell
-        cell.theUser = User.current()!
+        cell.theUser = swipes[indexPath.row].otherUser
         cell.backgroundColor = UIColor.red
         return cell
     }
