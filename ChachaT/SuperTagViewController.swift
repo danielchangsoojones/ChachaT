@@ -15,7 +15,6 @@ import Foundation
 class SuperTagViewController: UIViewController {
     
     @IBOutlet weak var tagChoicesView: ChachaChoicesTagListView!
-    @IBOutlet weak var backgroundColorView: UIView!
 
     var dropDownMenu: ChachaDropDownMenu!
     var tappedDropDownTagView : DropDownTagView? //a global variable to hold the dropDownTag that was tapped to pull down a ChachaDropDownMenu
