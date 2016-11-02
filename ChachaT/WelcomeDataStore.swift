@@ -10,6 +10,7 @@ import Foundation
 import ParseFacebookUtilsV4
 import Alamofire
 import SCLAlertView
+import Timepiece
 
 class WelcomeDataStore {
     var delegate: WelcomeDataStoreDelegate?
@@ -114,14 +115,15 @@ extension WelcomeDataStore {
 extension WelcomeDataStore {
     //Facebook log in is not currently working at the moment, and I am not totally sure why...
     func accessFaceBook() {
-        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email"]) { (user, error) in
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email", "user_photos", "user_birthday", "user_education_history", "user_work_history"]) { (user, error) in
             if let currentUser = user as? User {
                 if currentUser.isNew {
                     print("this is a new user that just signed up")
                     self.updateProfileFromFacebook(true)
                 } else {
                     //let the facebook user sign-in
-                    self.delegate?.performSegueIntoApp()
+                    self.updateProfileFromFacebook(false)
+//                    self.delegate?.performSegueIntoApp()
                 }
             } else if let error = error {
                 print(error)
@@ -134,15 +136,25 @@ extension WelcomeDataStore {
     //look into Facebook Graph API to learn more
     private func updateProfileFromFacebook(_ isNew : Bool) {
         if FBSDKAccessToken.current() != nil {
-            FBSDKGraphRequest(graphPath: "me?fields=name", parameters: nil).start(completionHandler: { (connection, result, error) -> Void in
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, birthday, education, work"]).start(completionHandler: { (connection, result, error) -> Void in
                 if error == nil {
                     print("updating profile from facebook")
                     let currentUser = User.current()!
                     
                     let userData = result as! NSDictionary
-                    print(userData)
-                    currentUser.fullName = userData[Constants.name] as? String
+                    if currentUser.fullName == nil || currentUser.fullName == "" {
+                        currentUser.fullName = userData[Constants.name] as? String
+                    }
                     currentUser.facebookId = userData[Constants.id] as? String
+                    currentUser.birthDate = self.extractBirthdate(userData: userData)
+                    if currentUser.title == nil || currentUser.title == "" {
+                        //don't change the user's title when they are logging back in, if they have already set it to something
+                        currentUser.title = self.extractSchoolName(userData: userData)
+                        if self.extractSchoolName(userData: userData) == nil {
+                            //if we can't find a school name, then see if they have a workplace
+                            currentUser.title = self.extractWork(userData: userData)
+                        }
+                    }
                     currentUser.saveInBackground()
                     
                     self.updateFacebookImage()
@@ -151,6 +163,36 @@ extension WelcomeDataStore {
                 }
             })
         }
+    }
+    
+    fileprivate func extractSchoolName(userData: NSDictionary) -> String? {
+        let education = userData["education"]
+        
+        //each school that a facebook user has listed, has its own dictionary for that school where it tells things like type of school, name, id, etc. So, we need to go through each school and then create a dictionary for each school. But, we really only want the user's most recent school, so we get the last school because we don't really care if the user's middle school, if they are in college now.
+        if let educationDictionary = education as? [NSDictionary] {
+            if let mostCurrentEducationDictionary = educationDictionary.last, let schoolDictionary = mostCurrentEducationDictionary.object(forKey: "school") as? NSDictionary {
+                return schoolDictionary.object(forKey: "name") as! String?
+            }
+        }
+        return nil
+    }
+    
+    fileprivate func extractBirthdate(userData: NSDictionary) -> Date? {
+        if let birthday = userData["birthday"] as? String {
+            return birthday.date(inFormat: "MM/dd/yyyy")
+        }
+        return nil
+    }
+    
+    fileprivate func extractWork(userData: NSDictionary) -> String? {
+        let work = userData["work"]
+        //each workplace that a facebook user has listed, has its own dictionary for that workplace where it tells things like employer, location, etc. So, we need to go through each workplace and then create a dictionary for each workplace. But, we really only want the user's most recent work, so we get the last workplace because we don't really care if the user's 5 year ago job, if they are working somewhere else now.
+        if let workDictionary = work as? [NSDictionary], let mostCurrentWorkplace = workDictionary.last {
+            if let employer = mostCurrentWorkplace.object(forKey: "employer") as? NSDictionary {
+                return employer.object(forKey: "name") as! String?
+            }
+        }
+        return nil
     }
     
     private func updateFacebookImage() {
