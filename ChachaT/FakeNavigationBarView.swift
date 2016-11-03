@@ -51,12 +51,24 @@ class FakeNavigationBarView : UIView {
     func createRightBarButton() {
         let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
         rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
+        createRightButtonCover()
         self.addSubview(rightButton)
         rightButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
         rightButton.setImage(UIImage(named: ImageNames.SearchIcon), for: UIControlState())
+    }
+    
+    //TODO: I wanted to have a bigger hit area for the button because it was really hard to hit. This was a fast way to get it to work, but definetly there is a better way where we don't create two buttons
+    func createRightButtonCover() {
+        let buttonCover = UIButton()
+        buttonCover.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
+        self.addSubview(buttonCover)
+        buttonCover.snp.makeConstraints { (make) in
+            make.trailing.top.bottom.equalTo(self)
+            make.width.equalTo(70)
+        }
     }
     
     func rightBarButtonPressed(_ sender: UIButton!) {
@@ -66,12 +78,24 @@ class FakeNavigationBarView : UIView {
     func createLeftBarButton() {
         leftMenuButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
         leftMenuButton.addTarget(self, action: #selector(FakeNavigationBarView.leftBarButtonPressed(_:)), for: .touchUpInside)
+        createLeftButtonCover()
         self.addSubview(leftMenuButton)
         leftMenuButton.snp.makeConstraints { (make) in
             make.leading.equalTo(self).offset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
         leftMenuButton.setImage(#imageLiteral(resourceName: "Notification Tab Icon"), for: UIControlState())
+    }
+    
+    //TODO: I wanted to have a bigger hit area for the button because it was really hard to hit. This was a fast way to get it to work, but definetly there is a better way where we don't create two buttons
+    func createLeftButtonCover() {
+        let buttonCover = UIButton()
+        buttonCover.addTarget(self, action: #selector(FakeNavigationBarView.leftBarButtonPressed(_:)), for: .touchUpInside)
+        self.addSubview(buttonCover)
+        buttonCover.snp.makeConstraints { (make) in
+            make.leading.top.bottom.equalTo(self)
+            make.width.equalTo(70)
+        }
     }
     
     func leftBarButtonPressed(_ sender: UIButton!) {
