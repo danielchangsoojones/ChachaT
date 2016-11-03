@@ -24,7 +24,7 @@ class CarouselSlideView: TGLParallaxCarouselItem {
     fileprivate func imageViewSetup(file: AnyObject?) {
         theImageView.loadFromFile(file)
         self.addSubview(theImageView)
-        theImageView.backgroundColor = UIColor.red
+        theImageView.backgroundColor = CustomColors.SilverChaliceGrey
         //Can't use snapkit to pin the image to the edges for some reason, but setting the frame to the bounds does the job
         theImageView.frame = self.bounds
     }

@@ -1,15 +1,17 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="15G1004" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I1A-ko-WaS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="I1A-ko-WaS">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--SearchTagsViewController-->
         <scene sceneID="q9H-Kk-l2v">
             <objects>
-                <viewController storyboardIdentifier="SearchTagsViewController" title="SearchTagsViewController" id="I1A-ko-WaS" customClass="SearchTagsViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="SearchTagsViewController" title="SearchTagsViewController" automaticallyAdjustsScrollViewInsets="NO" id="I1A-ko-WaS" customClass="SearchTagsViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HPb-BY-jXc"/>
                         <viewControllerLayoutGuide type="bottom" id="8zR-1V-GnX"/>
@@ -18,46 +20,58 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="VSR-xX-ycl">
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" ambiguous="YES" translatesAutoresizingMaskIntoConstraints="NO" id="cxi-sq-uxE">
+                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
                                 <subviews>
-                                    <view tag="1" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target"/>
+                                    <view contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bf0-S4-AUg">
+                                        <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                        <subviews>
+                                            <view tag="1" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="x2C-mZ-onz" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target">
+                                                <rect key="frame" x="0.0" y="0.0" width="375" height="46"/>
+                                            </view>
+                                        </subviews>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                        <constraints>
+                                            <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="bf0-S4-AUg" secondAttribute="leading" id="RC4-3c-G4o"/>
+                                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="bf0-S4-AUg" secondAttribute="top" id="XmD-ny-HDG"/>
+                                            <constraint firstAttribute="bottom" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="glV-su-HmG"/>
+                                            <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="guA-H0-fbr"/>
+                                        </constraints>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="x2C-mZ-onz" firstAttribute="leading" secondItem="VSR-xX-ycl" secondAttribute="leading" id="kRI-uO-DCd"/>
-                                    <constraint firstAttribute="bottom" secondItem="x2C-mZ-onz" secondAttribute="bottom" id="nZn-q1-PRP"/>
-                                    <constraint firstAttribute="trailing" secondItem="x2C-mZ-onz" secondAttribute="trailing" id="r1U-4A-4XX"/>
+                                    <constraint firstItem="bf0-S4-AUg" firstAttribute="leading" secondItem="cxi-sq-uxE" secondAttribute="leading" id="6oh-bc-plw"/>
+                                    <constraint firstAttribute="trailing" secondItem="bf0-S4-AUg" secondAttribute="trailing" id="hFu-Ks-VzA"/>
+                                    <constraint firstItem="bf0-S4-AUg" firstAttribute="top" secondItem="cxi-sq-uxE" secondAttribute="top" id="kug-lE-ftF"/>
+                                    <constraint firstAttribute="bottom" secondItem="bf0-S4-AUg" secondAttribute="bottom" id="p2d-bj-Wg5"/>
                                 </constraints>
-                            </view>
-                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7"/>
+                            </scrollView>
+                            <activityIndicatorView hidden="YES" opaque="NO" contentMode="scaleToFill" horizontalHuggingPriority="750" verticalHuggingPriority="750" hidesWhenStopped="YES" style="gray" translatesAutoresizingMaskIntoConstraints="NO" id="FYC-lr-Sp7">
+                                <rect key="frame" x="177.5" y="323.5" width="20" height="20"/>
+                            </activityIndicatorView>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
-                            <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" constant="44" id="7oF-yd-eQx"/>
-                            <constraint firstItem="VSR-xX-ycl" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="Q8F-76-7kr"/>
+                            <constraint firstAttribute="trailing" secondItem="cxi-sq-uxE" secondAttribute="trailing" id="CtJ-iD-LDf"/>
+                            <constraint firstItem="cxi-sq-uxE" firstAttribute="leading" secondItem="SST-8Z-EKe" secondAttribute="leading" id="IML-tz-9ih"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerY" secondItem="SST-8Z-EKe" secondAttribute="centerY" id="W9p-k7-qWD"/>
                             <constraint firstItem="FYC-lr-Sp7" firstAttribute="centerX" secondItem="SST-8Z-EKe" secondAttribute="centerX" id="Z1y-H2-sLC"/>
-                            <constraint firstAttribute="trailing" secondItem="VSR-xX-ycl" secondAttribute="trailing" id="bpw-Ow-FPQ"/>
-                            <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="VSR-xX-ycl" secondAttribute="bottom" id="ckL-Av-Z06"/>
-                            <constraint firstItem="VSR-xX-ycl" firstAttribute="top" secondItem="SST-8Z-EKe" secondAttribute="top" id="eQf-WH-dTZ"/>
-                            <constraint firstItem="x2C-mZ-onz" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" constant="10" id="enx-ks-A6l"/>
+                            <constraint firstItem="bf0-S4-AUg" firstAttribute="width" secondItem="SST-8Z-EKe" secondAttribute="width" id="bOQ-oL-4rG"/>
+                            <constraint firstItem="cxi-sq-uxE" firstAttribute="top" secondItem="HPb-BY-jXc" secondAttribute="bottom" id="jOA-CU-vhh"/>
+                            <constraint firstItem="8zR-1V-GnX" firstAttribute="top" secondItem="cxi-sq-uxE" secondAttribute="bottom" id="zHY-f5-tqn"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="7oF-yd-eQx"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="bQw-lD-3pe"/>
                     <connections>
-                        <outlet property="backgroundColorView" destination="VSR-xX-ycl" id="gnc-AV-l2U"/>
                         <outlet property="tagChoicesView" destination="x2C-mZ-onz" id="U2V-kU-JsF"/>
-                        <outlet property="tagChoicesViewTopConstraint" destination="enx-ks-A6l" id="Gkh-z1-hcb"/>
+                        <outlet property="tagChoicesViewTopConstraint" destination="jOA-CU-vhh" id="lOY-Xv-lhJ"/>
+                        <outlet property="theTagScrollView" destination="cxi-sq-uxE" id="8GO-R9-63S"/>
                         <segue destination="Dth-C6-7C9" kind="presentation" identifier="SearchPageToTinderMainPageSegue" id="aQB-SX-kvS"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0dv-y6-sJq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1158" y="393"/>
+            <point key="canvasLocation" x="1157.5999999999999" y="392.65367316341832"/>
         </scene>
         <!--BackgroundAnimationNavigationViewController-->
         <scene sceneID="5RL-Tr-wwZ">

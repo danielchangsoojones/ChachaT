@@ -136,7 +136,7 @@ extension WelcomeDataStore {
     //look into Facebook Graph API to learn more
     private func updateProfileFromFacebook(_ isNew : Bool) {
         if FBSDKAccessToken.current() != nil {
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, birthday, education, work"]).start(completionHandler: { (connection, result, error) -> Void in
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, email, birthday, education, work"]).start(completionHandler: { (connection, result, error) -> Void in
                 if error == nil {
                     print("updating profile from facebook")
                     let currentUser = User.current()!
@@ -147,6 +147,7 @@ extension WelcomeDataStore {
                     }
                     currentUser.facebookId = userData[Constants.id] as? String
                     currentUser.birthDate = self.extractBirthdate(userData: userData)
+                    currentUser.username = userData["email"] as? String
                     if currentUser.title == nil || currentUser.title == "" {
                         //don't change the user's title when they are logging back in, if they have already set it to something
                         currentUser.title = self.extractSchoolName(userData: userData)
