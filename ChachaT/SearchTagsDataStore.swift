@@ -165,9 +165,17 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {
-        showBottomUserArea()
-        if let bottomUserArea = theBottomUserArea {
-            bottomUserArea.reloadData(newData: swipes)
+        if !swipes.isEmpty {
+            if theBottomUserArea == nil {
+                showBottomUserArea()
+            }
+            if let bottomUserArea = theBottomUserArea {
+                bottomUserArea.reloadData(newData: swipes)
+                bottomUserArea.isHidden = false
+            }
+        } else {
+            //swipes are empty
+            hideBottomUserArea()
         }
     }
     

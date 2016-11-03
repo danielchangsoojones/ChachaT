@@ -116,6 +116,7 @@ extension SearchTagsViewController {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
+            //TODO: do something about hidingBottomUserArea when they hit the remove button.
             //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
         }
     }
@@ -132,6 +133,11 @@ extension SearchTagsViewController {
         tagChoicesView.removeAllTags()
         addChosenTagsToArray()
         dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
+    }
+    
+    func hideBottomUserArea() {
+        theBottomUserArea?.isHidden = true
+        theTagScrollView.contentInset.bottom = 0
     }
 }
 
