@@ -172,7 +172,7 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func showBottomUserArea() {
-        theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: 100))
+        theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: self.view.frame.height / 3), delegate: self)
         self.view.addSubview(theBottomUserArea!)
         theBottomUserArea?.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()
