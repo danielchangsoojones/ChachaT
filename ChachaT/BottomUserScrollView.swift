@@ -73,7 +73,7 @@ extension BottomUserScrollView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentSwipe = swipes[indexPath.row]
-        self.delegate?.segueToCardDetailPage(swipe: currentSwipe)
+        self.delegate?.segueToCardDetailPage(swipe: currentSwipe, tappedIndex: indexPath)
     }
 }
 
@@ -91,13 +91,13 @@ extension BottomUserScrollView: UICollectionViewDataSource {
 }
 
 protocol BottomUserScrollViewDelegate {
-    func segueToCardDetailPage(swipe: Swipe)
+    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath)
 }
 
 extension SearchTagsViewController: BottomUserScrollViewDelegate {
-    func segueToCardDetailPage(swipe: Swipe) {
+    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         cardDetailVC.userOfTheCard = swipe.otherUser
-        present(cardDetailVC, animated: false, completion: nil)
+        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
 }

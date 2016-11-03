@@ -19,6 +19,8 @@ class SearchTagsViewController: SuperTagViewController {
     
     var dataStore : SearchTagsDataStore!
     
+    var theTappedCellIndex: IndexPath = IndexPath(row: 0, section: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)

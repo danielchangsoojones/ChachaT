@@ -37,6 +37,7 @@
 		924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */; };
 		924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */; };
 		924139BA1DC7A28200C8B6AF /* CarouselSlideView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B91DC7A28200C8B6AF /* CarouselSlideView.swift */; };
+		925626D31DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
 		925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A21D903B32006D7C01 /* DropDownTag.swift */; };
@@ -165,6 +166,7 @@
 		924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionDetailView.swift; sourceTree = "<group>"; };
 		924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookImagePickerExtension.swift; sourceTree = "<group>"; };
 		924139B91DC7A28200C8B6AF /* CarouselSlideView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CarouselSlideView.swift; sourceTree = "<group>"; };
+		925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveableSearchTagsExtension.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
 		925884A21D903B32006D7C01 /* DropDownTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTag.swift; sourceTree = "<group>"; };
@@ -486,6 +488,14 @@
 			name = "Facebook Image Picking";
 			sourceTree = "<group>";
 		};
+		925626D11DCBB16C006A21BD /* Magic Move */ = {
+			isa = PBXGroup;
+			children = (
+				925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */,
+			);
+			name = "Magic Move";
+			sourceTree = "<group>";
+		};
 		925884AC1D909F35006D7C01 /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -666,6 +676,7 @@
 		9273B7991CFF491D0001A608 /* 8tracks Filtering Search */ = {
 			isa = PBXGroup;
 			children = (
+				925626D11DCBB16C006A21BD /* Magic Move */,
 				92C1B1DD1D51A7A200F4A815 /* Data Models */,
 				920BF81A1D3FF5E300104842 /* TagListView */,
 				928819391D1AE484000A8E04 /* Subview Files */,
@@ -1056,6 +1067,7 @@
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,
 				92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */,
 				923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */,
+				925626D31DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
