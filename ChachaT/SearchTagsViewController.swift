@@ -107,6 +107,10 @@ extension SearchTagsViewController {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
             addTagToChosenTagListView(title)
+            if sender.tag == 3 {
+                //we are dealing with the ChachaDropDownTagListView
+                dropDownMenu.hide()
+            }
             return
         }
     }
@@ -117,8 +121,6 @@ extension SearchTagsViewController {
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
             //TODO: do something about hidingBottomUserArea when they hit the remove button.
-            //TODO: remove the tag from the chosenview
-            
             //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
         }
     }
