@@ -55,6 +55,8 @@ class EditProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(EditProfileViewController.cancelButtonHit))
+        
         photoLayoutView.delegate = self
         bulletPointsSetup()
         fullNameViewSetup()
@@ -66,6 +68,10 @@ class EditProfileViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func cancelButtonHit() {
+        _ = navigationController?.popViewController(animated: true)
     }
     
     func dataStoreSetup() {
@@ -118,7 +124,6 @@ class EditProfileViewController: UIViewController {
         return nil
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
