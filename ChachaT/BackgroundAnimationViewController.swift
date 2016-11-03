@@ -44,6 +44,7 @@ class BackgroundAnimationViewController: UIViewController {
     fileprivate var dataStore : BackgroundAnimationDataStore!
     var rippleHasNotBeenStarted = true
     var prePassedSwipeArray = false
+    var theTappedKolodaIndex: Int = 0
     
     let locationManager = CLLocationManager()
     
@@ -255,20 +256,25 @@ extension BackgroundAnimationViewController: MagicMoveable {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
 
         cardDetailVC.userOfTheCard = swipeArray[index].otherUser
-        if let image = swipeArray[index].otherUser.profileImage{
-            self.theMagicMovePlaceholderImage.file = image
-            self.theMagicMovePlaceholderImage.loadInBackground()
-        } else {
-            theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
-        }
+        theTappedKolodaIndex = index
+        
+//        if let image = swipeArray[index].otherUser.profileImage{
+//            self.theMagicMovePlaceholderImage.file = image
+//            self.theMagicMovePlaceholderImage.loadInBackground()
+//        } else {
+//            theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
+//        }
         
         //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
-        theMagicMovePlaceholderImage.isHidden = false
+//        theMagicMovePlaceholderImage.isHidden = false
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
     var magicViews: [UIView] {
-        return [theMagicMovePlaceholderImage]
+        get {
+            let currentCardView = kolodaView.viewForCard(at: theTappedKolodaIndex) as! CustomCardView
+            return [currentCardView.theCardMainImage]
+        }
     }
 }
 
