@@ -29,7 +29,6 @@ private let numberOfCards : UInt = 5
 //go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
 class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
-    @IBOutlet weak var theMagicMovePlaceholderImage: PFImageView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
     @IBOutlet weak var theApproveButton: UIButton!
@@ -74,7 +73,6 @@ class BackgroundAnimationViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         self.navigationController?.isNavigationBarHidden = true //created a fake nav bar, so want to hide the real nav bar whenever I come on the screen
-        self.theMagicMovePlaceholderImage.isHidden = true
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -254,19 +252,9 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-
         cardDetailVC.userOfTheCard = swipeArray[index].otherUser
         theTappedKolodaIndex = index
         
-//        if let image = swipeArray[index].otherUser.profileImage{
-//            self.theMagicMovePlaceholderImage.file = image
-//            self.theMagicMovePlaceholderImage.loadInBackground()
-//        } else {
-//            theMagicMovePlaceholderImage.backgroundColor = ChachaBombayGrey
-//        }
-        
-        //image is initially hidden, so then we can animate it to the next vc. A smoke and mirrors trick.
-//        theMagicMovePlaceholderImage.isHidden = false
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
