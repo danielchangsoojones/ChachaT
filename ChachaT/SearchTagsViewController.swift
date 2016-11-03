@@ -117,6 +117,7 @@ extension SearchTagsViewController {
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
             //TODO: do something about hidingBottomUserArea when they hit the remove button.
+            //TODO: remove the tag from the chosenview
             //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
         }
     }
@@ -126,6 +127,7 @@ extension SearchTagsViewController {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        chosenTags.append(Tag(title: title, attribute: .generic))
         showSuccessiveTags()
     }
     
