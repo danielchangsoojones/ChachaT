@@ -16,6 +16,10 @@ protocol ScrollViewSearchViewDelegate {
 }
 
 class ScrollViewSearchView: UIView {
+    fileprivate struct SearchViewConstants {
+        static let edgeInset: CGFloat = 10
+        static let imageEdgeInsets: UIEdgeInsets = UIEdgeInsets(top: SearchViewConstants.edgeInset, left: SearchViewConstants.edgeInset, bottom: SearchViewConstants.edgeInset, right: SearchViewConstants.edgeInset)
+    }
     
     @IBOutlet weak var theTagChosenListView: ChachaChosenTagListView!
     @IBOutlet weak var theTagChosenHolderView: UIView!
@@ -69,8 +73,14 @@ class ScrollViewSearchView: UIView {
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clear // for some reason, the background color was defaulting to white, and we want transparency
         setButtonBorders()
+        buttonsSetup()
         searchBox = showSearchBox(self)
         hideScrollSearchView(true)
+    }
+    
+    func buttonsSetup() {
+        theGoButton.imageEdgeInsets = SearchViewConstants.imageEdgeInsets
+        theExitButton.imageEdgeInsets = SearchViewConstants.imageEdgeInsets
     }
     
     func showSearchBox(_ searchBoxHolder: UIView) -> CustomTagsSearchBar {

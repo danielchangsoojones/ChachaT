@@ -29,6 +29,7 @@ class EditProfileViewController: UIViewController {
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
     @IBOutlet weak var theScrollView: UIScrollView!
+    var theSpinner: UIActivityIndicatorView = UIActivityIndicatorView(frame: CGRect(x: 0, y: 0, w: 100, h: 100))
     
     @IBOutlet weak var theBulletPointOneView: AboutView!
     @IBOutlet weak var theBulletPointTwoView: AboutView!
@@ -43,9 +44,23 @@ class EditProfileViewController: UIViewController {
     var theKeyboardIsShowing: Bool = false
     
     @IBAction func theSaveButtonPressed(_ sender: UIBarButtonItem) {
+        showSpinner()
         saveTextIfEdited()
         resignFirstResponder()
         dataStore.saveEverything()
+    }
+    
+    fileprivate func showSpinner() {
+        if !theSpinner.isDescendant(of: self.view) {
+            theSpinner.hidesWhenStopped = true
+            theSpinner.activityIndicatorViewStyle = .whiteLarge
+            theSpinner.color = CustomColors.JellyTeal
+            self.view.addSubview(theSpinner)
+            theSpinner.snp.makeConstraints { (make) in
+                make.center.equalToSuperview()
+            }
+        }
+        theSpinner.startAnimating()
     }
     
     override func viewDidLoad() {
@@ -55,6 +70,8 @@ class EditProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
+        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(EditProfileViewController.cancelButtonHit))
+        
         photoLayoutView.delegate = self
         bulletPointsSetup()
         fullNameViewSetup()
@@ -66,6 +83,10 @@ class EditProfileViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
+    }
+    
+    @objc fileprivate func cancelButtonHit() {
+        _ = navigationController?.popViewController(animated: true)
     }
     
     func dataStoreSetup() {
@@ -118,7 +139,6 @@ class EditProfileViewController: UIViewController {
         return nil
     }
     
-
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -263,6 +283,11 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
                 }
             }
         }
+    }
+    
+    func exitPage() {
+        theSpinner.stopAnimating()
+        _ = self.navigationController?.popViewController(animated: true)
     }
 }
 

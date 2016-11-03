@@ -38,19 +38,6 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="Shuffles" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                                <subviews>
-                                    <imageView hidden="YES" userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="16g-Ya-p0C" customClass="PFImageView">
-                                        <rect key="frame" x="0.0" y="100" width="375" height="350"/>
-                                        <constraints>
-                                            <constraint firstAttribute="height" constant="350" id="OaJ-DG-2fy"/>
-                                        </constraints>
-                                    </imageView>
-                                </subviews>
-                                <constraints>
-                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="top" secondItem="32I-zm-XDi" secondAttribute="top" constant="100" id="9w1-Cl-OUP"/>
-                                    <constraint firstAttribute="trailing" secondItem="16g-Ya-p0C" secondAttribute="trailing" id="Qrc-L4-sPC"/>
-                                    <constraint firstItem="16g-Ya-p0C" firstAttribute="leading" secondItem="32I-zm-XDi" secondAttribute="leading" id="VQd-W2-Jcg"/>
-                                </constraints>
                             </view>
                             <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-AU-SZT" userLabel="Button Stack View">
                                 <rect key="frame" x="97.5" y="572" width="180" height="90"/>
@@ -129,7 +116,6 @@
                         <outlet property="theBackgroundColorView" destination="dsh-Hh-R5l" id="HgS-Re-cUg"/>
                         <outlet property="theBottomButtonStackView" destination="KXf-AU-SZT" id="P0V-zy-3cs"/>
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
-                        <outlet property="theMagicMovePlaceholderImage" destination="16g-Ya-p0C" id="MjF-Mq-LDl"/>
                         <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
                         <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
                         <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="Shuffles" customModuleProvider="target" id="2hX-Ts-O6M"/>

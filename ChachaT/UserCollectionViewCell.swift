@@ -17,7 +17,7 @@ class UserCollectionViewCell: UICollectionViewCell {
     
     static var reuseIdentifier: String = "userCollectionViewCell"
     
-    fileprivate var theImageView: UIImageView =  UIImageView()
+    var theImageView: UIImageView =  UIImageView()
     fileprivate var theNameLabel: UILabel = UILabel()
     
     var theUser: User? {

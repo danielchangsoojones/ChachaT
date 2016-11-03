@@ -19,6 +19,8 @@ class SearchTagsViewController: SuperTagViewController {
     
     var dataStore : SearchTagsDataStore!
     
+    var theTappedCellIndex: IndexPath = IndexPath(row: 0, section: 0)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
@@ -107,6 +109,10 @@ extension SearchTagsViewController {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
             addTagToChosenTagListView(title)
+            if sender.tag == 3 {
+                //we are dealing with the ChachaDropDownTagListView
+                dropDownMenu.hide()
+            }
             return
         }
     }
@@ -117,7 +123,6 @@ extension SearchTagsViewController {
             sender.removeTagView(tagView)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
             //TODO: do something about hidingBottomUserArea when they hit the remove button.
-            //TODO: remove the tag from the chosenview
             //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
         }
     }
@@ -127,7 +132,6 @@ extension SearchTagsViewController {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        chosenTags.append(Tag(title: title, attribute: .generic))
         showSuccessiveTags()
     }
     
@@ -135,6 +139,13 @@ extension SearchTagsViewController {
         tagChoicesView.removeAllTags()
         addChosenTagsToArray()
         dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
+        removeAllGenericTagsFromChosenTags()
+    }
+    
+    fileprivate func removeAllGenericTagsFromChosenTags() {
+        chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
+            return tag.attribute != .generic
+        })
     }
     
     func hideBottomUserArea() {
@@ -154,10 +165,11 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     fileprivate func addChosenTagsToArray() {
         for tagView in tagChosenView.tagViews {
             if let tagTitle = tagView.currentTitle {
-                let arrayAlreadyContains: Bool = chosenTags.testAll({ (tag: Tag) -> Bool in
-                    return tag.title == tagTitle
-                })
-                if !arrayAlreadyContains {
+                var alreadyContains: Bool = false
+                for tag in chosenTags where tag.title == tagTitle {
+                    alreadyContains = true
+                }
+                if !alreadyContains {
                     let tag = Tag(title: tagTitle, attribute: .generic)
                     chosenTags.append(tag)
                 }
