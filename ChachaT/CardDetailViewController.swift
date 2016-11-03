@@ -46,8 +46,13 @@ class CardDetailViewController: UIViewController {
     }
     
     @IBAction func backButtonPressed(_ sender: AnyObject) {
-        self.dismiss(animated: false, completion: nil)
-        _ = self.navigationController?.popViewController(animated: true)
+        if let navController = navigationController {
+            //for when we presented this VC in nav controller
+            _ = navController.popViewController(animated: true)
+        } else {
+            //for when we presented this vc modally
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
