@@ -33,7 +33,6 @@ class AddingTagsDataStore: SuperTagDataStore {
             let relation = User.current()!.relation(forKey: "tags")
             relation.remove(parseTag)
             User.current()!.saveInBackground()
-            deleteJointParseTagToUser(tagTitle: title)
         }
     }
     
@@ -64,8 +63,7 @@ class AddingTagsDataStore: SuperTagDataStore {
                             let relation = User.current()!.relation(forKey: "tags")
                             relation.add(parseTag)
                             
-                            let jointParseTagToUser = self.createJointParseTagToUser(parseTag: parseTag, user: User.current()!)
-                            PFObject.saveAll(inBackground: [User.current()!, jointParseTagToUser])
+                            User.current()?.saveInBackground()
                         } else if let error = error {
                             print(error)
                         }
@@ -73,28 +71,6 @@ class AddingTagsDataStore: SuperTagDataStore {
                 } else {
                     print(error)
                 }
-            }
-        }
-    }
-    
-    //Purpose: when we want to query the tags later, we need a scalable way to retrieve tags. Using a join table is the best solution, when using Parse.
-    fileprivate func createJointParseTagToUser(parseTag: ParseTag, user: User) -> JointParseTagToUser {
-        let joint = JointParseTagToUser()
-        joint.lowercaseTagTitle = parseTag.tagTitle
-        joint.parseTag = parseTag
-        joint.user = user
-        return joint
-    }
-    
-    fileprivate func deleteJointParseTagToUser(tagTitle: String) {
-        let query = JointParseTagToUser.query() as! PFQuery<JointParseTagToUser>
-        query.whereKey("tagTitle", equalTo: tagTitle)
-        query.whereKey("user", equalTo: User.current()!)
-        query.getFirstObjectInBackground { (joint, error) in
-            if let joint = joint {
-                joint.deleteInBackground()
-            } else if let error = error {
-                print(error)
             }
         }
     }
@@ -110,8 +86,7 @@ class AddingTagsDataStore: SuperTagDataStore {
                 let relation = User.current()!.relation(forKey: "tags")
                 relation.add(parseTag)
                 
-                let jointParseTagToUser = self.createJointParseTagToUser(parseTag: parseTag, user: User.current()!)
-                PFObject.saveAll(inBackground: [User.current()!, jointParseTagToUser])
+                User.current()?.saveInBackground()
             } else if let error = error {
                 print(error)
             }
@@ -149,8 +124,6 @@ class AddingTagsDataStore: SuperTagDataStore {
             //remove the previous tag that was correlated to the specific category
             let relation = User.current()!.relation(forKey: "tags")
             relation.remove(parseTag)
-            
-            deleteJointParseTagToUser(tagTitle: parseTag.tagTitle)
         }
     }
 }

@@ -124,7 +124,6 @@
 		92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */; };
 		92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */; };
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
-		92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */; };
 		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
 		92EB3CCF1DCA5BCD004E8797 /* BottomUserScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */; };
 		92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */; };
@@ -257,7 +256,6 @@
 		92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTag.swift; sourceTree = "<group>"; };
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
-		92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JointParseTagToUser.swift; sourceTree = "<group>"; };
 		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
 		92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomUserScrollView.swift; sourceTree = "<group>"; };
 		92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -440,7 +438,6 @@
 				92857DD01DA310CB001DB92C /* ParseSwipe.swift */,
 				92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */,
 				92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */,
-				92E36F491DAFD176000F2D22 /* JointParseTagToUser.swift */,
 				929428DD1DC37A5E0019617C /* Tags.swift */,
 			);
 			name = "Parse Models";
@@ -1131,7 +1128,6 @@
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
-				92E36F4A1DAFD176000F2D22 /* JointParseTagToUser.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
 				925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */,

@@ -111,6 +111,7 @@ extension AddingTagsToProfileViewController {
             _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
+            dropDownMenu.hide()
             if let dropDownTagView = tappedDropDownTagView {
                 tagChoicesView.setSpecialtyAnnotationTitle(tagView: dropDownTagView, annotationTitle: title)
                 dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)

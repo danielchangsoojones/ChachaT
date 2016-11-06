@@ -200,6 +200,7 @@ extension SearchTagsDataStore {
 
 //Mark: After a tag is tapped, show successive tags/find users
 extension SearchTagsDataStore {
+    //TODO: is this even being used?
     fileprivate func resetDefaultTags() {
         tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
             //we only want to have the dropDownTags in the defualt tag
@@ -234,6 +235,7 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func showBottomUserArea() {
+        self.view.endEditing(true)
         theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: self.view.frame.height / 3), delegate: self)
         self.view.addSubview(theBottomUserArea!)
         theBottomUserArea?.snp.makeConstraints { (make) in
