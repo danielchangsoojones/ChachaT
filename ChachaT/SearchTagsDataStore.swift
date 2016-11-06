@@ -197,7 +197,7 @@ extension SearchTagsDataStore {
 //Mark: After a tag is tapped, show successive tags/find users
 extension SearchTagsDataStore {
     //TODO: is this even being used?
-    fileprivate func resetDefaultTags() {
+    func resetDefaultTags() {
         tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
             //we only want to have the dropDownTags in the defualt tag
             return tag is DropDownTag
