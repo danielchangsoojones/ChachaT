@@ -96,6 +96,9 @@
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
 		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
+		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
+		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
+		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
@@ -228,6 +231,9 @@
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
+		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
+		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
+		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
@@ -593,6 +599,7 @@
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				924139A71DC664C800C8B6AF /* Anonymous User */,
+				929BF03B1DCF9C240099F3AB /* Empty State */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 			);
@@ -677,6 +684,7 @@
 				92C1B1DD1D51A7A200F4A815 /* Data Models */,
 				920BF81A1D3FF5E300104842 /* TagListView */,
 				928819391D1AE484000A8E04 /* Subview Files */,
+				929BF03E1DCFAE110099F3AB /* Empty State */,
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				928819351D18E78B000A8E04 /* SuperTagViewController.swift */,
 				920BF8261D415FC000104842 /* SearchTagsViewController.swift */,
@@ -796,6 +804,23 @@
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
 			);
 			name = Koloda;
+			sourceTree = "<group>";
+		};
+		929BF03B1DCF9C240099F3AB /* Empty State */ = {
+			isa = PBXGroup;
+			children = (
+				929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */,
+				929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */,
+			);
+			name = "Empty State";
+			sourceTree = "<group>";
+		};
+		929BF03E1DCFAE110099F3AB /* Empty State */ = {
+			isa = PBXGroup;
+			children = (
+				929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */,
+			);
+			name = "Empty State";
 			sourceTree = "<group>";
 		};
 		92BCEB511D8366C800E05C05 /* Subviews */ = {
@@ -1092,6 +1117,7 @@
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
 				925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */,
+				929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */,
 				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				924139BA1DC7A28200C8B6AF /* CarouselSlideView.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
@@ -1101,6 +1127,7 @@
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
+				929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				924139AA1DC6661A00C8B6AF /* MainPageAnonymousUser.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
@@ -1117,6 +1144,7 @@
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
+				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,

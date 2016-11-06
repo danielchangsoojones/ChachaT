@@ -266,6 +266,12 @@ extension BackgroundAnimationViewController: MagicMoveable {
     }
 }
 
+extension BackgroundAnimationViewController: EmptyStateDelegate {
+    func emptyStateButtonPressed() {
+        performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: nil)
+    }
+}
+
 extension BackgroundAnimationViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD

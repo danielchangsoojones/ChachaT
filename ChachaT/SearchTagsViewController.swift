@@ -294,6 +294,21 @@ extension SearchTagsViewController : UISearchBarDelegate {
     }
 }
 
+extension SearchTagsViewController: EmptyStateDelegate {
+    func emptyStateButtonPressed() {
+        //Do something when they click the empty search button
+        
+    }
+    
+    func showEmptyState() {
+        let emptyStateView = SearchingEmptyStateView(delegate: self)
+        theBottomUserArea?.addSubview(emptyStateView)
+        emptyStateView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+}
+
 extension SearchTagsViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD

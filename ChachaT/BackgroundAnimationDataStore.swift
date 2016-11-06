@@ -93,8 +93,22 @@ protocol BackgroundAnimationDataStoreDelegate {
 
 extension BackgroundAnimationViewController: BackgroundAnimationDataStoreDelegate {
     func passUnansweredSwipes(swipes: [Swipe]) {
+        if swipes.isEmpty {
+            showEmptyState()
+        }
+        
+        
         self.swipeArray = swipes
         self.kolodaView.dataSource = self
         self.kolodaView.reloadData()
+    }
+    
+    func showEmptyState() {
+        let emptyView = MainPageEmptyStateView(delegate: self)
+        self.view.addSubview(emptyView)
+        emptyView.snp.makeConstraints { (make) in
+            make.leading.trailing.bottom.equalToSuperview()
+            make.top.equalTo(fakeNavigationBar.snp.bottom)
+        }
     }
 }

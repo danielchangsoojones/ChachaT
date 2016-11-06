@@ -75,11 +75,7 @@ extension SearchTagsDataStore {
         
         tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
-                if users.isEmpty {
-                    _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
-                } else {
-                    self.convertUsersToSwipes(users: users, swipeDestination: swipeDestination)
-                }
+                self.convertUsersToSwipes(users: users, swipeDestination: swipeDestination)
             } else if let error = error {
                 print(error)
             }
@@ -220,18 +216,16 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {
-        if !swipes.isEmpty {
             if theBottomUserArea == nil {
                 showBottomUserArea()
             }
             if let bottomUserArea = theBottomUserArea {
-                bottomUserArea.reloadData(newData: swipes)
-                bottomUserArea.isHidden = false
+                if swipes.isEmpty {
+                    showEmptyState()
+                } else {
+                    bottomUserArea.reloadData(newData: swipes)
+                }
             }
-        } else {
-            //swipes are empty
-            hideBottomUserArea()
-        }
     }
     
     func showBottomUserArea() {
