@@ -138,7 +138,7 @@ extension SearchTagsViewController {
     fileprivate func showSuccessiveTags() {
         tagChoicesView.removeAllTags()
         addChosenTagsToArray()
-        dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
+        dataStore.getSwipesForBottomArea(chosenTags: chosenTags)
         removeAllGenericTagsFromChosenTags()
     }
     
@@ -158,7 +158,7 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
         addChosenTagsToArray()
-        dataStore.findUserArray(chosenTags: chosenTags)
+        dataStore.getSwipesForMainTinderPage(chosenTags: chosenTags)
     }
     
     //Purpose: we want to save the chosen tagViews into the chosenTag array, so then we can query on it.
@@ -304,17 +304,11 @@ extension SearchTagsViewController: SegueHandlerType {
         switch segueIdentifierForSegue(segue) {
             case .SearchPageToTinderMainPageSegue:
                 //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
-                if let userArray = sender as? [User] {
+                if let swipeArray = sender as? [Swipe] {
                     //the sender parameter is passed the user array
                     //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
                     let navigationVC = segue.destination as! ChachaNavigationViewController
                     let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
-                    var swipeArray: [Swipe] = []
-                    for user in userArray {
-                        //TODO: all the users won't technically be falsely approved
-                        let swipe = Swipe(otherUser: user, otherUserApproval: false)
-                        swipeArray.append(swipe)
-                    }
                     rootVC.swipeArray = swipeArray
                     rootVC.prePassedSwipeArray = true
                 }

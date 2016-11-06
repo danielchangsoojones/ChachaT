@@ -52,16 +52,33 @@ class SearchTagsDataStore: SuperTagDataStore {
             }
         }
     }
-    
-    func findUserArray(chosenTags: [Tag]) {
-        let tuple = createFindUserQuery(chosenTags: chosenTags)
+}
 
+//Mark: For finding the users
+extension SearchTagsDataStore {
+    fileprivate enum SwipeDestination {
+        case bottomUserArea
+        case mainTinderPage
+    }
+    
+    func getSwipesForBottomArea(chosenTags: [Tag]) {
+        findUserArray(chosenTags: chosenTags, swipeDestination: .bottomUserArea)
+    }
+    
+    func getSwipesForMainTinderPage(chosenTags: [Tag]) {
+        findUserArray(chosenTags: chosenTags, swipeDestination: .mainTinderPage)
+    }
+    
+    //TODO: the user array should just pull down anyone who is close to any of the tags, they don't have to have all of them.
+    fileprivate func findUserArray(chosenTags: [Tag], swipeDestination: SwipeDestination) {
+        let tuple = createFindUserQuery(chosenTags: chosenTags)
+        
         tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
                 if users.isEmpty {
                     _ = SCLAlertView().showInfo("No Users Found", subTitle: "No user has those tags")
                 } else {
-                    self.delegate?.passUserArrayToMainPage(users)
+                    self.convertUsersToSwipes(users: users, swipeDestination: swipeDestination)
                 }
             } else if let error = error {
                 print(error)
@@ -69,67 +86,66 @@ class SearchTagsDataStore: SuperTagDataStore {
         }
     }
     
-    func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
-        switch dropDownTag.specialtyCategory {
-            //TODO: these cases should be based upon the parse column name
-        case "Distance":
-            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
-        case "Age Range":
-            //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-            let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
-            let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
-            query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
-        case "Height":
-            query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
-            query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
-        default:
-            break
-        }
-        return query
-    }
-}
-
-//Mark: After a tag is tapped, show successive tags/find users
-extension SearchTagsDataStore {
-    func retrieveSuccessiveTags(chosenTags: [Tag]) {
-        let tuple = createFindUserQuery(chosenTags: chosenTags)
+    fileprivate func convertUsersToSwipes(users: [User], swipeDestination: SwipeDestination) {
         
-        tuple.query.findObjectsInBackground { (objects, error) in
-            if let users = objects as? [User] {
+        let userOneParseColumnName = "userOne"
+        let userTwoParseColumnName = "userTwo"
+        let currentUserIsUserOneQuery = createInnerQuery(currentUserParseColumn: userOneParseColumnName, otherUserParseColumn: userTwoParseColumnName, otherUsers: users)
+        let currentUserIsUserTwoQuery = createInnerQuery(currentUserParseColumn: userTwoParseColumnName, otherUserParseColumn: userOneParseColumnName, otherUsers: users)
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
+        orQuery.includeKey("userOne")
+        orQuery.includeKey("userTwo")
+        orQuery.findObjectsInBackground { (objects, error) in
+            if let parseSwipes = objects as? [ParseSwipe] {
+                let swipesToPass: [Swipe] = self.convertParseSwipesToSwipes(users: users, parseSwipes: parseSwipes)
                 
-                //TODO: once a better backend is implemented, it would be able to see if we have already swiped any of these users and actually pass me the swipes accordingly. For now, I am just making them totally new swipes
-                let newSwipes: [Swipe] = users.map({ (user: User) -> Swipe in
-                    return Swipe(otherUser: user, otherUserApproval: false)
-                })
-                self.delegate?.passdDataToBottomArea(swipes: newSwipes)
+                if swipeDestination == .bottomUserArea {
+                    self.passBottomAreaData(swipes: swipesToPass)
+                } else if swipeDestination == .mainTinderPage {
+                    self.passDataToMainTinderPage(swipes: swipesToPass)
+                }
                 
-                let query = JointParseTagToUser.query()! as! PFQuery<JointParseTagToUser>
-                query.whereKey("user", containedIn: users) //find any tags related to the chosen users
-                query.whereKey("tagTitle", notContainedIn: tuple.chosenTitleArray) //don't include any tags that have already been chosen
-                query.includeKey("parseTag")
-                query.findObjectsInBackground(block: { (joints, error) in
-                    self.resetDefaultTags()
-                    if let joints = joints {
-                        let successiveTags: [Tag] = joints.map({ (joint: JointParseTagToUser) -> Tag in
-                            let tag = Tag(title: joint.lowercaseTagTitle, attribute: .generic)
-                            return tag
-                        })
-                        self.tagChoicesDataArray.append(contentsOf: successiveTags)
-                    } else if let error = error {
-                        print(error)
-                    }
-                    self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
-                })
+            } else if let error = error {
+                print(error)
             }
         }
     }
     
-    fileprivate func resetDefaultTags() {
-        tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
-            //we only want to have the dropDownTags in the defualt tag
-            return tag is DropDownTag
-        })
+    fileprivate func convertParseSwipesToSwipes(users: [User], parseSwipes: [ParseSwipe]) -> [Swipe] {
+        let tuple = filterAlreadySwipedUsers(parseSwipes: parseSwipes)
+        
+        let previouslySwipedUserObjectIds: [String] = tuple.previouslySwipedUsersObjectIds
+        var swipesToPass: [Swipe] = tuple.swipesToPass
+        
+        for user in users where !previouslySwipedUserObjectIds.contains(user.objectId ?? "") {
+            let newSwipe = Swipe(otherUser: user, otherUserApproval: false)
+            swipesToPass.append(newSwipe)
+        }
+        
+        return swipesToPass
+    }
+    
+    fileprivate func filterAlreadySwipedUsers(parseSwipes: [ParseSwipe]) -> (previouslySwipedUsersObjectIds: [String], swipesToPass: [Swipe]) {
+        
+        var previouslySwipedUsersObjectIds: [String] = []
+        var swipesToPass: [Swipe] = []
+        
+        for parseSwipe in parseSwipes {
+            previouslySwipedUsersObjectIds.append(parseSwipe.otherUser.objectId ?? "")
+            
+            let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+            swipesToPass.append(swipe)
+        }
+        
+        return (previouslySwipedUsersObjectIds, swipesToPass)
+    }
+    
+    fileprivate func createInnerQuery(currentUserParseColumn: String, otherUserParseColumn: String, otherUsers: [User]) -> PFQuery<PFObject> {
+        let query = ParseSwipe.query()!
+        query.whereKey(currentUserParseColumn, equalTo: User.current()!)
+        query.whereKey(otherUserParseColumn, containedIn: otherUsers)
+        return query
     }
     
     fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {
@@ -152,16 +168,54 @@ extension SearchTagsDataStore {
         }
         return (query, tagTitleArray)
     }
+    
+    func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
+        switch dropDownTag.specialtyCategory {
+        //TODO: these cases should be based upon the parse column name
+        case "Distance":
+            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+        case "Age Range":
+            //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
+            let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
+            let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
+            query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
+            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+        case "Height":
+            query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
+        default:
+            break
+        }
+        return query
+    }
+    
+    fileprivate func passBottomAreaData(swipes: [Swipe]) {
+        delegate?.passdDataToBottomArea(swipes: swipes)
+    }
+    
+    fileprivate func passDataToMainTinderPage(swipes: [Swipe]) {
+        delegate?.passDataToMainPage(swipes: swipes)
+    }
+}
+
+//Mark: After a tag is tapped, show successive tags/find users
+extension SearchTagsDataStore {
+    fileprivate func resetDefaultTags() {
+        tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
+            //we only want to have the dropDownTags in the defualt tag
+            return tag is DropDownTag
+        })
+    }
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
-    func passUserArrayToMainPage(_ userArray: [User])
+    func passDataToMainPage(swipes: [Swipe])
     func passdDataToBottomArea(swipes: [Swipe])
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
-    func passUserArrayToMainPage(_ userArray: [User]) {
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: userArray as AnyObject?) //passing userArray to the segue
+    func passDataToMainPage(swipes: [Swipe]) {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: swipes as AnyObject?) //passing swipeArray to the segue
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {
