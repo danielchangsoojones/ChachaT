@@ -653,6 +653,7 @@
 		926108531CEA0E95009F3E86 /* Welcome */ = {
 			isa = PBXGroup;
 			children = (
+				929BF0461DD047340099F3AB /* First Onboarding */,
 				928761FF1D997027000EAED6 /* Data Models */,
 				926108541CEA0EA6009F3E86 /* Onboarding.storyboard */,
 				926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */,
@@ -821,6 +822,13 @@
 				929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */,
 			);
 			name = "Empty State";
+			sourceTree = "<group>";
+		};
+		929BF0461DD047340099F3AB /* First Onboarding */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "First Onboarding";
 			sourceTree = "<group>";
 		};
 		92BCEB511D8366C800E05C05 /* Subviews */ = {

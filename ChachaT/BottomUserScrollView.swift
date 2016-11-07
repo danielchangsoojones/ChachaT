@@ -12,7 +12,7 @@ class BottomUserScrollView: UIView {
     fileprivate struct BottomViewConstants {
         static let backgroundColor: UIColor = UIColor.white
         static let topLineColor: UIColor = CustomColors.SilverChaliceGrey
-        static let lineHeight: CGFloat = 0.5
+        static let lineHeight: CGFloat = 1.0
         static let lineAlpha: CGFloat = 0.5
     }
     
