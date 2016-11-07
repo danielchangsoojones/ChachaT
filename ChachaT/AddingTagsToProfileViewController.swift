@@ -167,7 +167,7 @@ extension AddingTagsToProfileViewController {
     fileprivate func performAgeTagAction(dropDownTag: DropDownTag) {
         let currentAge: Int = User.current()!.age ?? 0
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
-            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+            DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
                 (birthday) -> Void in
                 //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
                 let age = User.current()!.calculateAge(birthday: birthday)
