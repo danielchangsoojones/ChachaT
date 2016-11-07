@@ -223,6 +223,7 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
                 if swipes.isEmpty {
                     showEmptyState()
                 } else {
+                    hideEmptyState()
                     bottomUserArea.reloadData(newData: swipes)
                 }
             }

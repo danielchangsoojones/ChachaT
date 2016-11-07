@@ -121,10 +121,17 @@ extension SearchTagsViewController {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
             sender.removeTagView(tagView)
+            removeTagFromChosenTags(title: title)
             scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
-            //TODO: do something about hidingBottomUserArea when they hit the remove button.
-            //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
+            showSuccessiveTags()
         }
+    }
+    
+    fileprivate func removeTagFromChosenTags(title: String) {
+        //we don't technically save generic tags, but if we saved a slider tag, this would remove it from the chosen tag by matching the titles
+        chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
+            return tag.title != title
+        })
     }
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
@@ -135,6 +142,7 @@ extension SearchTagsViewController {
         showSuccessiveTags()
     }
     
+    //TODO: probably should rename this to something better of a name if you can think of one
     fileprivate func showSuccessiveTags() {
         resetToDefaultTags()
         //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
@@ -152,7 +160,7 @@ extension SearchTagsViewController {
     }
     
     fileprivate func removeAllGenericTagsFromChosenTags() {
-        //We keepslider tags in the array because we store those in the chosenTag array the entire time. 
+        //We keepslider tags in the array because we store those in the chosenTag array the entire time.
         chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
             return tag.attribute != .generic
         })
@@ -217,8 +225,7 @@ extension SearchTagsViewController: SliderViewDelegate {
             }
         } else {
             //tagView has never been created
-            let tagView = tagChosenView.addTag(text)
-            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
+            addTagToChosenTagListView(text)
             if let dropDownTagView = tappedDropDownTagView {
                 //It doesn't really matter what dropDownAttribute we pass
                 let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
@@ -315,6 +322,14 @@ extension SearchTagsViewController: EmptyStateDelegate {
         theBottomUserArea?.addSubview(emptyStateView)
         emptyStateView.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
+        }
+    }
+    
+    func hideEmptyState() {
+        for subview in theBottomUserArea?.subviews ?? [] {
+            if subview is SearchingEmptyStateView {
+                subview.removeFromSuperview()
+            }
         }
     }
 }
