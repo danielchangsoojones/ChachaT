@@ -46,9 +46,14 @@ class User: PFUser {
         return nil
     }
     var heightConvertedToString: String {
+        let tuple = calculateFeetAndInchesOfHeight()
+        return tuple.feet.toString + "'" + tuple.inches.toString + "\""
+    }
+    
+    func calculateFeetAndInchesOfHeight() -> (feet: Int, inches: Int) {
         let feet = height / 12
         let inches = height % 12
-        return feet.toString + "'" + inches.toString + "\""
+        return (feet, inches)
     }
     
     var nonNilProfileImages: [AnyObject?] {

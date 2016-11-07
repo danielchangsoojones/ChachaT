@@ -35,7 +35,15 @@ class HeightPickerViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        setInitialHeight()
         // Do any additional setup after loading the view.
+    }
+    
+    func setInitialHeight() {
+        let tuple = User.current()!.calculateFeetAndInchesOfHeight()
+        theHeightPicker.selectRow(feetArray.index(of: tuple.feet)?.advanced(by: 1) ?? 0, inComponent: 0, animated: false)
+        let doesHeightExist: Bool = User.current()!.height > 0
+        theHeightPicker.selectRow(doesHeightExist ? tuple.inches + 1 : 0, inComponent: 1, animated: false)
     }
 
     override func didReceiveMemoryWarning() {
@@ -74,5 +82,6 @@ extension HeightPickerViewController: UIPickerViewDelegate, UIPickerViewDataSour
         }
         return ""
     }
+
     
 }
