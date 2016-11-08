@@ -15,9 +15,6 @@ class ChatViewController: JSQMessagesViewController {
     // to prevent stomping on our own feet and double loading
     var isLoading = false
     
-    // identifier for this room. scalable to mutiple users
-    var chatroom = ""
-    
     // currently only setup for two participants
     var currentUser : User!
     var otherUser : User!
@@ -41,11 +38,10 @@ class ChatViewController: JSQMessagesViewController {
         dataStore = ChatDataStore(chatUsers: [currentUser, otherUser] ,delegate: self)
         self.navigationController?.isNavigationBarHidden = false
         
-        self.title = "Chat"
+        self.title = otherUser.fullName ?? "Unknown"
         
         self.senderId = dataStore.getsenderID()
         self.senderDisplayName = dataStore.getSenderDisplayName()
-        self.chatroom = dataStore.getChatRoomName(otherUser)
         
         // setup chat bubbles
         let bubbleFactory = JSQMessagesBubbleImageFactory()
@@ -53,7 +49,6 @@ class ChatViewController: JSQMessagesViewController {
         incomingBubbleImageView = bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
         
         self.loadMessages()
-        
     }
     
     override func viewDidAppear(_ animated: Bool) {
