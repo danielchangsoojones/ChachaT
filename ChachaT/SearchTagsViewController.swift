@@ -25,6 +25,7 @@ class SearchTagsViewController: SuperTagViewController {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         setDataFromDataStore()
+        anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
     }

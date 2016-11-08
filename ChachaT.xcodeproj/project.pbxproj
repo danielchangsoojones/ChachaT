@@ -101,6 +101,7 @@
 		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
 		929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0491DD126400099F3AB /* TutorialViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
+		92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
@@ -237,6 +238,7 @@
 		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF0491DD126400099F3AB /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
+		92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsAnonymousExtension.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -459,15 +461,6 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
-		924139A71DC664C800C8B6AF /* Anonymous User */ = {
-			isa = PBXGroup;
-			children = (
-				924139A81DC665E100C8B6AF /* Data Model */,
-				924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */,
-			);
-			name = "Anonymous User";
-			sourceTree = "<group>";
-		};
 		924139A81DC665E100C8B6AF /* Data Model */ = {
 			isa = PBXGroup;
 			children = (
@@ -582,6 +575,7 @@
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
+				92A5DDA51DD156970003B09D /* Anonymous User */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				9288194D1D2BECC8000A8E04 /* Navigation */,
 				9261085A1CEA1939009F3E86 /* Models */,
@@ -600,7 +594,6 @@
 				92BCEB6A1D85B49900E05C05 /* Card Detail */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
-				924139A71DC664C800C8B6AF /* Anonymous User */,
 				929BF03B1DCF9C240099F3AB /* Empty State */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
@@ -683,6 +676,7 @@
 		9273B7991CFF491D0001A608 /* 8tracks Filtering Search */ = {
 			isa = PBXGroup;
 			children = (
+				92A5DDA41DD1566F0003B09D /* New Group */,
 				925626D11DCBB16C006A21BD /* Magic Move */,
 				92C1B1DD1D51A7A200F4A815 /* Data Models */,
 				920BF81A1D3FF5E300104842 /* TagListView */,
@@ -832,6 +826,23 @@
 				929BF0491DD126400099F3AB /* TutorialViewController.swift */,
 			);
 			name = "First Onboarding";
+			sourceTree = "<group>";
+		};
+		92A5DDA41DD1566F0003B09D /* New Group */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = "New Group";
+			sourceTree = "<group>";
+		};
+		92A5DDA51DD156970003B09D /* Anonymous User */ = {
+			isa = PBXGroup;
+			children = (
+				924139A81DC665E100C8B6AF /* Data Model */,
+				924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */,
+				92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */,
+			);
+			name = "Anonymous User";
 			sourceTree = "<group>";
 		};
 		92BCEB511D8366C800E05C05 /* Subviews */ = {
@@ -1119,6 +1130,7 @@
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
+				92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
 				929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */,
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
