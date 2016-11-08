@@ -137,12 +137,3 @@ open class SpecialtyTagView: TagView {
         return CGSize(width: width, height: height)
     }
 }
-
-//Extension for annotationViews with inner text
-extension SpecialtyTagView {
-    func convertToInnerTextAnnotationTag(text: String) {
-        annotationView?.updateText(text: text)
-        updateAnnotationView()
-    }
-    
-}

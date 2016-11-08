@@ -17,10 +17,18 @@ public enum DropDownAttributes: String {
 
 //TODO: I can subclass this even farther into tagChoices and sliderTags
 class DropDownTag : Tag {
-    var annotationTitle: String?
+    var displayTitle: String? {
+        didSet {
+            if let displayTitle = displayTitle {
+                self.title = displayTitle
+            }
+        }
+    }
     var specialtyCategory: String {
         didSet {
-            self.title = specialtyCategory
+            if displayTitle == nil {
+                self.title = specialtyCategory
+            }
         }
     }
     var dropDownAttribute: DropDownAttributes

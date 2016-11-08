@@ -74,10 +74,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         if let dropDownTag = tag as? DropDownTag {
             switch dropDownTag.dropDownAttribute {
             case .tagChoices:
-                let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-                if let annotationTitle = dropDownTag.annotationTitle {
-                    tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
-                }
+                let _ = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
             case .singleSlider, .rangeSlider:
                 createCustomTags(dropDownTag: dropDownTag)
             }
@@ -106,7 +103,7 @@ extension AddingTagsToProfileViewController {
             //ChachaDropDownTagView pressed
             dropDownMenu.hide()
             if let dropDownTagView = tappedDropDownTagView {
-                tagChoicesView.setSpecialtyAnnotationTitle(tagView: dropDownTagView, annotationTitle: title)
+                tagChoicesView.setTagViewTitle(dropDownTagView, title: title)
                 dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)
             }
         }
