@@ -11,6 +11,7 @@ import UIKit
 import MobileCoreServices
 import JSQMessagesViewController
 import AVFoundation
+import SCLAlertView
 
 class Camera {
     
@@ -18,63 +19,50 @@ class Camera {
         
         if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
             //user gave permission for use to use their camera
-            print("user has given access to their camera")
-        } else {
-            //permission has not been granted
-            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted :Bool) -> Void in
-                if granted == true
-                {
-                    // User granted
-                    print("user granted access")
-                }
-                else
-                {
-                    // User Rejected
-                    print("user has denied")
-                }
-            })
-        }
-        
-        
-        if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == false {
-            return false
-        }
-        
-        let type = kUTTypeImage as String
-        let cameraUI = UIImagePickerController()
-        
-        let available = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) && (UIImagePickerController.availableMediaTypes(for: UIImagePickerControllerSourceType.camera) as [String]!).contains(type)
-        
-        if available {
-            cameraUI.mediaTypes = [type]
-            cameraUI.sourceType = UIImagePickerControllerSourceType.camera
+            if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == false {
+                return false
+            }
             
-            /* Prioritize front or rear camera */
-            if (frontFacing == true) {
-                if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.front) {
-                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.front
-                } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.rear) {
-                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.rear
+            let type = kUTTypeImage as String
+            let cameraUI = UIImagePickerController()
+            
+            let available = UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) && (UIImagePickerController.availableMediaTypes(for: UIImagePickerControllerSourceType.camera) as [String]!).contains(type)
+            
+            if available {
+                cameraUI.mediaTypes = [type]
+                cameraUI.sourceType = UIImagePickerControllerSourceType.camera
+                
+                /* Prioritize front or rear camera */
+                if (frontFacing == true) {
+                    if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.front) {
+                        cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.front
+                    } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.rear) {
+                        cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.rear
+                    }
+                } else {
+                    if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.rear) {
+                        cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.rear
+                    } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.front) {
+                        cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.front
+                    }
                 }
             } else {
-                if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.rear) {
-                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.rear
-                } else if UIImagePickerController.isCameraDeviceAvailable(UIImagePickerControllerCameraDevice.front) {
-                    cameraUI.cameraDevice = UIImagePickerControllerCameraDevice.front
-                }
+                return false
             }
+            
+            cameraUI.allowsEditing = canEdit
+            cameraUI.showsCameraControls = true
+            if let delegate = target as? (UIImagePickerControllerDelegate & UINavigationControllerDelegate) {
+                cameraUI.delegate = delegate
+            }
+            target.present(cameraUI, animated: true, completion: nil)
+            
+            return true
         } else {
+            //permission has not been granted
+             let _ = SCLAlertView().showInfo("Camera Denied", subTitle: "please go to iphone settings -> ShuffleHunt to allow us access to your camera")
             return false
         }
-        
-        cameraUI.allowsEditing = canEdit
-        cameraUI.showsCameraControls = true
-        if let delegate = target as? (UIImagePickerControllerDelegate & UINavigationControllerDelegate) {
-            cameraUI.delegate = delegate
-        }
-        target.present(cameraUI, animated: true, completion: nil)
-        
-        return true
     }
 
     class func shouldStartPhotoLibrary(target: AnyObject, canEdit: Bool) -> Bool {
