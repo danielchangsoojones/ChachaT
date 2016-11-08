@@ -116,7 +116,7 @@ extension WelcomeDataStore {
                     }
                     currentUser.facebookId = userData[Constants.id] as? String
                     currentUser.birthDate = self.extractBirthdate(userData: userData)
-                    currentUser.username = userData["email"] as? String
+                    currentUser.email = userData["email"] as? String
                     if currentUser.title == nil || currentUser.title == "" {
                         //don't change the user's title when they are logging back in, if they have already set it to something
                         currentUser.title = self.extractSchoolName(userData: userData)
