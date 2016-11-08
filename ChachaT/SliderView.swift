@@ -12,6 +12,7 @@ import TTRangeSlider
 protocol SliderViewDelegate {
     func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String)
     func slidingEnded(text: String, minValue: Int, maxValue: Int, suffix: String)
+    func sliderShown(text: String, minValue: Int, maxValue: Int, suffix: String)
 }
 
 class SliderView: UIView {
@@ -44,6 +45,7 @@ class SliderView: UIView {
         }
         createSliderLabel()
         addSliderToView(isRangeSlider)
+        delegate.sliderShown(text: isRangeSlider ? setRangeSliderLabelText(minValue, maxValue: maxValue) :  setSingleSliderLabelText(maxValue), minValue: minValue, maxValue: maxValue, suffix: suffix)
     }
     
     required init?(coder aDecoder: NSCoder) {

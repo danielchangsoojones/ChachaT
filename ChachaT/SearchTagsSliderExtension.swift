@@ -92,6 +92,8 @@ extension SearchTagsViewController {
             //revert the targets back to their original 
             setNewButtonAction(button: goButton!, selector: #selector(ScrollViewSearchView.goButtonTapped(_:)), target: scrollViewSearchView)
             setNewButtonAction(button: exitButton!, selector: #selector(ScrollViewSearchView.exitButtonTapped(_:)), target: scrollViewSearchView)
+            
+            updateAfterTagChosen()
         }
     }
 }
@@ -112,6 +114,17 @@ extension SearchTagsViewController: SliderViewDelegate {
     }
     
     func slidingEnded(text: String, minValue: Int, maxValue: Int, suffix: String) {
+        //when they finish sliding, we want to add the dropDownTag as well as update the bottom user area.
+        appendSliderTagToChosenTags(text: text, minValue: minValue, maxValue: maxValue, suffix: suffix)
+        updateAfterTagChosen()
+    }
+    
+    func sliderShown(text: String, minValue: Int, maxValue: Int, suffix: String) {
+        //even if the slider is just shown, and then not touched, it still adds the tag to the dropDownTags
+        appendSliderTagToChosenTags(text: text, minValue: minValue, maxValue: maxValue, suffix: suffix)
+    }
+    
+    func appendSliderTagToChosenTags(text: String, minValue: Int, maxValue: Int, suffix: String) {
         if let dropDownTagView = tappedDropDownTagView {
             //check if the dropDownTag already exists in the chosenTags
             let tag: Tag? = chosenTags.first(where: { (tag: Tag) -> Bool in
@@ -131,7 +144,6 @@ extension SearchTagsViewController: SliderViewDelegate {
                 chosenTags.append(tag)
             }
         }
-        updateAfterTagChosen()
     }
     
     //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
