@@ -187,6 +187,7 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
         
         let deleteAction = UIAlertAction(title: "Delete Photo", style: .default) { (alertAction: UIAlertAction) in
             self.photoLayoutView.deleteImage(photoNumber: self.thePhotoNumberToChange)
+            self.dataStore.deleteImage(photoNumber: self.thePhotoNumberToChange)
         }
         
         alert.addAction(replaceAction)

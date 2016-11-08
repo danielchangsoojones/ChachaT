@@ -37,13 +37,18 @@ class EditProfileDataStore {
     
     func saveProfileImage(_ image: UIImage, photoNumber: Int) {
         let file = PFFile(name: "profileImage.jpg",data: UIImageJPEGRepresentation(image, 0.6)!)
-        let prefix = "profileImage"
-        let parseColumnName = getProfileImageParseColumnName(prefix, imageNumber: photoNumber)
+        let parseColumnName = getProfileImageParseColumnName(imageNumber: photoNumber)
         //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
         currentUser[parseColumnName] = file
     }
     
-    func getProfileImageParseColumnName(_ prefix: String, imageNumber: Int) -> String {
+    func deleteImage(photoNumber: Int) {
+        let parseColumnName = getProfileImageParseColumnName(imageNumber: photoNumber)
+        currentUser.remove(forKey: parseColumnName)
+    }
+    
+    func getProfileImageParseColumnName(imageNumber: Int) -> String {
+        let prefix = "profileImage"
         if imageNumber == 1 {
             //the first profileImage is just saved in parse as:
             return "profileImage"
@@ -97,7 +102,7 @@ extension EditProfileDataStore {
         //TODO: probably need to resize these images when I bring them down, no use in using full size image, when we just want it for this size.
         for index in 1...PhotoEditingViewConstants.numberOfPhotoViews {
             //TODO: make the string profileImage be relative to something real
-            let parseColumnName = getProfileImageParseColumnName("profileImage", imageNumber: index)
+            let parseColumnName = getProfileImageParseColumnName(imageNumber: index)
             if let file = currentUser[parseColumnName] {
                 delegate?.loadProfileImage(file as AnyObject, num: index)
             }
