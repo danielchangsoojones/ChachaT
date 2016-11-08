@@ -7,7 +7,6 @@
 //
 
 import Foundation
-import SCLAlertView
 import CoreLocation
 import Parse
 

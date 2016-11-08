@@ -42,7 +42,7 @@ extension MatchNotificationViewController {
             //after we dismiss this VC, we want to go straight to the messaging page, but when we go back from the messaging page. This matches notification page will have been deleted, and it will just take us right back to the swiping page!
             let chatVC = ChatViewController()
             chatVC.currentUser = User.current()
-            chatVC.otherUser = User.current()!
+            chatVC.otherUser = self.otherUser
             chachaNavigationVC.pushViewController(chatVC, animated: false)
         }
     }

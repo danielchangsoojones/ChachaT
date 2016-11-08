@@ -8,7 +8,6 @@
 
 import Foundation
 import Parse
-import SCLAlertView
 
 class SearchTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
