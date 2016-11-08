@@ -219,6 +219,14 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         return false //for some reason, I have to return false in order for the textField to resignTheFirst responder propoerly
     }
     
+    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
+        //the return button hit
+        if let tagView = creationMenuView.choicesTagListView.tagViews.first, let currentTitle = tagView.currentTitle {
+            creationMenuView.tagPressed(currentTitle, tagView: tagView, sender: creationMenuView.choicesTagListView)
+        }
+        return true
+    }
+    
     func resetTextField() {
         if let addingTagView = findCreationTagView() {
             addingTagView.searchTextField.text = ""
