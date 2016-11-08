@@ -159,12 +159,9 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
     }
     
     func kolodaDidRunOutOfCards(_ koloda: KolodaView) {
-        for _ in 0...koloda.currentCardIndex - 1 {
-            //we want to remove any swipes that we have just swiped because we don't want the user swiping the same users. We do currentCardIndex - 1, because the currentCardIndex is one ahead because we just did a swipe. We don't want to just empty the array either because sometimes we load the data while the user is swiping, so some swipes in the stack have not been interacted with yet.
-            swipeArray.removeFirst()
+        if let lastSwipe = swipeArray.last {
+            dataStore.getMoreSwipes(lastSwipe: lastSwipe)
         }
-        kolodaView.resetCurrentCardIndex()
-        dataStore.getMoreSwipes()
     }
     
     func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
@@ -175,12 +172,15 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
         let currentSwipe = swipeArray[Int(index)]
         if direction == .right {
             currentSwipe.approve()
-            dataStore.swipe(swipe: currentSwipe)
             if currentSwipe.isMatch {
                 performSegue(withIdentifier: SegueIdentifier.BackgroundAnimationToMatchNotificationSegue.rawValue, sender: nil)
             }
         } else if direction == .left {
             currentSwipe.nope()
+        }
+        
+        if index < swipeArray.count - 1 {
+            //on the last card, the didRunOutOfCards function is called to save the swipe because we want to save the swipe before we check to see what swipes we can still pull from the database
             dataStore.swipe(swipe: currentSwipe)
         }
     }

@@ -21,12 +21,8 @@ class BackgroundAnimationDataStore {
     }
     
     func swipe(swipe: Swipe) {
-        //Check if the parseSwipe actually exists and then either update or create a new one. 
-        //TODO: Just get the first one out of the array that does this, instead of filtering the whole array
-        let filteredArray: [ParseSwipe] = parseSwipes.filter { (parseSwipe: ParseSwipe) -> Bool in
-            return parseSwipe.matchesUsers(otherUser: swipe.otherUser);
-        }
-        if let parseSwipe = filteredArray.first {
+        //Check if the parseSwipe actually exists and then either update or create a new one.
+        if let parseSwipe = getCorrespondingParseSwipe(swipe: swipe) {
             self.updateParseSwipe(parseSwipe: parseSwipe, swipe: swipe)
         }
     }
@@ -37,8 +33,27 @@ class BackgroundAnimationDataStore {
         parseSwipe.saveInBackground()
     }
     
-    func getMoreSwipes() {
-        loadSwipeArray()
+    fileprivate func getCorrespondingParseSwipe(swipe: Swipe) -> ParseSwipe? {
+        let parseSwipe: ParseSwipe? = parseSwipes.first { (parseSwipe: ParseSwipe) -> Bool in
+            return parseSwipe.matchesUsers(otherUser: swipe.otherUser)
+        }
+        
+        if let parseSwipe = parseSwipe {
+            return parseSwipe
+        } else {
+            //no matching parseSwipe
+            return nil
+        }
+    }
+    
+    func getMoreSwipes(lastSwipe: Swipe) {
+        if let parseSwipe = getCorrespondingParseSwipe(swipe: lastSwipe) {
+            parseSwipe.currentUserHasSwiped = true
+            parseSwipe.currentUserApproval = lastSwipe.currentUserApproval
+            parseSwipe.saveInBackground(block: { (_, _) in
+                self.loadSwipeArray()
+            })
+        }
     }
     
 }
@@ -95,7 +110,6 @@ extension BackgroundAnimationViewController: BackgroundAnimationDataStoreDelegat
         if swipes.isEmpty {
             showEmptyState()
         }
-        
         
         self.swipeArray = swipes
         self.kolodaView.dataSource = self
