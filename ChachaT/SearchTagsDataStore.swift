@@ -216,6 +216,8 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {
+        //had to end editing on the scrollViewSearchView, not the self.view because scrollViewSearchView is in its own separate view in the nav bar
+        scrollViewSearchView.endEditing(true)
             if theBottomUserArea == nil {
                 showBottomUserArea()
             }
@@ -230,7 +232,6 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func showBottomUserArea() {
-        self.view.endEditing(true)
         theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: self.view.frame.height / 3), delegate: self)
         self.view.addSubview(theBottomUserArea!)
         theBottomUserArea?.snp.makeConstraints { (make) in
