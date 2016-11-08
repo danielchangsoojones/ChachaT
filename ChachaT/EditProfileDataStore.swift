@@ -13,7 +13,7 @@ protocol EditProfileDataStoreDelegate {
     func loadBulletPoint(_ text: String, num: Int)
     func loadProfileImage(_ file: AnyObject,num: Int)
     func loadText(_ text: String, title: String)
-    func exitPage()
+    func finishedSaving()
 }
 
 class EditProfileDataStore {
@@ -31,7 +31,7 @@ class EditProfileDataStore {
             } else {
                 print("error")
             }
-            self.delegate?.exitPage()
+            self.delegate?.finishedSaving()
         }
     }
     
