@@ -13,7 +13,6 @@ import SnapKit
 open class SpecialtyTagView: TagView {
     struct AnnotationImages {
         static let dropDownMenu = ImageNames.DownArrow
-        static let isPrivate = "LockIcon"
     }
     
     
@@ -120,8 +119,6 @@ open class SpecialtyTagView: TagView {
         switch tagAttribute {
         case .dropDownMenu:
             return AnnotationImages.dropDownMenu
-        case .isPrivate:
-            return AnnotationImages.isPrivate
         default:
             return ""
         }

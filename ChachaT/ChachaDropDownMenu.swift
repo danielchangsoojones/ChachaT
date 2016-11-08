@@ -64,7 +64,6 @@ class ChachaDropDownMenu: UIView {
     var innerView: UIView?
     var arrowImage : UIImageView!
     let screenSizeWidth = UIScreen.main.bounds.width
-    var shouldAddPrivacyOption: Bool = false
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
@@ -238,10 +237,6 @@ class ChachaDropDownMenu: UIView {
         let arrowImageHeight = arrowImage.intrinsicContentSize.height
         let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
         return innerView!.intrinsicContentSize.height + arrowImageHeightAndInsets
-    }
-    
-    func addPrivacyTag() {
-        shouldAddPrivacyOption = true
     }
     
     class DropDownConfiguration {

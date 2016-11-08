@@ -55,11 +55,6 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         tap.cancelsTouchesInView = false
     }
     
-    override func setDropDownMenu() {
-        super.setDropDownMenu()
-        dropDownMenu.shouldAddPrivacyOption = true
-    }
-    
     override func passSearchResults(searchTags: [Tag]) {
         if searchTags.isEmpty {
             //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
@@ -80,9 +75,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
             switch dropDownTag.dropDownAttribute {
             case .tagChoices:
                 let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-                if dropDownTag.isPrivate {
-                    tagView.makePrivate()
-                } else if let annotationTitle = dropDownTag.annotationTitle {
+                if let annotationTitle = dropDownTag.annotationTitle {
                     tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
                 }
             case .singleSlider, .rangeSlider:
@@ -120,13 +113,8 @@ extension AddingTagsToProfileViewController {
     }
     
     func specialtyTagPressed(_ title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        if sender.tag == 3 {
-            //ChachaDropDownTagView pressed
-            if tagView.tagAttribute == .isPrivate, let dropDownTagView = tappedDropDownTagView {
-                dropDownTagView.makePrivate()
-                dataStore.savePrivacyTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle)
-            }
-        } else {
+        if sender.tag == 1 {
+            //dealing with the tagChoicesView
             switch tagView.tagAttribute {
             case .dropDownMenu:
                 tappedDropDownTagView = tagView as? DropDownTagView

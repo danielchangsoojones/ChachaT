@@ -13,7 +13,6 @@ public enum TagAttributes: String {
     //The string raw values are what will be saved to Parse. DO NOT CHANGE UNLESS YOU CHANGE ALL THE NAMES IN PARSE
     case generic = "generic"
     case dropDownMenu = "dropDownMenu"
-    case isPrivate = "isPrivate"
     case innerText
 }
 
