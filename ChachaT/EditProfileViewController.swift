@@ -232,7 +232,7 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
 //age extension
 extension EditProfileViewController {
     func ageCellTapped(_ sender: AboutView) {
-        DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+        DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
             (birthday) -> Void in
             let age = User.current()!.calculateAge(birthday: birthday)
             sender.setInnerTitle("\(age)")

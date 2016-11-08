@@ -12,7 +12,7 @@ class BottomUserScrollView: UIView {
     fileprivate struct BottomViewConstants {
         static let backgroundColor: UIColor = UIColor.white
         static let topLineColor: UIColor = CustomColors.SilverChaliceGrey
-        static let lineHeight: CGFloat = 0.5
+        static let lineHeight: CGFloat = 1.0
         static let lineAlpha: CGFloat = 0.5
     }
     
@@ -97,6 +97,7 @@ protocol BottomUserScrollViewDelegate {
 extension SearchTagsViewController: BottomUserScrollViewDelegate {
     func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
+        theTappedCellIndex = tappedIndex
         cardDetailVC.userOfTheCard = swipe.otherUser
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }

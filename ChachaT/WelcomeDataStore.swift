@@ -67,7 +67,6 @@ extension WelcomeDataStore {
                 let installation = PFInstallation.current()
                 installation!["user"] = PFUser.current()
                 installation!.saveEventually(nil)
-                self.cleanDatabaseTags()
                 self.delegate?.performSegueIntoApp()
             } else if let error = error {
                 let code = error._code
@@ -76,36 +75,6 @@ extension WelcomeDataStore {
                 } else {
                     _ = SCLAlertView().showError("Failed Login", subTitle: "Login failed at this time.", closeButtonTitle: "Okay")
                 }
-            }
-        }
-    }
-    
-    //Purpose: this will eventually be removed. So, when I got some real users, I (Daniel Jones) accidentally still had the code saving tags to the Tags class, so the  I tried to convert them to the updated database. But, I can't save/edit a user without logging in as them, and I need to be able to edit the user's relation. So, this is a hacky fix. Once the user logs in, then it will look over the join table and convert them to my updated database, then once I have converted all the users obselete tags, I can get rid of the Tags class. Overtime, if those users log back in, then this will fix the problem...
-    fileprivate func cleanDatabaseTags() {
-        let query = Tags.query()! as! PFQuery<Tags>
-        //This user was one of the beginning users who got messed up
-        query.whereKey("createdBy", equalTo: User.current()!)
-        query.getFirstObjectInBackground { (tag: Tags?, error) in
-            if let tag = tag {
-                self.findJointUserTags(tag: tag)
-            } else if let error = error {
-                print(error)
-            }
-        }
-    }
-    
-    fileprivate func findJointUserTags(tag: Tags) {
-        let query = JointParseTagToUser.query()! as! PFQuery<JointParseTagToUser>
-        query.whereKey("user", equalTo: User.current()!)
-        query.includeKey("parseTag")
-        query.findObjectsInBackground { (joints, error) in
-            if let joints = joints {
-                for joint in joints {
-                    let relation = User.current()!.relation(forKey: "tags")
-                    relation.add(joint.parseTag)
-                }
-                User.current()!.saveInBackground()
-                tag.deleteInBackground()
             }
         }
     }

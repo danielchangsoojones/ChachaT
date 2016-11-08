@@ -55,11 +55,6 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         tap.cancelsTouchesInView = false
     }
     
-    override func setDropDownMenu() {
-        super.setDropDownMenu()
-        dropDownMenu.shouldAddPrivacyOption = true
-    }
-    
     override func passSearchResults(searchTags: [Tag]) {
         if searchTags.isEmpty {
             //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
@@ -80,9 +75,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
             switch dropDownTag.dropDownAttribute {
             case .tagChoices:
                 let tagView = tagChoicesView.addDropDownTag(dropDownTag.title, specialtyCategoryTitle: dropDownTag.specialtyCategory) as! DropDownTagView
-                if dropDownTag.isPrivate {
-                    tagView.makePrivate()
-                } else if let annotationTitle = dropDownTag.annotationTitle {
+                if let annotationTitle = dropDownTag.annotationTitle {
                     tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
                 }
             case .singleSlider, .rangeSlider:
@@ -111,6 +104,7 @@ extension AddingTagsToProfileViewController {
             _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
+            dropDownMenu.hide()
             if let dropDownTagView = tappedDropDownTagView {
                 tagChoicesView.setSpecialtyAnnotationTitle(tagView: dropDownTagView, annotationTitle: title)
                 dataStore.saveSpecialtyTag(title: title, specialtyCategory: dropDownTagView.specialtyCategoryTitle)
@@ -119,13 +113,8 @@ extension AddingTagsToProfileViewController {
     }
     
     func specialtyTagPressed(_ title: String, tagView: SpecialtyTagView, sender: TagListView) {
-        if sender.tag == 3 {
-            //ChachaDropDownTagView pressed
-            if tagView.tagAttribute == .isPrivate, let dropDownTagView = tappedDropDownTagView {
-                dropDownTagView.makePrivate()
-                dataStore.savePrivacyTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle)
-            }
-        } else {
+        if sender.tag == 1 {
+            //dealing with the tagChoicesView
             switch tagView.tagAttribute {
             case .dropDownMenu:
                 tappedDropDownTagView = tagView as? DropDownTagView
@@ -166,7 +155,7 @@ extension AddingTagsToProfileViewController {
     fileprivate func performAgeTagAction(dropDownTag: DropDownTag) {
         let currentAge: Int = User.current()!.age ?? 0
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
-            DatePickerDialog().show("Your Birthday!", doneButtonTitle: "Done", cancelButtonTitle: "Cancel", datePickerMode: .date) {
+            DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
                 (birthday) -> Void in
                 //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
                 let age = User.current()!.calculateAge(birthday: birthday)

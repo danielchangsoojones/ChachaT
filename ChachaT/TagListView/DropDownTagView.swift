@@ -16,14 +16,6 @@ class DropDownTagView: SpecialtyTagView {
         self.specialtyCategoryTitle = specialtyCategoryTitle
     }
     
-    func makePrivate() {
-        annotationView?.updateImage(AnnotationImages.isPrivate)
-        updateAnnotationView()
-        if let tagListView = findSuperTagListView() {
-            tagListView.layoutSubviews()
-        }
-    }
-    
     //Purpose: goes through the superviews of the tagView to find the TagListView
     func findSuperTagListView() -> TagListView? {
         var view: UIView? = self

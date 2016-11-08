@@ -11,6 +11,7 @@ import TTRangeSlider
 
 protocol SliderViewDelegate {
     func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String)
+    func slidingEnded(text: String, minValue: Int, maxValue: Int, suffix: String)
 }
 
 class SliderView: UIView {
@@ -94,7 +95,14 @@ extension SliderView {
         slider.thumbTintColor = SliderViewConstants.nonSelectedTrackColor
         slider.isContinuous = true // false makes it call only once you let go
         slider.addTarget(self, action: #selector(SliderView.valueChanged(_:)), for: .valueChanged)
+        slider.addTarget(self, action: #selector(SliderView.sliderDraggingEnded(_:)), for: [.touchUpInside, .touchUpOutside])
         return slider
+    }
+    
+    func sliderDraggingEnded(_ sender: UISlider) {
+        let sliderValue = round(sender.value)
+        let text = setSingleSliderLabelText(Int(sliderValue))
+        delegate?.slidingEnded(text: text, minValue: minValue, maxValue: Int(sliderValue), suffix: suffix)
     }
     
     func valueChanged(_ sender: UISlider) {
@@ -164,6 +172,11 @@ extension SliderView : TTRangeSliderDelegate {
     func rangeSlider(_ sender: TTRangeSlider!, didChangeSelectedMinimumValue selectedMinimum: Float, andMaximumValue selectedMaximum: Float) {
         let text = setRangeSliderLabelText(Int(selectedMinimum), maxValue: Int(selectedMaximum))
         delegate?.sliderValueChanged(text: text, minValue: Int(selectedMinimum), maxValue: Int(selectedMaximum), suffix: suffix)
+    }
+    
+    func didEndTouches(in sender: TTRangeSlider!) {
+        let text = setRangeSliderLabelText(Int(sender.selectedMinimum), maxValue: Int(sender.selectedMaximum))
+        delegate?.slidingEnded(text: text, minValue: Int(sender.selectedMinimum), maxValue: Int(sender.selectedMaximum), suffix: suffix)
     }
     
     func setAsHeightSlider() {

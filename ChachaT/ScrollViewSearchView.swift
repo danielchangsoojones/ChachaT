@@ -27,6 +27,7 @@ class ScrollViewSearchView: UIView {
     @IBOutlet weak var theSearchButton: UIButton!
     @IBOutlet weak var theGoButton: UIButton!
     @IBOutlet weak var theExitButton: UIButton!
+    @IBOutlet weak var theButtonStackView: UIStackView!
     var searchBox: CustomTagsSearchBar!
     
     //constraint outlet

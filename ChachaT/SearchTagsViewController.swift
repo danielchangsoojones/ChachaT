@@ -15,6 +15,9 @@ class SearchTagsViewController: SuperTagViewController {
     var scrollViewSearchView : ScrollViewSearchView!
     var chosenTags: [Tag] = []
     @IBOutlet weak var theTagScrollView: UIScrollView!
+    
+    
+    
     var theBottomUserArea: BottomUserScrollView?
     
     var dataStore : SearchTagsDataStore!
@@ -25,6 +28,7 @@ class SearchTagsViewController: SuperTagViewController {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         setDataFromDataStore()
+        anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
     }
@@ -61,6 +65,7 @@ class SearchTagsViewController: SuperTagViewController {
             } else {
                 dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, sliderDelegate: self)
             }
+            transformSearchBarForSlider()
         default:
             break
         }
@@ -120,11 +125,22 @@ extension SearchTagsViewController {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
-            sender.removeTagView(tagView)
-            scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
-            //TODO: do something about hidingBottomUserArea when they hit the remove button.
-            //TODO: figure out how to remove a slidervalue tag. Normal tags are only added when a search occurs
+            removeTag(tagView: tagView, tagListView: sender)
+            updateAfterTagChosen()
         }
+    }
+    
+    func removeTag(tagView: TagView, tagListView: TagListView) {
+        tagListView.removeTagView(tagView)
+        removeTagFromChosenTags(title: tagView.currentTitle ?? "")
+        scrollViewSearchView.rearrangeSearchArea(tagView, extend: false)
+    }
+    
+    fileprivate func removeTagFromChosenTags(title: String) {
+        //we don't technically save generic tags, but if we saved a slider tag, this would remove it from the chosen tag by matching the titles
+        chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
+            return tag.title != title
+        })
     }
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
@@ -132,17 +148,28 @@ extension SearchTagsViewController {
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        showSuccessiveTags()
+        updateAfterTagChosen()
     }
     
-    fileprivate func showSuccessiveTags() {
-        tagChoicesView.removeAllTags()
+    //TODO: probably should rename this to something better of a name if you can think of one
+    func updateAfterTagChosen() {
+        resetToDefaultTags()
+        //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
         addChosenTagsToArray()
-        dataStore.retrieveSuccessiveTags(chosenTags: chosenTags)
+        dataStore.getSwipesForBottomArea(chosenTags: chosenTags)
         removeAllGenericTagsFromChosenTags()
     }
     
+    fileprivate func resetToDefaultTags() {
+        for tagView in tagChoicesView.tagViews {
+            if !(tagView is DropDownTagView) {
+                tagChoicesView.removeTagView(tagView)
+            }
+        }
+    }
+    
     fileprivate func removeAllGenericTagsFromChosenTags() {
+        //We keepslider tags in the array because we store those in the chosenTag array the entire time.
         chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
             return tag.attribute != .generic
         })
@@ -158,7 +185,7 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
         addChosenTagsToArray()
-        dataStore.findUserArray(chosenTags: chosenTags)
+        dataStore.getSwipesForMainTinderPage(chosenTags: chosenTags)
     }
     
     //Purpose: we want to save the chosen tagViews into the chosenTag array, so then we can query on it.
@@ -186,68 +213,6 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     
     func scrollViewSearchViewTapOccurred() {
         dropDownMenu.hide()
-    }
-}
-
-extension SearchTagsViewController: SliderViewDelegate {
-    func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String) {
-        scrollViewSearchView.hideScrollSearchView(false)
-        if let tagView = findTagViewWithSuffix(suffix) {
-            //the tagView has already been created
-            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
-            tagView.setTitle(text, for: UIControlState())
-            if let index = findIndexOfDropDownTag(suffix: suffix) {
-                //replace the index of the dropDownTag with our updated dropDownTag
-                let dropDownTag = chosenTags[index] as! DropDownTag
-                dropDownTag.minValue = minValue
-                dropDownTag.maxValue = maxValue
-                dropDownTag.title = text
-                dropDownTag.suffix = suffix
-                chosenTags[index] = dropDownTag
-            }
-        } else {
-            //tagView has never been created
-            let tagView = tagChosenView.addTag(text)
-            scrollViewSearchView.rearrangeSearchArea(tagView, extend: true)
-            if let dropDownTagView = tappedDropDownTagView {
-                //It doesn't really matter what dropDownAttribute we pass
-                let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
-                tag.title = text
-                chosenTags.append(tag)
-            }
-        }
-    }
-    
-    func findIndexOfDropDownTag(suffix: String) -> Int? {
-        if let index = chosenTags.index(where: { (tag: Tag) -> Bool in
-            if let dropDownTag = tag as? DropDownTag, dropDownTag.suffix == suffix {
-                return true
-            }
-            return false
-        }) {
-            return index
-        }
-        return nil
-    }
-    
-    func findDropDownTag(suffix: String, array: [Tag]) -> DropDownTag? {
-        for tag in array {
-            if let dropDownTag = tag as? DropDownTag , dropDownTag.suffix == suffix {
-                return dropDownTag
-            }
-        }
-        return nil
-    }
-    
-    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
-    func findTagViewWithSuffix(_ suffix: String) -> TagView? {
-        for tagView in tagChosenView.tagViews {
-            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
-            if let currentTitle = tagView.currentTitle , currentTitle.hasSuffix(suffix) {
-                return tagView
-            }
-        }
-        return nil
     }
 }
 
@@ -294,6 +259,36 @@ extension SearchTagsViewController : UISearchBarDelegate {
     }
 }
 
+extension SearchTagsViewController: EmptyStateDelegate {
+    func emptyStateButtonPressed() {
+        //Do something when they click the empty search button
+        resetSearch()
+    }
+    
+    func resetSearch() {
+        for tagView in tagChosenView.tagViews {
+            removeTag(tagView: tagView, tagListView: tagChosenView)
+        }
+        //TODO: hide the bottom user area
+    }
+    
+    func showEmptyState() {
+        let emptyStateView = SearchingEmptyStateView(delegate: self)
+        theBottomUserArea?.addSubview(emptyStateView)
+        emptyStateView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+    }
+    
+    func hideEmptyState() {
+        for subview in theBottomUserArea?.subviews ?? [] {
+            if subview is SearchingEmptyStateView {
+                subview.removeFromSuperview()
+            }
+        }
+    }
+}
+
 extension SearchTagsViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
@@ -304,17 +299,11 @@ extension SearchTagsViewController: SegueHandlerType {
         switch segueIdentifierForSegue(segue) {
             case .SearchPageToTinderMainPageSegue:
                 //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
-                if let userArray = sender as? [User] {
+                if let swipeArray = sender as? [Swipe] {
                     //the sender parameter is passed the user array
                     //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
                     let navigationVC = segue.destination as! ChachaNavigationViewController
                     let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
-                    var swipeArray: [Swipe] = []
-                    for user in userArray {
-                        //TODO: all the users won't technically be falsely approved
-                        let swipe = Swipe(otherUser: user, otherUserApproval: false)
-                        swipeArray.append(swipe)
-                    }
                     rootVC.swipeArray = swipeArray
                     rootVC.prePassedSwipeArray = true
                 }
