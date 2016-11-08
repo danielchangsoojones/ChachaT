@@ -74,4 +74,8 @@ class PhotoEditingView: UIView {
         theImageView.image = nil
         theNoPictureLabel.isHidden = false
     }
+    
+    func setPhotoNumber(num: Int) {
+        theNumberLabel.text = num.toString
+    }
 }

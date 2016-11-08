@@ -70,7 +70,6 @@ class EditProfileViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
-        self.navigationItem.leftBarButtonItem = UIBarButtonItem(barButtonSystemItem: .cancel, target: self, action: #selector(EditProfileViewController.cancelButtonHit))
         
         photoLayoutView.delegate = self
         bulletPointsSetup()
@@ -83,10 +82,6 @@ class EditProfileViewController: UIViewController {
     
     deinit {
         NotificationCenter.default.removeObserver(self)
-    }
-    
-    @objc fileprivate func cancelButtonHit() {
-        _ = navigationController?.popViewController(animated: true)
     }
     
     func dataStoreSetup() {
@@ -187,6 +182,7 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
         
         let deleteAction = UIAlertAction(title: "Delete Photo", style: .default) { (alertAction: UIAlertAction) in
             self.photoLayoutView.deleteImage(photoNumber: self.thePhotoNumberToChange)
+            self.dataStore.deleteImage(photoNumber: self.thePhotoNumberToChange)
         }
         
         alert.addAction(replaceAction)
@@ -285,9 +281,9 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
         }
     }
     
-    func exitPage() {
+    func finishedSaving() {
         theSpinner.stopAnimating()
-        _ = self.navigationController?.popViewController(animated: true)
+        self.view.endEditing(true)
     }
 }
 

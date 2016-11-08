@@ -55,6 +55,7 @@ class PhotoEditingMasterLayoutView: UIView {
         let distribution : UIStackViewDistribution = .fillEqually
         let verticalSiding = createStackView(.vertical, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInVerticalSiding))
         let horizontalSiding = createStackView(.horizontal, distribution: distribution, views: createMultiplePhotoEditingViews(PhotoEditingViewConstants.numberOfViewsInHorizontalSiding))
+        reorderHorizontalSidingPhotoNumbers(stackView: horizontalSiding)
         return (verticalSiding, horizontalSiding)
     }
     
@@ -83,6 +84,17 @@ class PhotoEditingMasterLayoutView: UIView {
         photoEditingView.tag = photoNumber
         photoEditingView.addTapGesture(target: self, action: #selector(PhotoEditingMasterLayoutView.photoTapped(_:)))
         return photoEditingView
+    }
+    
+    //Purpose: the number labels were backwards on the bottom row of the photo editing view, so this reorders them
+    func reorderHorizontalSidingPhotoNumbers(stackView: UIStackView) {
+        let numberArray = [6,5,4]
+        
+        for (index, subview) in stackView.arrangedSubviews.enumerated() {
+            if let photoEditingView = subview as? PhotoEditingView {
+                photoEditingView.setPhotoNumber(num: numberArray[index])
+            }
+        }
     }
     
     func photoTapped(_ sender: UIGestureRecognizer) {

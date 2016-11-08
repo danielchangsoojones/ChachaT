@@ -10,10 +10,32 @@
 import UIKit
 import MobileCoreServices
 import JSQMessagesViewController
+import AVFoundation
 
 class Camera {
     
     class func shouldStartCamera(target: AnyObject, canEdit: Bool, frontFacing: Bool) -> Bool {
+        
+        if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
+            //user gave permission for use to use their camera
+            print("user has given access to their camera")
+        } else {
+            //permission has not been granted
+            AVCaptureDevice.requestAccess(forMediaType: AVMediaTypeVideo, completionHandler: { (granted :Bool) -> Void in
+                if granted == true
+                {
+                    // User granted
+                    print("user granted access")
+                }
+                else
+                {
+                    // User Rejected
+                    print("user has denied")
+                }
+            })
+        }
+        
+        
         if UIImagePickerController.isSourceTypeAvailable(UIImagePickerControllerSourceType.camera) == false {
             return false
         }

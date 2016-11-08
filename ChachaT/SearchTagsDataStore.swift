@@ -216,7 +216,6 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     
     func passdDataToBottomArea(swipes: [Swipe]) {
         //had to end editing on the scrollViewSearchView, not the self.view because scrollViewSearchView is in its own separate view in the nav bar
-        scrollViewSearchView.endEditing(true)
             if theBottomUserArea == nil {
                 showBottomUserArea()
             }
