@@ -61,11 +61,21 @@ extension SearchTagsDataStore {
     }
     
     func getSwipesForBottomArea(chosenTags: [Tag]) {
-        findUserArray(chosenTags: chosenTags, swipeDestination: .bottomUserArea)
+        if !isChosenTagsEmpty(chosenTags: chosenTags) {
+            findUserArray(chosenTags: chosenTags, swipeDestination: .bottomUserArea)
+        }
     }
     
     func getSwipesForMainTinderPage(chosenTags: [Tag]) {
         findUserArray(chosenTags: chosenTags, swipeDestination: .mainTinderPage)
+    }
+    
+    func isChosenTagsEmpty(chosenTags: [Tag]) -> Bool {
+        if chosenTags.isEmpty {
+            delegate?.hideBottomUserArea()
+            return true
+        }
+        return false
     }
     
     //TODO: the user array should just pull down anyone who is close to any of the tags, they don't have to have all of them.
@@ -207,6 +217,7 @@ extension SearchTagsDataStore {
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passDataToMainPage(swipes: [Swipe])
     func passdDataToBottomArea(swipes: [Swipe])
+    func hideBottomUserArea()
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
@@ -220,6 +231,7 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
                 showBottomUserArea()
             }
             if let bottomUserArea = theBottomUserArea {
+                bottomUserArea.isHidden = false
                 if swipes.isEmpty {
                     showEmptyState()
                 } else {
