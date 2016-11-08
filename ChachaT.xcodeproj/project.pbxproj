@@ -99,6 +99,7 @@
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
 		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
+		929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0491DD126400099F3AB /* TutorialViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
@@ -234,6 +235,7 @@
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
+		929BF0491DD126400099F3AB /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
@@ -827,6 +829,7 @@
 		929BF0461DD047340099F3AB /* First Onboarding */ = {
 			isa = PBXGroup;
 			children = (
+				929BF0491DD126400099F3AB /* TutorialViewController.swift */,
 			);
 			name = "First Onboarding";
 			sourceTree = "<group>";
@@ -1117,6 +1120,7 @@
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
+				929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */,
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,

@@ -34,15 +34,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         Instabug.start(withToken: "c1d90288be3cf98624000127f6139a87", invocationEvent: IBGInvocationEvent.shake)
         
-        //If user doesn't exist, then we will do the anonymous User onboarding
-        User.enableAutomaticUser()
-        
         let anonymousDataStore = AnonymousDataStore()
-        
-        if anonymousDataStore.isUserAnonymous {
+
+        if User.current() == nil {
+            let tutorialVC = TutorialViewController()
+            
+            self.window?.rootViewController = tutorialVC
+            self.window?.makeKeyAndVisible()
+        } else if anonymousDataStore.isUserAnonymous {
             let navController = ChachaNavigationViewController()
             
-            //set up the rootviewController
             let storyboard = UIStoryboard(name: "Filtering", bundle: nil)
             let searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchTagsViewController") as! SearchTagsViewController
             navController.viewControllers = [searchViewController]
