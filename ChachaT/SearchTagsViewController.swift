@@ -15,6 +15,9 @@ class SearchTagsViewController: SuperTagViewController {
     var scrollViewSearchView : ScrollViewSearchView!
     var chosenTags: [Tag] = []
     @IBOutlet weak var theTagScrollView: UIScrollView!
+    
+    
+    
     var theBottomUserArea: BottomUserScrollView?
     
     var dataStore : SearchTagsDataStore!
@@ -62,6 +65,7 @@ class SearchTagsViewController: SuperTagViewController {
             } else {
                 dropDownMenu.addSlider(dropDownTag.minValue, maxValue: dropDownTag.maxValue, suffix: dropDownTag.suffix, isRangeSlider: dropDownTag.dropDownAttribute == .rangeSlider, sliderDelegate: self)
             }
+            transformSearchBarForSlider()
         default:
             break
         }
@@ -148,7 +152,7 @@ extension SearchTagsViewController {
     }
     
     //TODO: probably should rename this to something better of a name if you can think of one
-    fileprivate func updateAfterTagChosen() {
+    func updateAfterTagChosen() {
         resetToDefaultTags()
         //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
         addChosenTagsToArray()
@@ -209,54 +213,6 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     
     func scrollViewSearchViewTapOccurred() {
         dropDownMenu.hide()
-    }
-}
-
-extension SearchTagsViewController: SliderViewDelegate {
-    func sliderValueChanged(text: String, minValue: Int, maxValue: Int, suffix: String) {
-        scrollViewSearchView.hideScrollSearchView(false)
-        if let tagView = findTagViewWithSuffix(suffix) {
-            //the tagView has already been created
-            //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
-            tagView.setTitle(text, for: UIControlState())
-        } else {
-            let tagView = tagChosenView.addTag(text)
-            scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
-            scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        }
-    }
-    
-    func slidingEnded(text: String, minValue: Int, maxValue: Int, suffix: String) {
-        if let dropDownTagView = tappedDropDownTagView {
-            //check if the dropDownTag already exists in the chosenTags
-            let tag: Tag? = chosenTags.first(where: { (tag: Tag) -> Bool in
-                if let dropDownTag = tag as? DropDownTag {
-                    return dropDownTag.specialtyCategory == dropDownTagView.specialtyCategoryTitle
-                }
-                return false
-            })
-            
-            if let tag = tag {
-                //if it already exists, we need to reset its title
-                tag.title = text
-            } else {
-                let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
-                tag.title = text
-                chosenTags.append(tag)
-            }
-        }
-        updateAfterTagChosen()
-    }
-    
-    //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.
-    func findTagViewWithSuffix(_ suffix: String) -> TagView? {
-        for tagView in tagChosenView.tagViews {
-            //TODO: should get the tagView, not just based upon the suffix. Should check that the text is exactly how we would structure a numbered tagView
-            if let currentTitle = tagView.currentTitle , currentTitle.hasSuffix(suffix) {
-                return tagView
-            }
-        }
-        return nil
     }
 }
 

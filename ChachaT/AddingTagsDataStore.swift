@@ -143,7 +143,6 @@ extension AddingTagsDataStore {
                         let innerTagTitles = dropDownCategory.innerTagTitles
                         let newDropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
                         newDropDownTag.annotationTitle = parseTag.tagTitle
-                        newDropDownTag.isPrivate = parseTag.isPrivate
                         self.tagChoicesDataArray.append(newDropDownTag)
                     } else {
                         //just a generic tag

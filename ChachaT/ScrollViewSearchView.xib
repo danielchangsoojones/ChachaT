@@ -129,6 +129,7 @@
             </constraints>
             <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
             <connections>
+                <outlet property="theButtonStackView" destination="Qm8-QK-DG2" id="LqB-1l-VMf"/>
                 <outlet property="theExitButton" destination="SPh-de-YPj" id="kEf-un-BVG"/>
                 <outlet property="theGoButton" destination="mcn-RE-n9V" id="EEo-1q-Qg5"/>
                 <outlet property="theGoButtonHeightConstraint" destination="g7r-va-uhs" id="4MT-xl-Jgd"/>

@@ -102,6 +102,8 @@
 		929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0491DD126400099F3AB /* TutorialViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
 		92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */; };
+		92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDA91DD1676B0003B09D /* SearchTagsSliderExtension.swift */; };
+		92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDAB1DD175E70003B09D /* NotificationNames.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
 		92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */; };
 		92B8DF291CE9356000AFA518 /* AudioToolbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92B8DF281CE9356000AFA518 /* AudioToolbox.framework */; };
@@ -239,6 +241,8 @@
 		929BF0491DD126400099F3AB /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
 		92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsAnonymousExtension.swift; sourceTree = "<group>"; };
+		92A5DDA91DD1676B0003B09D /* SearchTagsSliderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsSliderExtension.swift; sourceTree = "<group>"; };
+		92A5DDAB1DD175E70003B09D /* NotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
 		92B02AB91D46F49D00624716 /* ChachaNavigationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaNavigationViewController.swift; sourceTree = "<group>"; };
 		92B8DF281CE9356000AFA518 /* AudioToolbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AudioToolbox.framework; path = System/Library/Frameworks/AudioToolbox.framework; sourceTree = SDKROOT; };
@@ -629,6 +633,7 @@
 				9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */,
 				928B8D761DBA585000D6B6D3 /* Configurations */,
 				9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */,
+				92A5DDAB1DD175E70003B09D /* NotificationNames.swift */,
 			);
 			name = "Globals/Helper Files";
 			sourceTree = "<group>";
@@ -676,12 +681,12 @@
 		9273B7991CFF491D0001A608 /* 8tracks Filtering Search */ = {
 			isa = PBXGroup;
 			children = (
-				92A5DDA41DD1566F0003B09D /* New Group */,
-				925626D11DCBB16C006A21BD /* Magic Move */,
 				92C1B1DD1D51A7A200F4A815 /* Data Models */,
 				920BF81A1D3FF5E300104842 /* TagListView */,
 				928819391D1AE484000A8E04 /* Subview Files */,
 				929BF03E1DCFAE110099F3AB /* Empty State */,
+				925626D11DCBB16C006A21BD /* Magic Move */,
+				92A5DDA41DD1566F0003B09D /* Extensions */,
 				9273B79A1CFF4D010001A608 /* Filtering.storyboard */,
 				928819351D18E78B000A8E04 /* SuperTagViewController.swift */,
 				920BF8261D415FC000104842 /* SearchTagsViewController.swift */,
@@ -828,11 +833,12 @@
 			name = "First Onboarding";
 			sourceTree = "<group>";
 		};
-		92A5DDA41DD1566F0003B09D /* New Group */ = {
+		92A5DDA41DD1566F0003B09D /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
+				92A5DDA91DD1676B0003B09D /* SearchTagsSliderExtension.swift */,
 			);
-			name = "New Group";
+			name = Extensions;
 			sourceTree = "<group>";
 		};
 		92A5DDA51DD156970003B09D /* Anonymous User */ = {
@@ -1157,6 +1163,7 @@
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
+				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
@@ -1189,6 +1196,7 @@
 				929428DE1DC37A5E0019617C /* Tags.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
+				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,

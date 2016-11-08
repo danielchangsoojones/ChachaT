@@ -194,6 +194,7 @@ class ChachaDropDownMenu: UIView {
             animations: {
                 self.backgroundView.alpha = 0
             }, completion: { _ in
+                NotificationCenter.default.post(name: .dropDownMenuHidden, object: nil)
                 self.menuWrapper.isHidden = true
         })
     }
