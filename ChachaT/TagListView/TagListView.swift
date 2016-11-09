@@ -428,8 +428,8 @@ extension TagListView {
         return tagView
     }
     
-    func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
-        let tagView = tagView ?? TagView(title: title)
+    func insertTagViewAtIndex(_ index: Int, title: String = "") {
+        let tagView = TagView(title: title)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
         
         tagViews.insert(attributedTagView, at: index)

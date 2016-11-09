@@ -95,8 +95,8 @@ extension AddingTagsToProfileViewController {
             //tagChoicesView pressed
             let alertView = SCLAlertView()
             _ = alertView.addButton("Delete") {
-                print("Deleted Tag")
                 self.dataStore.deleteTag(title)
+                sender.removeTagView(tagView)
             }
             _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
@@ -261,9 +261,8 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
 }
 
 extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(_ title: String, tagView: TagView?) {
-        //also passing the TagView because I get the feeling that I might need it in the future.
-        tagChoicesView.insertTagViewAtIndex(1, title: title, tagView: tagView)
+    func addNewTagToTagChoiceView(title: String) {
+        tagChoicesView.insertTagViewAtIndex(1, title: title)
         resetTextField()
         dataStore.saveNewTag(title: title)
     }
