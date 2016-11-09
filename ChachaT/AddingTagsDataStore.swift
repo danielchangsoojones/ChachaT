@@ -45,10 +45,7 @@ class AddingTagsDataStore: SuperTagDataStore {
         query.getFirstObjectInBackground { (object, error) in
             if let parseTag = object as? ParseTag {
                 //add this already existing tag to the User's tags
-                let relation = User.current()!.relation(forKey: "tags")
-                relation.add(parseTag)
-
-                User.current()!.saveInBackground()
+                self.saveTagRelation(parseTag: parseTag)
             } else if let error = error {
                 let errorCode = error._code
                 if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
@@ -60,10 +57,7 @@ class AddingTagsDataStore: SuperTagDataStore {
                     
                     parseTag.saveInBackground(block: { (success, error) in
                         if success {
-                            let relation = User.current()!.relation(forKey: "tags")
-                            relation.add(parseTag)
-                            
-                            User.current()?.saveInBackground()
+                            self.saveTagRelation(parseTag: parseTag)
                         } else if let error = error {
                             print(error)
                         }
@@ -73,6 +67,14 @@ class AddingTagsDataStore: SuperTagDataStore {
                 }
             }
         }
+    }
+    
+    fileprivate func saveTagRelation(parseTag: ParseTag) {
+        //add new tags to local parse tags, so a user can delete something they just made.
+        currentUserParseTags.append(parseTag)
+        let relation = User.current()!.relation(forKey: "tags")
+        relation.add(parseTag)
+        User.current()?.saveInBackground()
     }
     
     func saveSpecialtyTag(title: String, specialtyCategory: String) {
@@ -142,7 +144,7 @@ extension AddingTagsDataStore {
                         //a tag that is a member of the dropDownCategory
                         let innerTagTitles = dropDownCategory.innerTagTitles
                         let newDropDownTag = DropDownTag(specialtyCategory: dropDownCategory.name, innerTagTitles: innerTagTitles, dropDownAttribute: .tagChoices)
-                        newDropDownTag.annotationTitle = parseTag.tagTitle
+                        newDropDownTag.displayTitle = parseTag.tagTitle
                         self.tagChoicesDataArray.append(newDropDownTag)
                     } else {
                         //just a generic tag

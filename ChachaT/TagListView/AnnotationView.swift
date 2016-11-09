@@ -42,24 +42,9 @@ class AnnotationView: CircleView {
         }
     }
     
-    func updateImage(_ imageName: String) {
-        if !theImageView.isDescendant(of: self) {
-            //the innerLabel hasn't been added to the view yet
-            imageViewSetup(imageName)
-        }
-        theInnerLabel.removeFromSuperview()
-        updateDiameter(self.diameter)
-        theImageView.image = UIImage(named: imageName)
-    }
-    
     override func updateDiameter(_ diameter: CGFloat) {
-        if let text = theInnerLabel.text, text.characters.count > AnnotationConstants.minimumWordCountForCircle && theInnerLabel.isDescendant(of: self) {
-            //we only want to elongate the frame if the character count is greater than the min, and if theInnerLabel is actually supposed to be shown
-            elongateFrame(text: text)
-        } else {
-            self.diameter = diameter
-            super.updateDiameter(diameter)
-        }
+        self.diameter = diameter
+        super.updateDiameter(diameter)
     }
 }
 
@@ -83,9 +68,5 @@ extension AnnotationView {
         theInnerLabel.text = text
         theImageView.removeFromSuperview()
         updateDiameter(diameter)
-    }
-    
-    fileprivate func elongateFrame(text: String) {
-        self.frame = CGRect(x: 0, y: 0, width: theInnerLabel.intrinsicContentSize.width + TagViewProperties.paddingX, height: self.frame.height)
     }
 }

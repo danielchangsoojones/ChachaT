@@ -391,12 +391,10 @@ extension TagListView {
     //Purpose: change the tagView title and then update the frames of everything, so it rearranges everything, and makes the TagView frame fit snuggly for the new title
     func setTagViewTitle(_ tagView: TagView, title: String) {
         tagView.setTitle(title, for: UIControlState())
-        self.layoutSubviews()
-    }
-    
-    func setSpecialtyAnnotationTitle(tagView: SpecialtyTagView, annotationTitle: String) {
-        tagView.convertToInnerTextAnnotationTag(text: annotationTitle)
-        self.layoutSubviews()
+        rearrangeViews()
+//        shouldRearrangeViews = true
+//        self.layoutSubviews()
+//        shouldRearrangeViews = false
     }
     
     //Purpose: apply all the properties of the TagListView to a tagView
@@ -430,8 +428,8 @@ extension TagListView {
         return tagView
     }
     
-    func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
-        let tagView = tagView ?? TagView(title: title)
+    func insertTagViewAtIndex(_ index: Int, title: String = "") {
+        let tagView = TagView(title: title)
         let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
         
         tagViews.insert(attributedTagView, at: index)

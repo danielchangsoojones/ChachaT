@@ -9,7 +9,7 @@
 import Foundation
 
 protocol AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(_ title: String, tagView: TagView?)
+    func addNewTagToTagChoiceView(title: String)
 }
 
 //This is the menu that appears when you start typing in the CreationTagView. It shows all the available tags in the database, and if none exist, then it shows you how to create a new one.
@@ -73,7 +73,7 @@ extension CreationMenuView {
 
 extension CreationMenuView: TagListViewDelegate {
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        delegate?.addNewTagToTagChoiceView(title, tagView: tagView)
+        delegate?.addNewTagToTagChoiceView(title: title)
         reset()
     }
 }
