@@ -262,7 +262,7 @@ extension SearchTagsViewController: EmptyStateDelegate {
         for tagView in tagChosenView.tagViews {
             removeTag(tagView: tagView, tagListView: tagChosenView)
         }
-        //TODO: hide the bottom user area
+        hideBottomUserArea()
     }
     
     func showEmptyState() {
