@@ -65,6 +65,9 @@ extension SearchTagsViewController {
                 return tagView.currentTitle == title
             })
             if let tagView = tagView {
+                chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
+                    return tag.title != tagView.currentTitle ?? ""
+                })
                 tagChosenView.removeTagView(tagView)
                 scrollViewSearchView?.rearrangeSearchArea(tagView, extend: false)
             }
