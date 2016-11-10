@@ -44,6 +44,7 @@ class UserCollectionViewCell: UICollectionViewCell {
     fileprivate func imageViewSetup() {
         theImageView.backgroundColor = CustomColors.BombayGrey
         theImageView.setCornerRadius(radius: Constants.cornerRadius)
+        theImageView.contentMode = .scaleAspectFill
         theImageView.loadFromFile(theUser?.profileImage)
         self.addSubview(theImageView)
         theImageView.snp.makeConstraints { (make) in

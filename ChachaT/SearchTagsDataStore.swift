@@ -84,15 +84,15 @@ extension SearchTagsDataStore {
         
         tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
-                self.convertUsersToSwipes(users: users, swipeDestination: swipeDestination)
+                self.findMatchingSwipesForUsers(users: users, swipeDestination: swipeDestination)
             } else if let error = error {
                 print(error)
             }
         }
     }
     
-    fileprivate func convertUsersToSwipes(users: [User], swipeDestination: SwipeDestination) {
-        
+    //Purpose: we found any users who matched the swipes, now we need to make check if a parseSwipe exists for that particular user relative to this user, so if the user swipes on that person, we will know whether to make it a match or not.
+    fileprivate func findMatchingSwipesForUsers(users: [User], swipeDestination: SwipeDestination) {
         let userOneParseColumnName = "userOne"
         let userTwoParseColumnName = "userTwo"
         let currentUserIsUserOneQuery = createInnerQuery(currentUserParseColumn: userOneParseColumnName, otherUserParseColumn: userTwoParseColumnName, otherUsers: users)
@@ -118,12 +118,13 @@ extension SearchTagsDataStore {
     }
     
     fileprivate func convertParseSwipesToSwipes(users: [User], parseSwipes: [ParseSwipe]) -> [Swipe] {
-        let tuple = filterAlreadySwipedUsers(parseSwipes: parseSwipes)
+        let tuple = createSwipeForAlreadySwipedUsers(parseSwipes: parseSwipes)
         
         let previouslySwipedUserObjectIds: [String] = tuple.previouslySwipedUsersObjectIds
         var swipesToPass: [Swipe] = tuple.swipesToPass
         
         for user in users where !previouslySwipedUserObjectIds.contains(user.objectId ?? "") {
+            //If they don't have an existing swipe in the database, then we create a new one for them with the defualt starting values. This means that the currentUser has never swiped this user.
             let newSwipe = Swipe(otherUser: user, otherUserApproval: false)
             swipesToPass.append(newSwipe)
         }
@@ -131,16 +132,19 @@ extension SearchTagsDataStore {
         return swipesToPass
     }
     
-    fileprivate func filterAlreadySwipedUsers(parseSwipes: [ParseSwipe]) -> (previouslySwipedUsersObjectIds: [String], swipesToPass: [Swipe]) {
+    fileprivate func createSwipeForAlreadySwipedUsers(parseSwipes: [ParseSwipe]) -> (previouslySwipedUsersObjectIds: [String], swipesToPass: [Swipe]) {
         
         var previouslySwipedUsersObjectIds: [String] = []
         var swipesToPass: [Swipe] = []
         
         for parseSwipe in parseSwipes {
-            previouslySwipedUsersObjectIds.append(parseSwipe.otherUser.objectId ?? "")
-            
-            let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
-            swipesToPass.append(swipe)
+            let otherUserObjectId: String = parseSwipe.otherUser.objectId ?? ""
+            if !previouslySwipedUsersObjectIds.contains(otherUserObjectId) {
+                //avoiding any duplicate users. This could happen if somehow two swipes existed for the same user. Which technically shouldn't happen anyway, but this is an extra safety precaution to make sure the currentUser doesn't see duplicate users.
+                previouslySwipedUsersObjectIds.append(otherUserObjectId)
+                let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+                swipesToPass.append(swipe)
+            }
         }
         
         return (previouslySwipedUsersObjectIds, swipesToPass)
