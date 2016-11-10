@@ -27,6 +27,7 @@ class BottomUserScrollView: UIView {
         self.delegate = delegate
         collectionViewSetup()
         topLineSetup()
+        collectionView.backgroundColor = UIColor.red
     }
     
     required init?(coder aDecoder: NSCoder) {
