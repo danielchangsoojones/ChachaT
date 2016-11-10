@@ -25,6 +25,8 @@ class CarouselSlideView: TGLParallaxCarouselItem {
         theImageView.loadFromFile(file)
         self.addSubview(theImageView)
         theImageView.backgroundColor = CustomColors.SilverChaliceGrey
+        self.clipsToBounds = true
+        theImageView.contentMode = .scaleAspectFill
         //Can't use snapkit to pin the image to the edges for some reason, but setting the frame to the bounds does the job
         theImageView.frame = self.bounds
     }
