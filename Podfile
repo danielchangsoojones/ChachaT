@@ -26,6 +26,7 @@ pod 'RKNotificationHub'
 pod 'SCLAlertView'
 pod 'SnapKit'
 pod 'TGLParallaxCarousel', :git=> 'https://github.com/danielchangsoojones/TGLParallaxCarousel.git' #had to fork of my own repo, so I (Daniel Jones) could customize some things
+pod 'ALCameraViewController'
 
 post_install do |installer|
     `find Pods -regex 'Pods/pop.*\\.h' -print0 | xargs -0 sed -i '' 's/\\(<\\)pop\\/\\(.*\\)\\(>\\)/\\"\\2\\"/'`

@@ -152,7 +152,7 @@ extension EditProfileViewController: AboutViewDelegate {
     }
 }
 
-extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+extension EditProfileViewController: PhotoEditingDelegate, CameraDelegate {
     func photoPressed(_ photoNumber: Int, imageSize: CGSize, isPhotoWithImage: Bool) {
         thePhotoNumberToChange = photoNumber
         showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
@@ -191,8 +191,10 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
     }
     
     fileprivate func showNewPhotoChoices(alert: UIAlertController) -> UIAlertController {
+        let camera = Camera(delegate: self)
+        
         let photoLibraryAction = UIAlertAction(title: "Photo Library", style: .default) { (alertAction: UIAlertAction) in
-            _ = Camera.shouldStartPhotoLibrary(target: self, canEdit: false)
+            camera.presentCroppingPhotoLibraryVC(target: self)
         }
         
         let facebookAction = UIAlertAction(title: "From Facebook", style: .default) { (alertAction: UIAlertAction) in
@@ -200,7 +202,8 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
         }
         
         let cameraAction = UIAlertAction(title: "Take Photo", style: .default) { (alertAction: UIAlertAction) in
-            _ = Camera.shouldStartCamera(target: self, canEdit: false, frontFacing: true)
+            //If you are on mac simulator, then the camera crashes because mac doesn't have a camera on simulator, only photo library.
+            camera.presentCroppingCameraVC(target: self)
         }
         
         alert.addAction(photoLibraryAction)
@@ -210,18 +213,9 @@ extension EditProfileViewController: PhotoEditingDelegate, UIImagePickerControll
         return alert
     }
     
-    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingImage image: UIImage!, editingInfo: [AnyHashable: Any]!) {
-        imageWasPicked(image: image, picker: picker)
-    }
-    
-    func imageWasPicked(image: UIImage?, picker: UIViewController) {
-        //would like to resize the image, but it was creating bars around the image. Will have to analyze the resizeImage function
-        //            let resizedImage = image.resizeImage(profileImageSize!)
-        if let image = image {
-            photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
-            dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
-        }
-        picker.dismiss(animated: true, completion: nil)
+    func imageWasPicked(image: UIImage) {
+        photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
+        dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
     }
 }
 

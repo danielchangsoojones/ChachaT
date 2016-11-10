@@ -84,15 +84,15 @@ extension SearchTagsDataStore {
         
         tuple.query.findObjectsInBackground { (objects, error) in
             if let users = objects as? [User] {
-                self.convertUsersToSwipes(users: users, swipeDestination: swipeDestination)
+                self.findMatchingSwipesForUsers(users: users, swipeDestination: swipeDestination)
             } else if let error = error {
                 print(error)
             }
         }
     }
     
-    fileprivate func convertUsersToSwipes(users: [User], swipeDestination: SwipeDestination) {
-        
+    //Purpose: we found any users who matched the swipes, now we need to make check if a parseSwipe exists for that particular user relative to this user, so if the user swipes on that person, we will know whether to make it a match or not.
+    fileprivate func findMatchingSwipesForUsers(users: [User], swipeDestination: SwipeDestination) {
         let userOneParseColumnName = "userOne"
         let userTwoParseColumnName = "userTwo"
         let currentUserIsUserOneQuery = createInnerQuery(currentUserParseColumn: userOneParseColumnName, otherUserParseColumn: userTwoParseColumnName, otherUsers: users)
@@ -118,12 +118,13 @@ extension SearchTagsDataStore {
     }
     
     fileprivate func convertParseSwipesToSwipes(users: [User], parseSwipes: [ParseSwipe]) -> [Swipe] {
-        let tuple = filterAlreadySwipedUsers(parseSwipes: parseSwipes)
+        let tuple = createSwipeForAlreadySwipedUsers(parseSwipes: parseSwipes)
         
         let previouslySwipedUserObjectIds: [String] = tuple.previouslySwipedUsersObjectIds
         var swipesToPass: [Swipe] = tuple.swipesToPass
         
         for user in users where !previouslySwipedUserObjectIds.contains(user.objectId ?? "") {
+            //If they don't have an existing swipe in the database, then we create a new one for them with the defualt starting values. This means that the currentUser has never swiped this user.
             let newSwipe = Swipe(otherUser: user, otherUserApproval: false)
             swipesToPass.append(newSwipe)
         }
@@ -131,16 +132,19 @@ extension SearchTagsDataStore {
         return swipesToPass
     }
     
-    fileprivate func filterAlreadySwipedUsers(parseSwipes: [ParseSwipe]) -> (previouslySwipedUsersObjectIds: [String], swipesToPass: [Swipe]) {
+    fileprivate func createSwipeForAlreadySwipedUsers(parseSwipes: [ParseSwipe]) -> (previouslySwipedUsersObjectIds: [String], swipesToPass: [Swipe]) {
         
         var previouslySwipedUsersObjectIds: [String] = []
         var swipesToPass: [Swipe] = []
         
         for parseSwipe in parseSwipes {
-            previouslySwipedUsersObjectIds.append(parseSwipe.otherUser.objectId ?? "")
-            
-            let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
-            swipesToPass.append(swipe)
+            let otherUserObjectId: String = parseSwipe.otherUser.objectId ?? ""
+            if !previouslySwipedUsersObjectIds.contains(otherUserObjectId) {
+                //avoiding any duplicate users. This could happen if somehow two swipes existed for the same user. Which technically shouldn't happen anyway, but this is an extra safety precaution to make sure the currentUser doesn't see duplicate users.
+                previouslySwipedUsersObjectIds.append(otherUserObjectId)
+                let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+                swipesToPass.append(swipe)
+            }
         }
         
         return (previouslySwipedUsersObjectIds, swipesToPass)
@@ -178,20 +182,32 @@ extension SearchTagsDataStore {
         switch dropDownTag.specialtyCategory {
         //TODO: these cases should be based upon the parse column name
         case "Distance":
-            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+            }
         case "Age Range":
             //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
             let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
             let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
             query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+            }
         case "Height":
-            query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            }
             query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
         default:
             break
         }
         return query
+    }
+    
+    //TODO: This is kind of a hacky way to see if the slider is at its max value. Really, we should be passing the currentValue of the slider and comparing to max value> But, this works for now until code can be refactored
+    fileprivate func textContainsPlusSign(text: String) -> Bool {
+        let plusSign = "+"
+        return text.contains(plusSign)
     }
     
     fileprivate func passBottomAreaData(swipes: [Swipe]) {
@@ -228,10 +244,13 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     func passdDataToBottomArea(swipes: [Swipe]) {
         //had to end editing on the scrollViewSearchView, not the self.view because scrollViewSearchView is in its own separate view in the nav bar
             if theBottomUserArea == nil {
-                showBottomUserArea()
+                showBottomUserArea(swipes: swipes)
             }
             if let bottomUserArea = theBottomUserArea {
-                bottomUserArea.isHidden = false
+                if bottomUserArea.frame.y == self.view.frame.maxY {
+                    //the bottomUserArea is pushed off the screen currently
+                    toggleBottomUserArea(show: true)
+                }
                 if swipes.isEmpty {
                     showEmptyState()
                 } else {
@@ -239,16 +258,5 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
                     bottomUserArea.reloadData(newData: swipes)
                 }
             }
-    }
-    
-    func showBottomUserArea() {
-        theBottomUserArea = BottomUserScrollView(swipes: [], frame: CGRect(x: 0, y: 0, w: self.view.frame.width, h: self.view.frame.height / 3), delegate: self)
-        self.view.addSubview(theBottomUserArea!)
-        theBottomUserArea?.snp.makeConstraints { (make) in
-            make.leading.trailing.equalToSuperview()
-            make.bottom.equalToSuperview()
-            make.height.equalTo(theBottomUserArea!.frame.height)
-        }
-        theTagScrollView.contentInset.bottom = theBottomUserArea!.frame.height
     }
 }

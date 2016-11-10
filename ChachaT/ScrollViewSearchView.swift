@@ -28,11 +28,17 @@ class ScrollViewSearchView: UIView {
     @IBOutlet weak var theGoButton: UIButton!
     @IBOutlet weak var theExitButton: UIButton!
     @IBOutlet weak var theButtonStackView: UIStackView!
+    @IBOutlet weak var theFinishedButtonsStackView: UIStackView!
+    
     var searchBox: CustomTagsSearchBar!
     
     //constraint outlet
     @IBOutlet weak var theGoButtonHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var theTagListViewWidthConstraint: NSLayoutConstraint!
+    @IBOutlet weak var theLeadingSearchButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var theTrailingSearchButtonConstraint: NSLayoutConstraint!
+    @IBOutlet weak var theTrailingFinishedStackViewConstraint: NSLayoutConstraint!
+    
     
     var searchBarDelegate: UISearchBarDelegate?
     var scrollViewSearchViewDelegate: ScrollViewSearchViewDelegate?
@@ -59,6 +65,7 @@ class ScrollViewSearchView: UIView {
             toggleFirstResponder(hide)
         }
         theScrollView.isHidden = hide
+        theFinishedButtonsStackView.isHidden = hide
         searchBox.isHidden = !hide
     }
     
@@ -82,13 +89,23 @@ class ScrollViewSearchView: UIView {
     func buttonsSetup() {
         theGoButton.imageEdgeInsets = SearchViewConstants.imageEdgeInsets
         theExitButton.imageEdgeInsets = SearchViewConstants.imageEdgeInsets
+        setProperSpacing()
+    }
+    
+    fileprivate func setProperSpacing() {
+        let spacing = theTagChosenListView.marginX
+        theLeadingSearchButtonConstraint.constant = spacing
+        theTrailingSearchButtonConstraint.constant = spacing
+        theFinishedButtonsStackView.spacing = spacing
+        theTrailingFinishedStackViewConstraint.constant = spacing
     }
     
     func showSearchBox(_ searchBoxHolder: UIView) -> CustomTagsSearchBar {
         let searchBox = CustomTagsSearchBar(placeHolderText: "Search Tags")
         searchBoxHolder.addSubview(searchBox)
         searchBox.snp.makeConstraints { (make) in
-            make.edges.equalTo(searchBoxHolder)
+            make.trailing.top.bottom.equalTo(searchBoxHolder)
+            make.leading.equalToSuperview().inset(theLeadingSearchButtonConstraint.constant)
         }
         return searchBox
     }
@@ -96,8 +113,9 @@ class ScrollViewSearchView: UIView {
     func setButtonBorders() {
         let buttonArray = [theSearchButton, theGoButton, theExitButton]
         self.theGoButtonHeightConstraint.constant = TagView.getTagViewHeight(TagViewProperties.paddingY)
+        
         for button in buttonArray {
-            button?.layer.cornerRadius = self.theGoButtonHeightConstraint.constant / 2
+            button?.layer.cornerRadius = (self.theGoButtonHeightConstraint.constant / 2)
             button?.layer.borderWidth = TagViewProperties.borderWidth
             button?.layer.borderColor = TagViewProperties.borderColor.cgColor
         }
@@ -118,14 +136,15 @@ class ScrollViewSearchView: UIView {
         }
         
         self.layoutIfNeeded()
-        //checking to see if tags have outgrown screen because then I want it to slide the newest tag into focus
-        if self.frame.width <= theTagChosenHolderView.frame.width {
+        //checking to see if tags have reached the last buttons because then I want it to slide the newest tag into focus
+        if theFinishedButtonsStackView.frame.x <= theTagChosenHolderView.frame.width {
             //I want the scroll view to go to a content offset where I only see the newest added tags.
-            //So, I find out how big the TagHolderViewWidth has grown. Then, I see how big the screen is, and the difference is the area that is off the screen.
+            //So, I find out how big the TagHolderViewWidth has grown. Then, I see how big the screen is, and the difference is the area that is off the screen, accoiunting for the last two buttons at the end of the screen
             //Therefore, I want to have contentOffset start at the end of the area that has been pushed off screen.
             let screenWidth = self.frame.size.width
             let chosenTagHolderViewWidth = theTagChosenHolderView.frame.size.width
-            theScrollView.setContentOffset(CGPoint(x: chosenTagHolderViewWidth - screenWidth, y: 0), animated: true)
+            //I have not totally figured out why we need to add the TrailingConstraint into the equation, but that is what makes the final spacing right, you would think it gets accounted for in the width of the theTagChosenHolderView, but for some reason this makes the scroll view work like its supposed to. 
+            theScrollView.setContentOffset(CGPoint(x: chosenTagHolderViewWidth - screenWidth + theFinishedButtonsStackView.frame.width + theTrailingSearchButtonConstraint.constant, y: 0), animated: true)
         }
     }
     

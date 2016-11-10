@@ -16,6 +16,8 @@ class SearchTagsViewController: SuperTagViewController {
     var chosenTags: [Tag] = []
     @IBOutlet weak var theTagScrollView: UIScrollView!
     
+    //constraints
+    @IBOutlet weak var theTagScrollViewTopConstraint: NSLayoutConstraint!
     
     
     var theBottomUserArea: BottomUserScrollView?
@@ -27,10 +29,15 @@ class SearchTagsViewController: SuperTagViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
+        spacingSetup()
         setDataFromDataStore()
         anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
+    }
+    
+    func spacingSetup() {
+        theTagScrollViewTopConstraint.constant = TagViewProperties.marginY
     }
     
     func setDataFromDataStore() {
@@ -167,11 +174,6 @@ extension SearchTagsViewController {
             return tag.attribute != .generic
         })
     }
-    
-    func hideBottomUserArea() {
-        theBottomUserArea?.isHidden = true
-        theTagScrollView.contentInset.bottom = 0
-    }
 }
 
 extension SearchTagsViewController: ScrollViewSearchViewDelegate {
@@ -247,36 +249,6 @@ extension SearchTagsViewController : UISearchBarDelegate {
         for tagView in tagChoicesView.selectedTags() {
             if let currentTitle = tagView.currentTitle {
                 addTagToChosenTagListView(currentTitle)
-            }
-        }
-    }
-}
-
-extension SearchTagsViewController: EmptyStateDelegate {
-    func emptyStateButtonPressed() {
-        //Do something when they click the empty search button
-        resetSearch()
-    }
-    
-    func resetSearch() {
-        for tagView in tagChosenView.tagViews {
-            removeTag(tagView: tagView, tagListView: tagChosenView)
-        }
-        hideBottomUserArea()
-    }
-    
-    func showEmptyState() {
-        let emptyStateView = SearchingEmptyStateView(delegate: self)
-        theBottomUserArea?.addSubview(emptyStateView)
-        emptyStateView.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
-        }
-    }
-    
-    func hideEmptyState() {
-        for subview in theBottomUserArea?.subviews ?? [] {
-            if subview is SearchingEmptyStateView {
-                subview.removeFromSuperview()
             }
         }
     }

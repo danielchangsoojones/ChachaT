@@ -17,7 +17,7 @@ struct TagViewProperties {
     static let tagInsidesColor = UIColor.white //the tag insides for the chosen view
     static let cornerRadius : CGFloat = (TagViewProperties.textFont.pointSize + TagViewProperties.paddingY * 2) / 2 //makes the tagView have nice rounded corners, no matter size.
     static let paddingX : CGFloat = 14 //adds horizontal padding on each side of text, so extends width of TagView, but keeps the text centered.
-    static let paddingY : CGFloat = 15 //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
+    static let paddingY : CGFloat = 10 //adds vertical padding on each side of text, so extends width of TagView, but keeps the text centered.
     static let marginX : CGFloat = 9 //the horizontal space between TagViews
     static let marginY : CGFloat = 8 //the vertical space between TagViews
 }

@@ -32,19 +32,25 @@ class UserCollectionViewCell: UICollectionViewCell {
         theNameLabel.lineBreakMode = .byClipping
         theNameLabel.textAlignment = .center
         theNameLabel.textColor = Constants.textColor
+        
+        
         self.addSubview(theNameLabel)
         theNameLabel.snp.makeConstraints { (make) in
             let inset = self.frame.height * Constants.imageInsetRatio * 0.5
             make.centerX.equalTo(self)
             make.bottom.equalTo(self).inset(inset)
             make.width.equalTo(self).multipliedBy(0.75)
+            let textHeight: CGFloat = theNameLabel.font.pointSize
+            make.height.equalTo(textHeight)
         }
     }
     
     fileprivate func imageViewSetup() {
         theImageView.backgroundColor = CustomColors.BombayGrey
         theImageView.setCornerRadius(radius: Constants.cornerRadius)
+        theImageView.contentMode = .scaleAspectFill
         theImageView.loadFromFile(theUser?.profileImage)
+        theImageView.clipsToBounds = true
         self.addSubview(theImageView)
         theImageView.snp.makeConstraints { (make) in
             let inset = self.frame.height * Constants.imageInsetRatio

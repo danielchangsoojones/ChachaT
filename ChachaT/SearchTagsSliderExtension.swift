@@ -65,6 +65,9 @@ extension SearchTagsViewController {
                 return tagView.currentTitle == title
             })
             if let tagView = tagView {
+                chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
+                    return tag.title != tagView.currentTitle ?? ""
+                })
                 tagChosenView.removeTagView(tagView)
                 scrollViewSearchView?.rearrangeSearchArea(tagView, extend: false)
             }
@@ -135,9 +138,11 @@ extension SearchTagsViewController: SliderViewDelegate {
             })
             
             
-            if let tag = tag {
+            if let tag = tag as? DropDownTag {
                 //if it already exists, we need to reset its title
                 tag.title = text
+                tag.maxValue = maxValue
+                tag.minValue = minValue
             } else {
                 let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
                 tag.title = text

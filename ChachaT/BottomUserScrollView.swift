@@ -46,7 +46,8 @@ class BottomUserScrollView: UIView {
     
     func reloadData(newData: [Swipe]) {
         self.swipes = newData
-        collectionView.reloadData()
+        //using reload sections instead of reloadData gives a nice animation to the reloading. And, since this collectionView only has one section anyway, it works perfectly
+        collectionView.reloadSections(IndexSet(integer: 0))
     }
 }
 
