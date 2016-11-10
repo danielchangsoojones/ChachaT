@@ -35,6 +35,13 @@ extension EditProfileViewController: GBHFacebookImagePickerDelegate {
         imageWasPicked(image: image, picker: imagePicker)
     }
     
+    func imageWasPicked(image: UIImage?, picker: UIViewController) {
+        if let image = image {
+            imageWasPicked(image: image)
+        }
+        picker.dismiss(animated: true, completion: nil)
+    }
+    
     func facebookImagePicker(imagePicker: UIViewController, didFailWithError error: Error?) {
         imagePicker.dismiss(animated: true, completion: {
             _ = SCLAlertView().showError("Facebook Error", subTitle: "The image from facebook could not be retrieved. Please try again")

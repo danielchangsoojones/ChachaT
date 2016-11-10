@@ -12,9 +12,19 @@ import MobileCoreServices
 import JSQMessagesViewController
 import AVFoundation
 import SCLAlertView
+import ALCameraViewController
+
+protocol CameraDelegate {
+    func imageWasPicked(image: UIImage)
+}
 
 class Camera {
+    var delegate: CameraDelegate?
     
+    init(delegate: CameraDelegate) {
+        self.delegate = delegate
+    }
+
     class func shouldStartCamera(target: AnyObject, canEdit: Bool, frontFacing: Bool) -> Bool {
         
         if AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo) == AVAuthorizationStatus.authorized {
@@ -115,5 +125,34 @@ class Camera {
         target.present(imagePicker, animated: true, completion: nil)
         
         return true
+    }
+}
+
+//extension for specialty camera view that can crop
+extension Camera {
+    //Using this special image picker forces the user to crop the photo, the crop is a square
+    func presentCroppingPhotoLibraryVC(target: AnyObject) {
+        let libraryViewController = CameraViewController.imagePickerViewController(croppingEnabled: true) { image, asset in
+            self.imageWasPicked(image: image, target: target)
+        }
+        
+        target.present(libraryViewController, animated: true, completion: nil)
+    }
+    
+    func presentCroppingCameraVC(target: AnyObject) {
+        let cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak self] image, asset in
+            self?.imageWasPicked(image: image, target: target)
+        }
+        
+        target.present(cameraViewController, animated: true, completion: nil)
+    }
+    
+    fileprivate func imageWasPicked(image: UIImage?, target: AnyObject) {
+        if let image = image {
+            let dimension: CGFloat = 400
+            let resizedImage = image.resizeImage(targetSize: CGSize(width: dimension, height: dimension))
+            self.delegate?.imageWasPicked(image: resizedImage)
+        }
+        target.dismiss(animated: true, completion: nil)
     }
 }
