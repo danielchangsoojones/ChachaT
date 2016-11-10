@@ -52,7 +52,7 @@ class SliderView: UIView {
         if let _ = theSlider as? TTRangeSlider {
             delegate?.sliderShown(text: setRangeSliderLabelText(minValue, maxValue: maxValue), minValue: minValue, maxValue: maxValue, suffix: suffix)
         } else if let singleSlider = theSlider as? UISlider {
-            delegate?.sliderShown(text: setSingleSliderLabelText(Int(singleSlider.value)), minValue: minValue, maxValue: maxValue, suffix: suffix)
+            delegate?.sliderShown(text: setSingleSliderLabelText(Int(singleSlider.value)), minValue: minValue, maxValue: Int(singleSlider.value), suffix: suffix)
         }
 
     }

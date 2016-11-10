@@ -182,20 +182,32 @@ extension SearchTagsDataStore {
         switch dropDownTag.specialtyCategory {
         //TODO: these cases should be based upon the parse column name
         case "Distance":
-            query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+            }
         case "Age Range":
             //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
             let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
             let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
             query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-            query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
+            }
         case "Height":
-            query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            if !textContainsPlusSign(text: dropDownTag.title) {
+                query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
+            }
             query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
         default:
             break
         }
         return query
+    }
+    
+    //TODO: This is kind of a hacky way to see if the slider is at its max value. Really, we should be passing the currentValue of the slider and comparing to max value> But, this works for now until code can be refactored
+    fileprivate func textContainsPlusSign(text: String) -> Bool {
+        let plusSign = "+"
+        return text.contains(plusSign)
     }
     
     fileprivate func passBottomAreaData(swipes: [Swipe]) {

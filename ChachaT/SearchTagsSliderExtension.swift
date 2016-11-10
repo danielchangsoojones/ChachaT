@@ -135,9 +135,11 @@ extension SearchTagsViewController: SliderViewDelegate {
             })
             
             
-            if let tag = tag {
+            if let tag = tag as? DropDownTag {
                 //if it already exists, we need to reset its title
                 tag.title = text
+                tag.maxValue = maxValue
+                tag.minValue = minValue
             } else {
                 let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
                 tag.title = text
