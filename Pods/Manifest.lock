@@ -1,5 +1,6 @@
 PODS:
   - Alamofire (4.0.1)
+  - ALCameraViewController (1.2.7)
   - Bolts (1.8.4):
     - Bolts/AppLinks (= 1.8.4)
     - Bolts/Tasks (= 1.8.4)
@@ -56,6 +57,7 @@ PODS:
 
 DEPENDENCIES:
   - Alamofire
+  - ALCameraViewController
   - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, branch `develop`)
   - ExpandingMenu (~> 0.1)
   - EZSwiftExtensions
@@ -108,6 +110,7 @@ CHECKOUT OPTIONS:
 
 SPEC CHECKSUMS:
   Alamofire: 7682d43245de14874acd142ec137b144aa1dd335
+  ALCameraViewController: 4a513b8d5ecfdb3f34c50b1d469c373aae1ec7b4
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
   Bolts-Swift: fa98d1b59fc1acea9b21a21306dcdca1c85e3737
   EFTools: 36fe88141681c9a052bb5d6d42a4f8940f1b90e5
@@ -137,6 +140,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 896462d52586568c301974bc44a8cabb50f4f579
+PODFILE CHECKSUM: 6451798bd7a60c1d8033603c87c6b6aa29a9913e
 
 COCOAPODS: 1.1.1
