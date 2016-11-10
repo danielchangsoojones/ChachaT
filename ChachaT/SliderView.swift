@@ -45,7 +45,16 @@ class SliderView: UIView {
         }
         createSliderLabel()
         addSliderToView(isRangeSlider)
-        delegate.sliderShown(text: isRangeSlider ? setRangeSliderLabelText(minValue, maxValue: maxValue) :  setSingleSliderLabelText(maxValue), minValue: minValue, maxValue: maxValue, suffix: suffix)
+        passSliderValueToDelegate()
+    }
+    
+    fileprivate func passSliderValueToDelegate() {
+        if let _ = theSlider as? TTRangeSlider {
+            delegate?.sliderShown(text: setRangeSliderLabelText(minValue, maxValue: maxValue), minValue: minValue, maxValue: maxValue, suffix: suffix)
+        } else if let singleSlider = theSlider as? UISlider {
+            delegate?.sliderShown(text: setSingleSliderLabelText(Int(singleSlider.value)), minValue: minValue, maxValue: maxValue, suffix: suffix)
+        }
+
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -68,7 +77,9 @@ class SliderView: UIView {
             sliderText = setRangeSliderLabelText(self.minValue, maxValue: self.maxValue)
         } else {
             self.theSlider = createSingleSlider(self.maxValue)
-            sliderText = setSingleSliderLabelText(self.maxValue)
+            if let slider = theSlider as? UISlider {
+                sliderText = setSingleSliderLabelText(Int(slider.value))
+            }
         }
         self.addSubview(theSlider)
         theSlider.snp.makeConstraints { (make) in
@@ -96,6 +107,7 @@ extension SliderView {
         slider.minimumValue = SliderViewConstants.minValue.toFloat
         slider.thumbTintColor = SliderViewConstants.nonSelectedTrackColor
         slider.isContinuous = true // false makes it call only once you let go
+        slider.setValue(Float(maxValue / 2), animated: false)
         slider.addTarget(self, action: #selector(SliderView.valueChanged(_:)), for: .valueChanged)
         slider.addTarget(self, action: #selector(SliderView.sliderDraggingEnded(_:)), for: [.touchUpInside, .touchUpOutside])
         return slider
