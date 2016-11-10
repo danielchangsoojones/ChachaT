@@ -16,6 +16,8 @@ class SearchTagsViewController: SuperTagViewController {
     var chosenTags: [Tag] = []
     @IBOutlet weak var theTagScrollView: UIScrollView!
     
+    //constraints
+    @IBOutlet weak var theTagScrollViewTopConstraint: NSLayoutConstraint!
     
     
     var theBottomUserArea: BottomUserScrollView?
@@ -27,10 +29,15 @@ class SearchTagsViewController: SuperTagViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
+        spacingSetup()
         setDataFromDataStore()
         anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
+    }
+    
+    func spacingSetup() {
+        theTagScrollViewTopConstraint.constant = TagViewProperties.marginY
     }
     
     func setDataFromDataStore() {

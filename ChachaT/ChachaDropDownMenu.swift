@@ -201,14 +201,17 @@ class ChachaDropDownMenu: UIView {
     
     let arrowImageInset: CGFloat = 20.0
     let arrowImageBottomInsetDivision : CGFloat = 4 //how much I am dividing the arrowImageInset, so it is close to the bottom of the dropdown
+    var innerViewTopInset: CGFloat = 0
     
-    func addInnerView(sideOffset: CGFloat = 0) {
+    func addInnerView(sideOffset: CGFloat = 0, topInset: CGFloat = 0) {
         dropDownView.addSubview(innerView!)
+        
+        innerViewTopInset = topInset
         //the view will grow to whatever size is necessary to fit its innerView
         innerView!.snp.makeConstraints { (make) in
             make.leading.equalToSuperview().offset(sideOffset)
             make.trailing.equalToSuperview().inset(sideOffset)
-            make.top.equalToSuperview()
+            make.top.equalToSuperview().inset(topInset)
             make.bottom.equalTo(arrowImage.snp.top).offset(-arrowImageInset) //not sure why inset() does not work, but it doesn't
         }
     }
@@ -237,7 +240,7 @@ class ChachaDropDownMenu: UIView {
     func getDropDownViewHeight() -> CGFloat {
         let arrowImageHeight = arrowImage.intrinsicContentSize.height
         let arrowImageHeightAndInsets = arrowImageHeight + arrowImageInset + (arrowImageInset / arrowImageBottomInsetDivision)
-        return innerView!.intrinsicContentSize.height + arrowImageHeightAndInsets
+        return innerView!.intrinsicContentSize.height + arrowImageHeightAndInsets + innerViewTopInset
     }
     
     class DropDownConfiguration {
