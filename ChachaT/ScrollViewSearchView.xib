@@ -5,6 +5,7 @@
     </device>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <objects>
@@ -21,7 +22,7 @@
                             <rect key="frame" x="0.0" y="0.0" width="71" height="114"/>
                             <subviews>
                                 <view tag="2" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ShF-V1-DNL" customClass="ChachaChosenTagListView" customModule="Shuffles" customModuleProvider="target">
-                                    <rect key="frame" x="8" y="-20" width="0.0" height="154"/>
+                                    <rect key="frame" x="8" y="-5" width="0.0" height="124"/>
                                     <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="0.0" colorSpace="custom" customColorSpace="sRGB"/>
                                     <constraints>
                                         <constraint firstAttribute="width" id="Scz-8p-IDp"/>
@@ -94,19 +95,10 @@
                 <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="FHl-TR-B8M">
                     <rect key="frame" x="537" y="37" width="80" height="40"/>
                     <subviews>
-                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
-                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
-                            <state key="normal" image="XIcon">
-                                <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                            </state>
-                            <connections>
-                                <action selector="exitButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="CcL-T8-xhE"/>
-                            </connections>
-                        </button>
                         <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="mcn-RE-n9V">
-                            <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                            <rect key="frame" x="0.0" y="0.0" width="40" height="40"/>
                             <constraints>
-                                <constraint firstAttribute="width" constant="40" id="aPp-vU-vyR"/>
+                                <constraint firstAttribute="width" secondItem="mcn-RE-n9V" secondAttribute="height" multiplier="1:1" id="EKg-jo-jQL"/>
                                 <constraint firstAttribute="height" constant="40" id="g7r-va-uhs"/>
                             </constraints>
                             <state key="normal" image="Checkmark">
@@ -114,6 +106,15 @@
                             </state>
                             <connections>
                                 <action selector="goButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="SBt-i9-p54"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SPh-de-YPj">
+                            <rect key="frame" x="40" y="0.0" width="40" height="40"/>
+                            <state key="normal" image="XIcon">
+                                <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            </state>
+                            <connections>
+                                <action selector="exitButtonTapped:" destination="iN0-l3-epB" eventType="touchUpInside" id="CcL-T8-xhE"/>
                             </connections>
                         </button>
                     </subviews>

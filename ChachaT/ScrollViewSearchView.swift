@@ -104,7 +104,8 @@ class ScrollViewSearchView: UIView {
         let searchBox = CustomTagsSearchBar(placeHolderText: "Search Tags")
         searchBoxHolder.addSubview(searchBox)
         searchBox.snp.makeConstraints { (make) in
-            make.edges.equalTo(searchBoxHolder)
+            make.trailing.top.bottom.equalTo(searchBoxHolder)
+            make.leading.equalToSuperview().inset(theLeadingSearchButtonConstraint.constant)
         }
         return searchBox
     }
@@ -112,8 +113,9 @@ class ScrollViewSearchView: UIView {
     func setButtonBorders() {
         let buttonArray = [theSearchButton, theGoButton, theExitButton]
         self.theGoButtonHeightConstraint.constant = TagView.getTagViewHeight(TagViewProperties.paddingY)
+        
         for button in buttonArray {
-            button?.layer.cornerRadius = self.theGoButtonHeightConstraint.constant / 2
+            button?.layer.cornerRadius = (self.theGoButtonHeightConstraint.constant / 2)
             button?.layer.borderWidth = TagViewProperties.borderWidth
             button?.layer.borderColor = TagViewProperties.borderColor.cgColor
         }
