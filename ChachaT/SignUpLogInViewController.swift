@@ -159,6 +159,10 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                         self.theCreateAccountLabel.alpha = 1
                     }
                 }
+                
+                let alpha: CGFloat = hidden ? 0: 1
+                self.thePrivacyPolicyButton.alpha = alpha
+                self.theAndLabel.alpha = alpha
             })
     }
     
