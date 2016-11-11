@@ -13,6 +13,10 @@ import SnapKit
 import SCLAlertView
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
+    struct SignUpConstants {
+        static let forgotPasswordTitle: String = "Forgot Password?"
+        static let termsOfServiceTitle: String = "Terms Of Service"
+    }
     
     @IBOutlet weak var theEmail: UITextField!
     @IBOutlet weak var thePassword: UITextField!
@@ -63,7 +67,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 self.theFacebookButton.setTitle("Sign Up With Facebook", for: UIControlState())
                 self.theSignUpButton.setTitle("Sign Up", for: UIControlState())
                 self.theCreateAccountLabel.alpha = 1
-                self.theTermsOfService.setTitle("Terms Of Service", for: UIControlState())
+                self.theTermsOfService.setTitle(SignUpConstants.termsOfServiceTitle, for: UIControlState())
                 self.theTermsOfService.setTitleColor(facebookBlue, for: UIControlState())
                 self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue-Medium", size: 10)
                 self.view.layoutIfNeeded()
@@ -72,7 +76,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                 self.theFacebookButton.setTitle("Sign In With Facebook", for: UIControlState())
                 self.theSignUpButton.setTitle("Sign In", for: UIControlState())
                 self.theCreateAccountLabel.alpha = 0
-                self.theTermsOfService.setTitle("Forgot Password?", for: UIControlState())
+                self.theTermsOfService.setTitle(SignUpConstants.forgotPasswordTitle, for: UIControlState())
                 self.theTermsOfService.setTitleColor(UIColor.white, for: UIControlState())
                 self.theTermsOfService.titleLabel?.font = UIFont(name:"HelveticaNeue", size: 12)
                 self.view.layoutIfNeeded()
@@ -80,8 +84,20 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
         })
     }
     
-    @IBAction func termsOfServiceButtonPressed(_ sender: AnyObject) {
-       UIApplication.shared.openURL(URL(string: "https://shufflesprivacy.wordpress.com/shuffles-terms-of-service/")!)
+    @IBAction func termsOfServiceButtonPressed(_ sender: UIButton) {
+        if sender.currentTitle == SignUpConstants.forgotPasswordTitle {
+            let alertView = SCLAlertView()
+            let textField = alertView.addTextField("Enter your email")
+            textField.autocapitalizationType = .none
+            alertView.addButton("Send", action: {
+                if let currentText = textField.text {
+                    self.dataStore.performPasswordRecovery(email: currentText)
+                }
+            })
+            alertView.showEdit("Forgot Password", subTitle: "We'll send you a password reset email", closeButtonTitle: "Cancel")
+        } else if sender.currentTitle == SignUpConstants.termsOfServiceTitle {
+            UIApplication.shared.openURL(URL(string: "https://shufflesprivacy.wordpress.com/shuffles-terms-of-service/")!)
+        }
     }
     
     @IBAction func privacyPolicyButtonPressed(_ sender: UIButton) {
@@ -143,6 +159,10 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
                         self.theCreateAccountLabel.alpha = 1
                     }
                 }
+                
+                let alpha: CGFloat = hidden ? 0: 1
+                self.thePrivacyPolicyButton.alpha = alpha
+                self.theAndLabel.alpha = alpha
             })
     }
     
