@@ -13,6 +13,8 @@ class BulletPointView: UIView {
         static let bulletPointColor : UIColor = CustomColors.JellyTeal
         static let bulletPointDiameter : CGFloat = 10
         static let circleViewLeadingOffset : CGFloat = 20
+        static let bulletPointTextOffset: CGFloat = 10
+        static let textFont: UIFont = UIFont.systemFont(ofSize: 15)
     }
     
     var theCircleView : CircleView!
@@ -41,14 +43,16 @@ class BulletPointView: UIView {
     
     func textLabelSetup(_ text: String) {
         theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.greatestFiniteMagnitude)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
+        self.backgroundColor = UIColor.red
         theTextLabel.text = text
+        theTextLabel.font = BulletPointConstants.textFont
         theTextLabel.textColor = CustomColors.SilverChaliceGrey
         theTextLabel.numberOfLines = 0 //so the textLabel can grow to multiple lines
         theTextLabel.sizeToFit() //want the label's size to fit, so then we can calculate the intrinsicContentSize
         self.addSubview(theTextLabel)
         theTextLabel.snp.makeConstraints { (make) in
             make.firstBaseline.equalTo(theCircleView.snp.bottom)
-            make.leading.equalTo(theCircleView.snp.trailing) //if I add an offset, have to put offset in calculateTextLabelWidth
+            make.leading.equalTo(theCircleView.snp.trailing).offset(BulletPointConstants.bulletPointTextOffset) //if I add an offset, have to put offset in calculateTextLabelWidth
             make.trailing.equalTo(self)
             make.bottom.equalTo(self) //this makes the superview know its own height based upon how much the label has grown
         }
@@ -56,7 +60,7 @@ class BulletPointView: UIView {
     
     //StackViews calculate .FillProportionally based upon intrinsicContentSize, and normally, UIViews don't have intrinsicContentSize, but we override that.
     override var intrinsicContentSize : CGSize {
-        //TODO: technically, the textLable height is offset a little bit from the top, so we need to factor that into the total height, although, stackViews do a proportional calculation to calculate how things stretch, so maybe not necessary, since theTextLabelHeight is the only changing variable
+        //TODO: technically, the textLabel height is offset a little bit from the top, so we need to factor that into the total height, although, stackViews do a proportional calculation to calculate how things stretch, so maybe not necessary, since theTextLabelHeight is the only changing variable
         let textLabelHeight = theTextLabel.frame.height
         return CGSize(width: 0, height: textLabelHeight)
     }
@@ -64,7 +68,8 @@ class BulletPointView: UIView {
     func calculateTextLabelWidth() -> CGFloat {
         let superViewWidth = self.frame.width
         let circleViewWidth = theCircleView.frame.width
-        let textLabelWidth = superViewWidth - BulletPointConstants.circleViewLeadingOffset - circleViewWidth
+        //TODO: couldn't I just do textPoint size, maybe not because I need to know number of lines?
+        let textLabelWidth = superViewWidth - BulletPointConstants.circleViewLeadingOffset - circleViewWidth - BulletPointConstants.bulletPointTextOffset
         return textLabelWidth
     }
 

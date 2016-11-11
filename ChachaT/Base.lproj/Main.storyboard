@@ -233,7 +233,7 @@
                                                 <rect key="frame" x="0.0" y="661" width="600" height="78"/>
                                                 <subviews>
                                                     <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="Top Line" translatesAutoresizingMaskIntoConstraints="NO" id="Tck-Dg-N2s" userLabel="line">
-                                                        <rect key="frame" x="0.0" y="77" width="600" height="1"/>
+                                                        <rect key="frame" x="0.0" y="78" width="600" height="1"/>
                                                         <constraints>
                                                             <constraint firstAttribute="height" constant="1" id="DIf-9f-ind"/>
                                                         </constraints>
@@ -244,7 +244,7 @@
                                                 </subviews>
                                                 <constraints>
                                                     <constraint firstItem="aEI-ic-YIN" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="top" id="AyM-W7-gf3"/>
-                                                    <constraint firstItem="Tck-Dg-N2s" firstAttribute="top" secondItem="aEI-ic-YIN" secondAttribute="bottom" constant="-1" id="EO1-qZ-cW7"/>
+                                                    <constraint firstItem="Tck-Dg-N2s" firstAttribute="top" secondItem="aEI-ic-YIN" secondAttribute="bottom" id="EO1-qZ-cW7"/>
                                                     <constraint firstItem="aEI-ic-YIN" firstAttribute="leading" secondItem="dCo-OJ-te4" secondAttribute="leading" id="UhA-Rf-CjT"/>
                                                     <constraint firstAttribute="bottom" secondItem="aEI-ic-YIN" secondAttribute="bottom" id="c3e-80-8e3"/>
                                                     <constraint firstAttribute="trailing" secondItem="aEI-ic-YIN" secondAttribute="trailing" id="eE8-pn-k7E"/>
