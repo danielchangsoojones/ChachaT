@@ -43,7 +43,6 @@ class BulletPointView: UIView {
     
     func textLabelSetup(_ text: String) {
         theTextLabel = UILabel(frame: CGRect(x: 0, y: 0, w: calculateTextLabelWidth(), h: CGFloat.greatestFiniteMagnitude)) //setting the width and height, so we can calculate how tall the label will be for the intrinsicContentSize()
-        self.backgroundColor = UIColor.red
         theTextLabel.text = text
         theTextLabel.font = BulletPointConstants.textFont
         theTextLabel.textColor = CustomColors.SilverChaliceGrey
