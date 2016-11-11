@@ -68,6 +68,11 @@ class BackgroundAnimationViewController: UIViewController {
             dataStore.loadSwipeArray()
         }
         anonymousUserSetup()
+        
+        
+        
+        
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

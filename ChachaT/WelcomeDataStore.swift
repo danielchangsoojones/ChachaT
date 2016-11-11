@@ -26,6 +26,7 @@ extension WelcomeDataStore {
         let newUser = User()
         newUser.username = email
         newUser.password = password
+        newUser.email = email
         delegate?.toggleSpinner(hide: false)
         
         newUser.signUpInBackground { (success, error: Error?) -> Void in
@@ -179,6 +180,23 @@ extension WelcomeDataStore {
                     print("Failed to update profile image from facebook: \(response.result.error)")
                 }
             })
+        }
+    }
+}
+
+extension WelcomeDataStore {
+    func performPasswordRecovery(email: String) {
+        if email.isEmail {
+            User.requestPasswordResetForEmail(inBackground: email, block: { (success, error) in
+                if success {
+                    SCLAlertView().showSuccess("Email Sent", subTitle: "The email could take a couple of minutes to send", closeButtonTitle: "Okay")
+                } else if let _ = error {
+                    SCLAlertView().showInfo("Error", subTitle: "No matching email was found", closeButtonTitle: "Okay")
+                }
+            })
+        } else {
+            //not an email for username, so logged in via facebook
+            print("not an email for username, so logged in via facebook")
         }
     }
 }
