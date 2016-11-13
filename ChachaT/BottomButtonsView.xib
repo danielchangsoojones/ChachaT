@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="11542" systemVersion="16B2555" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="BottomButtonsView" customModule="Shuffles" customModuleProvider="target">
+            <connections>
+                <outlet property="theApproveButton" destination="ceF-mU-vSJ" id="Zjh-an-oJQ"/>
+                <outlet property="theButtonStackView" destination="ocy-Yn-fWp" id="Sc8-FP-OlD"/>
+                <outlet property="theNopeButton" destination="38E-zG-Xg6" id="Lvv-GE-Hya"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="319" height="90"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="ocy-Yn-fWp" userLabel="Button Stack View">
+                    <rect key="frame" x="0.0" y="0.0" width="319" height="90"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="38E-zG-Xg6" userLabel="Skip Button">
+                            <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="59" id="2pS-Nh-YsO"/>
+                                <constraint firstAttribute="width" constant="90" id="C0W-jH-uOH"/>
+                                <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="59" id="gHu-CU-Aei"/>
+                                <constraint firstAttribute="height" constant="79" id="nGg-tE-Ema"/>
+                                <constraint firstAttribute="height" constant="90" id="ovi-AR-hXu"/>
+                                <constraint firstAttribute="width" constant="81" id="vlI-XP-ZfD"/>
+                            </constraints>
+                            <state key="normal" image="Skip Button"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="2pS-Nh-YsO"/>
+                                    <exclude reference="gHu-CU-Aei"/>
+                                    <exclude reference="nGg-tE-Ema"/>
+                                    <exclude reference="vlI-XP-ZfD"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="theNopeButton:" destination="-1" eventType="touchUpInside" id="iQP-aM-z37"/>
+                                <action selector="theNopeButtonPressed:" destination="-1" eventType="touchUpInside" id="u2r-pH-uR5"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ceF-mU-vSJ">
+                            <rect key="frame" x="229" y="0.0" width="90" height="90"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="59" id="Whj-Eg-2EC"/>
+                                <constraint firstAttribute="height" constant="59" id="XgN-TV-XUs"/>
+                            </constraints>
+                            <state key="normal" image="Approve Button"/>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="Whj-Eg-2EC"/>
+                                    <exclude reference="XgN-TV-XUs"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="theApproveButtonPressed:" destination="-1" eventType="touchUpInside" id="6KP-XR-Cb8"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <constraints>
+                        <constraint firstItem="ceF-mU-vSJ" firstAttribute="height" secondItem="38E-zG-Xg6" secondAttribute="height" id="3ni-im-2bi"/>
+                        <constraint firstItem="ceF-mU-vSJ" firstAttribute="width" secondItem="38E-zG-Xg6" secondAttribute="width" id="hBr-OT-X6O"/>
+                    </constraints>
+                </stackView>
+            </subviews>
+            <constraints>
+                <constraint firstAttribute="trailing" secondItem="ocy-Yn-fWp" secondAttribute="trailing" id="Bpd-uv-ctz"/>
+                <constraint firstAttribute="bottom" secondItem="ocy-Yn-fWp" secondAttribute="bottom" id="Oy5-LW-Ney"/>
+                <constraint firstItem="ocy-Yn-fWp" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" id="bj2-Me-dwA"/>
+                <constraint firstItem="ocy-Yn-fWp" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" id="vng-iz-YXG"/>
+            </constraints>
+            <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
+            <point key="canvasLocation" x="-272.5" y="-282"/>
+        </view>
+    </objects>
+    <resources>
+        <image name="Approve Button" width="63" height="63"/>
+        <image name="Skip Button" width="63" height="63"/>
+    </resources>
+</document>

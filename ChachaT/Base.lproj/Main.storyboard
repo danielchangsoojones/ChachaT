@@ -25,7 +25,7 @@
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <subviews>
                                     <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="LoadingCircle" translatesAutoresizingMaskIntoConstraints="NO" id="Uj8-Kh-nVl">
-                                        <rect key="frame" x="148.5" y="294.5" width="78" height="78"/>
+                                        <rect key="frame" x="149" y="295" width="78" height="78"/>
                                         <constraints>
                                             <constraint firstAttribute="width" constant="78" id="Qim-2a-oEF"/>
                                             <constraint firstAttribute="height" constant="78" id="SsN-CR-kKR"/>
@@ -39,56 +39,16 @@
                             </view>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="32I-zm-XDi" customClass="CustomKolodaView" customModule="Shuffles" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                            </view>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="equalSpacing" alignment="center" translatesAutoresizingMaskIntoConstraints="NO" id="KXf-AU-SZT" userLabel="Button Stack View">
-                                <rect key="frame" x="97.5" y="572" width="180" height="90"/>
                                 <subviews>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ELM-4C-MkM" userLabel="Skip Button">
-                                        <rect key="frame" x="0.0" y="0.0" width="90" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="81" id="09h-A4-aYK"/>
-                                            <constraint firstAttribute="height" constant="90" id="FEl-lt-Dfe"/>
-                                            <constraint firstAttribute="height" relation="greaterThanOrEqual" constant="59" id="JJj-fO-nE6"/>
-                                            <constraint firstAttribute="width" constant="90" id="iLT-6i-PoO"/>
-                                            <constraint firstAttribute="width" relation="greaterThanOrEqual" constant="59" id="tW9-gA-9Bi"/>
-                                            <constraint firstAttribute="height" constant="79" id="zEg-7j-bgk"/>
-                                        </constraints>
-                                        <state key="normal" image="Skip Button"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="09h-A4-aYK"/>
-                                                <exclude reference="JJj-fO-nE6"/>
-                                                <exclude reference="tW9-gA-9Bi"/>
-                                                <exclude reference="zEg-7j-bgk"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="skipCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="XQ7-gb-Ksq"/>
-                                        </connections>
-                                    </button>
-                                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="qHW-wn-jru">
-                                        <rect key="frame" x="90" y="0.0" width="90" height="90"/>
-                                        <constraints>
-                                            <constraint firstAttribute="width" constant="59" id="ZO6-Mg-g80"/>
-                                            <constraint firstAttribute="height" constant="59" id="ju2-OL-HGr"/>
-                                        </constraints>
-                                        <state key="normal" image="Approve Button"/>
-                                        <variation key="default">
-                                            <mask key="constraints">
-                                                <exclude reference="ZO6-Mg-g80"/>
-                                                <exclude reference="ju2-OL-HGr"/>
-                                            </mask>
-                                        </variation>
-                                        <connections>
-                                            <action selector="approveCard:" destination="BYZ-38-t0r" eventType="touchUpInside" id="X1M-a9-leh"/>
-                                        </connections>
-                                    </button>
+                                    <view contentMode="scaleToFill" placeholderIntrinsicWidth="191" placeholderIntrinsicHeight="65" translatesAutoresizingMaskIntoConstraints="NO" id="3Dh-hH-PJE" customClass="BottomButtonsView" customModule="Shuffles" customModuleProvider="target">
+                                        <rect key="frame" x="92" y="602" width="191" height="65"/>
+                                    </view>
                                 </subviews>
                                 <constraints>
-                                    <constraint firstItem="qHW-wn-jru" firstAttribute="height" secondItem="ELM-4C-MkM" secondAttribute="height" id="qEM-mE-4q8"/>
-                                    <constraint firstItem="qHW-wn-jru" firstAttribute="width" secondItem="ELM-4C-MkM" secondAttribute="width" id="xrD-z5-lY3"/>
+                                    <constraint firstItem="3Dh-hH-PJE" firstAttribute="centerX" secondItem="32I-zm-XDi" secondAttribute="centerX" id="eHw-rS-uSq"/>
+                                    <constraint firstAttribute="bottom" secondItem="3Dh-hH-PJE" secondAttribute="bottom" id="hOP-cp-rdh"/>
                                 </constraints>
-                            </stackView>
+                            </view>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
@@ -100,25 +60,15 @@
                             <constraint firstItem="32I-zm-XDi" firstAttribute="leading" secondItem="8bC-Xf-vdC" secondAttribute="leading" id="JuR-HK-vJm"/>
                             <constraint firstItem="dsh-Hh-R5l" firstAttribute="top" secondItem="8bC-Xf-vdC" secondAttribute="top" id="WzL-Dr-pF6"/>
                             <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="dsh-Hh-R5l" secondAttribute="bottom" id="hz3-7g-Zfr"/>
-                            <constraint firstItem="KXf-AU-SZT" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="k3R-LS-UPU"/>
-                            <constraint firstItem="KXf-AU-SZT" firstAttribute="leading" relation="lessThanOrEqual" secondItem="8bC-Xf-vdC" secondAttribute="leading" constant="30" id="mox-SF-ess"/>
-                            <constraint firstItem="wfy-db-euE" firstAttribute="top" secondItem="KXf-AU-SZT" secondAttribute="bottom" constant="5" id="yBv-Xz-ntc"/>
                         </constraints>
-                        <variation key="default">
-                            <mask key="constraints">
-                                <exclude reference="mox-SF-ess"/>
-                            </mask>
-                        </variation>
                     </view>
                     <navigationItem key="navigationItem" id="YI6-Zh-KAq"/>
                     <connections>
                         <outlet property="kolodaView" destination="32I-zm-XDi" id="QB3-Nj-tjg"/>
-                        <outlet property="theApproveButton" destination="qHW-wn-jru" id="IMq-4O-CMW"/>
                         <outlet property="theBackgroundColorView" destination="dsh-Hh-R5l" id="HgS-Re-cUg"/>
-                        <outlet property="theBottomButtonStackView" destination="KXf-AU-SZT" id="P0V-zy-3cs"/>
+                        <outlet property="theBottomButtonsView" destination="3Dh-hH-PJE" id="WPa-7Q-AGs"/>
                         <outlet property="theChachaLoadingImage" destination="Uj8-Kh-nVl" id="ds1-7D-AOs"/>
-                        <outlet property="theSkipButton" destination="ELM-4C-MkM" id="AJ6-Jq-9RP"/>
-                        <outlet property="theStackViewBottomConstraint" destination="yBv-Xz-ntc" id="Vdi-Vf-HqK"/>
+                        <outlet property="theStackViewBottomConstraint" destination="hOP-cp-rdh" id="fx7-wv-Jba"/>
                         <segue destination="daK-C5-wmi" kind="custom" identifier="CustomBackgroundAnimationToSearchSegue" customClass="CustomBackgroundAnimationToSearchSegue" customModule="Shuffles" customModuleProvider="target" id="2hX-Ts-O6M"/>
                         <segue destination="UlM-dd-WqK" kind="show" identifier="BackgroundAnimationPageToAddingTagsPageSegue" id="tx2-If-MRg"/>
                         <segue destination="xAM-nQ-U75" kind="show" identifier="BackgroundAnimationToMatchesSegue" id="6Hf-IT-c8a"/>
@@ -128,7 +78,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1151.5" y="387.5"/>
+            <point key="canvasLocation" x="1151.2" y="387.25637181409297"/>
         </scene>
         <!--ProfileIndexViewController-->
         <scene sceneID="aXI-jz-yB4">
@@ -380,10 +330,8 @@
         </scene>
     </scenes>
     <resources>
-        <image name="Approve Button" width="63" height="63"/>
         <image name="LoadingCircle" width="78" height="78"/>
         <image name="Report User Button" width="5" height="20"/>
-        <image name="Skip Button" width="63" height="63"/>
         <image name="Top Line" width="375" height="1"/>
     </resources>
 </document>

@@ -84,6 +84,8 @@
 		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
+		927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 927A61A21DD6B90F006DC59F /* BottomButtonsView.swift */; };
+		927A61A51DD6B965006DC59F /* BottomButtonsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 927A61A41DD6B965006DC59F /* BottomButtonsView.xib */; };
 		92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92857DCC1DA1C264001DB92C /* MatchNotificationViewController.swift */; };
 		92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92857DCE1DA2F9F2001DB92C /* Swipe.swift */; };
 		92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92857DD01DA310CB001DB92C /* ParseSwipe.swift */; };
@@ -223,6 +225,8 @@
 		9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDataStore.swift; sourceTree = "<group>"; };
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
+		927A61A21DD6B90F006DC59F /* BottomButtonsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomButtonsView.swift; sourceTree = "<group>"; };
+		927A61A41DD6B965006DC59F /* BottomButtonsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = BottomButtonsView.xib; sourceTree = "<group>"; };
 		92857DCB1DA0427D001DB92C /* ChachaT.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ChachaT.entitlements; sourceTree = "<group>"; };
 		92857DCC1DA1C264001DB92C /* MatchNotificationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchNotificationViewController.swift; sourceTree = "<group>"; };
 		92857DCE1DA2F9F2001DB92C /* Swipe.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Swipe.swift; sourceTree = "<group>"; };
@@ -610,6 +614,7 @@
 		9261083A1CE4EDC4009F3E86 /* subviews/xibs */ = {
 			isa = PBXGroup;
 			children = (
+				927A61A11DD6B8AE006DC59F /* Bottom Buttons */,
 				924139AD1DC67D9600C8B6AF /* Description Detail View */,
 				925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */,
 			);
@@ -741,6 +746,15 @@
 				9275FB931D7C715800D8131D /* AboutView.swift */,
 			);
 			name = AboutView;
+			sourceTree = "<group>";
+		};
+		927A61A11DD6B8AE006DC59F /* Bottom Buttons */ = {
+			isa = PBXGroup;
+			children = (
+				927A61A21DD6B90F006DC59F /* BottomButtonsView.swift */,
+				927A61A41DD6B965006DC59F /* BottomButtonsView.xib */,
+			);
+			name = "Bottom Buttons";
 			sourceTree = "<group>";
 		};
 		928761FF1D997027000EAED6 /* Data Models */ = {
@@ -1046,6 +1060,7 @@
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
 				9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */,
+				927A61A51DD6B965006DC59F /* BottomButtonsView.xib in Resources */,
 				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
@@ -1138,6 +1153,7 @@
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
+				927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,

@@ -31,9 +31,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var kolodaView: CustomKolodaView!
     @IBOutlet weak var theChachaLoadingImage: UIImageView!
     @IBOutlet weak var theBackgroundColorView: UIView!
-    @IBOutlet weak var theApproveButton: UIButton!
-    @IBOutlet weak var theSkipButton: UIButton!
-    @IBOutlet weak var theBottomButtonStackView: UIStackView!
+    @IBOutlet weak var theBottomButtonsView: BottomButtonsView!
     var fakeNavigationBar: FakeNavigationBarView!
     
     //constraint outlets
@@ -186,7 +184,7 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
     }
     
     func calculateKolodaViewCardHeight() -> (cardHeight: CGFloat, navigationAreaHeight: CGFloat) {
-        let bottomAreaHeight = theStackViewBottomConstraint.constant + theBottomButtonStackView.frame.height
+        let bottomAreaHeight = theStackViewBottomConstraint.constant + theBottomButtonsView.frame.height
         let cardOffsetFromBottomButtons : CGFloat = 0
         let navigationBarHeight = self.navigationController?.navigationBar.frame.size.height
         let statusBarHeight = UIApplication.shared.statusBarFrame.size.height

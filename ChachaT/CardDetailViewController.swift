@@ -12,6 +12,7 @@ import ParseUI
 import EFTools
 import SCLAlertView
 import TGLParallaxCarousel
+import EZSwiftExtensions
 
 public enum QuestionDetailState {
     case editingMode
@@ -94,7 +95,6 @@ class CardDetailViewController: UIViewController {
     
     func setNormalGUI() {
         dataStore.loadTags(user: userOfTheCard!)
-        self.view.layer.addSublayer(setBottomBlur(blurHeight: 100, color: CustomColors.JellyTeal))
         theBackButton.layer.cornerRadius = CardDetailConstants.backButtonCornerRadius
         theDescriptionDetailView.userOfTheCard = userOfTheCard
         let bulletPointViewWidth = theBulletPointsStackView.frame.width
@@ -107,11 +107,23 @@ class CardDetailViewController: UIViewController {
         if let factThree = userOfTheCard?.bulletPoint3 {
             bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
+        setBottomButtons()
     }
     
     func bulletPointSetup(_ text: String, width: CGFloat) {
         let bulletPointView = BulletPointView(text: text, width: width)
         theBulletPointsStackView.addArrangedSubview(bulletPointView)
+    }
+    
+    func setBottomButtons() {
+        //setting the height to the nopeButton's height because that is the height of the view
+        self.view.layer.addSublayer(setBottomBlur(blurHeight: ez.screenHeight * 0.23, color: CustomColors.JellyTeal))
+        let bottomButtonsView = BottomButtonsView(addMessageButton: true)
+        self.view.addSubview(bottomButtonsView)
+        bottomButtonsView.snp.makeConstraints { (make) in
+            make.bottom.equalToSuperview()
+            make.centerX.equalToSuperview()
+        }
     }
 }
 
