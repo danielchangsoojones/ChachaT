@@ -118,7 +118,7 @@ class CardDetailViewController: UIViewController {
     func setBottomButtons() {
         //setting the height to the nopeButton's height because that is the height of the view
         self.view.layer.addSublayer(setBottomBlur(blurHeight: ez.screenHeight * 0.23, color: CustomColors.JellyTeal))
-        let bottomButtonsView = BottomButtonsView(addMessageButton: true)
+        let bottomButtonsView = BottomButtonsView(addMessageButton: true, delegate: self)
         self.view.addSubview(bottomButtonsView)
         bottomButtonsView.snp.makeConstraints { (make) in
             make.bottom.equalToSuperview()
@@ -173,6 +173,20 @@ extension CardDetailViewController {
         let storyboard = UIStoryboard(name: "Profile", bundle: nil)
         let editProfileVC = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
         navigationController?.pushViewController(editProfileVC, animated: true)
+    }
+}
+
+extension CardDetailViewController: BottomButtonsDelegate {
+    func nopeButtonPressed() {
+        <#code#>
+    }
+    
+    func approveButtonPressed() {
+        <#code#>
+    }
+    
+    func messageButtonPressed() {
+        <#code#>
     }
 }
 

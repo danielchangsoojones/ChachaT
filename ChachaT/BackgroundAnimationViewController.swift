@@ -45,14 +45,6 @@ class BackgroundAnimationViewController: UIViewController {
     
     let locationManager = CLLocationManager()
     
-    @IBAction func skipCard(_ sender: AnyObject) {
-        kolodaView.swipe(.left)
-    }
-    
-    @IBAction func approveCard(_ sender: UIButton) {
-        kolodaView.swipe(.right)
-    }
-    
     //MARK: Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -66,6 +58,7 @@ class BackgroundAnimationViewController: UIViewController {
             dataStore.loadSwipeArray()
         }
         anonymousUserSetup()
+        theBottomButtonsView.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -115,6 +108,16 @@ class BackgroundAnimationViewController: UIViewController {
     func bottomBlurAreaSetup() {
         let blur = setBottomBlur(blurHeight: ez.screenHeight * 0.33, color: CustomColors.JellyTeal)
         self.view.layer.insertSublayer(blur, at: 0)
+    }
+}
+
+extension BackgroundAnimationViewController: BottomButtonsDelegate {
+    func approveButtonPressed() {
+        kolodaView.swipe(.right)
+    }
+    
+    func nopeButtonPressed() {
+        kolodaView.swipe(.left)
     }
 }
 

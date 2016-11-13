@@ -8,6 +8,12 @@
 
 import Foundation
 
+@objc protocol BottomButtonsDelegate {
+    func nopeButtonPressed()
+    func approveButtonPressed()
+    @objc optional func messageButtonPressed()
+}
+
 class BottomButtonsView: UIView {
     fileprivate var view: UIView!
     
@@ -15,18 +21,24 @@ class BottomButtonsView: UIView {
     @IBOutlet weak var theNopeButton: UIButton!
     @IBOutlet weak var theApproveButton: UIButton!
     
+    var delegate: BottomButtonsDelegate?
+    
     @IBAction func theNopeButtonPressed(_ sender: UIButton) {
+        delegate?.nopeButtonPressed()
     }
     
     @IBAction func theApproveButtonPressed(_ sender: UIButton) {
+        delegate?.approveButtonPressed()
     }
     
+    func messageButtonPressed(sender: UIButton) {
+        delegate?.messageButtonPressed!()
+    }
     
-    
-    
-    init(addMessageButton: Bool) {
+    init(addMessageButton: Bool, delegate: BottomButtonsDelegate) {
         super.init(frame: CGRect.zero)
         xibSetup()
+        self.delegate = delegate
         if addMessageButton {
             insertMessageButton()
         }
@@ -40,6 +52,7 @@ class BottomButtonsView: UIView {
     func insertMessageButton() {
         let button = UIButton()
         button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        button.addTarget(self, action: #selector(messageButtonPressed(sender:)), for: .touchUpInside)
         theButtonStackView.insertArrangedSubview(button, at: 1)
         invertApproveButton()
     }
