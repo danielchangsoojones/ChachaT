@@ -19,6 +19,8 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
+		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
+		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -134,6 +136,7 @@
 		92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */; };
 		92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */; };
 		92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */; };
+		92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92CF5AF51DDA514E0039ABE8 /* CardSendMessageDataStore.swift */; };
 		92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */; };
 		92EB3CCF1DCA5BCD004E8797 /* BottomUserScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */; };
 		92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */; };
@@ -157,6 +160,8 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
+		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -276,6 +281,7 @@
 		92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTag.swift; sourceTree = "<group>"; };
 		92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownCategory.swift; sourceTree = "<group>"; };
+		92CF5AF51DDA514E0039ABE8 /* CardSendMessageDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageDataStore.swift; sourceTree = "<group>"; };
 		92E36F4B1DB78A8F000F2D22 /* SuperTagDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperTagDataStore.swift; sourceTree = "<group>"; };
 		92EB3CCE1DCA5BCD004E8797 /* BottomUserScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BottomUserScrollView.swift; sourceTree = "<group>"; };
 		92EB3CD11DCA60DD004E8797 /* UserCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCollectionViewCell.swift; sourceTree = "<group>"; };
@@ -406,6 +412,24 @@
 				922C89921D4C460200DE1373 /* CustomTagsSearchBar.swift */,
 			);
 			name = "Search Area";
+			sourceTree = "<group>";
+		};
+		9222E9C21DDA137400196433 /* Card Message */ = {
+			isa = PBXGroup;
+			children = (
+				92CF5AF41DDA512D0039ABE8 /* Data Model */,
+				9222E9C31DDA139C00196433 /* Subviews */,
+				9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */,
+			);
+			name = "Card Message";
+			sourceTree = "<group>";
+		};
+		9222E9C31DDA139C00196433 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				9222E9C41DDA140A00196433 /* MessageSalutationView.swift */,
+			);
+			name = Subviews;
 			sourceTree = "<group>";
 		};
 		922C898F1D4C080F00DE1373 /* Custom Segues */ = {
@@ -605,6 +629,7 @@
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				929BF03B1DCF9C240099F3AB /* Empty State */,
+				9222E9C21DDA137400196433 /* Card Message */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 			);
@@ -965,6 +990,14 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
+		92CF5AF41DDA512D0039ABE8 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				92CF5AF51DDA514E0039ABE8 /* CardSendMessageDataStore.swift */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
 		92EB3CCD1DCA5BA3004E8797 /* Bottom User Area */ = {
 			isa = PBXGroup;
 			children = (
@@ -1185,12 +1218,14 @@
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
+				9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
 				92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
+				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
@@ -1225,6 +1260,7 @@
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
+				9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */,
 				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,
 				928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */,

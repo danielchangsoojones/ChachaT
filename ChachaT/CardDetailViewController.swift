@@ -188,7 +188,7 @@ extension CardDetailViewController: BottomButtonsDelegate {
     }
     
     func messageButtonPressed() {
-        print("message button pressed")
+        performSegue(withIdentifier: SegueIdentifier.CardDetailToSendMessageSegue.rawValue, sender: nil)
     }
 }
 
@@ -209,5 +209,20 @@ extension CardDetailViewController: MagicMoveable {
     var magicViews: [UIView] {
         //TODO: not sure how good this animation is looking
         return [theProfileImageCarouselView]
+    }
+}
+
+extension CardDetailViewController: SegueHandlerType {
+    enum SegueIdentifier: String {
+        // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
+        case CardDetailToSendMessageSegue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifierForSegue(segue) {
+        case .CardDetailToSendMessageSegue:
+            let destinationVC = segue.destination as! CardSendMessageViewController
+            destinationVC.userToSend = userOfTheCard
+        }
     }
 }
