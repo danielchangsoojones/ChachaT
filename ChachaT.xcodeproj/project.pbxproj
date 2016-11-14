@@ -19,6 +19,9 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
+		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
+		9222E9C71DDA18FE00196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C61DDA18FE00196433 /* CardSendMessageViewController.swift */; };
+		9222E9C91DDA1B0A00196433 /* CardSendMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C81DDA1B0A00196433 /* CardSendMessageView.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -157,6 +160,9 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
+		9222E9C61DDA18FE00196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
+		9222E9C81DDA1B0A00196433 /* CardSendMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageView.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -408,6 +414,24 @@
 			name = "Search Area";
 			sourceTree = "<group>";
 		};
+		9222E9C21DDA137400196433 /* Card Message */ = {
+			isa = PBXGroup;
+			children = (
+				9222E9C31DDA139C00196433 /* Subviews */,
+				9222E9C61DDA18FE00196433 /* CardSendMessageViewController.swift */,
+				9222E9C81DDA1B0A00196433 /* CardSendMessageView.swift */,
+			);
+			name = "Card Message";
+			sourceTree = "<group>";
+		};
+		9222E9C31DDA139C00196433 /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				9222E9C41DDA140A00196433 /* MessageSalutationView.swift */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		922C898F1D4C080F00DE1373 /* Custom Segues */ = {
 			isa = PBXGroup;
 			children = (
@@ -605,6 +629,7 @@
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				929BF03B1DCF9C240099F3AB /* Empty State */,
+				9222E9C21DDA137400196433 /* Card Message */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 			);
@@ -1185,6 +1210,7 @@
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
+				9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
@@ -1217,6 +1243,7 @@
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
+				9222E9C91DDA1B0A00196433 /* CardSendMessageView.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
@@ -1225,6 +1252,7 @@
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
+				9222E9C71DDA18FE00196433 /* CardSendMessageViewController.swift in Sources */,
 				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,
 				920BF8251D3FF63A00104842 /* SpecialtyTagView.swift in Sources */,
 				928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */,
