@@ -55,9 +55,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
 //        
-//                    let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        
-//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+//                    let initialViewController = storyboard.instantiateViewController(withIdentifier: "CardSendMessageViewController") as! CardSendMessageViewController
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()
