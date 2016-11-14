@@ -12,6 +12,7 @@ class Swipe {
     var isMatch: Bool = false
     var otherUserApproval: Bool = false
     var currentUserApproval: Bool = false
+    var message: String?
     var otherUser: User
     
     init(otherUser: User, otherUserApproval: Bool) {

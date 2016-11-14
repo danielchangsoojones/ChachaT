@@ -43,7 +43,6 @@
                                 </mask>
                             </variation>
                             <connections>
-                                <action selector="theNopeButton:" destination="-1" eventType="touchUpInside" id="iQP-aM-z37"/>
                                 <action selector="theNopeButtonPressed:" destination="-1" eventType="touchUpInside" id="u2r-pH-uR5"/>
                             </connections>
                         </button>

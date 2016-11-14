@@ -255,6 +255,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         cardDetailVC.userOfTheCard = swipeArray[index].otherUser
+        cardDetailVC.delegate = self
         theTappedKolodaIndex = index
         
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)

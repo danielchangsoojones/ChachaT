@@ -74,7 +74,7 @@ extension BottomUserScrollView: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         let currentSwipe = swipes[indexPath.row]
-        self.delegate?.segueToCardDetailPage(swipe: currentSwipe, tappedIndex: indexPath)
+        self.delegate?.segueToCardDetailPage(swipe: currentSwipe, tappedIndex: indexPath, bottomButtonsDelegate: self)
     }
 }
 
@@ -91,15 +91,26 @@ extension BottomUserScrollView: UICollectionViewDataSource {
     }
 }
 
+extension BottomUserScrollView: BottomButtonsDelegate {
+    func nopeButtonPressed() {
+        print("implement the nope button action")
+    }
+    
+    func approveButtonPressed() {
+        print("implement the nope button action")
+    }
+}
+
 protocol BottomUserScrollViewDelegate {
-    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath)
+    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath, bottomButtonsDelegate: BottomButtonsDelegate)
 }
 
 extension SearchTagsViewController: BottomUserScrollViewDelegate {
-    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath) {
+    func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath, bottomButtonsDelegate: BottomButtonsDelegate) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         theTappedCellIndex = tappedIndex
         cardDetailVC.userOfTheCard = swipe.otherUser
+        cardDetailVC.delegate = bottomButtonsDelegate
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
 }

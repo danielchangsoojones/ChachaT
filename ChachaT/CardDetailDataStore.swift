@@ -29,6 +29,10 @@ class CardDetailDataStore {
             }
         }
     }
+    
+    func sendMessage(text: String) {
+        
+    }
 }
 
 protocol CardDetailDataStoreDelegate {

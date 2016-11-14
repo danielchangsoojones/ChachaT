@@ -20,6 +20,8 @@ class ParseSwipe: PFObject, PFSubclassing {
     @NSManaged var userTwoApproval: Bool
     @NSManaged var hasUserOneSwiped: Bool
     @NSManaged var hasUserTwoSwiped: Bool
+    @NSManaged var userOneMessage: String?
+    @NSManaged var userTwoMessage: String?
     //returns the user in the match that is not the currentUser
     var otherUser: User {
         get {

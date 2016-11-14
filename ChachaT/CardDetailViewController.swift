@@ -14,12 +14,6 @@ import SCLAlertView
 import TGLParallaxCarousel
 import EZSwiftExtensions
 
-public enum QuestionDetailState {
-    case editingMode
-    case profileViewOnlyMode
-    case otherUserProfileViewOnlyMode
-}
-
 class CardDetailViewController: UIViewController {
     fileprivate struct CardDetailConstants {
         static let backButtonCornerRadius: CGFloat = 10
@@ -39,6 +33,8 @@ class CardDetailViewController: UIViewController {
     
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
     var dataStore: CardDetailDataStore!
+    
+    var delegate: BottomButtonsDelegate?
     
     var isViewingOwnProfile: Bool = false {
         didSet {
@@ -117,12 +113,14 @@ class CardDetailViewController: UIViewController {
     
     func setBottomButtons() {
         //setting the height to the nopeButton's height because that is the height of the view
-        self.view.layer.addSublayer(setBottomBlur(blurHeight: ez.screenHeight * 0.23, color: CustomColors.JellyTeal))
-        let bottomButtonsView = BottomButtonsView(addMessageButton: true, delegate: self)
-        self.view.addSubview(bottomButtonsView)
-        bottomButtonsView.snp.makeConstraints { (make) in
-            make.bottom.equalToSuperview()
-            make.centerX.equalToSuperview()
+        if delegate != nil {
+            self.view.layer.addSublayer(setBottomBlur(blurHeight: ez.screenHeight * 0.23, color: CustomColors.JellyTeal))
+            let bottomButtonsView = BottomButtonsView(addMessageButton: true, delegate: self)
+            self.view.addSubview(bottomButtonsView)
+            bottomButtonsView.snp.makeConstraints { (make) in
+                make.bottom.equalToSuperview()
+                make.centerX.equalToSuperview()
+            }
         }
     }
 }
@@ -178,15 +176,19 @@ extension CardDetailViewController {
 
 extension CardDetailViewController: BottomButtonsDelegate {
     func nopeButtonPressed() {
-        <#code#>
+        dismiss(animated: false, completion: {
+            self.delegate?.nopeButtonPressed()
+        })
     }
     
     func approveButtonPressed() {
-        <#code#>
+        dismiss(animated: false, completion: {
+            self.delegate?.approveButtonPressed()
+        })
     }
     
     func messageButtonPressed() {
-        <#code#>
+        print("message button pressed")
     }
 }
 
