@@ -9,7 +9,7 @@
 import Foundation
 
 protocol NewCardMessageDelegate {
-    func respondToMessage()
+    func respondToMessage(swipe: Swipe)
     func deleteMessage(swipe: Swipe)
 }
 
@@ -195,6 +195,7 @@ extension NewCardMessageView {
     }
     
     @objc fileprivate func respondButtonPressed(sender: UIButton) {
-        self.delegate?.respondToMessage()
+        self.removeFromSuperview()
+        self.delegate?.respondToMessage(swipe: swipe)
     }
 }

@@ -38,7 +38,7 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var swipeArray = [Swipe]()
-    fileprivate var dataStore : BackgroundAnimationDataStore!
+    var dataStore : BackgroundAnimationDataStore!
     var rippleHasNotBeenStarted = true
     var prePassedSwipeArray = false
     var theTappedKolodaIndex: Int = 0
@@ -222,8 +222,15 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
 }
 
 extension BackgroundAnimationViewController: NewCardMessageDelegate {
-    func respondToMessage() {
-        print("implement the respond to message logic")
+    func respondToMessage(swipe: Swipe) {
+        deleteMessage(swipe: swipe)
+        segueToChatVC(swipe: swipe)
+    }
+    
+    fileprivate func segueToChatVC(swipe: Swipe) {
+        let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
+        chatVC.starterSwipe = swipe
+        self.navigationController?.pushViewController(chatVC, animated: true)
     }
     
     func deleteMessage(swipe: Swipe) {

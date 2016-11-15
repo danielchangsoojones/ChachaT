@@ -26,10 +26,12 @@ class ChatViewController: JSQMessagesViewController {
     // Key - value collection of users
     var users = [String:User]()
     
+    //starter swipe is the swipe that start off the conversation if the chatVC was accessed via a swipe message
+    var starterSwipe: Swipe?
+    
     // chat bubbles for our conversation
     var outgoingBubbleImageView : JSQMessagesBubbleImage!
     var incomingBubbleImageView : JSQMessagesBubbleImage!
-    
     
     var dataStore: ChatDataStore!
     
@@ -241,6 +243,14 @@ class ChatViewController: JSQMessagesViewController {
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, header headerView: JSQMessagesLoadEarlierHeaderView!, didTapLoadEarlierMessagesButton sender: UIButton!) {
         print("tapped load earlier messages - need implementation")
     }
+    
+    override func finishReceivingMessage() {
+        if let swipe = starterSwipe {
+            //if the swipe exists, then we want to append the swipe message onto the last message, so the user can respond to it.
+            dataStore.setStarterSwipeMessage(swipe: swipe)
+        }
+        super.finishReceivingMessage()
+    }
 }
 
 // MARK: - UIImagePickerControllerDelegate
@@ -272,5 +282,14 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
             self.didSelectPhotoMessage(image: picture!)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+extension ChatViewController {
+    class func instantiate(otherUser: User) -> ChatViewController {
+        let chatVC = ChatViewController()
+        chatVC.currentUser = User.current()
+        chatVC.otherUser = otherUser
+        return chatVC
     }
 }

@@ -9,7 +9,7 @@
 import Foundation
 import Parse
 
-class SuperTagDataStore {
+class SuperTagDataStore: SuperParseSwipeDataStore {
     
     var superTagDelegate: TagDataStoreDelegate?
     

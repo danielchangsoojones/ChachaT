@@ -142,10 +142,10 @@ extension SearchTagsDataStore {
             if !previouslySwipedUsersObjectIds.contains(otherUserObjectId) {
                 //avoiding any duplicate users. This could happen if somehow two swipes existed for the same user. Which technically shouldn't happen anyway, but this is an extra safety precaution to make sure the currentUser doesn't see duplicate users.
                 previouslySwipedUsersObjectIds.append(otherUserObjectId)
-                let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+                let swipe = convertParseSwipeToSwipe(parseSwipe: parseSwipe)
                 swipesToPass.append(swipe)
             }
-        }
+        } 
         
         return (previouslySwipedUsersObjectIds, swipesToPass)
     }

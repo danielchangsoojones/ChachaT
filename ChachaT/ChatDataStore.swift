@@ -74,11 +74,11 @@ class ChatDataStore {
     }
     
     func getsenderID() -> String {
-        return User.current()!.objectId!
+        return User.current()!.objectId ?? ""
     }
     
     func getSenderDisplayName() -> String {
-        return User.current()!.fullName!
+        return User.current()!.fullName ?? ""
     }
     
     func getChatRoomName(_ otherUser: User) -> String {
@@ -126,12 +126,12 @@ class ChatDataStore {
     
     func sendMessage(_ text: String) {
         // When they hit send. Save their message.
-        let chat = createChat(chatText: text)
+        let chat = createChat(chatText: text, sender: User.current()!)
         saveChat(chat: chat)
     }
     
     func sendPhotoMessage(text: String, pictureFile: PFFile!) {
-        let chat = createChat(chatText: text)
+        let chat = createChat(chatText: text, sender: User.current()!)
         if let pictureFile = pictureFile {
             chat.chatText = ChatDataStoreConstants.pictureMessageText
             chat.picture = pictureFile
@@ -151,10 +151,10 @@ class ChatDataStore {
         }
     }
     
-    fileprivate func createChat(chatText: String) -> Chat {
+    fileprivate func createChat(chatText: String, sender: User) -> Chat {
         let chat = Chat()
         chat.chatRoom = self.chatRoomName
-        chat.sender = User.current()!
+        chat.sender = sender
         chat.senderObjectId = User.current()!.objectId! //for parseLiveQuery, we can't query pointer columns, because they haven't updated to this, so need to query the objectId
         chat.recieverObjectId = otherUser.objectId!
         chat.receiver = self.otherUser
@@ -184,6 +184,16 @@ class ChatDataStore {
             message = JSQMessage(senderId: user.objectId, senderDisplayName: user.fullName, date: chat.createdAt ?? Date(), text: chat.chatText)
         }
         delegate?.appendMessage(message: message)
+    }
+    
+    func setStarterSwipeMessage(swipe: Swipe) {
+        let otherUser = swipe.otherUser
+        if let swipeMessage = swipe.incomingMessage {
+            let chat = createChat(chatText: swipeMessage, sender: otherUser)
+            //saving this chat because until the receiving user opens the message, the swipeMessage is not added to a chat. So, this is when the swipeMessage actually has to get saved as a chat message.
+            chat.saveInBackground()
+            addMessage(chat: chat)
+        }
     }
 
 }
