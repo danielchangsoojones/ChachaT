@@ -208,7 +208,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = swipeArray[Int(index)].otherUser
-        cardView.addNewMessageView(delegate: self)
+        cardView.addNewMessageView(delegate: self, swipe: swipeArray[Int(index)])
         
         return cardView
     }

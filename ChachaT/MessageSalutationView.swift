@@ -12,6 +12,12 @@ class MessageSalutationView: UIView {
     
     fileprivate var theCircleImageView: CircularImageView!
     fileprivate var theSalutationLabel = UILabel()
+    fileprivate var theColonLabel = UILabel()
+    
+    init(name: String, profileImage: AnyObject?, beginsWithTo: Bool) {
+        super.init(frame: CGRect.zero)
+        setSalutationView(name: name, profileImage: profileImage, beginsWithTo: beginsWithTo)
+    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -22,6 +28,11 @@ class MessageSalutationView: UIView {
         salutationLabelSetup(name: name, beginsWithTo: beginsWithTo)
         circleImageSetup(profileImage: profileImage)
         colonSetup()
+    }
+    
+    func setTextColor(color: UIColor) {
+        theSalutationLabel.textColor = color
+        theColonLabel.textColor = color
     }
     
     fileprivate func salutationLabelSetup(name: String, beginsWithTo: Bool) {
@@ -47,11 +58,10 @@ class MessageSalutationView: UIView {
     }
     
     fileprivate func colonSetup() {
-        let label = UILabel()
-        label.text = ":"
-        label.textColor = CardMesageConstants.salutationTextColor
-        self.addSubview(label)
-        label.snp.makeConstraints { (make) in
+        theColonLabel.text = ":"
+        theColonLabel.textColor = CardMesageConstants.salutationTextColor
+        self.addSubview(theColonLabel)
+        theColonLabel.snp.makeConstraints { (make) in
             make.firstBaseline.equalTo(theSalutationLabel)
             make.leading.equalTo(theCircleImageView.snp.trailing)
             //set the trailing, so the superview knows how big to make itself.

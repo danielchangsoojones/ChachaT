@@ -38,8 +38,8 @@ class CustomCardView: OverlayView {
         self.layer.masksToBounds = true
     }
     
-    func addNewMessageView(delegate: NewCardMessageDelegate) {
-        let newCardMessageView = NewCardMessageView(frame: CGRect(x: 0, y: 0, w: self.frame.width, h: 100), delegate: delegate)
+    func addNewMessageView(delegate: NewCardMessageDelegate, swipe: Swipe) {
+        let newCardMessageView = NewCardMessageView(frame: CGRect(x: 0, y: 0, w: self.frame.width, h: 100), delegate: delegate, swipe: swipe)
         self.addSubview(newCardMessageView)
     }
 }
