@@ -208,6 +208,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = swipeArray[Int(index)].otherUser
+        cardView.addNewMessageView(delegate: self)
         
         return cardView
     }
@@ -215,6 +216,12 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
+    }
+}
+
+extension BackgroundAnimationViewController: NewCardMessageDelegate {
+    func respondToMessage() {
+        print("implement the respond to message logic")
     }
 }
 
