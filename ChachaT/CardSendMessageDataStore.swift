@@ -10,6 +10,7 @@ import Foundation
 import Parse
 
 class CardSendMessageDataStore {
+    //TODO: to get to this point I would have already pulled down a parseSwipe for that user, so should jsut be using those, instead of querying the database for it. 
     func sendCardMessage(text: String, otherUser: User) {
         
         let currentUserIsUserOneQuery = ParseSwipe.query()!

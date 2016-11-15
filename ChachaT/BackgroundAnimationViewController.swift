@@ -206,10 +206,12 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
         
+        let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
-        cardView.userOfTheCard = swipeArray[Int(index)].otherUser
-        cardView.addNewMessageView(delegate: self, swipe: swipeArray[Int(index)])
-        
+        cardView.userOfTheCard = currentSwipe.otherUser
+        if currentSwipe.incomingMessage != nil {
+            cardView.addNewMessageView(delegate: self, swipe: currentSwipe)
+        }
         return cardView
     }
     
@@ -222,6 +224,10 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
 extension BackgroundAnimationViewController: NewCardMessageDelegate {
     func respondToMessage() {
         print("implement the respond to message logic")
+    }
+    
+    func deleteMessage(swipe: Swipe) {
+        dataStore.deleteSwipeMessage(swipe: swipe)
     }
 }
 

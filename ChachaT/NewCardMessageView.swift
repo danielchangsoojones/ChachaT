@@ -10,6 +10,7 @@ import Foundation
 
 protocol NewCardMessageDelegate {
     func respondToMessage()
+    func deleteMessage(swipe: Swipe)
 }
 
 class NewCardMessageView: UIView {
@@ -112,7 +113,6 @@ extension NewCardMessageView {
                 self.frame = superview.bounds
             }
         }, completion: { (complete: Bool) in
-            self.gestureRecognizers?.removeAll()
             self.addShowMessageComponents()
         })
     }
@@ -154,24 +154,29 @@ extension NewCardMessageView {
             make.height.equalTo(50)
         }
         
-        let deleteButton = createBottomButton(title: "Delete")
-        let respondButton = createBottomButton(title: "Respond")
+        let deleteButton = createBottomButton(title: "Delete", selector: #selector(deleteButtonPressed(sender:)))
+        let respondButton = createBottomButton(title: "Respond", selector: #selector(respondButtonPressed(sender:)))
         theButtonStackView?.addArrangedSubview(deleteButton)
         theButtonStackView?.addArrangedSubview(respondButton)
     }
     
-    fileprivate func createBottomButton(title: String) -> UIButton {
+    fileprivate func createBottomButton(title: String, selector: Selector) -> UIButton {
         let button = UIButton()
         button.backgroundColor = UIColor.white
         button.setTitleColor(CustomColors.JellyTeal, for: .normal)
         button.setCornerRadius(radius: 15)
         button.setTitle(title, for: .normal)
+        
+        //using a tap recognizer instead of target for button, because a target still lets the tap reach through to the superview. So, when the user clicks the button then it would also click the kolodaCard, causing a segue to the card detail page. The tap gesture only allows one tap to reach the button.
+        let tap = UITapGestureRecognizer(target: self, action: selector)
+        button.addGestureRecognizer(tap)
+        
         return button
     }
     
     fileprivate func addTextView() {
         theMessageTextView = UITextView()
-        theMessageTextView?.text = "hiisidididlskd"
+        theMessageTextView?.text = swipe.incomingMessage ?? "Message failed to show..."
         theMessageTextView?.textColor = NewCardMessageConstants.textColor
         theMessageTextView?.isUserInteractionEnabled = false
         theMessageTextView?.backgroundColor = UIColor.clear
@@ -184,5 +189,12 @@ extension NewCardMessageView {
         })
     }
     
+    @objc fileprivate func deleteButtonPressed(sender: UIButton) {
+        self.removeFromSuperview()
+        self.delegate?.deleteMessage(swipe: swipe)
+    }
     
+    @objc fileprivate func respondButtonPressed(sender: UIButton) {
+        self.delegate?.respondToMessage()
+    }
 }

@@ -56,6 +56,13 @@ class BackgroundAnimationDataStore {
         }
     }
     
+    func deleteSwipeMessage(swipe: Swipe) {
+        if let parseSwipe = getCorrespondingParseSwipe(swipe: swipe) {
+            parseSwipe.otherUserMessage = nil
+            parseSwipe.saveInBackground()
+        }
+    }
+    
 }
 
 //load the swipes
@@ -83,6 +90,7 @@ extension BackgroundAnimationDataStore {
     func convertParseSwipeToSwipe(parseSwipe: ParseSwipe) -> Swipe {
         let otherUser = parseSwipe.otherUser
         let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+        swipe.incomingMessage = parseSwipe.otherUserMessage
         return swipe
     }
 }
