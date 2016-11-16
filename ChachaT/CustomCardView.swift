@@ -30,14 +30,17 @@ class CustomCardView: OverlayView {
         }
     }
     
-    var didEndDragging = false
-    
     override func awakeFromNib() {
         super.awakeFromNib()
         
         //Rounded corners
         self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
+    }
+    
+    func addNewMessageView(delegate: NewCardMessageDelegate) {
+        let newCardMessageView = NewCardMessageView(frame: CGRect(x: 0, y: 0, w: self.frame.width, h: 100), delegate: delegate)
+        self.addSubview(newCardMessageView)
     }
 }
 
