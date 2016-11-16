@@ -50,6 +50,7 @@
 		925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4151DDB669E00FF484C /* NewCardMessageView.swift */; };
 		925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */; };
 		925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */; };
+		925CF4201DDCF84B00FF484C /* NewCardMessageDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF41F1DDCF84B00FF484C /* NewCardMessageDataStore.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */; };
@@ -194,6 +195,7 @@
 		925CF4151DDB669E00FF484C /* NewCardMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageView.swift; sourceTree = "<group>"; };
 		925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseSwipeDataStore.swift; sourceTree = "<group>"; };
 		925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageViewController.swift; sourceTree = "<group>"; };
+		925CF41F1DDCF84B00FF484C /* NewCardMessageDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageDataStore.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -547,10 +549,19 @@
 		925CF41B1DDCC69E00FF484C /* View Card Message */ = {
 			isa = PBXGroup;
 			children = (
+				925CF41E1DDCF82C00FF484C /* Data Models */,
 				925CF4151DDB669E00FF484C /* NewCardMessageView.swift */,
 				925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */,
 			);
 			name = "View Card Message";
+			sourceTree = "<group>";
+		};
+		925CF41E1DDCF82C00FF484C /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				925CF41F1DDCF84B00FF484C /* NewCardMessageDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		925D0FCF1D6F634400DE20F9 /* Xibs */ = {
@@ -1180,6 +1191,7 @@
 			files = (
 				925884A11D903A58006D7C01 /* Tag.swift in Sources */,
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
+				925CF4201DDCF84B00FF484C /* NewCardMessageDataStore.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,

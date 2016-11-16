@@ -194,12 +194,10 @@ extension NewCardMessageView {
     }
     
     @objc fileprivate func deleteButtonPressed(sender: UIButton) {
-        self.removeFromSuperview()
         self.delegate?.deleteMessage(swipe: swipe)
     }
     
     @objc fileprivate func respondButtonPressed(sender: UIButton) {
-        self.removeFromSuperview()
         self.delegate?.respondToMessage(swipe: swipe)
     }
 }

@@ -214,17 +214,15 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = currentSwipe.otherUser
         
-        //Get rid of this line, just using for testing purposes.
-        addCardMessageChildVC(toView: cardView)
-        
         if currentSwipe.incomingMessage != nil {
-            addCardMessageChildVC(toView: cardView)
+            addCardMessageChildVC(toView: cardView, swipe: currentSwipe)
         }
         return cardView
     }
     
-    fileprivate func addCardMessageChildVC(toView: UIView) {
+    fileprivate func addCardMessageChildVC(toView: UIView, swipe: Swipe) {
         let childVC = NewCardMessageViewController()
+        childVC.swipe = swipe
         addAsChildViewController(childVC, toView: toView)
         //For some reason, I have to snap the child's view to the top of the koloda card. Not really sure why, but if I don't, then the messageView top is above the card. Must be because of how koloda Cards are presented or something. I'm not really sure.
         childVC.view.snp.makeConstraints { (make) in
@@ -238,28 +236,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     }
     
     
-}
-
-//TODO: we no longer need this to be the delegate of the NewCardMessageDelegate
-extension BackgroundAnimationViewController: NewCardMessageDelegate {
-    func showMessage() {
-        print("implement show message logic")
-    }
-
-    func respondToMessage(swipe: Swipe) {
-        deleteMessage(swipe: swipe)
-        segueToChatVC(swipe: swipe)
-    }
-    
-    fileprivate func segueToChatVC(swipe: Swipe) {
-        let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
-        chatVC.starterSwipe = swipe
-        self.navigationController?.pushViewController(chatVC, animated: true)
-    }
-    
-    func deleteMessage(swipe: Swipe) {
-        dataStore.deleteSwipeMessage(swipe: swipe)
-    }
 }
 
 extension BackgroundAnimationViewController: FrostedSidebarDelegate {
@@ -299,6 +275,8 @@ extension BackgroundAnimationViewController: MagicMoveable {
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         cardDetailVC.userOfTheCard = swipeArray[index].otherUser
+        //TODO: only really need to pass swipe array, and then can get otherUser from that
+        cardDetailVC.swipe = swipeArray[index]
         cardDetailVC.delegate = self
         theTappedKolodaIndex = index
         

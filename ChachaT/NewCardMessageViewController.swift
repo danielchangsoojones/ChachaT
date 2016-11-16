@@ -10,14 +10,16 @@ import UIKit
 import EZSwiftExtensions
 
 class NewCardMessageViewController: UIViewController {
-    
     var cardMessageView: NewCardMessageView!
     var swipe: Swipe!
+    
+    var dataStore: NewCardMessageDataStore = NewCardMessageDataStore()
 
     override func viewDidLoad() {
         super.viewDidLoad()
         setFrame(frame: CGRect(x: 0, y: 0, w: ez.screenWidth, h: 100))
         self.view.translatesAutoresizingMaskIntoConstraints = false //not sure what this does, but makes growing animation happen smoothly
+        self.view.backgroundColor = UIColor.blue
     }
 
     override func didReceiveMemoryWarning() {
@@ -31,8 +33,6 @@ class NewCardMessageViewController: UIViewController {
     }
     
     func addCardMessageView(frame: CGRect) {
-        //just having a test swipe
-        let swipe = Swipe(otherUser: User.current()!, otherUserApproval: false)
         cardMessageView = NewCardMessageView(frame: self.view.bounds, delegate: self, swipe: swipe)
         self.view.addSubview(cardMessageView)
         cardMessageView.snp.makeConstraints { (make) in
@@ -44,12 +44,20 @@ class NewCardMessageViewController: UIViewController {
 extension NewCardMessageViewController: NewCardMessageDelegate {
     func deleteMessage(swipe: Swipe) {
         removeSelf()
+        dataStore.deleteSwipeMessage(swipe: swipe)
         print("implement the delete message func")
     }
     
     func respondToMessage(swipe: Swipe) {
-        removeSelf()
+        deleteMessage(swipe: swipe)
         print("implement the respond func")
+    }
+    
+    fileprivate func segueToChatVC(swipe: Swipe) {
+        let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
+        chatVC.starterSwipe = swipe
+        //TODO: what if the navigation controller doesn't exist
+        self.parent?.navigationController?.pushViewController(chatVC, animated: true)
     }
     
     func showMessage() {

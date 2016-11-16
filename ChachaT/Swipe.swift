@@ -16,9 +16,13 @@ class Swipe {
     var outgoingMessage: String?
     var otherUser: User
     
-    init(otherUser: User, otherUserApproval: Bool) {
+    //the swipe's correlated server data model
+    var parseSwipe: ParseSwipe
+    
+    init(otherUser: User, otherUserApproval: Bool, parseSwipe: ParseSwipe) {
         self.otherUser = otherUser
         self.otherUserApproval = otherUserApproval
+        self.parseSwipe = parseSwipe
     }
     
     func approve() {

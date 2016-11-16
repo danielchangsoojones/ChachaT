@@ -56,13 +56,6 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
         }
     }
     
-    func deleteSwipeMessage(swipe: Swipe) {
-        if let parseSwipe = getCorrespondingParseSwipe(swipe: swipe) {
-            parseSwipe.otherUserMessage = nil
-            parseSwipe.saveInBackground()
-        }
-    }
-    
     func setParseSwipes(parseSwipes: [ParseSwipe]) {
         self.parseSwipes = parseSwipes
     }

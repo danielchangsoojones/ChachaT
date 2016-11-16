@@ -128,10 +128,10 @@ extension SearchTagsDataStore {
         var swipesToPass: [Swipe] = tuple.swipesToPass
         
         for user in users where !previouslySwipedUserObjectIds.contains(user.objectId ?? "") {
-            //If they don't have an existing swipe in the database, then we create a new one for them with the defualt starting values. This means that the currentUser has never swiped this user.
-            let newSwipe = Swipe(otherUser: user, otherUserApproval: false)
             //we create a parseSwipe, so we can have it when we want to check what parseSwipe to save.
             let newParseSwipe = ParseSwipe(otherUser: user, currentUserApproval: false)
+            //If they don't have an existing swipe in the database, then we create a new one for them with the defualt starting values. This means that the currentUser has never swiped this user.
+            let newSwipe = Swipe(otherUser: user, otherUserApproval: false, parseSwipe: newParseSwipe)
             self.parseSwipes.append(newParseSwipe)
             swipesToPass.append(newSwipe)
         }
