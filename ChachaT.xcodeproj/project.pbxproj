@@ -49,6 +49,7 @@
 		925884AB1D90809E006D7C01 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884AA1D90809E006D7C01 /* SliderView.swift */; };
 		925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4151DDB669E00FF484C /* NewCardMessageView.swift */; };
 		925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */; };
+		925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */; };
@@ -192,6 +193,7 @@
 		925884AA1D90809E006D7C01 /* SliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
 		925CF4151DDB669E00FF484C /* NewCardMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageView.swift; sourceTree = "<group>"; };
 		925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseSwipeDataStore.swift; sourceTree = "<group>"; };
+		925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageViewController.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -423,6 +425,7 @@
 			children = (
 				92CF5AF41DDA512D0039ABE8 /* Data Model */,
 				9222E9C31DDA139C00196433 /* Subviews */,
+				925CF41B1DDCC69E00FF484C /* View Card Message */,
 				9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */,
 			);
 			name = "Card Message";
@@ -432,7 +435,6 @@
 			isa = PBXGroup;
 			children = (
 				9222E9C41DDA140A00196433 /* MessageSalutationView.swift */,
-				925CF4151DDB669E00FF484C /* NewCardMessageView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -540,6 +542,15 @@
 				925884A81D907C48006D7C01 /* SliderDropDown.swift */,
 			);
 			name = Extensions;
+			sourceTree = "<group>";
+		};
+		925CF41B1DDCC69E00FF484C /* View Card Message */ = {
+			isa = PBXGroup;
+			children = (
+				925CF4151DDB669E00FF484C /* NewCardMessageView.swift */,
+				925CF41C1DDCC6CE00FF484C /* NewCardMessageViewController.swift */,
+			);
+			name = "View Card Message";
 			sourceTree = "<group>";
 		};
 		925D0FCF1D6F634400DE20F9 /* Xibs */ = {
@@ -1194,6 +1205,7 @@
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
 				927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
+				925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */,
 				92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
 				929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */,

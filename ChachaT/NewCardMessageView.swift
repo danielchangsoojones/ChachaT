@@ -11,6 +11,7 @@ import Foundation
 protocol NewCardMessageDelegate {
     func respondToMessage(swipe: Swipe)
     func deleteMessage(swipe: Swipe)
+    func showMessage()
 }
 
 class NewCardMessageView: UIView {
@@ -46,7 +47,7 @@ class NewCardMessageView: UIView {
     }
     
     func showMessage(sender: UITapGestureRecognizer? = nil) {
-        animateShowingMessage()
+        delegate?.showMessage()
     }
     
     fileprivate func addMessageImage() {
@@ -99,7 +100,7 @@ class NewCardMessageView: UIView {
 
 //showing the message
 extension NewCardMessageView {
-    fileprivate func animateShowingMessage() {
+    func animateShowingMessage() {
         UIView.animate(withDuration: 0.3, animations: {
             self.hideNewMessageComponents()
         }, completion: { (complete: Bool) in
@@ -113,6 +114,9 @@ extension NewCardMessageView {
                 self.frame = superview.bounds
             }
         }, completion: { (complete: Bool) in
+            self.superview!.snp.remakeConstraints({ (make) in
+                make.edges.equalToSuperview()
+            })
             self.addShowMessageComponents()
         })
     }

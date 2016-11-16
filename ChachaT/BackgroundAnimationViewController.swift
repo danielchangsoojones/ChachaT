@@ -213,19 +213,39 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = currentSwipe.otherUser
+        
+        //Get rid of this line, just using for testing purposes.
+        addCardMessageChildVC(toView: cardView)
+        
         if currentSwipe.incomingMessage != nil {
-            cardView.addNewMessageView(delegate: self, swipe: currentSwipe)
+            addCardMessageChildVC(toView: cardView)
         }
         return cardView
+    }
+    
+    fileprivate func addCardMessageChildVC(toView: UIView) {
+        let childVC = NewCardMessageViewController()
+        addAsChildViewController(childVC, toView: toView)
+        //For some reason, I have to snap the child's view to the top of the koloda card. Not really sure why, but if I don't, then the messageView top is above the card. Must be because of how koloda Cards are presented or something. I'm not really sure.
+        childVC.view.snp.makeConstraints { (make) in
+            make.top.equalTo(toView)
+        }
     }
     
     func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
     }
+    
+    
 }
 
+//TODO: we no longer need this to be the delegate of the NewCardMessageDelegate
 extension BackgroundAnimationViewController: NewCardMessageDelegate {
+    func showMessage() {
+        print("implement show message logic")
+    }
+
     func respondToMessage(swipe: Swipe) {
         deleteMessage(swipe: swipe)
         segueToChatVC(swipe: swipe)

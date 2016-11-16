@@ -67,6 +67,12 @@ class CardDetailViewController: UIViewController {
         dataStoreSetup()
         setNormalGUI()
         profileImageCarouselSetup()
+        addCardMessageChildVC()
+    }
+    
+    func addCardMessageChildVC() {
+        let childVC = NewCardMessageViewController()
+        addAsChildViewController(childVC, toView: self.view)
     }
     
     override func viewWillAppear(_ animated: Bool) {
