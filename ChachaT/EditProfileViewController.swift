@@ -268,7 +268,7 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
                     case .normalTextField:
                         dataStore.textFieldWasEdited(text, title: aboutView.theTitleLabel.text!)
                     default:
-                        break
+                        print("buttholio")
                     }
                 }
             }
