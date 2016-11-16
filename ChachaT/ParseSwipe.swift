@@ -93,6 +93,23 @@ class ParseSwipe: PFObject, PFSubclassing {
             }
         }
     }
+    var otherUserMessage: String? {
+        get {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                return userTwoMessage
+            }
+            return userOneMessage
+        }
+        set (message) {
+            let userNumber = whichUserIsCurrentUser()
+            if userNumber == 1 {
+                userTwoMessage = message
+            } else if userNumber == 2 {
+                userOneMessage = message
+            }
+        }
+    }
     
     override init() {
         //have to override init, or else Parse gets mad. 

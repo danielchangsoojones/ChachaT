@@ -10,7 +10,7 @@ import Foundation
 import CoreLocation
 import Parse
 
-class BackgroundAnimationDataStore {
+class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
     
     var parseSwipes: [ParseSwipe] = []
     
@@ -56,6 +56,17 @@ class BackgroundAnimationDataStore {
         }
     }
     
+    func deleteSwipeMessage(swipe: Swipe) {
+        if let parseSwipe = getCorrespondingParseSwipe(swipe: swipe) {
+            parseSwipe.otherUserMessage = nil
+            parseSwipe.saveInBackground()
+        }
+    }
+    
+    func setParseSwipes(parseSwipes: [ParseSwipe]) {
+        self.parseSwipes = parseSwipes
+    }
+    
 }
 
 //load the swipes
@@ -78,12 +89,6 @@ extension BackgroundAnimationDataStore {
                 print(error)
             }
         })
-    }
-    
-    func convertParseSwipeToSwipe(parseSwipe: ParseSwipe) -> Swipe {
-        let otherUser = parseSwipe.otherUser
-        let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
-        return swipe
     }
 }
 

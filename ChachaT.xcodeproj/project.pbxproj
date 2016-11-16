@@ -47,6 +47,8 @@
 		925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */; };
 		925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A81D907C48006D7C01 /* SliderDropDown.swift */; };
 		925884AB1D90809E006D7C01 /* SliderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884AA1D90809E006D7C01 /* SliderView.swift */; };
+		925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4151DDB669E00FF484C /* NewCardMessageView.swift */; };
+		925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */; };
 		925D0FD11D6F638D00DE20F9 /* FakeNavigationBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */; };
 		925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */; };
 		925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */; };
@@ -188,6 +190,8 @@
 		925884A61D905D1E006D7C01 /* TagChoicesDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagChoicesDropDown.swift; sourceTree = "<group>"; };
 		925884A81D907C48006D7C01 /* SliderDropDown.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderDropDown.swift; sourceTree = "<group>"; };
 		925884AA1D90809E006D7C01 /* SliderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SliderView.swift; sourceTree = "<group>"; };
+		925CF4151DDB669E00FF484C /* NewCardMessageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewCardMessageView.swift; sourceTree = "<group>"; };
+		925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperParseSwipeDataStore.swift; sourceTree = "<group>"; };
 		925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FakeNavigationBarView.swift; sourceTree = "<group>"; };
 		925D0FD31D74986D00DE20F9 /* AddingTags.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = AddingTags.storyboard; sourceTree = "<group>"; };
 		925D0FD61D74990900DE20F9 /* AddingTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AddingTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
@@ -428,6 +432,7 @@
 			isa = PBXGroup;
 			children = (
 				9222E9C41DDA140A00196433 /* MessageSalutationView.swift */,
+				925CF4151DDB669E00FF484C /* NewCardMessageView.swift */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -977,6 +982,7 @@
 			isa = PBXGroup;
 			children = (
 				92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */,
+				925CF4191DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift */,
 			);
 			name = "Data Models";
 			sourceTree = "<group>";
@@ -1232,6 +1238,7 @@
 				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
+				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
@@ -1243,6 +1250,7 @@
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
+				925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
 				925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */,
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,

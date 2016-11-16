@@ -324,14 +324,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="111" placeholderIntrinsicHeight="38" translatesAutoresizingMaskIntoConstraints="NO" id="rf4-CY-7eA" customClass="MessageSalutationView" customModule="Shuffles" customModuleProvider="target">
-                                <rect key="frame" x="10" y="30" width="111" height="38"/>
+                                <rect key="frame" x="10" y="10" width="111" height="38"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="beH-t5-vug"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXb-UG-Teb">
-                                <rect key="frame" x="374" y="31" width="30" height="36"/>
+                                <rect key="frame" x="374" y="11" width="30" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +341,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Poopy butt butt" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f14-zE-fNX">
-                                <rect key="frame" x="0.0" y="68" width="414" height="623"/>
+                                <rect key="frame" x="0.0" y="48" width="414" height="643"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -409,7 +409,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
@@ -421,40 +421,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Edb-vs-eZq" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="339" y="387"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="8Hh-bn-avm">
-            <objects>
-                <viewController id="q3F-JV-ohV" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="z0K-wj-tw4"/>
-                        <viewControllerLayoutGuide type="bottom" id="tiw-fN-ayo"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="uDH-ZW-mgH">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="toF-FE-KsE" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="hqT-1E-xW0">
-            <objects>
-                <viewController id="Y2t-sk-TZt" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="Rj0-cb-WqO"/>
-                        <viewControllerLayoutGuide type="bottom" id="wS0-LI-LSG"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="O6k-BY-02B">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="736"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="QTn-hB-0hK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
     <resources>

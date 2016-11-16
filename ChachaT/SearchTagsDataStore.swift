@@ -13,6 +13,7 @@ class SearchTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
     
     var delegate: SearchTagsDataStoreDelegate?
+    var parseSwipes: [ParseSwipe] = []
     
     init(delegate: SearchTagsDataStoreDelegate) {
         super.init(superTagDelegate: delegate)
@@ -101,9 +102,12 @@ extension SearchTagsDataStore {
         let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
         orQuery.includeKey("userOne")
         orQuery.includeKey("userTwo")
+        
+        self.parseSwipes.removeAll()
         orQuery.findObjectsInBackground { (objects, error) in
             if let parseSwipes = objects as? [ParseSwipe] {
                 let swipesToPass: [Swipe] = self.convertParseSwipesToSwipes(users: users, parseSwipes: parseSwipes)
+                self.parseSwipes = parseSwipes
                 
                 if swipeDestination == .bottomUserArea {
                     self.passBottomAreaData(swipes: swipesToPass)
@@ -126,6 +130,9 @@ extension SearchTagsDataStore {
         for user in users where !previouslySwipedUserObjectIds.contains(user.objectId ?? "") {
             //If they don't have an existing swipe in the database, then we create a new one for them with the defualt starting values. This means that the currentUser has never swiped this user.
             let newSwipe = Swipe(otherUser: user, otherUserApproval: false)
+            //we create a parseSwipe, so we can have it when we want to check what parseSwipe to save.
+            let newParseSwipe = ParseSwipe(otherUser: user, currentUserApproval: false)
+            self.parseSwipes.append(newParseSwipe)
             swipesToPass.append(newSwipe)
         }
         
@@ -142,10 +149,10 @@ extension SearchTagsDataStore {
             if !previouslySwipedUsersObjectIds.contains(otherUserObjectId) {
                 //avoiding any duplicate users. This could happen if somehow two swipes existed for the same user. Which technically shouldn't happen anyway, but this is an extra safety precaution to make sure the currentUser doesn't see duplicate users.
                 previouslySwipedUsersObjectIds.append(otherUserObjectId)
-                let swipe = Swipe(otherUser: parseSwipe.otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+                let swipe = convertParseSwipeToSwipe(parseSwipe: parseSwipe)
                 swipesToPass.append(swipe)
             }
-        }
+        } 
         
         return (previouslySwipedUsersObjectIds, swipesToPass)
     }
@@ -215,7 +222,7 @@ extension SearchTagsDataStore {
     }
     
     fileprivate func passDataToMainTinderPage(swipes: [Swipe]) {
-        delegate?.passDataToMainPage(swipes: swipes)
+        delegate?.passDataToMainPage(swipes: swipes, parseSwipes: self.parseSwipes)
     }
 }
 
@@ -231,14 +238,16 @@ extension SearchTagsDataStore {
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
-    func passDataToMainPage(swipes: [Swipe])
+    func passDataToMainPage(swipes: [Swipe], parseSwipes: [ParseSwipe])
     func passdDataToBottomArea(swipes: [Swipe])
     func hideBottomUserArea()
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
-    func passDataToMainPage(swipes: [Swipe]) {
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: swipes as AnyObject?) //passing swipeArray to the segue
+    //Yes, this kind of breaks some of the code cleanliness to pass the parseSwipes to the next view controller, but the parseSwipes are needed in the next data store. There isn't really a better way.
+    func passDataToMainPage(swipes: [Swipe], parseSwipes: [ParseSwipe]) {
+        let anyArray: [Any] = [swipes, parseSwipes]
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: anyArray as AnyObject?) //passing swipeArray to the segue
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {
