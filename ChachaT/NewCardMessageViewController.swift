@@ -56,7 +56,10 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
         let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
         chatVC.starterSwipe = swipe
         //TODO: what if the navigation controller doesn't exist
-        self.parent?.navigationController?.pushViewController(chatVC, animated: true)
+        if let navController = self.parent?.navigationController {
+            navController.pushViewController(chatVC, animated: true)
+        }
+        
     }
     
     func showMessage() {
