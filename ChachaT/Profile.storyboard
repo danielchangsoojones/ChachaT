@@ -91,7 +91,6 @@
                                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ggM-LL-fqe" customClass="PhotoEditingMasterLayoutView" customModule="Shuffles" customModuleProvider="target">
                                                 <rect key="frame" x="8" y="8" width="584" height="584"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="width" priority="250" constant="584" id="Wg1-GU-a1H"/>
                                                     <constraint firstAttribute="width" secondItem="ggM-LL-fqe" secondAttribute="height" multiplier="1:1" id="h3g-Xj-luY"/>
                                                 </constraints>
                                             </view>
