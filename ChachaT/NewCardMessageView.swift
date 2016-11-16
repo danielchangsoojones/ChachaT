@@ -91,6 +91,11 @@ class NewCardMessageView: UIView {
         label.textColor = NewCardMessageConstants.textColor
         return label
     }
+    
+    //normally, a uiview has no intrinsic content size, but we need the intrinsic content size to be the size of the frame, so then it will grow to be that size. Daniel Jones is not totally sure if that is the right logic, but it is necessary for the view to show properly. 
+    override var intrinsicContentSize: CGSize {
+        return self.frame.size
+    }
 
     
     required init?(coder aDecoder: NSCoder) {

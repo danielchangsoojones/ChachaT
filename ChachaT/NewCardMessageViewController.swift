@@ -19,7 +19,6 @@ class NewCardMessageViewController: UIViewController {
         super.viewDidLoad()
         setFrame(frame: CGRect(x: 0, y: 0, w: ez.screenWidth, h: 100))
         self.view.translatesAutoresizingMaskIntoConstraints = false //not sure what this does, but makes growing animation happen smoothly
-        self.view.backgroundColor = UIColor.blue
     }
 
     override func didReceiveMemoryWarning() {
