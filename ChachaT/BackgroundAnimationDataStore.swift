@@ -63,6 +63,10 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
         }
     }
     
+    func setParseSwipes(parseSwipes: [ParseSwipe]) {
+        self.parseSwipes = parseSwipes
+    }
+    
 }
 
 //load the swipes

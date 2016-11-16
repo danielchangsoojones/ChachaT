@@ -263,24 +263,18 @@ extension SearchTagsViewController: SegueHandlerType {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
             case .SearchPageToTinderMainPageSegue:
-                //we had to pass the user array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
-                if let theArray = sender as? [Any] {
-                    if let parseSwipeArray = theArray[0] as? [ParseSwipe] {
-                        
+                let navigationVC = segue.destination as! ChachaNavigationViewController
+                let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
+                
+                if let theArray = sender as? [[AnyObject]] {
+                    if let parseSwipeArray = theArray[1] as? [ParseSwipe] {
+                        rootVC.parseSwipes = parseSwipeArray
                     }
-                }
-                
-                
-                
-                
-                if let swipeArray = sender as? [Swipe] {
-                    //the sender parameter is passed the user array
-                    //but if the sender array was not passed a user array, then that means we just want to dimsiss the view controller without passing anything.
-                    let navigationVC = segue.destination as! ChachaNavigationViewController
-                    let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
-                    rootVC.dataStore.parseSwipes
-                    rootVC.swipeArray = swipeArray
-                    rootVC.prePassedSwipeArray = true
+                    if let swipeArray = theArray[0] as? [Swipe] {
+                        //we had to pass the swipe array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
+                        rootVC.prePassedSwipeArray = true
+                        rootVC.swipeArray = swipeArray
+                    }
                 }
         }
     }
