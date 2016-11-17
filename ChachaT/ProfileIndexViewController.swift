@@ -33,7 +33,6 @@ class ProfileIndexViewController: UIViewController {
     
     func editButtonPressed(_ sender: UITapGestureRecognizer) {
         performSegueWithIdentifier(.ProfileIndexToEditProfileSegue, sender: nil)
-        print("was testing with benjamin")
     }
     
     func profileButtonPressed(_ sender: UITapGestureRecognizer) {
