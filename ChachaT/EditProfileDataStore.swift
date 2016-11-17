@@ -93,7 +93,6 @@ class EditProfileDataStore {
 //loading values extension
 extension EditProfileDataStore {
     func loadEverything() {
-        loadProfileImages()
         loadBulletPoints()
         loadTexts()
     }

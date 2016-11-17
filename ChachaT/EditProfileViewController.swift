@@ -158,6 +158,10 @@ extension EditProfileViewController: PhotoEditingDelegate, CameraDelegate {
         showPhotoChoices(isReplacingPhoto: isPhotoWithImage)
     }
     
+    func photoViewsHaveBeenPlaced() {
+        dataStore.loadProfileImages()
+    }
+    
     fileprivate func showPhotoChoices(isReplacingPhoto: Bool) {
         resignFirstResponder()
         var alert = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
