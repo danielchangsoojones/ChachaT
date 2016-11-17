@@ -44,12 +44,11 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
     func deleteMessage(swipe: Swipe) {
         removeSelf()
         dataStore.deleteSwipeMessage(swipe: swipe)
-        print("implement the delete message func")
     }
     
     func respondToMessage(swipe: Swipe) {
         deleteMessage(swipe: swipe)
-        print("implement the respond func")
+        segueToChatVC(swipe: swipe)
     }
     
     fileprivate func segueToChatVC(swipe: Swipe) {
