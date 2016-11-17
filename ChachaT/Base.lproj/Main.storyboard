@@ -299,6 +299,7 @@
                     <connections>
                         <outlet property="theBackButton" destination="i23-FF-3md" id="bs8-r8-Hh2"/>
                         <outlet property="theBackButtonLeadingConstraint" destination="Skd-VA-TBZ" id="byq-Xb-d1i"/>
+                        <outlet property="theBackButtonTopConstraint" destination="Ty8-td-QWW" id="WgM-6a-Guw"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
                         <outlet property="theCardUserTagListView" destination="dCe-w4-3mH" id="8wC-ZM-3yy"/>
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
@@ -409,7 +410,7 @@
             <objects>
                 <navigationController storyboardIdentifier="BackgroundAnimationNavigationViewController" automaticallyAdjustsScrollViewInsets="NO" id="hLe-I3-MDq" customClass="ChachaNavigationViewController" customModule="Shuffles" customModuleProvider="target" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="ufg-UD-wCR">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="ufg-UD-wCR">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

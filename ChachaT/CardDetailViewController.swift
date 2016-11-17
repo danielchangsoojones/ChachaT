@@ -30,6 +30,7 @@ class CardDetailViewController: UIViewController {
     
     //Constraints
     @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
+    @IBOutlet weak var theBackButtonTopConstraint: NSLayoutConstraint!
     
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
     //TODO: we really only need to take in a swipe to the cardDetailPage, and then we can set the userOfTheCard from there
@@ -79,6 +80,7 @@ class CardDetailViewController: UIViewController {
         let childVC = NewCardMessageViewController()
         childVC.swipe = swipe
         addAsChildViewController(childVC, toView: self.view)
+        theBackButtonTopConstraint.constant = childVC.view.frame.height + 10
     }
     
     override func viewWillAppear(_ animated: Bool) {
