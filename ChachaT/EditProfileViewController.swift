@@ -23,6 +23,8 @@ struct EditProfileConstants {
     static let agePlaceholder = "Tap to enter your birthday..."
     static let tagSegueTitle = "Tags"
     static let tagSeguePlaceholder = "See your tags..."
+    static let genderSeguePlaceholder = "Enter your gender"
+    static let genderTitle = "Gender"
 }
 
 class EditProfileViewController: UIViewController {
@@ -75,6 +77,7 @@ class EditProfileViewController: UIViewController {
         bulletPointsSetup()
         fullNameViewSetup()
         schoolOrJobViewSetup()
+        genderSetup()
         ageViewSetup()
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
@@ -109,6 +112,20 @@ class EditProfileViewController: UIViewController {
         let schoolOrJobView = AboutView(title: EditProfileConstants.schoolOrJobTitle, placeHolder: EditProfileConstants.schoolOrJobPlaceholder, type: .normalTextField)
         schoolOrJobView.delegate = self
         theStackView.addArrangedSubview(schoolOrJobView)
+    }
+    
+    func genderSetup() {
+        let genderView = AboutView(title: EditProfileConstants.genderTitle, placeHolder: EditProfileConstants.genderSeguePlaceholder, innerText: nil, action: { (sender) in
+            let vc = AttributePickerViewController()
+            vc.passedAction = { (chosen: String) in
+                self.loadText(chosen, title: EditProfileConstants.genderTitle)
+            }
+            vc.previouslyChosenTitle = sender.getCurrentText() ?? ""
+            vc.rowTitles = ["male", "female"]
+            vc.sectionTitle = EditProfileConstants.genderTitle
+            self.pushVC(vc)
+        }, type: .segueCell)
+        theStackView.addArrangedSubview(genderView)
     }
     
     func ageViewSetup() {

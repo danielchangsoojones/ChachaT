@@ -53,6 +53,7 @@ PODS:
   - SCLAlertView (0.7.0)
   - SnapKit (3.0.2)
   - SocketRocket (0.5.1)
+  - Static (2.0.1)
   - TGLParallaxCarousel (1.0.0)
   - Timepiece (1.0.0)
   - TPKeyboardAvoiding (1.3)
@@ -77,6 +78,7 @@ DEPENDENCIES:
   - RKNotificationHub
   - SCLAlertView
   - SnapKit
+  - Static (from `https://github.com/venmo/Static`)
   - TGLParallaxCarousel (from `https://github.com/danielchangsoojones/TGLParallaxCarousel.git`)
   - Timepiece
   - TTRangeSlider
@@ -95,6 +97,8 @@ EXTERNAL SOURCES:
     :git: https://github.com/white-rabbit-apps/ParseFacebookUtils-iOS.git
   ParseLiveQuery:
     :git: https://github.com/ParsePlatform/ParseLiveQuery-iOS-OSX.git
+  Static:
+    :git: https://github.com/venmo/Static
   TGLParallaxCarousel:
     :git: https://github.com/danielchangsoojones/TGLParallaxCarousel.git
 
@@ -114,6 +118,9 @@ CHECKOUT OPTIONS:
   ParseLiveQuery:
     :commit: 7b32e74f9735088651631fbb4ee94b6699527953
     :git: https://github.com/ParsePlatform/ParseLiveQuery-iOS-OSX.git
+  Static:
+    :commit: 321e997b9c2edc5d38aa0b007f2861ba457f13ed
+    :git: https://github.com/venmo/Static
   TGLParallaxCarousel:
     :commit: 22f32129b8061b6621b24be672f87c37839636e4
     :git: https://github.com/danielchangsoojones/TGLParallaxCarousel.git
@@ -146,11 +153,12 @@ SPEC CHECKSUMS:
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
+  Static: a8675f1e49645ab7ed12b2677aeae22f973d6a2e
   TGLParallaxCarousel: 94c8b4f271f0c1a1a3d973da1206f31771255e44
   Timepiece: 5dd72985a9eee1fe86b66d897e1996fe0745a24e
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: a1bb15bf3a370d5c29797c9f2dedf426c64b03a7
+PODFILE CHECKSUM: b60c6489d5ce044b4ffd7951b570a27480ec1629
 
 COCOAPODS: 1.1.1

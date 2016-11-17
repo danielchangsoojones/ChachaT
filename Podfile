@@ -28,6 +28,7 @@ pod 'SnapKit'
 pod 'TGLParallaxCarousel', :git=> 'https://github.com/danielchangsoojones/TGLParallaxCarousel.git' #had to fork of my own repo, so I (Daniel Jones) could customize some things
 pod 'ALCameraViewController'
 pod 'Instructions', git: 'https://github.com/ephread/Instructions.git', branch: 'swift3'
+pod 'Static', git: 'https://github.com/venmo/Static'
 
 post_install do |installer|
     `find Pods -regex 'Pods/pop.*\\.h' -print0 | xargs -0 sed -i '' 's/\\(<\\)pop\\/\\(.*\\)\\(>\\)/\\"\\2\\"/'`
