@@ -222,7 +222,7 @@ extension SearchTagsDataStore {
     }
     
     fileprivate func passDataToMainTinderPage(swipes: [Swipe]) {
-        delegate?.passDataToMainPage(swipes: swipes, parseSwipes: self.parseSwipes)
+        delegate?.passDataToMainPage(swipes: swipes)
     }
 }
 
@@ -238,16 +238,15 @@ extension SearchTagsDataStore {
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
-    func passDataToMainPage(swipes: [Swipe], parseSwipes: [ParseSwipe])
+    func passDataToMainPage(swipes: [Swipe])
     func passdDataToBottomArea(swipes: [Swipe])
     func hideBottomUserArea()
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     //Yes, this kind of breaks some of the code cleanliness to pass the parseSwipes to the next view controller, but the parseSwipes are needed in the next data store. There isn't really a better way.
-    func passDataToMainPage(swipes: [Swipe], parseSwipes: [ParseSwipe]) {
-        let anyArray: [Any] = [swipes, parseSwipes]
-        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: anyArray as AnyObject?) //passing swipeArray to the segue
+    func passDataToMainPage(swipes: [Swipe]) {
+        performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: swipes as AnyObject?) //passing swipeArray to the segue
     }
     
     func passdDataToBottomArea(swipes: [Swipe]) {

@@ -38,7 +38,6 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var swipeArray = [Swipe]()
-    var parseSwipes: [ParseSwipe]?
     var dataStore : BackgroundAnimationDataStore!
     var rippleHasNotBeenStarted = true
     var prePassedSwipeArray = false
@@ -77,9 +76,6 @@ class BackgroundAnimationViewController: UIViewController {
         //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks search page). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this. We have to wait until ViewDidAppear, instead of ViewDidLoad to implement this because in viewDidLoad and ViewWillAppear, the koloda cards aren't sized correctly yet, so they show up in weird forms/positions until we get to ViewDidAppear. This is kind of a hacky fix, until the Koloda cocoapod deals with this.
         if prePassedSwipeArray {
             prePassedSwipeArray = false
-            if let parseSwipes = parseSwipes {
-                dataStore.setParseSwipes(parseSwipes: parseSwipes)
-            }
             kolodaView.dataSource = self
             kolodaView.reloadData()
         }
