@@ -45,6 +45,7 @@ class BackgroundAnimationViewController: UIViewController {
     var theTappedKolodaIndex: Int = 0
     
     let coachMarksController = CoachMarksController()
+    var showTutorial: Bool = false
     
     let locationManager = CLLocationManager()
     
@@ -62,8 +63,6 @@ class BackgroundAnimationViewController: UIViewController {
         }
         anonymousUserSetup()
         theBottomButtonsView.delegate = self
-        
-        setUpTutorialCoachingMarks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -85,8 +84,7 @@ class BackgroundAnimationViewController: UIViewController {
             kolodaView.reloadData()
         }
         getUserLocation()
-        
-        self.coachMarksController.startOn(self)
+        setUpTutorialCoachingMarks()
     }
     
     override func viewWillDisappear(_ animated: Bool) {

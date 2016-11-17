@@ -104,6 +104,7 @@
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
 		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
 		92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */; };
+		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
@@ -253,6 +254,7 @@
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationTutorialExtension.swift; sourceTree = "<group>"; };
+		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
@@ -897,6 +899,7 @@
 			children = (
 				929BF0491DD126400099F3AB /* TutorialViewController.swift */,
 				92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */,
+				92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -1248,6 +1251,7 @@
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
+				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,

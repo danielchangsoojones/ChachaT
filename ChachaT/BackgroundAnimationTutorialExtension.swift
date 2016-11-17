@@ -11,12 +11,12 @@ import Instructions
 
 extension BackgroundAnimationViewController: CoachMarksControllerDataSource {
     func setUpTutorialCoachingMarks() {
-//        if User.current()!.isNew {
+        if showTutorial {
             self.coachMarksController.dataSource = self
-        self.coachMarksController.delegate = self
-            coachMarksController.overlay.color = UIColor.black.withAlphaComponent(0.5)
-        
-//        }
+            self.coachMarksController.delegate = self
+            coachMarksController.overlay.color = CustomColors.TutorialOverlayColor
+            self.coachMarksController.startOn(self)
+        }
     }
     
     func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
