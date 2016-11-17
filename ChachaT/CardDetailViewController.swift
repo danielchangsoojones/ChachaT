@@ -36,7 +36,10 @@ class CardDetailViewController: UIViewController {
     //TODO: we really only need to take in a swipe to the cardDetailPage, and then we can set the userOfTheCard from there
     var swipe: Swipe? {
         didSet {
-            addCardMessageChildVC()
+            userOfTheCard = swipe?.otherUser
+            if swipe?.incomingMessage != nil {
+                addCardMessageChildVC()
+            }
         }
     }
     var dataStore: CardDetailDataStore!
