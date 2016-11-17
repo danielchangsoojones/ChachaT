@@ -11,7 +11,7 @@ import Foundation
 class SuperParseSwipeDataStore {
     func convertParseSwipeToSwipe(parseSwipe: ParseSwipe) -> Swipe {
         let otherUser = parseSwipe.otherUser
-        let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval)
+        let swipe = Swipe(otherUser: otherUser, otherUserApproval: parseSwipe.otherUserApproval, parseSwipe: parseSwipe)
         swipe.incomingMessage = parseSwipe.otherUserMessage
         return swipe
     }

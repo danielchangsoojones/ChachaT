@@ -14,6 +14,7 @@ private let overlayRightImageName = "overlay_like"
 private let overlayLeftImageName = "overlay_skip"
 
 class CustomCardView: OverlayView {
+    //TODO: get rid of this pfIMageView and replace with more non-dependent UIImageView
     @IBOutlet weak var theCardMainImage: PFImageView!
     @IBOutlet weak var thePersonalInfoHolderView: UIView!
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
@@ -36,11 +37,6 @@ class CustomCardView: OverlayView {
         //Rounded corners
         self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
-    }
-    
-    func addNewMessageView(delegate: NewCardMessageDelegate, swipe: Swipe) {
-        let newCardMessageView = NewCardMessageView(frame: CGRect(x: 0, y: 0, w: self.frame.width, h: 100), delegate: delegate, swipe: swipe)
-        self.addSubview(newCardMessageView)
     }
 }
 

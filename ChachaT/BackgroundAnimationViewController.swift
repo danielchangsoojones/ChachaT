@@ -38,7 +38,6 @@ class BackgroundAnimationViewController: UIViewController {
     @IBOutlet weak var theStackViewBottomConstraint: NSLayoutConstraint!
 
     var swipeArray = [Swipe]()
-    var parseSwipes: [ParseSwipe]?
     var dataStore : BackgroundAnimationDataStore!
     var rippleHasNotBeenStarted = true
     var prePassedSwipeArray = false
@@ -77,9 +76,6 @@ class BackgroundAnimationViewController: UIViewController {
         //we have to set the kolodaView dataSource in viewDidAppear because there is a bug in the Koloda cocoapod. When you have data preset (like when we pass the user array from 8tracks search page). The koloda Card view doesn't show correctly, it is misplaced. So, we have to wait to load it in viewDidAppear, for it to load correctly, until the Koloda cocoapod is upgraded to fix this. We have to wait until ViewDidAppear, instead of ViewDidLoad to implement this because in viewDidLoad and ViewWillAppear, the koloda cards aren't sized correctly yet, so they show up in weird forms/positions until we get to ViewDidAppear. This is kind of a hacky fix, until the Koloda cocoapod deals with this.
         if prePassedSwipeArray {
             prePassedSwipeArray = false
-            if let parseSwipes = parseSwipes {
-                dataStore.setParseSwipes(parseSwipes: parseSwipes)
-            }
             kolodaView.dataSource = self
             kolodaView.reloadData()
         }
@@ -213,33 +209,29 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = currentSwipe.otherUser
+        
         if currentSwipe.incomingMessage != nil {
-            cardView.addNewMessageView(delegate: self, swipe: currentSwipe)
+            addCardMessageChildVC(toView: cardView, swipe: currentSwipe)
         }
         return cardView
+    }
+    
+    fileprivate func addCardMessageChildVC(toView: UIView, swipe: Swipe) {
+        let childVC = NewCardMessageViewController()
+        childVC.swipe = swipe
+        addAsChildViewController(childVC, toView: toView)
+        //For some reason, I have to snap the child's view to the top of the koloda card. Not really sure why, but if I don't, then the messageView top is above the card. Must be because of how koloda Cards are presented or something. I'm not really sure.
+        childVC.view.snp.makeConstraints { (make) in
+            make.top.equalTo(toView)
+        }
     }
     
     func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
     }
-}
-
-extension BackgroundAnimationViewController: NewCardMessageDelegate {
-    func respondToMessage(swipe: Swipe) {
-        deleteMessage(swipe: swipe)
-        segueToChatVC(swipe: swipe)
-    }
     
-    fileprivate func segueToChatVC(swipe: Swipe) {
-        let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
-        chatVC.starterSwipe = swipe
-        self.navigationController?.pushViewController(chatVC, animated: true)
-    }
     
-    func deleteMessage(swipe: Swipe) {
-        dataStore.deleteSwipeMessage(swipe: swipe)
-    }
 }
 
 extension BackgroundAnimationViewController: FrostedSidebarDelegate {
@@ -278,7 +270,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-        cardDetailVC.userOfTheCard = swipeArray[index].otherUser
+        cardDetailVC.swipe = swipeArray[index]
         cardDetailVC.delegate = self
         theTappedKolodaIndex = index
         

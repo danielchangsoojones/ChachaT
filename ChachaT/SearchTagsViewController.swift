@@ -266,15 +266,10 @@ extension SearchTagsViewController: SegueHandlerType {
                 let navigationVC = segue.destination as! ChachaNavigationViewController
                 let rootVC = navigationVC.viewControllers[0] as! BackgroundAnimationViewController
                 
-                if let theArray = sender as? [[AnyObject]] {
-                    if let parseSwipeArray = theArray[1] as? [ParseSwipe] {
-                        rootVC.parseSwipes = parseSwipeArray
-                    }
-                    if let swipeArray = theArray[0] as? [Swipe] {
-                        //we had to pass the swipe array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
-                        rootVC.prePassedSwipeArray = true
-                        rootVC.swipeArray = swipeArray
-                    }
+                if let swipeArray = sender as? [Swipe] {
+                    //we had to pass the swipe array in prepareForSegue because I tried to use delegate function, but the view controller wasn't loaded, so the user array was just being reset.
+                    rootVC.prePassedSwipeArray = true
+                    rootVC.swipeArray = swipeArray
                 }
         }
     }

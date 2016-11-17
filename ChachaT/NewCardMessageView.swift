@@ -11,6 +11,7 @@ import Foundation
 protocol NewCardMessageDelegate {
     func respondToMessage(swipe: Swipe)
     func deleteMessage(swipe: Swipe)
+    func showMessage()
 }
 
 class NewCardMessageView: UIView {
@@ -46,7 +47,7 @@ class NewCardMessageView: UIView {
     }
     
     func showMessage(sender: UITapGestureRecognizer? = nil) {
-        animateShowingMessage()
+        delegate?.showMessage()
     }
     
     fileprivate func addMessageImage() {
@@ -90,6 +91,11 @@ class NewCardMessageView: UIView {
         label.textColor = NewCardMessageConstants.textColor
         return label
     }
+    
+    //normally, a uiview has no intrinsic content size, but we need the intrinsic content size to be the size of the frame, so then it will grow to be that size. Daniel Jones is not totally sure if that is the right logic, but it is necessary for the view to show properly. 
+    override var intrinsicContentSize: CGSize {
+        return self.frame.size
+    }
 
     
     required init?(coder aDecoder: NSCoder) {
@@ -99,7 +105,7 @@ class NewCardMessageView: UIView {
 
 //showing the message
 extension NewCardMessageView {
-    fileprivate func animateShowingMessage() {
+    func animateShowingMessage() {
         UIView.animate(withDuration: 0.3, animations: {
             self.hideNewMessageComponents()
         }, completion: { (complete: Bool) in
@@ -113,6 +119,9 @@ extension NewCardMessageView {
                 self.frame = superview.bounds
             }
         }, completion: { (complete: Bool) in
+            self.superview!.snp.remakeConstraints({ (make) in
+                make.edges.equalToSuperview()
+            })
             self.addShowMessageComponents()
         })
     }
@@ -190,12 +199,10 @@ extension NewCardMessageView {
     }
     
     @objc fileprivate func deleteButtonPressed(sender: UIButton) {
-        self.removeFromSuperview()
         self.delegate?.deleteMessage(swipe: swipe)
     }
     
     @objc fileprivate func respondButtonPressed(sender: UIButton) {
-        self.removeFromSuperview()
         self.delegate?.respondToMessage(swipe: swipe)
     }
 }
