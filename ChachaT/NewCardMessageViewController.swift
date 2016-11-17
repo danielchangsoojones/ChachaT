@@ -13,6 +13,9 @@ class NewCardMessageViewController: UIViewController {
     var cardMessageView: NewCardMessageView!
     var swipe: Swipe!
     
+    //need to hold in global variable
+    var chatVC: ChatViewController?
+    
     var dataStore: NewCardMessageDataStore = NewCardMessageDataStore()
 
     override func viewDidLoad() {
@@ -52,20 +55,23 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
     }
     
     fileprivate func segueToChatVC(swipe: Swipe) {
-        let chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
-        chatVC.starterSwipe = swipe
+        chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
+        chatVC?.starterSwipe = swipe
         //TODO: what if the navigation controller doesn't exist
         if let navController = self.parent?.navigationController {
-            navController.pushViewController(chatVC, animated: true)
+            navController.pushViewController(chatVC!, animated: true)
         } else {
-            //TODO: I just want to be able to segue right to the chat page and have a back button that the user can use to go back to the card detail page. But, I haven't figured out a simple way, since the card detail is not in a navigation controller. So, this is a temporary fix where it goes to main page and then pushes the chat page until I can figure out a way to do this.
-            let chachaNavigationVC = self.presentingViewController as! ChachaNavigationViewController
-            self.dismiss(animated: false) {
-                //after we dismiss this VC, we want to go straight to the messaging page, but when we go back from the messaging page. This card detail page will have been deleted, and it will just take us right back to the swiping page
-                chachaNavigationVC.pushViewController(chatVC, animated: true)
-            }
+            let navController = ChachaNavigationViewController(rootViewController: chatVC!)
+            self.present(navController, animated: true, completion: {
+                //TODO: make this show the normal back button indicator we have on every other page, just can't exactly figure out how to at the moment. 
+                self.chatVC?.navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Back", style: .plain, target: self, action: #selector(self.dismissChatVC))
+            })
         }
         
+    }
+    
+    @objc func dismissChatVC() {
+        chatVC?.dismiss(animated: true, completion: nil)
     }
     
     func showMessage() {
