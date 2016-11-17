@@ -18,7 +18,6 @@ struct PhotoEditingViewConstants {
 
 class PhotoEditingMasterLayoutView: UIView {
     var delegate : PhotoEditingDelegate?
-//    var photoNumber : Int = 0
     
     //Making units to work off of. The major units will be the height and width of one of the smaller pictures. The minor unit will be half of one spacing between each picture. The reason I choose half is so that the spacing along the edge of the master view will be smaller than the space between two pictures.
     func setLayout() {
