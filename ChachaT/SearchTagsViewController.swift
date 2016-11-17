@@ -34,7 +34,6 @@ class SearchTagsViewController: SuperTagViewController {
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         spacingSetup()
         setDataFromDataStore()
-        anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
     }

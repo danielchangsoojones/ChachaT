@@ -33,22 +33,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
         
         Instabug.start(withToken: "c1d90288be3cf98624000127f6139a87", invocationEvent: IBGInvocationEvent.shake)
-        
-        let anonymousDataStore = AnonymousDataStore()
 
         if User.current() == nil {
-            let tutorialVC = TutorialViewController()
+            self.window = UIWindow(frame: UIScreen.main.bounds)
             
-            self.window?.rootViewController = tutorialVC
-            self.window?.makeKeyAndVisible()
-        } else if anonymousDataStore.isUserAnonymous {
-            let navController = ChachaNavigationViewController()
+            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
             
-            let storyboard = UIStoryboard(name: "Filtering", bundle: nil)
-            let searchViewController = storyboard.instantiateViewController(withIdentifier: "SearchTagsViewController") as! SearchTagsViewController
-            navController.viewControllers = [searchViewController]
+            let initialViewController = storyboard.instantiateViewController(withIdentifier: "SignUpLogInViewController") as! SignUpLogInViewController
             
-            self.window?.rootViewController = navController
+            self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
         }
         

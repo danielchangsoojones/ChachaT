@@ -61,7 +61,6 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
             dataStore.loadSwipeArray()
         }
-        anonymousUserSetup()
         theBottomButtonsView.delegate = self
     }
     
@@ -318,6 +317,10 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             destinationVC.modalPresentationStyle = .custom
             destinationVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.85)
             destinationVC.view.isOpaque = false
+        case .CustomBackgroundAnimationToSearchSegue:
+            let destinationVC = segue.destination as! SearchTagsViewController
+            destinationVC.showTutorial = showTutorial
+            showTutorial = false
         default:
             break
         }
