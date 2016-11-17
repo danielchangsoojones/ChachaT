@@ -9,6 +9,7 @@
 import UIKit
 import EFTools
 import Parse
+import Instructions
 
 class SearchTagsViewController: SuperTagViewController {
     var tagChosenView : ChachaChosenTagListView!
@@ -19,21 +20,32 @@ class SearchTagsViewController: SuperTagViewController {
     //constraints
     @IBOutlet weak var theTagScrollViewTopConstraint: NSLayoutConstraint!
     
-    
     var theBottomUserArea: BottomUserScrollView?
     
     var dataStore : SearchTagsDataStore!
     
     var theTappedCellIndex: IndexPath = IndexPath(row: 0, section: 0)
     
+    let coachMarksController = CoachMarksController()
+    var showTutorial: Bool = false
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         scrollViewSearchView = addSearchScrollView(navigationController!.navigationBar)
         spacingSetup()
         setDataFromDataStore()
-        anonymousUserSetup()
         tagChoicesView.delegate = self
         scrollViewSearchView.scrollViewSearchViewDelegate = self
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        setUpTutorialCoachingMarks()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        coachMarksController.stop(immediately: true)
     }
     
     func spacingSetup() {

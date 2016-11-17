@@ -34,8 +34,6 @@
 		923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDA1D9309200033A8A2 /* ChatRoom.swift */; };
 		923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDC1D930B2F0033A8A2 /* Message.swift */; };
 		923C7EE01D9422520033A8A2 /* ChatDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */; };
-		924139AA1DC6661A00C8B6AF /* MainPageAnonymousUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */; };
-		924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */; };
 		924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */; };
 		924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */; };
 		924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */; };
@@ -103,13 +101,13 @@
 		928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D771DBA588700D6B6D3 /* Enviroment.swift */; };
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
 		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
+		92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */; };
+		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
 		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
-		929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0491DD126400099F3AB /* TutorialViewController.swift */; };
 		929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */; };
-		92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */; };
 		92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDA91DD1676B0003B09D /* SearchTagsSliderExtension.swift */; };
 		92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A5DDAB1DD175E70003B09D /* NotificationNames.swift */; };
 		92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7F7DE1D9C6908005D22AA /* Camera.swift */; };
@@ -178,8 +176,6 @@
 		923C7EDA1D9309200033A8A2 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		923C7EDC1D930B2F0033A8A2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
 		923C7EDF1D9422520033A8A2 /* ChatDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatDataStore.swift; sourceTree = "<group>"; };
-		924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageAnonymousUser.swift; sourceTree = "<group>"; };
-		924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AnonymousDataStore.swift; sourceTree = "<group>"; };
 		924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionDetailView.xib; sourceTree = "<group>"; };
 		924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionDetailView.swift; sourceTree = "<group>"; };
 		924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookImagePickerExtension.swift; sourceTree = "<group>"; };
@@ -251,13 +247,13 @@
 		928B8D771DBA588700D6B6D3 /* Enviroment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
 		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
+		92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationTutorialExtension.swift; sourceTree = "<group>"; };
+		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
-		929BF0491DD126400099F3AB /* TutorialViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageExtension.swift; sourceTree = "<group>"; };
-		92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsAnonymousExtension.swift; sourceTree = "<group>"; };
 		92A5DDA91DD1676B0003B09D /* SearchTagsSliderExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsSliderExtension.swift; sourceTree = "<group>"; };
 		92A5DDAB1DD175E70003B09D /* NotificationNames.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationNames.swift; sourceTree = "<group>"; };
 		92A7F7DE1D9C6908005D22AA /* Camera.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Camera.swift; sourceTree = "<group>"; };
@@ -502,14 +498,6 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
-		924139A81DC665E100C8B6AF /* Data Model */ = {
-			isa = PBXGroup;
-			children = (
-				924139AB1DC6665D00C8B6AF /* AnonymousDataStore.swift */,
-			);
-			name = "Data Model";
-			sourceTree = "<group>";
-		};
 		924139AD1DC67D9600C8B6AF /* Description Detail View */ = {
 			isa = PBXGroup;
 			children = (
@@ -634,7 +622,6 @@
 				926108161CDBCA32009F3E86 /* AppDelegate.swift */,
 				9261081F1CDBCA32009F3E86 /* LaunchScreen.storyboard */,
 				926108221CDBCA32009F3E86 /* Info.plist */,
-				92A5DDA51DD156970003B09D /* Anonymous User */,
 				922C898F1D4C080F00DE1373 /* Custom Segues */,
 				9288194D1D2BECC8000A8E04 /* Navigation */,
 				9261085A1CEA1939009F3E86 /* Models */,
@@ -711,7 +698,7 @@
 			isa = PBXGroup;
 			children = (
 				928761FF1D997027000EAED6 /* Data Models */,
-				929BF0461DD047340099F3AB /* First Onboarding */,
+				929BF0461DD047340099F3AB /* Tutorial */,
 				926108541CEA0EA6009F3E86 /* Onboarding.storyboard */,
 				926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */,
 			);
@@ -890,12 +877,13 @@
 			name = "Empty State";
 			sourceTree = "<group>";
 		};
-		929BF0461DD047340099F3AB /* First Onboarding */ = {
+		929BF0461DD047340099F3AB /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
-				929BF0491DD126400099F3AB /* TutorialViewController.swift */,
+				92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */,
+				92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */,
 			);
-			name = "First Onboarding";
+			name = Tutorial;
 			sourceTree = "<group>";
 		};
 		92A5DDA41DD1566F0003B09D /* Extensions */ = {
@@ -905,16 +893,6 @@
 				9236872F1DD4185A00F1EDE5 /* SearchTagsBottomUserExtension.swift */,
 			);
 			name = Extensions;
-			sourceTree = "<group>";
-		};
-		92A5DDA51DD156970003B09D /* Anonymous User */ = {
-			isa = PBXGroup;
-			children = (
-				924139A81DC665E100C8B6AF /* Data Model */,
-				924139A91DC6661A00C8B6AF /* MainPageAnonymousUser.swift */,
-				92A5DDA61DD1574A0003B09D /* SearchTagsAnonymousExtension.swift */,
-			);
-			name = "Anonymous User";
 			sourceTree = "<group>";
 		};
 		92BCEB511D8366C800E05C05 /* Subviews */ = {
@@ -1215,9 +1193,8 @@
 				927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */,
-				92A5DDA71DD1574A0003B09D /* SearchTagsAnonymousExtension.swift in Sources */,
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
-				929BF04A1DD126400099F3AB /* TutorialViewController.swift in Sources */,
+				92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */,
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
@@ -1239,11 +1216,11 @@
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
-				924139AA1DC6661A00C8B6AF /* MainPageAnonymousUser.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
+				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */,
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
@@ -1286,7 +1263,6 @@
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */,
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
-				924139AC1DC6665D00C8B6AF /* AnonymousDataStore.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
 				9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */,
 				922C89911D4C087E00DE1373 /* CustomBackgroundAnimationToSearchSegue.swift in Sources */,

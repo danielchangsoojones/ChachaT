@@ -22,6 +22,9 @@ PODS:
     - FBSDKCoreKit (~> 4.16.0)
     - FBSDKLoginKit (~> 4.16.0)
   - Instabug (6.0.3)
+  - Instructions (0.5.0):
+    - Instructions/Core (= 0.5.0)
+  - Instructions/Core (0.5.0)
   - JSQMessagesViewController (7.3.4):
     - JSQSystemSoundPlayer (~> 2.0.1)
   - JSQSystemSoundPlayer (2.0.1)
@@ -62,6 +65,7 @@ DEPENDENCIES:
   - ExpandingMenu (~> 0.1)
   - EZSwiftExtensions
   - GBHFacebookImagePicker
+  - Instructions (from `https://github.com/ephread/Instructions.git`, branch `swift3`)
   - JSQMessagesViewController
   - Koloda (from `https://github.com/Yalantis/Koloda.git`, branch `swift-3`)
   - MBAutoGrowingTextView (~> 0.1.0)
@@ -81,6 +85,9 @@ EXTERNAL SOURCES:
   EFTools:
     :branch: develop
     :git: https://github.com/ElevenFifty/EFTools.git
+  Instructions:
+    :branch: swift3
+    :git: https://github.com/ephread/Instructions.git
   Koloda:
     :branch: swift-3
     :git: https://github.com/Yalantis/Koloda.git
@@ -95,6 +102,9 @@ CHECKOUT OPTIONS:
   EFTools:
     :commit: 965bea20ea60bd957893717c33b21a09329bea78
     :git: https://github.com/ElevenFifty/EFTools.git
+  Instructions:
+    :commit: 44f0ad4460f99ff3e08c6aca6d3601b0ba352530
+    :git: https://github.com/ephread/Instructions.git
   Koloda:
     :commit: 2aea10e0ae955814e38fc815ff38c0b20fb126ea
     :git: https://github.com/Yalantis/Koloda.git
@@ -120,6 +130,7 @@ SPEC CHECKSUMS:
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
   GBHFacebookImagePicker: e8bbd1bd2c85f648bd80f52d66edeb2148b6c8ba
   Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
+  Instructions: 6976f674ce788aefec475be6f18500572f1645d4
   JSQMessagesViewController: 39fed975e3c9f8eba7292071e29eeb541d105e66
   JSQSystemSoundPlayer: c5850e77a4363ffd374cd851154b9af93264ed8d
   Koloda: 5aee353329cd1605540f1215a4c1975481dc7a37
@@ -140,6 +151,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 6451798bd7a60c1d8033603c87c6b6aa29a9913e
+PODFILE CHECKSUM: a1bb15bf3a370d5c29797c9f2dedf426c64b03a7
 
 COCOAPODS: 1.1.1

@@ -17,6 +17,7 @@ import Ripple
 import SnapKit
 import Timepiece
 import EZSwiftExtensions
+import Instructions
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -43,6 +44,9 @@ class BackgroundAnimationViewController: UIViewController {
     var prePassedSwipeArray = false
     var theTappedKolodaIndex: Int = 0
     
+    let coachMarksController = CoachMarksController()
+    var showTutorial: Bool = false
+    
     let locationManager = CLLocationManager()
     
     //MARK: Lifecycle
@@ -57,7 +61,6 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
             dataStore.loadSwipeArray()
         }
-        anonymousUserSetup()
         theBottomButtonsView.delegate = self
     }
     
@@ -80,6 +83,11 @@ class BackgroundAnimationViewController: UIViewController {
             kolodaView.reloadData()
         }
         getUserLocation()
+        setUpTutorialCoachingMarks()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.coachMarksController.stop(immediately: true)
     }
     
     func dataStoreSetup() {
@@ -226,12 +234,11 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         }
     }
     
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+    //Need to do Koloda.OverlayView because Instructions pod also has a view called OverlayView, so it was ambigious
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> Koloda.OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
     }
-    
-    
 }
 
 extension BackgroundAnimationViewController: FrostedSidebarDelegate {
@@ -310,6 +317,10 @@ extension BackgroundAnimationViewController: SegueHandlerType {
             destinationVC.modalPresentationStyle = .custom
             destinationVC.view.backgroundColor = UIColor.black.withAlphaComponent(0.85)
             destinationVC.view.isOpaque = false
+        case .CustomBackgroundAnimationToSearchSegue:
+            let destinationVC = segue.destination as! SearchTagsViewController
+            destinationVC.showTutorial = showTutorial
+            showTutorial = false
         default:
             break
         }

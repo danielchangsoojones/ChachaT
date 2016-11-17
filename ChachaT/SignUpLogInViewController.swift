@@ -256,6 +256,14 @@ extension SignUpLogInViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case SignUpSuccessSegue
-        case SignUpToQuestionOnboardingSegue
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        switch segueIdentifierForSegue(segue) {
+        case .SignUpSuccessSegue:
+            let navController = segue.destination as! UINavigationController
+            let rootVC = navController.viewControllers[0] as! BackgroundAnimationViewController
+            rootVC.showTutorial = User.current()!.isNew
+        }
     }
 }

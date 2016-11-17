@@ -14,6 +14,7 @@ import RKNotificationHub
 //Daniel Jones created a fakeNavigationBarView because originally, we wanted the bar to expand when the menu button was clicked. But, later, it was better to just use a side menu. So, technically we don't need to use a fake navigation bar anymore, but I think it allows for more custumization if we decided to change things. 
 class FakeNavigationBarView : UIView {
     var leftMenuButton: UIButton!
+    var rightMenuButton: UIButton!
     var navigationBarHeight: CGFloat = 44 //being a good coder, and make the actual view controller pass us the nav bar height, in case that apple changes the nav bar height one day
     var hub : RKNotificationHub?
     
@@ -49,15 +50,15 @@ class FakeNavigationBarView : UIView {
     }
     
     func createRightBarButton() {
-        let rightButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
-        rightButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
+        rightMenuButton = UIButton(frame: CGRect(x: 0, y: 0, width: ImportantDimensions.BarButtonItemSize.width, height: ImportantDimensions.BarButtonItemSize.height))
+        rightMenuButton.addTarget(self, action: #selector(FakeNavigationBarView.rightBarButtonPressed(_:)), for: .touchUpInside)
         createRightButtonCover()
-        self.addSubview(rightButton)
-        rightButton.snp.makeConstraints { (make) in
+        self.addSubview(rightMenuButton)
+        rightMenuButton.snp.makeConstraints { (make) in
             make.trailing.equalTo(self).inset(ImportantDimensions.BarButtonInset)
             make.centerY.equalTo(self).offset(ImportantDimensions.StatusBarHeight / 2)
         }
-        rightButton.setImage(UIImage(named: ImageNames.SearchIcon), for: UIControlState())
+        rightMenuButton.setImage(UIImage(named: ImageNames.SearchIcon), for: UIControlState())
     }
     
     //TODO: I wanted to have a bigger hit area for the button because it was really hard to hit. This was a fast way to get it to work, but definetly there is a better way where we don't create two buttons
