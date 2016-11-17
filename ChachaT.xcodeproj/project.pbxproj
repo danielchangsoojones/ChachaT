@@ -84,7 +84,6 @@
 		9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB831D7A037D00D8131D /* PhotoEditingView.xib */; };
 		9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */; };
 		9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */; };
-		9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */; };
 		9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */; };
 		9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB911D7C6A4900D8131D /* AboutView.xib */; };
 		9275FB941D7C715800D8131D /* AboutView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB931D7C715800D8131D /* AboutView.swift */; };
@@ -230,7 +229,6 @@
 		9275FB831D7A037D00D8131D /* PhotoEditingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditingView.xib; sourceTree = "<group>"; };
 		9275FB851D7A0F2C00D8131D /* PhotoEditingView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingView.swift; sourceTree = "<group>"; };
 		9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingMasterLayoutView.swift; sourceTree = "<group>"; };
-		9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoEditingStackView.swift; sourceTree = "<group>"; };
 		9275FB8E1D7B78FD00D8131D /* EditProfileDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileDataStore.swift; sourceTree = "<group>"; };
 		9275FB911D7C6A4900D8131D /* AboutView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutView.xib; sourceTree = "<group>"; };
 		9275FB931D7C715800D8131D /* AboutView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AboutView.swift; sourceTree = "<group>"; };
@@ -756,7 +754,6 @@
 			children = (
 				929428DC1DC2816F0019617C /* Single Photo Editing  View */,
 				9275FB871D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift */,
-				9275FB891D7B540C00D8131D /* PhotoEditingStackView.swift */,
 			);
 			name = PhotoEditing;
 			sourceTree = "<group>";
@@ -1235,7 +1232,6 @@
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
-				9275FB8A1D7B540C00D8131D /* PhotoEditingStackView.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
