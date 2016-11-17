@@ -17,6 +17,7 @@ import Ripple
 import SnapKit
 import Timepiece
 import EZSwiftExtensions
+import Instructions
 
 private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
@@ -43,6 +44,8 @@ class BackgroundAnimationViewController: UIViewController {
     var prePassedSwipeArray = false
     var theTappedKolodaIndex: Int = 0
     
+    let coachMarksController = CoachMarksController()
+    
     let locationManager = CLLocationManager()
     
     //MARK: Lifecycle
@@ -59,6 +62,8 @@ class BackgroundAnimationViewController: UIViewController {
         }
         anonymousUserSetup()
         theBottomButtonsView.delegate = self
+        
+        setUpTutorialCoachingMarks()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -80,6 +85,12 @@ class BackgroundAnimationViewController: UIViewController {
             kolodaView.reloadData()
         }
         getUserLocation()
+        
+        self.coachMarksController.startOn(self)
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        self.coachMarksController.stop(immediately: true)
     }
     
     func dataStoreSetup() {
@@ -226,12 +237,11 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         }
     }
     
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> OverlayView? {
+    //Need to do Koloda.OverlayView because Instructions pod also has a view called OverlayView, so it was ambigious
+    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> Koloda.OverlayView? {
         let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
         return overlayView
     }
-    
-    
 }
 
 extension BackgroundAnimationViewController: FrostedSidebarDelegate {
