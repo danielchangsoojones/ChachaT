@@ -44,11 +44,11 @@ extension SettingsViewController {
     }
     
     private func createInterestedInRow() -> InlinePickerRowFormer<FormInlinePickerCell, String> {
-        var choices: [String] = ["female", "male", "all"]
-        if let index = choices.index(of: User.current()!.interestedIn) {
+        var choices: [String] = ["all", "female", "male"]
+        if let index = choices.index(of: User.current()!.interestedIn ?? "") {
             //placing the previously chosen attribute first, so then the title will show that attribute, and it will also be the top choice.
             choices.remove(at: index)
-            choices.insertAsFirst(User.current()!.interestedIn)
+            choices.insertAsFirst(User.current()!.interestedIn ?? "")
         }
         
         let row = InlinePickerRowFormer<FormInlinePickerCell, String> {

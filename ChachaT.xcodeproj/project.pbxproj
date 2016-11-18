@@ -135,8 +135,6 @@
 		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
 		92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6E1D87115B00E05C05 /* CircleView.swift */; };
 		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
-		92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB731D88A8DF00E05C05 /* Settings.storyboard */; };
-		92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */; };
 		92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */; };
 		92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */; };
@@ -285,8 +283,6 @@
 		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
 		92BCEB6E1D87115B00E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircleView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		92BCEB731D88A8DF00E05C05 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationDataStore.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTag.swift; sourceTree = "<group>"; };
@@ -1004,8 +1000,6 @@
 			isa = PBXGroup;
 			children = (
 				920B4DF71DDEA47900AFC7BD /* Data Models */,
-				92BCEB731D88A8DF00E05C05 /* Settings.storyboard */,
-				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
 				920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */,
 			);
 			name = Settings;
@@ -1138,7 +1132,6 @@
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
 				920BF8211D3FF5E300104842 /* Info.plist in Resources */,
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
-				92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
@@ -1256,7 +1249,6 @@
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
-				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
