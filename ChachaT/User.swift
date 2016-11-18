@@ -30,6 +30,7 @@ class User: PFUser {
     @NSManaged var facebookId : String?
     @NSManaged var location: PFGeoPoint
     @NSManaged var tags: PFRelation<ParseTag>
+    @NSManaged var gender: String
     var age : Int? {
         if let birthDate = birthDate {
             return calculateAge(birthday: birthDate)

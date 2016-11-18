@@ -104,6 +104,7 @@
 		92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */; };
 		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */; };
+		92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
@@ -251,6 +252,7 @@
 		92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerViewController.swift; sourceTree = "<group>"; };
+		92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerDataStore.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
@@ -745,9 +747,9 @@
 			children = (
 				924139B51DC77ED300C8B6AF /* Facebook Image Picking */,
 				9275FB821D7A030600D8131D /* Subviews */,
+				92954CB01DDE6520005B6FA4 /* Attribute Picker */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 				928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */,
-				92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */,
 			);
 			name = "Edit Profile";
 			sourceTree = "<group>";
@@ -850,6 +852,23 @@
 				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 			);
 			name = "Single Photo Editing  View";
+			sourceTree = "<group>";
+		};
+		92954CB01DDE6520005B6FA4 /* Attribute Picker */ = {
+			isa = PBXGroup;
+			children = (
+				92954CB11DDE652F005B6FA4 /* Data Models */,
+				92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */,
+			);
+			name = "Attribute Picker";
+			sourceTree = "<group>";
+		};
+		92954CB11DDE652F005B6FA4 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
@@ -1235,6 +1254,7 @@
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
+				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,

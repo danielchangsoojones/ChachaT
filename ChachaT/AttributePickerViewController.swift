@@ -16,6 +16,8 @@ class AttributePickerViewController: TableViewController {
     var rowTitles: [String] = []
     var previouslyChosenTitle: String = ""
     
+    let dataStore: AttributePickerDataStore = AttributePickerDataStore()
+    
     convenience init() {
         self.init(style: .grouped)
     }
@@ -23,7 +25,7 @@ class AttributePickerViewController: TableViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         dataSource.sections = [
-            Section(header: "Hi", rows: createRows())
+            Section(header: Section.Extremity(stringLiteral: sectionTitle), rows: createRows())
         ]
         // Do any additional setup after loading the view.
     }
@@ -50,6 +52,7 @@ class AttributePickerViewController: TableViewController {
     
     fileprivate func createSelection(title: String) -> Selection {
         return {
+            self.dataStore.saveGender(gender: title)
             _ = self.passedAction!(title)
             self.popVC()
         }

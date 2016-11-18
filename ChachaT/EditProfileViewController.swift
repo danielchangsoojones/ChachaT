@@ -24,7 +24,7 @@ struct EditProfileConstants {
     static let tagSegueTitle = "Tags"
     static let tagSeguePlaceholder = "See your tags..."
     static let genderSeguePlaceholder = "Enter your gender"
-    static let genderTitle = "Gender"
+    static let genderTitle = "Your Gender"
 }
 
 class EditProfileViewController: UIViewController {

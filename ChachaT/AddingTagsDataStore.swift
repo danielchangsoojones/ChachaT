@@ -95,26 +95,6 @@ class AddingTagsDataStore: SuperTagDataStore {
         }
     }
     
-    func savePrivacyTag(specialtyCategory: String) {
-        removeSpecialtyTag(specialtyCategory: specialtyCategory)
-    
-        let query = ParseTag.query()!
-        query.whereKey("isPrivate", equalTo: true)
-        let innerQuery = DropDownCategory.query()!
-        innerQuery.whereKey("name", equalTo: specialtyCategory)
-        query.whereKey("dropDownCategory", matchesQuery: innerQuery)
-        
-        query.getFirstObjectInBackground { (object, error) in
-            if let parseTag = object as? ParseTag {
-                let relation = User.current()!.relation(forKey: "tags")
-                relation.add(parseTag)
-                User.current()?.saveInBackground()
-            } else if let error = error {
-                print(error)
-            }
-        }
-    }
-    
     func saveCustomActionTag(databaseColumnName: String, itemToSave: Any) {
         User.current()![databaseColumnName] = itemToSave
         User.current()!.saveInBackground()
