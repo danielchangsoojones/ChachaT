@@ -129,6 +129,8 @@ class AboutView: UIView {
         if theAutoGrowingTextView.isHidden {
             if let textField = theTextField , textField.text != nil {
                 return textField.text!
+            } else if let labelText = theInnerLabel?.text {
+                return labelText
             }
         } else {
             return theAutoGrowingTextView.text

@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6B35B017D7C7AC2EB65946EF /* Pods_Shuffles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471CA7B841A92D5EF573B32C /* Pods_Shuffles.framework */; };
+		920B4DF61DDE990700AFC7BD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */; };
+		920B4DF91DDEA48B00AFC7BD /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */; };
 		920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81B1D3FF5E300104842 /* CloseButton.swift */; };
 		920BF8211D3FF5E300104842 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920BF81C1D3FF5E300104842 /* Info.plist */; };
 		920BF8221D3FF5E300104842 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81E1D3FF5E300104842 /* TagListView.swift */; };
@@ -103,6 +105,8 @@
 		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
 		92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */; };
 		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
+		92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */; };
+		92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */; };
 		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
@@ -131,8 +135,6 @@
 		92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */; };
 		92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB6E1D87115B00E05C05 /* CircleView.swift */; };
 		92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB701D87457000E05C05 /* CircularImageView.swift */; };
-		92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92BCEB731D88A8DF00E05C05 /* Settings.storyboard */; };
-		92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */; };
 		92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */; };
 		92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */; };
 		92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */; };
@@ -149,6 +151,8 @@
 		49472BCE7514485EBE58CA66 /* Pods-Shuffles.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(production).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(production).xcconfig"; sourceTree = "<group>"; };
 		7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 		7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
+		920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
 		920BF81B1D3FF5E300104842 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		920BF81C1D3FF5E300104842 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920BF81D1D3FF5E300104842 /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
@@ -249,6 +253,8 @@
 		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
+		92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerViewController.swift; sourceTree = "<group>"; };
+		92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerDataStore.swift; sourceTree = "<group>"; };
 		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
@@ -277,8 +283,6 @@
 		92BCEB6C1D85B4CB00E05C05 /* BulletPointView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BulletPointView.swift; sourceTree = "<group>"; };
 		92BCEB6E1D87115B00E05C05 /* CircleView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircleView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92BCEB701D87457000E05C05 /* CircularImageView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = CircularImageView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
-		92BCEB731D88A8DF00E05C05 /* Settings.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Settings.storyboard; sourceTree = "<group>"; };
-		92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsTableViewController.swift; sourceTree = "<group>"; };
 		92BCEB7A1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationDataStore.swift; sourceTree = "<group>"; };
 		92C1B1DE1D51A7D700F4A815 /* SearchTagsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SearchTagsDataStore.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseTag.swift; sourceTree = "<group>"; };
@@ -353,6 +357,14 @@
 				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 			);
 			name = Subviews;
+			sourceTree = "<group>";
+		};
+		920B4DF71DDEA47900AFC7BD /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		920BF81A1D3FF5E300104842 /* TagListView */ = {
@@ -743,6 +755,7 @@
 			children = (
 				924139B51DC77ED300C8B6AF /* Facebook Image Picking */,
 				9275FB821D7A030600D8131D /* Subviews */,
+				92954CB01DDE6520005B6FA4 /* Attribute Picker */,
 				920BF8281D41DF9400104842 /* EditProfileViewController.swift */,
 				928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */,
 			);
@@ -847,6 +860,23 @@
 				9275FB831D7A037D00D8131D /* PhotoEditingView.xib */,
 			);
 			name = "Single Photo Editing  View";
+			sourceTree = "<group>";
+		};
+		92954CB01DDE6520005B6FA4 /* Attribute Picker */ = {
+			isa = PBXGroup;
+			children = (
+				92954CB11DDE652F005B6FA4 /* Data Models */,
+				92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */,
+			);
+			name = "Attribute Picker";
+			sourceTree = "<group>";
+		};
+		92954CB11DDE652F005B6FA4 /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
@@ -969,8 +999,8 @@
 		92BCEB721D88A8C500E05C05 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
-				92BCEB731D88A8DF00E05C05 /* Settings.storyboard */,
-				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
+				920B4DF71DDEA47900AFC7BD /* Data Models */,
+				920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1102,7 +1132,6 @@
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
 				920BF8211D3FF5E300104842 /* Info.plist in Resources */,
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
-				92BCEB741D88A8DF00E05C05 /* Settings.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */,
 				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
@@ -1187,6 +1216,7 @@
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
+				920B4DF61DDE990700AFC7BD /* SettingsViewController.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
@@ -1212,13 +1242,13 @@
 				92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
+				92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */,
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
-				92BCEB781D88AB0B00E05C05 /* SettingsTableViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
@@ -1231,6 +1261,7 @@
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
+				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
@@ -1243,6 +1274,7 @@
 				928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */,
 				923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
+				920B4DF91DDEA48B00AFC7BD /* SettingsDataStore.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
