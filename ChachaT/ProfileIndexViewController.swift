@@ -124,7 +124,6 @@ extension ProfileIndexViewController: SegueHandlerType {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
         case ProfileIndexToCardDetailPageSegue
         case ProfileIndexToEditProfileSegue
-        case ProfileIndexToSettingsPage
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
