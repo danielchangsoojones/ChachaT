@@ -40,7 +40,8 @@ class ProfileIndexViewController: UIViewController {
     }
     
     func settingsButtonPressed(_ sender: UITapGestureRecognizer) {
-        performSegueWithIdentifier(.ProfileIndexToSettingsPage, sender: nil)
+        let settingsVC = SettingsViewController()
+        pushVC(settingsVC)
     }
     
     func profileButtonSetup() {

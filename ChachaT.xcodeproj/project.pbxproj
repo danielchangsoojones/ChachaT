@@ -8,6 +8,8 @@
 
 /* Begin PBXBuildFile section */
 		6B35B017D7C7AC2EB65946EF /* Pods_Shuffles.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 471CA7B841A92D5EF573B32C /* Pods_Shuffles.framework */; };
+		920B4DF61DDE990700AFC7BD /* SettingsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */; };
+		920B4DF91DDEA48B00AFC7BD /* SettingsDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */; };
 		920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81B1D3FF5E300104842 /* CloseButton.swift */; };
 		920BF8211D3FF5E300104842 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 920BF81C1D3FF5E300104842 /* Info.plist */; };
 		920BF8221D3FF5E300104842 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF81E1D3FF5E300104842 /* TagListView.swift */; };
@@ -151,6 +153,8 @@
 		49472BCE7514485EBE58CA66 /* Pods-Shuffles.debug(production).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Shuffles.debug(production).xcconfig"; path = "Pods/Target Support Files/Pods-Shuffles/Pods-Shuffles.debug(production).xcconfig"; sourceTree = "<group>"; };
 		7F0EBE5031BC4BD95CB9E0A1 /* Pods-ChachaT.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.release.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.release.xcconfig"; sourceTree = "<group>"; };
 		7F7ED6D7748AACFBB7251848 /* Pods-ChachaT.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ChachaT.debug.xcconfig"; path = "Pods/Target Support Files/Pods-ChachaT/Pods-ChachaT.debug.xcconfig"; sourceTree = "<group>"; };
+		920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsViewController.swift; sourceTree = "<group>"; };
+		920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsDataStore.swift; sourceTree = "<group>"; };
 		920BF81B1D3FF5E300104842 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		920BF81C1D3FF5E300104842 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		920BF81D1D3FF5E300104842 /* TagListView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = TagListView.h; sourceTree = "<group>"; };
@@ -357,6 +361,14 @@
 				920BF81B1D3FF5E300104842 /* CloseButton.swift */,
 			);
 			name = Subviews;
+			sourceTree = "<group>";
+		};
+		920B4DF71DDEA47900AFC7BD /* Data Models */ = {
+			isa = PBXGroup;
+			children = (
+				920B4DF81DDEA48B00AFC7BD /* SettingsDataStore.swift */,
+			);
+			name = "Data Models";
 			sourceTree = "<group>";
 		};
 		920BF81A1D3FF5E300104842 /* TagListView */ = {
@@ -991,8 +1003,10 @@
 		92BCEB721D88A8C500E05C05 /* Settings */ = {
 			isa = PBXGroup;
 			children = (
+				920B4DF71DDEA47900AFC7BD /* Data Models */,
 				92BCEB731D88A8DF00E05C05 /* Settings.storyboard */,
 				92BCEB771D88AB0B00E05C05 /* SettingsTableViewController.swift */,
+				920B4DF51DDE990700AFC7BD /* SettingsViewController.swift */,
 			);
 			name = Settings;
 			sourceTree = "<group>";
@@ -1209,6 +1223,7 @@
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,
 				9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */,
 				9275FB881D7B497C00D8131D /* PhotoEditingMasterLayoutView.swift in Sources */,
+				920B4DF61DDE990700AFC7BD /* SettingsViewController.swift in Sources */,
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
@@ -1267,6 +1282,7 @@
 				928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */,
 				923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
+				920B4DF91DDEA48B00AFC7BD /* SettingsDataStore.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,

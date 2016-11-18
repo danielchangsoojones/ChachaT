@@ -47,7 +47,6 @@
                         <outlet property="theUpperBackgroundView" destination="UPa-l3-a2J" id="RAj-FG-9Mg"/>
                         <segue destination="Si2-TA-hhX" kind="show" identifier="ProfileIndexToEditProfileSegue" id="hBf-Mv-AVU"/>
                         <segue destination="DnT-3j-PZJ" kind="show" identifier="ProfileIndexToCardDetailPageSegue" id="gIl-zM-83q"/>
-                        <segue destination="pl2-TI-YyZ" kind="show" identifier="ProfileIndexToSettingsPage" id="2c2-IT-jV1"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9b-39-CQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -61,14 +60,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="fpp-eA-MBc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2129" y="391"/>
-        </scene>
-        <!--SettingsTableViewController-->
-        <scene sceneID="ADV-BG-RR9">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Settings" referencedIdentifier="SettingsTableViewController" id="pl2-TI-YyZ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="Anb-AL-Nwm" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2066" y="606"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Dhh-ST-gQG">

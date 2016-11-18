@@ -29,6 +29,7 @@ pod 'TGLParallaxCarousel', :git=> 'https://github.com/danielchangsoojones/TGLPar
 pod 'ALCameraViewController'
 pod 'Instructions', git: 'https://github.com/ephread/Instructions.git', branch: 'swift3'
 pod 'Static', git: 'https://github.com/venmo/Static'
+pod "Former"
 
 post_install do |installer|
     `find Pods -regex 'Pods/pop.*\\.h' -print0 | xargs -0 sed -i '' 's/\\(<\\)pop\\/\\(.*\\)\\(>\\)/\\"\\2\\"/'`

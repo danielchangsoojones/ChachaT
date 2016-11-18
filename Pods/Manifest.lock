@@ -18,6 +18,7 @@ PODS:
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.16.1):
     - FBSDKCoreKit
+  - Former (1.5.0)
   - GBHFacebookImagePicker (1.0.6):
     - FBSDKCoreKit (~> 4.16.0)
     - FBSDKLoginKit (~> 4.16.0)
@@ -65,6 +66,7 @@ DEPENDENCIES:
   - EFTools/Basic (from `https://github.com/ElevenFifty/EFTools.git`, branch `develop`)
   - ExpandingMenu (~> 0.1)
   - EZSwiftExtensions
+  - Former
   - GBHFacebookImagePicker
   - Instructions (from `https://github.com/ephread/Instructions.git`, branch `swift3`)
   - JSQMessagesViewController
@@ -135,6 +137,7 @@ SPEC CHECKSUMS:
   EZSwiftExtensions: 4afef248066a036903d8496bf07bc355b22ce766
   FBSDKCoreKit: 6feac4e8921ccd7afa83fb1df6291dc6eec42c7c
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
+  Former: 8f9f41e51eceb75e47b4275147795ec477b121ec
   GBHFacebookImagePicker: e8bbd1bd2c85f648bd80f52d66edeb2148b6c8ba
   Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
   Instructions: 6976f674ce788aefec475be6f18500572f1645d4
@@ -159,6 +162,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: b60c6489d5ce044b4ffd7951b570a27480ec1629
+PODFILE CHECKSUM: 77efcf9cc5dfd7348f6724259330c455a2004e70
 
 COCOAPODS: 1.1.1
