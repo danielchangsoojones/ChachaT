@@ -40,6 +40,7 @@ class EditProfileDataStore {
         let parseColumnName = getProfileImageParseColumnName(imageNumber: photoNumber)
         //dangerous to save parse things this way because it will create a new column no matter if the data model was supposed to be named that
         currentUser[parseColumnName] = file
+    
     }
     
     func deleteImage(photoNumber: Int) {
