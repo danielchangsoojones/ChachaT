@@ -92,8 +92,18 @@ class SearchTagsViewController: SuperTagViewController {
     
     override func passSearchResults(searchTags: [Tag]) {
         tagChoicesView.removeAllTags()
+        //Technically, just need to remove the no tag exist label subview, not all subviews, it just so happens that the only subview left is the label.
+        tagChoicesView.removeSubviews() //in case we have added the "No tags exist" label
         if searchTags.isEmpty {
-            //TODO: there were no results from the search
+            let label = UILabel()
+            label.textColor = CustomColors.SilverChaliceGrey
+            label.textAlignment = .center
+            label.text = "No tag exists"
+            tagChoicesView.addSubview(label)
+            label.snp.makeConstraints({ (make) in
+                make.centerX.equalTo(self.view)
+                make.top.equalTo(tagChoicesView).offset(10)
+            })
             //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
         } else {
             for (index, tag) in searchTags.enumerated() {

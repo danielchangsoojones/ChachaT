@@ -78,21 +78,34 @@ class AddingTagsDataStore: SuperTagDataStore {
     }
     
     func saveSpecialtyTag(title: String, specialtyCategory: String) {
-        removeSpecialtyTag(specialtyCategory: specialtyCategory)
-        
-        let query = ParseTag.query()!
-        query.whereKey("title", equalTo: title)
-        query.getFirstObjectInBackground { (object, error) in
-            if let parseTag = object as? ParseTag {
-                //add the new tag chosen tag to the User's tags
-                let relation = User.current()!.relation(forKey: "tags")
-                relation.add(parseTag)
-                
-                User.current()?.saveInBackground()
-            } else if let error = error {
-                print(error)
+        if !checkIfGenderTag(title: title, specialtyCategory: specialtyCategory) {
+            removeSpecialtyTag(specialtyCategory: specialtyCategory)
+            
+            let query = ParseTag.query()!
+            query.whereKey("title", equalTo: title)
+            query.getFirstObjectInBackground { (object, error) in
+                if let parseTag = object as? ParseTag {
+                    //add the new tag chosen tag to the User's tags
+                    let relation = User.current()!.relation(forKey: "tags")
+                    relation.add(parseTag)
+                    
+                    User.current()?.saveInBackground()
+                } else if let error = error {
+                    print(error)
+                }
             }
         }
+    }
+    
+    //Purpose: when gender changes we need to update the users gender in the user's column, not just the tag.
+    fileprivate func checkIfGenderTag(title: String, specialtyCategory: String) -> Bool {
+        if specialtyCategory == "Gender" {
+            let attributePickerDataStore = AttributePickerDataStore()
+            attributePickerDataStore.saveGender(gender: title)
+            return true
+        }
+        
+        return false
     }
     
     func saveCustomActionTag(databaseColumnName: String, itemToSave: Any) {

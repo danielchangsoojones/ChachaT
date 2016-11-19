@@ -50,8 +50,8 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
     }
     
     func respondToMessage(swipe: Swipe) {
-        deleteMessage(swipe: swipe)
         segueToChatVC(swipe: swipe)
+        deleteMessage(swipe: swipe)
     }
     
     fileprivate func segueToChatVC(swipe: Swipe) {
