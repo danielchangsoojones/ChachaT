@@ -132,7 +132,7 @@ class CardDetailViewController: UIViewController {
         //setting the height to the nopeButton's height because that is the height of the view
         if delegate != nil {
             self.view.layer.addSublayer(setBottomBlur(blurHeight: ez.screenHeight * 0.23, color: CustomColors.JellyTeal))
-            let bottomButtonsView = BottomButtonsView(addMessageButton: true, delegate: self)
+            let bottomButtonsView = BottomButtonsView(addMessageButton: true, delegate: self, style: .filled)
             self.view.addSubview(bottomButtonsView)
             bottomButtonsView.snp.makeConstraints { (make) in
                 make.bottom.equalToSuperview()
@@ -205,7 +205,9 @@ extension CardDetailViewController: BottomButtonsDelegate {
     }
     
     func messageButtonPressed() {
-        performSegue(withIdentifier: SegueIdentifier.CardDetailToSendMessageSegue.rawValue, sender: nil)
+        if let userOfTheCard = userOfTheCard {
+            CardSendMessageViewController.presentFrom(self, userToSend: userOfTheCard)
+        }
     }
 }
 

@@ -305,7 +305,6 @@
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
                         <outlet property="theProfileImageCarouselView" destination="vGv-4q-uCX" id="cla-An-9YF"/>
                         <outlet property="theProfileImageHolderView" destination="vGv-4q-uCX" id="9ri-bf-pWk"/>
-                        <segue destination="PjY-dj-Cfp" kind="presentation" identifier="CardDetailToSendMessageSegue" id="43e-Cs-ujw"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>

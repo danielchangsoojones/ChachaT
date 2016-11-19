@@ -35,13 +35,15 @@ class BottomButtonsView: UIView {
         delegate?.messageButtonPressed!()
     }
     
-    init(addMessageButton: Bool, delegate: BottomButtonsDelegate) {
+    enum  Style {
+        case filled
+        case transparent
+    }
+    
+    init(addMessageButton: Bool, delegate: BottomButtonsDelegate, style: Style) {
         super.init(frame: CGRect.zero)
         xibSetup()
-        self.delegate = delegate
-        if addMessageButton {
-            insertMessageButton()
-        }
+        setBottomButtonImages(addMessageButton: addMessageButton, delegate: delegate, style: style)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -49,12 +51,27 @@ class BottomButtonsView: UIView {
         xibSetup()
     }
     
-    func insertMessageButton() {
+    func setBottomButtonImages(addMessageButton: Bool, delegate: BottomButtonsDelegate, style: Style) {
+        if style == .filled {
+            theNopeButton.setImage(#imageLiteral(resourceName: "filledInSkipButton"), for: .normal)
+            theApproveButton.setImage(#imageLiteral(resourceName: "filledInApproveButton"), for: .normal)
+        }
+        self.delegate = delegate
+        if addMessageButton {
+            insertMessageButton(style: style)
+        }
+    }
+    
+    func insertMessageButton(style: Style) {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        switch style {
+        case .filled:
+            button.setImage(#imageLiteral(resourceName: "filledInMessageButton"), for: .normal)
+        case .transparent:
+            button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        }
         button.addTarget(self, action: #selector(messageButtonPressed(sender:)), for: .touchUpInside)
         theButtonStackView.insertArrangedSubview(button, at: 1)
-        invertApproveButton()
     }
     
     func invertApproveButton() {

@@ -61,7 +61,7 @@ class BackgroundAnimationViewController: UIViewController {
             //if it is not empty, that means the swipeArray was passed from the search page, so don't load new swipes
             dataStore.loadSwipeArray()
         }
-        theBottomButtonsView.delegate = self
+        setBottomButtons()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -92,6 +92,10 @@ class BackgroundAnimationViewController: UIViewController {
     
     func dataStoreSetup() {
         self.dataStore = BackgroundAnimationDataStore(delegate: self)
+    }
+    
+    func setBottomButtons() {
+        theBottomButtonsView.setBottomButtonImages(addMessageButton: true, delegate: self, style: .transparent)
     }
     
     func playSoundInBG(_ theAudioPlayer:AVAudioPlayer) {
@@ -126,6 +130,11 @@ extension BackgroundAnimationViewController: BottomButtonsDelegate {
     
     func nopeButtonPressed() {
         kolodaView.swipe(.left)
+    }
+    
+    func messageButtonPressed() {
+        let currentIndex = kolodaView.currentCardIndex
+        CardSendMessageViewController.presentFrom(self, userToSend: swipeArray[currentIndex].otherUser)
     }
 }
 
