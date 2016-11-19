@@ -18,12 +18,14 @@ class ProfileIndexViewController: UIViewController {
     @IBOutlet weak var theButtonStackView: UIStackView!
     @IBOutlet weak var theUpperBackgroundView: UIView!
     
+    var profileBubble = CircularImageView(file: User.current()?.profileImage, diameter: 150)
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. In the background Animation Controller, in viewDidDismiss, I should turn the navBarHidden = false and then it would fix.
         self.navigationController?.isNavigationBarHidden = false
         settingsButtonSetup()
-        profileButtonSetup()
+        profileImageButtonSetup()
     }
 
     override func didReceiveMemoryWarning() {
@@ -35,7 +37,7 @@ class ProfileIndexViewController: UIViewController {
         performSegueWithIdentifier(.ProfileIndexToEditProfileSegue, sender: nil)
     }
     
-    func profileButtonPressed(_ sender: UITapGestureRecognizer) {
+    func profileImageButtonPressed(_ sender: UITapGestureRecognizer) {
         performSegueWithIdentifier(.ProfileIndexToCardDetailPageSegue, sender: nil)
     }
     
@@ -44,9 +46,9 @@ class ProfileIndexViewController: UIViewController {
         pushVC(settingsVC)
     }
     
-    func profileButtonSetup() {
-        let profileBubble = CircularImageView(file: User.current()?.profileImage, diameter: 150)
-        profileBubble.addTapGesture(target: self, action: #selector(ProfileIndexViewController.profileButtonPressed(_:)))
+    func profileImageButtonSetup() {
+        profileBubble = CircularImageView(file: User.current()?.profileImage, diameter: 150)
+        profileBubble.addTapGesture(target: self, action: #selector(ProfileIndexViewController.profileImageButtonPressed(_:)))
         theUpperBackgroundView.addSubview(profileBubble)
         profileBubble.snp.makeConstraints { (make) in
             make.center.equalTo(theUpperBackgroundView)
@@ -120,6 +122,12 @@ class ProfileIndexViewController: UIViewController {
 
 }
 
+extension ProfileIndexViewController: EditProfileDelegate {
+    func setProfileBubbleImage(image: UIImage) {
+        profileBubble.theImageView.image = image
+    }
+}
+
 extension ProfileIndexViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
@@ -134,8 +142,9 @@ extension ProfileIndexViewController: SegueHandlerType {
             let cardDetailVC = segue.destination as! CardDetailViewController
             cardDetailVC.isViewingOwnProfile = true
             cardDetailVC.userOfTheCard = User.current()
-        default:
-            break
+        case .ProfileIndexToEditProfileSegue:
+            let editProfileVC = segue.destination as! EditProfileViewController
+            editProfileVC.delegate = self
         }
     }
 }

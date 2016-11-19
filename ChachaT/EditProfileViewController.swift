@@ -27,6 +27,10 @@ struct EditProfileConstants {
     static let genderTitle = "Your Gender"
 }
 
+protocol EditProfileDelegate {
+    func setProfileBubbleImage(image: UIImage)
+}
+
 class EditProfileViewController: UIViewController {
     @IBOutlet weak var photoLayoutView: PhotoEditingMasterLayoutView!
     @IBOutlet weak var theStackView: UIStackView!
@@ -42,6 +46,7 @@ class EditProfileViewController: UIViewController {
     
     var thePhotoNumberToChange: Int!
     var dataStore : EditProfileDataStore!
+    var delegate: EditProfileDelegate?
     let currentUser = User.current()
     var theKeyboardIsShowing: Bool = false
     
@@ -82,6 +87,7 @@ class EditProfileViewController: UIViewController {
         tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
+    
     
     deinit {
         NotificationCenter.default.removeObserver(self)
@@ -237,6 +243,9 @@ extension EditProfileViewController: PhotoEditingDelegate, CameraDelegate {
     func imageWasPicked(image: UIImage) {
         photoLayoutView.setNewImage(image, photoNumber: thePhotoNumberToChange)
         dataStore.saveProfileImage(image, photoNumber: thePhotoNumberToChange)
+        if thePhotoNumberToChange == 1 {
+            delegate?.setProfileBubbleImage(image: image)
+        }
     }
 }
 
