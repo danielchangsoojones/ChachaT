@@ -19,6 +19,13 @@ struct CardMesageConstants {
 
 class CardSendMessageViewController: UIViewController {
     
+    class func presentFrom(_ vc: UIViewController, userToSend: User) {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+        let cardSendMessageVC = storyboard.instantiateViewController(withIdentifier: "CardSendMessageViewController") as! CardSendMessageViewController
+        cardSendMessageVC.userToSend = userToSend
+        vc.presentVC(cardSendMessageVC)
+    }
+    
     @IBOutlet weak var theSalutationView: MessageSalutationView!
     @IBOutlet weak var theCharCountLabel: UILabel!
     @IBOutlet weak var theSendButton: UIButton!
