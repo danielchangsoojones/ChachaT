@@ -35,12 +35,17 @@ class BottomButtonsView: UIView {
         delegate?.messageButtonPressed!()
     }
     
-    init(addMessageButton: Bool, delegate: BottomButtonsDelegate) {
+    enum  Style {
+        case filled
+        case transparent
+    }
+    
+    init(addMessageButton: Bool, delegate: BottomButtonsDelegate, style: Style) {
         super.init(frame: CGRect.zero)
         xibSetup()
         self.delegate = delegate
         if addMessageButton {
-            insertMessageButton()
+            insertMessageButton(style: style)
         }
     }
     
@@ -49,9 +54,16 @@ class BottomButtonsView: UIView {
         xibSetup()
     }
     
-    func insertMessageButton() {
+    func insertMessageButton(style: Style) {
         let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        switch style {
+        case .filled:
+            button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        case .transparent:
+            button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        default:
+            button.setImage(#imageLiteral(resourceName: "Message Airplane Button"), for: .normal)
+        }
         button.addTarget(self, action: #selector(messageButtonPressed(sender:)), for: .touchUpInside)
         theButtonStackView.insertArrangedSubview(button, at: 1)
         invertApproveButton()
