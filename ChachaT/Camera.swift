@@ -132,16 +132,17 @@ class Camera {
 extension Camera {
     //Using this special image picker forces the user to crop the photo, the crop is a square
     func presentCroppingPhotoLibraryVC(target: AnyObject) {
-        let libraryViewController = CameraViewController.imagePickerViewController(croppingEnabled: true) { image, asset in
-            self.imageWasPicked(image: image, target: target)
+        //TODO: fix the weak stuff that is on the github that says we need to do.
+        let libraryViewController = CameraViewController.imagePickerViewController(croppingEnabled: true) { [weak target] image, asset in
+            self.imageWasPicked(image: image, target: target!)
         }
         
         target.present(libraryViewController, animated: true, completion: nil)
     }
     
     func presentCroppingCameraVC(target: AnyObject) {
-        let cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak self] image, asset in
-            self?.imageWasPicked(image: image, target: target)
+        let cameraViewController = CameraViewController(croppingEnabled: true, allowsLibraryAccess: true) { [weak target] image, asset in
+            self.imageWasPicked(image: image, target: target!)
         }
         
         target.present(cameraViewController, animated: true, completion: nil)
