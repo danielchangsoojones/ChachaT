@@ -269,23 +269,16 @@ extension SignUpLogInViewController: SegueHandlerType {
     }
 }
 
-func UIColorFromHex(_ rgbValue:UInt32, alpha:Double=1.0)->UIColor {
-    let red = CGFloat((rgbValue & 0xFF0000) >> 16)/256.0
-    let green = CGFloat((rgbValue & 0xFF00) >> 8)/256.0
-    let blue = CGFloat(rgbValue & 0xFF)/256.0
-    return UIColor(red:red, green:green, blue:blue, alpha:CGFloat(alpha))
-}
-
 func showActivityIndicatory(uiView: UIView) {
     let container: UIView = UIView()
     container.frame = uiView.frame
     container.center = uiView.center
-    container.backgroundColor = UIColorFromHex(0xffffff, alpha: 0.3)
+    container.backgroundColor = UIColor.white.withAlphaComponent(0.3)
     
     let loadingView: UIView = UIView()
     loadingView.frame = CGRect(x: 0.0, y: 0.0, w: 80.0, h: 80.0)
     loadingView.center = uiView.center
-    loadingView.backgroundColor = UIColorFromHex(0x444444, alpha: 0.7)
+    loadingView.backgroundColor = UIColor(r: 0.25, g: 0.25, b: 0.25, a: 0.7)
     loadingView.clipsToBounds = true
     loadingView.layer.cornerRadius = 10
     

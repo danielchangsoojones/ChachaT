@@ -56,17 +56,21 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     }
     
     override func passSearchResults(searchTags: [Tag]) {
-        if searchTags.isEmpty {
-            //TODO: If we can't find any more tags here, then stop querying any farther if the suer keeps typing
-            if let addingTagView = findCreationTagView() {
-                creationMenuView.toggleMenuType(.newTag, newTagTitle: addingTagView.searchTextField.text, tagTitles: nil)
+        if let addingTagView = findCreationTagView() {
+            let currentSearchText: String = addingTagView.searchTextField.text ?? ""
+            if searchTags.isEmpty {
+                //TODO: If we can't find any more tags here, then stop querying any farther if the user keeps typing
+                creationMenuView.toggleMenuType(.newTag, newTagTitle: currentSearchText, tagTitles: nil)
+            } else {
+                //search results exist
+                var tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
+                    return tag.title
+                })
+                if !tagTitles.contains(currentSearchText) {
+                    tagTitles.append(currentSearchText)
+                }
+                creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
             }
-        } else {
-            //search results exist
-            let tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
-                return tag.title
-            })
-            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
         }
     }
     
