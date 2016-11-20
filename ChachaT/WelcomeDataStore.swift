@@ -218,8 +218,6 @@ extension WelcomeDataStore {
                     currentUser.profileImage = PFFile(name: Constants.profileImage, data: data!)
                     currentUser.saveInBackground()
                     self.delegate?.performSegueIntoApp()
-                    
-                    //Find this delegate and code spinner!!!
                 } else {
                     print("Failed to update profile image from facebook: \(response.result.error)")
                 }
