@@ -47,7 +47,7 @@ class CreationTagView: TagView {
         self.addSubview(searchTextField)
         searchTextField.placeholder = searchBarPlaceHolderText
         searchTextField.snp.makeConstraints { (make) in
-            make.edges.equalTo(self)
+            make.edges.equalTo(self).inset(UIEdgeInsetsMake(0, 10, 0, 0))
         }
     }
     
