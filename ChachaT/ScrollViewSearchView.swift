@@ -78,6 +78,10 @@ class ScrollViewSearchView: UIView {
         }
     }
     
+    func getSearchBarText() -> String? {
+        return searchBox.text
+    }
+    
     override func awakeFromNib() {
         self.backgroundColor = UIColor.clear // for some reason, the background color was defaulting to white, and we want transparency
         setButtonBorders()

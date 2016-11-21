@@ -77,6 +77,10 @@ class SuperTagViewController: UIViewController {
     func passSearchResults(searchTags: [Tag]) {
         fatalError("Subclasses need to implement the `passSearchResults` method.")
     }
+    
+    func getMostCurrentSearchText() -> String {
+        fatalError("Subclasses need to implement the `getMostCurrentSearchText` method.")
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()

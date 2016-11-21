@@ -14,6 +14,7 @@ import Timepiece
 class AddingTagsToProfileViewController: SuperTagViewController {
     @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
     var creationMenuView: CreationMenuView!
+    var theCreationTagView: CreationTagView!
     
     var dataStore : AddingTagsDataStore!
     
@@ -42,6 +43,7 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
         //TODO: move this the CreationTagView class
         tagView.borderColor = UIColor.black
+        theCreationTagView = tagView
         _ = tagChoicesView.addTagView(tagView)
     }
     
@@ -56,21 +58,19 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     }
     
     override func passSearchResults(searchTags: [Tag]) {
-        if let addingTagView = findCreationTagView() {
-            let currentSearchText: String = addingTagView.searchTextField.text ?? ""
-            if searchTags.isEmpty {
-                //TODO: If we can't find any more tags here, then stop querying any farther if the user keeps typing
-                creationMenuView.toggleMenuType(.newTag, newTagTitle: currentSearchText, tagTitles: nil)
-            } else {
-                //search results exist
-                var tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
-                    return tag.title
-                })
-                if !tagTitles.contains(currentSearchText) {
-                    tagTitles.append(currentSearchText)
-                }
-                creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
+        let currentSearchText: String = theCreationTagView.searchTextField.text ?? ""
+        if searchTags.isEmpty {
+            //TODO: If we can't find any more tags here, then stop querying any farther if the user keeps typing
+            creationMenuView.toggleMenuType(.newTag, newTagTitle: currentSearchText, tagTitles: nil)
+        } else {
+            //search results exist
+            var tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
+                return tag.title
+            })
+            if !tagTitles.contains(currentSearchText) {
+                tagTitles.append(currentSearchText)
             }
+            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
         }
     }
     
@@ -83,6 +83,13 @@ class AddingTagsToProfileViewController: SuperTagViewController {
                 createCustomTags(dropDownTag: dropDownTag)
             }
         }
+    }
+    
+    override func getMostCurrentSearchText() -> String {
+        if let currentText = theCreationTagView.searchTextField.text {
+            return currentText
+        }
+        return ""
     }
     
     override func didReceiveMemoryWarning() {
@@ -187,15 +194,6 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
         //we already check if the text is empty over in the CreationTagView class
         dataStore.searchForTags(searchText: searchText)
     }
-    
-    //TODO: could probably be a better way to get CreationTagView because this just finds the first instance, and there only happens to be one instance. But, if we ever wanted two for some reason, then this would break.
-    //Purpose: find the tagView that is an CreationTagView, because we want to do special things to that one.
-    func findCreationTagView() -> CreationTagView? {
-        for tagView in tagChoicesView.tagViews where tagView is CreationTagView {
-            return tagView as? CreationTagView
-        }
-        return nil //shouldn't reach this point
-    }
 }
 
 //textField Delegate Extension for the CreationTagView textField
@@ -229,11 +227,9 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
     }
     
     func resetTextField() {
-        if let addingTagView = findCreationTagView() {
-            addingTagView.searchTextField.text = ""
-            dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
-            creationMenuView?.isHidden = true
-        }
+        theCreationTagView.searchTextField.text = ""
+        dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
+        creationMenuView?.isHidden = true
     }
     
     func keyboardWillShow(_ notification:Notification) {
@@ -256,10 +252,8 @@ extension AddingTagsToProfileViewController: UITextFieldDelegate {
         creationMenuView.snp.remakeConstraints { (make) in
             make.leading.trailing.equalTo(self.view)
             make.bottom.equalTo(self.view).inset(keyboardHeight)
-            if let addingTagView = findCreationTagView() {
-                //We can't just snp the top to addingTagView.snp.bottom, becuase when we rearrange the tagViews, the constraints get messed up. So, we snp it to the bottom of the addingTagView but make sure that the offset is a constant. 
-                make.top.equalTo(tagChoicesView.snp.top).offset(addingTagView.frame.height)
-            }
+            //We can't just snp the top to addingTagView.snp.bottom, becuase when we rearrange the tagViews, the constraints get messed up. So, we snp it to the bottom of the addingTagView but make sure that the offset is a constant.
+            make.top.equalTo(tagChoicesView.snp.top).offset(theCreationTagView.frame.height)
         }
     }
 }
