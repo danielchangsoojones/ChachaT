@@ -22,6 +22,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseSwipe.registerSubclass()
         ParseTag.registerSubclass()
         DropDownCategory.registerSubclass()
+        ParseUserTag.registerSubclass()
         
         var appConfiguration = Configuration()
         let configuration = ParseClientConfiguration {

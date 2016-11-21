@@ -21,6 +21,7 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
+		921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF701DE29F3800EF48BE /* ParseUserTag.swift */; };
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
 		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
@@ -165,6 +166,7 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		921BAF701DE29F3800EF48BE /* ParseUserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUserTag.swift; sourceTree = "<group>"; };
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
 		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
@@ -498,6 +500,7 @@
 				92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */,
 				92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */,
 				929428DD1DC37A5E0019617C /* Tags.swift */,
+				921BAF701DE29F3800EF48BE /* ParseUserTag.swift */,
 			);
 			name = "Parse Models";
 			sourceTree = "<group>";
@@ -1220,6 +1223,7 @@
 				920BF8231D3FF5E300104842 /* TagView.swift in Sources */,
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
+				921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */,
 				927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */,
