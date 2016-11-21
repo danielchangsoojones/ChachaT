@@ -85,6 +85,13 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         }
     }
     
+    override func getMostCurrentSearchText() -> String {
+        if let addingTagView = findCreationTagView(), let currentText = addingTagView.searchTextField.text {
+            return currentText
+        }
+        return ""
+    }
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
