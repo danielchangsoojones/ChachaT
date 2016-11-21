@@ -8,6 +8,7 @@
 
 import Foundation
 
+//TODO: this is not kept in MVC format, it kind of smashed the view and controller into a single entity...
 class BottomUserScrollView: UIView {
     fileprivate struct BottomViewConstants {
         static let backgroundColor: UIColor = UIColor.white
@@ -19,6 +20,7 @@ class BottomUserScrollView: UIView {
     //using swipes instead of users because we want to be able to push swipes to the card, so when we have buttons on the card for swiping when on the cardDetailPage, we will be able to do that.
     var swipes: [Swipe] = []
     var delegate: BottomUserScrollViewDelegate?
+    var swipeDataStore: BackgroundAnimationDataStore = BackgroundAnimationDataStore()
     var collectionView: UICollectionView!
     
     init(swipes: [Swipe], frame: CGRect, delegate: BottomUserScrollViewDelegate) {
@@ -46,6 +48,10 @@ class BottomUserScrollView: UIView {
     
     func reloadData(newData: [Swipe]) {
         self.swipes = newData
+        animateReloading()
+    }
+    
+    fileprivate func animateReloading() {
         //using reload sections instead of reloadData gives a nice animation to the reloading. And, since this collectionView only has one section anyway, it works perfectly
         collectionView.reloadSections(IndexSet(integer: 0))
     }
@@ -93,16 +99,35 @@ extension BottomUserScrollView: UICollectionViewDataSource {
 
 extension BottomUserScrollView: BottomButtonsDelegate {
     func nopeButtonPressed() {
-        print("implement the nope button action")
+        removeTappedCell(didApprove: false)
     }
     
     func approveButtonPressed() {
-        print("implement the nope button action")
+        removeTappedCell(didApprove: true)
+    }
+    
+    fileprivate func removeTappedCell(didApprove: Bool) {
+        if let indexPath = self.delegate?.getLastTappedCellIndexPath() {
+            let index = indexPath.row
+            saveSwipe(didApprove: didApprove, swipe: swipes[index])
+            swipes.remove(at: index)
+            animateReloading()
+        }
+    }
+    
+    fileprivate func saveSwipe(didApprove: Bool, swipe: Swipe) {
+        if didApprove {
+            swipe.approve()
+        } else {
+            swipe.nope()
+        }
+        swipeDataStore.swipe(swipe: swipe)
     }
 }
 
 protocol BottomUserScrollViewDelegate {
     func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath, bottomButtonsDelegate: BottomButtonsDelegate)
+    func getLastTappedCellIndexPath() -> IndexPath
 }
 
 extension SearchTagsViewController: BottomUserScrollViewDelegate {
@@ -112,5 +137,9 @@ extension SearchTagsViewController: BottomUserScrollViewDelegate {
         cardDetailVC.swipe = swipe
         cardDetailVC.delegate = bottomButtonsDelegate
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
+    }
+    
+    func getLastTappedCellIndexPath() -> IndexPath {
+        return theTappedCellIndex
     }
 }

@@ -20,6 +20,10 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
         self.delegate = delegate
     }
     
+    override init(){
+        super.init()
+    }
+    
     func swipe(swipe: Swipe) {
         //Check if the parseSwipe actually exists and then either update or create a new one.
         self.updateParseSwipe(parseSwipe: swipe.parseSwipe, swipe: swipe)
