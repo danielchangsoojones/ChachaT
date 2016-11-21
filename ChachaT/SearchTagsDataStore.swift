@@ -47,6 +47,28 @@ class SearchTagsDataStore: SuperTagDataStore {
                     }
                 }
                 self.delegate?.setChoicesViewTagsArray(self.tagChoicesDataArray)
+                
+                //adding generic tags after the drop down tags because I want them to go below the other drop down tags
+                self.setGenericTagsIntoDefaultView()
+            } else if let error = error {
+                print(error)
+            }
+        }
+    }
+    
+    //TODO: right now just pulling the newest 50, but eventually, we want to pull trending, even just random tags everytime, or past search results.
+    fileprivate func setGenericTagsIntoDefaultView() {
+        let query = ParseTag.query()! as! PFQuery<ParseTag>
+        //TODO: figure out the height/width of the screen and how many tags to show in each case.
+        query.limit = 50
+        
+        query.findObjectsInBackground { (parseTags, error) in
+            if let parseTags = parseTags {
+                let tags: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
+                    let tag = Tag(title: parseTag.tagTitle, attribute: .generic)
+                    return tag
+                })
+                self.delegate?.appendTagsToTagChoices(tags: tags)
             } else if let error = error {
                 print(error)
             }
@@ -226,20 +248,10 @@ extension SearchTagsDataStore {
     }
 }
 
-//Mark: After a tag is tapped, show successive tags/find users
-extension SearchTagsDataStore {
-    //TODO: is this even being used?
-    func resetDefaultTags() {
-        tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
-            //we only want to have the dropDownTags in the defualt tag
-            return tag is DropDownTag
-        })
-    }
-}
-
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
     func passDataToMainPage(swipes: [Swipe])
     func passdDataToBottomArea(swipes: [Swipe])
+    func appendTagsToTagChoices(tags: [Tag])
     func hideBottomUserArea()
 }
 
@@ -266,5 +278,12 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
                     bottomUserArea.reloadData(newData: swipes)
                 }
             }
+    }
+    
+    func appendTagsToTagChoices(tags: [Tag]) {
+        self.tagChoicesDataArray.append(contentsOf: tags)
+        for tag in tags {
+            _ = tagChoicesView.addTag(tag.title)
+        }
     }
 }

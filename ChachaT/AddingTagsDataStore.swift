@@ -39,7 +39,8 @@ class AddingTagsDataStore: SuperTagDataStore {
     
     func saveNewTag(title: String) {
         let query = ParseTag.query()!
-        query.whereKey("title", equalTo: title)
+        let formattedTitle = ParseTag.formatTitleForDatabase(title: title)
+        query.whereKey("title", equalTo: formattedTitle)
         
         //TODO: Technically, any tag that reaches this point would mean that no other tag exists yet, so we don't need to find the first tag in the background. Because the only way you can create a new tag is to have searched through the database already.
         query.getFirstObjectInBackground { (object, error) in

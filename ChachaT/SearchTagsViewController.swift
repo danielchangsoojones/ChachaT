@@ -156,6 +156,9 @@ extension SearchTagsViewController {
             if sender.tag == 3 {
                 //we are dealing with the ChachaDropDownTagListView
                 dropDownMenu.hide()
+            } else if sender.tag == 1 {
+                //the tagChoicesListView
+                sender.removeTag(title)
             }
             return
         }

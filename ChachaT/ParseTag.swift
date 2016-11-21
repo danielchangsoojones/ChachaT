@@ -32,7 +32,26 @@ class ParseTag: PFObject, PFSubclassing {
             return title
         }
         set (newStr) {
-            title = newStr.lowercased()
+            title = ParseTag.formatTitleForDatabase(title: newStr)
         }
     }
+    
+    class func formatTitleForDatabase(title: String) -> String {
+        let withoutEndingWhiteSpacesString = ParseTag.removeEndingSpaces(str: title)
+        return withoutEndingWhiteSpacesString.lowercased()
+    }
+    
+    //Purpose: we don't want people to add "hi" and "hi " to the database
+    class func removeEndingSpaces(str: String) -> String {
+        var characters = str.characters
+        if let lastChar = str.characters.last, lastChar == " " {
+            //using recursion to remove any ending whitespaces until we hit a non-space character
+            characters.removeLast()
+            let truncatedString: String = String(characters)
+            
+            return removeEndingSpaces(str: truncatedString)
+        }
+        return str
+    }
+
 }
