@@ -10,12 +10,10 @@ import UIKit
 import pop
 import Koloda
 import AVFoundation
-import Parse
+import CoreLocation
 import EFTools
-import ParseUI
 import Ripple
 import SnapKit
-import Timepiece
 import EZSwiftExtensions
 import Instructions
 
