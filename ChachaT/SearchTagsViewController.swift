@@ -115,6 +115,10 @@ class SearchTagsViewController: SuperTagViewController {
             }
         }
     }
+    
+    override func getMostCurrentSearchText() -> String {
+        return scrollViewSearchView.getSearchBarText() ?? ""
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
