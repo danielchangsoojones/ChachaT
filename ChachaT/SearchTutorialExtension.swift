@@ -12,7 +12,6 @@ import Instructions
 extension SearchTagsViewController: CoachMarksControllerDataSource {
     func setUpTutorialCoachingMarks() {
         if showTutorial {
-            showTutorial = false
             self.coachMarksController.dataSource = self
             coachMarksController.overlay.color = CustomColors.TutorialOverlayColor
             self.coachMarksController.startOn(self)

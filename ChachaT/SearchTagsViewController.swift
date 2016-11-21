@@ -73,6 +73,12 @@ class SearchTagsViewController: SuperTagViewController {
         return scrollViewSearchView
     }
     
+    override func loadChoicesViewTags() {
+        if !showTutorial {
+            super.loadChoicesViewTags()
+        }
+    }
+    
     override func dropDownActions(_ dropDownTag: DropDownTag) {
         super.dropDownActions(dropDownTag)
         switch dropDownTag.dropDownAttribute {
