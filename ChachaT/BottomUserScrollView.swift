@@ -134,8 +134,8 @@ extension SearchTagsViewController: BottomUserScrollViewDelegate {
     func segueToCardDetailPage(swipe: Swipe, tappedIndex: IndexPath, bottomButtonsDelegate: BottomButtonsDelegate) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         theTappedCellIndex = tappedIndex
-        cardDetailVC.swipe = swipe
         cardDetailVC.delegate = bottomButtonsDelegate
+        cardDetailVC.swipe = swipe
         presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
