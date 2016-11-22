@@ -113,12 +113,10 @@ class ChatDataStore {
                         let chat = object as! Chat
                         self.addMessage(chat: chat)
                     }
-                    if !objects!.isEmpty {
-                        self.delegate?.finishReceivingMessage()
-                    }
                 } else if let error = error {
                     print(error)
                 }
+                self.delegate?.finishReceivingMessage()
                 self.isLoading = false
             })
         }

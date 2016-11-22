@@ -168,7 +168,7 @@ class ChatViewController: JSQMessagesViewController {
             }
         }
         
-        return NSAttributedString(string: otherUser.fullName!)
+        return NSAttributedString(string: otherUser.fullName ?? "Unknown")
     }
     
     

@@ -9,13 +9,17 @@
 import UIKit
 import EZSwiftExtensions
 
+protocol NewCardMessageControllerDelegate {
+    func removeMessageFromSwipe()
+}
+
 class NewCardMessageViewController: UIViewController {
     var cardMessageView: NewCardMessageView!
     var swipe: Swipe!
     
     //need to hold in global variable
     var chatVC: ChatViewController?
-    
+    var delegate: NewCardMessageControllerDelegate?
     var dataStore: NewCardMessageDataStore = NewCardMessageDataStore()
 
     override func viewDidLoad() {
@@ -56,8 +60,10 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
     
     fileprivate func segueToChatVC(swipe: Swipe) {
         chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
-        chatVC?.starterSwipe = swipe
-        //TODO: what if the navigation controller doesn't exist
+        //original swipe was a reference to the original swipe, and we want to pass it to the swipe with the incoming swipe message, even though it gets deleted here. 
+        let swipeCopy = Swipe(otherUser: swipe.otherUser, otherUserApproval: swipe.otherUserApproval, parseSwipe: swipe.parseSwipe)
+        swipeCopy.incomingMessage = swipe.incomingMessage
+        chatVC?.starterSwipe = swipeCopy
         if let navController = self.parent?.navigationController {
             navController.pushViewController(chatVC!, animated: true)
         } else {
@@ -81,10 +87,12 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
         }
     }
     
-    fileprivate func removeSelf() {
+    func removeSelf() {
         self.willMove(toParentViewController: nil)
         self.view.removeFromSuperview()
         self.removeFromParentViewController()
+        swipe.incomingMessage = nil
+        delegate?.removeMessageFromSwipe()
     }
     
     

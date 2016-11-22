@@ -42,8 +42,10 @@ class CardDetailViewController: UIViewController {
             }
         }
     }
+
     var dataStore: CardDetailDataStore!
     
+    var newCardMessageViewControllerDelegate: NewCardMessageControllerDelegate?
     var delegate: BottomButtonsDelegate?
     
     var isViewingOwnProfile: Bool = false {
@@ -82,8 +84,10 @@ class CardDetailViewController: UIViewController {
     func addCardMessageChildVC() {
         let childVC = NewCardMessageViewController()
         childVC.swipe = swipe
+        childVC.delegate = newCardMessageViewControllerDelegate
         addAsChildViewController(childVC, toView: self.view)
         theBackButtonTopConstraint.constant = childVC.view.frame.height + 10
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

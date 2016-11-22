@@ -234,6 +234,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     fileprivate func addCardMessageChildVC(toView: UIView, swipe: Swipe) {
         let childVC = NewCardMessageViewController()
         childVC.swipe = swipe
+        childVC.delegate = self
         addAsChildViewController(childVC, toView: toView)
         //For some reason, I have to snap the child's view to the top of the koloda card. Not really sure why, but if I don't, then the messageView top is above the card. Must be because of how koloda Cards are presented or something. I'm not really sure.
         childVC.view.snp.makeConstraints { (make) in
@@ -284,6 +285,7 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
+        cardDetailVC.newCardMessageViewControllerDelegate = self
         cardDetailVC.swipe = swipeArray[index]
         cardDetailVC.delegate = self
         theTappedKolodaIndex = index
@@ -302,6 +304,20 @@ extension BackgroundAnimationViewController: MagicMoveable {
 extension BackgroundAnimationViewController: EmptyStateDelegate {
     func emptyStateButtonPressed() {
         performSegue(withIdentifier: SegueIdentifier.CustomBackgroundAnimationToSearchSegue.rawValue, sender: nil)
+    }
+}
+
+extension BackgroundAnimationViewController: NewCardMessageControllerDelegate {
+    func removeMessageFromSwipe() {
+        removeNewCardMessageController()
+    }
+    
+    func removeNewCardMessageController() {
+        for childVC in childViewControllers {
+            if let cardMessageController = childVC as? NewCardMessageViewController {
+                cardMessageController.removeSelf()
+            }
+        }
     }
 }
 
