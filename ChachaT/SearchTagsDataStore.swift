@@ -281,9 +281,11 @@ extension SearchTagsViewController : SearchTagsDataStoreDelegate {
     }
     
     func appendTagsToTagChoices(tags: [Tag]) {
-        self.tagChoicesDataArray.append(contentsOf: tags)
-        for tag in tags {
-            _ = tagChoicesView.addTag(tag.title)
+        if !showTutorial {
+            self.tagChoicesDataArray.append(contentsOf: tags)
+            for tag in tags {
+                _ = tagChoicesView.addTag(tag.title)
+            }
         }
     }
 }
