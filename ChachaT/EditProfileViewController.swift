@@ -79,12 +79,12 @@ class EditProfileViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = false //when coming from the BackgroundAnimationVC, the nav bar is hidden, so we want to unhide
         
         photoLayoutView.delegate = self
+        tagPageSegueViewSetup()
         bulletPointsSetup()
         fullNameViewSetup()
         schoolOrJobViewSetup()
         genderSetup()
         ageViewSetup()
-        tagPageSegueViewSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
     

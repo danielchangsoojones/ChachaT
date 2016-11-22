@@ -30,12 +30,9 @@ extension BackgroundAnimationViewController: CoachMarksControllerDataSource {
     }
     
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
-        
-        coachViews.bodyView.hintLabel.text = "Let's do your first search"
-        coachViews.bodyView.nextLabel.text = "Go!"
-        coachViews.bodyView.nextLabel.textColor = CustomColors.JellyTeal
-        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
+        let bodyView = Tutorial.createBodyView(hintText: "let's do your first search")
+        let arrowView = CoachMarkArrowDefaultView(orientation: .top)
+        return (bodyView: bodyView, arrowView: arrowView)
     }
 }
 

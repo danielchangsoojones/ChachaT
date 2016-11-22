@@ -8,7 +8,6 @@
 
 import Foundation
 import EFTools
-import Parse
 
 //colors
 struct CustomColors {
