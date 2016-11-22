@@ -152,14 +152,17 @@ extension SearchTagsViewController {
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         guard sender is ChachaChosenTagListView else {
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
-            addTagToChosenTagListView(title)
             if sender.tag == 3 {
                 //we are dealing with the ChachaDropDownTagListView
                 dropDownMenu.hide()
             } else if sender.tag == 1 {
                 //the tagChoicesListView
                 sender.removeTag(title)
+                if searchActive {
+                    resetTagChoicesViewList()
+                }
             }
+            addTagToChosenTagListView(title, shouldResetTags: false)
             return
         }
     }
@@ -186,16 +189,15 @@ extension SearchTagsViewController {
     }
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
-    func addTagToChosenTagListView(_ title: String) {
+    func addTagToChosenTagListView(_ title: String, shouldResetTags: Bool = true) {
+        updateAfterTagChosen()
         let tagView = tagChosenView.addTag(title)
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
-        updateAfterTagChosen()
     }
     
     //TODO: probably should rename this to something better of a name if you can think of one
     func updateAfterTagChosen() {
-        resetTagChoicesViewList()
         //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
         addChosenTagsToArray()
         scrollViewSearchView.endEditing(true)
@@ -280,12 +282,10 @@ extension SearchTagsViewController : UISearchBarDelegate {
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        searchActive = false
         for tagView in tagChoicesView.selectedTags() {
-            if let currentTitle = tagView.currentTitle {
-                addTagToChosenTagListView(currentTitle)
-            }
+            tagChoicesView.tagPressed(tagView)
         }
+        searchActive = false
     }
 }
 
