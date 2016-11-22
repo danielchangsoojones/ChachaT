@@ -190,8 +190,8 @@ extension SearchTagsViewController {
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
     func addTagToChosenTagListView(_ title: String, shouldResetTags: Bool = true) {
-        updateAfterTagChosen()
         let tagView = tagChosenView.addTag(title)
+        updateAfterTagChosen()
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
     }
