@@ -38,9 +38,7 @@ class ChatTableViewCell: UITableViewCell {
         profileCircleSetup()
         newestMessage = chatRoom.messages[0]
         timeStampSetup(newestMessage.dateSent as Date)
-        if let name = user!.fullName {
-            nameLabelSetup(name)
-        }
+        nameLabelSetup(user!.fullName ?? "No Name")
         unreadNotificationBubbleSetup()
         messagePreviewLabelSetup(newestMessage.body)
         lineSetup()

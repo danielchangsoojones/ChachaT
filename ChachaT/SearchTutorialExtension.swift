@@ -72,16 +72,10 @@ extension SearchTagsViewController: CoachMarksControllerDataSource {
     }
     
     fileprivate func createFirstBodyView() -> CoachMarkBodyView {
-        return createBodyView(hintText: "Tap to choose the fun tag")
+        return Tutorial.createBodyView(hintText: "Tap to choose the fun tag")
     }
     
     fileprivate func createSecondBodyView() -> CoachMarkBodyView {
-        return createBodyView(hintText: "Tap to search all users who match the fun tag")
-    }
-    
-    fileprivate func createBodyView(hintText: String) -> CoachMarkBodyView {
-        let bodyView = CoachMarkBodyDefaultView(hintText: hintText, nextText: nil)
-        bodyView.isUserInteractionEnabled = false
-        return bodyView
+        return Tutorial.createBodyView(hintText: "Tap to search all users who match the fun tag")
     }
 }
