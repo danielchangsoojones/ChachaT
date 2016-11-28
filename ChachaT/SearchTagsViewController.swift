@@ -201,9 +201,7 @@ extension SearchTagsViewController {
     //TODO: probably should rename this to something better of a name if you can think of one
     func updateAfterTagChosen() {
         //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
-        if let tag = chosenTags.last {
-            dataStore.searchTag(tag: tag)
-        }
+        dataStore.searchTags(chosenTags: chosenTags)
     }
 }
 

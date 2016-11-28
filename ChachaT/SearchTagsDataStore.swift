@@ -80,13 +80,46 @@ class SearchTagsDataStore: SuperTagDataStore {
 
 //Mark: For finding the users
 extension SearchTagsDataStore {
-    func searchTag(tag: Tag) {
-        if let sliderTag = tag as? DropDownTag {
-            searchSliderTag(tag: sliderTag)
-        } else {
-            searchTagTitle(tagTitle: tag.title)
+    func searchTags(chosenTags: [Tag]) {
+        let query = ParseUserTag.query()!
+        query.limit = 20
+        query.includeKey("user")
+        
+        var innerQuery = User.query()!
+        innerQuery.whereKeyExists("profileImage")
+        
+        var tagTitleArray: [String] = []
+        for tag in chosenTags {
+            if let dropDownTag = tag as? DropDownTag {
+                innerQuery = addSliderQueryComponents(dropDownTag: dropDownTag, query: innerQuery)
+            } else {
+                tagTitleArray.append(tag.title)
+            }
+        }
+        if !tagTitleArray.isEmpty {
+            //query any tags with the title
+            innerQuery.whereKey("tagsArray", containsAllObjectsIn: tagTitleArray)
+            query.whereKey("tagTitle", containedIn: tagTitleArray)
+        }
+        
+        query.whereKey("user", matchesQuery: innerQuery)
+        findUsers(query: query)
+    }
+    
+    fileprivate func findUsers(query: PFQuery<PFObject>) {
+        query.findObjectsInBackground { (objects, error) in
+            if let parseUserTags = objects as? [ParseUserTag] {
+                let users: [User] = parseUserTags.map({ (parseUserTag: ParseUserTag) -> User in
+                    return parseUserTag.user
+                })
+                self.findMatchingSwipesForUsers(users: users)
+            } else if let error = error {
+                print(error)
+            }
         }
     }
+    
+    
     
     func getSwipesForMainTinderPage(chosenTags: [Tag]) {
 //        findUserArray(chosenTags: chosenTags, swipeDestination: .mainTinderPage)
@@ -258,28 +291,30 @@ extension SearchTagsDataStore {
     }
     
     func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
-        switch dropDownTag.specialtyCategory {
-        //TODO: these cases should be based upon the parse column name
-        case "Distance":
+        var newQuery: PFQuery<PFObject> = query
+        
+        switch dropDownTag.databaseColumnName {
+        case "location":
             if !textContainsPlusSign(text: dropDownTag.title) {
-                query.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
+                newQuery.whereKey("location", nearGeoPoint: User.current()!.location, withinMiles: Double(dropDownTag.maxValue))
             }
-        case "Age Range":
+        case "birthDate":
             //For calculating age, just think anyone born 18 years ago from today would be the youngest type of 18 year old their could be. So to do age range, just do this date minus 18 years
-            let minAge : Date = dropDownTag.minValue.years.ago ?? Date()
-            let maxAge : Date = dropDownTag.maxValue.years.ago ?? Date()
-            query.whereKey("birthDate", lessThanOrEqualTo: minAge) //the younger you are, the higher value your birthdate is. So (April 4th, 1996 > April,6th 1990) when comparing
-            if !textContainsPlusSign(text: dropDownTag.title) {
-                query.whereKey("birthDate", greaterThanOrEqualTo: maxAge)
-            }
-        case "Height":
-            if !textContainsPlusSign(text: dropDownTag.title) {
-                query.whereKey("height", lessThanOrEqualTo: dropDownTag.maxValue)
-            }
-            query.whereKey("height", greaterThanOrEqualTo: dropDownTag.minValue)
+            //Remember, a newer date has a higher value
+            let minDate : Date = dropDownTag.maxValue.years.ago ?? Date()
+            let maxDate : Date = dropDownTag.minValue.years.ago ?? Date()
+            newQuery = addSliderQuery(title: dropDownTag.title, min: minDate, max: maxDate, databaseColumnName: dropDownTag.databaseColumnName, query: newQuery)
         default:
-            break
+            newQuery = addSliderQuery(title: dropDownTag.title, min: dropDownTag.minValue, max: dropDownTag.maxValue, databaseColumnName: dropDownTag.databaseColumnName, query: newQuery)
         }
+        return newQuery
+    }
+    
+    fileprivate func addSliderQuery(title: String, min: Any, max: Any, databaseColumnName: String, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
+        if !textContainsPlusSign(text: title) {
+            query.whereKey(databaseColumnName, lessThanOrEqualTo: max)
+        }
+        query.whereKey(databaseColumnName, greaterThanOrEqualTo: min)
         return query
     }
     
@@ -288,6 +323,11 @@ extension SearchTagsDataStore {
         let plusSign = "+"
         return text.contains(plusSign)
     }
+    
+    
+    
+    
+    
     
     fileprivate func passBottomAreaData(swipes: [Swipe]) {
         delegate?.passdDataToBottomArea(swipes: swipes)
@@ -328,7 +368,6 @@ extension SearchTagsDataStore {
                     cacheArray[i] = ""
                 }
             }
-            deleteDatabaseCaches(deletedCaches: deletedCaches)
             
             //get rid of the tag that just got deleted cache
             cacheArray.remove(at: index)
@@ -338,18 +377,6 @@ extension SearchTagsDataStore {
         }
         
         return []
-    }
-    
-    private func deleteDatabaseCaches(deletedCaches: [String]) {
-        let query = SearchCache.query()! as! PFQuery<SearchCache>
-        query.whereKey("cacheIdentifier", containedIn: deletedCaches)
-        query.findObjectsInBackground { (caches, error) in
-            if let caches = caches {
-                PFObject.deleteAll(inBackground: caches)
-            } else if let error = error {
-                print(error)
-            }
-        }
     }
     
     //Purpose: find the last cache that exists, and pass what index that cache was at, so we know what tags to requery upon from the cache
