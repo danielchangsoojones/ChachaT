@@ -119,8 +119,6 @@ extension SearchTagsDataStore {
         }
     }
     
-    
-    
     func getSwipesForMainTinderPage(chosenTags: [Tag]) {
 //        findUserArray(chosenTags: chosenTags, swipeDestination: .mainTinderPage)
     }
@@ -340,18 +338,10 @@ extension SearchTagsDataStore {
 
 //extension for removing a tag from the search
 extension SearchTagsDataStore {
-    func removeSearchTags(titleToRemove: String, chosenTags: [Tag]) {
-        let removedChosenTags = deleteDependentCaches(titleToRemove: titleToRemove, chosenTags: chosenTags)
-        let tuple = getLastNonEmptyCache(index: cacheArray.count - 1)
-        let tagTuple = getTagsAfter(index: tuple.index, chosenTags: removedChosenTags)
-        let sliderDict = convertSliderTagsToDict(sliderTags: tagTuple.sliderTags)
-        
-        PFCloud.callFunction(inBackground: "removeSearchTags", withParameters: ["cacheIdentifier" : getMostRecentCache(), "tagTitles" : tagTuple.tagTitles, "sliderTags" : sliderDict], block: {
-            (results: Any?, error: Error?) -> Void in
-            if let error = error {
-                print(error)
-            }
-        })
+    func removeSearchTags(chosenTags: [Tag]) {
+        if !isChosenTagsEmpty(chosenTags: chosenTags) {
+            searchTags(chosenTags: chosenTags)
+        }
     }
     
     private func deleteDependentCaches(titleToRemove: String, chosenTags: [Tag]) -> [Tag] {

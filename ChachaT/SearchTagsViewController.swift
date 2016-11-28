@@ -172,8 +172,8 @@ extension SearchTagsViewController {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
-            dataStore.removeSearchTags(titleToRemove: title, chosenTags: chosenTags)
             removeTag(tagView: tagView, tagListView: sender)
+            dataStore.removeSearchTags(chosenTags: chosenTags)
         }
     }
     
