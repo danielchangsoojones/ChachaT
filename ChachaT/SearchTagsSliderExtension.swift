@@ -110,9 +110,7 @@ extension SearchTagsViewController: SliderViewDelegate {
             //TODO: make the sliderView scroll over to where the tag is because if it is off the screen, then the user can't see it.
             tagView.setTitle(text, for: UIControlState())
         } else {
-            let tagView = tagChosenView.addTag(text)
-            scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
-            scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+            addTagToChosenTagListView(text)
         }
     }
     
@@ -128,27 +126,43 @@ extension SearchTagsViewController: SliderViewDelegate {
     }
     
     func appendSliderTagToChosenTags(text: String, minValue: Int, maxValue: Int, suffix: String) {
-        if let dropDownTagView = tappedDropDownTagView {
-            //check if the dropDownTag already exists in the chosenTags
-            let tag: Tag? = chosenTags.first(where: { (tag: Tag) -> Bool in
-                if let dropDownTag = tag as? DropDownTag {
-                    return dropDownTag.specialtyCategory == dropDownTagView.specialtyCategoryTitle
+        if let correspondingTag = findCorrespondDropDownTag(suffix: suffix) {
+            var alreadyFoundTag: Bool = false
+            for (index, tag) in chosenTags.enumerated() {
+                if let dropDownTag = tag as? DropDownTag, dropDownTag.specialtyCategory == correspondingTag.specialtyCategory {
+                    chosenTags.remove(at: index)
+                    
+                    dropDownTag.title = text
+                    dropDownTag.maxValue = maxValue
+                    dropDownTag.minValue = minValue
+                    
+                    chosenTags.append(dropDownTag)
+                    alreadyFoundTag = true
                 }
-                return false
-            })
+            }
             
-            
-            if let tag = tag as? DropDownTag {
-                //if it already exists, we need to reset its title
+            if !alreadyFoundTag {
+                let tag = DropDownTag(specialtyCategory: correspondingTag.specialtyCategory, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: correspondingTag.dropDownAttribute)
                 tag.title = text
-                tag.maxValue = maxValue
-                tag.minValue = minValue
-            } else {
-                let tag = DropDownTag(specialtyCategory: dropDownTagView.specialtyCategoryTitle, minValue: minValue, maxValue: maxValue, suffix: suffix, dropDownAttribute: .singleSlider)
-                tag.title = text
+                tag.databaseColumnName = correspondingTag.databaseColumnName
                 chosenTags.append(tag)
             }
         }
+    }
+    
+    fileprivate func findCorrespondDropDownTag(suffix: String) -> DropDownTag? {
+        let tag = tagChoicesDataArray.first { (tag: Tag) -> Bool in
+            if let dropDownTag = tag as? DropDownTag {
+                return dropDownTag.suffix == suffix
+            }
+            return false
+        }
+        
+        if let dropDownTag = tag as? DropDownTag {
+            return dropDownTag
+        }
+        
+        return nil
     }
     
     //TODO: change this to work with a regex that checks if the given tagViewTitle works with a particular pattern.

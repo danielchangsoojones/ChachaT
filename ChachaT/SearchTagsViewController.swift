@@ -162,7 +162,9 @@ extension SearchTagsViewController {
                     resetTagChoicesViewList()
                 }
             }
-            addTagToChosenTagListView(title, shouldResetTags: false)
+            chosenTags.append(Tag(title: title, attribute: .generic))
+            addTagToChosenTagListView(title)
+            updateAfterTagChosen()
             return
         }
     }
@@ -170,8 +172,8 @@ extension SearchTagsViewController {
     func tagRemoveButtonPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 2 {
             //we are dealing with ChosenTagListView because I set the tag in storyboard to be 2
+            dataStore.removeSearchTags(titleToRemove: title, chosenTags: chosenTags)
             removeTag(tagView: tagView, tagListView: sender)
-            updateAfterTagChosen()
         }
     }
     
@@ -189,51 +191,27 @@ extension SearchTagsViewController {
     }
     
     //Purpose: I want to add a tag to the chosen view, have the search bar disappear to show all the chosen tags
-    func addTagToChosenTagListView(_ title: String, shouldResetTags: Bool = true) {
+    func addTagToChosenTagListView(_ title: String) {
         let tagView = tagChosenView.addTag(title)
-        updateAfterTagChosen()
         scrollViewSearchView?.rearrangeSearchArea(tagView, extend: true)
         scrollViewSearchView.hideScrollSearchView(false) //making the search bar disappear in favor of the scrolling area for the tagviews. like 8tracks does.
+        scrollViewSearchView.endEditing(true)
     }
     
     //TODO: probably should rename this to something better of a name if you can think of one
     func updateAfterTagChosen() {
         //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
-        addChosenTagsToArray()
-        scrollViewSearchView.endEditing(true)
-        dataStore.getSwipesForBottomArea(chosenTags: chosenTags)
-        removeAllGenericTagsFromChosenTags()
-    }
-    
-    fileprivate func removeAllGenericTagsFromChosenTags() {
-        //We keepslider tags in the array because we store those in the chosenTag array the entire time.
-        chosenTags = chosenTags.filter({ (tag: Tag) -> Bool in
-            return tag.attribute != .generic
-        })
+        if let tag = chosenTags.last {
+            dataStore.searchTag(tag: tag)
+        }
     }
 }
 
 extension SearchTagsViewController: ScrollViewSearchViewDelegate {
     //TODO: pass user array and also create custom segue for the single page animation of doing searches.
     func dismissPageAndPassUserArray() {
-        addChosenTagsToArray()
+        //TODO: fix the dismissing of the page, we should already be loaded by the time they hit this.
         dataStore.getSwipesForMainTinderPage(chosenTags: chosenTags)
-    }
-    
-    //Purpose: we want to save the chosen tagViews into the chosenTag array, so then we can query on it.
-    fileprivate func addChosenTagsToArray() {
-        for tagView in tagChosenView.tagViews {
-            if let tagTitle = tagView.currentTitle {
-                var alreadyContains: Bool = false
-                for tag in chosenTags where tag.title == tagTitle {
-                    alreadyContains = true
-                }
-                if !alreadyContains {
-                    let tag = Tag(title: tagTitle, attribute: .generic)
-                    chosenTags.append(tag)
-                }
-            }
-        }
     }
     
     func dismissCurrentViewController() {
