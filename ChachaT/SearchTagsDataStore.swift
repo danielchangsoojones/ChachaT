@@ -11,10 +11,10 @@ import Parse
 
 class SearchTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
-    var cacheArray: [String] = []
     
     var delegate: SearchTagsDataStoreDelegate?
     var parseSwipes: [ParseSwipe] = []
+    var swipes: [Swipe] = []
     
     init(delegate: SearchTagsDataStoreDelegate) {
         super.init(superTagDelegate: delegate)
@@ -120,85 +120,9 @@ extension SearchTagsDataStore {
     }
     
     func getSwipesForMainTinderPage(chosenTags: [Tag]) {
-//        findUserArray(chosenTags: chosenTags, swipeDestination: .mainTinderPage)
+        //TODO: technically, if the passDataToBottom area query has not completed by the time they hit this button, then it won't pass the newest swipes in time.
+        passDataToMainTinderPage(swipes: self.swipes)
     }
-    
-    func isChosenTagsEmpty(chosenTags: [Tag]) -> Bool {
-        if chosenTags.isEmpty {
-            delegate?.hideBottomUserArea()
-            return true
-        }
-        return false
-    }
-    
-    fileprivate func searchTagTitle(tagTitle: String) {
-        PFCloud.callFunction(inBackground: "searchTags", withParameters: ["title" : tagTitle, "cacheIdentifier" : getMostRecentCache()], block: {
-            (results: Any?, error: Error?) -> Void in
-                self.analyzeResults(results: results, error: error)
-        })
-    }
-    
-    fileprivate func searchSliderTag(tag: DropDownTag) {
-        let extremes = convertMaxAndMinValues(tag: tag)
-        PFCloud.callFunction(inBackground: "searchSlider", withParameters: ["cacheIdentifier" : getMostRecentCache(), "minValue" : extremes.minValue, "maxValue" : extremes.maxValue, "parseColumnName" : tag.databaseColumnName], block: {
-            (results: Any?, error: Error?) -> Void in
-                self.analyzeResults(results: results, error: error)
-        })
-    }
-    
-    fileprivate func analyzeResults(results: Any?, error: Error?) {
-        if let results = results as? [Any] {
-            for result in results {
-                if let cacheIdentifier = result as? String {
-                    self.cacheArray.append(cacheIdentifier)
-                } else if let users = result as? [User] {
-                    self.findMatchingSwipesForUsers(users: users)
-                }
-            }
-        } else if let error = error {
-            print(error)
-        }
-    }
-    
-    fileprivate func convertMaxAndMinValues(tag: DropDownTag) -> (minValue: Any, maxValue: Any) {
-        var minValue: Any = tag.minValue
-        var maxValue: Any = tag.maxValue
-        
-        switch tag.databaseColumnName {
-        case "location":
-            minValue = User.current()!.location
-        case "birthDate":
-            //When working with dates, the higher the age, implies an earlier bday, and the earlier the bday, the lower the number value of the date. (.i.e. April 1, 1996 > Jan 1, 1990)
-            minValue = tag.maxValue.years.ago ?? NSNull()
-            maxValue = tag.minValue.years.ago ?? NSNull()
-        default:
-            break
-        }
-        
-        if textContainsPlusSign(text: tag.title) {
-            //the tag was something like 50+ mi
-            maxValue = NSNull()
-        }
-        
-        return (minValue, maxValue)
-    }
-    
-    fileprivate func getMostRecentCache() -> Any {
-        //returning NSNUll because that is how the API reads nil.
-        return cacheArray.last ?? NSNull()
-    }
-    
-//    fileprivate func findUserArray(chosenTags: [Tag], swipeDestination: SwipeDestination) {
-//        let tuple = createFindUserQuery(chosenTags: chosenTags)
-//        
-//        tuple.query.findObjectsInBackground { (objects, error) in
-//            if let users = objects as? [User] {
-//                self.findMatchingSwipesForUsers(users: users, swipeDestination: swipeDestination)
-//            } else if let error = error {
-//                print(error)
-//            }
-//        }
-//    }
     
     //TODO: move this to cloud code because we have to run another query? or at least pass the users before we conver them to swipes
     //Purpose: we found any users who matched the swipes, now we need to make check if a parseSwipe exists for that particular user relative to this user, so if the user swipes on that person, we will know whether to make it a match or not.
@@ -267,28 +191,7 @@ extension SearchTagsDataStore {
         return query
     }
     
-    fileprivate func createFindUserQuery(chosenTags: [Tag]) -> (query: PFQuery<PFObject>, chosenTitleArray: [String]) {
-        var query = User.query()!
-        query.whereKeyExists("profileImage")
-        
-        var tagTitleArray: [String] = []
-        for tag in chosenTags {
-            if let dropDownTag = tag as? DropDownTag {
-                query = addSliderQueryComponents(dropDownTag: dropDownTag, query: query)
-            } else {
-                tagTitleArray.append(tag.title)
-            }
-        }
-        if !tagTitleArray.isEmpty {
-            //query any tags with the title
-            let innerQuery = ParseTag.query()!
-            innerQuery.whereKey("title", containedIn: tagTitleArray)
-            query.whereKey("tags", matchesQuery: innerQuery)
-        }
-        return (query, tagTitleArray)
-    }
-    
-    func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
+    fileprivate func addSliderQueryComponents(dropDownTag: DropDownTag, query: PFQuery<PFObject>) -> PFQuery<PFObject> {
         var newQuery: PFQuery<PFObject> = query
         
         switch dropDownTag.databaseColumnName {
@@ -322,12 +225,8 @@ extension SearchTagsDataStore {
         return text.contains(plusSign)
     }
     
-    
-    
-    
-    
-    
     fileprivate func passBottomAreaData(swipes: [Swipe]) {
+        self.swipes = swipes
         delegate?.passdDataToBottomArea(swipes: swipes)
     }
     
@@ -344,70 +243,13 @@ extension SearchTagsDataStore {
         }
     }
     
-    private func deleteDependentCaches(titleToRemove: String, chosenTags: [Tag]) -> [Tag] {
-        let index: Int? = chosenTags.index { (tag: Tag) -> Bool in
-            return tag.title == titleToRemove
+    fileprivate func isChosenTagsEmpty(chosenTags: [Tag]) -> Bool {
+        if chosenTags.isEmpty {
+            delegate?.hideBottomUserArea()
+            return true
         }
-        
-        if let index = index {
-            //replace any caches that have been obseleted with a "". We need to keep the cacheArray at the same length as the chosenTags array. If the user deletes a the second tag in 5 total tags, then the tags that were chosen after it have had their caches obseleted.
-            var deletedCaches: [String] = []
-            for (i, cache) in cacheArray.enumerated() {
-                if i >= index {
-                    deletedCaches.append(cache)
-                    cacheArray[i] = ""
-                }
-            }
-            
-            //get rid of the tag that just got deleted cache
-            cacheArray.remove(at: index)
-            var chosenTagsCopy = chosenTags
-            chosenTagsCopy.remove(at: index)
-            return chosenTagsCopy
-        }
-        
-        return []
+        return false
     }
-    
-    //Purpose: find the last cache that exists, and pass what index that cache was at, so we know what tags to requery upon from the cache
-    private func getLastNonEmptyCache(index: Int) -> (lastCache: Any, index: Int) {
-        if cacheArray.isEmpty {
-            return (NSNull(), 0)
-        } else {
-            if cacheArray[index] == "" {
-                if index == 0 {
-                    return (NSNull(), 0)
-                } else {
-                    return getLastNonEmptyCache(index: index - 1)
-                }
-            }
-            
-            return (cacheArray[index], index)
-        }
-    }
-    
-    private func getTagsAfter(index: Int, chosenTags: [Tag]) -> (tagTitles: [String], sliderTags: [DropDownTag]) {
-        var tagTitles: [String] = []
-        var sliderTags: [DropDownTag] = []
-        for (i, tag) in chosenTags.enumerated() {
-            if i >= index && !(tag is DropDownTag) {
-                if let dropDownTag = tag as? DropDownTag {
-                    sliderTags.append(dropDownTag)
-                } else {
-                    tagTitles.append(tag.title)
-                }
-            }
-        }
-        return (tagTitles, sliderTags)
-    }
-    
-    private func convertSliderTagsToDict(sliderTags: [DropDownTag]) -> [[String: Any]] {
-        let dictArray: [[String: Any]] = sliderTags.map { (tag: DropDownTag) -> [String: Any] in
-            return ["minValue" : tag.minValue, "maxValue" : tag.maxValue, "parseColumnName" : tag.databaseColumnName]
-        }
-        return dictArray
-    }
-    
 }
 
 protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
@@ -418,7 +260,6 @@ protocol SearchTagsDataStoreDelegate : TagDataStoreDelegate {
 }
 
 extension SearchTagsViewController : SearchTagsDataStoreDelegate {
-    //Yes, this kind of breaks some of the code cleanliness to pass the parseSwipes to the next view controller, but the parseSwipes are needed in the next data store. There isn't really a better way.
     func passDataToMainPage(swipes: [Swipe]) {
         performSegueWithIdentifier(.SearchPageToTinderMainPageSegue, sender: swipes as AnyObject?) //passing swipeArray to the segue
     }
