@@ -42,40 +42,41 @@ class AddingTagsDataStore: SuperTagDataStore {
         let formattedTitle = ParseTag.formatTitleForDatabase(title: title)
         query.whereKey("title", equalTo: formattedTitle)
         
-        //TODO: Technically, any tag that reaches this point would mean that no other tag exists yet, so we don't need to find the first tag in the background. Because the only way you can create a new tag is to have searched through the database already.
-        query.getFirstObjectInBackground { (object, error) in
-            if let parseTag = object as? ParseTag {
-                //add this already existing tag to the User's tags
-                self.saveTagRelation(parseTag: parseTag)
-            } else if let error = error {
-                let errorCode = error._code
-                if errorCode == PFErrorCode.errorObjectNotFound.rawValue {
-                    //tag doesn't exist yet, so make a new tag, and then add it to the current User's tags
-                    let parseTag = ParseTag()
-                    parseTag.tagTitle = title
-                    parseTag.attribute = TagAttributes.generic.rawValue
-                    parseTag.isPrivate = false
-                    
-                    parseTag.saveInBackground(block: { (success, error) in
-                        if success {
-                            self.saveTagRelation(parseTag: parseTag)
-                        } else if let error = error {
-                            print(error)
-                        }
-                    })
-                } else {
-                    print(error)
-                }
-            }
+        if let parseTag = findSearchedParseTag(title: title) {
+            //the parseTag already exists in database
+            saveParseUserTag(parseTag: parseTag)
+        } else {
+            //totally new tag created
+            saveNovelParseTag(title: title)
         }
     }
     
-    fileprivate func saveTagRelation(parseTag: ParseTag) {
-        //add new tags to local parse tags, so a user can delete something they just made.
-        currentUserParseTags.append(parseTag)
-        let relation = User.current()!.relation(forKey: "tags")
-        relation.add(parseTag)
-        User.current()?.saveInBackground()
+    fileprivate func saveNovelParseTag(title: String) {
+        let parseTag = ParseTag()
+        parseTag.tagTitle = title
+        parseTag.attribute = TagAttributes.generic.rawValue
+        parseTag.isPrivate = false
+        
+        parseTag.saveInBackground(block: { (success, error) in
+            if success {
+                self.saveParseUserTag(parseTag: parseTag)
+            } else if let error = error {
+                print(error)
+            }
+        })
+    }
+    
+    fileprivate func saveParseUserTag(parseTag: ParseTag) {
+        let parseUserTag = ParseUserTag(parseTag: parseTag)
+        User.current()!.addUniqueObject(parseTag.tagTitle, forKey: "tagsArray")
+        PFObject.saveAll(inBackground: [User.current()!, parseUserTag])
+    }
+    
+    fileprivate func findSearchedParseTag(title: String) -> ParseTag? {
+        let parseTag = searchTags.first { (parseTag: ParseTag) -> Bool in
+            return ParseTag.formatTitleForDatabase(title: title) == parseTag.tagTitle
+        }
+        return parseTag
     }
     
     func saveSpecialtyTag(title: String, specialtyCategory: String) {

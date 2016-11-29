@@ -12,6 +12,7 @@ import Parse
 class SuperTagDataStore: SuperParseSwipeDataStore {
     
     var superTagDelegate: TagDataStoreDelegate?
+    var searchTags: [ParseTag] = []
     fileprivate var isSearching: Bool = false
     
     init(superTagDelegate: TagDataStoreDelegate) {
@@ -26,6 +27,7 @@ class SuperTagDataStore: SuperParseSwipeDataStore {
             query.findObjectsInBackground { (parseTags, error) in
                 var searchDataArray: [Tag] = []
                 if let parseTags = parseTags {
+                    self.searchTags = parseTags
                     let newSearchResults: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
                         let tag = Tag(title: parseTag.tagTitle, attribute: TagAttributes.generic)
                         return tag
