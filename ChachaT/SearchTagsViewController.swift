@@ -10,6 +10,7 @@ import UIKit
 import EFTools
 import Parse
 import Instructions
+import EZSwiftExtensions
 
 class SearchTagsViewController: SuperTagViewController {
     var tagChosenView : ChachaChosenTagListView!
@@ -151,6 +152,7 @@ extension SearchTagsViewController {
     
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         guard sender is ChachaChosenTagListView else {
+            let wasSearchActive: Bool = searchActive //searchActive changes halfway through func, so this holds its original value
             //making sure the sender TagListView is not the chosenView because the chosen view should not be clickable. as in the dropdown menu tags or the tagChoicesView
             if sender.tag == 3 {
                 //we are dealing with the ChachaDropDownTagListView
@@ -158,13 +160,17 @@ extension SearchTagsViewController {
             } else if sender.tag == 1 {
                 //the tagChoicesListView
                 sender.removeTag(title)
-                if searchActive {
-                    resetTagChoicesViewList()
-                }
             }
             chosenTags.append(Tag(title: title, attribute: .generic))
             addTagToChosenTagListView(title)
             updateAfterTagChosen()
+            if wasSearchActive && sender.tag == 1 {
+                //we only want to resetTagChoicesView after the tag has been added to the chosenArea, if we do it beforehand, we get lag time.
+                ez.runThisAfterDelay(seconds: 0.01, after: {
+                    //the delay makes the ui lag time look better
+                    self.resetTagChoicesViewList()
+                })
+            }
             return
         }
     }
@@ -200,7 +206,6 @@ extension SearchTagsViewController {
     
     //TODO: probably should rename this to something better of a name if you can think of one
     func updateAfterTagChosen() {
-        //adding and then clearing the chosenTags array because we want to get the chosen tags for the searching, but then get rid of them because we don't track the chosen tags the whole time, only when an action is pressed. We do track the sliderValues in chosen tags though.
         dataStore.searchTags(chosenTags: chosenTags)
     }
 }
@@ -226,7 +231,6 @@ extension SearchTagsViewController: ScrollViewSearchViewDelegate {
 
 //search extension
 extension SearchTagsViewController : UISearchBarDelegate {
-    //TODO: can probably get rid of all these searchActive stuff, because I am not actually using them for anything
    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if searchText.isEmpty {
             //no text, so we want to stay on the tagChoicesView
@@ -247,9 +251,9 @@ extension SearchTagsViewController : UISearchBarDelegate {
     
     func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
         searchActive = false
-        resetTagChoicesViewList()
         if !scrollViewSearchView.theTagChosenListView.tagViews.isEmpty {
             //there are tags in the chosen area, so we want to go back to scroll view search area, not the normal search area
+            resetTagChoicesViewList()
             scrollViewSearchView.hideScrollSearchView(false)
         }
         if tagChosenView.tagViews.isEmpty {
