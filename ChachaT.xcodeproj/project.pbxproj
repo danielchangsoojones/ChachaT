@@ -23,7 +23,6 @@
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
 		921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF701DE29F3800EF48BE /* ParseUserTag.swift */; };
 		921BAF731DE3F64F00EF48BE /* TutorialStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */; };
-		921BAF751DEC5E1A00EF48BE /* SearchCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF741DEC5E1900EF48BE /* SearchCache.swift */; };
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
 		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
@@ -105,7 +104,6 @@
 		928B8D731DB96A1F00D6B6D3 /* HeightPickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */; };
 		928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D771DBA588700D6B6D3 /* Enviroment.swift */; };
 		928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 928B8D791DBA58B700D6B6D3 /* Configuration.swift */; };
-		929428DE1DC37A5E0019617C /* Tags.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929428DD1DC37A5E0019617C /* Tags.swift */; };
 		92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */; };
 		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */; };
@@ -170,7 +168,6 @@
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
 		921BAF701DE29F3800EF48BE /* ParseUserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUserTag.swift; sourceTree = "<group>"; };
 		921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialStruct.swift; sourceTree = "<group>"; };
-		921BAF741DEC5E1900EF48BE /* SearchCache.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchCache.swift; sourceTree = "<group>"; };
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
 		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
@@ -256,7 +253,6 @@
 		928B8D721DB96A1F00D6B6D3 /* HeightPickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeightPickerViewController.swift; sourceTree = "<group>"; };
 		928B8D771DBA588700D6B6D3 /* Enviroment.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Enviroment.swift; sourceTree = "<group>"; };
 		928B8D791DBA58B700D6B6D3 /* Configuration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
-		929428DD1DC37A5E0019617C /* Tags.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tags.swift; sourceTree = "<group>"; };
 		92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerViewController.swift; sourceTree = "<group>"; };
@@ -503,9 +499,7 @@
 				92857DD01DA310CB001DB92C /* ParseSwipe.swift */,
 				92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */,
 				92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */,
-				929428DD1DC37A5E0019617C /* Tags.swift */,
 				921BAF701DE29F3800EF48BE /* ParseUserTag.swift */,
-				921BAF741DEC5E1900EF48BE /* SearchCache.swift */,
 			);
 			name = "Parse Models";
 			sourceTree = "<group>";
@@ -1288,7 +1282,6 @@
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
-				921BAF751DEC5E1A00EF48BE /* SearchCache.swift in Sources */,
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
@@ -1297,7 +1290,6 @@
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
-				929428DE1DC37A5E0019617C /* Tags.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
