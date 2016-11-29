@@ -132,7 +132,9 @@ extension BackgroundAnimationViewController: BottomButtonsDelegate {
     
     func messageButtonPressed() {
         let currentIndex = kolodaView.currentCardIndex
-        CardSendMessageViewController.presentFrom(self, userToSend: swipeArray[currentIndex].otherUser)
+        if swipeArray.indices.contains(currentIndex) {
+            CardSendMessageViewController.presentFrom(self, userToSend: swipeArray[currentIndex].otherUser)
+        }
     }
 }
 
