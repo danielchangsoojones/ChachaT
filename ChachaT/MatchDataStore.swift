@@ -79,7 +79,9 @@ class MatchDataStore: NSObject {
                         //TODO: make the message have an actual date for the date sent
                         let message = Message(sender: chat.sender, body: chat.chatText, hasBeenRead: chat.readByReceiver, dateSent: Date())
                         let chatRoom = ChatRoom(users: [chat.sender, chat.receiver], messages: [message])
-                        self.chatRooms.append(chatRoom)
+                        if chatRoom.getOtherUser() != nil {
+                            self.chatRooms.append(chatRoom)
+                        }
                     }
                 }
             } else {

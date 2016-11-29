@@ -33,15 +33,18 @@ class ChatTableViewCell: UITableViewCell {
     
     init(chatRoom: ChatRoom) {
         super.init(style: .default, reuseIdentifier: "chatTableViewCell")
-        self.user = chatRoom.getOtherUser()
-        self.chatRoom = chatRoom
-        profileCircleSetup()
-        newestMessage = chatRoom.messages[0]
-        timeStampSetup(newestMessage.dateSent as Date)
-        nameLabelSetup(user!.fullName ?? "No Name")
-        unreadNotificationBubbleSetup()
-        messagePreviewLabelSetup(newestMessage.body)
-        lineSetup()
+        if let user = chatRoom.getOtherUser() {
+            self.user = user
+            self.chatRoom = chatRoom
+            profileCircleSetup()
+            newestMessage = chatRoom.messages[0]
+            timeStampSetup(newestMessage.dateSent as Date)
+            nameLabelSetup(user.fullName ?? "No Name")
+            unreadNotificationBubbleSetup()
+            messagePreviewLabelSetup(newestMessage.body)
+            lineSetup()
+        }
+        
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -51,7 +54,7 @@ class ChatTableViewCell: UITableViewCell {
     func profileCircleSetup() {
         //TODO: the diameter for this should be the same as the diameter for the scrolling matches view
         let diameter : CGFloat = self.frame.width * 0.2
-        theCircleImageView = CircularImageView(file: user!.profileImage, diameter: diameter)
+        theCircleImageView = CircularImageView(file: user?.profileImage, diameter: diameter)
         self.addSubview(theCircleImageView)
         theCircleImageView.snp.makeConstraints { (make) in
             make.centerY.equalTo(self)
