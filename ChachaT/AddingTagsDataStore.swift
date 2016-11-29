@@ -16,8 +16,7 @@ struct CustomDropDownParseColumnNames {
 
 class AddingTagsDataStore: SuperTagDataStore {
     var tagChoicesDataArray : [Tag] = [] //tags that get added to the choices tag view
-    
-    var currentUserParseTags: [ParseTag] = []
+    var currentUserParseTags : [ParseUserTag] = []
     
     var delegate: AddingTagsDataStoreDelegate?
     
@@ -27,27 +26,16 @@ class AddingTagsDataStore: SuperTagDataStore {
         loadCurrentUserTags()
     }
     
-    //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
-    func deleteTag(_ title: String) {
-        for parseTag in currentUserParseTags where parseTag.tagTitle == title {
-            let relation = User.current()!.relation(forKey: "tags")
-            relation.remove(parseTag)
-            User.current()!.saveInBackground()
-        }
-    }
-    
-    
     func saveNewTag(title: String) {
-        let query = ParseTag.query()!
-        let formattedTitle = ParseTag.formatTitleForDatabase(title: title)
-        query.whereKey("title", equalTo: formattedTitle)
-        
-        if let parseTag = findSearchedParseTag(title: title) {
-            //the parseTag already exists in database
-            saveParseUserTag(parseTag: parseTag)
-        } else {
-            //totally new tag created
-            saveNovelParseTag(title: title)
+        if findParseUserTag(title: title) == nil {
+            //the current user does not already have this tag
+            if let parseTag = findSearchedParseTag(title: title) {
+                //the parseTag already exists in database
+                saveParseUserTag(parseTag: parseTag)
+            } else {
+                //totally new tag created
+                saveNovelParseTag(title: title)
+            }
         }
     }
     
@@ -70,6 +58,7 @@ class AddingTagsDataStore: SuperTagDataStore {
         let parseUserTag = ParseUserTag(parseTag: parseTag)
         User.current()!.addUniqueObject(parseTag.tagTitle, forKey: "tagsArray")
         PFObject.saveAll(inBackground: [User.current()!, parseUserTag])
+        currentUserParseTags.append(parseUserTag)
     }
     
     fileprivate func findSearchedParseTag(title: String) -> ParseTag? {
@@ -83,15 +72,13 @@ class AddingTagsDataStore: SuperTagDataStore {
         if !checkIfGenderTag(title: title, specialtyCategory: specialtyCategory) {
             removeSpecialtyTag(specialtyCategory: specialtyCategory)
             
+            //TODO: the dropDownCategories area already pulled down at this point, so we could get this parseTag without having to query the database.
             let query = ParseTag.query()!
             query.whereKey("title", equalTo: title)
+            query.includeKey("dropDownCategory")
             query.getFirstObjectInBackground { (object, error) in
                 if let parseTag = object as? ParseTag {
-                    //add the new tag chosen tag to the User's tags
-                    let relation = User.current()!.relation(forKey: "tags")
-                    relation.add(parseTag)
-                    
-                    User.current()?.saveInBackground()
+                    self.saveParseUserTag(parseTag: parseTag)
                 } else if let error = error {
                     print(error)
                 }
@@ -114,27 +101,58 @@ class AddingTagsDataStore: SuperTagDataStore {
         User.current()![databaseColumnName] = itemToSave
         User.current()!.saveInBackground()
     }
+}
+
+//deleting extension
+extension AddingTagsDataStore {
+    //Delete Tag will only be used by generic tags because it is not possible to delete a specialty tag. If you click on a specialty tag, it just pulls drop down menu, and you can change it.
+    func deleteTag(_ title: String) {
+        if let parseUserTag = findParseUserTag(title: title) {
+            self.deleteParseUserTag(parseUserTag: parseUserTag)
+        }
+    }
     
     //Purpose: remove the specialty tag from the current User's tags
     fileprivate func removeSpecialtyTag(specialtyCategory: String) {
-        for parseTag in currentUserParseTags where parseTag.dropDownCategory?.name == specialtyCategory {
-            //remove the previous tag that was correlated to the specific category
-            let relation = User.current()!.relation(forKey: "tags")
-            relation.remove(parseTag)
+        let parseUserTag = currentUserParseTags.first { (parseUserTag: ParseUserTag) -> Bool in
+            return parseUserTag.parseTag.dropDownCategory?.name == specialtyCategory
+        }
+        
+        if let parseUserTag = parseUserTag {
+            deleteParseUserTag(parseUserTag: parseUserTag)
         }
     }
+    
+    fileprivate func deleteParseUserTag(parseUserTag: ParseUserTag) {
+        parseUserTag.deleteInBackground()
+        User.current()!.remove(parseUserTag.lowercasedTagTitle, forKey: "tagsArray")
+        User.current()!.saveInBackground()
+        currentUserParseTags.removeObject(parseUserTag)
+    }
+    
+    fileprivate func findParseUserTag(title: String) -> ParseUserTag? {
+        let parseUserTag = currentUserParseTags.first { (parseUserTag: ParseUserTag) -> Bool in
+            return parseUserTag.lowercasedTagTitle == ParseTag.formatTitleForDatabase(title: title)
+        }
+        
+        return parseUserTag
+    }
+    
 }
 
 //for loading the tags
 extension AddingTagsDataStore {
-    //TODO: if nothing exists, then it will print error because the user doesn't have a tags row. Should create one when the user signs up.
     func loadCurrentUserTags() {
-        let query = User.current()!.tags.query()
-        query.includeKey("dropDownCategory")
-        query.includeKey("dropDownCategory.innerTags")
-        query.findObjectsInBackground { (parseTags, error) in
-            if let parseTags = parseTags {
-                for parseTag in parseTags {
+        let query = ParseUserTag.query()! as! PFQuery<ParseUserTag>
+        query.whereKey("user", equalTo: User.current()!)
+        query.includeKey("parseTag")
+        query.includeKey("parseTag.dropDownCategory")
+        query.includeKey("parseTag.dropDownCategory.innerTags")
+        
+        query.findObjectsInBackground { (parseUserTags, error) in
+            if let parseUserTags = parseUserTags {
+                for parseUserTag in parseUserTags {
+                    let parseTag = parseUserTag.parseTag
                     if let dropDownCategory = parseTag.dropDownCategory {
                         //a tag that is a member of the dropDownCategory
                         let innerTagTitles = dropDownCategory.innerTagTitles
@@ -146,7 +164,7 @@ extension AddingTagsDataStore {
                         let newTag = Tag(title: parseTag.tagTitle, attribute: .generic)
                         self.tagChoicesDataArray.append(newTag)
                     }
-                    self.currentUserParseTags.append(parseTag)
+                    self.currentUserParseTags.append(parseUserTag)
                 }
             } else if let error = error {
                 print(error)
@@ -227,12 +245,9 @@ extension AddingTagsDataStore {
     }
 }
 
+//Right now, my delegate doesn't do anything, but it will probably need to do something in the future, so I didn't refactor it.
 protocol AddingTagsDataStoreDelegate : TagDataStoreDelegate {
-    func deleteTagView(_ title: String)
 }
 
 extension AddingTagsToProfileViewController: AddingTagsDataStoreDelegate {
-    func deleteTagView(_ title: String) {
-        tagChoicesView.removeTag(title)
-    }
 }

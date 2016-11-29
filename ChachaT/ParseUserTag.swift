@@ -27,8 +27,13 @@ class ParseUserTag: PFObject, PFSubclassing {
         }
     }
     
-    init(parseTag: ParseTag) {
+    override init() {
+        //have to override init, or else Parse gets mad.
         super.init()
+    }
+    
+    convenience init(parseTag: ParseTag) {
+        self.init()
         self.parseTag = parseTag
         self.user = User.current()!
         self.lowercasedTagTitle = parseTag.tagTitle
