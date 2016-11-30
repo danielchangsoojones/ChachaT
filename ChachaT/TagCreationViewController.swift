@@ -9,10 +9,9 @@
 import UIKit
 
 protocol TagCreationViewControllerDelegate {
-    func keyboardWasShown(keyboardHeight: CGFloat)
+    func keyboardChanged(keyboardHeight: CGFloat)
     func searchForTags(searchText: String)
     func saveNewTag(title: String)
-    func creationMenuTagPressed(_ title: String, tagView: TagView, sender: TagListView)
 }
 
 class TagCreationViewController: UIViewController {
@@ -42,6 +41,7 @@ class TagCreationViewController: UIViewController {
         layoutCreationTagListView()
         setCreationTagView()
         NotificationCenter.default.addObserver(self, selector: #selector(TagCreationViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(TagCreationViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         self.view.backgroundColor = UIColor.green
     }
 
@@ -131,20 +131,30 @@ extension TagCreationViewController: CreationTagViewDelegate {
     }
     
     func resetTextField() {
+        creationTagListView.shouldRearrangeViews = true
         theCreationTagView.searchTextField.text = ""
         dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
         creationMenuView?.isHidden = true
     }
     
     func keyboardWillShow(_ notification:Notification) {
+        let keyboardHeight = getKeyboardHeight(notification: notification)
+        //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
+        //But, we can only get the keyboard height through this notification.
+        createTagMenuView(keyboardHeight)
+        delegate?.keyboardChanged(keyboardHeight: keyboardHeight)
+    }
+    
+    func keyboardWillHide(_ notification:Notification) {
+        delegate?.keyboardChanged(keyboardHeight: 0)
+    }
+    
+    fileprivate func getKeyboardHeight(notification: Notification) -> CGFloat {
         let userInfo:NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
         let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
         let keyboardRectangle = keyboardFrame.cgRectValue
         let keyboardHeight = keyboardRectangle.height
-        //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
-        //But, we can only get the keyboard height through this notification.
-        createTagMenuView(keyboardHeight)
-        delegate?.keyboardWasShown(keyboardHeight: keyboardHeight)
+        return keyboardHeight
     }
     
     func createTagMenuView(_ keyboardHeight: CGFloat) {
@@ -167,8 +177,11 @@ extension TagCreationViewController: CreationTagViewDelegate {
 
 extension TagCreationViewController: AddingTagMenuDelegate {
     func addNewTagToTagChoiceView(title: String) {
-        creationTagListView.insertTagViewAtIndex(1, title: title)
         resetTextField()
         delegate?.saveNewTag(title: title)
+    }
+    
+    func addChosenTagView(tagView: TagView) {
+        creationTagListView.insertTagViewAtIndex(1, tagView: tagView)
     }
 }

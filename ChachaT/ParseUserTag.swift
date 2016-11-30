@@ -18,6 +18,9 @@ class ParseUserTag: PFObject, PFSubclassing {
     @NSManaged private var tagTitle: String
     @NSManaged var parseTag: ParseTag
     @NSManaged var user: User
+    @NSManaged var createdBy: User
+    @NSManaged var isPending: Bool
+    @NSManaged var approved: Bool
     var lowercasedTagTitle: String {
         get {
             return tagTitle
@@ -32,10 +35,13 @@ class ParseUserTag: PFObject, PFSubclassing {
         super.init()
     }
     
-    convenience init(parseTag: ParseTag) {
+    convenience init(parseTag: ParseTag, user: User = User.current()!, isPending: Bool, approved: Bool) {
         self.init()
         self.parseTag = parseTag
-        self.user = User.current()!
+        self.user = user
         self.lowercasedTagTitle = parseTag.tagTitle
+        self.createdBy = User.current()!
+        self.isPending = isPending
+        self.approved = approved
     }
 }

@@ -11,6 +11,7 @@ import Parse
 
 class CardDetailDataStore {
     var delegate: CardDetailDataStoreDelegate?
+    var searchedParseTags: [ParseTag] = []
     
     init(delegate: CardDetailDataStoreDelegate) {
         self.delegate = delegate
@@ -32,7 +33,42 @@ class CardDetailDataStore {
     
     func searchForTags(searchText: String, delegate: TagDataStoreDelegate) {
         let superTagDataStore = SuperTagDataStore(superTagDelegate: delegate)
-        superTagDataStore.searchForTags(searchText: searchText)
+        
+        let query = superTagDataStore.createSearchQuery(searchText: searchText)
+        query.whereKeyDoesNotExist("dropDownCategory")
+        
+        superTagDataStore.runSearchQuery(searchText: searchText, query: query)
+        searchedParseTags = superTagDataStore.searchTags
+    }
+    
+    func setSearchedTags(tags: [Tag]) {
+        searchedParseTags = tags.filter({ (tag: Tag) -> Bool in
+            return tag.parseTag != nil
+        }).map({ (tag: Tag) -> ParseTag in
+            return tag.parseTag!
+        })
+    }
+    
+    func saveTag(title: String, userForTag: User) {
+        if let parseTag = ParseTag.findParseTag(title: title, parseTags: searchedParseTags) {
+            //the parseTag already exists in database
+            saveParseUserTag(parseTag: parseTag, userForTag: userForTag)
+        } else {
+            //doesn't exist yet
+            let parseTag = ParseTag(title: title, attribute: .generic)
+            parseTag.saveInBackground(block: { (success, error) in
+                if success {
+                    self.saveParseUserTag(parseTag: parseTag, userForTag: userForTag)
+                } else if let error = error {
+                    print(error)
+                }
+            })
+        }
+    }
+    
+    fileprivate func saveParseUserTag(parseTag: ParseTag, userForTag: User) {
+        let parseUserTag = ParseUserTag(parseTag: parseTag, user: userForTag, isPending: true, approved: false)
+        parseUserTag.saveInBackground()
     }
 }
 

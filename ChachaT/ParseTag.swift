@@ -25,7 +25,6 @@ class ParseTag: PFObject, PFSubclassing {
     @NSManaged private var title: String
     @NSManaged var attribute: String //i.e. DropDownTag, Generic, etc. We get thses from our Tag Attribute enum raw value.
     @NSManaged var dropDownCategory: DropDownCategory? //stores the data for what happens if the tag needs to have an action for the dropDownMenu (slider, tag menu, etc.)
-    @NSManaged var isPrivate: Bool
     //We want to save all tagTitles as lowercase values, so it will be quick and easy to query over them. But, when using an NSManaged variable, we can't use a setter/getter. So, we made tagTitle a public property that sets the private title variable.
     var tagTitle: String {
         get {
@@ -34,6 +33,17 @@ class ParseTag: PFObject, PFSubclassing {
         set (newStr) {
             title = ParseTag.formatTitleForDatabase(title: newStr)
         }
+    }
+    
+    override init() {
+        super.init()
+    }
+    
+    convenience init(title: String, attribute: TagAttributes, dropDownCategory: DropDownCategory? = nil) {
+        self.init()
+        self.tagTitle = title
+        self.attribute = attribute.rawValue
+        self.dropDownCategory = dropDownCategory
     }
     
     class func formatTitleForDatabase(title: String) -> String {
@@ -52,6 +62,13 @@ class ParseTag: PFObject, PFSubclassing {
             return removeEndingSpaces(str: truncatedString)
         }
         return str
+    }
+    
+    class func findParseTag(title: String, parseTags: [ParseTag]) -> ParseTag? {
+        let parseTag = parseTags.first { (parseTag: ParseTag) -> Bool in
+            return ParseTag.formatTitleForDatabase(title: title) == parseTag.tagTitle
+        }
+        return parseTag
     }
 
 }

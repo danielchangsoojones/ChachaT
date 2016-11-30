@@ -11,9 +11,11 @@ import Foundation
 class Tag {
     var title : String
     var attribute : TagAttributes
+    var parseTag: ParseTag?
     
-    init(title: String, attribute: TagAttributes) {
+    init(title: String, attribute: TagAttributes, parseTag: ParseTag? = nil) {
         self.title = title
         self.attribute = attribute
+        self.parseTag = parseTag
     }
 }

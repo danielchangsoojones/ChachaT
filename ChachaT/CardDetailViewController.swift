@@ -227,11 +227,7 @@ extension CardDetailViewController: BottomButtonsDelegate {
 }
 
 extension CardDetailViewController: TagCreationViewControllerDelegate {
-    func creationMenuTagPressed(_ title: String, tagView: TagView, sender: TagListView) {
-        
-    }
-    
-    func keyboardWasShown(keyboardHeight: CGFloat) {
+    func keyboardChanged(keyboardHeight: CGFloat) {
         theScrollView.contentInset.bottom = keyboardHeight
     }
     
@@ -240,7 +236,14 @@ extension CardDetailViewController: TagCreationViewControllerDelegate {
     }
     
     func saveNewTag(title: String) {
-        
+        dataStore.saveTag(title: title, userForTag: userOfTheCard ?? User.current()!)
+        createChosenTagView(title: title)
+    }
+    
+    fileprivate func createChosenTagView(title: String) {
+        //TODO: implement the specialty tagView for a pending tag
+        let tagView = TagView(title: title)
+        theTagCreationViewController.addChosenTagView(tagView: tagView)
     }
 }
 
@@ -248,6 +251,7 @@ extension CardDetailViewController: TagDataStoreDelegate {
     func setChoicesViewTagsArray(_ tagChoicesDataArray: [Tag]) {}
     
     func passSearchResults(searchTags: [Tag]) {
+        dataStore.setSearchedTags(tags: searchTags)
         theTagCreationViewController.passSearchedTags(searchTags: searchTags)
     }
     

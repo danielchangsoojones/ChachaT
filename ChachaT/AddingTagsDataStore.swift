@@ -39,11 +39,12 @@ class AddingTagsDataStore: SuperTagDataStore {
         }
     }
     
+    func findSearchedParseTag(title: String) -> ParseTag? {
+        return ParseTag.findParseTag(title: title, parseTags: searchTags)
+    }
+    
     fileprivate func saveNovelParseTag(title: String) {
-        let parseTag = ParseTag()
-        parseTag.tagTitle = title
-        parseTag.attribute = TagAttributes.generic.rawValue
-        parseTag.isPrivate = false
+        let parseTag = ParseTag(title: title, attribute: .generic)
         
         parseTag.saveInBackground(block: { (success, error) in
             if success {
@@ -55,17 +56,10 @@ class AddingTagsDataStore: SuperTagDataStore {
     }
     
     fileprivate func saveParseUserTag(parseTag: ParseTag) {
-        let parseUserTag = ParseUserTag(parseTag: parseTag)
+        let parseUserTag = ParseUserTag(parseTag: parseTag, user: User.current()!, isPending: false, approved: true)
         User.current()!.addUniqueObject(parseTag.tagTitle, forKey: "tagsArray")
         PFObject.saveAll(inBackground: [User.current()!, parseUserTag])
         currentUserParseTags.append(parseUserTag)
-    }
-    
-    fileprivate func findSearchedParseTag(title: String) -> ParseTag? {
-        let parseTag = searchTags.first { (parseTag: ParseTag) -> Bool in
-            return ParseTag.formatTitleForDatabase(title: title) == parseTag.tagTitle
-        }
-        return parseTag
     }
     
     func saveSpecialtyTag(title: String, specialtyCategory: String) {

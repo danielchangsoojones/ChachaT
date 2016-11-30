@@ -20,16 +20,24 @@ class SuperTagDataStore: SuperParseSwipeDataStore {
     }
     
     func searchForTags(searchText: String) {
+        runSearchQuery(searchText: searchText, query: createSearchQuery(searchText: searchText))
+    }
+    
+    func createSearchQuery(searchText: String) -> PFQuery<ParseTag> {
+        let query = ParseTag.query()! as! PFQuery<ParseTag>
+        query.whereKey("title", contains: searchText.lowercased())
+        return query
+    }
+    
+    func runSearchQuery(searchText: String, query: PFQuery<ParseTag>) {
         if !isSearching {
             isSearching = true
-            let query = ParseTag.query()! as! PFQuery<ParseTag>
-            query.whereKey("title", contains: searchText.lowercased())
             query.findObjectsInBackground { (parseTags, error) in
                 var searchDataArray: [Tag] = []
                 if let parseTags = parseTags {
                     self.searchTags = parseTags
                     let newSearchResults: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
-                        let tag = Tag(title: parseTag.tagTitle, attribute: TagAttributes.generic)
+                        let tag = Tag(title: parseTag.tagTitle, attribute: TagAttributes.generic, parseTag: parseTag)
                         return tag
                     })
                     searchDataArray.append(contentsOf: newSearchResults)

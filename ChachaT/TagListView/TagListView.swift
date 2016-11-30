@@ -392,9 +392,6 @@ extension TagListView {
     func setTagViewTitle(_ tagView: TagView, title: String) {
         tagView.setTitle(title, for: UIControlState())
         rearrangeViews()
-//        shouldRearrangeViews = true
-//        self.layoutSubviews()
-//        shouldRearrangeViews = false
     }
     
     //Purpose: apply all the properties of the TagListView to a tagView
@@ -428,9 +425,9 @@ extension TagListView {
         return tagView
     }
     
-    func insertTagViewAtIndex(_ index: Int, title: String = "") {
-        let tagView = TagView(title: title)
-        let attributedTagView = setTagViewAttributes(tagView, actionOnTap: #selector(tagPressed(_:)))
+    func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
+        let theTagView: TagView = tagView ?? TagView(title: title)
+        let attributedTagView = setTagViewAttributes(theTagView, actionOnTap: #selector(tagPressed(_:)))
         
         tagViews.insert(attributedTagView, at: index)
         tagBackgroundViews.append(UIView(frame: attributedTagView.bounds))
