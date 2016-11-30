@@ -15,7 +15,8 @@ class TagCreationViewController: UIViewController {
     
     convenience init(tags: [Tag]) {
         self.init(nibName: nil, bundle: nil)
-        
+        layoutCreationTagListView()
+        setCreationTagView()
     }
     
     //In order to use an init in view controller, must use a convenience init that calls this init and then passes nil, if not in storyboard.
@@ -41,6 +42,13 @@ class TagCreationViewController: UIViewController {
     private func setCreationTagView() {
         theCreationTagView = creationTagListView.creationTagView
         theCreationTagView.setDelegate(delegate: self)
+    }
+    
+    private func layoutCreationTagListView() {
+        self.view.addSubview(creationTagListView)
+        creationTagListView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self.view)
+        }
     }
 }
 

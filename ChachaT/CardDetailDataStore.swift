@@ -42,7 +42,8 @@ protocol CardDetailDataStoreDelegate {
 extension CardDetailViewController: CardDetailDataStoreDelegate {
     func passTags(tagArray: [Tag]) {
         for tag in tagArray {
-            _ = self.theCardUserTagListView.addTag(tag.title)
+            //add the appropriate tags to the tagListView
+//            _ = self.theCardUserTagListView.addTag(tag.title)
         }
     }
 }

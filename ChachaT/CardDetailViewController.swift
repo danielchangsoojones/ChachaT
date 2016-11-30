@@ -23,9 +23,12 @@ class CardDetailViewController: UIViewController {
     
     @IBOutlet weak var theBulletPointsStackView: UIStackView!
     @IBOutlet weak var theBackButton: UIButton!
-    @IBOutlet weak var theCardUserTagListView: ChachaChoicesTagListView!
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
     @IBOutlet weak var theProfileImageHolderView: UIView!
+    @IBOutlet weak var theTagListViewHolder: UIView!
+    
+    
+    
     var theProfileImageCarouselView: TGLParallaxCarousel!
     
     //Constraints
@@ -79,6 +82,7 @@ class CardDetailViewController: UIViewController {
         dataStoreSetup()
         setNormalGUI()
         profileImageCarouselSetup()
+        addTagListViewChildVC()
     }
     
     func addCardMessageChildVC() {
@@ -87,7 +91,14 @@ class CardDetailViewController: UIViewController {
         childVC.delegate = newCardMessageViewControllerDelegate
         addAsChildViewController(childVC, toView: self.view)
         theBackButtonTopConstraint.constant = childVC.view.frame.height + 10
-        
+    }
+    
+    fileprivate func addTagListViewChildVC() {
+        let childVC = TagCreationViewController(tags: [])
+        addAsChildViewController(childVC, toView: theTagListViewHolder)
+        childVC.view.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
     }
     
     override func viewWillAppear(_ animated: Bool) {

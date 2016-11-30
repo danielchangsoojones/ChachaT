@@ -225,11 +225,9 @@
                                                     <action selector="backButtonPressed:" destination="7Sy-Jm-ZWb" eventType="touchUpInside" id="XKm-I8-rXS"/>
                                                 </connections>
                                             </button>
-                                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dCe-w4-3mH" customClass="ChachaChoicesTagListView" customModule="Shuffles" customModuleProvider="target">
-                                                <rect key="frame" x="0.0" y="781" width="600" height="312"/>
-                                                <constraints>
-                                                    <constraint firstAttribute="height" constant="312" id="qYw-rF-hQs"/>
-                                                </constraints>
+                                            <view contentMode="scaleToFill" placeholderIntrinsicWidth="584" placeholderIntrinsicHeight="227" translatesAutoresizingMaskIntoConstraints="NO" id="wSd-Il-f4h">
+                                                <rect key="frame" x="8" y="773" width="584" height="227"/>
+                                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
                                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
@@ -237,20 +235,20 @@
                                             <constraint firstAttribute="trailing" secondItem="vGv-4q-uCX" secondAttribute="trailing" id="1ao-Jx-Fif"/>
                                             <constraint firstItem="h0H-yA-KZp" firstAttribute="top" secondItem="vGv-4q-uCX" secondAttribute="bottom" id="3Ff-cT-kNV"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="top" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="3" id="DjI-9k-vhI"/>
-                                            <constraint firstItem="dCe-w4-3mH" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="9" id="E0i-QV-clM"/>
+                                            <constraint firstItem="wSd-Il-f4h" firstAttribute="top" secondItem="bjX-Q8-gEl" secondAttribute="bottom" constant="1" id="Maz-Gn-mrP"/>
                                             <constraint firstAttribute="bottom" secondItem="dCo-OJ-te4" secondAttribute="bottom" constant="130" id="PyY-G5-Lvp"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="QMU-7g-Chs"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="20" id="Skd-VA-TBZ"/>
                                             <constraint firstItem="i23-FF-3md" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" constant="30" id="Ty8-td-QWW"/>
+                                            <constraint firstAttribute="bottom" secondItem="wSd-Il-f4h" secondAttribute="bottom" constant="118" id="U6g-UG-1LZ"/>
                                             <constraint firstItem="vGv-4q-uCX" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="Uz9-bG-MqN"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="top" secondItem="v5S-4V-jao" secondAttribute="top" id="VCW-xe-Mzj"/>
                                             <constraint firstAttribute="trailing" secondItem="q5j-vq-aso" secondAttribute="trailing" id="WO9-kc-fX2"/>
                                             <constraint firstItem="bjX-Q8-gEl" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="8" id="dLr-Py-L1I"/>
+                                            <constraint firstItem="wSd-Il-f4h" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" constant="8" id="dmj-EQ-ozl"/>
+                                            <constraint firstAttribute="trailing" secondItem="wSd-Il-f4h" secondAttribute="trailing" constant="8" id="lvg-vR-HD7"/>
                                             <constraint firstItem="q5j-vq-aso" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="m0d-Qv-Dsh"/>
-                                            <constraint firstAttribute="bottom" secondItem="dCe-w4-3mH" secondAttribute="bottom" constant="25" id="ni6-JD-Kkw"/>
                                             <constraint firstItem="dCo-OJ-te4" firstAttribute="top" secondItem="q5j-vq-aso" secondAttribute="bottom" id="t67-ZE-aKb"/>
-                                            <constraint firstAttribute="trailing" secondItem="dCe-w4-3mH" secondAttribute="trailing" id="wlj-3e-3iH"/>
-                                            <constraint firstItem="dCe-w4-3mH" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="x9g-xW-zhk"/>
                                             <constraint firstItem="vGv-4q-uCX" firstAttribute="leading" secondItem="v5S-4V-jao" secondAttribute="leading" id="x9z-ry-S8x"/>
                                             <constraint firstAttribute="trailing" secondItem="dCo-OJ-te4" secondAttribute="trailing" id="xLZ-qp-Z4y"/>
                                         </constraints>
@@ -301,15 +299,14 @@
                         <outlet property="theBackButtonLeadingConstraint" destination="Skd-VA-TBZ" id="byq-Xb-d1i"/>
                         <outlet property="theBackButtonTopConstraint" destination="Ty8-td-QWW" id="WgM-6a-Guw"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
-                        <outlet property="theCardUserTagListView" destination="dCe-w4-3mH" id="8wC-ZM-3yy"/>
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
-                        <outlet property="theProfileImageCarouselView" destination="vGv-4q-uCX" id="cla-An-9YF"/>
                         <outlet property="theProfileImageHolderView" destination="vGv-4q-uCX" id="9ri-bf-pWk"/>
+                        <outlet property="theTagListViewHolder" destination="wSd-Il-f4h" id="XY1-eC-ykX"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="lLv-S6-oCo" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="2137.5999999999999" y="423.68815592203902"/>
+            <point key="canvasLocation" x="2134.7826086956525" y="423.09782608695656"/>
         </scene>
         <!--Card Send Message View Controller-->
         <scene sceneID="2sH-tH-JLy">
@@ -324,14 +321,14 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <view contentMode="scaleToFill" placeholderIntrinsicWidth="111" placeholderIntrinsicHeight="38" translatesAutoresizingMaskIntoConstraints="NO" id="rf4-CY-7eA" customClass="MessageSalutationView" customModule="Shuffles" customModuleProvider="target">
-                                <rect key="frame" x="10" y="10" width="111" height="38"/>
+                                <rect key="frame" x="10" y="30" width="111" height="38"/>
                                 <color key="backgroundColor" red="0.69803921570000005" green="0.69803921570000005" blue="0.69803921570000005" alpha="1" colorSpace="calibratedRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="height" constant="38" id="beH-t5-vug"/>
                                 </constraints>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="rXb-UG-Teb">
-                                <rect key="frame" x="374" y="11" width="30" height="36"/>
+                                <rect key="frame" x="374" y="31" width="30" height="36"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="X">
                                     <color key="titleColor" red="0.047058823530000002" green="0.72941176470000002" blue="0.58823529409999997" alpha="1" colorSpace="calibratedRGB"/>
@@ -341,7 +338,7 @@
                                 </connections>
                             </button>
                             <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Poopy butt butt" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="f14-zE-fNX">
-                                <rect key="frame" x="0.0" y="48" width="414" height="643"/>
+                                <rect key="frame" x="0.0" y="68" width="414" height="623"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
