@@ -27,6 +27,7 @@
 		921BAF731DE3F64F00EF48BE /* TutorialStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */; };
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
 		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
+		92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E401DEF82C800C7C1F5 /* PendingTagView.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -174,6 +175,7 @@
 		921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialStruct.swift; sourceTree = "<group>"; };
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
 		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
+		92248E401DEF82C800C7C1F5 /* PendingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTagView.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -506,6 +508,7 @@
 				920BF81F1D3FF5E300104842 /* TagView.swift */,
 				920BF8241D3FF63A00104842 /* SpecialtyTagView.swift */,
 				9258849E1D902704006D7C01 /* DropDownTagView.swift */,
+				92248E401DEF82C800C7C1F5 /* PendingTagView.swift */,
 			);
 			name = TagViews;
 			sourceTree = "<group>";
@@ -1263,6 +1266,7 @@
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
+				92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */,
 				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
 				92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,

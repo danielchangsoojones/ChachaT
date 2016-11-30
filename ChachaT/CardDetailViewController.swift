@@ -241,9 +241,8 @@ extension CardDetailViewController: TagCreationViewControllerDelegate {
     }
     
     fileprivate func createChosenTagView(title: String) {
-        //TODO: implement the specialty tagView for a pending tag
-        let tagView = TagView(title: title)
-        theTagCreationViewController.addChosenTagView(tagView: tagView)
+        let pendingTagView = PendingTagView(title: title)
+        theTagCreationViewController.addChosenTagView(tagView: pendingTagView)
     }
 }
 

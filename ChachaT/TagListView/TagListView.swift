@@ -425,12 +425,35 @@ extension TagListView {
         return tagView
     }
     
-    func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
+    fileprivate func createTagView(index: Int, title: String, tagView: TagView?) -> UIView {
         let theTagView: TagView = tagView ?? TagView(title: title)
         let attributedTagView = setTagViewAttributes(theTagView, actionOnTap: #selector(tagPressed(_:)))
-        
         tagViews.insert(attributedTagView, at: index)
-        tagBackgroundViews.append(UIView(frame: attributedTagView.bounds))
+        let tagBackgroundView = UIView(frame: attributedTagView.bounds)
+        return tagBackgroundView
+    }
+    
+    func insertTagViewAtIndex(_ index: Int, title: String = "", tagView: TagView? = nil) {
+        let tagBackgroundView = createTagView(index: index, title: title, tagView: tagView)
+        tagBackgroundViews.append(tagBackgroundView)
+        rearrangeViews()
+    }
+    
+    //TODO: I want to figure out how to put the pending label above the tagView, but I can't seem to figure out how to do it from the PendingTagView class. This is the only way that I could figure out, for now to get it to work
+    func insertPendingTagViewAtIndex(index: Int, pendingTagView: PendingTagView) {
+        let tagBackgroundView = createTagView(index: index, title: "", tagView: pendingTagView)
+        
+        let label = UILabel()
+        label.text = "pending..."
+        label.textAlignment = .center
+        label.font = UIFont.systemFont(ofSize: marginY)
+        tagBackgroundView.addSubview(label)
+        label.snp.makeConstraints { (make) in
+            make.centerX.equalTo(tagBackgroundView)
+            make.bottom.equalTo(tagBackgroundView.snp.top)
+        }
+        
+        tagBackgroundViews.append(tagBackgroundView)
         rearrangeViews()
     }
 }

@@ -42,7 +42,6 @@ class TagCreationViewController: UIViewController {
         setCreationTagView()
         NotificationCenter.default.addObserver(self, selector: #selector(TagCreationViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(TagCreationViewController.keyboardWillHide(_:)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-        self.view.backgroundColor = UIColor.green
     }
 
     override func didReceiveMemoryWarning() {
@@ -163,8 +162,6 @@ extension TagCreationViewController: CreationTagViewDelegate {
         }
         //TODO: should this add subview be up in the nil check area? we don't want to add this multiple times to the view
         self.view.addSubview(creationMenuView)
-        creationMenuView.backgroundColor = UIColor.blue
-        self.view.backgroundColor = UIColor.purple
         //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
         creationMenuView.snp.remakeConstraints { (make) in
             make.leading.trailing.equalTo(self.view)
@@ -182,6 +179,11 @@ extension TagCreationViewController: AddingTagMenuDelegate {
     }
     
     func addChosenTagView(tagView: TagView) {
-        creationTagListView.insertTagViewAtIndex(1, tagView: tagView)
+        if let pendingTagView = tagView as? PendingTagView {
+            //TODO: I can't figure out how to make the PendingTagView just have a pending label in the view, so then I don't have to differentiate when I pass in the tagView. This is the only way I could hack the view to make it show the little "pending..." title on top
+            creationTagListView.insertPendingTagViewAtIndex(index: 1, pendingTagView: pendingTagView)
+        } else {
+            creationTagListView.insertTagViewAtIndex(1, tagView: tagView)
+        }
     }
 }

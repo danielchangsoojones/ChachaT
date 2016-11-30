@@ -230,7 +230,6 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="vGv-4q-uCX" secondAttribute="trailing" id="1ao-Jx-Fif"/>
                                             <constraint firstItem="h0H-yA-KZp" firstAttribute="top" secondItem="vGv-4q-uCX" secondAttribute="bottom" id="3Ff-cT-kNV"/>
