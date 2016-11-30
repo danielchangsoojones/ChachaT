@@ -21,6 +21,8 @@
 		920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8331D432E2500104842 /* MatchesViewController.swift */; };
 		920BF8371D43346B00104842 /* Chat.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8361D43346B00104842 /* Chat.swift */; };
 		920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920BF8381D4334DF00104842 /* ChatViewController.swift */; };
+		92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92142E621DEE5BBA00046DE2 /* CreationTagListView.swift */; };
+		92142E681DEE5FE900046DE2 /* TagCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92142E671DEE5FE900046DE2 /* TagCreationViewController.swift */; };
 		921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF701DE29F3800EF48BE /* ParseUserTag.swift */; };
 		921BAF731DE3F64F00EF48BE /* TutorialStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */; };
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
@@ -166,6 +168,8 @@
 		920BF8331D432E2500104842 /* MatchesViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MatchesViewController.swift; sourceTree = "<group>"; };
 		920BF8361D43346B00104842 /* Chat.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Chat.swift; sourceTree = "<group>"; };
 		920BF8381D4334DF00104842 /* ChatViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatViewController.swift; sourceTree = "<group>"; };
+		92142E621DEE5BBA00046DE2 /* CreationTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreationTagListView.swift; path = TagListView/CreationTagListView.swift; sourceTree = "<group>"; };
+		92142E671DEE5FE900046DE2 /* TagCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCreationViewController.swift; sourceTree = "<group>"; };
 		921BAF701DE29F3800EF48BE /* ParseUserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUserTag.swift; sourceTree = "<group>"; };
 		921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialStruct.swift; sourceTree = "<group>"; };
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
@@ -430,6 +434,34 @@
 			name = "Search Area";
 			sourceTree = "<group>";
 		};
+		92142E641DEE5F8B00046DE2 /* Tag Creation */ = {
+			isa = PBXGroup;
+			children = (
+				92142E661DEE5FA300046DE2 /* Tags */,
+				92142E651DEE5F9300046DE2 /* Creation Menu View */,
+				92142E671DEE5FE900046DE2 /* TagCreationViewController.swift */,
+			);
+			name = "Tag Creation";
+			sourceTree = "<group>";
+		};
+		92142E651DEE5F9300046DE2 /* Creation Menu View */ = {
+			isa = PBXGroup;
+			children = (
+				925D0FDD1D760EE000DE20F9 /* CreationMenuView.xib */,
+				925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */,
+			);
+			name = "Creation Menu View";
+			sourceTree = "<group>";
+		};
+		92142E661DEE5FA300046DE2 /* Tags */ = {
+			isa = PBXGroup;
+			children = (
+				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
+				92142E621DEE5BBA00046DE2 /* CreationTagListView.swift */,
+			);
+			name = Tags;
+			sourceTree = "<group>";
+		};
 		9222E9C21DDA137400196433 /* Card Message */ = {
 			isa = PBXGroup;
 			children = (
@@ -595,9 +627,7 @@
 		925D0FDA1D760E2F00DE20F9 /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FD81D75E61300DE20F9 /* CreationTagView.swift */,
-				925D0FDB1D760E7500DE20F9 /* CreationMenuView.swift */,
-				925D0FDD1D760EE000DE20F9 /* CreationMenuView.xib */,
+				92142E641DEE5F8B00046DE2 /* Tag Creation */,
 			);
 			name = Subviews;
 			sourceTree = "<group>";
@@ -1200,6 +1230,7 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				925CF4201DDCF84B00FF484C /* NewCardMessageDataStore.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
+				92142E681DEE5FE900046DE2 /* TagCreationViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,
 				92BCEB581D837DD700E05C05 /* CircleProfileView.swift in Sources */,
@@ -1297,6 +1328,7 @@
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
+				92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */,
 				924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */,
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,

@@ -8,7 +8,7 @@
 
 import Foundation
 
-protocol CreationTagViewDelegate {
+protocol CreationTagViewDelegate: UITextFieldDelegate {
     func textFieldDidChange(_ searchText: String)
 }
 
@@ -20,16 +20,21 @@ class CreationTagView: TagView {
     
     var delegate: CreationTagViewDelegate?
     
-    init(textFieldDelegate: UITextFieldDelegate, delegate: CreationTagViewDelegate, textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
+    init(textFont: UIFont, paddingX: CGFloat, paddingY: CGFloat, borderWidth: CGFloat, cornerRadius: CGFloat, tagBackgroundColor: UIColor) {
         super.init(frame: CGRect.zero)
-        self.delegate = delegate
         self.textFont = textFont
         self.paddingX = paddingX
         self.paddingY = paddingY
         self.borderWidth = borderWidth
         self.cornerRadius = cornerRadius
         self.tagBackgroundColor = tagBackgroundColor
-        addTextFieldSubview(textFieldDelegate)
+        self.borderColor = UIColor.black
+        addTextFieldSubview()
+    }
+    
+    func setDelegate(delegate: CreationTagViewDelegate) {
+        self.delegate = delegate
+        searchTextField.delegate = delegate
     }
     
     required internal init?(coder aDecoder: NSCoder) {
@@ -37,11 +42,10 @@ class CreationTagView: TagView {
     }
     
     //Purpose: the user should be able to type into the tag to find new tags
-    func addTextFieldSubview(_ textFieldDelegate: UITextFieldDelegate) {
+    func addTextFieldSubview() {
         searchTextField = UITextField()
         searchTextField.autocorrectionType = .no
         searchTextField.addTarget(self, action: #selector(textFieldDidChange(_:)), for: UIControlEvents.editingChanged)
-        searchTextField.delegate = textFieldDelegate
         searchTextField.clearButtonMode = .always
         searchTextField.autocapitalizationType = .none
         self.addSubview(searchTextField)

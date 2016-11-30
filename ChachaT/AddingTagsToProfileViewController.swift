@@ -40,11 +40,11 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     //Purpose: the first tag view needs to be a tag view that says "Add tags..." in a different color, and when the user clicks, they can start typing right there.
     //This should create a drop down menu of all available tags
     func createCreationTagView() {
-        let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
-        //TODO: move this the CreationTagView class
-        tagView.borderColor = UIColor.black
-        theCreationTagView = tagView
-        _ = tagChoicesView.addTagView(tagView)
+//        let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
+//        //TODO: move this the CreationTagView class
+//        tagView.borderColor = UIColor.black
+//        theCreationTagView = tagView
+//        _ = tagChoicesView.addTagView(tagView)
     }
     
     //Purpose: the user should be able to tap, when keyboard is showing, anywhere to dismiss the keyboard
@@ -185,14 +185,14 @@ extension AddingTagsToProfileViewController {
 
 extension AddingTagsToProfileViewController: CreationTagViewDelegate {
     func textFieldDidChange(_ searchText: String) {
-        if creationMenuView == nil {
-            //when we use the mac simulator, sometimes, the keyboard is not toggled. And, the creationMenuView uses the height of the keyboard to calculate its height. Hence, if the keyboard doesn't show, then the creationMenuView would be nil. By just having a nil check here, we stop the mac simulator from crashing, even though a real device would not need this code/wouldn't crash.
-            createTagMenuView(0)
-        }
-        creationMenuView.removeAllTags()
-        creationMenuView.isHidden = false
-        //we already check if the text is empty over in the CreationTagView class
-        dataStore.searchForTags(searchText: searchText)
+//        if creationMenuView == nil {
+//            //when we use the mac simulator, sometimes, the keyboard is not toggled. And, the creationMenuView uses the height of the keyboard to calculate its height. Hence, if the keyboard doesn't show, then the creationMenuView would be nil. By just having a nil check here, we stop the mac simulator from crashing, even though a real device would not need this code/wouldn't crash.
+//            createTagMenuView(0)
+//        }
+//        creationMenuView.removeAllTags()
+//        creationMenuView.isHidden = false
+//        //we already check if the text is empty over in the CreationTagView class
+//        dataStore.searchForTags(searchText: searchText)
     }
 }
 
