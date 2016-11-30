@@ -8,15 +8,23 @@
 
 import UIKit
 
+protocol TagCreationViewControllerDelegate {
+    func keyboardWasShown(keyboardHeight: CGFloat)
+    func searchForTags(searchText: String)
+    func saveNewTag(title: String)
+    func creationMenuTagPressed(_ title: String, tagView: TagView, sender: TagListView)
+}
+
 class TagCreationViewController: UIViewController {
     var creationTagListView: CreationTagListView = CreationTagListView(frame: CGRect.zero)
     var creationMenuView: CreationMenuView!
     var theCreationTagView: CreationTagView!
     
-    convenience init(tags: [Tag]) {
+    var delegate: TagCreationViewControllerDelegate?
+    
+    convenience init(delegate: TagCreationViewControllerDelegate) {
         self.init(nibName: nil, bundle: nil)
-        layoutCreationTagListView()
-        setCreationTagView()
+        self.delegate = delegate
     }
     
     //In order to use an init in view controller, must use a convenience init that calls this init and then passes nil, if not in storyboard.
@@ -31,12 +39,19 @@ class TagCreationViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        layoutCreationTagListView()
         setCreationTagView()
+        NotificationCenter.default.addObserver(self, selector: #selector(TagCreationViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        self.view.backgroundColor = UIColor.green
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     private func setCreationTagView() {
@@ -50,6 +65,27 @@ class TagCreationViewController: UIViewController {
             make.edges.equalTo(self.view)
         }
     }
+    
+    func getCurrentSearchText() -> String {
+        return theCreationTagView.searchTextField.text ?? ""
+    }
+    
+    func passSearchedTags(searchTags: [Tag]) {
+        let currentSearchText: String = theCreationTagView.searchTextField.text ?? ""
+        if searchTags.isEmpty {
+            //TODO: If we can't find any more tags here, then stop querying any farther if the user keeps typing
+            creationMenuView.toggleMenuType(.newTag, newTagTitle: currentSearchText, tagTitles: nil)
+        } else {
+            //search results exist
+            var tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
+                return tag.title
+            })
+            if !tagTitles.contains(currentSearchText) {
+                tagTitles.append(currentSearchText)
+            }
+            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
+        }
+    }
 }
 
 extension TagCreationViewController: CreationTagViewDelegate {
@@ -61,14 +97,14 @@ extension TagCreationViewController: CreationTagViewDelegate {
         creationMenuView.removeAllTags()
         creationMenuView.isHidden = false
         //we already check if the text is empty over in the CreationTagView class
-        //TODO: run a search for the tags in this class or in the super class?
-//        dataStore.searchForTags(searchText: searchText)
+        delegate?.searchForTags(searchText: searchText)
+        creationMenuView.backgroundColor = UIColor.red
     }
-    
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
         //TODO: hide all tagViews that aren't the CreationTagView, meaning clear the screen.
         creationMenuView?.isHidden = false
+        creationTagListView.shouldRearrangeViews = false
     }
     
     //Calls this function when the tap is recognized anywhere on the screen that is not a tappable object.
@@ -108,6 +144,7 @@ extension TagCreationViewController: CreationTagViewDelegate {
         //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
         //But, we can only get the keyboard height through this notification.
         createTagMenuView(keyboardHeight)
+        delegate?.keyboardWasShown(keyboardHeight: keyboardHeight)
     }
     
     func createTagMenuView(_ keyboardHeight: CGFloat) {
@@ -116,10 +153,12 @@ extension TagCreationViewController: CreationTagViewDelegate {
         }
         //TODO: should this add subview be up in the nil check area? we don't want to add this multiple times to the view
         self.view.addSubview(creationMenuView)
+        creationMenuView.backgroundColor = UIColor.blue
+        self.view.backgroundColor = UIColor.purple
         //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
         creationMenuView.snp.remakeConstraints { (make) in
             make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view).inset(keyboardHeight)
+            make.bottom.equalTo(self.view)
             //We can't just snp the top to addingTagView.snp.bottom, becuase when we rearrange the tagViews, the constraints get messed up. So, we snp it to the bottom of the addingTagView but make sure that the offset is a constant.
             make.top.equalTo(creationTagListView.snp.top).offset(theCreationTagView.frame.height)
         }
@@ -130,7 +169,6 @@ extension TagCreationViewController: AddingTagMenuDelegate {
     func addNewTagToTagChoiceView(title: String) {
         creationTagListView.insertTagViewAtIndex(1, title: title)
         resetTextField()
-        //TODO: pass a delegate to make it save the tagTitle however it is supposed to save
-//        dataStore.saveNewTag(title: title)
+        delegate?.saveNewTag(title: title)
     }
 }

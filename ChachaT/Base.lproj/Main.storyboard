@@ -230,7 +230,7 @@
                                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                             </view>
                                         </subviews>
-                                        <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                        <color key="backgroundColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                         <constraints>
                                             <constraint firstAttribute="trailing" secondItem="vGv-4q-uCX" secondAttribute="trailing" id="1ao-Jx-Fif"/>
                                             <constraint firstItem="h0H-yA-KZp" firstAttribute="top" secondItem="vGv-4q-uCX" secondAttribute="bottom" id="3Ff-cT-kNV"/>
@@ -301,6 +301,7 @@
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
                         <outlet property="theProfileImageHolderView" destination="vGv-4q-uCX" id="9ri-bf-pWk"/>
+                        <outlet property="theScrollView" destination="cKi-vK-cJw" id="pgu-6h-lgo"/>
                         <outlet property="theTagListViewHolder" destination="wSd-Il-f4h" id="XY1-eC-ykX"/>
                     </connections>
                 </viewController>

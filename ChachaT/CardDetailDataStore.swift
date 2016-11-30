@@ -30,8 +30,9 @@ class CardDetailDataStore {
         }
     }
     
-    func sendMessage(text: String) {
-        
+    func searchForTags(searchText: String, delegate: TagDataStoreDelegate) {
+        let superTagDataStore = SuperTagDataStore(superTagDelegate: delegate)
+        superTagDataStore.searchForTags(searchText: searchText)
     }
 }
 

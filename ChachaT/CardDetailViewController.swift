@@ -26,10 +26,10 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
     @IBOutlet weak var theProfileImageHolderView: UIView!
     @IBOutlet weak var theTagListViewHolder: UIView!
-    
-    
+    @IBOutlet weak var theScrollView: UIScrollView!
     
     var theProfileImageCarouselView: TGLParallaxCarousel!
+    var theTagCreationViewController: TagCreationViewController!
     
     //Constraints
     @IBOutlet weak var theBackButtonLeadingConstraint: NSLayoutConstraint!
@@ -94,9 +94,9 @@ class CardDetailViewController: UIViewController {
     }
     
     fileprivate func addTagListViewChildVC() {
-        let childVC = TagCreationViewController(tags: [])
-        addAsChildViewController(childVC, toView: theTagListViewHolder)
-        childVC.view.snp.makeConstraints { (make) in
+        theTagCreationViewController = TagCreationViewController(delegate: self)
+        addAsChildViewController(theTagCreationViewController, toView: theTagListViewHolder)
+        theTagCreationViewController.view.snp.makeConstraints { (make) in
             make.edges.equalToSuperview()
         }
     }
@@ -225,6 +225,38 @@ extension CardDetailViewController: BottomButtonsDelegate {
         }
     }
 }
+
+extension CardDetailViewController: TagCreationViewControllerDelegate {
+    func creationMenuTagPressed(_ title: String, tagView: TagView, sender: TagListView) {
+        
+    }
+    
+    func keyboardWasShown(keyboardHeight: CGFloat) {
+        theScrollView.contentInset.bottom = keyboardHeight
+    }
+    
+    func searchForTags(searchText: String) {
+        dataStore.searchForTags(searchText: searchText, delegate: self)
+    }
+    
+    func saveNewTag(title: String) {
+        
+    }
+}
+
+extension CardDetailViewController: TagDataStoreDelegate {
+    func setChoicesViewTagsArray(_ tagChoicesDataArray: [Tag]) {}
+    
+    func passSearchResults(searchTags: [Tag]) {
+        theTagCreationViewController.passSearchedTags(searchTags: searchTags)
+    }
+    
+    func getMostCurrentSearchText() -> String {
+        return theTagCreationViewController.getCurrentSearchText()
+    }
+}
+
+
 
 extension CardDetailViewController: MagicMoveable {
     

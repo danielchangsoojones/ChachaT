@@ -192,7 +192,7 @@ extension AddingTagsToProfileViewController: CreationTagViewDelegate {
 //        creationMenuView.removeAllTags()
 //        creationMenuView.isHidden = false
 //        //we already check if the text is empty over in the CreationTagView class
-//        dataStore.searchForTags(searchText: searchText)
+        dataStore.searchForTags(searchText: searchText)
     }
 }
 

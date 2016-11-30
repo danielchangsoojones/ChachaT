@@ -38,6 +38,12 @@ class CreationMenuView: UIView {
         nib.delegate = delegate
         return nib
     }
+    
+    override var intrinsicContentSize: CGSize {
+        //Superviews calculate the height of the creationMenuView based upon the intrinsicContentSize of this menu. So, we need to set the intrinsicContentHeight here, in order to allow scrollViews to calculate off of this. 
+        let heightOfCreationMenuView: Double = 200
+        return CGSize(width: 500, height: heightOfCreationMenuView)
+    }
 }
 
 extension CreationMenuView {
