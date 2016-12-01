@@ -67,15 +67,14 @@ extension SearchTagsViewController: CoachMarksControllerDataSource {
             bodyView = coachMarksController.helper.makeDefaultCoachViews(hintText: "error").bodyView
         }
         
-        let arrowView = CoachMarkArrowDefaultView(orientation: .top)
-        return (bodyView: bodyView, arrowView: arrowView)
+        return (bodyView: bodyView, arrowView: nil)
     }
     
     fileprivate func createFirstBodyView() -> CoachMarkBodyView {
-        return Tutorial.createBodyView(hintText: "Tap to choose the fun tag")
+        return MyCoachMarkBodyView(title: "Tap to choose a tag")
     }
     
     fileprivate func createSecondBodyView() -> CoachMarkBodyView {
-        return Tutorial.createBodyView(hintText: "Tap to search all users who match the fun tag")
+        return MyCoachMarkBodyView(title: "Find all matching users")
     }
 }

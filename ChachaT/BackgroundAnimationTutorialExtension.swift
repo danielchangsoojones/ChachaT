@@ -26,13 +26,15 @@ extension BackgroundAnimationViewController: CoachMarksControllerDataSource {
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
         var coachMark = coachMarksController.helper.makeCoachMark(for: fakeNavigationBar.rightMenuButton)
         coachMark.allowTouchInsideCutoutPath = true
+        coachMark.gapBetweenCoachMarkAndCutoutPath = 0
+        coachMark.gapBetweenBodyAndArrow = 0
         return coachMark
     }
     
     func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
-        let bodyView = Tutorial.createBodyView(hintText: "let's do your first search")
-        let arrowView = CoachMarkArrowDefaultView(orientation: .top)
-        return (bodyView: bodyView, arrowView: arrowView)
+        //TODO: one day, I want to figure out how to make an arrowView, just can't figure it out at the moment. 
+        let bodyView = MyCoachMarkBodyView(title: "Let's do your first search")
+        return (bodyView: bodyView, arrowView: nil)
     }
 }
 

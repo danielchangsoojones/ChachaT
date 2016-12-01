@@ -24,11 +24,11 @@
 		92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92142E621DEE5BBA00046DE2 /* CreationTagListView.swift */; };
 		92142E681DEE5FE900046DE2 /* TagCreationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92142E671DEE5FE900046DE2 /* TagCreationViewController.swift */; };
 		921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF701DE29F3800EF48BE /* ParseUserTag.swift */; };
-		921BAF731DE3F64F00EF48BE /* TutorialStruct.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */; };
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
 		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
 		92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E401DEF82C800C7C1F5 /* PendingTagView.swift */; };
 		92248E441DEFEA8100C7C1F5 /* MyMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */; };
+		92248E471DF0A6BF00C7C1F5 /* MyCoachMarkBodyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E461DF0A6BF00C7C1F5 /* MyCoachMarkBodyView.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -173,11 +173,11 @@
 		92142E621DEE5BBA00046DE2 /* CreationTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreationTagListView.swift; path = TagListView/CreationTagListView.swift; sourceTree = "<group>"; };
 		92142E671DEE5FE900046DE2 /* TagCreationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagCreationViewController.swift; sourceTree = "<group>"; };
 		921BAF701DE29F3800EF48BE /* ParseUserTag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ParseUserTag.swift; sourceTree = "<group>"; };
-		921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TutorialStruct.swift; sourceTree = "<group>"; };
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
 		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
 		92248E401DEF82C800C7C1F5 /* PendingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTagView.swift; sourceTree = "<group>"; };
 		92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMenuItem.swift; sourceTree = "<group>"; };
+		92248E461DF0A6BF00C7C1F5 /* MyCoachMarkBodyView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyCoachMarkBodyView.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -491,6 +491,14 @@
 				92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */,
 			);
 			name = "Menu Items";
+			sourceTree = "<group>";
+		};
+		92248E451DF0A5FB00C7C1F5 /* Coachmark */ = {
+			isa = PBXGroup;
+			children = (
+				92248E461DF0A6BF00C7C1F5 /* MyCoachMarkBodyView.swift */,
+			);
+			name = Coachmark;
 			sourceTree = "<group>";
 		};
 		922C898F1D4C080F00DE1373 /* Custom Segues */ = {
@@ -956,9 +964,9 @@
 		929BF0461DD047340099F3AB /* Tutorial */ = {
 			isa = PBXGroup;
 			children = (
+				92248E451DF0A5FB00C7C1F5 /* Coachmark */,
 				92954CA81DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift */,
 				92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */,
-				921BAF721DE3F64F00EF48BE /* TutorialStruct.swift */,
 			);
 			name = Tutorial;
 			sourceTree = "<group>";
@@ -1306,6 +1314,7 @@
 				926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */,
 				925884A71D905D1E006D7C01 /* TagChoicesDropDown.swift in Sources */,
 				920BF8201D3FF5E300104842 /* CloseButton.swift in Sources */,
+				92248E471DF0A6BF00C7C1F5 /* MyCoachMarkBodyView.swift in Sources */,
 				92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
@@ -1332,7 +1341,6 @@
 				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
-				921BAF731DE3F64F00EF48BE /* TutorialStruct.swift in Sources */,
 				925884A91D907C48006D7C01 /* SliderDropDown.swift in Sources */,
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
