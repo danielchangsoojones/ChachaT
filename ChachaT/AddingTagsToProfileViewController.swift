@@ -12,18 +12,15 @@ import SCLAlertView
 import Timepiece
 
 class AddingTagsToProfileViewController: SuperTagViewController {
-    @IBOutlet weak var theActivityIndicator: UIActivityIndicatorView!
-    var creationMenuView: CreationMenuView!
-    var theCreationTagView: CreationTagView!
+    var theTagCreationVC: TagCreationViewController!
+    @IBOutlet weak var theContentView: UIView!
     
     var dataStore : AddingTagsDataStore!
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        tagChoicesView.delegate = self
-        createCreationTagView()
+        createTagCreationHolderView()
         setDataFromDataStore()
-        setTapGestureToCloseKeyboard()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -37,41 +34,8 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         dataStore = AddingTagsDataStore(delegate: self) //sets the data for the tag arrays
     }
     
-    //Purpose: the first tag view needs to be a tag view that says "Add tags..." in a different color, and when the user clicks, they can start typing right there.
-    //This should create a drop down menu of all available tags
-    func createCreationTagView() {
-//        let tagView = CreationTagView(textFieldDelegate: self, delegate: self, textFont: tagChoicesView.textFont, paddingX: tagChoicesView.paddingX, paddingY: tagChoicesView.paddingY, borderWidth: tagChoicesView.borderWidth, cornerRadius: tagChoicesView.cornerRadius, tagBackgroundColor: tagChoicesView.tagBackgroundColor)
-//        //TODO: move this the CreationTagView class
-//        tagView.borderColor = UIColor.black
-//        theCreationTagView = tagView
-//        _ = tagChoicesView.addTagView(tagView)
-    }
-    
-    //Purpose: the user should be able to tap, when keyboard is showing, anywhere to dismiss the keyboard
-    //IF YOU EVER HAVE WEIRD GESTURES NOT BEING RECOGNIZED, THIS GESTURE RECOGNIZER IS PROBABLY THE PROBLEM
-    func setTapGestureToCloseKeyboard() {
-        NotificationCenter.default.addObserver(self, selector: #selector(AddingTagsToProfileViewController.keyboardWillShow(_:)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(AddingTagsToProfileViewController.dismissTheKeyboard))
-        view.addGestureRecognizer(tap)
-        //gesture recognizers usually fucks with tableView SelectAtIndexRow, but setting this property to false allows the tap to pass through to the tableView
-        tap.cancelsTouchesInView = false
-    }
-    
     override func passSearchResults(searchTags: [Tag]) {
-        let currentSearchText: String = theCreationTagView.searchTextField.text ?? ""
-        if searchTags.isEmpty {
-            //TODO: If we can't find any more tags here, then stop querying any farther if the user keeps typing
-            creationMenuView.toggleMenuType(.newTag, newTagTitle: currentSearchText, tagTitles: nil)
-        } else {
-            //search results exist
-            var tagTitles: [String] = searchTags.map({ (tag: Tag) -> String in
-                return tag.title
-            })
-            if !tagTitles.contains(currentSearchText) {
-                tagTitles.append(currentSearchText)
-            }
-            creationMenuView.toggleMenuType(.existingTags, newTagTitle: nil, tagTitles: tagTitles)
-        }
+        theTagCreationVC.passSearchedTags(searchTags: searchTags)
     }
     
     override func addDropDownTag(tag: Tag) {
@@ -86,15 +50,47 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     }
     
     override func getMostCurrentSearchText() -> String {
-        if let currentText = theCreationTagView.searchTextField.text {
-            return currentText
-        }
-        return ""
+        return theTagCreationVC.getCurrentSearchText()
     }
     
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+}
+
+//Tag Creation Holder View extension
+extension AddingTagsToProfileViewController {
+    fileprivate func createTagCreationHolderView() {
+        let holderView = UIView()
+        theContentView.addSubview(holderView)
+        holderView.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        addTagCreationChildVC(holderView: holderView)
+    }
+    
+    func addTagCreationChildVC(holderView: UIView) {
+        theTagCreationVC = TagCreationViewController(delegate: self)
+        theTagCreationVC.creationTagListView.delegate = self
+        addAsChildViewController(theTagCreationVC, toView: holderView)
+        theTagCreationVC.view.snp.makeConstraints { (make) in
+            make.edges.equalToSuperview()
+        }
+        tagChoicesView = theTagCreationVC.creationTagListView
+    }
+}
+
+extension AddingTagsToProfileViewController: TagCreationViewControllerDelegate {
+    func keyboardChanged(keyboardHeight: CGFloat) {}
+    
+    func searchForTags(searchText: String) {
+        dataStore.searchForTags(searchText: searchText)
+    }
+    
+    func saveNewTag(title: String) {
+        dataStore.saveNewTag(title: title)
+        theTagCreationVC.insertTagViewAtFront(tagView: TagView(title: title))
     }
 }
 
@@ -140,15 +136,15 @@ extension AddingTagsToProfileViewController {
     fileprivate func createCustomTags(dropDownTag: DropDownTag) {
         switch dropDownTag.databaseColumnName {
         case CustomDropDownParseColumnNames.height:
-            performHeightTagAction(dropDownTag: dropDownTag)
+            addHeightTag(dropDownTag: dropDownTag)
         case CustomDropDownParseColumnNames.age:
-            performAgeTagAction(dropDownTag: dropDownTag)
+            addAgeTag(dropDownTag: dropDownTag)
         default:
             break
         }
     }
     
-    fileprivate func performHeightTagAction(dropDownTag: DropDownTag) {
+    fileprivate func addHeightTag(dropDownTag: DropDownTag) {
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: User.current()!.heightConvertedToString) { (specialtyTagView: SpecialtyTagView) in
             let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
             let heightPickerVC = storyboard.instantiateViewController(withIdentifier: "HeightPickerViewController") as! HeightPickerViewController
@@ -160,7 +156,7 @@ extension AddingTagsToProfileViewController {
         }
     }
     
-    fileprivate func performAgeTagAction(dropDownTag: DropDownTag) {
+    fileprivate func addAgeTag(dropDownTag: DropDownTag) {
         let currentAge: Int = User.current()!.age ?? 0
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
             DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
@@ -181,88 +177,4 @@ extension AddingTagsToProfileViewController {
             }
         }
     }
-}
-
-extension AddingTagsToProfileViewController: CreationTagViewDelegate {
-    func textFieldDidChange(_ searchText: String) {
-//        if creationMenuView == nil {
-//            //when we use the mac simulator, sometimes, the keyboard is not toggled. And, the creationMenuView uses the height of the keyboard to calculate its height. Hence, if the keyboard doesn't show, then the creationMenuView would be nil. By just having a nil check here, we stop the mac simulator from crashing, even though a real device would not need this code/wouldn't crash.
-//            createTagMenuView(0)
-//        }
-//        creationMenuView.removeAllTags()
-//        creationMenuView.isHidden = false
-//        //we already check if the text is empty over in the CreationTagView class
-        dataStore.searchForTags(searchText: searchText)
-    }
-}
-
-//textField Delegate Extension for the CreationTagView textField
-extension AddingTagsToProfileViewController: UITextFieldDelegate {
-    func textFieldDidBeginEditing(_ textField: UITextField) {
-        //TODO: hide all tagViews that aren't the CreationTagView, meaning clear the screen.
-        creationMenuView?.isHidden = false
-    }
-    
-    //Calls this function when the tap is recognized anywhere on the screen that is not a tappable object.
-    func dismissTheKeyboard() {
-        //Causes the view (or one of its embedded text fields) to resign the first responder status.
-        view.endEditing(true)
-    }
-    
-    func textFieldDidEndEditing(_ textField: UITextField) {
-        resetTextField()
-    }
-    
-    func textFieldShouldClear(_ textField: UITextField) -> Bool {
-        textFieldDidEndEditing(textField)
-        return false //for some reason, I have to return false in order for the textField to resignTheFirst responder propoerly
-    }
-    
-    func textFieldShouldReturn(_ textField: UITextField) -> Bool {
-        //the return button hit
-        if let tagView = creationMenuView.choicesTagListView.tagViews.first, let currentTitle = tagView.currentTitle {
-            creationMenuView.tagPressed(currentTitle, tagView: tagView, sender: creationMenuView.choicesTagListView)
-        }
-        return true
-    }
-    
-    func resetTextField() {
-        theCreationTagView.searchTextField.text = ""
-        dismissTheKeyboard() //calls the textFieldDidEndEditing method, which hides the CreationMenuView
-        creationMenuView?.isHidden = true
-    }
-    
-    func keyboardWillShow(_ notification:Notification) {
-        let userInfo:NSDictionary = (notification as NSNotification).userInfo! as NSDictionary
-        let keyboardFrame:NSValue = userInfo.value(forKey: UIKeyboardFrameEndUserInfoKey) as! NSValue
-        let keyboardRectangle = keyboardFrame.cgRectValue
-        let keyboardHeight = keyboardRectangle.height
-        //creating the creationMenuView here because we only want it to be visible above the keyboard, so they can scroll through all available tags.
-        //But, we can only get the keyboard height through this notification.
-        createTagMenuView(keyboardHeight)
-    }
-    
-    func createTagMenuView(_ keyboardHeight: CGFloat) {
-        if creationMenuView == nil {
-            creationMenuView = CreationMenuView.instanceFromNib(self)
-        }
-        //TODO: should this add subview be up in the nil check area? we don't want to add this multiple times to the view
-        self.view.addSubview(creationMenuView)
-        //TODO: I don't know why, but by setting the hidden value on the tagMenuView when I want it to disappear, it makes the height constraint = 0, so I need to remake the constraints to make the CreationMenu show up a second time. This fixes it. But, might be a better way, where I don't have to set constraints every time the keyboard appears.
-        creationMenuView.snp.remakeConstraints { (make) in
-            make.leading.trailing.equalTo(self.view)
-            make.bottom.equalTo(self.view).inset(keyboardHeight)
-            //We can't just snp the top to addingTagView.snp.bottom, becuase when we rearrange the tagViews, the constraints get messed up. So, we snp it to the bottom of the addingTagView but make sure that the offset is a constant.
-            make.top.equalTo(tagChoicesView.snp.top).offset(theCreationTagView.frame.height)
-        }
-    }
-}
-
-extension AddingTagsToProfileViewController: AddingTagMenuDelegate {
-    func addNewTagToTagChoiceView(title: String) {
-        tagChoicesView.insertTagViewAtIndex(1, title: title)
-        resetTextField()
-        dataStore.saveNewTag(title: title)
-    }
-    
 }

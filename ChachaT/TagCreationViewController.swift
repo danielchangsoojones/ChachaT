@@ -60,6 +60,8 @@ class TagCreationViewController: UIViewController {
     
     private func layoutCreationTagListView() {
         self.view.addSubview(creationTagListView)
+        //TODO: one day, need to make an enum to hold the tags, so we know which tagListViews correspond with what. 
+        creationTagListView.tag = 1
         creationTagListView.snp.makeConstraints { (make) in
             make.edges.equalTo(self.view)
         }
