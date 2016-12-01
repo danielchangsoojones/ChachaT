@@ -229,10 +229,18 @@ extension CardDetailViewController: BottomButtonsDelegate {
 extension CardDetailViewController: TagCreationViewControllerDelegate {
     func keyboardChanged(keyboardHeight: CGFloat) {
         theScrollView.contentInset.bottom = keyboardHeight
+        if keyboardHeight > 0 {
+            ez.runThisAfterDelay(seconds: 0.2, after: {
+                //TODO: I honestly have no fucking idea why I had to put a delay on scrolling to a certain point. I don't know why this works, but if I don't use a delay, then it scrolls funkily.
+                let visibleRect = self.theTagListViewHolder.frame
+                self.theScrollView.scrollRectToVisible(visibleRect, animated: true)
+            })
+        }
     }
     
     func searchForTags(searchText: String) {
         dataStore.searchForTags(searchText: searchText, delegate: self)
+        theScrollView.setContentOffset(CGPoint(x:0, y: theScrollView.frame.height), animated: true)
     }
     
     func saveNewTag(title: String) {
