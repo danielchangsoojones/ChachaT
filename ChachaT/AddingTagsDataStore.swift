@@ -139,6 +139,8 @@ extension AddingTagsDataStore {
     func loadCurrentUserTags() {
         let query = ParseUserTag.query()! as! PFQuery<ParseUserTag>
         query.whereKey("user", equalTo: User.current()!)
+        query.whereKey("isPending", notEqualTo: false)
+        query.includeKey("createdBy")
         query.includeKey("parseTag")
         query.includeKey("parseTag.dropDownCategory")
         query.includeKey("parseTag.dropDownCategory.innerTags")
@@ -155,7 +157,8 @@ extension AddingTagsDataStore {
                         self.tagChoicesDataArray.append(newDropDownTag)
                     } else {
                         //just a generic tag
-                        let newTag = Tag(title: parseTag.tagTitle, attribute: .generic)
+                        let newTag = Tag(title: parseTag.tagTitle, attribute: .generic, createdBy: parseUserTag.createdBy)
+                        newTag.isPending = parseUserTag.isPending
                         self.tagChoicesDataArray.append(newTag)
                     }
                     self.currentUserParseTags.append(parseUserTag)
@@ -236,6 +239,25 @@ extension AddingTagsDataStore {
         }
         dropDownTag?.databaseColumnName = parseColumnName
         return dropDownTag
+    }
+}
+
+//Pending Tags
+extension AddingTagsDataStore {
+    func approveTag(title: String) {
+        updateParseUserTag(title: title, isApproved: false)
+    }
+    
+    func rejectTag(title: String) {
+        updateParseUserTag(title: title, isApproved: false)
+    }
+    
+    private func updateParseUserTag(title: String, isApproved: Bool) {
+        if let parseUserTag = findParseUserTag(title: title) {
+            parseUserTag.approved = isApproved
+            parseUserTag.isPending = false
+            parseUserTag.saveInBackground()
+        }
     }
 }
 

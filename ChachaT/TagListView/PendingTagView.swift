@@ -9,19 +9,29 @@
 import Foundation
 
 class PendingTagView: TagView {
-    override init(title: String) {
+    
+    var theTopLabel: UILabel = UILabel()
+    var isApproved: Bool = false
+    
+    init(title: String, topLabelTitle: String) {
         super.init(title: title)
         self.alpha = 0.4
+        theTopLabel.text = topLabelTitle
         labelSetup()
     }
     
+    func approve() {
+        self.alpha = 1
+        isApproved = true
+        theTopLabel.removeFromSuperview()
+    }
+    
     fileprivate func labelSetup() {
-        let label = UILabel()
-        label.text = "pending..."
-        label.textAlignment = .center
-        label.font = UIFont.systemFont(ofSize: TagViewProperties.marginY)
-        self.addSubview(label)
-        label.snp.makeConstraints { (make) in
+        theTopLabel.textAlignment = .center
+        theTopLabel.text = "butter"
+        theTopLabel.font = UIFont.systemFont(ofSize: TagViewProperties.marginY)
+        self.addSubview(theTopLabel)
+        theTopLabel.snp.makeConstraints { (make) in
             make.centerX.equalTo(self)
             make.bottom.equalTo(self.snp.top)
         }

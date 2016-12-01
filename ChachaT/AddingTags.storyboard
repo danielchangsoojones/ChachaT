@@ -22,7 +22,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ACJ-NV-rNZ">
-                                <rect key="frame" x="0.0" y="20" width="375" height="647"/>
+                                <rect key="frame" x="0.0" y="30" width="375" height="637"/>
                                 <subviews>
                                     <view contentMode="scaleToFill" placeholderIntrinsicWidth="240" placeholderIntrinsicHeight="128" translatesAutoresizingMaskIntoConstraints="NO" id="Z9b-Qb-jYN">
                                         <rect key="frame" x="0.0" y="0.0" width="375" height="128"/>
@@ -43,7 +43,7 @@
                             <constraint firstAttribute="trailing" secondItem="ACJ-NV-rNZ" secondAttribute="trailing" id="Loi-MR-GM8"/>
                             <constraint firstItem="ACJ-NV-rNZ" firstAttribute="leading" secondItem="qcq-BR-zCX" secondAttribute="leading" id="VSe-5y-QhZ"/>
                             <constraint firstItem="Z9b-Qb-jYN" firstAttribute="width" secondItem="qcq-BR-zCX" secondAttribute="width" id="qd6-2d-gZi"/>
-                            <constraint firstItem="ACJ-NV-rNZ" firstAttribute="top" secondItem="in9-u2-WDu" secondAttribute="bottom" id="uTj-7L-4Eg"/>
+                            <constraint firstItem="ACJ-NV-rNZ" firstAttribute="top" secondItem="in9-u2-WDu" secondAttribute="bottom" constant="10" id="uTj-7L-4Eg"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Your Tags" id="lDu-8K-Y1l"/>
@@ -116,23 +116,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="0l1-sl-lYJ" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="2881" y="512"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="fhf-PA-BfM">
-            <objects>
-                <viewController id="PCd-wo-GwD" sceneMemberID="viewController">
-                    <layoutGuides>
-                        <viewControllerLayoutGuide type="top" id="IDF-CT-Avx"/>
-                        <viewControllerLayoutGuide type="bottom" id="bPR-bx-b7r"/>
-                    </layoutGuides>
-                    <view key="view" contentMode="scaleToFill" id="M1w-yr-oO7">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                    </view>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="s5S-JK-3N4" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
         </scene>
     </scenes>
 </document>

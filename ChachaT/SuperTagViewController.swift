@@ -36,14 +36,18 @@ class SuperTagViewController: UIViewController {
     
     func loadChoicesViewTags() {
         for tag in tagChoicesDataArray {
-            switch tag.attribute {
-            case .dropDownMenu:
-                addDropDownTag(tag: tag)
-            case .generic:
-                _ = tagChoicesView.addTag(tag.title)
-            default:
-                break
-            }
+            loadTag(tag: tag)
+        }
+    }
+    
+    func loadTag(tag: Tag) {
+        switch tag.attribute {
+        case .dropDownMenu:
+            addDropDownTag(tag: tag)
+        case .generic:
+            _ = tagChoicesView.addTag(tag.title)
+        default:
+            break
         }
     }
     
