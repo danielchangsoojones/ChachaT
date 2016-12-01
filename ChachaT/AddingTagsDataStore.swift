@@ -31,7 +31,7 @@ class AddingTagsDataStore: SuperTagDataStore {
             //the current user does not already have this tag
             if let parseTag = findSearchedParseTag(title: title) {
                 //the parseTag already exists in database
-                saveParseUserTag(parseTag: parseTag)
+                saveParseUserTagFrom(parseTag: parseTag)
             } else {
                 //totally new tag created
                 saveNovelParseTag(title: title)
@@ -48,16 +48,20 @@ class AddingTagsDataStore: SuperTagDataStore {
         
         parseTag.saveInBackground(block: { (success, error) in
             if success {
-                self.saveParseUserTag(parseTag: parseTag)
+                self.saveParseUserTagFrom(parseTag: parseTag)
             } else if let error = error {
                 print(error)
             }
         })
     }
     
-    fileprivate func saveParseUserTag(parseTag: ParseTag) {
+    fileprivate func saveParseUserTagFrom(parseTag: ParseTag) {
         let parseUserTag = ParseUserTag(parseTag: parseTag, user: User.current()!, isPending: false, approved: true)
-        User.current()!.addUniqueObject(parseTag.tagTitle, forKey: "tagsArray")
+        saveParseUserTag(parseUserTag)
+    }
+    
+    fileprivate func saveParseUserTag(_ parseUserTag: ParseUserTag) {
+        User.current()!.addUniqueObject(parseUserTag.lowercasedTagTitle, forKey: "tagsArray")
         PFObject.saveAll(inBackground: [User.current()!, parseUserTag])
         currentUserParseTags.append(parseUserTag)
     }
@@ -72,7 +76,7 @@ class AddingTagsDataStore: SuperTagDataStore {
             query.includeKey("dropDownCategory")
             query.getFirstObjectInBackground { (object, error) in
                 if let parseTag = object as? ParseTag {
-                    self.saveParseUserTag(parseTag: parseTag)
+                    self.saveParseUserTagFrom(parseTag: parseTag)
                 } else if let error = error {
                     print(error)
                 }
@@ -137,16 +141,21 @@ extension AddingTagsDataStore {
 //for loading the tags
 extension AddingTagsDataStore {
     func loadCurrentUserTags() {
-        let query = ParseUserTag.query()! as! PFQuery<ParseUserTag>
-        query.whereKey("user", equalTo: User.current()!)
-        query.whereKey("isPending", notEqualTo: false)
-        query.includeKey("createdBy")
-        query.includeKey("parseTag")
-        query.includeKey("parseTag.dropDownCategory")
-        query.includeKey("parseTag.dropDownCategory.innerTags")
+        let normalAndPendingTagsQuery = createInnerQuery()
+        //using the not equal to false, because since not every column will have a bool (might be blank), this will just find any tag that is pending or just has nothing.
+        normalAndPendingTagsQuery.whereKey("isPending", notEqualTo: false)
         
-        query.findObjectsInBackground { (parseUserTags, error) in
-            if let parseUserTags = parseUserTags {
+        let approvedTagsQuery = createInnerQuery()
+        approvedTagsQuery.whereKey("approved", equalTo: true)
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [normalAndPendingTagsQuery, approvedTagsQuery])
+        orQuery.includeKey("createdBy")
+        orQuery.includeKey("parseTag")
+        orQuery.includeKey("parseTag.dropDownCategory")
+        orQuery.includeKey("parseTag.dropDownCategory.innerTags")
+        
+        orQuery.findObjectsInBackground { (objects, error) in
+            if let parseUserTags = objects as? [ParseUserTag] {
                 for parseUserTag in parseUserTags {
                     let parseTag = parseUserTag.parseTag
                     if let dropDownCategory = parseTag.dropDownCategory {
@@ -168,6 +177,12 @@ extension AddingTagsDataStore {
             }
             self.loadDropDownTags()
         }
+    }
+    
+    private func createInnerQuery() -> PFQuery<PFObject> {
+        let query = ParseUserTag.query()!
+        query.whereKey("user", equalTo: User.current()!)
+        return query
     }
     
     func loadDropDownTags() {
@@ -245,16 +260,16 @@ extension AddingTagsDataStore {
 //Pending Tags
 extension AddingTagsDataStore {
     func approveTag(title: String) {
-        updateParseUserTag(title: title, isApproved: false)
+        if let parseUserTag = findParseUserTag(title: title) {
+            parseUserTag.approved = true
+            parseUserTag.isPending = false
+            saveParseUserTag(parseUserTag)
+        }
     }
     
     func rejectTag(title: String) {
-        updateParseUserTag(title: title, isApproved: false)
-    }
-    
-    private func updateParseUserTag(title: String, isApproved: Bool) {
         if let parseUserTag = findParseUserTag(title: title) {
-            parseUserTag.approved = isApproved
+            parseUserTag.approved = false
             parseUserTag.isPending = false
             parseUserTag.saveInBackground()
         }

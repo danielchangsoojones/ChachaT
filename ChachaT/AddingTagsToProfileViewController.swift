@@ -90,7 +90,9 @@ extension AddingTagsToProfileViewController {
         theTagCreationVC.creationTagListView.delegate = self
         addAsChildViewController(theTagCreationVC, toView: holderView)
         theTagCreationVC.view.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.bottom.trailing.leading.equalToSuperview()
+            //add the inset, so we could see the little words that say pending and stuff
+            make.top.equalToSuperview().inset(10)
         }
         tagChoicesView = theTagCreationVC.creationTagListView
     }

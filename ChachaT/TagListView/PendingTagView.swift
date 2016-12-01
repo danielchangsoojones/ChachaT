@@ -28,7 +28,6 @@ class PendingTagView: TagView {
     
     fileprivate func labelSetup() {
         theTopLabel.textAlignment = .center
-        theTopLabel.text = "butter"
         theTopLabel.font = UIFont.systemFont(ofSize: TagViewProperties.marginY)
         self.addSubview(theTopLabel)
         theTopLabel.snp.makeConstraints { (make) in

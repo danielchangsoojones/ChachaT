@@ -99,7 +99,6 @@ extension TagCreationViewController: CreationTagViewDelegate {
         creationMenuView.isHidden = false
         //we already check if the text is empty over in the CreationTagView class
         delegate?.searchForTags(searchText: searchText)
-        creationMenuView.backgroundColor = UIColor.red
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
