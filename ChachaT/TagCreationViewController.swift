@@ -178,12 +178,7 @@ extension TagCreationViewController: AddingTagMenuDelegate {
         delegate?.saveNewTag(title: title)
     }
     
-    func addChosenTagView(tagView: TagView) {
-        if let pendingTagView = tagView as? PendingTagView {
-            //TODO: I can't figure out how to make the PendingTagView just have a pending label in the view, so then I don't have to differentiate when I pass in the tagView. This is the only way I could hack the view to make it show the little "pending..." title on top
-            creationTagListView.insertPendingTagViewAtIndex(index: 1, pendingTagView: pendingTagView)
-        } else {
-            creationTagListView.insertTagViewAtIndex(1, tagView: tagView)
-        }
+    func insertTagViewAtFront(tagView: TagView) {
+        creationTagListView.insertTagViewAtIndex(1, tagView: tagView)
     }
 }

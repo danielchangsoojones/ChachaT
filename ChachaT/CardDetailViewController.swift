@@ -241,8 +241,12 @@ extension CardDetailViewController: TagCreationViewControllerDelegate {
     }
     
     fileprivate func createChosenTagView(title: String) {
+        addPendingTagView(title: title)
+    }
+    
+    fileprivate func addPendingTagView(title: String) {
         let pendingTagView = PendingTagView(title: title)
-        theTagCreationViewController.addChosenTagView(tagView: pendingTagView)
+        theTagCreationViewController.insertTagViewAtFront(tagView: pendingTagView)
     }
 }
 
@@ -263,8 +267,7 @@ extension CardDetailViewController: CardDetailDataStoreDelegate {
     func passTags(tagArray: [Tag]) {
         for tag in tagArray {
             if tag.isPending {
-                let pendingTagView = PendingTagView(title: tag.title)
-                theTagCreationViewController.addChosenTagView(tagView: pendingTagView)
+                addPendingTagView(title: tag.title)
             } else {
                 _ = theTagCreationViewController.creationTagListView.addTag(tag.title)
             }
