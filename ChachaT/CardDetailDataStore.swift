@@ -9,26 +9,16 @@
 import Foundation
 import Parse
 
+protocol CardDetailDataStoreDelegate {
+    func passTags(tagArray: [Tag])
+}
+
 class CardDetailDataStore {
     var delegate: CardDetailDataStoreDelegate?
     var searchedParseTags: [ParseTag] = []
     
     init(delegate: CardDetailDataStoreDelegate) {
         self.delegate = delegate
-    }
-    
-    func loadTags(user: User) {
-        let query = user.tags.query() 
-        query.findObjectsInBackground { (parseTags, error) in
-            if let parseTags = parseTags {
-                let tags: [Tag] = parseTags.map({ (parseTag: ParseTag) -> Tag in
-                    return Tag(title: parseTag.tagTitle, attribute: .generic)
-                })
-                self.delegate?.passTags(tagArray: tags)
-            } else if let error = error {
-                print(error)
-            }
-        }
     }
     
     func searchForTags(searchText: String, delegate: TagDataStoreDelegate) {
@@ -72,15 +62,34 @@ class CardDetailDataStore {
     }
 }
 
-protocol CardDetailDataStoreDelegate {
-    func passTags(tagArray: [Tag])
-}
-
-extension CardDetailViewController: CardDetailDataStoreDelegate {
-    func passTags(tagArray: [Tag]) {
-        for tag in tagArray {
-            //add the appropriate tags to the tagListView
-//            _ = self.theCardUserTagListView.addTag(tag.title)
+//loading tags extension
+extension CardDetailDataStore {
+    func loadTags(user: User) {
+        let approvedTagQuery = createCommonQuery(user: user)
+        approvedTagQuery.whereKey("approved", notEqualTo: false)
+        
+        //get any tags created by the current user, and we will show them as pending even if the other user has not approved it yet.
+        let pendingTagQuery = createCommonQuery(user: user)
+        pendingTagQuery.whereKey("createdBy", equalTo: User.current()!)
+        
+        let orQuery = PFQuery.orQuery(withSubqueries: [approvedTagQuery, pendingTagQuery])
+        orQuery.findObjectsInBackground { (objects, error) in
+            if let parseUserTags = objects as? [ParseUserTag] {
+                let tags: [Tag] = parseUserTags.map({ (parseUserTag: ParseUserTag) -> Tag in
+                    let tag = Tag(title: parseUserTag.lowercasedTagTitle, attribute: .generic)
+                    tag.isPending = parseUserTag.isPending
+                    return tag
+                })
+                self.delegate?.passTags(tagArray: tags)
+            } else if let error = error {
+                print(error)
+            }
         }
+    }
+    
+    private func createCommonQuery(user: User) -> PFQuery<PFObject> {
+        let query = ParseUserTag.query()!
+        query.whereKey("user", equalTo: user)
+        return query
     }
 }

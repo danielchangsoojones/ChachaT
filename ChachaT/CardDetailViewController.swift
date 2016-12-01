@@ -259,6 +259,19 @@ extension CardDetailViewController: TagDataStoreDelegate {
     }
 }
 
+extension CardDetailViewController: CardDetailDataStoreDelegate {
+    func passTags(tagArray: [Tag]) {
+        for tag in tagArray {
+            if tag.isPending {
+                let pendingTagView = PendingTagView(title: tag.title)
+                theTagCreationViewController.addChosenTagView(tagView: pendingTagView)
+            } else {
+                _ = theTagCreationViewController.creationTagListView.addTag(tag.title)
+            }
+        }
+    }
+}
+
 
 
 extension CardDetailViewController: MagicMoveable {

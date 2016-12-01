@@ -12,6 +12,7 @@ class Tag {
     var title : String
     var attribute : TagAttributes
     var parseTag: ParseTag?
+    var isPending: Bool = false
     
     init(title: String, attribute: TagAttributes, parseTag: ParseTag? = nil) {
         self.title = title
