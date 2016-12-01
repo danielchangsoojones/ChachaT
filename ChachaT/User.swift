@@ -10,6 +10,11 @@ import UIKit
 import Parse
 
 class User: PFUser {
+    enum InterestedIn: String {
+        case female
+        case male
+        case all
+    }
     
     //MARK- NSManaged properies
     @NSManaged var fullName: String?
@@ -31,7 +36,7 @@ class User: PFUser {
     @NSManaged var location: PFGeoPoint
     @NSManaged var tags: PFRelation<ParseTag>
     @NSManaged var gender: String?
-    @NSManaged var interestedIn: String?
+    @NSManaged private var interestedIn: String?
     @NSManaged var tagArray: [String]
     var age : Int? {
         if let birthDate = birthDate {
@@ -64,6 +69,16 @@ class User: PFUser {
             let allProfileImages: [AnyObject?] = [profileImage, profileImage2, profileImage3, profileImage4, profileImage5, profileImage6]
             return allProfileImages.filter { (file) -> Bool in
                 return file != nil
+            }
+        }
+    }
+    var genderInterest: String? {
+        get {
+            return interestedIn
+        }
+        set (newValue) {
+            if InterestedIn(rawValue: newValue?.lowercased() ?? "") != nil {
+                interestedIn = newValue
             }
         }
     }
