@@ -240,7 +240,6 @@ extension CardDetailViewController: TagCreationViewControllerDelegate {
     
     func searchForTags(searchText: String) {
         dataStore.searchForTags(searchText: searchText, delegate: self)
-        theScrollView.setContentOffset(CGPoint(x:0, y: theScrollView.frame.height), animated: true)
     }
     
     func saveNewTag(title: String) {
