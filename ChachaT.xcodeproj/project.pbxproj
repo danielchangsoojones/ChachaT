@@ -28,6 +28,7 @@
 		9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9C41DDA140A00196433 /* MessageSalutationView.swift */; };
 		9222E9CB1DDA24E800196433 /* CardSendMessageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */; };
 		92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E401DEF82C800C7C1F5 /* PendingTagView.swift */; };
+		92248E441DEFEA8100C7C1F5 /* MyMenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */; };
 		922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */; };
 		922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */; };
 		922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */; };
@@ -176,6 +177,7 @@
 		9222E9C41DDA140A00196433 /* MessageSalutationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessageSalutationView.swift; sourceTree = "<group>"; };
 		9222E9CA1DDA24E800196433 /* CardSendMessageViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardSendMessageViewController.swift; sourceTree = "<group>"; };
 		92248E401DEF82C800C7C1F5 /* PendingTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PendingTagView.swift; sourceTree = "<group>"; };
+		92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyMenuItem.swift; sourceTree = "<group>"; };
 		922C89831D4A07D500DE1373 /* ChachaDropDownMenu.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaDropDownMenu.swift; sourceTree = "<group>"; };
 		922C89851D4B1F1D00DE1373 /* ScrollViewSearchView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ScrollViewSearchView.xib; sourceTree = "<group>"; };
 		922C89871D4B1F6400DE1373 /* ScrollViewSearchView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ScrollViewSearchView.swift; sourceTree = "<group>"; };
@@ -483,6 +485,14 @@
 			name = Subviews;
 			sourceTree = "<group>";
 		};
+		92248E421DEFEA6700C7C1F5 /* Menu Items */ = {
+			isa = PBXGroup;
+			children = (
+				92248E431DEFEA8100C7C1F5 /* MyMenuItem.swift */,
+			);
+			name = "Menu Items";
+			sourceTree = "<group>";
+		};
 		922C898F1D4C080F00DE1373 /* Custom Segues */ = {
 			isa = PBXGroup;
 			children = (
@@ -716,6 +726,7 @@
 		9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */ = {
 			isa = PBXGroup;
 			children = (
+				92248E421DEFEA6700C7C1F5 /* Menu Items */,
 				92BCEB601D847F3A00E05C05 /* Circle Views */,
 				92BCEB5F1D847C4000E05C05 /* Scroll Views */,
 				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
@@ -1298,6 +1309,7 @@
 				92C1FC1B1DAAE6D600660BD8 /* ParseTag.swift in Sources */,
 				92BCEB631D84B16100E05C05 /* ChatTableViewCell.swift in Sources */,
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
+				92248E441DEFEA8100C7C1F5 /* MyMenuItem.swift in Sources */,
 				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,

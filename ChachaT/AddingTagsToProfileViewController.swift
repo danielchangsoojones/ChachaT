@@ -10,6 +10,7 @@ import UIKit
 import Parse
 import SCLAlertView
 import Timepiece
+import EZSwiftExtensions
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     var theTagCreationVC: TagCreationViewController!
@@ -38,6 +39,16 @@ class AddingTagsToProfileViewController: SuperTagViewController {
         theTagCreationVC.passSearchedTags(searchTags: searchTags)
     }
     
+    override func loadTag(tag: Tag) {
+        if tag.isPending {
+            //add a pendingTagView
+            let pendingTagView = PendingTagView(title: tag.title, topLabelTitle: "Approve?")
+            tagChoicesView.insertTagViewAtIndex(1, tagView: pendingTagView)
+        } else {
+            super.loadTag(tag: tag)
+        }
+    }
+    
     override func addDropDownTag(tag: Tag) {
         if let dropDownTag = tag as? DropDownTag {
             switch dropDownTag.dropDownAttribute {
@@ -51,6 +62,10 @@ class AddingTagsToProfileViewController: SuperTagViewController {
     
     override func getMostCurrentSearchText() -> String {
         return theTagCreationVC.getCurrentSearchText()
+    }
+    
+    override var canBecomeFirstResponder: Bool {
+        return true //need to do this to allow UIMenuItems to work
     }
     
     override func didReceiveMemoryWarning() {
@@ -75,7 +90,9 @@ extension AddingTagsToProfileViewController {
         theTagCreationVC.creationTagListView.delegate = self
         addAsChildViewController(theTagCreationVC, toView: holderView)
         theTagCreationVC.view.snp.makeConstraints { (make) in
-            make.edges.equalToSuperview()
+            make.bottom.trailing.leading.equalToSuperview()
+            //add the inset, so we could see the little words that say pending and stuff
+            make.top.equalToSuperview().inset(10)
         }
         tagChoicesView = theTagCreationVC.creationTagListView
     }
@@ -100,12 +117,14 @@ extension AddingTagsToProfileViewController {
     func tagPressed(_ title: String, tagView: TagView, sender: TagListView) {
         if sender.tag == 1 {
             //tagChoicesView pressed
-            let alertView = SCLAlertView()
-            _ = alertView.addButton("Delete") {
-                self.dataStore.deleteTag(title)
-                sender.removeTagView(tagView)
+            if !isPendingTagView(tagView: tagView) {
+                let alertView = SCLAlertView()
+                _ = alertView.addButton("Delete") {
+                    self.dataStore.deleteTag(title)
+                    sender.removeTagView(tagView)
+                }
+                _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
             }
-            _ = alertView.showError("Delete", subTitle: "Do you want to delete this tag?", closeButtonTitle: "Cancel")
         } else if sender.tag == 3 {
             //ChachaDropDownTagView pressed
             dropDownMenu.hide()
@@ -128,6 +147,75 @@ extension AddingTagsToProfileViewController {
             default: break
             }
         }
+    }
+}
+
+//Pending Tags extension
+extension AddingTagsToProfileViewController {
+    fileprivate func isPendingTagView(tagView: TagView) -> Bool {
+        if let pendingTagView = tagView as? PendingTagView {
+            showMenuController(pendingTagView: pendingTagView)
+        }
+        return tagView is PendingTagView
+    }
+    
+    fileprivate func showMenuController(pendingTagView: PendingTagView) {
+        if !pendingTagView.isApproved {
+            let menu = UIMenuController.shared
+            
+            let approveItem = MyMenuItem(title: "Approve", action: #selector(approveTag(sender:)), correspondingObject: pendingTagView)
+            let rejectItem = MyMenuItem(title: "Reject", action: #selector(rejectTag(sender:)), correspondingObject: pendingTagView)
+            let createdByItem = MyMenuItem(title: "Created By", action: #selector(segueToCreatedBy(sender:)), correspondingObject: findTag(title: pendingTagView.currentTitle ?? ""))
+            
+            menu.menuItems = [approveItem, rejectItem, createdByItem]
+            
+            let frame = tagChoicesView.convert(pendingTagView.frame, from: pendingTagView.superview)
+            menu.setTargetRect(frame, in: tagChoicesView)
+            menu.setMenuVisible(true, animated: true)
+        }
+    }
+    
+    func approveTag(sender: UIMenuController) {
+        //TODO: hard coding the menuItems num to access the correspondingObject, this cold break if things change
+        if let myMenuItem = sender.menuItems?[0] as? MyMenuItem, let pendingTagView = myMenuItem.correspondingObject as? PendingTagView, let currentTitle = pendingTagView.currentTitle {
+            pendingTagView.approve()
+            dataStore.approveTag(title: currentTitle)
+            if let tag = findTag(title: currentTitle) {
+                tag.isPending = false
+            }
+        }
+    }
+    
+    func rejectTag(sender: UIMenuController) {
+        if let myMenuItem = sender.menuItems?[1] as? MyMenuItem, let pendingTagView = myMenuItem.correspondingObject as? PendingTagView, let currentTitle = pendingTagView.currentTitle {
+            tagChoicesView.removeTag(currentTitle)
+            dataStore.rejectTag(title: currentTitle)
+            
+            tagChoicesDataArray = tagChoicesDataArray.filter({ (tag: Tag) -> Bool in
+                return tag.title != currentTitle
+            })
+        }
+    }
+    
+    func segueToCreatedBy(sender: UIMenuController) {
+        if let myMenuItem = sender.menuItems?[2] as? MyMenuItem, let tag = myMenuItem.correspondingObject as? Tag, let createdBy = tag.createdBy {
+            segueToCardDetailVC(userOfCard: createdBy)
+        }
+    }
+    
+    private func segueToCardDetailVC(userOfCard: User) {
+        //TODO: make swipeable when they get to other users page.
+        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
+        cardDetailVC.userOfTheCard = userOfCard
+        pushVC(cardDetailVC)
+    }
+    
+    fileprivate func findTag(title: String) -> Tag? {
+        let tag = tagChoicesDataArray.first { (tag: Tag) -> Bool in
+            return tag.title == title
+        }
+        
+        return tag
     }
 }
 

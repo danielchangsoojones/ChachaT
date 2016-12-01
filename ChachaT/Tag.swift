@@ -13,10 +13,12 @@ class Tag {
     var attribute : TagAttributes
     var parseTag: ParseTag?
     var isPending: Bool = false
+    var createdBy: User?
     
-    init(title: String, attribute: TagAttributes, parseTag: ParseTag? = nil) {
+    init(title: String, attribute: TagAttributes, createdBy: User? = nil, parseTag: ParseTag? = nil) {
         self.title = title
         self.attribute = attribute
         self.parseTag = parseTag
+        self.createdBy = createdBy
     }
 }

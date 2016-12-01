@@ -102,15 +102,11 @@ class CardDetailViewController: UIViewController {
     }
     
     override func viewWillAppear(_ animated: Bool) {
-        if isViewingOwnProfile {
-            self.navigationController?.isNavigationBarHidden = true
-        }
+        self.navigationController?.isNavigationBarHidden = true
     }
     
     override func viewWillDisappear(_ animated: Bool) {
-        if isViewingOwnProfile {
-            self.navigationController?.isNavigationBarHidden = false
-        }
+        self.navigationController?.isNavigationBarHidden = false
     }
     
     func dataStoreSetup() {
@@ -252,7 +248,7 @@ extension CardDetailViewController: TagCreationViewControllerDelegate {
     }
     
     fileprivate func addPendingTagView(title: String) {
-        let pendingTagView = PendingTagView(title: title)
+        let pendingTagView = PendingTagView(title: title, topLabelTitle: "Pending...")
         theTagCreationViewController.insertTagViewAtFront(tagView: pendingTagView)
     }
 }
