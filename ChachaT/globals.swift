@@ -48,6 +48,7 @@ struct Constants {
     static let discoverable = "discoverable"
     static let isMatch = "isMatch"
     static let email = "email"
+    static let maxCacheAge = TimeInterval(60 * 60 * 24) //24 hours
 }
 
 struct ImageNames {

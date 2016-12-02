@@ -29,6 +29,8 @@ class SearchTagsDataStore: SuperTagDataStore {
     func setSpecialtyTagsIntoDefaultView() {
         let query = DropDownCategory.query()! as! PFQuery<DropDownCategory>
         query.includeKey("innerTags")
+        query.cachePolicy = .cacheElseNetwork
+        query.maxCacheAge = Constants.maxCacheAge
         query.findObjectsInBackground { (categories, error) in
             if let categories = categories {
                 for dropDownCategory in categories {
@@ -63,6 +65,8 @@ class SearchTagsDataStore: SuperTagDataStore {
         let query = ParseTag.query()! as! PFQuery<ParseTag>
         //TODO: figure out the height/width of the screen and how many tags to show in each case.
         query.limit = 50
+        query.cachePolicy = .cacheElseNetwork
+        query.maxCacheAge = Constants.maxCacheAge
         
         query.findObjectsInBackground { (parseTags, error) in
             if let parseTags = parseTags {

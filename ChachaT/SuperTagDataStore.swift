@@ -26,6 +26,9 @@ class SuperTagDataStore: SuperParseSwipeDataStore {
     func createSearchQuery(searchText: String) -> PFQuery<ParseTag> {
         let query = ParseTag.query()! as! PFQuery<ParseTag>
         query.whereKey("title", contains: searchText.lowercased())
+        query.cachePolicy = .cacheElseNetwork
+        let minutes = 1
+        query.maxCacheAge = TimeInterval(60 * minutes)
         return query
     }
     
