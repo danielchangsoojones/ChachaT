@@ -10,6 +10,7 @@ import UIKit
 import EZSwiftExtensions
 import Timepiece
 import EFTools
+import DatePickerDialog
 
 struct EditProfileConstants {
     static let numberOfBulletPoints : Int = 3
@@ -165,8 +166,15 @@ class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: AboutViewDelegate {
+    func scroll(to view: UIView) {
+        let newCoordinateFrame = theScrollView.convert(view.frame, from: view.superview)
+        let offSetFrame = CGRect(x: newCoordinateFrame.x, y: newCoordinateFrame.y, w: newCoordinateFrame.width, h: newCoordinateFrame.height + 20) //adding a little extra space, so not right under the content
+        theScrollView.scrollRectToVisible(offSetFrame, animated: true)
+    }
+    
     func jumpToScrollViewPosition(yPosition: CGFloat) {
-        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition), animated: true)
+        //TODO: just adding a constant to get a quick fix the scrolling of the text field because it wasn't jumping far enough,but this is not clean code.
+        theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition + 30), animated: true)
     }
     
     func incrementScrollViewYPosition(by heightChange: CGFloat) {
@@ -252,11 +260,13 @@ extension EditProfileViewController: PhotoEditingDelegate, CameraDelegate {
 //age extension
 extension EditProfileViewController {
     func ageCellTapped(_ sender: AboutView) {
-        DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
+        DatePickerDialog().show(title: "Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
             (birthday) -> Void in
-            let age = User.current()!.calculateAge(birthday: birthday)
-            sender.setInnerTitle("\(age)")
-            self.dataStore.saveAge(birthday)
+            if let birthday = birthday {
+                let age = User.current()!.calculateAge(birthday: birthday)
+                sender.setInnerTitle("\(age)")
+                self.dataStore.saveAge(birthday)
+            }
         }
     }
 }

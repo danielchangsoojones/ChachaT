@@ -10,7 +10,7 @@ import Foundation
 
 class MainPageEmptyStateView: SuperEmptyStateView {
     fileprivate struct EmptyMainPageConstants {
-        static let exhaustedDatabaseLabelText: String = "You have swiped everyone in the database. Come back later when we have more users or:"
+        static let exhaustedDatabaseLabelText: String = "No available users.\nSearch for more:"
         static let exhaustedDatabaseButtonText: String = "Search Users"
     }
     
@@ -18,7 +18,7 @@ class MainPageEmptyStateView: SuperEmptyStateView {
         super.stackViewSetup()
         theStackView.snp.makeConstraints { (make) in
             make.center.equalToSuperview()
-            make.height.equalTo(150)
+            make.height.equalTo(100)
             make.width.equalToSuperview().multipliedBy(0.75)
         }
     }

@@ -10,7 +10,7 @@ import Foundation
 
 class SettingsDataStore {
     func saveInterestedIn(choice: String) {
-        User.current()!.interestedIn = choice
+        User.current()!.genderInterest = choice
         User.current()?.saveInBackground()
     }
 }

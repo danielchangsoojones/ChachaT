@@ -88,7 +88,7 @@ extension WelcomeDataStore {
 extension WelcomeDataStore {
     //Facebook log in is not currently working at the moment, and I am not totally sure why...
     func accessFaceBook() {
-        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email", "user_photos", "user_birthday", "user_education_history", "user_work_history"]) { (user, error) in
+        PFFacebookUtils.logInInBackground(withReadPermissions: ["public_profile", "email", "user_photos", "user_birthday", "user_education_history", "user_work_history", "user_relationship_details"]) { (user, error) in
             if let currentUser = user as? User {
                 if currentUser.isNew {
                     print("this is a new user that just signed up")
@@ -104,12 +104,17 @@ extension WelcomeDataStore {
         }
     }
     
+    private enum FBRequest: String {
+        case interestedIn = "interested_in"
+    }
+    
+    //TODO: put all the strings into a struct/enum, to keep things cleaner
     //the API request to facebook will look something like this: graph.facebook.com/me?fields=name,email,picture
     //me is a special endpoint that somehow figures out the user's id or token, and then it can access the currentusers info like name, email and picture.
     //look into Facebook Graph API to learn more
     private func updateProfileFromFacebook(_ isNew : Bool) {
         if FBSDKAccessToken.current() != nil {
-            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, birthday, education, work"]).start(completionHandler: { (connection, result, error) -> Void in
+            FBSDKGraphRequest(graphPath: "me", parameters: ["fields": "id, name, gender, email, birthday, education, work, \(FBRequest.interestedIn.rawValue)"]).start(completionHandler: { (connection, result, error) -> Void in
                 if error == nil {
                     print("updating profile from facebook")
                     let currentUser = User.current()!
@@ -130,6 +135,7 @@ extension WelcomeDataStore {
                         }
                     }
                     currentUser.gender = userData["gender"] as? String
+                    currentUser.genderInterest = self.extractInterestedIn(userData: userData)
                     currentUser.saveInBackground(block: { (success, error) in
                         if let error = error {
                             let code = error._code
@@ -151,6 +157,12 @@ extension WelcomeDataStore {
                 }
             })
         }
+    }
+    
+    fileprivate func extractInterestedIn(userData: NSDictionary) -> String? {
+        let array = userData[FBRequest.interestedIn.rawValue] as? [String]
+        let interestedIn = array?.last
+        return interestedIn
     }
     
     fileprivate func extractGender(userData: NSDictionary) {

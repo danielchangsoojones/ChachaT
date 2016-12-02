@@ -10,7 +10,7 @@ import UIKit
 import MBAutoGrowingTextView
 
 protocol AboutViewDelegate {
-    func jumpToScrollViewPosition(yPosition: CGFloat)
+    func scroll(to view: UIView)
     func incrementScrollViewYPosition(by heightChange: CGFloat)
 }
 
@@ -276,7 +276,7 @@ extension AboutView: UITextViewDelegate {
     }
     
     func textViewDidBeginEditing(_ textView: UITextView) {
-        delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
+        delegate?.scroll(to: self)
     }
 }
 
@@ -296,12 +296,7 @@ extension AboutView : UITextFieldDelegate {
     }
     
     func textFieldDidBeginEditing(_ textField: UITextField) {
-        delegate?.jumpToScrollViewPosition(yPosition: getPositionToJumpTo())
-    }
-    
-    fileprivate func getPositionToJumpTo() -> CGFloat {
-        //TODO: this should account for the scrollviewinset/constraint because if we change spacing on things, then this could break and not be in the exact right position. But works for now.
-        return self.frame.origin.y + self.frame.height
+        delegate?.scroll(to: self)
     }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
