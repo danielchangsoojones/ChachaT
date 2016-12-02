@@ -10,6 +10,7 @@ import UIKit
 import EZSwiftExtensions
 import Timepiece
 import EFTools
+import DatePickerDialog
 
 struct EditProfileConstants {
     static let numberOfBulletPoints : Int = 3
@@ -253,11 +254,13 @@ extension EditProfileViewController: PhotoEditingDelegate, CameraDelegate {
 //age extension
 extension EditProfileViewController {
     func ageCellTapped(_ sender: AboutView) {
-        DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
+        DatePickerDialog().show(title: "Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
             (birthday) -> Void in
-            let age = User.current()!.calculateAge(birthday: birthday)
-            sender.setInnerTitle("\(age)")
-            self.dataStore.saveAge(birthday)
+            if let birthday = birthday {
+                let age = User.current()!.calculateAge(birthday: birthday)
+                sender.setInnerTitle("\(age)")
+                self.dataStore.saveAge(birthday)
+            }
         }
     }
 }

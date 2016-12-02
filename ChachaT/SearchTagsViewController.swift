@@ -166,10 +166,7 @@ extension SearchTagsViewController {
             updateAfterTagChosen()
             if wasSearchActive && sender.tag == 1 {
                 //we only want to resetTagChoicesView after the tag has been added to the chosenArea, if we do it beforehand, we get lag time.
-                ez.runThisAfterDelay(seconds: 0.01, after: {
-                    //the delay makes the ui lag time look better
-                    self.resetTagChoicesViewList()
-                })
+                self.resetTagChoicesViewList()
             }
             return
         }

@@ -112,7 +112,6 @@
 		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */; };
 		92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */; };
-		929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
 		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
@@ -265,7 +264,6 @@
 		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerViewController.swift; sourceTree = "<group>"; };
 		92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerDataStore.swift; sourceTree = "<group>"; };
-		929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DatePickerDialog.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
@@ -737,7 +735,6 @@
 				92248E421DEFEA6700C7C1F5 /* Menu Items */,
 				92BCEB601D847F3A00E05C05 /* Circle Views */,
 				92BCEB5F1D847C4000E05C05 /* Scroll Views */,
-				929A71DA1CEB935E000C9549 /* DatePickerDialog.swift */,
 				9261083D1CE4F8E3009F3E86 /* globals.swift */,
 				929FDB841CFA7AE100ACE474 /* UIImageExtension.swift */,
 				9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */,
@@ -1266,7 +1263,6 @@
 				92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */,
 				923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */,
 				92EB3CCF1DCA5BCD004E8797 /* BottomUserScrollView.swift in Sources */,
-				929A71DB1CEB935E000C9549 /* DatePickerDialog.swift in Sources */,
 				922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */,
 				92BCEB5C1D83813400E05C05 /* AutoGrowingHorizontalScrollView.swift in Sources */,
 				925D0FD91D75E61300DE20F9 /* CreationTagView.swift in Sources */,

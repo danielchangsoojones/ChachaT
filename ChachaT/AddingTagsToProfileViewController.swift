@@ -11,6 +11,7 @@ import Parse
 import SCLAlertView
 import Timepiece
 import EZSwiftExtensions
+import DatePickerDialog
 
 class AddingTagsToProfileViewController: SuperTagViewController {
     var theTagCreationVC: TagCreationViewController!
@@ -247,12 +248,13 @@ extension AddingTagsToProfileViewController {
     fileprivate func addAgeTag(dropDownTag: DropDownTag) {
         let currentAge: Int = User.current()!.age ?? 0
         addCustomTagViews(dropDownTag: dropDownTag, innerAnnotationText: currentAge.toString) { (specialtyTagView: SpecialtyTagView) in
-            DatePickerDialog().show("Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
+            DatePickerDialog().show(title: "Your Birthday!", defaultDate: User.current()!.birthDate ?? Date(),  datePickerMode: .date) {
                 (birthday) -> Void in
-                //TODO: the date dialog should pop up to the user's previous inputted bday if they have one
-                let age = User.current()!.calculateAge(birthday: birthday)
-                specialtyTagView.annotationView?.updateText(text: "\(age)")
-                self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
+                if let birthday = birthday {
+                    let age = User.current()!.calculateAge(birthday: birthday)
+                    specialtyTagView.annotationView?.updateText(text: "\(age)")
+                    self.dataStore.saveCustomActionTag(databaseColumnName: dropDownTag.databaseColumnName, itemToSave: birthday)
+                }
             }
         }
     }
