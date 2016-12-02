@@ -203,6 +203,10 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
         }
     }
     
+    func kolodaSwipeThresholdRatioMargin(_ koloda: KolodaView) -> CGFloat? {
+        return 0.3
+    }
+    
     func calculateKolodaViewCardHeight() -> (cardHeight: CGFloat, navigationAreaHeight: CGFloat) {
         let bottomAreaHeight = theStackViewBottomConstraint.constant + theBottomButtonsView.frame.height
         let cardOffsetFromBottomButtons : CGFloat = 0
