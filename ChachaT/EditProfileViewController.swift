@@ -166,6 +166,12 @@ class EditProfileViewController: UIViewController {
 }
 
 extension EditProfileViewController: AboutViewDelegate {
+    func scroll(to view: UIView) {
+        let newCoordinateFrame = theScrollView.convert(view.frame, from: view.superview)
+        let offSetFrame = CGRect(x: newCoordinateFrame.x, y: newCoordinateFrame.y, w: newCoordinateFrame.width, h: newCoordinateFrame.height + 20) //adding a little extra space, so not right under the content
+        theScrollView.scrollRectToVisible(offSetFrame, animated: true)
+    }
+    
     func jumpToScrollViewPosition(yPosition: CGFloat) {
         //TODO: just adding a constant to get a quick fix the scrolling of the text field because it wasn't jumping far enough,but this is not clean code.
         theScrollView.setContentOffset(CGPoint(x: theScrollView.contentOffset.x, y: yPosition + 30), animated: true)
