@@ -206,8 +206,7 @@ extension AddingTagsToProfileViewController {
     
     private func segueToCardDetailVC(userOfCard: User) {
         //TODO: make swipeable when they get to other users page.
-        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-        cardDetailVC.userOfTheCard = userOfCard
+        let cardDetailVC = CardDetailViewController.createCardDetailVC(userOfCard: userOfCard)
         pushVC(cardDetailVC)
     }
     

@@ -9,6 +9,7 @@
 import UIKit
 import JSQMessagesViewController
 import MobileCoreServices
+import EZSwiftExtensions
 import Parse
 
 class ChatViewController: JSQMessagesViewController {
@@ -39,6 +40,7 @@ class ChatViewController: JSQMessagesViewController {
         super.viewDidLoad()
         dataStore = ChatDataStore(chatUsers: [currentUser, otherUser] ,delegate: self)
         self.navigationController?.isNavigationBarHidden = false
+        rightNavButtonSetup()
         
         self.title = otherUser.fullName ?? "Unknown"
         
@@ -256,6 +258,7 @@ class ChatViewController: JSQMessagesViewController {
 // MARK: - UIImagePickerControllerDelegate
 extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     func sendMessage(text: String, picture: UIImage?) {
+        //TODO: make it so I don't need Parse in my ViewController. I don't even know if I need these lines, but I don;t want to break anything right now. 
         var pictureFile: PFFile!
 
         if let picture = picture {
@@ -282,6 +285,22 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
             self.didSelectPhotoMessage(image: picture!)
         }
         picker.dismiss(animated: true, completion: nil)
+    }
+}
+
+//Navigation buttons extension
+extension ChatViewController {
+    fileprivate func rightNavButtonSetup() {
+        let profileCircle = CircularImageView(file: otherUser.profileImage, diameter: navigationBarHeight * 0.75)
+        let tap = UITapGestureRecognizer(target: self, action: #selector(segueToCardDetailVC))
+        profileCircle.addGestureRecognizer(tap)
+        let barButtonItem = UIBarButtonItem(customView: profileCircle)
+        navigationItem.rightBarButtonItem = barButtonItem
+    }
+    
+    func segueToCardDetailVC() {
+        let cardDetailVC = CardDetailViewController.createCardDetailVC(userOfCard: otherUser)
+        pushVC(cardDetailVC)
     }
 }
 
