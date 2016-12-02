@@ -1511,7 +1511,7 @@
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = com.Chacha.Shuffle;
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				PROVISIONING_PROFILE = "27e5c8b3-bcee-48af-8b4e-3f910d6c2087";
+				PROVISIONING_PROFILE = "7b89d852-373f-4615-addc-cfbdbfff7e76";
 				PROVISIONING_PROFILE_SPECIFIER = "Shuffle App";
 				SWIFT_OBJC_BRIDGING_HEADER = "ChachaT/ChachaT-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
