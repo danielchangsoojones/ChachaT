@@ -92,8 +92,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-            print("DEVICE TOKEN = \(token.uppercased())")
+//        let token = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+//        print("DEVICE TOKEN = \(token.uppercased())")
+        let installation = PFInstallation.current()
+        installation?.setDeviceTokenFrom(deviceToken)
+        installation?.channels = ["global"]
+        installation?.saveInBackground()
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
