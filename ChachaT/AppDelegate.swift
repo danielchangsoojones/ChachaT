@@ -119,7 +119,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
         //when user has app in background or is in app, it will call this when a remote notification received. If the app was in background, it waits to get the app into the foreground before calling this
         print(userInfo)
-        print("eat my butthole")
+        MyNotification().performAction(dict: userInfo, appStatus: application.applicationState)
     }
 
 

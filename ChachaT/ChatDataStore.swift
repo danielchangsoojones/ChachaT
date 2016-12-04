@@ -184,16 +184,15 @@ class ChatDataStore {
         delegate?.appendMessage(message: message)
     }
     
-    func setStarterSwipeMessage(swipe: Swipe) {
-        let otherUser = swipe.otherUser
-        if let swipeMessage = swipe.incomingMessage {
-            let chat = createChat(chatText: swipeMessage, sender: otherUser)
+    func setStartingMessage(connection: Connection) {
+        let otherUser = connection.targetUser
+        if let startingMessage = connection.beginningMessage {
+            let chat = createChat(chatText: startingMessage, sender: otherUser)
             //saving this chat because until the receiving user opens the message, the swipeMessage is not added to a chat. So, this is when the swipeMessage actually has to get saved as a chat message.
             chat.saveInBackground()
             addMessage(chat: chat)
         }
     }
-
 }
 
 protocol ChatDataStoreDelegate {

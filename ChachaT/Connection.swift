@@ -12,10 +12,11 @@ import Foundation
 class Connection {
     var targetUser: User //the user who the currentUser got matched with
     var hasSeen: Bool = false //the currentUser has or has not checked the match out already. Checking them out, means tapping on the Match to start a conversation.
+    var beginningMessage: String? = nil
     
-    init(targetUser: User, hasSeen: Bool = false) {
+    init(targetUser: User, hasSeen: Bool = false, beginningMessage: String? = nil) {
         self.targetUser = targetUser
         self.hasSeen = hasSeen
+        self.beginningMessage = beginningMessage
     }
-    
 }

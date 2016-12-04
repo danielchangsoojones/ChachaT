@@ -60,7 +60,6 @@ class BackgroundAnimationViewController: UIViewController {
             dataStore.loadSwipeArray()
         }
         setBottomButtons()
-        MyNotification().helper()
     }
     
     override func viewWillAppear(_ animated: Bool) {

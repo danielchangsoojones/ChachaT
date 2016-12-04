@@ -316,7 +316,7 @@ extension CardDetailViewController: SegueHandlerType {
 }
 
 extension CardDetailViewController {
-    class func createCardDetailVC(userOfCard: User) -> CardDetailViewController {
+    class func createCardDetailVC(userOfCard: User?) -> CardDetailViewController {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
         cardDetailVC.userOfTheCard = userOfCard
         return cardDetailVC

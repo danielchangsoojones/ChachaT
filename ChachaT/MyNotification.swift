@@ -16,61 +16,35 @@ class MyNotification {
         case toMatch
     }
     
+    var dataStore: MyNotificationDataStore!
+    
+    init() {
+        dataStore = MyNotificationDataStore(delegate: self)
+    }
+    
     
     func checkIfStartedFromNotification(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
-        if let remoteNotification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? NSDictionary {
-//            let prefs: UserDefaults = UserDefaults.standard
-//            prefs.set(remoteNotification as! [AnyHashable: Any], forKey: "startUpNotif")
-//            prefs.synchronize()
-            if let dict = remoteNotification as? [AnyHashable : Any] {
-                getNotificationIdentifier(dictionary: remoteNotification)
-            }
-            
-            
-            
-            let query = User.query()!
-            query.getFirstObjectInBackground(block: { (object, error) in
-                let navController = UIApplication.shared.keyWindow?.rootViewController as! ChachaNavigationViewController
-                
-                let storyboard = UIStoryboard(name: "Main", bundle: nil)
-                
-                let initialViewController = storyboard.instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-                initialViewController.userOfTheCard = object as! User
-                
-                navController.pushViewController(initialViewController, animated: false)
-                
-//                window.rootViewController = initialViewController
-//                window.makeKeyAndVisible()
-            })
-            
+        if let remoteNotification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable : Any] {
+            performAction(dict: remoteNotification, appStatus: .inactive)
             return true
         }
         return false
     }
     
-    func helper() {
-        let query = User.query()!
-        query.getFirstObjectInBackground(block: { (object, error) in
-            let navController = UIApplication.shared.keyWindow?.rootViewController as! ChachaNavigationViewController
-            
-            let storyboard = UIStoryboard(name: "Main", bundle: nil)
-            
-            let initialViewController = storyboard.instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-            initialViewController.userOfTheCard = object as! User
-            
-            navController.pushViewController(initialViewController, animated: false)
-            
-            //                window.rootViewController = initialViewController
-            //                window.makeKeyAndVisible()
-        })
+    func performAction(dict: [AnyHashable : Any], appStatus: UIApplicationState) {
+        if let identifier = getNotificationIdentifier(dictionary: dict) {
+            switch appStatus {
+            case .active:
+                break
+            case .inactive, .background:
+                enteringAppActions(identifier: identifier, dictionary: dict)
+            }
+        }
     }
     
     fileprivate func getNotificationIdentifier(dictionary: [AnyHashable: Any]) -> Identifier? {
-        if let dict = dictionary as? [AnyHashable: Any], let value = dict["identifier"] as? String, let identifier = Identifiers(rawValue: value) {
-            switch identifier {
-            case .toMatch:
-                print(identifier.rawValue)
-            }
+        if let value = dictionary["identifier"] as? String {
+            return Identifier(rawValue: value)
         }
         return nil
     }
@@ -78,8 +52,42 @@ class MyNotification {
 
 //App was completely closed
 extension MyNotification {
-    func enteringAppActions(identifier: Identifier) {
-        
+    fileprivate func enteringAppActions(identifier: Identifier, dictionary: [AnyHashable : Any]) {
+        switch identifier {
+        case .toMatch:
+            showNotifiedMatch(dictionary: dictionary)
+        }
+    }
+    
+    fileprivate func showNotifiedMatch(dictionary: [AnyHashable : Any]) {
+        let parseSwipeObjectId: String? = dictionary["objectId"] as? String
+        dataStore.findNewMatchFromParseSwipe(objectId: parseSwipeObjectId ?? "")
+    }
+}
+
+//Segueing to chat actions
+extension MyNotification: MyNotificationDataStoreDelegate {
+    func segueToChat(connection: Connection) {
+        if let navController = getCurrentNavController() {
+            navController.pushViewController(getMatchesVC(), animated: false)
+            let chatVC = ChatViewController.instantiate(connection: connection)
+            navController.pushViewController(chatVC, animated: false)
+        }
+    }
+    
+    fileprivate func getMatchesVC() -> MatchesViewController {
+        let matchesVC = instatiateVC(storyboardId: "Matches", viewControllerId: "MatchesViewController") as! MatchesViewController
+        return matchesVC
+    }
+    
+    fileprivate func instatiateVC(storyboardId: String, viewControllerId: String) -> UIViewController {
+        let storyboard = UIStoryboard(name: storyboardId, bundle: nil)
+        let initialViewController = storyboard.instantiateViewController(withIdentifier: viewControllerId)
+        return initialViewController
+    }
+    
+    fileprivate func getCurrentNavController() -> ChachaNavigationViewController? {
+        return UIApplication.shared.keyWindow?.rootViewController as? ChachaNavigationViewController
     }
 }
 
