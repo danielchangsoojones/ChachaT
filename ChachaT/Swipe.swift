@@ -10,6 +10,7 @@ import Foundation
 
 class Swipe {
     var isMatch: Bool = false
+    var isNewMatch: Bool = false
     var otherUserApproval: Bool = false
     var currentUserApproval: Bool = false
     var incomingMessage: String?
@@ -26,13 +27,14 @@ class Swipe {
     }
     
     func approve() {
+        let previousCurrentUserApproval = currentUserApproval
         currentUserApproval = true
         isMatch = currentUserApproval && otherUserApproval
+        isNewMatch = !previousCurrentUserApproval && isMatch
     }
     
     func nope() {
         currentUserApproval = false
         isMatch = false
     }
-    
 }

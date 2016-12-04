@@ -17,7 +17,7 @@ class ChatViewController: JSQMessagesViewController {
     var isLoading = false
     
     // currently only setup for two participants
-    var currentUser : User!
+    var currentUser : User = User.current()!
     var otherUser : User!
     
     // Key - value collection of avatars so we don't double load too much
@@ -307,7 +307,7 @@ extension ChatViewController {
 extension ChatViewController {
     class func instantiate(otherUser: User) -> ChatViewController {
         let chatVC = ChatViewController()
-        chatVC.currentUser = User.current()
+        chatVC.currentUser = User.current()!
         chatVC.otherUser = otherUser
         return chatVC
     }

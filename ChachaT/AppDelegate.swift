@@ -11,6 +11,7 @@ import Parse
 import ParseFacebookUtilsV4
 
 @UIApplicationMain
+//TODO: one day create datastore to hold the parse stuff
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -44,8 +45,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
+        } else if MyNotification().checkIfStartedFromNotification(launchOptions: launchOptions) {
+//            self.window = UIWindow(frame: UIScreen.main.bounds)
+//            
+//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
+//            
+//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "SignUpLogInViewController") as! SignUpLogInViewController
+//            
+//            self.window?.rootViewController = initialViewController
+//            self.window?.makeKeyAndVisible()
         }
-        
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
 //        
@@ -84,6 +93,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
+        let currentInstallation = PFInstallation.current()
+        if currentInstallation?.badge != 0 {
+            currentInstallation?.badge = 0
+            currentInstallation?.saveEventually()
+        }
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -103,7 +117,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        //when user has app in background or is in app, it will call this when a remote notification received. If the app was in background, it waits to get the app into the foreground before calling this
         print(userInfo)
+        print("eat my butthole")
     }
 
 

@@ -112,6 +112,7 @@
 		92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */; };
 		92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */; };
 		92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */; };
+		9299DC321DF38C5A0079C8F2 /* MyNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9299DC311DF38C5A0079C8F2 /* MyNotification.swift */; };
 		929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */; };
 		929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */; };
 		929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */; };
@@ -264,6 +265,7 @@
 		92954CAA1DDE20A3005B6FA4 /* SearchTutorialExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTutorialExtension.swift; sourceTree = "<group>"; };
 		92954CAE1DDE4B38005B6FA4 /* AttributePickerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerViewController.swift; sourceTree = "<group>"; };
 		92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AttributePickerDataStore.swift; sourceTree = "<group>"; };
+		9299DC311DF38C5A0079C8F2 /* MyNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyNotification.swift; sourceTree = "<group>"; };
 		929BF03C1DCF9C670099F3AB /* MainPageEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MainPageEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF03F1DCFB4720099F3AB /* SearchingEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchingEmptyStateView.swift; sourceTree = "<group>"; };
 		929BF0411DCFB4A60099F3AB /* SuperEmptyStateView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SuperEmptyStateView.swift; sourceTree = "<group>"; };
@@ -689,6 +691,7 @@
 				9288194D1D2BECC8000A8E04 /* Navigation */,
 				9261085A1CEA1939009F3E86 /* Models */,
 				9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */,
+				9299DC301DF38C270079C8F2 /* Notification */,
 				9261083B1CE4EDF7009F3E86 /* sounds */,
 				926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */,
 			);
@@ -928,6 +931,14 @@
 				92954CB21DDE6541005B6FA4 /* AttributePickerDataStore.swift */,
 			);
 			name = "Data Models";
+			sourceTree = "<group>";
+		};
+		9299DC301DF38C270079C8F2 /* Notification */ = {
+			isa = PBXGroup;
+			children = (
+				9299DC311DF38C5A0079C8F2 /* MyNotification.swift */,
+			);
+			name = Notification;
 			sourceTree = "<group>";
 		};
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
@@ -1300,6 +1311,7 @@
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
 				92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */,
+				9299DC321DF38C5A0079C8F2 /* MyNotification.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
 				922C89931D4C460200DE1373 /* CustomTagsSearchBar.swift in Sources */,
 				929BF03D1DCF9C670099F3AB /* MainPageEmptyStateView.swift in Sources */,
