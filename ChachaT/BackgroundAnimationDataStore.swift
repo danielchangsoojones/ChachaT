@@ -32,6 +32,15 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
     fileprivate func updateParseSwipe(parseSwipe: ParseSwipe, swipe: Swipe) {
         parseSwipe.currentUserHasSwiped = true
         parseSwipe.currentUserApproval = swipe.currentUserApproval
+        parseSwipe.saveInBackground { (success, error) in
+            if success {
+                if let parseSwipeObjectId = parseSwipe.objectId, swipe.isNewMatch {
+                    PFCloud.callFunction(inBackground: "sendMatchPushNotification", withParameters: ["parseSwipeObjectId" : parseSwipeObjectId, "targetUserObjectId" : parseSwipe.otherUser.objectId ?? ""])
+                }
+            } else if let error = error {
+                print(error)
+            }
+        }
         parseSwipe.saveInBackground()
     }
     
