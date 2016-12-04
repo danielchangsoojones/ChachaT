@@ -41,11 +41,13 @@ class SearchTagsViewController: SuperTagViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
+        scrollViewSearchView.isHidden = false
         setUpTutorialCoachingMarks()
     }
     
     override func viewWillDisappear(_ animated: Bool) {
         super.viewWillDisappear(animated)
+        scrollViewSearchView.isHidden = true //for when we push VC's after this VC
         coachMarksController.stop(immediately: true)
     }
     
@@ -62,6 +64,7 @@ class SearchTagsViewController: SuperTagViewController {
         tagChosenView.delegate = self
     }
     
+    //TODO: put the scrollview search view into a normal view instead of nav bar because nav bar when pushing keeps the views in it, so it messes up the nav bar on anything after this vc
     func addSearchScrollView(_ holderView: UIView) -> ScrollViewSearchView {
         //getting the xib file for the scroll view
         let scrollViewSearchView = ScrollViewSearchView.instanceFromNib()

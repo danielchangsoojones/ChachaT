@@ -69,9 +69,8 @@ extension MyNotification {
 extension MyNotification: MyNotificationDataStoreDelegate {
     func segueToChat(connection: Connection) {
         if let navController = getCurrentNavController() {
-            navController.pushViewController(getMatchesVC(), animated: false)
             let chatVC = ChatViewController.instantiate(connection: connection)
-            navController.pushViewController(chatVC, animated: false)
+            navController.pushViewControllers(viewControllers: [getMatchesVC(), chatVC])
         }
     }
     
