@@ -24,13 +24,17 @@ class MyNotification {
         dataStore = MyNotificationDataStore(delegate: self)
     }
     
+    func registerForNotifications(application: UIApplication) {
+        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
+        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
+        application.registerUserNotificationSettings(pushNotificationSettings)
+        application.registerForRemoteNotifications()
+    }
     
-    func checkIfStartedFromNotification(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
+    func checkIfStartedFromNotification(launchOptions: [UIApplicationLaunchOptionsKey: Any]?) {
         if let remoteNotification = launchOptions?[UIApplicationLaunchOptionsKey.remoteNotification] as? [AnyHashable : Any] {
             performAction(dict: remoteNotification, appStatus: .inactive)
-            return true
         }
-        return false
     }
     
     func performAction(dict: [AnyHashable : Any], appStatus: UIApplicationState) {
@@ -105,6 +109,16 @@ extension MyNotification: MyNotificationDataStoreDelegate {
     
     fileprivate func getCurrentNavController() -> ChachaNavigationViewController? {
         return UIApplication.shared.keyWindow?.rootViewController as? ChachaNavigationViewController
+    }
+}
+
+extension MyNotification {
+    func setDeviceTokenToPoint(deviceToken: Data) {
+        dataStore.setDeviceTokenToPoint(deviceToken: deviceToken)
+    }
+    
+    func resetNotificationBadgeCount() {
+        dataStore.resetNotificationBadgeCount()
     }
 }
 

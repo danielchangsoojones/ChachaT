@@ -47,4 +47,19 @@ class MyNotificationDataStore {
             }
         }
     }
+    
+    func resetNotificationBadgeCount() {
+        let currentInstallation = PFInstallation.current()
+        if currentInstallation?.badge != 0 {
+            currentInstallation?.badge = 0
+            currentInstallation?.saveEventually()
+        }
+    }
+    
+    func setDeviceTokenToPoint(deviceToken: Data) {
+        let installation = PFInstallation.current()
+        installation?.setDeviceTokenFrom(deviceToken)
+        installation?.channels = ["global"]
+        installation?.saveInBackground()
+    }
 }

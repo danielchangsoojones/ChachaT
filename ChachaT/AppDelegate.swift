@@ -45,15 +45,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
-        } else if MyNotification().checkIfStartedFromNotification(launchOptions: launchOptions) {
-//            self.window = UIWindow(frame: UIScreen.main.bounds)
-//            
-//            let storyboard = UIStoryboard(name: "Onboarding", bundle: nil)
-//            
-//            let initialViewController = storyboard.instantiateViewController(withIdentifier: "SignUpLogInViewController") as! SignUpLogInViewController
-//            
-//            self.window?.rootViewController = initialViewController
-//            self.window?.makeKeyAndVisible()
+        } else {
+            let myNotification = MyNotification()
+            myNotification.registerForNotifications(application: application)
+            myNotification.checkIfStartedFromNotification(launchOptions: launchOptions)
         }
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
@@ -64,10 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()
-        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        application.registerUserNotificationSettings(pushNotificationSettings)
-        application.registerForRemoteNotifications()
+        
         
         return true
     }
@@ -93,11 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
-        let currentInstallation = PFInstallation.current()
-        if currentInstallation?.badge != 0 {
-            currentInstallation?.badge = 0
-            currentInstallation?.saveEventually()
-        }
+        MyNotification().resetNotificationBadgeCount()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -106,10 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let installation = PFInstallation.current()
-        installation?.setDeviceTokenFrom(deviceToken)
-        installation?.channels = ["global"]
-        installation?.saveInBackground()
+        MyNotification().setDeviceTokenToPoint(deviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
