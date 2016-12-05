@@ -15,6 +15,7 @@ class MyNotification {
     enum Identifier: String {
         case toMatch
         case toChat
+        case toApproveTag
     }
     
     var dataStore: MyNotificationDataStore!
@@ -59,6 +60,8 @@ extension MyNotification {
             showNotifiedMatch(dictionary: dictionary)
         case .toChat:
             showNotifiedMessage(dict: dictionary)
+        case .toApproveTag:
+            segueToAddingTagPage()
         }
     }
     
@@ -70,6 +73,13 @@ extension MyNotification {
     fileprivate func showNotifiedMessage(dict: [AnyHashable : Any]) {
         let senderObjectId: String? = dict["senderObjectId"] as? String
         dataStore.findUser(objectId: senderObjectId ?? "")
+    }
+    
+    fileprivate func segueToAddingTagPage() {
+        if let navController = getCurrentNavController() {
+            let addingTagsVC = AddingTagsToProfileViewController.instantiate()
+            navController.pushViewController(addingTagsVC, animated: false)
+        }
     }
 }
 
