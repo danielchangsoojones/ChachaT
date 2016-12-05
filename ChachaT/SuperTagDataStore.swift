@@ -8,6 +8,7 @@
 
 import Foundation
 import Parse
+import FuzzyMatchingSwift
 
 class SuperTagDataStore: SuperParseSwipeDataStore {
     
@@ -48,9 +49,19 @@ class SuperTagDataStore: SuperParseSwipeDataStore {
                     print(error)
                 }
                 self.compareToNewestSearch(queriedSearchText: searchText)
-                self.superTagDelegate?.passSearchResults(searchTags: searchDataArray)
+                let sortedSearchArray: [Tag] = self.sortSearchArray(searchText: searchText, array: searchDataArray)
+                self.superTagDelegate?.passSearchResults(searchTags: sortedSearchArray)
             }
         }
+    }
+    
+    fileprivate func sortSearchArray(searchText: String, array: [Tag]) -> [Tag] {
+        return array.sorted(by: { (currentTag: Tag, nextTag: Tag) -> Bool in
+            if let currentTagFuzzyValue = currentTag.title.fuzzyMatchPattern(searchText), let nextTagFuzzyValue = nextTag.title.fuzzyMatchPattern(searchText) {
+                return currentTagFuzzyValue < nextTagFuzzyValue
+            }
+            return false
+        })
     }
     
     fileprivate func compareToNewestSearch(queriedSearchText: String) {

@@ -64,6 +64,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>FuzzyMatchingSwift.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>GBHFacebookImagePicker-GBHFacebookImagePicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -202,17 +207,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>1E30A4A06B51BCDB7C32FD55A5FDA503</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>26208899B960C88E2D069743CE6A76FF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>263B2B8C730A272B589EE9261F3BA5E1</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>2CB52E03C75CA5A10D2E7857D918CB6A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,12 +227,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>50380D93B96679DFB1AD2089EB6E4E53</key>
+		<key>43BB2687993FC1FA2ADA657F014CCCE5</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>5CF8D1E595540FD6DBF8ADB3ACEBAD22</key>
+		<key>4FB8C5980A1E8E6BF1719210BF7F21EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>50380D93B96679DFB1AD2089EB6E4E53</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -253,11 +258,6 @@
 			<true/>
 		</dict>
 		<key>6F8B1550C368E4096947D48F73AD9623</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>739FC0887F1328D1E4ED41F2CCA2C32A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -287,17 +287,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8A5147B6824C7BFCDD38F5ECF10072EF</key>
+		<key>938E54729630D6604F5560C1DDD27642</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8D719C962A41ECB72EBD604EFE6500C4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>9B63FA9A256B5A0D63B8FC386F0855AA</key>
+		<key>96E510421FDAC30D8CE8DD0CCB8F779A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -307,7 +302,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>A3E7455F5DE94C6F18070AA6DE6CF278</key>
+		<key>B03300D2B27D6B74A6FB79294DAB49A2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>BB6F894C37D13422EF4E8AE76CD40BC2</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -328,6 +328,11 @@
 			<true/>
 		</dict>
 		<key>CF80F8CD2AD8E9E2534F906079EB908A</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>D01F54380270CE185E54E0476D0C6097</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -357,12 +362,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F358CF4ED7FC9E0E81474C367DBC6B3B</key>
+		<key>F7351B17E1031EE7EC06C3BCAC7FDC69</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>FE7B98CE34A4A9AF64FFE394AA652851</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFB32B0CD336B85995DF15F02E08D1AA</key>
 		<dict>
 			<key>primary</key>
 			<true/>
