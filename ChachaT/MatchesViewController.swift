@@ -130,7 +130,7 @@ extension MatchesViewController: UITableViewDelegate, UITableViewDataSource {
 
 extension MatchesViewController : ScrollingMatchesCellDelegate {
     func segueToChatVC(_ otherUser: User) {
-        let chatVC = ChatViewController.instantiate(otherUser: otherUser)
+        let chatVC = ChatViewController.instantiate(connection: Connection(targetUser: otherUser))
         self.navigationController?.pushViewController(chatVC, animated: true)
     }
 }

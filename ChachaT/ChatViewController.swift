@@ -17,8 +17,8 @@ class ChatViewController: JSQMessagesViewController {
     var isLoading = false
     
     // currently only setup for two participants
-    var currentUser : User!
-    var otherUser : User!
+    var currentUser : User = User.current()!
+    var otherUser : User?
     
     // Key - value collection of avatars so we don't double load too much
     var avatars = [String:JSQMessagesAvatarImage]()
@@ -28,7 +28,17 @@ class ChatViewController: JSQMessagesViewController {
     var users = [String:User]()
     
     //starter swipe is the swipe that start off the conversation if the chatVC was accessed via a swipe message
-    var starterSwipe: Swipe?
+    var connection: Connection? {
+        didSet {
+            otherUser = connection?.targetUser
+            rightNavButtonSetup()
+            dataStore = ChatDataStore(chatUsers: [currentUser, otherUser!] ,delegate: self)
+            self.title = otherUser?.fullName ?? "Unknown"
+            self.senderId = dataStore.getsenderID()
+            self.senderDisplayName = dataStore.getSenderDisplayName()
+            self.loadMessages()
+        }
+    }
     
     // chat bubbles for our conversation
     var outgoingBubbleImageView : JSQMessagesBubbleImage!
@@ -38,21 +48,13 @@ class ChatViewController: JSQMessagesViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        dataStore = ChatDataStore(chatUsers: [currentUser, otherUser] ,delegate: self)
+        
         self.navigationController?.isNavigationBarHidden = false
-        rightNavButtonSetup()
-        
-        self.title = otherUser.fullName ?? "Unknown"
-        
-        self.senderId = dataStore.getsenderID()
-        self.senderDisplayName = dataStore.getSenderDisplayName()
         
         // setup chat bubbles
         let bubbleFactory = JSQMessagesBubbleImageFactory()
         outgoingBubbleImageView = bubbleFactory?.outgoingMessagesBubbleImage(with: UIColor.jsq_messageBubbleLightGray())
         incomingBubbleImageView = bubbleFactory?.incomingMessagesBubbleImage(with: UIColor.jsq_messageBubbleBlue())
-        
-        self.loadMessages()
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -127,8 +129,8 @@ class ChatViewController: JSQMessagesViewController {
             
             
             //TODO: abstract this thing to data store, but I am not exactly sure how to at the moment.
-            let user = users[message.senderId]!
-            user.profileImage!.getDataInBackground { (data, error) in
+            let user = users[message.senderId]
+            user?.profileImage?.getDataInBackground { (data, error) in
                 imageView?.avatarImage = JSQMessagesAvatarImageFactory.circularAvatarImage(UIImage(data:data!), withDiameter: 30)
                 // Hack: For reload entire table now that avatar is downloaded
                 self.collectionView!.reloadData()
@@ -170,7 +172,7 @@ class ChatViewController: JSQMessagesViewController {
             }
         }
         
-        return NSAttributedString(string: otherUser.fullName ?? "Unknown")
+        return NSAttributedString(string: otherUser?.fullName ?? "Unknown")
     }
     
     
@@ -247,9 +249,8 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func finishReceivingMessage() {
-        if let swipe = starterSwipe {
-            //if the swipe exists, then we want to append the swipe message onto the last message, so the user can respond to it.
-            dataStore.setStarterSwipeMessage(swipe: swipe)
+        if let connection = connection {
+            dataStore.setStartingMessage(connection: connection)
         }
         super.finishReceivingMessage()
     }
@@ -291,7 +292,7 @@ extension ChatViewController:  UIImagePickerControllerDelegate, UINavigationCont
 //Navigation buttons extension
 extension ChatViewController {
     fileprivate func rightNavButtonSetup() {
-        let profileCircle = CircularImageView(file: otherUser.profileImage, diameter: navigationBarHeight * 0.75)
+        let profileCircle = CircularImageView(file: otherUser?.profileImage, diameter: navigationBarHeight * 0.75)
         let tap = UITapGestureRecognizer(target: self, action: #selector(segueToCardDetailVC))
         profileCircle.addGestureRecognizer(tap)
         let barButtonItem = UIBarButtonItem(customView: profileCircle)
@@ -305,10 +306,9 @@ extension ChatViewController {
 }
 
 extension ChatViewController {
-    class func instantiate(otherUser: User) -> ChatViewController {
+    class func instantiate(connection: Connection) -> ChatViewController {
         let chatVC = ChatViewController()
-        chatVC.currentUser = User.current()
-        chatVC.otherUser = otherUser
+        chatVC.connection = connection
         return chatVC
     }
 }

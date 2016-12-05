@@ -59,11 +59,8 @@ extension NewCardMessageViewController: NewCardMessageDelegate {
     }
     
     fileprivate func segueToChatVC(swipe: Swipe) {
-        chatVC = ChatViewController.instantiate(otherUser: swipe.otherUser)
-        //original swipe was a reference to the original swipe, and we want to pass it to the swipe with the incoming swipe message, even though it gets deleted here. 
-        let swipeCopy = Swipe(otherUser: swipe.otherUser, otherUserApproval: swipe.otherUserApproval, parseSwipe: swipe.parseSwipe)
-        swipeCopy.incomingMessage = swipe.incomingMessage
-        chatVC?.starterSwipe = swipeCopy
+        let connection = Connection(targetUser: swipe.otherUser, hasSeen: false, beginningMessage: swipe.incomingMessage)
+        chatVC = ChatViewController.instantiate(connection: connection)
         if let navController = self.parent?.navigationController {
             navController.pushViewController(chatVC!, animated: true)
         } else {

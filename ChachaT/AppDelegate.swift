@@ -11,6 +11,7 @@ import Parse
 import ParseFacebookUtilsV4
 
 @UIApplicationMain
+//TODO: one day create datastore to hold the parse stuff
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
@@ -44,8 +45,11 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
             self.window?.rootViewController = initialViewController
             self.window?.makeKeyAndVisible()
+        } else {
+            let myNotification = MyNotification()
+            myNotification.registerForNotifications(application: application)
+            myNotification.checkIfStartedFromNotification(launchOptions: launchOptions)
         }
-        
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
 //        
@@ -55,10 +59,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        
 //                    self.window?.rootViewController = initialViewController
 //                    self.window?.makeKeyAndVisible()
-        let notificationTypes: UIUserNotificationType = [UIUserNotificationType.alert, UIUserNotificationType.badge, UIUserNotificationType.sound]
-        let pushNotificationSettings = UIUserNotificationSettings(types: notificationTypes, categories: nil)
-        application.registerUserNotificationSettings(pushNotificationSettings)
-        application.registerForRemoteNotifications()
+        
         
         return true
     }
@@ -84,6 +85,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationDidBecomeActive(_ application: UIApplication) {
         // Restart any tasks that were paused (or not yet started) while the application was inactive. If the application was previously in the background, optionally refresh the user interface.
         FBSDKAppEvents.activateApp()
+        MyNotification().resetNotificationBadgeCount()
     }
 
     func applicationWillTerminate(_ application: UIApplication) {
@@ -92,10 +94,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        let installation = PFInstallation.current()
-        installation?.setDeviceTokenFrom(deviceToken)
-        installation?.channels = ["global"]
-        installation?.saveInBackground()
+        MyNotification().setDeviceTokenToPoint(deviceToken: deviceToken)
     }
     
     func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
@@ -103,7 +102,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     }
     
     func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable : Any]) {
+        //when user has app in background or is in app, it will call this when a remote notification received. If the app was in background, it waits to get the app into the foreground before calling this
         print(userInfo)
+        MyNotification().performAction(dict: userInfo, appStatus: application.applicationState)
     }
 
 

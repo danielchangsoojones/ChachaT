@@ -267,3 +267,11 @@ extension AddingTagsToProfileViewController {
         }
     }
 }
+
+extension AddingTagsToProfileViewController {
+    class func instantiate() -> AddingTagsToProfileViewController {
+        let storyboard = UIStoryboard(name: "AddingTags", bundle: nil)
+        let addingTagsVC = storyboard.instantiateViewController(withIdentifier: "AddingTagsViewController") as! AddingTagsToProfileViewController
+        return addingTagsVC
+    }
+}

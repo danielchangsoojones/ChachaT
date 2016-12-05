@@ -35,5 +35,10 @@ class ChachaNavigationViewController: UINavigationController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-
+    
+    func pushViewControllers(viewControllers: [UIViewController]) {
+        for vc in viewControllers {
+            pushViewController(vc, animated: false)
+        }
+    }
 }
