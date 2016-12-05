@@ -35,6 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         PFFacebookUtils.initializeFacebook(applicationLaunchOptions: launchOptions)
         
         Instabug.start(withToken: "c1d90288be3cf98624000127f6139a87", invocationEvent: IBGInvocationEvent.shake)
+        Instabug.setIntroMessageEnabled(false)
 
         if User.current() == nil {
             self.window = UIWindow(frame: UIScreen.main.bounds)

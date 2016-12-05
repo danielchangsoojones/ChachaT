@@ -80,7 +80,10 @@ extension CardDetailDataStore {
                     tag.isPending = parseUserTag.isPending
                     return tag
                 })
-                self.delegate?.passTags(tagArray: tags)
+                let sortedTags = tags.sorted(by: { (previousTag: Tag, nextTag: Tag) -> Bool in
+                    return previousTag.title.localizedCaseInsensitiveCompare(nextTag.title) == ComparisonResult.orderedAscending
+                })
+                self.delegate?.passTags(tagArray: sortedTags)
             } else if let error = error {
                 print(error)
             }
