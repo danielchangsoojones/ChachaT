@@ -34,4 +34,17 @@ class MyNotificationDataStore {
             }
         }
     }
+    
+    func findUser(objectId: String) {
+        let query = User.query()! as! PFQuery<User>
+        query.whereKey("objectId", equalTo: objectId)
+        query.getFirstObjectInBackground { (user, error) in
+            if let user = user {
+                let connection = Connection(targetUser: user)
+                self.delegate?.segueToChat(connection: connection)
+            } else if let error = error {
+                print(error)
+            }
+        }
+    }
 }

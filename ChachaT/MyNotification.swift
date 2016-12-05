@@ -14,6 +14,7 @@ class MyNotification {
     //Don't change identifier names, unless we change the names of the identifiers in the server code also.
     enum Identifier: String {
         case toMatch
+        case toChat
     }
     
     var dataStore: MyNotificationDataStore!
@@ -56,12 +57,19 @@ extension MyNotification {
         switch identifier {
         case .toMatch:
             showNotifiedMatch(dictionary: dictionary)
+        case .toChat:
+            showNotifiedMessage(dict: dictionary)
         }
     }
     
     fileprivate func showNotifiedMatch(dictionary: [AnyHashable : Any]) {
         let parseSwipeObjectId: String? = dictionary["objectId"] as? String
         dataStore.findNewMatchFromParseSwipe(objectId: parseSwipeObjectId ?? "")
+    }
+    
+    fileprivate func showNotifiedMessage(dict: [AnyHashable : Any]) {
+        let senderObjectId: String? = dict["senderObjectId"] as? String
+        dataStore.findUser(objectId: senderObjectId ?? "")
     }
 }
 
