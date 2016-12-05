@@ -72,7 +72,6 @@
 		9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261082C1CE25994009F3E86 /* CustomCardView.swift */; };
 		9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9261082E1CE25B74009F3E86 /* CustomCardView.xib */; };
 		926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 926108301CE25B84009F3E86 /* CustomOverlayView.xib */; };
-		926108331CE25C22009F3E86 /* woosh.wav in Resources */ = {isa = PBXBuildFile; fileRef = 926108321CE25C22009F3E86 /* woosh.wav */; };
 		926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108341CE25C5E009F3E86 /* CustomOverlayView.swift */; };
 		9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261083D1CE4F8E3009F3E86 /* globals.swift */; };
 		926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108401CE50661009F3E86 /* MagicMoveExt.swift */; };
@@ -224,7 +223,6 @@
 		9261082C1CE25994009F3E86 /* CustomCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCardView.swift; sourceTree = "<group>"; };
 		9261082E1CE25B74009F3E86 /* CustomCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCardView.xib; sourceTree = "<group>"; };
 		926108301CE25B84009F3E86 /* CustomOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
-		926108321CE25C22009F3E86 /* woosh.wav */ = {isa = PBXFileReference; lastKnownFileType = audio.wav; path = woosh.wav; sourceTree = "<group>"; };
 		926108341CE25C5E009F3E86 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
 		9261083D1CE4F8E3009F3E86 /* globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
 		926108401CE50661009F3E86 /* MagicMoveExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveExt.swift; sourceTree = "<group>"; };
@@ -694,7 +692,6 @@
 				9261085A1CEA1939009F3E86 /* Models */,
 				9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */,
 				9299DC301DF38C270079C8F2 /* Notification */,
-				9261083B1CE4EDF7009F3E86 /* sounds */,
 				926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */,
 			);
 			path = ChachaT;
@@ -724,14 +721,6 @@
 				925D0FD01D6F638D00DE20F9 /* FakeNavigationBarView.swift */,
 			);
 			name = subviews/xibs;
-			sourceTree = "<group>";
-		};
-		9261083B1CE4EDF7009F3E86 /* sounds */ = {
-			isa = PBXGroup;
-			children = (
-				926108321CE25C22009F3E86 /* woosh.wav */,
-			);
-			name = sounds;
 			sourceTree = "<group>";
 		};
 		9261083C1CE4F8D5009F3E86 /* Globals/Helper Files */ = {
@@ -1197,7 +1186,6 @@
 				926108211CDBCA32009F3E86 /* LaunchScreen.storyboard in Resources */,
 				925D0FD41D74986D00DE20F9 /* AddingTags.storyboard in Resources */,
 				928819461D286CA8000A8E04 /* Profile.storyboard in Resources */,
-				926108331CE25C22009F3E86 /* woosh.wav in Resources */,
 				9275FB921D7C6A4900D8131D /* AboutView.xib in Resources */,
 				92BCEB501D83510E00E05C05 /* Matches.storyboard in Resources */,
 				9261081E1CDBCA32009F3E86 /* Assets.xcassets in Resources */,
@@ -1476,8 +1464,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
 				ENABLE_NS_ASSERTIONS = NO;
@@ -1531,7 +1519,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
 				DEVELOPMENT_TEAM = KNK3WJA66N;
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
@@ -1565,8 +1553,8 @@
 				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iPhone Developer";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
 				COPY_PHASE_STRIP = NO;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -1602,7 +1590,7 @@
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_ENTITLEMENTS = ChachaT/ChachaT.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Distribution: Medici Holdings LLC (KNK3WJA66N)";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer: Daniel Jones (R565XSQC74)";
 				DEVELOPMENT_TEAM = KNK3WJA66N;
 				INFOPLIST_FILE = ChachaT/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;

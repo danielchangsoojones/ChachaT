@@ -9,7 +9,6 @@
 import UIKit
 import pop
 import Koloda
-import AVFoundation
 import CoreLocation
 import EFTools
 import Ripple
@@ -21,8 +20,6 @@ private let frameAnimationSpringBounciness:CGFloat = 9
 private let frameAnimationSpringSpeed:CGFloat = 16
 private let kolodaCountOfVisibleCards = 2
 private let kolodaAlphaValueSemiTransparent:CGFloat = 0
-var wooshSound = URL(fileURLWithPath: Bundle.main.path(forResource: "woosh", ofType: "wav")!)
-var audioPlayerWoosh = AVAudioPlayer()
 private let numberOfCards : UInt = 5
 
 //go to Yalantis/Koloda github to see examples/more documentation on what Koloda is. 
@@ -96,14 +93,6 @@ class BackgroundAnimationViewController: UIViewController {
         theBottomButtonsView.setBottomButtonImages(addMessageButton: true, delegate: self, style: .transparent)
     }
     
-    func playSoundInBG(_ theAudioPlayer:AVAudioPlayer) {
-        let qualityOfServiceClass = DispatchQoS.QoSClass.background
-        let backgroundQueue = DispatchQueue.global(qos: qualityOfServiceClass)
-        backgroundQueue.async(execute: {
-            theAudioPlayer.play()
-        })
-    }
-    
     //Purpose: we created a fake navigation bar because we are turning off the normal navigation bar. Then, we use this view as a fake navigation bar that the user can't tell the difference. We need to do this because we need the view to grow to include the left side menu drop down menu. The normal nav bar shows the buttons, but they aren't clickable because they are outside the nav bars bounds. So, we need to make this view's frame grow, so the buttons become clickable.
     func setFakeNavigationBarView() {
         fakeNavigationBar = FakeNavigationBarView(navigationBarHeight: self.navigationController!.navigationBar.frame.height, delegate: self)
@@ -168,11 +157,6 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
         kolodaView.delegate = self
         //TODO: figure out how to merge customKolodaViewDelegate and the normal delegate.
         kolodaView.customKolodaViewDelegate = self
-        do {
-            audioPlayerWoosh = try AVAudioPlayer(contentsOf: wooshSound)
-        }
-        catch { }
-        audioPlayerWoosh.prepareToPlay()
         self.modalTransitionStyle = UIModalTransitionStyle.flipHorizontal //not exactly sure how important this line is, but came with the Koloda code
     }
     

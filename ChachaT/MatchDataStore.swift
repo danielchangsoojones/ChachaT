@@ -38,6 +38,7 @@ class MatchDataStore: NSObject {
         let orQuery = PFQuery.orQuery(withSubqueries: [currentUserIsUserOneQuery, currentUserIsUserTwoQuery])
         orQuery.includeKey("userOne")
         orQuery.includeKey("userTwo")
+        orQuery.cachePolicy = .cacheThenNetwork
         orQuery.findObjectsInBackground { (objects, error) in
             if let parseSwipes = objects as? [ParseSwipe] {
                 var connections : [Connection] = []
@@ -71,6 +72,7 @@ class MatchDataStore: NSObject {
         query.includeKey("receiver")
         query.whereKey("chatRoom", contains: currentUser.objectId!)
         query.addDescendingOrder("createdAt") //we want the newest message for the preview message
+        query.cachePolicy = .cacheThenNetwork
         query.findObjectsInBackground { (objects, error) in
             if let chats = objects as? [Chat] , error == nil {
                 for chat in chats {

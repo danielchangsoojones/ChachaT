@@ -20,6 +20,7 @@ PODS:
   - FBSDKLoginKit (4.16.1):
     - FBSDKCoreKit
   - Former (1.5.0)
+  - FuzzyMatchingSwift (0.5.0)
   - GBHFacebookImagePicker (1.0.6):
     - FBSDKCoreKit (~> 4.16.0)
     - FBSDKLoginKit (~> 4.16.0)
@@ -69,6 +70,7 @@ DEPENDENCIES:
   - ExpandingMenu (~> 0.1)
   - EZSwiftExtensions
   - Former
+  - FuzzyMatchingSwift
   - GBHFacebookImagePicker
   - Instructions (from `https://github.com/ephread/Instructions.git`, branch `swift3`)
   - JSQMessagesViewController
@@ -141,6 +143,7 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: 6feac4e8921ccd7afa83fb1df6291dc6eec42c7c
   FBSDKLoginKit: 469a56cebe2e1ed62b1621d0b155970fd6aac2d8
   Former: 8f9f41e51eceb75e47b4275147795ec477b121ec
+  FuzzyMatchingSwift: 5da90cbc4c047d13f28f23e0ca2332da5e0f9a9c
   GBHFacebookImagePicker: e8bbd1bd2c85f648bd80f52d66edeb2148b6c8ba
   Instabug: 4daae5fd154e8a83654f8d974ba008ce87b9a104
   Instructions: 6976f674ce788aefec475be6f18500572f1645d4
@@ -165,6 +168,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: 985860e8c6f1db08a2a5201086b5927491e20429
+PODFILE CHECKSUM: 3e8a6d5452922c78843ca9bda130d25e581d3538
 
 COCOAPODS: 1.1.1
