@@ -7,11 +7,8 @@
 //
 
 import UIKit
-import Parse
-import ParseUI
 import EFTools
 import SCLAlertView
-import TGLParallaxCarousel
 import EZSwiftExtensions
 
 class CardDetailViewController: UIViewController {

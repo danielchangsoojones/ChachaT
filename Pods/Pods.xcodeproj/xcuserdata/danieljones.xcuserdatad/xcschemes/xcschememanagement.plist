@@ -164,11 +164,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>TGLParallaxCarousel.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>TPKeyboardAvoiding.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -202,17 +197,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>0BD1D4482808DBA3F54F3F4E0F230456</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>180C74C9AD29DA8202520CCB38154CEB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>263B2B8C730A272B589EE9261F3BA5E1</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>2CB52E03C75CA5A10D2E7857D918CB6A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -227,17 +222,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>43BB2687993FC1FA2ADA657F014CCCE5</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4FB8C5980A1E8E6BF1719210BF7F21EF</key>
+		<key>3B2EA211736FE4C5C5E564F861B37DDE</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>50380D93B96679DFB1AD2089EB6E4E53</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>5D35B67CB07132B93A28007AA5DD3D2A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -262,6 +257,11 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>731DA764FE39AD889644698DDBD288DE</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>77FA126E80CB2DDF7D175546F163AF8C</key>
 		<dict>
 			<key>primary</key>
@@ -282,17 +282,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>80D44E15EA9D5B910EA6DB3ABFCA4C63</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>89B94020164F280B4BBD6545EB481CFA</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>938E54729630D6604F5560C1DDD27642</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>96E510421FDAC30D8CE8DD0CCB8F779A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -302,12 +297,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>B03300D2B27D6B74A6FB79294DAB49A2</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>BB6F894C37D13422EF4E8AE76CD40BC2</key>
+		<key>A58CA415C21AC71386641C93BE6695DB</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -327,12 +317,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>CF80F8CD2AD8E9E2534F906079EB908A</key>
+		<key>C90FC5D9DE9B2C56DFD471133AE5B178</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>D01F54380270CE185E54E0476D0C6097</key>
+		<key>CF80F8CD2AD8E9E2534F906079EB908A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -362,7 +352,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>F7351B17E1031EE7EC06C3BCAC7FDC69</key>
+		<key>F319CB9C2EF1ED6F9A0E392CE8F00EDF</key>
 		<dict>
 			<key>primary</key>
 			<true/>

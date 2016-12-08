@@ -25,7 +25,6 @@ pod 'MBAutoGrowingTextView', '~> 0.1.0'
 pod 'RKNotificationHub'
 pod 'SCLAlertView'
 pod 'SnapKit'
-pod 'TGLParallaxCarousel', :git=> 'https://github.com/danielchangsoojones/TGLParallaxCarousel.git' #had to fork of my own repo, so I (Daniel Jones) could customize some things
 pod 'ALCameraViewController'
 pod 'Instructions', git: 'https://github.com/ephread/Instructions.git', branch: 'swift3'
 pod 'Static', git: 'https://github.com/venmo/Static'
