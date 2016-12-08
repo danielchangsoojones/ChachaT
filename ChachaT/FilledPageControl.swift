@@ -119,7 +119,7 @@ import UIKit
         }
     }
     
-    fileprivate func layoutPageIndicators(_ layers: [CALayer]) {
+    func layoutPageIndicators(_ layers: [CALayer]) {
         let layerDiameter = indicatorRadius * 2
         var layerFrame = CGRect(x: 0, y: 0, width: layerDiameter, height: layerDiameter)
         layers.forEach() { layer in

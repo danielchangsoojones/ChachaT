@@ -51,9 +51,9 @@ extension BumbleOverlayView {
         pageControl = CustomPageControl(numberOfPages: numberOfPhotos + 1) //+1 for the bumbleDetailCircle
         self.addSubview(pageControl)
         pageControl.snp.makeConstraints { (make) in
-            make.trailing.equalTo(self)
-            //TODO: I don't know why, but for some reason, we have to add an offset to the page controller. I can not figure out what to base the offset off of, but a constant makes it look good for now.
-            make.top.equalTo(self).offset(20)
+            let inset: CGFloat = 15
+            make.trailing.equalTo(self).inset(inset)
+            make.top.equalTo(self).offset(inset)
         }
     }
     
