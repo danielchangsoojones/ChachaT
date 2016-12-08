@@ -38,6 +38,14 @@
 		922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */; };
 		922C899F1D4DA26900DE1373 /* AnnotationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 922C899E1D4DA26900DE1373 /* AnnotationView.swift */; };
 		923687301DD4185A00F1EDE5 /* SearchTagsBottomUserExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9236872F1DD4185A00F1EDE5 /* SearchTagsBottomUserExtension.swift */; };
+		92371D3F1DF9168400BE0A92 /* VerticalSlideShowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D3E1DF9168400BE0A92 /* VerticalSlideShowView.swift */; };
+		92371D421DF916AF00BE0A92 /* BumbleImageHolderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D401DF916AF00BE0A92 /* BumbleImageHolderView.swift */; };
+		92371D431DF916AF00BE0A92 /* BumbleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D411DF916AF00BE0A92 /* BumbleScrollView.swift */; };
+		92371D481DF916CE00BE0A92 /* BumbleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */; };
+		92371D491DF916CE00BE0A92 /* BumbleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */; };
+		92371D4A1DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */; };
+		92371D4D1DF916D600BE0A92 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D4B1DF916D600BE0A92 /* CustomPageControl.swift */; };
+		92371D4E1DF916D600BE0A92 /* FilledPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D4C1DF916D600BE0A92 /* FilledPageControl.swift */; };
 		923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7ED61D9303E30033A8A2 /* Connection.swift */; };
 		923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDA1D9309200033A8A2 /* ChatRoom.swift */; };
 		923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7EDC1D930B2F0033A8A2 /* Message.swift */; };
@@ -187,6 +195,14 @@
 		922C899A1D4D901E00DE1373 /* ChachaChosenTagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChachaChosenTagListView.swift; sourceTree = "<group>"; };
 		922C899E1D4DA26900DE1373 /* AnnotationView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = AnnotationView.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
 		9236872F1DD4185A00F1EDE5 /* SearchTagsBottomUserExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchTagsBottomUserExtension.swift; sourceTree = "<group>"; };
+		92371D3E1DF9168400BE0A92 /* VerticalSlideShowView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VerticalSlideShowView.swift; sourceTree = "<group>"; };
+		92371D401DF916AF00BE0A92 /* BumbleImageHolderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleImageHolderView.swift; sourceTree = "<group>"; };
+		92371D411DF916AF00BE0A92 /* BumbleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleScrollView.swift; sourceTree = "<group>"; };
+		92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleDetailView.swift; sourceTree = "<group>"; };
+		92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleOverlayView.swift; sourceTree = "<group>"; };
+		92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumblePanGestureRecognizer.swift; sourceTree = "<group>"; };
+		92371D4B1DF916D600BE0A92 /* CustomPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
+		92371D4C1DF916D600BE0A92 /* FilledPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledPageControl.swift; sourceTree = "<group>"; };
 		923C7ED61D9303E30033A8A2 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
 		923C7EDA1D9309200033A8A2 /* ChatRoom.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ChatRoom.swift; sourceTree = "<group>"; };
 		923C7EDC1D930B2F0033A8A2 /* Message.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Message.swift; sourceTree = "<group>"; };
@@ -531,6 +547,45 @@
 			name = TagViews;
 			sourceTree = "<group>";
 		};
+		92371D3B1DF9166100BE0A92 /* Bumble */ = {
+			isa = PBXGroup;
+			children = (
+				92371D3D1DF9167A00BE0A92 /* Overlay */,
+				92371D3C1DF9167400BE0A92 /* Scroll View */,
+				92371D3E1DF9168400BE0A92 /* VerticalSlideShowView.swift */,
+			);
+			name = Bumble;
+			sourceTree = "<group>";
+		};
+		92371D3C1DF9167400BE0A92 /* Scroll View */ = {
+			isa = PBXGroup;
+			children = (
+				92371D401DF916AF00BE0A92 /* BumbleImageHolderView.swift */,
+				92371D411DF916AF00BE0A92 /* BumbleScrollView.swift */,
+			);
+			name = "Scroll View";
+			sourceTree = "<group>";
+		};
+		92371D3D1DF9167A00BE0A92 /* Overlay */ = {
+			isa = PBXGroup;
+			children = (
+				92371D441DF916BD00BE0A92 /* Page Control */,
+				92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */,
+				92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */,
+				92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */,
+			);
+			name = Overlay;
+			sourceTree = "<group>";
+		};
+		92371D441DF916BD00BE0A92 /* Page Control */ = {
+			isa = PBXGroup;
+			children = (
+				92371D4B1DF916D600BE0A92 /* CustomPageControl.swift */,
+				92371D4C1DF916D600BE0A92 /* FilledPageControl.swift */,
+			);
+			name = "Page Control";
+			sourceTree = "<group>";
+		};
 		923C7ED81D9308F20033A8A2 /* Internal Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -700,6 +755,7 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
+				92371D3B1DF9166100BE0A92 /* Bumble */,
 				92BCEB791D88BEB800E05C05 /* Data Models */,
 				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
 				92BCEB6A1D85B49900E05C05 /* Card Detail */,
@@ -1270,6 +1326,7 @@
 				925626D31DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift in Sources */,
 				9261085C1CEA196C009F3E86 /* User.swift in Sources */,
 				92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */,
+				92371D491DF916CE00BE0A92 /* BumbleOverlayView.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
@@ -1292,6 +1349,7 @@
 				925D0FD71D74990900DE20F9 /* AddingTagsDataStore.swift in Sources */,
 				92954CA91DDE110A005B6FA4 /* BackgroundAnimationTutorialExtension.swift in Sources */,
 				923C7EDD1D930B2F0033A8A2 /* Message.swift in Sources */,
+				92371D4D1DF916D600BE0A92 /* CustomPageControl.swift in Sources */,
 				920BF8271D415FC000104842 /* SearchTagsViewController.swift in Sources */,
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */,
@@ -1333,16 +1391,20 @@
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
+				92371D4E1DF916D600BE0A92 /* FilledPageControl.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
+				92371D4A1DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
+				92371D3F1DF9168400BE0A92 /* VerticalSlideShowView.swift in Sources */,
 				928B8D7A1DBA58B700D6B6D3 /* Configuration.swift in Sources */,
 				923C7EDB1D9309200033A8A2 /* ChatRoom.swift in Sources */,
+				92371D431DF916AF00BE0A92 /* BumbleScrollView.swift in Sources */,
 				92B02ABA1D46F49D00624716 /* ChachaNavigationViewController.swift in Sources */,
 				920B4DF91DDEA48B00AFC7BD /* SettingsDataStore.swift in Sources */,
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
@@ -1356,6 +1418,7 @@
 				929FDB851CFA7AE100ACE474 /* UIImageExtension.swift in Sources */,
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
+				92371D421DF916AF00BE0A92 /* BumbleImageHolderView.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
@@ -1364,6 +1427,7 @@
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */,
+				92371D481DF916CE00BE0A92 /* BumbleDetailView.swift in Sources */,
 				924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */,
 				92A7F7DF1D9C6908005D22AA /* Camera.swift in Sources */,
 				926108171CDBCA32009F3E86 /* AppDelegate.swift in Sources */,
