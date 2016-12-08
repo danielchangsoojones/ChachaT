@@ -10,30 +10,9 @@ import UIKit
 import SnapKit
 
 class CustomBackgroundAnimationToSearchSegue: UIStoryboardSegue {
-    
-//    func hideTinderSubviews(hide: Bool, viewController: BackgroundAnimationViewController) {
-//        //TODO: add in approve/skip button, it hides them both when we make one hidden.
-//        let tinderSubviewsArray : [UIView] = [viewController.theMessageButton, viewController.theProfileButton, viewController.kolodaView]
-//        for subviews in tinderSubviewsArray {
-//            subviews.hidden = hide
-//        }
-//    }
-//
-//    //Purpose: For showing/unshowing the search bar in navigation bar in the background animationview controller
-//    func hideNavigationControllerComponents(hideSubviews: Bool, viewController: BackgroundAnimationViewController) {
-//        if let chachaNavigationViewController = viewController.navigationController! as? ChachaNavigationViewController {
-//            viewController.navigationItem.rightBarButtonItem = hideSubviews ? nil : viewController.rightNavigationButton
-//            viewController.navigationItem.leftBarButtonItem = hideSubviews ? nil : viewController.leftNavigationButton
-//            chachaNavigationViewController.navigationBarLogo.hidden = hideSubviews
-//            hideTinderSubviews(hideSubviews, viewController: viewController)
-//            showSearchBox(chachaNavigationViewController)
-//        }
-//    }
-    
     func setUpSearchNavigationBar(_ viewController: UIViewController) {
         if let _ = viewController.navigationController as? ChachaNavigationViewController {
             viewController.navigationItem.hidesBackButton = true
-//            chachaNavigationVC.navigationBarLogo.hidden = true
         }
     }
     
