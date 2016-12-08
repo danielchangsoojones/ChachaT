@@ -36,16 +36,14 @@ class CardDetailViewController: UIViewController {
     var newCardMessageViewControllerDelegate: NewCardMessageControllerDelegate?
     var delegate: BottomButtonsDelegate?
     
-    //TODO: do we need this?
-//    @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
-//        let alertView = SCLAlertView()
-//        _ = alertView.addButton("Block User", action: {
-//            let responder = SCLAlertViewResponder(alertview: alertView)
-//            responder.close()
-//        })
-//        _ = alertView.showError("Report Abuse", subTitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Cancel")
-//    }
-    
+    @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
+        let alertView = SCLAlertView()
+        _ = alertView.addButton("Block User", action: {
+            let responder = SCLAlertViewResponder(alertview: alertView)
+            responder.close()
+        })
+        _ = alertView.showError("Report Abuse", subTitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Cancel")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()

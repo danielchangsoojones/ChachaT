@@ -36,7 +36,7 @@ class BumbleDetailView: UIView {
         }
     }
     
-    let maxFrameInset: CGFloat = 1
+    let maxFrameInset: CGFloat = 3
     let originalFrameInset: CGFloat = 10
     var originalFrame: CGRect = CGRect.zero
     var maxFrame: CGRect = CGRect.infinite
@@ -46,6 +46,11 @@ class BumbleDetailView: UIView {
         let insetFrame = theFrame.insetBy(dx: originalFrameInset, dy: originalFrameInset)
         super.init(frame: insetFrame)
         originalFrame = insetFrame
+        roundCorners()
+    }
+    
+    func roundCorners() {
+        self.setCornerRadius(radius: 4)
     }
     
     func setMaxFrame() {
