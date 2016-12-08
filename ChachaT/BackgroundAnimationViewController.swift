@@ -214,6 +214,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = currentSwipe.otherUser
+        addDetailVC(toView: cardView.theVertSlideView.theBumbleDetailView, user: currentSwipe.otherUser)
         
         if currentSwipe.incomingMessage != nil {
             addCardMessageChildVC(toView: cardView, swipe: currentSwipe)
@@ -230,6 +231,12 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         childVC.view.snp.makeConstraints { (make) in
             make.top.equalTo(toView)
         }
+    }
+    
+    fileprivate func addDetailVC(toView: BumbleDetailView, user: User) {
+        let childVC = CardDetailViewController.createCardDetailVC(userOfCard: user)
+        addAsChildViewController(childVC, toView: toView)
+        childVC.view.frame = toView.bounds
     }
     
     //Need to do Koloda.OverlayView because Instructions pod also has a view called OverlayView, so it was ambigious
@@ -275,12 +282,11 @@ extension BackgroundAnimationViewController: MagicMoveable {
     
     fileprivate func buttonTappedHandler(_ index: Int) {
         let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-        cardDetailVC.newCardMessageViewControllerDelegate = self
         cardDetailVC.delegate = self
         cardDetailVC.swipe = swipeArray[index]
         theTappedKolodaIndex = index
         
-        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
+//        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
     var magicViews: [UIView] {
