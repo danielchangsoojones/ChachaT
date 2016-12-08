@@ -136,7 +136,7 @@ extension SearchTagsViewController: BottomUserScrollViewDelegate {
         theTappedCellIndex = tappedIndex
         cardDetailVC.delegate = bottomButtonsDelegate
         cardDetailVC.swipe = swipe
-        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
+//        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
     }
     
     func getLastTappedCellIndexPath() -> IndexPath {

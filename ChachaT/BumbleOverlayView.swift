@@ -29,8 +29,8 @@ class BumbleOverlayView: UIView {
     }
     
     fileprivate func cardDetailSetup() {
-        theBumbleDetailView = BumbleDetailView(frameWidth: self.frame.width, frameMinY: self.bounds.maxY - 100, height: 100)
-        theBumbleDetailView.backgroundColor = UIColor.red
+        let height: CGFloat = 85
+        theBumbleDetailView = BumbleDetailView(frameWidth: self.frame.width, frameMinY: self.bounds.maxY - height, height: height)
         self.addSubview(theBumbleDetailView)
         theBumbleDetailView.setMaxFrame()
     }

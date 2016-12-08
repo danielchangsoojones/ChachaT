@@ -15,11 +15,16 @@ import TGLParallaxCarousel
 import EZSwiftExtensions
 
 class CardDetailViewController: UIViewController {
-    var theBulletPointsStackView: UIStackView!
-    var theDescriptionDetailView: DescriptionDetailView!
-    var theTagListViewHolder: UIView!
-    var theScrollView: UIScrollView!
+    @IBOutlet weak var theBulletPointsStackView: UIStackView!
+    @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
+    @IBOutlet weak var theTagListViewHolder: UIView!
+    @IBOutlet weak var theScrollView: UIScrollView!
+
     var theTagCreationViewController: TagCreationViewController!
+    
+    //constraints
+    @IBOutlet weak var theDetailViewHolderHeight: NSLayoutConstraint!
+    
     
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
     //TODO: we really only need to take in a swipe to the cardDetailPage, and then we can set the userOfTheCard from there
@@ -30,16 +35,19 @@ class CardDetailViewController: UIViewController {
     }
 
     var dataStore: CardDetailDataStore!
+    
+    var newCardMessageViewControllerDelegate: NewCardMessageControllerDelegate?
     var delegate: BottomButtonsDelegate?
     
-    @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
-        let alertView = SCLAlertView()
-        _ = alertView.addButton("Block User", action: {
-            let responder = SCLAlertViewResponder(alertview: alertView)
-            responder.close()
-        })
-        _ = alertView.showError("Report Abuse", subTitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Cancel")
-    }
+    //TODO: do we need this?
+//    @IBAction func reportAbuseButtonPressed(_ sender: AnyObject) {
+//        let alertView = SCLAlertView()
+//        _ = alertView.addButton("Block User", action: {
+//            let responder = SCLAlertViewResponder(alertview: alertView)
+//            responder.close()
+//        })
+//        _ = alertView.showError("Report Abuse", subTitle: "The profile has been reported, and moderators will be examining the profile shortly.", closeButtonTitle: "Cancel")
+//    }
     
     
     override func viewDidLoad() {
@@ -47,6 +55,13 @@ class CardDetailViewController: UIViewController {
         dataStoreSetup()
         setNormalGUI()
         addTagListViewChildVC()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(true)
+        if let superview = self.view.superview {
+            theDetailViewHolderHeight.constant = superview.frame.height
+        }
     }
     
     fileprivate func addTagListViewChildVC() {
