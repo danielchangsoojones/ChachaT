@@ -14,11 +14,26 @@ class BumbleImageHolderView: UIView {
     
     init(image: UIImage, frame: CGRect, haveBottomInset: Bool) {
         super.init(frame: frame)
-        imageViewSetup(image: image, haveBottomInset: haveBottomInset)
+        imageViewSetup(image: image)
+        addImageView(haveBottomInset: haveBottomInset)
     }
     
-    private func imageViewSetup(image: UIImage, haveBottomInset: Bool) {
+    init(file: AnyObject?, frame: CGRect, haveBottomInset: Bool) {
+        super.init(frame: frame)
+        imageViewSetup(file: file)
+        addImageView(haveBottomInset: haveBottomInset)
+    }
+    
+    private func imageViewSetup(file: AnyObject?) {
+        theImageView = UIImageView()
+        theImageView.loadFromFile(file)
+    }
+    
+    private func imageViewSetup(image: UIImage) {
         theImageView = UIImageView(image: image)
+    }
+    
+    private func addImageView(haveBottomInset: Bool) {
         self.addSubview(theImageView)
         theImageView.snp.makeConstraints { (make) in
             make.leading.trailing.equalToSuperview()

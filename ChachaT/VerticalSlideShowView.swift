@@ -21,7 +21,7 @@ class VerticalSlideShowView: UIView {
     var theBumbleDetailView: BumbleDetailView!
     var theBumbleOverlayView: BumbleOverlayView!
     
-    init(imageFiles: [Any], frame: CGRect) {
+    init(imageFiles: [AnyObject?], frame: CGRect) {
         super.init(frame: frame)
         scrollViewSetup(imageFiles: imageFiles)
         infoHolderViewSetup(numberOfPhotos: imageFiles.count)
@@ -38,7 +38,7 @@ class VerticalSlideShowView: UIView {
         self.addSubview(theBumbleOverlayView)
     }
     
-    fileprivate func scrollViewSetup(imageFiles: [Any]) {
+    fileprivate func scrollViewSetup(imageFiles: [AnyObject?]) {
         theBumbleScrollView = BumbleScrollView(imageFiles: imageFiles, delegate: self, frame: self.bounds)
         theBumbleScrollView.delegate = self
         self.addSubview(theBumbleScrollView)

@@ -123,8 +123,11 @@ import UIKit
         let layerDiameter = indicatorRadius * 2
         var layerFrame = CGRect(x: 0, y: 0, width: layerDiameter, height: layerDiameter)
         layers.forEach() { layer in
-            layer.cornerRadius = self.indicatorRadius
-            layer.frame = layerFrame
+            //Daniel Jones added this. Idk why, but when I moved this code over to shuffle from bumble-app-clone, it turned layer into a tuple
+            layer.1.cornerRadius = self.indicatorRadius
+            layer.1.frame = layerFrame
+//            layer.cornerRadius = self.indicatorRadius
+//            layer.frame = layerFrame
             layerFrame.origin.x += layerDiameter + indicatorPadding
         }
     }

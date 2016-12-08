@@ -18,15 +18,27 @@ class CustomCardView: OverlayView {
     @IBOutlet weak var theCardMainImage: PFImageView!
     @IBOutlet weak var thePersonalInfoHolderView: UIView!
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
+    var theVertSlideView: VerticalSlideShowView?
     
     var userOfTheCard : User? {
         didSet {
-            theDescriptionDetailView.userOfTheCard = userOfTheCard
-            if let profileImage = userOfTheCard?.profileImage {
-                self.theCardMainImage.file = profileImage
-                self.theCardMainImage.loadInBackground()
-            } else {
-                theCardMainImage.backgroundColor = ChachaBombayGrey
+//            theDescriptionDetailView.userOfTheCard = userOfTheCard
+//            if let profileImage = userOfTheCard?.profileImage {
+//                self.theCardMainImage.file = profileImage
+//                self.theCardMainImage.loadInBackground()
+//            } else {
+//                theCardMainImage.backgroundColor = ChachaBombayGrey
+//            }
+            if let user = userOfTheCard {
+                vertSlideShowViewSetup(user: user)
+            }
+        }
+    }
+    
+    override var bounds: CGRect {
+        didSet {
+            if let view = theVertSlideView {
+                view.frame = self.bounds
             }
         }
     }
@@ -37,6 +49,11 @@ class CustomCardView: OverlayView {
         //Rounded corners
         self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
+    }
+    
+    fileprivate func vertSlideShowViewSetup(user: User) {
+        theVertSlideView = VerticalSlideShowView(imageFiles: user.nonNilProfileImages, frame: self.bounds)
+        self.addSubview(theVertSlideView!)
     }
 }
 

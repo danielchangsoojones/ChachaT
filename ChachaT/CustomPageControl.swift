@@ -8,6 +8,7 @@
 
 import Foundation
 import UIKit
+import EZSwiftExtensions
 
 class CustomPageControl: FilledPageControl {
     override var pageCount: Int {
@@ -33,7 +34,9 @@ class CustomPageControl: FilledPageControl {
     
     init(numberOfPages: Int) {
         super.init(frame: CGRect.zero)
+        tintColor = UIColor.white
         pageCount = numberOfPages
+        self.setRotationY(90)
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -42,7 +45,7 @@ class CustomPageControl: FilledPageControl {
     
     func makeLastBubbleColor() {
         if let lastLayer = inactiveLayers.last {
-            lastLayer.backgroundColor = UIColor.red.cgColor
+            lastLayer.backgroundColor = CustomColors.JellyTeal.cgColor
         }
     }
 }

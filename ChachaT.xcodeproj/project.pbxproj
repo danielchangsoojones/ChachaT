@@ -755,9 +755,9 @@
 		926108391CE4EDA0009F3E86 /* Tinder */ = {
 			isa = PBXGroup;
 			children = (
-				92371D3B1DF9166100BE0A92 /* Bumble */,
 				92BCEB791D88BEB800E05C05 /* Data Models */,
 				9261083A1CE4EDC4009F3E86 /* subviews/xibs */,
+				92371D3B1DF9166100BE0A92 /* Bumble */,
 				92BCEB6A1D85B49900E05C05 /* Card Detail */,
 				929A71E51CECDF4C000C9549 /* Koloda */,
 				9261083F1CE50447009F3E86 /* Magic Move */,
