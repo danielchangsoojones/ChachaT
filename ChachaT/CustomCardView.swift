@@ -22,20 +22,13 @@ class CustomCardView: OverlayView {
     
     var userOfTheCard : User? {
         didSet {
-//            theDescriptionDetailView.userOfTheCard = userOfTheCard
-//            if let profileImage = userOfTheCard?.profileImage {
-//                self.theCardMainImage.file = profileImage
-//                self.theCardMainImage.loadInBackground()
-//            } else {
-//                theCardMainImage.backgroundColor = ChachaBombayGrey
-//            }
             if let user = userOfTheCard {
                 vertSlideShowViewSetup(user: user)
             }
         }
     }
     
-    override var bounds: CGRect {
+    override var frame: CGRect {
         didSet {
             if let view = theVertSlideView {
                 view.frame = self.bounds

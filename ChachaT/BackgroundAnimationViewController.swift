@@ -210,6 +210,8 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     
     func koloda(_ koloda: KolodaView, viewForCardAt index: Int) -> UIView {
         let cardView = Bundle.main.loadNibNamed("CustomCardView", owner: self, options: nil)![0] as! CustomCardView
+        cardView.frame = kolodaView.frameForCard(at: 0)
+//        print()
         
         let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
