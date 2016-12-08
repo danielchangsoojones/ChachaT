@@ -236,6 +236,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
     fileprivate func addDetailVC(toView: BumbleDetailView, user: User) {
         let childVC = CardDetailViewController.createCardDetailVC(userOfCard: user)
         addAsChildViewController(childVC, toView: toView)
+        toView.theCardDetailViewController = childVC
         childVC.view.frame = toView.bounds
     }
     

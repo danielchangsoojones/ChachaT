@@ -73,6 +73,7 @@ class CardDetailViewController: UIViewController {
     
     func setNormalGUI() {
         dataStore.loadTags(user: userOfTheCard!)
+        scrollViewSetup()
         theDescriptionDetailView.userOfTheCard = userOfTheCard
         let bulletPointViewWidth = theBulletPointsStackView.frame.width
         if let factOne = userOfTheCard?.bulletPoint1 {
@@ -90,6 +91,10 @@ class CardDetailViewController: UIViewController {
     func bulletPointSetup(_ text: String, width: CGFloat) {
         let bulletPointView = BulletPointView(text: text, width: width)
         theBulletPointsStackView.addArrangedSubview(bulletPointView)
+    }
+    
+    func scrollViewSetup() {
+        theScrollView.showsVerticalScrollIndicator = false
     }
     
     //TODO: do I really need to have bottom buttons on this area?

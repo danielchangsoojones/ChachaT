@@ -25,14 +25,38 @@ class BumbleDetailView: UIView {
             return self.frame != originalFrame
         }
     }
+    var isAtMaximumFrame: Bool {
+        get {
+            return self.frame == maxFrame
+        }
+    }
+    var isAtMinimumFrame: Bool {
+        get {
+            return self.frame == originalFrame
+        }
+    }
     
     override var frame: CGRect {
+        willSet {
+            if newValue != maxFrame {
+                //close keybaord, in case it was open
+                self.endEditing(true)
+            }
+        }
         didSet {
             if frame.height <= originalFrame.height {
                 super.frame = originalFrame
             } else if frame.height >= maxFrame.height {
                 super.frame = maxFrame
             }
+            toggleCardDetailScroll()
+        }
+    }
+    
+    fileprivate func toggleCardDetailScroll() {
+        theCardDetailViewController?.theScrollView.isScrollEnabled = isAtMaximumFrame
+        if isAtMinimumFrame {
+            theCardDetailViewController?.theScrollView.setContentOffset(CGPoint.zero, animated: false)
         }
     }
     
@@ -40,6 +64,12 @@ class BumbleDetailView: UIView {
     let originalFrameInset: CGFloat = 10
     var originalFrame: CGRect = CGRect.zero
     var maxFrame: CGRect = CGRect.infinite
+    
+    var theCardDetailViewController: CardDetailViewController? {
+        didSet {
+            toggleCardDetailScroll()
+        }
+    }
     
     init(frameWidth: CGFloat, frameMinY: CGFloat, height: CGFloat) {
         let theFrame = CGRect(x: 0, y: frameMinY, width: frameWidth, height: height)

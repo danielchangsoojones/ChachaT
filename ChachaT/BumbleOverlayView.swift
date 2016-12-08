@@ -88,10 +88,19 @@ extension BumbleOverlayView {
 }
 
 //handlind pan
-extension BumbleOverlayView {
+extension BumbleOverlayView: UIGestureRecognizerDelegate {
     func addPan() {
         let pan = UIPanGestureRecognizer(target: self, action: #selector(self.isPanning(pan:)))
+        pan.delegate = self
         self.addGestureRecognizer(pan)
+    }
+    
+    override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        let pointOfTouch = gestureRecognizer.location(in: self)
+        if theBumbleDetailView.isAtMaximumFrame && theBumbleDetailView.frame.contains(pointOfTouch) {
+            return false
+        }
+        return true
     }
     
     func isPanning(pan: UIPanGestureRecognizer) {

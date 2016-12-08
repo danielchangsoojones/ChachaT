@@ -97,8 +97,10 @@ extension VerticalSlideShowView: UIGestureRecognizerDelegate {
         if let cardPan = pan as? BumblePanGestureRecognizer {
             theBumbleOverlayView.pan(touchPoint: pointOfTouch, direction: cardPan.direction, state: pan.state)
             
-            if pan.state == .ended || pan.state == .changed {
+            if pan.state == .ended {
                 cardPan.haveStartedCardOpenDrag = theBumbleDetailView.isOpen
+            } else if pan.state == .changed {
+                cardPan.haveStartedCardOpenDrag = true
             }
         }
     }
