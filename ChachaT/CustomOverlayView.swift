@@ -9,9 +9,6 @@
 import UIKit
 import Koloda
 
-private let overlayRightImageName = "overlay_like"
-private let overlayLeftImageName = "overlay_skip"
-
 class CustomOverlayView: OverlayView {
     
     @IBOutlet weak var theApproveImage: UIImageView!

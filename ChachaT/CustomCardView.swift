@@ -8,17 +8,9 @@
 
 import UIKit
 import Koloda
-import ParseUI
-
-private let overlayRightImageName = "overlay_like"
-private let overlayLeftImageName = "overlay_skip"
 
 class CustomCardView: OverlayView {
-    //TODO: get rid of this pfIMageView and replace with more non-dependent UIImageView
-    @IBOutlet weak var theCardMainImage: PFImageView!
-    @IBOutlet weak var thePersonalInfoHolderView: UIView!
-    @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
-    var theVertSlideView: VerticalSlideShowView?
+    var theVertSlideView: VerticalSlideShowView!
     
     var userOfTheCard : User? {
         didSet {
@@ -28,20 +20,15 @@ class CustomCardView: OverlayView {
         }
     }
     
-    override var frame: CGRect {
-        didSet {
-            if let view = theVertSlideView {
-                view.frame = self.bounds
-            }
-        }
-    }
-    
-    override func awakeFromNib() {
-        super.awakeFromNib()
-        
+    override init(frame: CGRect) {
+        super.init(frame: frame)
         //Rounded corners
         self.layer.cornerRadius = 10.0
         self.layer.masksToBounds = true
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     fileprivate func vertSlideShowViewSetup(user: User) {

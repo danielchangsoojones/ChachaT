@@ -78,7 +78,6 @@
 		926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108281CE255ED009F3E86 /* CustomKolodaView.swift */; };
 		9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */; };
 		9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261082C1CE25994009F3E86 /* CustomCardView.swift */; };
-		9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9261082E1CE25B74009F3E86 /* CustomCardView.xib */; };
 		926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 926108301CE25B84009F3E86 /* CustomOverlayView.xib */; };
 		926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108341CE25C5E009F3E86 /* CustomOverlayView.swift */; };
 		9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261083D1CE4F8E3009F3E86 /* globals.swift */; };
@@ -237,7 +236,6 @@
 		926108281CE255ED009F3E86 /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
 		9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationViewController.swift; sourceTree = "<group>"; };
 		9261082C1CE25994009F3E86 /* CustomCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCardView.swift; sourceTree = "<group>"; };
-		9261082E1CE25B74009F3E86 /* CustomCardView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomCardView.xib; sourceTree = "<group>"; };
 		926108301CE25B84009F3E86 /* CustomOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
 		926108341CE25C5E009F3E86 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
 		9261083D1CE4F8E3009F3E86 /* globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
@@ -676,7 +674,6 @@
 			isa = PBXGroup;
 			children = (
 				926108301CE25B84009F3E86 /* CustomOverlayView.xib */,
-				9261082E1CE25B74009F3E86 /* CustomCardView.xib */,
 			);
 			name = Xibs;
 			sourceTree = "<group>";
@@ -1255,7 +1252,6 @@
 				9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */,
 				9261081C1CDBCA32009F3E86 /* Main.storyboard in Resources */,
 				924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */,
-				9261082F1CE25B74009F3E86 /* CustomCardView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

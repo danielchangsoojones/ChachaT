@@ -36,7 +36,7 @@ class CustomPageControl: FilledPageControl {
         super.init(frame: CGRect.zero)
         tintColor = UIColor.white
         pageCount = numberOfPages
-        self.setRotationY(90)
+        self.transform = CGAffineTransform(rotationAngle: CGFloat(M_PI_2)) //make vertical
     }
     
     required init?(coder aDecoder: NSCoder) {
