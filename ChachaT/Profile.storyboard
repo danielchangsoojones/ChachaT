@@ -46,20 +46,11 @@
                         <outlet property="theButtonStackView" destination="6rx-WT-UoA" id="E3d-oE-rk7"/>
                         <outlet property="theUpperBackgroundView" destination="UPa-l3-a2J" id="RAj-FG-9Mg"/>
                         <segue destination="Si2-TA-hhX" kind="show" identifier="ProfileIndexToEditProfileSegue" id="hBf-Mv-AVU"/>
-                        <segue destination="DnT-3j-PZJ" kind="show" identifier="ProfileIndexToCardDetailPageSegue" id="gIl-zM-83q"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="p9b-39-CQs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="1372" y="530"/>
-        </scene>
-        <!--CardDetailViewController-->
-        <scene sceneID="3Zh-A1-SxU">
-            <objects>
-                <viewControllerPlaceholder storyboardName="Main" referencedIdentifier="CardDetailViewController" id="DnT-3j-PZJ" sceneMemberID="viewController"/>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="fpp-eA-MBc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="2129" y="391"/>
         </scene>
         <!--Edit Profile-->
         <scene sceneID="Dhh-ST-gQG">

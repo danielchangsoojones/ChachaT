@@ -308,7 +308,7 @@ extension EditProfileViewController : EditProfileDataStoreDelegate {
                     case .normalTextField:
                         dataStore.textFieldWasEdited(text, title: aboutView.theTitleLabel.text!)
                     default:
-                        print("buttholio")
+                        break
                     }
                 }
             }
@@ -337,5 +337,13 @@ extension EditProfileViewController {
     func keyboardWillHide(notification:NSNotification){
         let contentInset:UIEdgeInsets = UIEdgeInsets.zero
         self.theScrollView.contentInset = contentInset
+    }
+}
+
+extension EditProfileViewController {
+    class func instantiate() -> EditProfileViewController {
+        let storyboard = UIStoryboard(name: "Profile", bundle: nil)
+        let editProfileVC = storyboard.instantiateViewController(withIdentifier: "EditProfileViewController") as! EditProfileViewController
+        return editProfileVC
     }
 }

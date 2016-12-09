@@ -38,7 +38,7 @@ class ProfileIndexViewController: UIViewController {
     }
     
     func profileImageButtonPressed(_ sender: UITapGestureRecognizer) {
-        performSegueWithIdentifier(.ProfileIndexToCardDetailPageSegue, sender: nil)
+        self.pushVC(CheckOwnProfileViewController())
     }
     
     func settingsButtonPressed(_ sender: UITapGestureRecognizer) {
@@ -131,17 +131,11 @@ extension ProfileIndexViewController: EditProfileDelegate {
 extension ProfileIndexViewController: SegueHandlerType {
     enum SegueIdentifier: String {
         // THESE CASES WILL ALL MATCH THE IDENTIFIERS YOU CREATED IN THE STORYBOARD
-        case ProfileIndexToCardDetailPageSegue
         case ProfileIndexToEditProfileSegue
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         switch segueIdentifierForSegue(segue) {
-        case .ProfileIndexToCardDetailPageSegue:
-            //TODO: make the nav bar disappear, and they can just hit the back button on the image.
-            let cardDetailVC = segue.destination as! CardDetailViewController
-//            cardDetailVC.isViewingOwnProfile = true
-            cardDetailVC.userOfTheCard = User.current()
         case .ProfileIndexToEditProfileSegue:
             let editProfileVC = segue.destination as! EditProfileViewController
             editProfileVC.delegate = self

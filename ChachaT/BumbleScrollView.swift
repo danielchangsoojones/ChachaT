@@ -140,10 +140,6 @@ extension BumbleScrollView {
             }
             
         }
-        
-        print("previous range \(previousRange)")
-        print("current range \(currentRange)")
-        print("following range \(followingRange)")
         return (previousRange, currentRange, followingRange)
     }
 }

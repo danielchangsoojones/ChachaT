@@ -53,6 +53,8 @@
 		924139AF1DC67E2800C8B6AF /* DescriptionDetailView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */; };
 		924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */; };
 		924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */; };
+		9252F8541DFA2B9900D104BA /* CheckOwnProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */; };
+		9252F8561DFA2C4900D104BA /* CheckProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252F8551DFA2C4900D104BA /* CheckProfileView.swift */; };
 		925626D31DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
@@ -208,6 +210,8 @@
 		924139AE1DC67E2800C8B6AF /* DescriptionDetailView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = DescriptionDetailView.xib; sourceTree = "<group>"; };
 		924139B01DC67EA100C8B6AF /* DescriptionDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DescriptionDetailView.swift; sourceTree = "<group>"; };
 		924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookImagePickerExtension.swift; sourceTree = "<group>"; };
+		9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOwnProfileViewController.swift; sourceTree = "<group>"; };
+		9252F8551DFA2C4900D104BA /* CheckProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProfileView.swift; sourceTree = "<group>"; };
 		925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveableSearchTagsExtension.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -640,6 +644,15 @@
 			name = "Facebook Image Picking";
 			sourceTree = "<group>";
 		};
+		9252F8521DFA2B6D00D104BA /* View Profile */ = {
+			isa = PBXGroup;
+			children = (
+				9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */,
+				9252F8551DFA2C4900D104BA /* CheckProfileView.swift */,
+			);
+			name = "View Profile";
+			sourceTree = "<group>";
+		};
 		925626D11DCBB16C006A21BD /* Magic Move */ = {
 			isa = PBXGroup;
 			children = (
@@ -933,6 +946,7 @@
 			children = (
 				9275FB8C1D7B64AF00D8131D /* Data Models */,
 				9275FB811D7A02F900D8131D /* Edit Profile */,
+				9252F8521DFA2B6D00D104BA /* View Profile */,
 				928819451D286CA8000A8E04 /* Profile.storyboard */,
 				928819491D2A1C26000A8E04 /* ProfileIndexViewController.swift */,
 			);
@@ -1344,6 +1358,7 @@
 				92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */,
 				928762021D997096000EAED6 /* WelcomeDataStore.swift in Sources */,
 				921BAF711DE29F3800EF48BE /* ParseUserTag.swift in Sources */,
+				9252F8561DFA2C4900D104BA /* CheckProfileView.swift in Sources */,
 				927A61A31DD6B90F006DC59F /* BottomButtonsView.swift in Sources */,
 				92BCEB6F1D87115B00E05C05 /* CircleView.swift in Sources */,
 				925CF41D1DDCC6CE00FF484C /* NewCardMessageViewController.swift in Sources */,
@@ -1375,6 +1390,7 @@
 				9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */,
 				920BF8341D432E2500104842 /* MatchesViewController.swift in Sources */,
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
+				9252F8541DFA2B9900D104BA /* CheckOwnProfileViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
 				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,

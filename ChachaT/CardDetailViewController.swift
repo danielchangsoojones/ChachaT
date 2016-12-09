@@ -209,4 +209,11 @@ extension CardDetailViewController {
         cardDetailVC.userOfTheCard = userOfCard
         return cardDetailVC
     }
+    
+    class func addAsChildVC(to vc: UIViewController, toView: BumbleDetailView, user: User) {
+        let childVC = CardDetailViewController.createCardDetailVC(userOfCard: user)
+        vc.addAsChildViewController(childVC, toView: toView)
+        toView.theCardDetailViewController = childVC
+        childVC.view.frame = toView.bounds
+    }
 }

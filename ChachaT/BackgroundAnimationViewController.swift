@@ -214,7 +214,7 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         let currentSwipe = swipeArray[Int(index)]
         cardView.backgroundColor = UIColor.clear
         cardView.userOfTheCard = currentSwipe.otherUser
-        addDetailVC(toView: cardView.theVertSlideView.theBumbleDetailView, user: currentSwipe.otherUser)
+        CardDetailViewController.addAsChildVC(to: self,toView: cardView.theVertSlideView.theBumbleDetailView, user: currentSwipe.otherUser)
         
         if currentSwipe.incomingMessage != nil {
             addCardMessageChildVC(toView: cardView, swipe: currentSwipe)
@@ -231,13 +231,6 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         childVC.view.snp.makeConstraints { (make) in
             make.top.equalTo(toView)
         }
-    }
-    
-    fileprivate func addDetailVC(toView: BumbleDetailView, user: User) {
-        let childVC = CardDetailViewController.createCardDetailVC(userOfCard: user)
-        addAsChildViewController(childVC, toView: toView)
-        toView.theCardDetailViewController = childVC
-        childVC.view.frame = toView.bounds
     }
     
     //Need to do Koloda.OverlayView because Instructions pod also has a view called OverlayView, so it was ambigious
