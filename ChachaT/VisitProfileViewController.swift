@@ -41,7 +41,16 @@ class VisitProfileViewController: UIViewController {
             cardView.userOfTheCard = userOfCard
             CardDetailViewController.addAsChildVC(to: self,toView: cardView.theVertSlideView.theBumbleDetailView, user: user)
         }
+        if navigationController == nil {
+            checkProfileView.addBackButton(target: self, selector: #selector(backButtonPressed))
+        }
+        
+        
         self.view.addSubview(checkProfileView)
+    }
+    
+    func backButtonPressed() {
+       dismiss(animated: true, completion: nil)
     }
 }
 

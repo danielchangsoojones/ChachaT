@@ -588,13 +588,6 @@
 			name = "Page Control";
 			sourceTree = "<group>";
 		};
-		92371D4F1DF9CA7300BE0A92 /* Background Animation Extensions */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Background Animation Extensions";
-			sourceTree = "<group>";
-		};
 		923C7ED81D9308F20033A8A2 /* Internal Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -781,7 +774,6 @@
 				9261083F1CE50447009F3E86 /* Magic Move */,
 				929BF03B1DCF9C240099F3AB /* Empty State */,
 				9222E9C21DDA137400196433 /* Card Message */,
-				92371D4F1DF9CA7300BE0A92 /* Background Animation Extensions */,
 				9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */,
 				9261081A1CDBCA32009F3E86 /* Main.storyboard */,
 			);

@@ -30,6 +30,17 @@ class CheckProfileView: UIView {
     
     func addBackButton(target: UIViewController, selector: Selector) {
         let button = UIButton()
-        
+        let radius: CGFloat = 10
+        button.setCornerRadius(radius: radius)
+        button.backgroundColor = UIColor.black
+        button.alpha = 0.5
+        let rotatedImage = #imageLiteral(resourceName: "DownArrow").imageRotatedByDegrees(180, flip: false)
+        button.setImage(rotatedImage, for: .normal)
+        button.addTarget(target, action: selector, for: .touchUpInside)
+        theCardView.addSubview(button)
+        button.snp.makeConstraints { (make) in
+            make.top.leading.equalToSuperview().inset(15)
+            make.height.width.equalTo(30)
+        }
     }
 }
