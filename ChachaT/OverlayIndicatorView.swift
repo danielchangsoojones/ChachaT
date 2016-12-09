@@ -13,8 +13,8 @@ class OverlayIndicatorView: CircularImageView {
     fileprivate struct OverlayConstants {
         static let width: CGFloat = 100
         static let maxWidth: CGFloat = 150
-        static let leftImage: UIImage = #imageLiteral(resourceName: "filledInSkipButton")
-        static let rightImage: UIImage = #imageLiteral(resourceName: "filledInApproveButton")
+        static let leftImage: UIImage = #imageLiteral(resourceName: "OverlayIndicatorLeftButton")
+        static let rightImage: UIImage = #imageLiteral(resourceName: "OverlayIndicatorRightButton")
     }
     
     enum Side {

@@ -107,7 +107,13 @@ extension VerticalSlideShowView: UIGestureRecognizerDelegate {
     
     override func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
         //if the final page is the first page (i.e. the user only has one pic), then we don't want swiping that could interfere with the card swipe.
-        return (theBumbleScrollView.isAtFinalPage && theBumbleScrollView.currentPage != 0) || theBumbleDetailView.isOpen
+        if let pan = gestureRecognizer as? UIPanGestureRecognizer {
+            let velocity = pan.velocity(in: self)
+            let isVertical = abs(velocity.x) < abs(velocity.y)
+            let isUpwards = velocity.y < 0
+            return (theBumbleScrollView.isAtFinalPage && isVertical && isUpwards) || theBumbleDetailView.isOpen
+        }
+        return true
     }
 }
 
