@@ -8,6 +8,7 @@
 
 import UIKit
 import Koloda
+import EZSwiftExtensions
 
 let defaultBottomOffset:CGFloat = 0
 let defaultTopOffset:CGFloat = 5
@@ -22,8 +23,15 @@ protocol CustomKolodaViewDelegate: KolodaViewDelegate  {
 }
 
 class CustomKolodaView: KolodaView {
+    var theLeftOverlayIndicator: OverlayIndicatorView?
+    var theRightOverlayIndicator: OverlayIndicatorView?
     
     var customKolodaViewDelegate: CustomKolodaViewDelegate?
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+        createOverlayIndicators()
+    }
     
     override func frameForCard(at index: Int) -> CGRect {
         let measurmentTuple = customKolodaViewDelegate?.calculateKolodaViewCardHeight()
@@ -51,5 +59,51 @@ class CustomKolodaView: KolodaView {
             return CGRect(x: horizontalMargin, y: 0, width: width, height: height)
         }
         return CGRect.zero
+    }
+}
+
+//overlay indicator extension
+extension CustomKolodaView {
+    fileprivate func createOverlayIndicators() {
+        theLeftOverlayIndicator = createOverlayIndicator(side: .left)
+        theRightOverlayIndicator = createOverlayIndicator(side: .right)
+    }
+    
+    fileprivate func createOverlayIndicator(side: SwipeResultDirection) -> OverlayIndicatorView {
+        let overlayIndicatorView = OverlayIndicatorView(side: side == .left ? .left : .right)
+        self.addSubview(overlayIndicatorView)
+        return overlayIndicatorView
+    }
+    
+    func animate(to dragPercentage: CGFloat, direction: SwipeResultDirection) {
+        let tuple = setIndicator(dragPercentage: dragPercentage, direction: direction)
+        if let overlayIndicator = tuple.overlayIndicator {
+            UIView.animate(withDuration: 1.0, animations: {
+                overlayIndicator.frame.x = tuple.targetX
+            }, completion: nil)
+        }
+    }
+    
+    fileprivate func setIndicator(dragPercentage: CGFloat, direction: SwipeResultDirection) -> (overlayIndicator: UIView?, targetX: CGFloat) {
+        var theOverlayIndicator: OverlayIndicatorView?
+        var targetX: CGFloat = 0
+        let maxThreshold: CGFloat = self.frame.width * 0.4
+        let dx = maxThreshold * (dragPercentage / 100)
+        switch direction {
+        case .left:
+            theOverlayIndicator = theLeftOverlayIndicator
+            targetX = dx - theOverlayIndicator!.originalFrame.width
+        case .right:
+            theOverlayIndicator = theRightOverlayIndicator
+            targetX = self.bounds.maxX - dx + theOverlayIndicator!.originalFrame.width
+        default:
+            break
+        }
+        return (theOverlayIndicator, targetX)
+    }
+    
+    func revertToOriginalIndicatorPositions() {
+        theLeftOverlayIndicator?.revertToOriginalPosition()
+        theRightOverlayIndicator?.revertToOriginalPosition()
     }
 }

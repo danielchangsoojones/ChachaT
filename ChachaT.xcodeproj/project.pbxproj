@@ -95,6 +95,7 @@
 		92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */; };
 		92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */; };
 		9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */; };
+		9272D2BA1DFB42B4001BA1DF /* OverlayIndicatorView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */; };
 		9273B79B1CFF4D010001A608 /* Filtering.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9273B79A1CFF4D010001A608 /* Filtering.storyboard */; };
 		9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */; };
 		9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9275FB831D7A037D00D8131D /* PhotoEditingView.xib */; };
@@ -256,6 +257,7 @@
 		92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailDataStore.swift; sourceTree = "<group>"; };
 		92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
 		9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateDropDownCategories.swift; sourceTree = "<group>"; };
+		9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OverlayIndicatorView.swift; sourceTree = "<group>"; };
 		9273B79A1CFF4D010001A608 /* Filtering.storyboard */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.storyboard; path = Filtering.storyboard; sourceTree = "<group>"; };
 		9275FB7F1D79FDDC00D8131D /* UIImageViewExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIImageViewExtension.swift; sourceTree = "<group>"; };
 		9275FB831D7A037D00D8131D /* PhotoEditingView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PhotoEditingView.xib; sourceTree = "<group>"; };
@@ -1016,6 +1018,7 @@
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
 				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
+				9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */,
 			);
 			name = Koloda;
 			sourceTree = "<group>";
@@ -1387,6 +1390,7 @@
 				9275FB941D7C715800D8131D /* AboutView.swift in Sources */,
 				9252F8541DFA2B9900D104BA /* CheckOwnProfileViewController.swift in Sources */,
 				92A5DDAC1DD175E70003B09D /* NotificationNames.swift in Sources */,
+				9272D2BA1DFB42B4001BA1DF /* OverlayIndicatorView.swift in Sources */,
 				92954CAB1DDE20A3005B6FA4 /* SearchTutorialExtension.swift in Sources */,
 				920BF8321D431CD000104842 /* MatchDataStore.swift in Sources */,
 				9222E9C51DDA140A00196433 /* MessageSalutationView.swift in Sources */,
