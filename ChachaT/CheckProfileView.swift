@@ -27,4 +27,9 @@ class CheckProfileView: UIView {
         theCardView = CustomCardView(frame: self.bounds.insetBy(dx: inset, dy: inset))
         self.addSubview(theCardView)
     }
+    
+    func addBackButton(target: UIViewController, selector: Selector) {
+        let button = UIButton()
+        
+    }
 }

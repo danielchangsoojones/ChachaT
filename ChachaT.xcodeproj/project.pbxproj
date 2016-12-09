@@ -55,6 +55,7 @@
 		924139B71DC77EF500C8B6AF /* FacebookImagePickerExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */; };
 		9252F8541DFA2B9900D104BA /* CheckOwnProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */; };
 		9252F8561DFA2C4900D104BA /* CheckProfileView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252F8551DFA2C4900D104BA /* CheckProfileView.swift */; };
+		9252F8581DFA45A900D104BA /* VisitProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9252F8571DFA45A900D104BA /* VisitProfileViewController.swift */; };
 		925626D31DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */; };
 		9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9258849E1D902704006D7C01 /* DropDownTagView.swift */; };
 		925884A11D903A58006D7C01 /* Tag.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925884A01D903A58006D7C01 /* Tag.swift */; };
@@ -212,6 +213,7 @@
 		924139B61DC77EF500C8B6AF /* FacebookImagePickerExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FacebookImagePickerExtension.swift; sourceTree = "<group>"; };
 		9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckOwnProfileViewController.swift; sourceTree = "<group>"; };
 		9252F8551DFA2C4900D104BA /* CheckProfileView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CheckProfileView.swift; sourceTree = "<group>"; };
+		9252F8571DFA45A900D104BA /* VisitProfileViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = VisitProfileViewController.swift; sourceTree = "<group>"; };
 		925626D21DCBB18D006A21BD /* MagicMoveableSearchTagsExtension.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveableSearchTagsExtension.swift; sourceTree = "<group>"; };
 		9258849E1D902704006D7C01 /* DropDownTagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DropDownTagView.swift; sourceTree = "<group>"; };
 		925884A01D903A58006D7C01 /* Tag.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Tag.swift; sourceTree = "<group>"; };
@@ -649,6 +651,7 @@
 			children = (
 				9252F8531DFA2B9900D104BA /* CheckOwnProfileViewController.swift */,
 				9252F8551DFA2C4900D104BA /* CheckProfileView.swift */,
+				9252F8571DFA45A900D104BA /* VisitProfileViewController.swift */,
 			);
 			name = "View Profile";
 			sourceTree = "<group>";
@@ -1408,6 +1411,7 @@
 				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
 				92371D4E1DF916D600BE0A92 /* FilledPageControl.swift in Sources */,
+				9252F8581DFA45A900D104BA /* VisitProfileViewController.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,

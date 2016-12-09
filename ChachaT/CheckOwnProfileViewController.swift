@@ -7,40 +7,18 @@
 //
 
 import UIKit
-import EZSwiftExtensions
 
-class CheckOwnProfileViewController: UIViewController {
-    var userOfCard: User? = User.current()! {
-        didSet {
-            viewSetup()
-        }
-    }
-
+class CheckOwnProfileViewController: VisitProfileViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
-        automaticallyAdjustsScrollViewInsets = false
-        self.view.backgroundColor = UIColor.white
         self.title = "Your Profile"
-        if userOfCard == User.current()! {
-            viewSetup()
-        }
+        userOfCard = User.current()!
         createBarButtons()
     }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
-    }
-    
-    func viewSetup() {
-        let navBarHeight = ez.screenStatusBarHeight + navigationBarHeight
-        let boundsWithoutNavBar = CGRect(x: 0, y: navBarHeight, w: self.view.bounds.width, h: self.view.bounds.height - navBarHeight)
-        let checkProfileView = CheckProfileView(frame: boundsWithoutNavBar)
-        if let user = userOfCard, let cardView = checkProfileView.theCardView {
-            cardView.userOfTheCard = userOfCard
-            CardDetailViewController.addAsChildVC(to: self,toView: cardView.theVertSlideView.theBumbleDetailView, user: user)
-        }
-        self.view.addSubview(checkProfileView)
     }
 }
 

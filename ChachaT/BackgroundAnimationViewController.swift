@@ -166,10 +166,6 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
         }
     }
     
-    func koloda(_ koloda: KolodaView, didSelectCardAt index: Int) {
-        self.buttonTappedHandler(index)
-    }
-    
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
         let currentSwipe = swipeArray[Int(index)]
         if direction == .right {
@@ -259,36 +255,6 @@ extension BackgroundAnimationViewController: FrostedSidebarDelegate {
     func sidebar(_ sidebar: FrostedSidebar, didEnable itemEnabled: Bool, itemAtIndex index: Int) {}
     func sidebar(_ sidebar: FrostedSidebar, didDismissFromScreenAnimated animated: Bool) {}
     func sidebar(_ sidebar: FrostedSidebar, willDismissFromScreenAnimated animated: Bool) {}
-}
-
-extension BackgroundAnimationViewController: MagicMoveable {
-    var isMagic: Bool {
-        return true
-    }
-    
-    var duration: TimeInterval {
-        return 0.5
-    }
-    
-    var spring: CGFloat {
-        return 0.7
-    }
-    
-    fileprivate func buttonTappedHandler(_ index: Int) {
-        let cardDetailVC = UIStoryboard(name: Storyboards.main.storyboard, bundle: nil).instantiateViewController(withIdentifier: "CardDetailViewController") as! CardDetailViewController
-        cardDetailVC.delegate = self
-        cardDetailVC.swipe = swipeArray[index]
-        theTappedKolodaIndex = index
-        
-//        presentViewControllerMagically(self, to: cardDetailVC, animated: true, duration: duration, spring: spring)
-    }
-    
-    var magicViews: [UIView] {
-        get {
-            let currentCardView = kolodaView.viewForCard(at: theTappedKolodaIndex) as! CustomCardView
-            return [currentCardView.theVertSlideView]
-        }
-    }
 }
 
 extension BackgroundAnimationViewController: EmptyStateDelegate {
