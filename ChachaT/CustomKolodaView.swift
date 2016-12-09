@@ -79,15 +79,24 @@ extension CustomKolodaView {
         let tuple = setIndicator(dragPercentage: dragPercentage, direction: direction)
         if let overlayIndicator = tuple.overlayIndicator {
             UIView.animate(withDuration: 1.0, animations: {
+                //TODO: we want to animate the button to scale larger and smaller as we drag, like bumble.
                 overlayIndicator.frame.x = tuple.targetX
+                self.changeAlphe(overlayIndicator: overlayIndicator, dragPercentage: dragPercentage)
             }, completion: nil)
         }
     }
     
-    fileprivate func setIndicator(dragPercentage: CGFloat, direction: SwipeResultDirection) -> (overlayIndicator: UIView?, targetX: CGFloat) {
+    fileprivate func changeAlphe(overlayIndicator: UIView, dragPercentage: CGFloat) {
+        let maxAlpha: CGFloat = 0.8
+        let minAlpha: CGFloat = 0.2
+        let alpheDiff = maxAlpha - minAlpha
+        overlayIndicator.alpha = alpheDiff * (dragPercentage / 100) + minAlpha
+    }
+    
+    fileprivate func setIndicator(dragPercentage: CGFloat, direction: SwipeResultDirection) -> (overlayIndicator: OverlayIndicatorView?, targetX: CGFloat) {
         var theOverlayIndicator: OverlayIndicatorView?
         var targetX: CGFloat = 0
-        let maxThreshold: CGFloat = self.frame.width * 0.4
+        let maxThreshold: CGFloat = self.frame.width * 0.5
         let dx = maxThreshold * (dragPercentage / 100)
         switch direction {
         case .left:
@@ -95,7 +104,7 @@ extension CustomKolodaView {
             targetX = dx - theOverlayIndicator!.originalFrame.width
         case .right:
             theOverlayIndicator = theRightOverlayIndicator
-            targetX = self.bounds.maxX - dx + theOverlayIndicator!.originalFrame.width
+            targetX = ez.screenWidth - dx
         default:
             break
         }

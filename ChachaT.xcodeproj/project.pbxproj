@@ -848,6 +848,16 @@
 			name = "Data Models";
 			sourceTree = "<group>";
 		};
+		9272D2BB1DFB4B82001BA1DF /* Subviews */ = {
+			isa = PBXGroup;
+			children = (
+				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
+				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
+				9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */,
+			);
+			name = Subviews;
+			sourceTree = "<group>";
+		};
 		9273B7991CFF491D0001A608 /* 8tracks Filtering Search */ = {
 			isa = PBXGroup;
 			children = (
@@ -1015,10 +1025,8 @@
 			isa = PBXGroup;
 			children = (
 				925D0FCF1D6F634400DE20F9 /* Xibs */,
+				9272D2BB1DFB4B82001BA1DF /* Subviews */,
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
-				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
-				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
-				9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */,
 			);
 			name = Koloda;
 			sourceTree = "<group>";

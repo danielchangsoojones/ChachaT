@@ -11,7 +11,8 @@ import EZSwiftExtensions
 
 class OverlayIndicatorView: CircularImageView {
     fileprivate struct OverlayConstants {
-        static let width: CGFloat = 20
+        static let width: CGFloat = 100
+        static let maxWidth: CGFloat = 150
         static let leftImage: UIImage = #imageLiteral(resourceName: "filledInSkipButton")
         static let rightImage: UIImage = #imageLiteral(resourceName: "filledInApproveButton")
     }
@@ -24,6 +25,12 @@ class OverlayIndicatorView: CircularImageView {
     override var frame: CGRect {
         didSet {
             isHidden = frame == originalFrame
+        }
+    }
+    
+    var widthDifference: CGFloat {
+        get {
+            return OverlayConstants.maxWidth - originalFrame.width
         }
     }
     
