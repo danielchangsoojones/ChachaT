@@ -37,28 +37,18 @@ class CustomKolodaView: KolodaView {
         let measurmentTuple = customKolodaViewDelegate?.calculateKolodaViewCardHeight()
         let cardHeight = measurmentTuple?.cardHeight
         let navigationAreaHeight = measurmentTuple?.navigationAreaHeight
-        if index == 0 {
-            let topOffset:CGFloat = navigationAreaHeight! + defaultTopOffset
-            let xOffset:CGFloat = defaultHorizontalOffset
-            let width = UIScreen.main.bounds.width - 2 * defaultHorizontalOffset
-            var height = cardHeight! - defaultTopOffset //if we move the card down, then we need to make it that much shorter, so it doesn't go over buttons
-            if isIphone3by2AR() {
-                height = height * 0.72
-            }
-            let yOffset:CGFloat = topOffset
-            let frame = CGRect(x: xOffset, y: yOffset, width: width, height: height)
-            
-            return frame
-        } else if index == 1 {
-            let horizontalMargin = -self.bounds.width * backgroundCardHorizontalMarginMultiplier
-            let width = self.bounds.width * backgroundCardScalePercent
-            var height = width * defaultHeightRatio
-            if isIphone3by2AR() {
-                height = height * 0.72
-            }
-            return CGRect(x: horizontalMargin, y: 0, width: width, height: height)
+        
+        let topOffset:CGFloat = navigationAreaHeight! + defaultTopOffset
+        let xOffset:CGFloat = defaultHorizontalOffset
+        let width = UIScreen.main.bounds.width - 2 * defaultHorizontalOffset
+        var height = cardHeight! - defaultTopOffset //if we move the card down, then we need to make it that much shorter, so it doesn't go over buttons
+        if isIphone3by2AR() {
+            height = height * 0.72
         }
-        return CGRect.zero
+        let yOffset:CGFloat = topOffset
+        let frame = CGRect(x: xOffset, y: yOffset, width: width, height: height)
+        
+        return frame
     }
 }
 
@@ -78,7 +68,7 @@ extension CustomKolodaView {
     func animate(to dragPercentage: CGFloat, direction: SwipeResultDirection) {
         let tuple = setIndicator(dragPercentage: dragPercentage, direction: direction)
         if let overlayIndicator = tuple.overlayIndicator {
-            UIView.animate(withDuration: 1.0, animations: {
+            UIView.animate(withDuration: 0.1, animations: {
                 //TODO: we want to animate the button to scale larger and smaller as we drag, like bumble.
                 overlayIndicator.frame.x = tuple.targetX
                 self.changeAlphe(overlayIndicator: overlayIndicator, dragPercentage: dragPercentage)

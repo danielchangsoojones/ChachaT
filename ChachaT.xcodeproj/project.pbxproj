@@ -43,7 +43,6 @@
 		92371D431DF916AF00BE0A92 /* BumbleScrollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D411DF916AF00BE0A92 /* BumbleScrollView.swift */; };
 		92371D481DF916CE00BE0A92 /* BumbleDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */; };
 		92371D491DF916CE00BE0A92 /* BumbleOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */; };
-		92371D4A1DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */; };
 		92371D4D1DF916D600BE0A92 /* CustomPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D4B1DF916D600BE0A92 /* CustomPageControl.swift */; };
 		92371D4E1DF916D600BE0A92 /* FilledPageControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92371D4C1DF916D600BE0A92 /* FilledPageControl.swift */; };
 		923C7ED71D9303E30033A8A2 /* Connection.swift in Sources */ = {isa = PBXBuildFile; fileRef = 923C7ED61D9303E30033A8A2 /* Connection.swift */; };
@@ -80,8 +79,6 @@
 		926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108281CE255ED009F3E86 /* CustomKolodaView.swift */; };
 		9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */; };
 		9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261082C1CE25994009F3E86 /* CustomCardView.swift */; };
-		926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 926108301CE25B84009F3E86 /* CustomOverlayView.xib */; };
-		926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108341CE25C5E009F3E86 /* CustomOverlayView.swift */; };
 		9261083E1CE4F8E3009F3E86 /* globals.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261083D1CE4F8E3009F3E86 /* globals.swift */; };
 		926108411CE50661009F3E86 /* MagicMoveExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108401CE50661009F3E86 /* MagicMoveExt.swift */; };
 		926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108421CE5066F009F3E86 /* UIViewExt.swift */; };
@@ -202,7 +199,6 @@
 		92371D411DF916AF00BE0A92 /* BumbleScrollView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleScrollView.swift; sourceTree = "<group>"; };
 		92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleDetailView.swift; sourceTree = "<group>"; };
 		92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumbleOverlayView.swift; sourceTree = "<group>"; };
-		92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BumblePanGestureRecognizer.swift; sourceTree = "<group>"; };
 		92371D4B1DF916D600BE0A92 /* CustomPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomPageControl.swift; sourceTree = "<group>"; };
 		92371D4C1DF916D600BE0A92 /* FilledPageControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilledPageControl.swift; sourceTree = "<group>"; };
 		923C7ED61D9303E30033A8A2 /* Connection.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Connection.swift; sourceTree = "<group>"; };
@@ -241,8 +237,6 @@
 		926108281CE255ED009F3E86 /* CustomKolodaView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomKolodaView.swift; sourceTree = "<group>"; };
 		9261082A1CE257AE009F3E86 /* BackgroundAnimationViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundAnimationViewController.swift; sourceTree = "<group>"; };
 		9261082C1CE25994009F3E86 /* CustomCardView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomCardView.swift; sourceTree = "<group>"; };
-		926108301CE25B84009F3E86 /* CustomOverlayView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = CustomOverlayView.xib; sourceTree = "<group>"; };
-		926108341CE25C5E009F3E86 /* CustomOverlayView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomOverlayView.swift; sourceTree = "<group>"; };
 		9261083D1CE4F8E3009F3E86 /* globals.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = globals.swift; sourceTree = "<group>"; };
 		926108401CE50661009F3E86 /* MagicMoveExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MagicMoveExt.swift; sourceTree = "<group>"; };
 		926108421CE5066F009F3E86 /* UIViewExt.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UIViewExt.swift; sourceTree = "<group>"; };
@@ -576,7 +570,6 @@
 				92371D441DF916BD00BE0A92 /* Page Control */,
 				92371D451DF916CE00BE0A92 /* BumbleDetailView.swift */,
 				92371D461DF916CE00BE0A92 /* BumbleOverlayView.swift */,
-				92371D471DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift */,
 			);
 			name = Overlay;
 			sourceTree = "<group>";
@@ -684,14 +677,6 @@
 				925CF41F1DDCF84B00FF484C /* NewCardMessageDataStore.swift */,
 			);
 			name = "Data Models";
-			sourceTree = "<group>";
-		};
-		925D0FCF1D6F634400DE20F9 /* Xibs */ = {
-			isa = PBXGroup;
-			children = (
-				926108301CE25B84009F3E86 /* CustomOverlayView.xib */,
-			);
-			name = Xibs;
 			sourceTree = "<group>";
 		};
 		925D0FD21D74981100DE20F9 /* Adding Tags */ = {
@@ -851,7 +836,6 @@
 		9272D2BB1DFB4B82001BA1DF /* Subviews */ = {
 			isa = PBXGroup;
 			children = (
-				926108341CE25C5E009F3E86 /* CustomOverlayView.swift */,
 				9261082C1CE25994009F3E86 /* CustomCardView.swift */,
 				9272D2B91DFB42B4001BA1DF /* OverlayIndicatorView.swift */,
 			);
@@ -1024,7 +1008,6 @@
 		929A71E51CECDF4C000C9549 /* Koloda */ = {
 			isa = PBXGroup;
 			children = (
-				925D0FCF1D6F634400DE20F9 /* Xibs */,
 				9272D2BB1DFB4B82001BA1DF /* Subviews */,
 				926108281CE255ED009F3E86 /* CustomKolodaView.swift */,
 			);
@@ -1270,7 +1253,6 @@
 				922C89861D4B1F1D00DE1373 /* ScrollViewSearchView.xib in Resources */,
 				9275FB841D7A037D00D8131D /* PhotoEditingView.xib in Resources */,
 				927A61A51DD6B965006DC59F /* BottomButtonsView.xib in Resources */,
-				926108311CE25B84009F3E86 /* CustomOverlayView.xib in Resources */,
 				926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */,
 				925D0FDE1D760EE000DE20F9 /* CreationMenuView.xib in Resources */,
 				920BF8211D3FF5E300104842 /* Info.plist in Resources */,
@@ -1422,7 +1404,6 @@
 				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
 				922C89841D4A07D500DE1373 /* ChachaDropDownMenu.swift in Sources */,
-				92371D4A1DF916CE00BE0A92 /* BumblePanGestureRecognizer.swift in Sources */,
 				92BCEB5E1D83AFEE00E05C05 /* ScrollingMatchesTableViewCell.swift in Sources */,
 				92BCEB711D87457000E05C05 /* CircularImageView.swift in Sources */,
 				92371D3F1DF9168400BE0A92 /* VerticalSlideShowView.swift in Sources */,
@@ -1434,7 +1415,6 @@
 				92BCEB6D1D85B4CB00E05C05 /* BulletPointView.swift in Sources */,
 				926108441CE5066F009F3E86 /* UIViewExt.swift in Sources */,
 				925884AB1D90809E006D7C01 /* SliderView.swift in Sources */,
-				926108351CE25C5E009F3E86 /* CustomOverlayView.swift in Sources */,
 				925CF41A1DDBBD6B00FF484C /* SuperParseSwipeDataStore.swift in Sources */,
 				920BF8221D3FF5E300104842 /* TagListView.swift in Sources */,
 				9299DC351DF4892E0079C8F2 /* MyNotificationDataStore.swift in Sources */,
