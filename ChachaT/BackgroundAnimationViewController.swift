@@ -167,6 +167,7 @@ extension BackgroundAnimationViewController: CustomKolodaViewDelegate {
     }
     
     func koloda(_ koloda: KolodaView, didSwipeCardAt index: Int, in direction: SwipeResultDirection) {
+        kolodaView.revertToOriginalIndicatorPositions()
         let currentSwipe = swipeArray[Int(index)]
         if direction == .right {
             currentSwipe.approve()
@@ -229,10 +230,12 @@ extension BackgroundAnimationViewController: KolodaViewDataSource {
         }
     }
     
-    //Need to do Koloda.OverlayView because Instructions pod also has a view called OverlayView, so it was ambigious
-    func koloda(_ koloda: KolodaView, viewForCardOverlayAt index: Int) -> Koloda.OverlayView? {
-        let overlayView : CustomOverlayView? = Bundle.main.loadNibNamed("CustomOverlayView", owner: self, options: nil)?[0] as? CustomOverlayView
-        return overlayView
+    func koloda(_ koloda: KolodaView, draggedCardWithPercentage finishPercentage: CGFloat, in direction: SwipeResultDirection) {
+        kolodaView.animate(to: finishPercentage, direction: direction)
+    }
+    
+    func kolodaDidResetCard(_ koloda: KolodaView) {
+        kolodaView.revertToOriginalIndicatorPositions()
     }
 }
 
