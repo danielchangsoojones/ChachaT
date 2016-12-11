@@ -271,6 +271,8 @@
                     <freeformSimulatedSizeMetrics key="simulatedDestinationMetrics"/>
                     <size key="freeformSize" width="600" height="1000"/>
                     <connections>
+                        <outlet property="theBulletPointBottomToTagsConstraint" destination="c3e-80-8e3" id="Cff-4B-kcA"/>
+                        <outlet property="theBulletPointViewLine" destination="Tck-Dg-N2s" id="of0-Hh-nIZ"/>
                         <outlet property="theBulletPointsStackView" destination="aEI-ic-YIN" id="EMR-rZ-Rwq"/>
                         <outlet property="theDescriptionDetailView" destination="h0H-yA-KZp" id="uRB-KU-aOw"/>
                         <outlet property="theDetailViewHolderHeight" destination="Tnl-HE-9ze" id="dlZ-UQ-0x4"/>

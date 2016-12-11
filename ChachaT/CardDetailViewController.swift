@@ -16,11 +16,13 @@ class CardDetailViewController: UIViewController {
     @IBOutlet weak var theDescriptionDetailView: DescriptionDetailView!
     @IBOutlet weak var theTagListViewHolder: UIView!
     @IBOutlet weak var theScrollView: UIScrollView!
+    @IBOutlet weak var theBulletPointViewLine: UIImageView!
 
     var theTagCreationViewController: TagCreationViewController!
     
     //constraints
     @IBOutlet weak var theDetailViewHolderHeight: NSLayoutConstraint!
+    @IBOutlet weak var theBulletPointBottomToTagsConstraint: NSLayoutConstraint!
     
     
     var userOfTheCard: User? = User.current() //just setting a defualt, should be passed through dependency injection
@@ -75,6 +77,12 @@ class CardDetailViewController: UIViewController {
         dataStore.loadTags(user: userOfTheCard!)
         scrollViewSetup()
         theDescriptionDetailView.userOfTheCard = userOfTheCard
+        bulletPointsSetup()
+        
+//        setBottomButtons()
+    }
+    
+    fileprivate func bulletPointsSetup() {
         let bulletPointViewWidth = theBulletPointsStackView.frame.width
         if let factOne = userOfTheCard?.bulletPoint1 {
             bulletPointSetup(factOne, width: bulletPointViewWidth)
@@ -85,7 +93,10 @@ class CardDetailViewController: UIViewController {
         if let factThree = userOfTheCard?.bulletPoint3 {
             bulletPointSetup(factThree, width: bulletPointViewWidth)
         }
-//        setBottomButtons()
+        if theBulletPointsStackView.arrangedSubviews.isEmpty {
+            theBulletPointBottomToTagsConstraint.constant = 0
+            theBulletPointViewLine.isHidden = true
+        }
     }
     
     func bulletPointSetup(_ text: String, width: CGFloat) {
