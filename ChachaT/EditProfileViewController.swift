@@ -142,11 +142,11 @@ class EditProfileViewController: UIViewController {
         let interestedInView = AboutView(title: EditProfileConstants.interestedInTitle, placeHolder: EditProfileConstants.interestedInPlaceholder, innerText: nil, action: { (sender) in
             let vc = AttributePickerViewController()
             vc.passedAction = { (chosen: String) in
-                self.loadText(chosen, title: EditProfileConstants.genderTitle)
+                self.loadText(chosen, title: EditProfileConstants.interestedInTitle)
             }
             vc.previouslyChosenTitle = sender.getCurrentText() ?? ""
-            vc.rowTitles = ["male", "female"]
-            vc.sectionTitle = EditProfileConstants.genderTitle
+            vc.rowTitles = ["male", "female", "all"]
+            vc.sectionTitle = EditProfileConstants.interestedInTitle
             self.pushVC(vc)
         }, type: .segueCell)
         theStackView.addArrangedSubview(interestedInView)

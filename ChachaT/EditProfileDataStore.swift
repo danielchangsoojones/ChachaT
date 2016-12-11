@@ -132,6 +132,9 @@ extension EditProfileDataStore {
         if let age = currentUser.age {
             delegate?.loadText(age.toString, title: EditProfileConstants.ageTitle)
         }
+        if let interestedIn = currentUser.genderInterest {
+            delegate?.loadText(interestedIn, title: EditProfileConstants.interestedInTitle)
+        }
     }
 }
 
