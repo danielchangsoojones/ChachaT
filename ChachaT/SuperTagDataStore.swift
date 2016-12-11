@@ -20,6 +20,8 @@ class SuperTagDataStore: SuperParseSwipeDataStore {
         self.superTagDelegate = superTagDelegate
     }
     
+    override init() {}
+    
     func searchForTags(searchText: String) {
         runSearchQuery(searchText: searchText, query: createSearchQuery(searchText: searchText))
     }

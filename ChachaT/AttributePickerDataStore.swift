@@ -10,48 +10,63 @@ import Foundation
 import Parse
 
 class AttributePickerDataStore {
+    func save(selection: String, sectionTitle: String) {
+        switch sectionTitle {
+        case EditProfileConstants.genderTitle:
+            saveGender(gender: selection)
+        case EditProfileConstants.interestedInTitle:
+            saveInterestedIn(interestedIn: selection)
+        default:
+            break
+        }
+    }
+    
+    fileprivate func saveInterestedIn(interestedIn: String) {
+        let settingsDataStore = SettingsDataStore()
+        settingsDataStore.saveInterestedIn(choice: interestedIn)
+    }
+}
+
+//saving Gender
+extension AttributePickerDataStore {
     func saveGender(gender: String) {
         replaceGenderTag(gender: gender)
     }
     
     fileprivate func replaceGenderTag(gender: String) {
-        let relation = User.current()!.relation(forKey: "tags")
-        
-        let innerQuery = DropDownCategory.query()!
-        innerQuery.whereKey("name", equalTo: "Gender")
-        
-        let query = relation.query() as! PFQuery<ParseTag>
-        query.whereKey("dropDownCategory", matchesQuery: innerQuery)
-        
-        query.findObjectsInBackground { (parseTags, error) in
-            if let parseTags = parseTags {
-                for parseTag in parseTags {
-                    relation.remove(parseTag)
+        deletePreviousGenderTag(gender: gender)
+        saveTag(gender: gender)
+    }
+    
+    func deletePreviousGenderTag(gender: String) {
+        if let previousGender = User.current()!.gender {
+            User.current()!.remove(previousGender, forKey: "tagsArray")
+            User.current()!.saveInBackground()
+            let query = ParseUserTag.query()! as! PFQuery<ParseUserTag>
+            query.whereKey("tagTitle", equalTo: previousGender)
+            query.getFirstObjectInBackground(block: { (parseUserTag, error) in
+                if let parseUserTag = parseUserTag {
+                    parseUserTag.deleteInBackground()
+                } else if let error = error {
+                    print(error)
                 }
-            } else if let error = error {
-                print(error)
-            }
-            self.saveNewTagRelation(relation: relation, gender: gender)
+            })
         }
     }
     
-    fileprivate func saveNewTagRelation(relation: PFRelation<PFObject>, gender: String) {
+    fileprivate func saveTag(gender: String) {
         let query = ParseTag.query()! as! PFQuery<ParseTag>
         query.whereKey("title", equalTo: gender)
+        query.whereKey("attribute", equalTo: TagAttributes.dropDownMenu.rawValue)
         query.getFirstObjectInBackground { (parseTag, error) in
             if let parseTag = parseTag {
-                relation.add(parseTag)
-                self.saveUsersGender(gender: gender)
+                let parseUserTag = ParseUserTag(parseTag: parseTag, isPending: false, approved: true)
+                User.current()!.gender = gender
+                let addingTagsDataStore = AddingTagsDataStore()
+                addingTagsDataStore.saveParseUserTag(parseUserTag)
             } else if let error = error {
                 print(error)
             }
         }
     }
-    
-    fileprivate func saveUsersGender(gender: String) {
-        User.current()!.gender = gender
-        User.current()?.saveInBackground()
-    }
-    
-    
 }
