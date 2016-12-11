@@ -11,8 +11,7 @@ import EZSwiftExtensions
 
 class OverlayIndicatorView: CircularImageView {
     fileprivate struct OverlayConstants {
-        static let width: CGFloat = 100
-        static let maxWidth: CGFloat = 150
+        static let width: CGFloat = 75
         static let leftImage: UIImage = #imageLiteral(resourceName: "OverlayIndicatorLeftButton")
         static let rightImage: UIImage = #imageLiteral(resourceName: "OverlayIndicatorRightButton")
     }
@@ -28,16 +27,19 @@ class OverlayIndicatorView: CircularImageView {
         }
     }
     
-    var widthDifference: CGFloat {
-        get {
-            return OverlayConstants.maxWidth - originalFrame.width
-        }
-    }
-    
     var originalFrame: CGRect {
         get {
             let minX = side == .left ? -OverlayConstants.width : ez.screenWidth + OverlayConstants.width
             return CGRect(x: minX, y: superview?.frame.midY ?? ez.screenHeight / 2, width: OverlayConstants.width, height: OverlayConstants.width)
+        }
+    }
+    
+    var maxFrame: CGRect {
+        get {
+            let sideDimension: CGFloat = originalFrame.width * 2
+            let maxThreshold: CGFloat = 0.3
+            let minX = side == .left ? ez.screenWidth * maxThreshold : ez.screenWidth * (1 - maxThreshold) - sideDimension
+            return CGRect(x: minX, y: originalFrame.y - sideDimension / 2, w: sideDimension, h: sideDimension)
         }
     }
 
@@ -48,6 +50,8 @@ class OverlayIndicatorView: CircularImageView {
         self.side = side
         self.frame = originalFrame
         self.layer.zPosition = CGFloat.greatestFiniteMagnitude
+        self.backgroundColor = UIColor.clear
+        snapImageToSides()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -56,5 +60,12 @@ class OverlayIndicatorView: CircularImageView {
     
     func revertToOriginalPosition() {
         self.frame = originalFrame
+    }
+    
+    func snapImageToSides() {
+        //we need to snap the imageView to the side, so it grows as the overlay is scaled
+        theImageView.snp.makeConstraints { (make) in
+            make.edges.equalTo(self)
+        }
     }
 }

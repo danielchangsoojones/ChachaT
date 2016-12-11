@@ -70,35 +70,51 @@ extension CustomKolodaView {
         if let overlayIndicator = tuple.overlayIndicator {
             UIView.animate(withDuration: 0.1, animations: {
                 //TODO: we want to animate the button to scale larger and smaller as we drag, like bumble.
-                overlayIndicator.frame.x = tuple.targetX
-                self.changeAlphe(overlayIndicator: overlayIndicator, dragPercentage: dragPercentage)
+                overlayIndicator.frame = tuple.newFrame
+                self.changeAlpha(overlayIndicator: overlayIndicator, dragPercentage: dragPercentage)
             }, completion: nil)
         }
     }
     
-    fileprivate func changeAlphe(overlayIndicator: UIView, dragPercentage: CGFloat) {
+    fileprivate func changeAlpha(overlayIndicator: UIView, dragPercentage: CGFloat) {
         let maxAlpha: CGFloat = 0.8
         let minAlpha: CGFloat = 0.2
         let alpheDiff = maxAlpha - minAlpha
         overlayIndicator.alpha = alpheDiff * (dragPercentage / 100) + minAlpha
     }
     
-    fileprivate func setIndicator(dragPercentage: CGFloat, direction: SwipeResultDirection) -> (overlayIndicator: OverlayIndicatorView?, targetX: CGFloat) {
+    fileprivate func setIndicator(dragPercentage: CGFloat, direction: SwipeResultDirection) -> (overlayIndicator: OverlayIndicatorView?, newFrame: CGRect) {
         var theOverlayIndicator: OverlayIndicatorView?
-        var targetX: CGFloat = 0
-        let maxThreshold: CGFloat = self.frame.width * 0.5
-        let dx = maxThreshold * (dragPercentage / 100)
+        var newFrame: CGRect = CGRect.zero
+        
         switch direction {
         case .left:
             theOverlayIndicator = theLeftOverlayIndicator
-            targetX = dx - theOverlayIndicator!.originalFrame.width
         case .right:
             theOverlayIndicator = theRightOverlayIndicator
-            targetX = ez.screenWidth - dx
         default:
             break
         }
-        return (theOverlayIndicator, targetX)
+        
+        if let theOverlayIndicator = theOverlayIndicator {
+            newFrame = getNewIndicatorFrame(indicator: theOverlayIndicator, progress: dragPercentage / 100)
+        }
+        
+        return (theOverlayIndicator, newFrame)
+    }
+    
+    fileprivate func getNewIndicatorFrame(indicator: OverlayIndicatorView, progress: CGFloat) -> CGRect {
+        let originalFrame = indicator.originalFrame
+        let maxFrame = indicator.maxFrame
+        let targetX = alterFrame(initial: originalFrame.x, final: maxFrame.x, progress: progress)
+        let targetY = alterFrame(initial: originalFrame.y, final: maxFrame.y, progress: progress)
+        let targetWidth = alterFrame(initial: originalFrame.width, final: maxFrame.width, progress: progress)
+        let targetHeight = alterFrame(initial: originalFrame.height, final: maxFrame.height, progress: progress)
+        return CGRect(x: targetX, y: targetY, w: targetWidth, h: targetHeight)
+    }
+    
+    fileprivate func alterFrame(initial: CGFloat, final: CGFloat, progress: CGFloat) -> CGFloat {
+        return (final - initial) * progress + initial
     }
     
     func revertToOriginalIndicatorPositions() {
