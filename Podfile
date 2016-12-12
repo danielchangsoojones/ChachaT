@@ -31,6 +31,7 @@ pod 'Static', git: 'https://github.com/venmo/Static'
 pod "Former"
 pod 'DatePickerDialog'
 pod "FuzzyMatchingSwift"
+pod 'RSKPlaceholderTextView'
 
 post_install do |installer|
     `find Pods -regex 'Pods/pop.*\\.h' -print0 | xargs -0 sed -i '' 's/\\(<\\)pop\\/\\(.*\\)\\(>\\)/\\"\\2\\"/'`

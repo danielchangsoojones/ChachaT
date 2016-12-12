@@ -7,12 +7,18 @@
 //
 
 import Foundation
+import RSKPlaceholderTextView
 
 class NewIceBreakerView: UIView {
-    var theTextView: UITextView = UITextView()
+    struct IceBreakConstants {
+        static let keyboardBarButtonsInset: CGFloat = 10
+    }
+    
+    
+    var theTextView:  RSKPlaceholderTextView = RSKPlaceholderTextView()
     var theKeyboardBar: UIView = UIView()
     var theSaveButton: UIButton = UIButton()
-    
+    var theCharCountLabel: UILabel = UILabel()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -31,7 +37,9 @@ class NewIceBreakerView: UIView {
         }
     }
     
-
+    func setTextView(placeholder: String) {
+        theTextView.placeholder = placeholder as NSString?
+    }
 }
 
 //keyboard bar extension
@@ -40,6 +48,7 @@ extension NewIceBreakerView {
         let view = UIView(frame: CGRect(x: 0, y: 0, w: 10, h: 60))
         createSaveButton(superview: view)
         topLineSetup(parentView: view)
+        wordLimitLabelSetup(parentView: view)
         return view
     }
     
@@ -51,7 +60,7 @@ extension NewIceBreakerView {
         superview.addSubview(theSaveButton)
         theSaveButton.snp.makeConstraints { (make) in
             make.centerY.equalToSuperview()
-            make.trailing.equalToSuperview().inset(10)
+            make.trailing.equalToSuperview().inset(IceBreakConstants.keyboardBarButtonsInset)
         }
     }
     
@@ -61,6 +70,16 @@ extension NewIceBreakerView {
         line.snp.makeConstraints { (make) in
             make.trailing.top.leading.equalToSuperview()
             make.height.equalTo(0.5)
+        }
+    }
+    
+    func wordLimitLabelSetup(parentView: UIView) {
+        theCharCountLabel = UILabel()
+        theCharCountLabel.textColor = CustomColors.SilverChaliceGrey
+        parentView.addSubview(theCharCountLabel)
+        theCharCountLabel.snp.makeConstraints { (make) in
+            make.centerY.equalToSuperview()
+            make.leading.equalToSuperview().inset(IceBreakConstants.keyboardBarButtonsInset)
         }
     }
 }

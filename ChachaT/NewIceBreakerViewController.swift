@@ -9,7 +9,13 @@
 import UIKit
 
 class NewIceBreakerViewController: UIViewController {
+    struct Constant {
+        static let maxCharacterCount: Int = 150
+    }
+    
+    var theNewIceBreakerView: NewIceBreakerView!
     var theTextView: UITextView!
+    var theCharCountLabel: UILabel!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,10 +36,11 @@ class NewIceBreakerViewController: UIViewController {
     
     
     fileprivate func viewSetup() {
-        let theView = NewIceBreakerView(frame: self.view.bounds)
-        theTextView = theView.theTextView
-        theView.theSaveButton.addTarget(self, action: #selector(saveButtonPressed(sender:)), for: .touchUpInside)
-        self.view.addSubview(theView)
+        theNewIceBreakerView = NewIceBreakerView(frame: self.view.bounds)
+        theTextView = theNewIceBreakerView.theTextView
+        theNewIceBreakerView.theSaveButton.addTarget(self, action: #selector(saveButtonPressed(sender:)), for: .touchUpInside)
+        theCharCountLabel = theNewIceBreakerView.theCharCountLabel
+        self.view.addSubview(theNewIceBreakerView)
     }
     
     func saveButtonPressed(sender: UIButton) {
@@ -46,6 +53,8 @@ extension NewIceBreakerViewController: UITextViewDelegate {
     fileprivate func textViewSetup() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         theTextView.delegate = self
+        theNewIceBreakerView.setTextView(placeholder: "i.e. what is your favorite color?")
+        theCharCountLabel.text = Constant.maxCharacterCount.toString
     }
     
     func keyboardWillShow(notification: NSNotification) {
@@ -54,5 +63,15 @@ extension NewIceBreakerViewController: UITextViewDelegate {
         }
     }
     
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        let newLength = textView.text.utf16.count + text.utf16.count - range.length
+        return newLength < Constant.maxCharacterCount
+    }
+    
+    func textViewDidChange(_ textView: UITextView) {
+        let characterCount = textView.text.characters.count
+        let charactersLeft = Constant.maxCharacterCount - characterCount
+        theCharCountLabel.text = "\(charactersLeft)"
+    }
     
 }

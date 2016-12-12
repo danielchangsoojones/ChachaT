@@ -53,6 +53,7 @@ PODS:
   - pop (1.0.9)
   - Ripple (3.0)
   - RKNotificationHub (2.0.4)
+  - RSKPlaceholderTextView (2.0.0)
   - SCLAlertView (0.7.0)
   - SnapKit (3.0.2)
   - SocketRocket (0.5.1)
@@ -81,6 +82,7 @@ DEPENDENCIES:
   - ParseUI
   - Ripple
   - RKNotificationHub
+  - RSKPlaceholderTextView
   - SCLAlertView
   - SnapKit
   - Static (from `https://github.com/venmo/Static`)
@@ -152,6 +154,7 @@ SPEC CHECKSUMS:
   pop: f667631a5108a2e60d9e8797c9b32ddaf2080bce
   Ripple: 6be634e42a9d48f147a84b72cae82f9b0d08137d
   RKNotificationHub: 3765424499139c3d3885b681bb0837f072d12ae6
+  RSKPlaceholderTextView: 301f0f30e70e7c42fe4e941e3a08365ab0d890d5
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SnapKit: 2e456761aa92d4d4067a7a5594c18769d451a8ad
   SocketRocket: d57c7159b83c3c6655745cd15302aa24b6bae531
@@ -160,6 +163,6 @@ SPEC CHECKSUMS:
   TPKeyboardAvoiding: a5138f318c06fb3e151f886e18ce4a72695d9cbe
   TTRangeSlider: 7c04d9cf84cd5fba96e86b3ded8e5e0b534758b0
 
-PODFILE CHECKSUM: d247dcbbd7da4de1baf4ac33a4ec3b1d2d10d89f
+PODFILE CHECKSUM: 03765eb732d372fc538cf0fd8457262e177388e1
 
 COCOAPODS: 1.1.1
