@@ -52,7 +52,7 @@ class AttributePickerViewController: TableViewController {
     
     fileprivate func createSelection(title: String) -> Selection {
         return {
-            self.dataStore.saveGender(gender: title)
+            self.dataStore.save(selection: title, sectionTitle: self.sectionTitle)
             _ = self.passedAction!(title)
             self.popVC()
         }

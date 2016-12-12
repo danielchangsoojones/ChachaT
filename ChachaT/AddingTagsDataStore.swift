@@ -26,6 +26,10 @@ class AddingTagsDataStore: SuperTagDataStore {
         loadCurrentUserTags()
     }
     
+    override init() {
+        super.init()
+    }
+    
     func saveNewTag(title: String) {
         if findParseUserTag(title: title) == nil {
             //the current user does not already have this tag
@@ -55,12 +59,12 @@ class AddingTagsDataStore: SuperTagDataStore {
         })
     }
     
-    fileprivate func saveParseUserTagFrom(parseTag: ParseTag) {
+    func saveParseUserTagFrom(parseTag: ParseTag) {
         let parseUserTag = ParseUserTag(parseTag: parseTag, user: User.current()!, isPending: false, approved: true)
         saveParseUserTag(parseUserTag)
     }
     
-    fileprivate func saveParseUserTag(_ parseUserTag: ParseUserTag) {
+    func saveParseUserTag(_ parseUserTag: ParseUserTag) {
         User.current()!.addUniqueObject(parseUserTag.lowercasedTagTitle, forKey: "tagsArray")
         PFObject.saveAll(inBackground: [User.current()!, parseUserTag])
         currentUserParseTags.append(parseUserTag)

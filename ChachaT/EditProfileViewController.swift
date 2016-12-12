@@ -26,6 +26,8 @@ struct EditProfileConstants {
     static let tagSeguePlaceholder = "See your tags..."
     static let genderSeguePlaceholder = "Enter your gender"
     static let genderTitle = "Your Gender"
+    static let interestedInPlaceholder = "Enter your preferred gender"
+    static let interestedInTitle = "Interested In"
 }
 
 protocol EditProfileDelegate {
@@ -86,6 +88,7 @@ class EditProfileViewController: UIViewController {
         schoolOrJobViewSetup()
         genderSetup()
         ageViewSetup()
+        interestedInSetup()
         dataStoreSetup() //needs to happen after all the views have been added to the stackview, because we use the datastore to set any text on the views
     }
     
@@ -133,6 +136,20 @@ class EditProfileViewController: UIViewController {
             self.pushVC(vc)
         }, type: .segueCell)
         theStackView.addArrangedSubview(genderView)
+    }
+    
+    func interestedInSetup() {
+        let interestedInView = AboutView(title: EditProfileConstants.interestedInTitle, placeHolder: EditProfileConstants.interestedInPlaceholder, innerText: nil, action: { (sender) in
+            let vc = AttributePickerViewController()
+            vc.passedAction = { (chosen: String) in
+                self.loadText(chosen, title: EditProfileConstants.interestedInTitle)
+            }
+            vc.previouslyChosenTitle = sender.getCurrentText() ?? ""
+            vc.rowTitles = ["male", "female", "all"]
+            vc.sectionTitle = EditProfileConstants.interestedInTitle
+            self.pushVC(vc)
+        }, type: .segueCell)
+        theStackView.addArrangedSubview(interestedInView)
     }
     
     func ageViewSetup() {
