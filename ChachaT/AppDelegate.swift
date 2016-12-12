@@ -52,14 +52,15 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             myNotification.checkIfStartedFromNotification(launchOptions: launchOptions)
         }
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
-//                    self.window = UIWindow(frame: UIScreen.main.bounds)
-//        
+                    self.window = UIWindow(frame: UIScreen.main.bounds)
+        let navigationController = ChachaNavigationViewController(rootViewController: IceBreakersViewController())
+        
 //                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
-//        
-////                    let initialViewController = TutorialBackgroundAnimationViewController()
-//        
-//                    self.window?.rootViewController = initialViewController
-//                    self.window?.makeKeyAndVisible()
+        
+//                    let initialViewController = TutorialBackgroundAnimationViewController()
+        
+                    self.window?.rootViewController = navigationController
+                    self.window?.makeKeyAndVisible()
         
         
         return true
