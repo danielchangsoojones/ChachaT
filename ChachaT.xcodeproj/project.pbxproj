@@ -92,6 +92,8 @@
 		9269837C1DFE2A720095A770 /* IceBreakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */; };
 		9269837E1DFE2AB60095A770 /* IceBreakersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269837D1DFE2AB60095A770 /* IceBreakersView.swift */; };
 		926983811DFE2E700095A770 /* IceBreakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */; };
+		926983841DFE40000095A770 /* NewIceBreakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983831DFE40000095A770 /* NewIceBreakerViewController.swift */; };
+		926983861DFE40850095A770 /* NewIceBreakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983851DFE40850095A770 /* NewIceBreakerView.swift */; };
 		92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */; };
 		92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */; };
 		9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */; };
@@ -254,6 +256,8 @@
 		9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakersViewController.swift; sourceTree = "<group>"; };
 		9269837D1DFE2AB60095A770 /* IceBreakersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakersView.swift; sourceTree = "<group>"; };
 		926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerTableViewCell.swift; sourceTree = "<group>"; };
+		926983831DFE40000095A770 /* NewIceBreakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerViewController.swift; sourceTree = "<group>"; };
+		926983851DFE40850095A770 /* NewIceBreakerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerView.swift; sourceTree = "<group>"; };
 		92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailDataStore.swift; sourceTree = "<group>"; };
 		92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
 		9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateDropDownCategories.swift; sourceTree = "<group>"; };
@@ -854,6 +858,8 @@
 		926983821DFE3F230095A770 /* New Ice Breaker */ = {
 			isa = PBXGroup;
 			children = (
+				926983831DFE40000095A770 /* NewIceBreakerViewController.swift */,
+				926983851DFE40850095A770 /* NewIceBreakerView.swift */,
 			);
 			name = "New Ice Breaker";
 			sourceTree = "<group>";
@@ -1429,6 +1435,7 @@
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92248E441DEFEA8100C7C1F5 /* MyMenuItem.swift in Sources */,
 				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
+				926983861DFE40850095A770 /* NewIceBreakerView.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
@@ -1464,6 +1471,7 @@
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
+				926983841DFE40000095A770 /* NewIceBreakerViewController.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */,

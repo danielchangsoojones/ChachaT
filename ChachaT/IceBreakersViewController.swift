@@ -148,4 +148,9 @@ extension IceBreakersViewController: UITableViewDelegate {
             return UITableViewCellEditingStyle.none
         }
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let newIceBreakVC = NewIceBreakerViewController()
+        pushVC(newIceBreakVC)
+    }
 }
