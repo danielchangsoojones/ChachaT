@@ -8,6 +8,10 @@
 
 import UIKit
 
+protocol NewIceBreakerControllerDelegate {
+    func passUpdated(iceBreaker: IceBreaker)
+}
+
 class NewIceBreakerViewController: UIViewController {
     struct Constant {
         static let maxCharacterCount: Int = 150
@@ -17,7 +21,18 @@ class NewIceBreakerViewController: UIViewController {
     var theTextView: UITextView!
     var theCharCountLabel: UILabel!
     
-    var initialText: String?
+    var iceBreaker: IceBreaker!
+    var dataStore: NewIceBreakerDataStore = NewIceBreakerDataStore()
+    var delegate: NewIceBreakerControllerDelegate?
+    
+    init(iceBreaker: IceBreaker) {
+        super.init(nibName: nil, bundle: nil)
+        self.iceBreaker = iceBreaker
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,7 +51,6 @@ class NewIceBreakerViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    
     fileprivate func viewSetup() {
         theNewIceBreakerView = NewIceBreakerView(frame: self.view.bounds)
         theTextView = theNewIceBreakerView.theTextView
@@ -46,7 +60,14 @@ class NewIceBreakerViewController: UIViewController {
     }
     
     func saveButtonPressed(sender: UIButton) {
+        if theTextView.text != "" {
+            iceBreaker.text = theTextView.text
+        }
         
+        //TODO: technically when they're saving a totally new ice breaker, then we go back to the screen, and if they delete it, then it won't delete because no ParseIceBreaker exists yet
+        dataStore.save(iceBreaker: iceBreaker)
+        delegate?.passUpdated(iceBreaker: iceBreaker)
+        popVC()
     }
 }
 
@@ -54,7 +75,7 @@ extension NewIceBreakerViewController: UITextViewDelegate {
     fileprivate func textViewSetup() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         theTextView.delegate = self
-        if let initialText = initialText {
+        if let initialText = iceBreaker.text {
             theTextView.text = initialText
         }
         theNewIceBreakerView.setTextView(placeholder: "i.e. what is your favorite color?")

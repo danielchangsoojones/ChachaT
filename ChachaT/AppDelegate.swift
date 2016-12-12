@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseTag.registerSubclass()
         DropDownCategory.registerSubclass()
         ParseUserTag.registerSubclass()
+        IceBreakerParse.registerSubclass()
         
         var appConfiguration = Configuration()
         let configuration = ParseClientConfiguration {

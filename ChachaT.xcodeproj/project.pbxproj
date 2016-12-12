@@ -94,6 +94,10 @@
 		926983811DFE2E700095A770 /* IceBreakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */; };
 		926983841DFE40000095A770 /* NewIceBreakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983831DFE40000095A770 /* NewIceBreakerViewController.swift */; };
 		926983861DFE40850095A770 /* NewIceBreakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983851DFE40850095A770 /* NewIceBreakerView.swift */; };
+		926983881DFF19210095A770 /* IceBreakerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983871DFF19210095A770 /* IceBreakerParse.swift */; };
+		9269838A1DFF23640095A770 /* IceBreaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983891DFF23640095A770 /* IceBreaker.swift */; };
+		9269838D1DFF25800095A770 /* IceBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */; };
+		926983901DFF32460095A770 /* NewIceBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */; };
 		92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */; };
 		92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */; };
 		9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */; };
@@ -258,6 +262,10 @@
 		926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerTableViewCell.swift; sourceTree = "<group>"; };
 		926983831DFE40000095A770 /* NewIceBreakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerViewController.swift; sourceTree = "<group>"; };
 		926983851DFE40850095A770 /* NewIceBreakerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerView.swift; sourceTree = "<group>"; };
+		926983871DFF19210095A770 /* IceBreakerParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerParse.swift; sourceTree = "<group>"; };
+		926983891DFF23640095A770 /* IceBreaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreaker.swift; sourceTree = "<group>"; };
+		9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerDataStore.swift; sourceTree = "<group>"; };
+		9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerDataStore.swift; sourceTree = "<group>"; };
 		92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailDataStore.swift; sourceTree = "<group>"; };
 		92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
 		9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateDropDownCategories.swift; sourceTree = "<group>"; };
@@ -602,6 +610,7 @@
 				923C7EDA1D9309200033A8A2 /* ChatRoom.swift */,
 				923C7EDC1D930B2F0033A8A2 /* Message.swift */,
 				92857DCE1DA2F9F2001DB92C /* Swipe.swift */,
+				926983891DFF23640095A770 /* IceBreaker.swift */,
 			);
 			name = "Internal Models";
 			sourceTree = "<group>";
@@ -615,6 +624,7 @@
 				92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */,
 				92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */,
 				921BAF701DE29F3800EF48BE /* ParseUserTag.swift */,
+				926983871DFF19210095A770 /* IceBreakerParse.swift */,
 			);
 			name = "Parse Models";
 			sourceTree = "<group>";
@@ -839,6 +849,7 @@
 		9269837A1DFE28030095A770 /* Ice Breakers */ = {
 			isa = PBXGroup;
 			children = (
+				9269838B1DFF25650095A770 /* Data Model */,
 				9269837F1DFE2E5E0095A770 /* Cell */,
 				926983821DFE3F230095A770 /* New Ice Breaker */,
 				9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */,
@@ -858,10 +869,27 @@
 		926983821DFE3F230095A770 /* New Ice Breaker */ = {
 			isa = PBXGroup;
 			children = (
+				9269838E1DFF32350095A770 /* Data Model */,
 				926983831DFE40000095A770 /* NewIceBreakerViewController.swift */,
 				926983851DFE40850095A770 /* NewIceBreakerView.swift */,
 			);
 			name = "New Ice Breaker";
+			sourceTree = "<group>";
+		};
+		9269838B1DFF25650095A770 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		9269838E1DFF32350095A770 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		92709BF31DA6A28D00E0B8DE /* Data Models */ = {
@@ -1408,10 +1436,12 @@
 				929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */,
 				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
+				926983901DFF32460095A770 /* NewIceBreakerDataStore.swift in Sources */,
 				92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
+				926983881DFF19210095A770 /* IceBreakerParse.swift in Sources */,
 				92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */,
 				9299DC321DF38C5A0079C8F2 /* MyNotification.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
@@ -1443,6 +1473,7 @@
 				9252F8581DFA45A900D104BA /* VisitProfileViewController.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
+				9269838D1DFF25800095A770 /* IceBreakerDataStore.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
@@ -1466,6 +1497,7 @@
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
 				92371D421DF916AF00BE0A92 /* BumbleImageHolderView.swift in Sources */,
+				9269838A1DFF23640095A770 /* IceBreaker.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,

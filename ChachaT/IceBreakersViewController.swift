@@ -16,12 +16,16 @@ class IceBreakersViewController: UIViewController {
         static let fontSize: CGFloat = 20
     }
     
-    var iceBreakers: [String] = [IceBreakersConstants.newCellText, "hii", "butttholio"]
+    
     var theTableView: UITableView!
+    
+    var iceBreakers: [IceBreaker] = []
+    var dataStore: IceBreakerDataStore!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSetup()
+        dataStoreSetup()
         rightBarButtonSetup()
         titleViewSetup()
     }
@@ -37,6 +41,10 @@ class IceBreakersViewController: UIViewController {
         iceBreakersView.theTableView.dataSource = self
         iceBreakersView.theTableView.delegate = self
         self.view.addSubview(iceBreakersView)
+    }
+    
+    fileprivate func dataStoreSetup() {
+        self.dataStore = IceBreakerDataStore(delegate: self)
     }
 }
 
@@ -112,7 +120,7 @@ extension IceBreakersViewController: UITableViewDataSource {
             return createPlaceholderCell()
         } else {
             let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-            cell.detailTextLabel?.text = iceBreakers[row]
+            cell.detailTextLabel?.text = iceBreakers[row].text
             cell.detailTextLabel?.font = UIFont.systemFont(ofSize: IceBreakersConstants.fontSize)
             return cell
         }
@@ -129,6 +137,7 @@ extension IceBreakersViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
+            dataStore.delete(iceBreaker: iceBreakers[indexPath.row])
             iceBreakers.remove(at: indexPath.row)
             tableView.reloadData()
         }
@@ -150,10 +159,32 @@ extension IceBreakersViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let newIceBreakVC = NewIceBreakerViewController()
-        if indexPath.row > 0 {
-            newIceBreakVC.initialText = iceBreakers[indexPath.row]
-        }
+        let newIceBreakVC = NewIceBreakerViewController(iceBreaker: iceBreakers[indexPath.row])
+        newIceBreakVC.delegate = self
         pushVC(newIceBreakVC)
+    }
+}
+
+extension IceBreakersViewController: NewIceBreakerControllerDelegate {
+    func passUpdated(iceBreaker: IceBreaker) {
+        if let tappedIndexPath = theTableView.indexPathForSelectedRow {
+            let row = tappedIndexPath.row
+            if row == 0 {
+                //tapped the create new ice breaker
+                iceBreakers.insert(iceBreaker, at: 1)
+            } else {
+                iceBreakers[tappedIndexPath.row] = iceBreaker
+            }
+            theTableView.reloadData()
+        }
+    }
+}
+
+extension IceBreakersViewController: IceBreakerDataStoreDelegate {
+    func passCurrentUser(iceBreakers: [IceBreaker]) {
+        self.iceBreakers = iceBreakers
+        let placeholderIceBreaker = IceBreaker()
+        self.iceBreakers.insertAsFirst(placeholderIceBreaker)
+        theTableView.reloadData()
     }
 }
