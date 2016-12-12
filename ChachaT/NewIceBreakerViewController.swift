@@ -16,6 +16,8 @@ class NewIceBreakerViewController: UIViewController {
     var theNewIceBreakerView: NewIceBreakerView!
     var theTextView: UITextView!
     var theCharCountLabel: UILabel!
+    
+    var initialText: String?
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,13 +48,15 @@ class NewIceBreakerViewController: UIViewController {
     func saveButtonPressed(sender: UIButton) {
         
     }
-
 }
 
 extension NewIceBreakerViewController: UITextViewDelegate {
     fileprivate func textViewSetup() {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         theTextView.delegate = self
+        if let initialText = initialText {
+            theTextView.text = initialText
+        }
         theNewIceBreakerView.setTextView(placeholder: "i.e. what is your favorite color?")
         theCharCountLabel.text = Constant.maxCharacterCount.toString
     }

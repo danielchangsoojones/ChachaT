@@ -10,13 +10,13 @@ import UIKit
 
 class IceBreakersViewController: UIViewController {
     fileprivate struct IceBreakersConstants {
-        static let placeholderAlpha: CGFloat = 0.6
-        static let placeholderColor: UIColor = CustomColors.SilverChaliceGrey
-        static let placeHolderText: String = "i.e. what is your favorite color?"
+        static let newCellAlpha: CGFloat = 0.6
+        static let newCellColor: UIColor = CustomColors.SilverChaliceGrey
+        static let newCellText: String = "Add a new ice breaker..."
         static let fontSize: CGFloat = 20
     }
     
-    var iceBreakers: [String] = [IceBreakersConstants.placeHolderText, "hii", "butttholio"]
+    var iceBreakers: [String] = [IceBreakersConstants.newCellText, "hii", "butttholio"]
     var theTableView: UITableView!
 
     override func viewDidLoad() {
@@ -63,17 +63,17 @@ extension IceBreakersViewController {
         self.navigationItem.titleView = titleView
     }
     
-    fileprivate func questionButtonSetup() -> UIButton {
-        //TODO: make thuis an actual lightning bolt as the image
-        let button = UIButton()
-        button.setImage(#imageLiteral(resourceName: "LightningBolt"), for: .normal)
-        button.addTarget(self, action: #selector(infoIndicatorPressed(sender:)), for: .touchUpInside)
-        return button
-    }
-    
-    func infoIndicatorPressed(sender: UIButton) {
-        print("info indi pressed")
-    }
+    //this is for the info indicator
+//    fileprivate func questionButtonSetup() -> UIButton {
+//        //TODO: make thuis an actual lightning bolt as the image
+//        let button = UIButton()
+//        button.setImage(#imageLiteral(resourceName: "LightningBolt"), for: .normal)
+//        return button
+//    }
+//    
+//    func infoIndicatorPressed(sender: UIButton) {
+//        print("info indi pressed")
+//    }
     
     fileprivate func lightningBoltSetup() -> UIImageView {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "LightningBolt"))
@@ -120,10 +120,10 @@ extension IceBreakersViewController: UITableViewDataSource {
     
     fileprivate func createPlaceholderCell() -> UITableViewCell {
         let cell = UITableViewCell(style: .subtitle, reuseIdentifier: nil)
-        cell.detailTextLabel?.text = IceBreakersConstants.placeHolderText
+        cell.detailTextLabel?.text = IceBreakersConstants.newCellText
         cell.detailTextLabel?.font = UIFont.systemFont(ofSize: IceBreakersConstants.fontSize)
-        cell.detailTextLabel?.textColor = IceBreakersConstants.placeholderColor
-        cell.detailTextLabel?.alpha = IceBreakersConstants.placeholderAlpha
+        cell.detailTextLabel?.textColor = IceBreakersConstants.newCellColor
+        cell.detailTextLabel?.alpha = IceBreakersConstants.newCellAlpha
         return cell
     }
     
@@ -151,6 +151,9 @@ extension IceBreakersViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let newIceBreakVC = NewIceBreakerViewController()
+        if indexPath.row > 0 {
+            newIceBreakVC.initialText = iceBreakers[indexPath.row]
+        }
         pushVC(newIceBreakVC)
     }
 }
