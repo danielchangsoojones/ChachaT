@@ -94,6 +94,13 @@ func setBottomBlur(blurHeight: CGFloat, color: UIColor) -> CAGradientLayer {
     return gradientLayer
 }
 
+func createLine() -> UIView {
+    let line = UIView(frame: CGRect(x: 0, y: 0, w: 0, h: 0.5))
+    line.backgroundColor = CustomColors.SilverChaliceGrey
+    line.alpha = 0.5
+    return line
+}
+
 //Text View methods
 func editingBeginsTextView(_ textView: UITextView) {
     if textView.textColor == placeHolderTextColor {

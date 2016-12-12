@@ -9,12 +9,19 @@
 import UIKit
 
 class NewIceBreakerViewController: UIViewController {
+    var theTextView: UITextView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
         viewSetup()
-        // Do any additional setup after loading the view.
+        textViewSetup()
     }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        theTextView.becomeFirstResponder()
+    }
+
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -24,17 +31,28 @@ class NewIceBreakerViewController: UIViewController {
     
     fileprivate func viewSetup() {
         let theView = NewIceBreakerView(frame: self.view.bounds)
+        theTextView = theView.theTextView
+        theView.theSaveButton.addTarget(self, action: #selector(saveButtonPressed(sender:)), for: .touchUpInside)
         self.view.addSubview(theView)
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+    
+    func saveButtonPressed(sender: UIButton) {
+        
     }
-    */
 
+}
+
+extension NewIceBreakerViewController: UITextViewDelegate {
+    fileprivate func textViewSetup() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
+        theTextView.delegate = self
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        if let keyboardSize = (notification.userInfo?[UIKeyboardFrameBeginUserInfoKey] as? NSValue)?.cgRectValue {
+            theTextView.contentInset.bottom = keyboardSize.height
+        }
+    }
+    
+    
 }
