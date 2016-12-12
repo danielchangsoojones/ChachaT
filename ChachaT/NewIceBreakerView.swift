@@ -19,10 +19,13 @@ class NewIceBreakerView: UIView {
     var theKeyboardBar: UIView = UIView()
     var theSaveButton: UIButton = UIButton()
     var theCharCountLabel: UILabel = UILabel()
+    var theTitleView: UIView = UIView()
+    var theInfoIndicator: UIButton = UIButton()
     
     override init(frame: CGRect) {
         super.init(frame: frame)
         textViewSetup()
+        titleViewSetup()
     }
     
     required init?(coder aDecoder: NSCoder) {
@@ -39,6 +42,38 @@ class NewIceBreakerView: UIView {
     
     func setTextView(placeholder: String) {
         theTextView.placeholder = placeholder as NSString?
+    }
+}
+
+//nav bar extension
+extension NewIceBreakerView {
+    fileprivate func titleViewSetup() {
+        theTitleView.frame = CGRect(x: 0,y: 0,w: 100,h: 40)
+        let titleLabel = addTitleLabel()
+        theTitleView.addSubview(titleLabel)
+        titleLabel.snp.makeConstraints { (make) in
+            make.center.equalToSuperview()
+        }
+        let infoIndicator = infoIndicatorSetup()
+        theTitleView.addSubview(infoIndicator)
+        infoIndicator.snp.makeConstraints { (make) in
+            make.width.height.equalTo(20)
+            make.centerY.equalTo(titleLabel)
+            make.leading.equalTo(titleLabel.snp.trailing).offset(2)
+        }
+    }
+    
+    fileprivate func infoIndicatorSetup() -> UIButton {
+        //TODO: make thuis an actual info Indicator
+        theInfoIndicator = UIButton()
+        theInfoIndicator.setImage(#imageLiteral(resourceName: "InfoIndicator"), for: .normal)
+        return theInfoIndicator
+    }
+    
+    fileprivate func addTitleLabel() -> UILabel {
+        let titleLabel = UILabel()
+        titleLabel.text = "New Ice Breaker"
+        return titleLabel
     }
 }
 

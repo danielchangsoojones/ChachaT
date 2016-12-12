@@ -38,13 +38,13 @@ class NewIceBreakerViewController: UIViewController {
         super.viewDidLoad()
         viewSetup()
         textViewSetup()
+        navBarSetup()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         theTextView.becomeFirstResponder()
     }
-
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -53,7 +53,6 @@ class NewIceBreakerViewController: UIViewController {
     
     fileprivate func viewSetup() {
         theNewIceBreakerView = NewIceBreakerView(frame: self.view.bounds)
-        theTextView = theNewIceBreakerView.theTextView
         theNewIceBreakerView.theSaveButton.addTarget(self, action: #selector(saveButtonPressed(sender:)), for: .touchUpInside)
         theCharCountLabel = theNewIceBreakerView.theCharCountLabel
         self.view.addSubview(theNewIceBreakerView)
@@ -71,8 +70,21 @@ class NewIceBreakerViewController: UIViewController {
     }
 }
 
+//nav bar setup
+extension NewIceBreakerViewController {
+    fileprivate func navBarSetup() {
+        theNewIceBreakerView.theInfoIndicator.addTarget(self, action: #selector(infoIndicatorPressed(sender:)), for: .touchUpInside)
+        self.navigationItem.titleView = theNewIceBreakerView.theTitleView
+    }
+    
+    func infoIndicatorPressed(sender: UIButton) {
+        print("info indi pressed")
+    }
+}
+
 extension NewIceBreakerViewController: UITextViewDelegate {
     fileprivate func textViewSetup() {
+        theTextView = theNewIceBreakerView.theTextView
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
         theTextView.delegate = self
         if let initialText = iceBreaker.text {

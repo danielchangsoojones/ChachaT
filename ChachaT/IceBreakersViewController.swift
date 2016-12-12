@@ -55,6 +55,7 @@ extension IceBreakersViewController {
     }
     
     fileprivate func titleViewSetup() {
+        self.navigationBarColor = CustomColors.JellyTeal
         let titleView = UIView(frame: CGRect(x: 0,y: 0,w: 100,h: 40))
         let titleLabel = addTitleLabel()
         titleView.addSubview(titleLabel)
@@ -70,18 +71,6 @@ extension IceBreakersViewController {
         }
         self.navigationItem.titleView = titleView
     }
-    
-    //this is for the info indicator
-//    fileprivate func questionButtonSetup() -> UIButton {
-//        //TODO: make thuis an actual lightning bolt as the image
-//        let button = UIButton()
-//        button.setImage(#imageLiteral(resourceName: "LightningBolt"), for: .normal)
-//        return button
-//    }
-//    
-//    func infoIndicatorPressed(sender: UIButton) {
-//        print("info indi pressed")
-//    }
     
     fileprivate func lightningBoltSetup() -> UIImageView {
         let imageView = UIImageView(image: #imageLiteral(resourceName: "LightningBolt"))
