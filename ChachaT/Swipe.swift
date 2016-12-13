@@ -18,12 +18,16 @@ class Swipe {
     var otherUser: User
     
     //the swipe's correlated server data model
-    var parseSwipe: ParseSwipe
+    var parseSwipe: ParseSwipe? = nil
     
     init(parseSwipe: ParseSwipe) {
         self.parseSwipe = parseSwipe
         self.otherUser = parseSwipe.otherUser
         self.otherUserApproval = parseSwipe.otherUserApproval
+    }
+    
+    init(otherUser: User) {
+        self.otherUser = otherUser
     }
     
     init(otherUser: User, otherUserApproval: Bool, parseSwipe: ParseSwipe) {

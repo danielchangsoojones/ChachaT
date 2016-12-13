@@ -11,7 +11,7 @@ import Foundation
 class NewCardMessageDataStore {
     func deleteSwipeMessage(swipe: Swipe) {
         let parseSwipe = swipe.parseSwipe
-        parseSwipe.otherUserMessage = nil
-        parseSwipe.saveInBackground()
+        parseSwipe?.otherUserMessage = nil
+        parseSwipe?.saveInBackground()
     }
 }

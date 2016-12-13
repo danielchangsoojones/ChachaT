@@ -16,16 +16,15 @@ class VisitProfileViewController: UIViewController {
             userOfCard = swipe?.otherUser
         }
     }
-    var userOfCard: User? {
-        didSet {
-            viewSetup()
-        }
-    }
+    var userOfCard: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         automaticallyAdjustsScrollViewInsets = false
         self.view.backgroundColor = UIColor.white
+        if userOfCard != nil {
+            viewSetup()
+        }
     }
 
     override func didReceiveMemoryWarning() {

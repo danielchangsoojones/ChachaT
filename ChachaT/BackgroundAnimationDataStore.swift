@@ -26,7 +26,9 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
     
     func swipe(swipe: Swipe) {
         //Check if the parseSwipe actually exists and then either update or create a new one.
-        self.updateParseSwipe(parseSwipe: swipe.parseSwipe, swipe: swipe)
+        if let parseSwipe = swipe.parseSwipe {
+            self.updateParseSwipe(parseSwipe: parseSwipe, swipe: swipe)
+        }
     }
     
     fileprivate func updateParseSwipe(parseSwipe: ParseSwipe, swipe: Swipe) {
@@ -46,9 +48,9 @@ class BackgroundAnimationDataStore: SuperParseSwipeDataStore {
     
     func getMoreSwipes(lastSwipe: Swipe) {
         let parseSwipe = lastSwipe.parseSwipe
-        parseSwipe.currentUserHasSwiped = true
-        parseSwipe.currentUserApproval = lastSwipe.currentUserApproval
-        parseSwipe.saveInBackground(block: { (_, _) in
+        parseSwipe?.currentUserHasSwiped = true
+        parseSwipe?.currentUserApproval = lastSwipe.currentUserApproval
+        parseSwipe?.saveInBackground(block: { (_, _) in
             self.loadSwipeArray()
         })
     }

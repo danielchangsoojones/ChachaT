@@ -10,9 +10,9 @@ import UIKit
 
 class CheckOwnProfileViewController: VisitProfileViewController {
     override func viewDidLoad() {
+        userOfCard = User.current()!
         super.viewDidLoad()
         self.title = "Your Profile"
-        userOfCard = User.current()!
         createBarButtons()
     }
 

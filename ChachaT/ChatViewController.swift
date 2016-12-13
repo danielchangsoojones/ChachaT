@@ -31,7 +31,6 @@ class ChatViewController: JSQMessagesViewController {
     var connection: Connection? {
         didSet {
             otherUser = connection?.targetUser
-            rightNavButtonSetup()
             dataStore = ChatDataStore(chatUsers: [currentUser, otherUser!] ,delegate: self)
             self.title = otherUser?.fullName ?? "Unknown"
             self.senderId = dataStore.getsenderID()
@@ -51,6 +50,10 @@ class ChatViewController: JSQMessagesViewController {
         super.viewDidLoad()
         
         self.navigationController?.isNavigationBarHidden = false
+        
+        if connection != nil {
+            rightNavButtonSetup()
+        }
         
         // setup chat bubbles
         let bubbleFactory = JSQMessagesBubbleImageFactory()
@@ -324,8 +327,14 @@ extension ChatViewController {
     }
     
     func segueToCardDetailVC() {
-        let cardDetailVC = CardDetailViewController.createCardDetailVC(userOfCard: otherUser)
-        pushVC(cardDetailVC)
+        if let otherUser = otherUser {
+            let visitCardVC = VisitProfileViewController()
+            visitCardVC.swipe = Swipe(otherUser: otherUser)
+            pushVC(visitCardVC)
+//            let checkVC = CheckOwnProfileViewController()
+//            checkVC.swipe = Swipe(otherUser: otherUser)
+//            pushVC(checkVC)
+        }
     }
 }
 
