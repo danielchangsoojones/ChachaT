@@ -24,6 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         ParseTag.registerSubclass()
         DropDownCategory.registerSubclass()
         ParseUserTag.registerSubclass()
+        IceBreakerParse.registerSubclass()
         
         var appConfiguration = Configuration()
         let configuration = ParseClientConfiguration {
@@ -53,12 +54,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
         //this is for easy changing of main viewcontrollers when I am working, so I don't have to click all the way to a screen
 //                    self.window = UIWindow(frame: UIScreen.main.bounds)
+//        let navigationController = ChachaNavigationViewController(rootViewController: IceBreakersViewController())
 //        
-//                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
+////                    let storyboard = UIStoryboard(name: "Main", bundle: nil)
 //        
 ////                    let initialViewController = TutorialBackgroundAnimationViewController()
 //        
-//                    self.window?.rootViewController = initialViewController
+//                    self.window?.rootViewController = navigationController
 //                    self.window?.makeKeyAndVisible()
         
         

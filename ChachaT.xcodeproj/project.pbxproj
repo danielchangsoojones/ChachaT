@@ -89,6 +89,15 @@
 		926108551CEA0EA6009F3E86 /* Onboarding.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 926108541CEA0EA6009F3E86 /* Onboarding.storyboard */; };
 		926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */; };
 		9261085C1CEA196C009F3E86 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9261085B1CEA196C009F3E86 /* User.swift */; };
+		9269837C1DFE2A720095A770 /* IceBreakersViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */; };
+		9269837E1DFE2AB60095A770 /* IceBreakersView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269837D1DFE2AB60095A770 /* IceBreakersView.swift */; };
+		926983811DFE2E700095A770 /* IceBreakerTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */; };
+		926983841DFE40000095A770 /* NewIceBreakerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983831DFE40000095A770 /* NewIceBreakerViewController.swift */; };
+		926983861DFE40850095A770 /* NewIceBreakerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983851DFE40850095A770 /* NewIceBreakerView.swift */; };
+		926983881DFF19210095A770 /* IceBreakerParse.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983871DFF19210095A770 /* IceBreakerParse.swift */; };
+		9269838A1DFF23640095A770 /* IceBreaker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 926983891DFF23640095A770 /* IceBreaker.swift */; };
+		9269838D1DFF25800095A770 /* IceBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */; };
+		926983901DFF32460095A770 /* NewIceBreakerDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */; };
 		92709BF51DA6A2BB00E0B8DE /* CardDetailDataStore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */; };
 		92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */; };
 		9272CD7A1DBA6FF200446A1C /* PopulateDropDownCategories.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */; };
@@ -248,6 +257,15 @@
 		926108561CEA0EC0009F3E86 /* SignUpLogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SignUpLogInViewController.swift; sourceTree = "<group>"; };
 		9261085B1CEA196C009F3E86 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		926185F01D46CC4700F25A79 /* ChachaT-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "ChachaT-Bridging-Header.h"; sourceTree = "<group>"; };
+		9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakersViewController.swift; sourceTree = "<group>"; };
+		9269837D1DFE2AB60095A770 /* IceBreakersView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakersView.swift; sourceTree = "<group>"; };
+		926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerTableViewCell.swift; sourceTree = "<group>"; };
+		926983831DFE40000095A770 /* NewIceBreakerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerViewController.swift; sourceTree = "<group>"; };
+		926983851DFE40850095A770 /* NewIceBreakerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerView.swift; sourceTree = "<group>"; };
+		926983871DFF19210095A770 /* IceBreakerParse.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerParse.swift; sourceTree = "<group>"; };
+		926983891DFF23640095A770 /* IceBreaker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreaker.swift; sourceTree = "<group>"; };
+		9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IceBreakerDataStore.swift; sourceTree = "<group>"; };
+		9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewIceBreakerDataStore.swift; sourceTree = "<group>"; };
 		92709BF41DA6A2BB00E0B8DE /* CardDetailDataStore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CardDetailDataStore.swift; sourceTree = "<group>"; };
 		92709BF61DA6B18800E0B8DE /* FrostedSidebar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FrostedSidebar.swift; sourceTree = "<group>"; };
 		9272CD791DBA6FF200446A1C /* PopulateDropDownCategories.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PopulateDropDownCategories.swift; sourceTree = "<group>"; };
@@ -592,6 +610,7 @@
 				923C7EDA1D9309200033A8A2 /* ChatRoom.swift */,
 				923C7EDC1D930B2F0033A8A2 /* Message.swift */,
 				92857DCE1DA2F9F2001DB92C /* Swipe.swift */,
+				926983891DFF23640095A770 /* IceBreaker.swift */,
 			);
 			name = "Internal Models";
 			sourceTree = "<group>";
@@ -605,6 +624,7 @@
 				92C1FC1A1DAAE6D600660BD8 /* ParseTag.swift */,
 				92C1FC1D1DAAE97400660BD8 /* DropDownCategory.swift */,
 				921BAF701DE29F3800EF48BE /* ParseUserTag.swift */,
+				926983871DFF19210095A770 /* IceBreakerParse.swift */,
 			);
 			name = "Parse Models";
 			sourceTree = "<group>";
@@ -732,6 +752,7 @@
 				926108531CEA0E95009F3E86 /* Welcome */,
 				92BCEB721D88A8C500E05C05 /* Settings */,
 				928819441D286C70000A8E04 /* Profile */,
+				9269837A1DFE28030095A770 /* Ice Breakers */,
 				920BF8351D4333CA00104842 /* Messaging */,
 				920BF82C1D431C5E00104842 /* Matching */,
 				925D0FD21D74981100DE20F9 /* Adding Tags */,
@@ -823,6 +844,52 @@
 				923C7ED81D9308F20033A8A2 /* Internal Models */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		9269837A1DFE28030095A770 /* Ice Breakers */ = {
+			isa = PBXGroup;
+			children = (
+				9269838B1DFF25650095A770 /* Data Model */,
+				9269837F1DFE2E5E0095A770 /* Cell */,
+				926983821DFE3F230095A770 /* New Ice Breaker */,
+				9269837B1DFE2A720095A770 /* IceBreakersViewController.swift */,
+				9269837D1DFE2AB60095A770 /* IceBreakersView.swift */,
+			);
+			name = "Ice Breakers";
+			sourceTree = "<group>";
+		};
+		9269837F1DFE2E5E0095A770 /* Cell */ = {
+			isa = PBXGroup;
+			children = (
+				926983801DFE2E700095A770 /* IceBreakerTableViewCell.swift */,
+			);
+			name = Cell;
+			sourceTree = "<group>";
+		};
+		926983821DFE3F230095A770 /* New Ice Breaker */ = {
+			isa = PBXGroup;
+			children = (
+				9269838E1DFF32350095A770 /* Data Model */,
+				926983831DFE40000095A770 /* NewIceBreakerViewController.swift */,
+				926983851DFE40850095A770 /* NewIceBreakerView.swift */,
+			);
+			name = "New Ice Breaker";
+			sourceTree = "<group>";
+		};
+		9269838B1DFF25650095A770 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				9269838C1DFF25800095A770 /* IceBreakerDataStore.swift */,
+			);
+			name = "Data Model";
+			sourceTree = "<group>";
+		};
+		9269838E1DFF32350095A770 /* Data Model */ = {
+			isa = PBXGroup;
+			children = (
+				9269838F1DFF32460095A770 /* NewIceBreakerDataStore.swift */,
+			);
+			name = "Data Model";
 			sourceTree = "<group>";
 		};
 		92709BF31DA6A28D00E0B8DE /* Data Models */ = {
@@ -1321,6 +1388,7 @@
 				926108291CE255ED009F3E86 /* CustomKolodaView.swift in Sources */,
 				925CF4201DDCF84B00FF484C /* NewCardMessageDataStore.swift in Sources */,
 				926108571CEA0EC0009F3E86 /* SignUpLogInViewController.swift in Sources */,
+				9269837C1DFE2A720095A770 /* IceBreakersViewController.swift in Sources */,
 				92142E681DEE5FE900046DE2 /* TagCreationViewController.swift in Sources */,
 				926108491CE5079E009F3E86 /* CustomTransitionExamples.swift in Sources */,
 				922C899B1D4D901E00DE1373 /* ChachaChosenTagListView.swift in Sources */,
@@ -1331,6 +1399,7 @@
 				92BCEB7B1D88BEDE00E05C05 /* BackgroundAnimationDataStore.swift in Sources */,
 				92371D491DF916CE00BE0A92 /* BumbleOverlayView.swift in Sources */,
 				9261082B1CE257AE009F3E86 /* BackgroundAnimationViewController.swift in Sources */,
+				9269837E1DFE2AB60095A770 /* IceBreakersView.swift in Sources */,
 				9288194A1D2A1C26000A8E04 /* ProfileIndexViewController.swift in Sources */,
 				920BF8371D43346B00104842 /* Chat.swift in Sources */,
 				92EB3CD21DCA60DD004E8797 /* UserCollectionViewCell.swift in Sources */,
@@ -1358,6 +1427,7 @@
 				9275FB801D79FDDC00D8131D /* UIImageViewExtension.swift in Sources */,
 				92248E411DEF82C800C7C1F5 /* PendingTagView.swift in Sources */,
 				9258849F1D902704006D7C01 /* DropDownTagView.swift in Sources */,
+				926983811DFE2E700095A770 /* IceBreakerTableViewCell.swift in Sources */,
 				92709BF71DA6B18800E0B8DE /* FrostedSidebar.swift in Sources */,
 				920BF8291D41DF9400104842 /* EditProfileViewController.swift in Sources */,
 				9275FB8F1D7B78FD00D8131D /* EditProfileDataStore.swift in Sources */,
@@ -1366,10 +1436,12 @@
 				929BF0401DCFB4720099F3AB /* SearchingEmptyStateView.swift in Sources */,
 				925884A31D903B32006D7C01 /* DropDownTag.swift in Sources */,
 				928819481D2874D8000A8E04 /* AddingTagsToProfileViewController.swift in Sources */,
+				926983901DFF32460095A770 /* NewIceBreakerDataStore.swift in Sources */,
 				92C1FC1E1DAAE97400660BD8 /* DropDownCategory.swift in Sources */,
 				92C1B1DF1D51A7D700F4A815 /* SearchTagsDataStore.swift in Sources */,
 				926108451CE5066F009F3E86 /* UIGestureRecognizerExt.swift in Sources */,
 				925D0FDC1D760E7500DE20F9 /* CreationMenuView.swift in Sources */,
+				926983881DFF19210095A770 /* IceBreakerParse.swift in Sources */,
 				92954CAF1DDE4B38005B6FA4 /* AttributePickerViewController.swift in Sources */,
 				9299DC321DF38C5A0079C8F2 /* MyNotification.swift in Sources */,
 				92857DCD1DA1C264001DB92C /* MatchNotificationViewController.swift in Sources */,
@@ -1393,6 +1465,7 @@
 				9275FB861D7A0F2C00D8131D /* PhotoEditingView.swift in Sources */,
 				92248E441DEFEA8100C7C1F5 /* MyMenuItem.swift in Sources */,
 				92CF5AF61DDA514E0039ABE8 /* CardSendMessageDataStore.swift in Sources */,
+				926983861DFE40850095A770 /* NewIceBreakerView.swift in Sources */,
 				92857DCF1DA2F9F2001DB92C /* Swipe.swift in Sources */,
 				92954CB31DDE6541005B6FA4 /* AttributePickerDataStore.swift in Sources */,
 				922C89991D4D86C800DE1373 /* ChachaChoicesTagListView.swift in Sources */,
@@ -1400,6 +1473,7 @@
 				9252F8581DFA45A900D104BA /* VisitProfileViewController.swift in Sources */,
 				92857DD11DA310CB001DB92C /* ParseSwipe.swift in Sources */,
 				929BF0421DCFB4A60099F3AB /* SuperEmptyStateView.swift in Sources */,
+				9269838D1DFF25800095A770 /* IceBreakerDataStore.swift in Sources */,
 				928819361D18E78B000A8E04 /* SuperTagViewController.swift in Sources */,
 				925CF4161DDB669E00FF484C /* NewCardMessageView.swift in Sources */,
 				924139B11DC67EA100C8B6AF /* DescriptionDetailView.swift in Sources */,
@@ -1423,11 +1497,13 @@
 				9261082D1CE25994009F3E86 /* CustomCardView.swift in Sources */,
 				92E36F4C1DB78A8F000F2D22 /* SuperTagDataStore.swift in Sources */,
 				92371D421DF916AF00BE0A92 /* BumbleImageHolderView.swift in Sources */,
+				9269838A1DFF23640095A770 /* IceBreaker.swift in Sources */,
 				922C89881D4B1F6400DE1373 /* ScrollViewSearchView.swift in Sources */,
 				928B8D781DBA588700D6B6D3 /* Enviroment.swift in Sources */,
 				92A5DDAA1DD1676B0003B09D /* SearchTagsSliderExtension.swift in Sources */,
 				92BCEB661D856C2E00E05C05 /* HeadingView.swift in Sources */,
 				926108471CE50755009F3E86 /* MagicMove.swift in Sources */,
+				926983841DFE40000095A770 /* NewIceBreakerViewController.swift in Sources */,
 				920BF8391D4334DF00104842 /* ChatViewController.swift in Sources */,
 				9261084B1CE50816009F3E86 /* CardDetailViewController.swift in Sources */,
 				92142E631DEE5BBA00046DE2 /* CreationTagListView.swift in Sources */,

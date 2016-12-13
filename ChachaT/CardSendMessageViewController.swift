@@ -106,6 +106,7 @@ extension CardSendMessageViewController {
 }
 
 //textview extension
+//TODO: I could use RSKPlaceholderText view to literally get rid of all this placeholder code
 extension CardSendMessageViewController: UITextViewDelegate {
     func textViewSetup() {
         theTextView.delegate = self

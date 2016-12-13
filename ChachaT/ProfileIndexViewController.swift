@@ -24,8 +24,15 @@ class ProfileIndexViewController: UIViewController {
         super.viewDidLoad()
         //TODO: figure out how to have navigationBar not hidden across the whole app. I set nav bar hidden in backgroundAnimationController, and it makes it in every view controller, where I have to turn it back on. In the background Animation Controller, in viewDidDismiss, I should turn the navBarHidden = false and then it would fix.
         self.navigationController?.isNavigationBarHidden = false
+        iceBreakersButtonSetup()
         settingsButtonSetup()
         profileImageButtonSetup()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        self.navigationBarColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = CustomColors.JellyTeal
     }
 
     override func didReceiveMemoryWarning() {
@@ -72,20 +79,55 @@ class ProfileIndexViewController: UIViewController {
         }
     }
     
+    func iceBreakersButtonSetup() {
+        createBigButton(image: #imageLiteral(resourceName: "LightningBolt"), title: "Ice Breakers", selector: #selector(iceBreakerButtonPressed(sender:)))
+    }
+    
+    func iceBreakerButtonPressed(sender: UIButton) {
+        let iceBreakerVC = IceBreakersViewController()
+        pushVC(iceBreakerVC)
+    }
+    
     func settingsButtonSetup() {
+        createBigButton(image: #imageLiteral(resourceName: "SettingsGear"), title: "Settings", selector: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
+        
+        
+//        let buttonView = createButtonView()
+//        buttonView.addTapGesture(target: self, action: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
+//        
+//        //By setting the height for the circleButton and label, and then constraining these to the buttonView, the buttonView is able to calculate its necessary size.
+//        //TODO: put image name in struct above
+//        let circleButton = createButtonCircle(UIImage(named: "SettingsGear")!)
+//        buttonView.addSubview(circleButton)
+//        circleButton.snp.makeConstraints { (make) in
+//            make.top.equalTo(buttonView)
+//            make.leading.trailing.equalTo(buttonView)
+//        }
+//        
+//        let label = createButtonLabel(ProfileIndexConstants.settingsTitle)
+//        buttonView.addSubview(label)
+//        label.snp.makeConstraints { (make) in
+//            make.bottom.equalTo(buttonView)
+//            make.top.equalTo(circleButton.snp.bottom)
+//            make.centerX.equalTo(buttonView)
+//        }
+//        
+//        theButtonStackView.addArrangedSubview(buttonView)
+    }
+    
+    fileprivate func createBigButton(image: UIImage, title: String, selector: Selector) {
         let buttonView = createButtonView()
-        buttonView.addTapGesture(target: self, action: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
+        buttonView.addTapGesture(target: self, action: selector)
         
         //By setting the height for the circleButton and label, and then constraining these to the buttonView, the buttonView is able to calculate its necessary size.
-        //TODO: put image name in struct above
-        let circleButton = createButtonCircle(UIImage(named: "SettingsGear")!)
+        let circleButton = createButtonCircle(image)
         buttonView.addSubview(circleButton)
         circleButton.snp.makeConstraints { (make) in
             make.top.equalTo(buttonView)
             make.leading.trailing.equalTo(buttonView)
         }
         
-        let label = createButtonLabel(ProfileIndexConstants.settingsTitle)
+        let label = createButtonLabel(title)
         buttonView.addSubview(label)
         label.snp.makeConstraints { (make) in
             make.bottom.equalTo(buttonView)
