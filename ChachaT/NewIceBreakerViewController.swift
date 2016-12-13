@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Instructions
 
 protocol NewIceBreakerControllerDelegate {
     func passUpdated(iceBreaker: IceBreaker)
@@ -20,10 +21,12 @@ class NewIceBreakerViewController: UIViewController {
     var theNewIceBreakerView: NewIceBreakerView!
     var theTextView: UITextView!
     var theCharCountLabel: UILabel!
+    var theInfoIndicator: UIButton!
     
     var iceBreaker: IceBreaker!
     var dataStore: NewIceBreakerDataStore = NewIceBreakerDataStore()
     var delegate: NewIceBreakerControllerDelegate?
+    let coachMarksController = CoachMarksController()
     
     init(iceBreaker: IceBreaker) {
         super.init(nibName: nil, bundle: nil)
@@ -44,6 +47,11 @@ class NewIceBreakerViewController: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         theTextView.becomeFirstResponder()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
+        coachMarksController.stop(immediately: true)
     }
 
     override func didReceiveMemoryWarning() {
@@ -71,14 +79,35 @@ class NewIceBreakerViewController: UIViewController {
 }
 
 //nav bar setup
-extension NewIceBreakerViewController {
+extension NewIceBreakerViewController: CoachMarksControllerDataSource {
     fileprivate func navBarSetup() {
-        theNewIceBreakerView.theInfoIndicator.addTarget(self, action: #selector(infoIndicatorPressed(sender:)), for: .touchUpInside)
+        theInfoIndicator = theNewIceBreakerView.theInfoIndicator
+        theInfoIndicator.addTarget(self, action: #selector(infoIndicatorPressed(sender:)), for: .touchUpInside)
         self.navigationItem.titleView = theNewIceBreakerView.theTitleView
     }
     
     func infoIndicatorPressed(sender: UIButton) {
-        print("info indi pressed")
+        coachMarksController.dataSource = self
+        coachMarksController.startOn(self)
+        coachMarksController.overlay.color = UIColor.black.withAlphaComponent(0.5)
+        coachMarksController.overlay.allowTap = true
+    }
+    
+    func numberOfCoachMarks(for coachMarksController: CoachMarksController) -> Int {
+        return 1
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkAt index: Int) -> CoachMark {
+        return coachMarksController.helper.makeCoachMark(for: theInfoIndicator)
+    }
+    
+    func coachMarksController(_ coachMarksController: CoachMarksController, coachMarkViewsAt index: Int, coachMark: CoachMark) -> (bodyView: CoachMarkBodyView, arrowView: CoachMarkArrowView?) {
+        let coachViews = coachMarksController.helper.makeDefaultCoachViews(withArrow: true, arrowOrientation: coachMark.arrowOrientation)
+        
+        coachViews.bodyView.hintLabel.text = "An ice breaker is the first message that gets sent when you match with someone."
+        coachViews.bodyView.nextLabel.text = "Ok!"
+        
+        return (bodyView: coachViews.bodyView, arrowView: coachViews.arrowView)
     }
 }
 
@@ -90,7 +119,8 @@ extension NewIceBreakerViewController: UITextViewDelegate {
         if let initialText = iceBreaker.text {
             theTextView.text = initialText
         }
-        theNewIceBreakerView.setTextView(placeholder: "i.e. what is your favorite color?")
+        //TODO: change to "ex: what are your two truths and a lie?"
+        theNewIceBreakerView.setTextView(placeholder: "ex: So, how would you hide a giraffe from the government?")
         theCharCountLabel.text = Constant.maxCharacterCount.toString
     }
     

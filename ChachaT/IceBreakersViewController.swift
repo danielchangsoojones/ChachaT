@@ -28,6 +28,7 @@ class IceBreakersViewController: UIViewController {
         dataStoreSetup()
         rightBarButtonSetup()
         titleViewSetup()
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
 
     override func didReceiveMemoryWarning() {
@@ -50,8 +51,13 @@ class IceBreakersViewController: UIViewController {
 
 extension IceBreakersViewController {
     fileprivate func rightBarButtonSetup() {
-        let rightButton = UIBarButtonItem(barButtonSystemItem: .edit, target: self, action: #selector(makeTableViewEditable(sender:)))
-        navigationItem.rightBarButtonItem = rightButton
+        createRightBarButtonItem(systemItem: .edit)
+    }
+    
+    fileprivate func createRightBarButtonItem(systemItem: UIBarButtonSystemItem) {
+        let button = UIBarButtonItem(barButtonSystemItem: systemItem, target: self, action: #selector(makeTableViewEditable(sender:)))
+        navigationItem.rightBarButtonItem = button
+        navigationItem.rightBarButtonItem?.tintColor = UIColor.white
     }
     
     fileprivate func titleViewSetup() {
@@ -94,7 +100,7 @@ extension IceBreakersViewController {
             systemItem = .done
             self.theTableView.setEditing(true, animated: true)
         }
-        navigationItem.rightBarButtonItem = UIBarButtonItem(barButtonSystemItem: systemItem, target: self, action: #selector(makeTableViewEditable(sender:)))
+        createRightBarButtonItem(systemItem: systemItem)
     }
 }
 
@@ -130,6 +136,10 @@ extension IceBreakersViewController: UITableViewDataSource {
             iceBreakers.remove(at: indexPath.row)
             tableView.reloadData()
         }
+    }
+    
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        return 50
     }
 }
 

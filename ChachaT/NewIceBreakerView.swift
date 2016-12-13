@@ -48,7 +48,7 @@ class NewIceBreakerView: UIView {
 //nav bar extension
 extension NewIceBreakerView {
     fileprivate func titleViewSetup() {
-        theTitleView.frame = CGRect(x: 0,y: 0,w: 100,h: 40)
+        theTitleView.frame = CGRect(x: 0,y: 0,w: 200,h: 40)
         let titleLabel = addTitleLabel()
         theTitleView.addSubview(titleLabel)
         titleLabel.snp.makeConstraints { (make) in
