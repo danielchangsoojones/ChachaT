@@ -193,6 +193,23 @@ class ChatDataStore {
             addMessage(chat: chat)
         }
     }
+    
+    func setIceBreaker() {
+        let query = IceBreakerParse.query()! as! PFQuery<IceBreakerParse>
+        query.whereKey("user", equalTo: otherUser)
+        query.findObjectsInBackground { (iceBreakersParse, error) in
+            if let iceBreakersParse = iceBreakersParse {
+                if let ice = iceBreakersParse.random() {
+                    let chat = self.createChat(chatText: ice.text, sender: self.otherUser)
+                    chat.saveInBackground()
+                    self.addMessage(chat: chat)
+                    self.delegate?.startIceBreakingMessage(message: ice.text)
+                }
+            } else if let error = error {
+                print(error)
+            }
+        }
+    }
 }
 
 protocol ChatDataStoreDelegate {
@@ -201,6 +218,7 @@ protocol ChatDataStoreDelegate {
     func cacheUserObject(_ user: User, objectID: String)
     func reloadCollectionView()
     func appendMessage(message: JSQMessage)
+    func startIceBreakingMessage(message: String)
 }
 
 extension ChatViewController: ChatDataStoreDelegate {
@@ -214,5 +232,10 @@ extension ChatViewController: ChatDataStoreDelegate {
     
     func appendMessage(message: JSQMessage) {
         self.messages.append(message)
+    }
+    
+    func startIceBreakingMessage(message: String) {
+        shouldStartWithIceBreaker = true
+        finishReceivingMessage()
     }
 }

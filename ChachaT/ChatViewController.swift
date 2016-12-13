@@ -43,6 +43,7 @@ class ChatViewController: JSQMessagesViewController {
     // chat bubbles for our conversation
     var outgoingBubbleImageView : JSQMessagesBubbleImage!
     var incomingBubbleImageView : JSQMessagesBubbleImage!
+    var shouldStartWithIceBreaker: Bool = false
     
     var dataStore: ChatDataStore!
     
@@ -154,25 +155,46 @@ class ChatViewController: JSQMessagesViewController {
     
     
     override func collectionView(_ collectionView: JSQMessagesCollectionView!, attributedTextForMessageBubbleTopLabelAt indexPath: IndexPath!) -> NSAttributedString! {
-        
-        // Show the name every once and a while
-        let message = messages[indexPath.item]
-        
-        if message.senderId == self.senderId
-        {
-            return nil
-        }
-        
-        if indexPath.item - 1 > 0
-        {
-            let previousMessage = messages[indexPath.item - 1]
-            if previousMessage.senderId == message.senderId
+        if shouldStartWithIceBreaker && indexPath.row == 0 {
+            return createIceBreakerString()
+        } else {
+            // Show the name every once and a while
+            let message = messages[indexPath.item]
+            
+            if message.senderId == self.senderId
             {
                 return nil
             }
+            
+            if indexPath.item - 1 > 0
+            {
+                let previousMessage = messages[indexPath.item - 1]
+                if previousMessage.senderId == message.senderId
+                {
+                    return nil
+                }
+            }
+            
+            return NSAttributedString(string: otherUser?.fullName ?? "Unknown")
         }
+    }
+    
+    fileprivate func createIceBreakerString() -> NSAttributedString {
+        // create an NSMutableAttributedString that we'll append everything to
+        let iceBreaker = NSMutableAttributedString(string: "Ice breaker")
         
-        return NSAttributedString(string: otherUser?.fullName ?? "Unknown")
+        // create our NSTextAttachment
+        let image1Attachment = NSTextAttachment()
+        image1Attachment.bounds = CGRect(x: 0, y: 0, w: 10, h: 10)
+        image1Attachment.image = #imageLiteral(resourceName: "LightningBolt")
+        
+        //         wrap the attachment in its own attributed string so we can append it
+        let image1String = NSAttributedString(attachment: image1Attachment)
+        
+        //         add the NSTextAttachment wrapper to our full string, then add some more text.
+        iceBreaker.append(image1String)
+        
+        return iceBreaker
     }
     
     
@@ -249,8 +271,10 @@ class ChatViewController: JSQMessagesViewController {
     }
     
     override func finishReceivingMessage() {
-        if let connection = connection {
+        if let connection = connection, connection.beginningMessage != nil {
             dataStore.setStartingMessage(connection: connection)
+        } else if messages.isEmpty {
+            dataStore.setIceBreaker()
         }
         super.finishReceivingMessage()
     }
