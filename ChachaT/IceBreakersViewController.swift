@@ -79,7 +79,7 @@ extension IceBreakersViewController {
     }
     
     fileprivate func lightningBoltSetup() -> UIImageView {
-        let imageView = UIImageView(image: #imageLiteral(resourceName: "LightningBolt"))
+        let imageView = UIImageView(image: #imageLiteral(resourceName: "IceBreakerIcon"))
         imageView.contentMode = .scaleAspectFit
         return imageView
     }

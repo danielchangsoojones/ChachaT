@@ -80,7 +80,7 @@ class ProfileIndexViewController: UIViewController {
     }
     
     func iceBreakersButtonSetup() {
-        createBigButton(image: #imageLiteral(resourceName: "LightningBolt"), title: "Ice Breakers", selector: #selector(iceBreakerButtonPressed(sender:)))
+        createBigButton(image: #imageLiteral(resourceName: "IceBreakerIcon"), title: "Ice Breakers", selector: #selector(iceBreakerButtonPressed(sender:)))
     }
     
     func iceBreakerButtonPressed(sender: UIButton) {
@@ -90,29 +90,6 @@ class ProfileIndexViewController: UIViewController {
     
     func settingsButtonSetup() {
         createBigButton(image: #imageLiteral(resourceName: "SettingsGear"), title: "Settings", selector: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
-        
-        
-//        let buttonView = createButtonView()
-//        buttonView.addTapGesture(target: self, action: #selector(ProfileIndexViewController.settingsButtonPressed(_:)))
-//        
-//        //By setting the height for the circleButton and label, and then constraining these to the buttonView, the buttonView is able to calculate its necessary size.
-//        //TODO: put image name in struct above
-//        let circleButton = createButtonCircle(UIImage(named: "SettingsGear")!)
-//        buttonView.addSubview(circleButton)
-//        circleButton.snp.makeConstraints { (make) in
-//            make.top.equalTo(buttonView)
-//            make.leading.trailing.equalTo(buttonView)
-//        }
-//        
-//        let label = createButtonLabel(ProfileIndexConstants.settingsTitle)
-//        buttonView.addSubview(label)
-//        label.snp.makeConstraints { (make) in
-//            make.bottom.equalTo(buttonView)
-//            make.top.equalTo(circleButton.snp.bottom)
-//            make.centerX.equalTo(buttonView)
-//        }
-//        
-//        theButtonStackView.addArrangedSubview(buttonView)
     }
     
     fileprivate func createBigButton(image: UIImage, title: String, selector: Selector) {

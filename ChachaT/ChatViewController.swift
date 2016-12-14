@@ -188,8 +188,9 @@ class ChatViewController: JSQMessagesViewController {
         
         // create our NSTextAttachment
         let image1Attachment = NSTextAttachment()
-        image1Attachment.bounds = CGRect(x: 0, y: 0, w: 10, h: 10)
-        image1Attachment.image = #imageLiteral(resourceName: "LightningBolt")
+        image1Attachment.bounds = CGRect(x: 0, y: 0, w: 20, h: 20)
+        let origImage = #imageLiteral(resourceName: "IceBreakerIcon")
+        image1Attachment.image = origImage.maskWithColor(color: CustomColors.JellyTeal)
         
         //         wrap the attachment in its own attributed string so we can append it
         let image1String = NSAttributedString(attachment: image1Attachment)
@@ -331,9 +332,6 @@ extension ChatViewController {
             let visitCardVC = VisitProfileViewController()
             visitCardVC.swipe = Swipe(otherUser: otherUser)
             pushVC(visitCardVC)
-//            let checkVC = CheckOwnProfileViewController()
-//            checkVC.swipe = Swipe(otherUser: otherUser)
-//            pushVC(checkVC)
         }
     }
 }
