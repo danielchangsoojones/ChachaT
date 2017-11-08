@@ -11,6 +11,7 @@ import EFTools
 import Parse
 import SnapKit
 import SCLAlertView
+import Time
 
 class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     struct SignUpConstants {
@@ -43,6 +44,7 @@ class SignUpLogInViewController: UIViewController, UITextFieldDelegate {
     @IBAction func facebookButtonPressed(_ sender: UIButton) {
         showActivityIndicatory(uiView: self.view)
         dataStore.accessFaceBook()
+        let time: TimeInterval = 1.hour.interval
     }
     
     
